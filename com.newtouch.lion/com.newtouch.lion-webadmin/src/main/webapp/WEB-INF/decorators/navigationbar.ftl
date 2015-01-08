@@ -2,7 +2,7 @@
 <div class="page-head">
 	<!-- BEGIN PAGE TITLE -->
 	<div class="page-title">
-		<h1>Dashboard <small>statistics & reports</small></h1>
+		<h1>${title}</h1>
 	</div>
 	<!-- END PAGE TITLE -->
 	<!-- BEGIN PAGE TOOLBAR -->
@@ -98,7 +98,7 @@
 <!-- END PAGE HEAD -->
 <!-- BEGIN PAGE BREADCRUMB -->
 <ul class="page-breadcrumb breadcrumb">
-	<li><a href="#">Home</a><i class="fa fa-circle"></i></li>
+	<li><a href="${base}/index.htm">首页</a><i class="fa fa-circle"></i></li>
 	<li><a href="#">系统设置</a><i class="fa fa-circle"></i></li>
 	<li class="active">系统信息</li>
 </ul>
