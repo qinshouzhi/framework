@@ -16,32 +16,34 @@
 <script src="${base}/resources/global/plugins/easyui/jquery.easyui.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
 <!--EasyUI JavaScript End-->
-<script src="${base}/resources/admin/scripts/system/parameter.js" type="text/javascript"></script>s
+<script src="${base}/resources/admin/scripts/system/parameter.js" type="text/javascript"></script>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed-hide-logo">
 <!-- BEGIN PAGE CONTENT INNER -->
 <div class="portlet light">
 	<div class="portlet-body">
 		<div class="row inbox">
-		<div style="padding-bottom:8px;" id="toolbar">
-			<a href="#" class="btn btn-sm yellow"><i class="fa fa-plus"></i> 新增  </a>
-			<a href="javascript:void(0)" class="btn btn-sm red"><i class="fa fa-edit"></i> 编辑 </a>
-			<a href="#" class="btn btn-sm purple"><i class="fa fa-times"></i> 删除 </a>
-			<a href="#" class="btn btn-sm blue"><i class="fa fa-refresh"></i> 刷新  </a>
-			<a href="#" class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> Excel </a>
-		</div>		 
-		<table class="easyui-datagrid" style="height:400px;padding-left:10px;padding-right:10px;" data-options="rownumbers:true,singleSelect:true,autoRowHeight:false,pagination:true,pageSize:10,singleSelect:true,url:'${base}/datagrid_data1.json',method:'get'">
-			<thead>
-				<tr>
-					<th data-options="field:'itemid',width:80">Item ID</th>
-					<th data-options="field:'productid',width:100">Product</th>
-					<th data-options="field:'listprice',width:80,align:'right'">List Price</th>
-					<th data-options="field:'unitcost',width:80,align:'right'">Unit Cost</th>
-					<th data-options="field:'attr1',width:250">Attribute</th>
-					<th data-options="field:'status',width:60,align:'center'">Status</th>
-				</tr>
-			</thead>
-		</table>	 
+		<div class="col-md-12 margin-bottom-10" id="toolbar">
+			<a href="javascript:void(0" id="btnAdd" class="btn btn-sm yellow"><i class="fa fa-plus"></i> 新增  </a>
+			<a href="javascript:void(0)"id="btnEdit" class="btn btn-sm red"><i class="fa fa-edit"></i> 编辑 </a>
+			<a href="javascript:void(0" id="btnDelete" class="btn btn-sm purple"><i class="fa fa-times"></i> 删除 </a>
+			<a href="javascript:void(0" id="btnRefresh" class="btn btn-sm blue"><i class="fa fa-refresh"></i> 刷新  </a>
+			<a href="javascript:void(0" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> Excel </a>
+		</div>
+		<div class="col-md-12">	 
+			<table class="easyui-datagrid" style="height:400px;padding-left:10px;padding-right:10px;" data-options="rownumbers:true,singleSelect:true,autoRowHeight:false,pagination:true,pageSize:10,singleSelect:true,url:'${base}/datagrid_data1.json',method:'get'">
+				<thead>
+					<tr>
+						<th data-options="field:'itemid',width:80">Item ID</th>
+						<th data-options="field:'productid',width:100">Product</th>
+						<th data-options="field:'listprice',width:80,align:'right'">List Price</th>
+						<th data-options="field:'unitcost',width:80,align:'right'">Unit Cost</th>
+						<th data-options="field:'attr1',width:250">Attribute</th>
+						<th data-options="field:'status',width:60,align:'center'">Status</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
 		</div>
 	</div>
 </div>
