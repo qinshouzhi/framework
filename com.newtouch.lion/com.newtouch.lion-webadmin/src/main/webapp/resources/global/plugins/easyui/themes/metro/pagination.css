@@ -22,6 +22,7 @@
   padding: 2px;
   width: 2em;
   height: auto;
+  text-align: center;
 }
 .pagination-page-list {
   margin: 0px 6px;

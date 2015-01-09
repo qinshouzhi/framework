@@ -30,15 +30,15 @@ import freemarker.template.TemplateModelException;
  * @author WangLijun
  * @version 1.0
  */
-public class StringNotEmptyFunction implements TemplateMethodModelEx {
-
+public class StringNotEmptyFunction implements TemplateMethodModelEx { 
+	
 	@SuppressWarnings("rawtypes")
 	@Override
 	public Boolean exec(List args) throws TemplateModelException {
 		if (args.size() != 1) {
 			throw new TemplateModelException("Wrong arguments");
 		}
-		return StringUtils.isNotEmpty((String) args.get(0));
+		return StringUtils.isNotEmpty(String.valueOf(args.get(0)));
 	}
 
 }

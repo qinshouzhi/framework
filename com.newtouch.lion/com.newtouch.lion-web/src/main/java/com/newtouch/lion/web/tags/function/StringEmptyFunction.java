@@ -31,6 +31,7 @@ import freemarker.template.TemplateModelException;
  * @version 1.0
  */
 public class StringEmptyFunction implements TemplateMethodModelEx {
+ 
 
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -38,7 +39,7 @@ public class StringEmptyFunction implements TemplateMethodModelEx {
 		if (args.size() != 1) {
 			throw new TemplateModelException("Wrong arguments");
 		}
-		return StringUtils.isEmpty((String) args.get(0));
+		return StringUtils.isEmpty(String.valueOf(args.get(0)));
 	}
 
 }

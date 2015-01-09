@@ -35,7 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
-@ContextConfiguration(locations = { "classpath*:applicationContext.xml" })
+@ContextConfiguration(locations = { "classpath*:applicationContext-service.xml" })
 public abstract class AllServiceTest extends AbstractTransactionalJUnit4SpringContextTests{
 	
 	/**日志*/

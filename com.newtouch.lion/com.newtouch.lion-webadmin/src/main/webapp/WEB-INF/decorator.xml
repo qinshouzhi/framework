@@ -8,6 +8,8 @@
 		<pattern>**/ajax/*</pattern>
 		<pattern>**/menu/*</pattern>
 		<pattern>**/json*</pattern>
+		<pattern>**/list*.htm</pattern>
+		<pattern>**/combox*.htm*</pattern>
 		<pattern>/logout.htm</pattern>
 		<pattern>/login.htm</pattern>
 		<!-- <pattern>/test.htm</pattern> -->

@@ -144,7 +144,7 @@
 .datagrid-cell-check {
   padding: 0;
   width: 27px;
-  height: 25px;
+  height: 19px;
   font-size: 1px;
   text-align: center;
   overflow: hidden;
@@ -154,7 +154,7 @@
   margin: 0;
   padding: 0;
   width: 15px;
-  height:28px;
+  height:19px;
 }
 .datagrid-resize-proxy {
   position: absolute;

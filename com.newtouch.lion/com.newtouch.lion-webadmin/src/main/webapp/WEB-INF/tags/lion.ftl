@@ -20,24 +20,24 @@
 <#macro datagrids name,tableClass,toolbar,load,url,dataOptions,style>
 <@ui.datagrid id='${name}'>
 <table id="${name}" 
-<#if strIsNotEmpty(tableClass)>class="${tableClass}"</#if> 
-<#if strIsNotEmpty(toolbar)>toolbar="#${toolbar}"</#if> 
-<#if strIsNotEmpty(load)&&load=='true'>
-<#if strIsNotEmpty(url)>url="${url}"<#elseif strIsNotEmpty(datagrids.url)>url="${datagrids.url}"</#if>
-</#if><#if strIsNotEmpty(dataOptions)>dataOptions="${dataOptions}"</#if> 
-<#if strIsNotEmpty(style)>style="${style}"</#if>
+<#if ui.strIsNotEmpty(tableClass)>class="${tableClass}"</#if> 
+<#if ui.strIsNotEmpty(toolbar)>toolbar="#${toolbar}"</#if> 
+<#if ui.strIsNotEmpty(load)&&load=='true'>
+<#if ui.strIsNotEmpty(url)>url="${url}"<#elseif ui.strIsNotEmpty(datagrids.url)>url="${datagrids.url}"</#if>
+</#if><#if ui.strIsNotEmpty(dataOptions)>dataOptions="${dataOptions}"</#if> 
+<#if ui.strIsNotEmpty(style)>style="${style}"</#if>
 <#if datagrids.fit?if_exists>fit="${datagrids.fit?string("true","false")}"</#if>
 <#if datagrids.fitColumns?if_exists> fitColumns="${datagrids.fitColumns?string("true","false")}" </#if>
 <#if datagrids.pagination?if_exists&&datagrids.pagination> 
 pagination="true" 
-<#if strIsNotEmpty(datagrids.pagePosition)>pagePosition="${datagrids.pagePosition}"</#if>
+<#if ui.strIsNotEmpty(datagrids.pagePosition)>pagePosition="${datagrids.pagePosition}"</#if>
 <#if (datagrids.pageNumber gt 1)> pageNumber="${datagrids.pageNumber}" </#if> 
 <#if (datagrids.pageSize gt 1) > pageSize="${datagrids.pageSize!}" <#else>pageSize="15"</#if>
-<#if strIsNotEmpty(datagrids.pageList)>pageList="${datagrids.pageList}"</#if>
+<#if ui.strIsNotEmpty(datagrids.pageList)>pageList="${datagrids.pageList}"</#if>
 </#if>
-<#if strIsNotEmpty(datagrids.sortName)>  
+<#if ui.strIsNotEmpty(datagrids.sortName)>  
 sortName="${datagrids.sortName}" 
-<#if isNotEmpty(datagrids.sortOrder())&& datagrids.sortOrder()!="asc">
+<#if ui.isNotEmpty(datagrids.sortOrder())&& datagrids.sortOrder()!="asc">
 sortOrder="${dataGrid.sortOrder}"
 </#if></#if>
 <#if datagrids.remoteSort?if_exists&&!datagrids.remoteSort >
@@ -50,18 +50,18 @@ showHeader="false"
 title="${datagrids.title}"
 </#if>
 <#if datagrids.showFooter?if_exists&&datagrids.showFooter>showFooter="true"</#if>
-<#if strIsNotEmpty(datagrids.rowStyler)>rowStyler="${datagrids.rowStyler}"</#if>
-<#if strIsNotEmpty(datagrids.loader)>loader="${datagrids.loader}"</#if>
+<#if ui.strIsNotEmpty(datagrids.rowStyler)>rowStyler="${datagrids.rowStyler}"</#if>
+<#if ui.strIsNotEmpty(datagrids.loader)>loader="${datagrids.loader}"</#if>
 <#if datagrids.striped?if_exists&&datagrids.striped>striped="true"</#if>
-<#if strIsNotEmpty(datagrids.method)>method="${datagrids.method}"</#if>
+<#if ui.strIsNotEmpty(datagrids.method)>method="${datagrids.method}"</#if>
 <#if datagrids.nowrap?if_exists&&datagrids.nowrap>nowrap="true"</#if>
-<#if strIsNotEmpty(datagrids.data)>data="${datagrids.data}"</#if>
-<#if strIsNotEmpty(datagrids.loadMsg)>loadMsg="${datagrids.loadMsg}"</#if>
+<#if ui.strIsNotEmpty(datagrids.data)>data="${datagrids.data}"</#if>
+<#if ui.strIsNotEmpty(datagrids.loadMsg)>loadMsg="${datagrids.loadMsg}"</#if>
 <#if datagrids.rownumbers?if_exists&&datagrids.rownumbers>rownumbers="true"</#if>
 <#if datagrids.singleSelect?if_exists&&datagrids.singleSelect>singleSelect="true"</#if>
 <#if datagrids.checkOnSelect?if_exists&&datagrids.checkOnSelect>checkOnSelect="true"</#if>
 <#if datagrids.selectOnCheck?if_exists&&datagrids.selectOnCheck>selectOnCheck="true"</#if>
-<#if strIsNotEmpty(datagrids.loadFilter)>loadFilter="${datagrids.loadFilter}"</#if>
+<#if ui.strIsNotEmpty(datagrids.loadFilter)>loadFilter="${datagrids.loadFilter}"</#if>
 ><thead><tr>
 	 <#if datagrids.sortColumns?exists>
 	  <#list datagrids.sortColumns as dataColumn>

@@ -24,7 +24,7 @@
 		<property name="mappingResources">
 			<list>
 				<value>model/application/bas_app_properties.${database.prefix}.orm.xml</value>
-				<value>mode/datagrid/bas_datagrid.${database.prefix}.orm.xml</value>
+				<value>model/datagrid/bas_datagrid.${database.prefix}.orm.xml</value>
 				<value>model/system/bas_demo.${database.prefix}.orm.xml</value>
 				<value>model/system/bas_common.${database.prefix}.orm.xml</value>
 				<value>model/system/bas_login_log.${database.prefix}.orm.xml</value>

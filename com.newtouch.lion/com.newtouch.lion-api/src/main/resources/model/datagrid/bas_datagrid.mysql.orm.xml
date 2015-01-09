@@ -5,36 +5,6 @@
 	version="2.0">
 	<package>com.newtouch.lion.model.datagrid</package>
 	<access>PROPERTY</access>
-	<!-- 抽象类 -->
-	<mapped-superclass class="com.newtouch.lion.model.VersionEntity">
-		<attributes>
-			<basic name="createdById">
-				<column name="CREATE_BY" length="11" scale="0" nullable="true" />
-			</basic>
-			<basic name="createdDate">
-				<column name="CREATE_DATE" />
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="updatedById">
-				<column name="UPDATE_BY" length="11" scale="0" nullable="true" />
-			</basic>
-			<basic name="updatedDate">
-				<column name="UPDATE_DATE" />
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="deleteDate">
-				<column name="DELETE_DATE" />
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="isDeleted">
-				<column name="MARK_FOR_DELETE" />
-			</basic>
-			<version name="optCounter">
-				<column name="OPT_COUNTER" />
-			</version>
-		</attributes>
-	</mapped-superclass>
-
 	<!-- DataGrid -->
 	<entity class="DataGrid">
 		<table name="bas_datagrid" />
@@ -117,7 +87,7 @@
 				<column name="PAGE_LIST" length="30" nullable="true" />
 			</basic>
 			<basic name="queryParams">
-				<column name="QUEYR_PARAMS" length="30" nullable="true" />
+				<column name="QUEYR_PARAMS" length="50" nullable="true" />
 			</basic>
 			<basic name="sortName">
 				<column name="SORT_NAME" length="30" nullable="true" />

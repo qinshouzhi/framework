@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.parameter.ParameterVo;
-import com.newtouch.lion.common.date.DateUtil;
+import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.datagrid.DataColumn;
 import com.newtouch.lion.model.system.Parameter;
@@ -201,9 +201,9 @@ public class ParameterController {
 		return flag;
 	}
 
-	@RequestMapping(value = "/system/parameter/lists")
+	@RequestMapping(value = "/system/parameter/list")
 	@ResponseBody
-	public String list(HttpServletRequest servletRequest, Model model,
+	public DataTable<Parameter> list(HttpServletRequest servletRequest, Model model,
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "15") int rows,
 			@RequestParam(required = false) String sort,
@@ -231,13 +231,9 @@ public class ParameterController {
 		PageResult<Parameter> pageResult = parameterService
 				.doFindByCriteria(queryCriteria);
 
-		Set<String> filterColumn = this.getColumns("sys_parameter_lists_tb");
-
-		String result = this.getJSONString(pageResult.getTotalCount(),
-				pageResult.getContent(), filterColumn,
-				DateUtil.FORMAT_DATETIME_YYYY_MM_DD_HH_MM_SS, Boolean.TRUE);
-
-		return result;
+		 
+		
+		return pageResult.getDataTable();
 	}
 
 	/** 根据TableId配置DataGrid */

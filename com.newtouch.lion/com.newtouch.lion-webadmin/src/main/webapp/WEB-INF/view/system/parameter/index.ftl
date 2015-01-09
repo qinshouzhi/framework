@@ -16,6 +16,8 @@
 <script src="${base}/resources/global/plugins/easyui/jquery.easyui.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
 <!--EasyUI JavaScript End-->
+<script src="${base}/resources/global/scripts/framework.js" type="text/javascript"></script>
+<script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/scripts/system/parameter.js" type="text/javascript"></script>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed-hide-logo">
@@ -24,6 +26,25 @@
 	<div class="portlet-body">
 		<div class="row inbox">
 		<div class="col-md-12 margin-bottom-10" id="toolbar">
+			<form id="queryParameterform">
+				<table border="0" width="100%" height="40px;">
+					<tr>
+						<td width="20%" height="100%" align="right" valign="middle">
+							 名称
+						</td>
+						<td width="30%" valign="middle">
+						 	<input class="easyui-combobox" type="text" name="type" id="sys_parameter_type" data-options="url:'${base}/system/code/combox.htm?nameEn=SystemParamter',valueField:'nameEn',textField:'nameZh',panelHeight:'auto'">
+						</td>
+						<td width="50%" align="left" valign="middle">
+							 <a  href="javascript:void(0)" class="easyui-linkbutton"  id="sys_parameter_queryBtn" >
+								查询
+							</a>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div class="col-md-12 margin-bottom-10" id="toolbar">
 			<a href="javascript:void(0" id="btnAdd" class="btn btn-sm yellow"><i class="fa fa-plus"></i> 新增  </a>
 			<a href="javascript:void(0)"id="btnEdit" class="btn btn-sm red"><i class="fa fa-edit"></i> 编辑 </a>
 			<a href="javascript:void(0" id="btnDelete" class="btn btn-sm purple"><i class="fa fa-times"></i> 删除 </a>
@@ -31,22 +52,7 @@
 			<a href="javascript:void(0" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> Excel </a>
 		</div>
 		<div class="col-md-12">
-			  <@lion.greet/><br/>
-			  <@lion.datagrids name="sys_parameter_lists_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/parameter/lists.htm" dataOptions="" style=""/>
-		</div>
-		<div class="col-md-12 margin-top-10">
-			<table class="easyui-datagrid" style="height:400px;padding-left:10px;padding-right:10px;" data-options="rownumbers:true,singleSelect:true,autoRowHeight:false,pagination:true,pageSize:10,singleSelect:true,url:'${base}/datagrid_data1.json',method:'get'">
-				<thead>
-					<tr>
-						<th data-options="field:'itemid',width:80">Item ID</th>
-						<th data-options="field:'productid',width:100">Product</th>
-						<th data-options="field:'listprice',width:80,align:'right'">List Price</th>
-						<th data-options="field:'unitcost',width:80,align:'right'">Unit Cost</th>
-						<th data-options="field:'attr1',width:250">Attribute</th>
-						<th data-options="field:'status',width:60,align:'center'">Status</th>
-					</tr>
-				</thead>
-			</table>
+			  <@lion.datagrids name="sys_parameter_lists_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/parameter/list.htm" dataOptions="" style="height:400px;"/>
 		</div>
 		</div>
 	</div>

@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.newtouch.lion.data.DataTable;
+
 /**
  * <p>
  * Title:分页类
@@ -165,6 +167,12 @@ public class PageResult<T> implements Serializable {
 	 */
 	public void setPageList(String pageList) {
 		this.pageList = pageList;
+	}
+	/***
+	 *获取DataGrid数据集,包含总记录数、数据集合
+	 */
+	public DataTable<T> getDataTable(){
+		return new DataTable<T>(this.totalCount,this.content);
 	}
 
 }
