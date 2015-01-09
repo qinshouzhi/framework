@@ -144,7 +144,7 @@ public class MenuTreeUtil {
 				if(menuResourcesMap.containsKey(resource.getId())){
 					checked=Boolean.FALSE;
 					if(equalsURL(requestURL, contextPath, resource.getPath())){
-						logger.info("requestURL:{}",requestURL);
+						logger.debug("requestURL:{}",requestURL);
 						selected=Boolean.TRUE;
 					}
 				}
@@ -153,7 +153,7 @@ public class MenuTreeUtil {
 				}
 				
 			}
-			logger.info("count:{}",count);
+			logger.debug("count:{}",count);
 			List<Menu> childrenNext = new ArrayList<Menu>();
 			// 当资源子集大于1时，进入递归调用；
 			if (resource.getResources().size() > 0) {
@@ -166,7 +166,7 @@ public class MenuTreeUtil {
 				}
 			}
 			count--;
-			logger.info("count:{}:selected:{}",count,selected);
+			logger.debug("count:{}:selected:{}",count,selected);
 			Boolean isLeaf = Boolean.TRUE;
 			if (containsKey(resource.getType())
 					&& resource.getResources().size() > 0) {

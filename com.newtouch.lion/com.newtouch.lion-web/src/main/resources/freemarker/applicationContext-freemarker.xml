@@ -29,7 +29,7 @@
 		</property>
 		<property name="defaultEncoding" value="utf-8" />
 	</bean>
-	<!-- Tag definition Start -->
+	<!-- Shiro Tag definition Start -->
 	<bean id="authenticated" class="com.newtouch.lion.web.shiro.tags.AuthenticatedTag" />
 	<bean id="guest" class="com.newtouch.lion.web.shiro.tags.GuestTag" />
 	<bean id="hasAnyRoles" class="com.newtouch.lion.web.shiro.tags.HasAnyRolesTag" />
@@ -40,9 +40,14 @@
 	<bean id="notAuthenticated" class="com.newtouch.lion.web.shiro.tags.NotAuthenticatedTag" />
 	<bean id="principal" class="com.newtouch.lion.web.shiro.tags.PrincipalTag" />
 	<bean id="user" class="com.newtouch.lion.web.shiro.tags.UserTag" />
+	<!-- Shiro Tag definition End -->
+	<!-- Lion UI Tag  definiton Start -->
 	<bean id="menu" class="com.newtouch.lion.web.tags.MenuTag" />
-	
-
+	<bean id="dataGrid" class="com.newtouch.lion.web.tags.datagrid.DataGridTag"/>
+	<bean id="strIsEmpty" class="com.newtouch.lion.web.tags.function.StringEmptyFunction"/>
+	<bean id="strIsNotEmpty" class="com.newtouch.lion.web.tags.function.StringNotEmptyFunction"/>
+	<!-- Lion UI Tag  definiton End -->	
+	<!-- Shiro Tag Map Start -->
 	<util:map id="shiroTag" map-class="java.util.HashMap">
 		<entry key="authenticated" value-ref="authenticated" />
 		<entry key="guest" value-ref="guest" />
@@ -55,11 +60,15 @@
 		<entry key="principal" value-ref="principal" />
 		<entry key="user" value-ref="user" />
 	</util:map>
-	
+	<!-- Shiro Tag Map End -->
+	<!-- Lion UI Tag  Map Start -->	
 	<util:map id="uiTag" map-class="java.util.HashMap">
 		<entry key="menu" value-ref="menu" />
+		<entry key="dataGrid" value-ref="dataGrid"/>
+		<entry key="strIsEmpty" value-ref="strIsEmpty"/>
+		<entry key="strIsNotEmpty"  value-ref="strIsNotEmpty"/>
 	</util:map>
-	
+	<!-- Lion UI Tag  Map End -->	
 	<bean  id="shiro"  class="com.newtouch.lion.web.tags.FreemarkerHashTag">
 		<constructor-arg  index="0"  ref="shiroTag"/>
 	</bean>
