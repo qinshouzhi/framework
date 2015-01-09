@@ -18,6 +18,7 @@
  * style TML style 样式 
  -->
 <#macro datagrid name,tableClass,toolbar,load,url,dataOptions,style>
+${name}ddd
 <@ui.datagrid id='${name}'>
 <table id="${name}" 
 <#if strIsNotEmpty(tableClass)>class="${tableClass}"</#if> 
@@ -63,12 +64,12 @@ title="${datagrids.title}"
 <#if datagrids.selectOnCheck?if_exists&&datagrids.selectOnCheck>selectOnCheck="true"</#if>
 <#if strIsNotEmpty(datagrids.loadFilter)>loadFilter="${datagrids.loadFilter}"</#if>
 ><thead><tr>
-	 <#if datagrids.sortColumns?exists>
-	  <#list datagrids.sortColumns as dataColumn>
-		<th field="${dataColumn.field}"  width="${dataColumn.width}" align="${dataColumn.align}" <#if dataColumn.headerAlign??>halign="${dataColumn.headerAlign}"</#if><#if dataColumn.checkbox?if_exists&&dataColumn.checkbox>checkbox="true"</#if><#if dataColumn.sortable?if_exists&&dataColumn.sortable>sortable="true"</#if><#if dataColumn.order??>order="${dataColumn.order}"</#if><#if dataColumn.hidden?if_exists&&dataColumn.hidden>hidden="true"</#if><#if dataColumn.formatter??&&dataColumn.formatter!="">formatter="${dataColumn.formatter}"</#if><#if dataColumn.styler??&&dataColumn.styler!=""> styler="${dataColumn.styler}"</#if>>${dataColumn.name}</th>
-	  </#list>
-	 </#if>	 
-	 </tr></thead></table>
+ <#if datagrids.sortColumns?exists>
+  <#list datagrids.sortColumns as dataColumn>
+	<th field="${dataColumn.field}"  width="${dataColumn.width}" align="${dataColumn.align}" <#if dataColumn.headerAlign??>halign="${dataColumn.headerAlign}"</#if><#if dataColumn.checkbox?if_exists&&dataColumn.checkbox>checkbox="true"</#if><#if dataColumn.sortable?if_exists&&dataColumn.sortable>sortable="true"</#if><#if dataColumn.order??>order="${dataColumn.order}"</#if><#if dataColumn.hidden?if_exists&&dataColumn.hidden>hidden="true"</#if><#if dataColumn.formatter??&&dataColumn.formatter!="">formatter="${dataColumn.formatter}"</#if><#if dataColumn.styler??&&dataColumn.styler!=""> styler="${dataColumn.styler}"</#if>>${dataColumn.name}</th>
+  </#list>
+ </#if>
+</tr></thead></table>
 </@ui.datagrid>
 </#macro>
 <!--DataGrid 数据表格 Start-->
