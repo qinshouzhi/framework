@@ -24,11 +24,11 @@
 	<div class="portlet-body">
 		<div class="row inbox">
 		<div style="padding-bottom:8px;" id="toolbar">
-			<a href="#" class="btn btn-sm yellow"><i class="fa fa-plus"></i> 新增  </a>
-			<a href="javascript:void(0)" class="btn btn-sm red"><i class="fa fa-edit"></i> 编辑 </a>
-			<a href="#" class="btn btn-sm purple"><i class="fa fa-times"></i> 删除 </a>
-			<a href="#" class="btn btn-sm blue"><i class="fa fa-refresh"></i> 刷新  </a>
-			<a href="#" class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> Excel </a>
+			<a href="javascript:void(0" id="btnAdd" class="btn btn-sm yellow"><i class="fa fa-plus"></i> 新增  </a>
+			<a href="javascript:void(0)"id="btnEdit" class="btn btn-sm red"><i class="fa fa-edit"></i> 编辑 </a>
+			<a href="javascript:void(0" id="btnDelete" class="btn btn-sm purple"><i class="fa fa-times"></i> 删除 </a>
+			<a href="javascript:void(0" id="btnRefresh" class="btn btn-sm blue"><i class="fa fa-refresh"></i> 刷新  </a>
+			<a href="javascript:void(0" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> Excel </a>
 		</div>		 
 		<table class="easyui-datagrid" style="height:400px;padding-left:10px;padding-right:10px;" data-options="rownumbers:true,singleSelect:true,autoRowHeight:false,pagination:true,pageSize:10,singleSelect:true,url:'${base}/datagrid_data1.json',method:'get'">
 			<thead>
