@@ -155,6 +155,11 @@
   padding: 0;
   width: 15px;
   height:19px;
+  background:none;
+  display: -moz-inline-box;
+  list-style:none;
+  box-sizing: border-box;
+  border: 1px solid;
 }
 .datagrid-resize-proxy {
   position: absolute;
