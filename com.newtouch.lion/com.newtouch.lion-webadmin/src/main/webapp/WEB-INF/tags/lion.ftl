@@ -1,17 +1,11 @@
 <!-- Freemarker自定义标签 -->
 <#assign contextPath = request.contextPath/>
-<#macro greet person>     
-    <font size="+2">Hello ${person}!</font>     
-</#macro>
+<!--DataGrid 工具栏标签 Start-->
 
-<#macro border> 
-      <table border=4 cellspacing=0 cellpadding=4><tr><td> 
-        <#nested> 
-      </tr></td></table> 
-</#macro>
-<!-- BEGIN CONTAINER -->
-<div class="page-container">
-<!--菜单-->
+<!--DataGrid 工具栏标签 End-->
+<!---->
+
+<!--菜单标签 Start-->
 <#macro menuTree menus>
 	<#if menus?? && menus?size gt 0>
 		<ul class="sub-menu">
@@ -77,3 +71,4 @@
 	</ul>	
 </@ui.menu>
 </#macro>
+<!--菜单标签 End-->

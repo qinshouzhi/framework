@@ -102,8 +102,7 @@
 	<bean id="jsltViewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="order" value="3" />
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
