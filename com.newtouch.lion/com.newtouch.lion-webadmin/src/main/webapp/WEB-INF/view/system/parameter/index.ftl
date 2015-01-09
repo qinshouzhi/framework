@@ -31,8 +31,8 @@
 			<a href="javascript:void(0" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> Excel </a>
 		</div>
 		<div class="col-md-12">
-			 ddd
-			  <@lion.datagrid name="sys_parameter_lists_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/parameter/lists.htm" dataOptions="" style=""/>
+			  <@lion.greet/><br/>
+			  <@lion.datagrids name="sys_parameter_lists_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/parameter/lists.htm" dataOptions="" style=""/>
 		</div>
 		<div class="col-md-12 margin-top-10">
 			<table class="easyui-datagrid" style="height:400px;padding-left:10px;padding-right:10px;" data-options="rownumbers:true,singleSelect:true,autoRowHeight:false,pagination:true,pageSize:10,singleSelect:true,url:'${base}/datagrid_data1.json',method:'get'">

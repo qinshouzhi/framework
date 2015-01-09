@@ -64,7 +64,7 @@
 	<!-- Lion UI Tag  Map Start -->	
 	<util:map id="uiTag" map-class="java.util.HashMap">
 		<entry key="menu" value-ref="menu" />
-		<entry key="dataGrid" value-ref="dataGrid"/>
+		<entry key="datagrid" value-ref="dataGrid"/>
 		<entry key="strIsEmpty" value-ref="strIsEmpty"/>
 		<entry key="strIsNotEmpty"  value-ref="strIsNotEmpty"/>
 	</util:map>

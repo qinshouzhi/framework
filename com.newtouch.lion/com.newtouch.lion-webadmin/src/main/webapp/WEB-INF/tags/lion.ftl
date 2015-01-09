@@ -17,7 +17,7 @@
  * title 表格标题 title
  * style TML style 样式 
  -->
-<#macro datagrid name,tableClass,toolbar,load,url,dataOptions,style>
+<#macro datagrids name,tableClass,toolbar,load,url,dataOptions,style>
 <@ui.datagrid id='${name}'>
 <table id="${name}" 
 <#if strIsNotEmpty(tableClass)>class="${tableClass}"</#if> 
