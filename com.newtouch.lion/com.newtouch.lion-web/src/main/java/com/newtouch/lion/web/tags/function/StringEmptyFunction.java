@@ -4,7 +4,7 @@
  *
  * $id: StringEmptyMehtod.java 9552 2014-2-19 下午03:07:13 WangLijun$
  */
-package com.newtouch.lion.web.freemarker.method;
+package com.newtouch.lion.web.tags.function;
 
 import java.util.List;
 
@@ -15,10 +15,10 @@ import freemarker.template.TemplateModelException;
 
 /**
  * <p>
- * Title:Freemarker函数判断字符不为空
+ * Title:函数判断字符是否为空
  * </p>
  * <p>
- * Description:函数判断字符不为空
+ * Description:函数判断字符是否为空
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -30,7 +30,7 @@ import freemarker.template.TemplateModelException;
  * @author WangLijun
  * @version 1.0
  */
-public class StringNotEmptyMehtod implements TemplateMethodModelEx {
+public class StringEmptyFunction implements TemplateMethodModelEx {
 
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -38,7 +38,7 @@ public class StringNotEmptyMehtod implements TemplateMethodModelEx {
 		if (args.size() != 1) {
 			throw new TemplateModelException("Wrong arguments");
 		}
-		return StringUtils.isNotEmpty((String) args.get(0));
+		return StringUtils.isEmpty((String) args.get(0));
 	}
 
 }
