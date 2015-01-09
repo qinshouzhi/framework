@@ -41,6 +41,7 @@
 		<fastjson.version>1.2.3</fastjson.version>
 		<gson.version>2.2.4</gson.version>
 		<jackson-core.version>2.4.4</jackson-core.version>
+		<jackson-module-hibernate.version>1.9.1</jackson-module-hibernate.version>
 		<shiro.version>1.2.3</shiro.version>
 		<freemarker.version>2.3.20</freemarker.version>
 		<jsp-api.version>2.0</jsp-api.version>
@@ -601,6 +602,11 @@
 				<artifactId>jackson-databind</artifactId>
 				<version>${jackson-core.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.datatype</groupId>
+				<artifactId>jackson-datatype-hibernate4</artifactId>
+				<version>${jackson-core.version}</version>
+			</dependency>
 			<!-- JSON End -->
 			<!-- Servlet&&JSP Start -->
 			<dependency>
@@ -678,7 +684,8 @@
 		</developer>
 	</developers>
 	<repositories>
-		<!--  --><repository>
+		<!-- -->
+		<repository>
 			<id>repo1</id>
 			<name>maven</name>
 			<url>http://repo1.maven.org/maven2/</url>

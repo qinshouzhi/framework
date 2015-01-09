@@ -15,17 +15,14 @@
 	<context:component-scan base-package="com.newtouch.lion.admin.web" />
 	<context:component-scan base-package="com.newtouch.lion.web" />
 	<aop:config proxy-target-class="true" />
-	<bean
-		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
 		<property name="securityManager" ref="securityManager" />
 	</bean>
 	<!-- Spring MVC自动 -->
 	<mvc:annotation-driven validator="validator">
 		<mvc:message-converters>
-			<bean
-				class="com.newtouch.lion.web.converter.escape.StringEscapeHttpMessageConverter" />
-			<bean name="mappingJacksonHttpMessageConverter"
-				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+			<bean class="com.newtouch.lion.web.converter.escape.StringEscapeHttpMessageConverter" />
+			<bean name="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 				<property name="supportedMediaTypes">
 					<list>
 						<value>text/html;charset=UTF-8</value>
@@ -33,10 +30,13 @@
 						<value>application/json;charset=UTF-8</value>
 					</list>
 				</property>
+				<property name="objectMapper" ref="objectMapper"/>
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
-
+	
+	<bean  id="objectMapper"  class="com.newtouch.lion.web.json.CustomObjectMapper"/>
+	
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>

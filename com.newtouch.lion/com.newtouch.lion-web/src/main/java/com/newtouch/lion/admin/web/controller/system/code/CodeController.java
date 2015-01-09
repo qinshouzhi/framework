@@ -39,6 +39,7 @@ import com.newtouch.lion.service.system.CodeTypeService;
  * @version 1.0
  */
 @Controller(value = "sysCodeController")
+@RequestMapping("/system/code/")
 public class CodeController {
 
 	@Autowired
@@ -46,21 +47,14 @@ public class CodeController {
 	@Autowired
 	private CodeTypeService codeTypeService;
 
-	@RequestMapping("/system/code/combox")
+	@RequestMapping("combox")
 	@ResponseBody
-	public String combox(@RequestParam String nameEn) {
+	public List<CodeList> combox(@RequestParam String nameEn) {
 		List<CodeList> codeLists = codeListService.doFindCodeListByCodeTypeNameEn(nameEn);
-		Set<String> filterColumn = new HashSet<String>();
-		filterColumn.add("id");
-		filterColumn.add("nameEn");
-		filterColumn.add("nameZh");
-		filterColumn.add("codeValue");
-		filterColumn.add("sortNo");
-		filterColumn.add("selected");
-		return JSONParser.toJSONString(codeLists, filterColumn, true);
+		return codeLists;
 	}
 
-	@RequestMapping("/system/code/comboxselected")
+	@RequestMapping("comboxselected")
 	@ResponseBody
 	public String comboxDefaultSelectedValue(@RequestParam String nameEn,
 			@RequestParam(required = false) String selectedValue) {

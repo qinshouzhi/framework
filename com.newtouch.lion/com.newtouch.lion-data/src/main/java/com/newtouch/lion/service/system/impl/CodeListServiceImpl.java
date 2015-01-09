@@ -172,6 +172,7 @@ public class CodeListServiceImpl extends AbstractService implements
 	@Override
 	public List<CodeList> doFindCodeListByCodeTypeNameEn(String codeTypeNameEn) {
 		
+		//String hql="select cl.id,cl.codeValue,cl.nameZh,cl.nameEn,cl.selected from CodeList as cl left join cl.codeType as ct where ct.nameEn=:nameEn order by cl.sortNo ASC";
 		String hql="select cl from CodeList as cl left join cl.codeType as ct where ct.nameEn=:nameEn order by cl.sortNo ASC";
 		Map<String,Object>  params=new HashMap<String, Object>();
 		params.put("nameEn",codeTypeNameEn);
