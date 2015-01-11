@@ -49,6 +49,9 @@ public class CustomObjectMapper extends ObjectMapper {
 	    this.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 		this.registerModule(module);
 		this.registerModule(new Hibernate4Module());
+ 
+ 
+		this.registerModule(module);
 
 	}
 }
