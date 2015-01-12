@@ -26,10 +26,31 @@ $(document).ready(function() {
 	 $("#btnRefresh").on("click",function(){
 		 dataGridReload("sys_parameter_lists_tb");
 	 });
-	 
+	 //新增
 	 $("#btnAdd").on("click",function(){
 		 alert("dd");
-	 });	
+	 });
+	 //编辑
+	 $("#btnEdit").on("click",function(){
+		 alert("dd");
+	 });
+	 //删除
+	 $("#btnDelete").on("click",function(){
+		  bootbox.confirm("确认要删除此记录？", function(result) {
+              if(result){
+            	  $.lionui.notice.success('已经成功删除!', '删除成功');
+            	  
+              }
+              else{
+            	  toastr.error('已经成功删除', '删除!');
+              }
+              //toastr.warning('My name is Inigo Montoya. You killed my father, prepare to die!')
+          }); 
+	 });
+	 //导出Excel
+	 $("#btnExport").on("click",function(){
+		 alert("dd");
+	 });
 });
 //获取下拉列表数据
 var data = [];

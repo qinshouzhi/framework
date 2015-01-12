@@ -244,6 +244,36 @@ $.extend($.fn.validatebox.defaults.rules, {
 	}
 });
 
+/**提示信息（成功，提示、警告、错误）*/
+(function($) {       
+	$.lionui={};
+	$.lionui.notice={
+		 success:function(title,content){
+			 toastr.options = {
+				  "closeButton": true,
+				  "debug": false,
+				  "positionClass": "toast-top-center",
+				  "onclick": null,
+				  "showDuration": "1000",
+				  "hideDuration": "1000",
+				  "timeOut": "5000",
+				  "extendedTimeOut": "1000",
+				  "showEasing": "swing",
+				  "hideEasing": "linear",
+				  "showMethod": "fadeIn",
+				  "hideMethod": "fadeOut"
+			 };
+			 toastr.success(content, title);
+		 },
+		 error:function(title,content){
+			 
+		 },
+		 warning:function(title,content){
+			 
+		 },
+		 info:function(title,content){}
+	};
+})(jQuery);
 (function($) {
 	$.topCenterMsgBox = function(msg) {
 		parent.$.messager.show({

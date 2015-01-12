@@ -30,12 +30,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.role.RoleVo;
 import com.newtouch.lion.common.lang.LongUtils;
+import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.system.Attributes;
 import com.newtouch.lion.model.system.Group;
 import com.newtouch.lion.model.system.Resource;
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
+import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.system.GroupService;
 import com.newtouch.lion.service.system.ResourceService;
@@ -81,13 +83,13 @@ public class RoleController extends AbstractController{
 	/**角色所有用户列表*/
 	private static final String AUTHROLE_USERS_TB="sys_authrole_users_tb";
 	/**系统角色首页*/
-	private static final String INDEX_RETURN="index";
+	private static final String INDEX_RETURN="/system/role/index";
 	/**系统角色添加*/
-	private static final String ADD_DIALOG_RETURN="adddialog";
+	private static final String ADD_DIALOG_RETURN="/system/role/adddialog";
 	/**系统角色编辑*/
-	private static final String EDIT_DIALOG_RETURN="editdialog";
+	private static final String EDIT_DIALOG_RETURN="/system/role/editdialog";
 	/**系角色授权*/
-	private static final String AUTH_DIALOG_RETURN="authdialog";
+	private static final String AUTH_DIALOG_RETURN="/system/role/authdialog";
 	
 	@Autowired
 	private RoleService  roleService;
@@ -373,9 +375,9 @@ public class RoleController extends AbstractController{
     	return modelAndView;
 	}
 	
-	@RequestMapping(value = "lists")
+	@RequestMapping(value = "list")
 	@ResponseBody
-	public String list(HttpServletRequest servletRequest,Model model,@RequestParam(defaultValue="1") int page, @RequestParam(defaultValue="15") int rows,@RequestParam(required=false) String sort,@RequestParam(required=false) String order,@RequestParam(required=false) String nameZh){
+	public DataTable<Role> list(HttpServletRequest servletRequest,Model model,@RequestParam(defaultValue="1") int page, @RequestParam(defaultValue="15") int rows,@RequestParam(required=false) String sort,@RequestParam(required=false) String order,@RequestParam(required=false) String nameZh){
 		QueryCriteria queryCriteria=new QueryCriteria();
 		
 		// 设置分页 启始页
@@ -395,9 +397,9 @@ public class RoleController extends AbstractController{
 			queryCriteria.addQueryCondition("nameZh","%"+nameZh.trim()+"%");
 		}
 		
-		String result=this.roleService.doFindByCriteria(queryCriteria,DEFAULT_TABLE_ID);
+		PageResult<Role> pageResult = this.roleService.doFindByCriteria(queryCriteria);
 		
-		return result;
+		return pageResult.getDataTable();
 	}
 }
 
