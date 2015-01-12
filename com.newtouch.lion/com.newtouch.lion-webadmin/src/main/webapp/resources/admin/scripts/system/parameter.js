@@ -9,7 +9,7 @@ $(document).ready(function() {
 	            tickIcon: 'fa-check'
 	        });
 	}
-	
+	//初始化下拉框
 	handleBootstrapSelect();
 
 	$("#sys_parameter_lists_tb").datagrid({
@@ -26,21 +26,30 @@ $(document).ready(function() {
 	 $("#btnRefresh").on("click",function(){
 		 dataGridReload("sys_parameter_lists_tb");
 	 });
-	  
-	 var data = [];
-	 $("#sysParameterCodeList option").each(function () {
-		 var row = {};
-         var codeText = $(this).text(); //获取单个text
-         var codeValue = $(this).val(); //获取单个value
-         row.codeText=codeText;
-         row.codeValue=codeValue;
-         data.push(row);
-     });
+	 
+	 $("#btnAdd").on("click",function()){
+		 
+	 }
+	
 });
-
-
+//获取下拉列表数据
+var data = [];
+$("#sysParameterCodeList option").each(function () {
+	var row = {};
+    var codeText = $(this).text(); //获取单个text
+    var codeValue = $(this).val(); //获取单个value
+    row.codeText=codeText;
+    row.codeValue=codeValue;
+    data.push(row);
+});
 /**sys_code_type 加载列表*/
 function formatterCodeList(val,row) {
-	var nameZh = "中文";
+	var nameZh = "";
+	for ( var obj in data) {
+		if (data[obj].codeValue ===val) {
+			nameZh = data[obj].codeText;
+			break;
+		}
+	}
 	return nameZh;
 }

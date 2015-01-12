@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2015-01-08 17:10:57
+Date: 2015-01-12 13:42:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -78,7 +78,7 @@ CREATE TABLE `bas_code_list` (
 -- Records of bas_code_list
 -- ----------------------------
 INSERT INTO `bas_code_list` VALUES ('1', '19', 'Users', '用户', 'Users', '2', '1', '2013-03-19 17:15:16', '1', '2014-04-08 10:28:59', '0', '3', null, '1', '0');
-INSERT INTO `bas_code_list` VALUES ('2', '19', 'file', '文件类', 'Files', '1', '1', '2013-03-19 17:19:03', '1', '2014-04-08 10:28:53', '0', '2', null, '1', '0');
+INSERT INTO `bas_code_list` VALUES ('2', '19', 'Files', '文件类', 'Files', '1', '1', '2013-03-19 17:19:03', '1', '2014-04-08 10:28:53', '0', '2', null, '1', '0');
 INSERT INTO `bas_code_list` VALUES ('3', '19', 'systems', '系统类', 'systems', '3', '1', '2013-03-19 20:42:18', '1', '2014-04-08 10:55:56', '0', '9', null, '1', '1');
 INSERT INTO `bas_code_list` VALUES ('11', '21', 'system', '系统类型', 'system', '1', '1', '2013-03-20 18:03:39', '1', '2014-04-08 13:54:54', '0', '6', null, '1', '0');
 INSERT INTO `bas_code_list` VALUES ('12', '21', 'Products', '产品管理', 'Products', '2', '1', '2013-03-20 18:04:45', '1', '2013-03-20 18:04:45', '0', '0', null, '1', '0');
@@ -388,16 +388,16 @@ CREATE TABLE `bas_datagrid` (
   `NOWRAP` tinyint(1) DEFAULT '1' COMMENT ' 默认设置为：true，当数据长度超出列宽时将会自动截取',
   `URL` varchar(256) DEFAULT NULL COMMENT ' A URL to request data from remote site',
   `DATA` varchar(512) DEFAULT NULL COMMENT 'The data to be loaded',
-  `LOADMSG` varchar(100) DEFAULT NULL COMMENT ' When loading data from remote site,show a prompt message.Default value is:''Processing, please wait …''',
+  `LOAD_MSG` varchar(100) DEFAULT NULL COMMENT ' When loading data from remote site,show a prompt message.Default value is:''Processing, please wait …''',
   `ROW_NUMBERS` tinyint(1) DEFAULT '1' COMMENT 'True to show a row number column. Default value is:true',
   `SINGLE_SELECT` tinyint(1) DEFAULT '1' COMMENT 'True to allow selecting only one row. Default value is:true',
-  `CHECK_ON_SEELCT` tinyint(1) DEFAULT '1',
+  `CHECK_ON_SELECT` tinyint(1) DEFAULT '1',
   `SELECT_ON_CHECK` tinyint(1) DEFAULT '1',
   `PAGE_POSITION` varchar(10) DEFAULT NULL COMMENT ' Defines position of the pager bar. Available values are: ''top'',''bottom'',''both''.The default value is:bottom',
   `PAGE_NUMBER` int(11) DEFAULT '1',
   `PAGE_SIZE` int(11) DEFAULT '15',
   `PAGE_LIST` varchar(50) DEFAULT '[10,15,20,30,40,50,100]',
-  `QUERY_PARAMS` varchar(50) DEFAULT '100',
+  `QUEYR_PARAMS` varchar(50) DEFAULT '100',
   `SORT_NAME` varchar(30) DEFAULT 'id' COMMENT 'Defines which column can be sorted.',
   `SORT_ORDER` varchar(5) DEFAULT 'asc' COMMENT 'Defines the column sort order, can only be ''asc'' or ''desc''.',
   `REMOTE_SORT` tinyint(1) DEFAULT '1' COMMENT 'Defines if to sort data from server.',
@@ -444,7 +444,7 @@ INSERT INTO `bas_datagrid` VALUES ('25', 'code_datagrid', 'sys_codelist_tb', '�
 INSERT INTO `bas_datagrid` VALUES ('26', 'code_datagrid', 'sys_codetype_lists_tb', '编码类型列表', '0', '1', '1', '0', '1', '1', '1', 'post', '1', 'main/codetype_lists.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-14 09:47:00', '1', '2014-04-08 23:50:30', '0', '2', null);
 INSERT INTO `bas_datagrid` VALUES ('27', 'system_datagrid', 'sys_resource_lists_tb', '资源列表', '0', '1', '1', '0', '1', '1', '1', 'post', '1', 'main/resource_lists.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-14 11:45:43', '1', '2014-04-08 23:51:21', '0', '7', null);
 INSERT INTO `bas_datagrid` VALUES ('28', 'system_datagrid', 'sys_department_lists', '部门列表', '0', '1', '0', '0', '1', '1', '0', null, '0', 'main/department_lists.action', '', '', '1', '0', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', null, '0', '1', '0', '18', '', '', null, '', null, '1', '2013-04-14 16:35:22', '1', '2014-04-08 23:51:11', '0', '8', null);
-INSERT INTO `bas_datagrid` VALUES ('29', 'system_datagrid', 'sys_parameter_lists_tb', '系统参数列表', '0', '1', '1', '0', '1', '1', '1', 'post', '1', 'main/parameter_lists.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-14 17:26:58', '1', '2014-04-08 23:50:57', '0', '2', null);
+INSERT INTO `bas_datagrid` VALUES ('29', 'system_datagrid', 'sys_parameter_lists_tb', '系统参数列表', '0', '0', '1', '0', '1', '1', '1', 'post', '1', 'main/parameter_lists.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-14 17:26:58', '1', '2014-04-08 23:50:57', '0', '2', null);
 INSERT INTO `bas_datagrid` VALUES ('30', 'system_datagrid', 'sys_department_lists2', null, '0', '1', '1', '0', '1', '1', '1', 'post', '1', '/main/system/department/lists.jhtml', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2014-04-04 01:04:59', '1', '2014-04-04 01:10:43', '0', '2', null);
 INSERT INTO `bas_datagrid` VALUES ('32', 'datagrid_datagrid ', 'sys_datagrid_tb1', 'DataGrid表格测试 ', '0', '1', '1', '0', '1', '1', '0', 'post', '1', 'sys_datagrid_tb1', '', '', '1', '0', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2014-04-08 23:04:00', '1', '2014-04-08 23:46:14', '0', '2', null);
 INSERT INTO `bas_datagrid` VALUES ('33', 'system_datagrid', 'sys_cachelist_tb', '缓存管理', '0', '1', '1', '0', '0', '1', '1', 'post', '1', 'sys_cachelist_tb', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '0', '1', '0', '18', '', '', null, '', null, '1', '2014-04-21 15:13:40', '1', '2014-04-22 10:30:01', '0', '1', null);
