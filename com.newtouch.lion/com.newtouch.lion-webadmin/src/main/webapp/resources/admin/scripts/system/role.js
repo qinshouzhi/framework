@@ -6,7 +6,7 @@ $(document).ready(function() {
 
 	$("#sys_role_lists_tb").datagrid({
 		onLoadSuccess : function(data) {
-			 	
+ 
 		}
 	});
 	
