@@ -11,8 +11,21 @@ $(document).ready(function() {
 	}
 	//初始化下拉框
 	handleBootstrapSelect();
-
-	$("#sys_parameter_lists_tb").datagrid({
+	(function($){
+		$.sys.parameter={
+				querybtn:"queryBtn",
+				datagridId:"sys_parameter_lists_tb",
+				dialogId:"sys_parameter_dialogData",
+				formId:"sys_parameter_data_form",
+				id:"sys_parameter_data_form_id",
+				type:"sys_parameter_form_type",
+				btn:{add:"btnAdd",save:"#btnSave",edit:"#btnEdit",remove:"#btnDelete",reload:"#btnRefresh",exportbtn:"#btnExport"}
+		};
+	})(jQuery);
+	//选择DataGrid单行
+	function getSelectedRow(){return $("#"+$.sys.parameter.datagridId).datagrid("getSelected");}
+	 
+	$("#"+$.sys.parameter.datagridId).datagrid({
 		onLoadSuccess : function(data) {
 			//Metronic.init(); // init metronic core componets
 		}
@@ -24,11 +37,11 @@ $(document).ready(function() {
 	 }
 	 //刷新
 	 $("#btnRefresh").on("click",function(){
-		 dataGridReload("sys_parameter_lists_tb");
+		 dataGridReload($.sys.parameter.datagridId);
 	 });
 	 //新增
 	 $("#btnAdd").on("click",function(){
-		 alert("dd");
+		 return;
 	 });
 	 //编辑
 	 $("#btnEdit").on("click",function(){
@@ -36,15 +49,23 @@ $(document).ready(function() {
 	 });
 	 //删除
 	 $("#btnDelete").on("click",function(){
-		  bootbox.confirm("确认要删除此记录？", function(result) {
+		 var row=getSelectedRow();
+		 if(!row){
+			 $.lionui.notice.info("提示","请选择要删除记录");
+			 return;
+		 }
+		 bootbox.confirm("确认要删除此记录？", function(result) {
               if(result){
-            	  $.lionui.notice.success('已经成功删除!', '删除成功');
-            	  
+            	 
+            	  var ps = "?id="+row.id;
+					//$.post("delete.htm" + ps, function(data) {
+					//	var dataJson=eval('(' + data + ')');
+					//	//parent.$.topCenterMsgBox(dataJson.message);
+					//	dataGridReload();
+					//	dataGridReload($.sys.parameter.datagridId);
+					//});
+            	  $.lionui.notice.success('提示!', '已删除成功');
               }
-              else{
-            	  toastr.error('已经成功删除', '删除!');
-              }
-              //toastr.warning('My name is Inigo Montoya. You killed my father, prepare to die!')
           }); 
 	 });
 	 //导出Excel

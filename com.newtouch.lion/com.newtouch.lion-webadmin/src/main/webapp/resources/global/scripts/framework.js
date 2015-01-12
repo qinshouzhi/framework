@@ -29,8 +29,7 @@
 				return;
 			}
 		 
-			$('input,select,textarea',target).each(function(){
-				
+			$('input,select,textarea',target).each(function(){				
 				var inputName=this.name;
 			    if(($.StringUtils.isNotEmpty(this.name))&&($.StringUtils.isNotEmpty(fieldErrors[inputName]))){
 			    	$(this).addClass("validatebox-invalid");
@@ -266,12 +265,56 @@ $.extend($.fn.validatebox.defaults.rules, {
 			 toastr.success(content, title);
 		 },
 		 error:function(title,content){
-			 
+			 toastr.options = {
+					  "closeButton": true,
+					  "debug": false,
+					  "positionClass": "toast-top-center",
+					  "onclick": null,
+					  "showDuration": "1000",
+					  "hideDuration": "0",
+					  "timeOut": "0",
+					  "extendedTimeOut": "0",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+				};
+			 toastr.error(content, title);
 		 },
 		 warning:function(title,content){
-			 
+			 toastr.options = {
+					  "closeButton": true,
+					  "debug": false,
+					  "positionClass": "toast-top-center",
+					  "onclick": null,
+					  "showDuration": "1000",
+					  "hideDuration": "0",
+					  "timeOut": "0",
+					  "extendedTimeOut": "0",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+				};
+			 toastr.warning(content, title); 
 		 },
-		 info:function(title,content){}
+		 info:function(title,content){
+			 toastr.options = {
+					  "closeButton": true,
+					  "debug": false,
+					  "positionClass": "toast-top-center",
+					  "onclick": null,
+					  "showDuration": "1000",
+					  "hideDuration": "1000",
+					  "timeOut": "5000",
+					  "extendedTimeOut": "1000",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+				};
+			 toastr.info(content, title);
+		 }
 	};
 })(jQuery);
 (function($) {

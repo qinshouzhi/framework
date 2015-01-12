@@ -51,7 +51,7 @@
 			</div>
 		
 			<div class="col-md-12 margin-bottom-10" id="toolbar">
-				<a href="javascript:void(0)" id="btnAdd" class="btn btn-sm yellow"><i class="fa fa-plus"></i> 新增  </a>
+				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic"><i class="fa fa-plus"></i> 新增  </a>
 				<a href="javascript:void(0)"id="btnEdit" class="btn btn-sm red"><i class="fa fa-edit"></i> 编辑 </a>
 				<a href="javascript:void(0)" id="btnDelete" class="btn btn-sm purple"><i class="fa fa-times"></i> 删除 </a>
 				<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue"><i class="fa fa-refresh"></i> 刷新  </a>
@@ -64,5 +64,24 @@
 	</div>
 </div>
 <!-- END PAGE CONTENT INNER -->
+<div  class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<h4 class="modal-title">系统参数</h4>
+			</div>
+			<div class="modal-body">
+				 Modal body goes here
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn default" data-dismiss="modal"><i class="fa fa-save"></i> 取 消 </button>
+				<button type="button" class="btn blue"><i class="fa fa-save"></i> 保 存 </button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
 </body>
 </html>

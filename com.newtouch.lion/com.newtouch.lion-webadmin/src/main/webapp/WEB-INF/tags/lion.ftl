@@ -53,7 +53,7 @@ multipleDataMaxOptions：是否支持多项选择，等于1表示只能选择一
 <#if ui.strIsNotEmpty(url)>url="${url}"<#elseif ui.strIsNotEmpty(datagrids.url)>url="${datagrids.url}"</#if>
 </#if><#if ui.strIsNotEmpty(dataOptions)>dataOptions="${dataOptions}"</#if> 
 <#if ui.strIsNotEmpty(style)> style="${style}"</#if>
-fit="false"
+fit="${datagrids.fit?string("true","false")}"
 <#if datagrids.fitColumns?if_exists> fitColumns="${datagrids.fitColumns?string("true","false")}" </#if>
 <#if datagrids.pagination?if_exists&&datagrids.pagination> 
 pagination="true" 
