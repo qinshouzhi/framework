@@ -44,6 +44,7 @@
 	<!-- Lion UI Tag  definiton Start -->
 	<bean id="menu" class="com.newtouch.lion.web.tags.MenuTag" />
 	<bean id="dataGrid" class="com.newtouch.lion.web.tags.datagrid.DataGridTag"/>
+	<bean id="comboBox" class="com.newtouch.lion.web.tags.combo.ComboBoxTag"/>
 	<bean id="strIsEmpty" class="com.newtouch.lion.web.tags.function.StringEmptyFunction"/>
 	<bean id="strIsNotEmpty" class="com.newtouch.lion.web.tags.function.StringNotEmptyFunction"/>
 	<!-- Lion UI Tag  definiton End -->	
@@ -65,6 +66,7 @@
 	<util:map id="uiTag" map-class="java.util.HashMap">
 		<entry key="menu" value-ref="menu" />
 		<entry key="datagrid" value-ref="dataGrid"/>
+		<entry key="comboboxs" value-ref="comboBox"/>
 		<entry key="strIsEmpty" value-ref="strIsEmpty"/>
 		<entry key="strIsNotEmpty"  value-ref="strIsNotEmpty"/>
 	</util:map>
