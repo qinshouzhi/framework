@@ -26,7 +26,6 @@ $(document).ready(function() {
 	 $("#btnRefresh").on("click",function(){
 		 dataGridReload("sys_parameter_lists_tb");
 	 });
-	  
 	 var data = [];
 	 $("#sysParameterCodeList option").each(function () {
 		 var row = {};
