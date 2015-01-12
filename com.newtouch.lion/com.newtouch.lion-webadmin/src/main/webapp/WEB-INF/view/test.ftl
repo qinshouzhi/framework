@@ -38,6 +38,10 @@
 				  <option>10</option>
 				</select>
 			</div>
+			<div class="col-md-4">
+				<@lion.combobox id="parameterCodeList" codeName="SystemParamter" dataClass="bootstrap-select bs-select form-control input-small" title="请选择参数列表" dataSize="8" multipleDataMaxOptions="1"/>
+				 
+			</div>
 		</div>
  	</div>
 </div>

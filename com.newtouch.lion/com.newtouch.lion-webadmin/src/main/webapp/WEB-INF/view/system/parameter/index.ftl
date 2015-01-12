@@ -12,7 +12,9 @@
 <link href="${base}/resources/global/plugins/easyui/themes/metro/combo.css" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/global/plugins/easyui/themes/metro/combobox.css" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/global/plugins/easyui/themes/icon.css" rel="stylesheet" type="text/css"/>
+<link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <!--EasyUI css End-->
+<script src="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript" ></script>
 <!--EasyUI JavaScript Start-->
 <script src="${base}/resources/global/plugins/easyui/jquery.easyui.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
@@ -34,7 +36,7 @@
 				</div>
 				<label class="control-label col-md-2" for="sys_parameter_type" >参数类型</label>
 				<div class="col-md-3">
-					<input class="easyui-combobox" type="text" name="type" id="sys_parameter_type" placeholder="请选择参数类型" data-options="url:'${base}/system/code/combox.htm?nameEn=SystemParamter',valueField:'nameEn',textField:'nameZh',panelHeight:'auto'">					
+					<@lion.combobox id="sysParameterCodeList" codeName="SystemParamter" dataClass="bootstrap-select bs-select form-control input-small" title="请选择参数列表" dataSize="8" multipleDataMaxOptions="1"/>
 				</div>
 				<div class="col-md-2">
 					<a href="javascript:void(0)" class="btn blue"><i class="fa fa-search"></i> 查 询 </a>

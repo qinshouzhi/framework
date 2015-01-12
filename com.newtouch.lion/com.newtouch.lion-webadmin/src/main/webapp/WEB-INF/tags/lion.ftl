@@ -1,5 +1,32 @@
 <!-- Freemarker自定义标签 -->
 <#assign contextPath = request.contextPath/>
+<!--ComboBox 标签定义 Start-->
+<#--
+combobox 用户下拉列表显示控件
+id 表示该控件的ID，
+codeName:表示IM的Name
+dataClass:表该控件的样式
+title:显示提示信息
+dataSize:显示下拉列表记录数，大于此记录数则显示流动条
+multipleDataMaxOptions：是否支持多项选择，等于1表示只能选择一项
+-->
+<#macro combobox id,codeName,dataClass,title,dataSize, multipleDataMaxOptions>
+<@ui.comboboxs codeName="${codeName}">
+<select <#if ui.strIsNotEmpty(id)>id="${id}"</#if>
+	    <#if ui.strIsNotEmpty(dataClass)>class="${dataClass}"</#if>
+	    <#if ui.strIsNotEmpty(title)>title="${title}"</#if>
+	    <#if ui.strIsNotEmpty(dataSize)>data-size="${dataSize}"</#if>
+	    <#if ui.strIsNotEmpty(multipleDataMaxOptions)>multiple data-max-options="${multipleDataMaxOptions}"</#if>
+>
+<#if codes?? &&codes?size gt 0>
+	<#list codes as code>
+		<option value="${code.codeValue}">${code.nameZh}</option>
+	</#list>
+</#if>
+</select>
+</@ui.comboboxs>
+</#macro>
+<!--ComboBox 标签定义 End-->
 <!--DataGrid 工具栏标签 Start-->
 
 <!--DataGrid 工具栏标签 End-->
