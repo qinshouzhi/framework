@@ -29,8 +29,7 @@ $(document).ready(function() {
 	 
 	 $("#btnAdd").on("click",function(){
 		 alert("dd");
-	 });
-	
+	 });	
 });
 //获取下拉列表数据
 var data = [];
