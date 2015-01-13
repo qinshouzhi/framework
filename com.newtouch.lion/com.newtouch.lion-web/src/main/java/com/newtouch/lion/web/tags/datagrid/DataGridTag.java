@@ -74,15 +74,16 @@ public class DataGridTag  extends AbstractTag{
 		String dataGridId = DirectiveUtils.getString(DATAGRID_ID, params);
 		logger.debug("dataGridId:{}",dataGridId);
 		DataGrid dataGrid = dataGridService.doFindByTableId(dataGridId);
+		if(dataGrid!=null){
+			List<DataColumn> dataColumns = new ArrayList<DataColumn>(dataGrid.getColumns());
+			Collections.sort(dataColumns, new DataColumnComparator());
+			dataGrid.setSortColumns(dataColumns);
+		}else{
+			logger.error("未查询到ID为：{}数据表格的配置信息",dataGridId);
+			dataGrid=new DataGrid();
+		}
 
-		List<DataColumn> dataColumns = new ArrayList<DataColumn>(dataGrid.getColumns());
-
-		Collections.sort(dataColumns, new DataColumnComparator());
-
-		dataGrid.setSortColumns(dataColumns);
-
-		Map<String, TemplateModel> paramWrap = new HashMap<String, TemplateModel>(
-				params);
+		Map<String, TemplateModel> paramWrap = new HashMap<String, TemplateModel>(params);
 
 		paramWrap.put(DATAGRID, DEFAULT_WRAPPER.wrap(dataGrid));
 
