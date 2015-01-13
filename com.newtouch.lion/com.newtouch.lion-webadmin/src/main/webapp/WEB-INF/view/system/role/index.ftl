@@ -27,7 +27,7 @@
 <!--EasyUI JavaScript End-->
 <script src="${base}/resources/global/scripts/framework.js" type="text/javascript"></script>
 <script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
-<script src="${base}/resources/admin/scripts/system/parameter.js" type="text/javascript"></script>
+<script src="${base}/resources/admin/scripts/system/role.js" type="text/javascript"></script>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed-hide-logo">
 <!-- BEGIN PAGE CONTENT INNER -->
@@ -36,13 +36,11 @@
 		<div class="row">
 			<div class="col-md-12 margin-bottom-10">
 				<form id="queryParameterform" class="form-horizontal">
-					<label class="control-label col-md-2" for="nameZh" >参数名称</label>
-					<div class="col-md-2">
-						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="请输入参数名称"/>					
-					</div>
-					<label class="control-label col-md-2" for="sys_parameter_type" >参数类型</label>
+					<label class="control-label col-md-2" for="nameZh" >角色名称</label>
 					<div class="col-md-3">
-						<@lion.combobox id="sysParameterCodeList" codeName="SystemParamter" dataClass="bootstrap-select bs-select form-control input-small" title="请选择参数列表" dataSize="8" multipleDataMaxOptions="1"/>
+						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="请输入角色名称"/>					
+					</div>
+					<div class="col-md-2">
 					</div>
 					<div class="col-md-2">
 						<a href="javascript:void(0)" class="btn blue"><i class="fa fa-search"></i> 查 询 </a>

@@ -388,7 +388,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 				.doFindColumnsByTableId(tableId);
 		return JSONParser.toJSONDataGridString(groups, properties);
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

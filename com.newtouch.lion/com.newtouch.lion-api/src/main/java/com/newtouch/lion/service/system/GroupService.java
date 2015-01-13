@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.newtouch.lion.model.datagrid.DataColumn;
 import com.newtouch.lion.model.system.Group;
+import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
@@ -83,7 +84,7 @@ public interface GroupService {
 	 * @return String JSON字符串
 	 * */
 	public String doFindAuthGroups(QueryCriteria criteria, String tableId);
-
+	
 	/**
 	 * 根据用户ID查询用户所属用户组，并返回用户组列表
 	 * 
