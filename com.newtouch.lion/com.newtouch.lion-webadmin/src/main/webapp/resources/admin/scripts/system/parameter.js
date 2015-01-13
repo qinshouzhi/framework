@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(function() {
 	//加载bootstrap
 	Metronic.init(); // init metronic core componets
 	Layout.init(); // init layout
