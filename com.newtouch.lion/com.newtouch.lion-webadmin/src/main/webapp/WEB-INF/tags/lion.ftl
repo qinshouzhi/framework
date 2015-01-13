@@ -10,9 +10,10 @@ title:显示提示信息
 dataSize:显示下拉列表记录数，大于此记录数则显示流动条
 multipleDataMaxOptions：是否支持多项选择，等于1表示只能选择一项
 -->
-<#macro combobox id,codeName,dataClass,title,dataSize, multipleDataMaxOptions>
+<#macro combobox id,codeName,name,dataClass,title,dataSize, multipleDataMaxOptions>
 <@ui.comboboxs codeName="${codeName}">
 <select <#if ui.strIsNotEmpty(id)>id="${id}"</#if>
+		<#if ui.strIsNotEmpty(name)>id="${name}"</#if>
 	    <#if ui.strIsNotEmpty(dataClass)>class="${dataClass}"</#if>
 	    <#if ui.strIsNotEmpty(title)>title="${title}"</#if>
 	    <#if ui.strIsNotEmpty(dataSize)>data-size="${dataSize}"</#if>
