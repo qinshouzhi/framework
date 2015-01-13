@@ -1,8 +1,8 @@
 <#assign base = request.contextPath/>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
-<head>
-<title>用户组管理</title>
+<head> 
+<title>DataGrid信息</title>
 <!--EasyUI css Start-->
 <link href="${base}/resources/global/plugins/easyui/themes/metro/panel.css" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/global/plugins/easyui/themes/metro/linkbutton.css" rel="stylesheet" type="text/css"/>
@@ -27,7 +27,7 @@
 <!--EasyUI JavaScript End-->
 <script src="${base}/resources/global/scripts/framework.js" type="text/javascript"></script>
 <script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
-<script src="${base}/resources/admin/scripts/system/group.js" type="text/javascript"></script>
+<script src="${base}/resources/admin/scripts/system/datagrid.js" type="text/javascript"></script>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed-hide-logo">
 <!-- BEGIN PAGE CONTENT INNER -->
@@ -36,11 +36,11 @@
 		<div class="row">
 			<div class="col-md-12 margin-bottom-10">
 				<form id="queryParameterform" class="form-horizontal">
-					<label class="control-label col-md-2" for="nameZh" >用户组名称</label>
-					<div class="col-md-3">
-						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="请输入用户组名称"/>					
-					</div>
+					<label class="control-label col-md-2" for="nameZh" >datagrid名称</label>
 					<div class="col-md-5">
+						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="请输入datagrid名称"/>					
+					</div>
+					<div class="col-md-3">
 					</div>
 					<div class="col-md-2">
 						<a href="javascript:void(0)" class="btn blue"><i class="fa fa-search"></i>查 询 </a>
@@ -56,7 +56,7 @@
 				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> Excel </a>
 			</div>
 			<div class="col-md-12">
-				 <@lion.datagrids name="sys_group_list_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/group/list.htm" dataOptions="" style="height:400px;"/>	
+				 <@lion.datagrids name="datagrid_dt" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/datagrid/list.htm" dataOptions="" style="height:400px;"/>	
 			</div>
 		</div>
 	</div>

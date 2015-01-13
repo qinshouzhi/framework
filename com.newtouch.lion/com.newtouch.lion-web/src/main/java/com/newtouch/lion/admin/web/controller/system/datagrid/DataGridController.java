@@ -26,7 +26,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.datagrid.DataGridVo;
+import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.model.datagrid.DataGrid;
+import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.datagrid.DataGridService;
 import com.newtouch.lion.web.constant.ConstantMessage;
@@ -51,12 +53,13 @@ import com.newtouch.lion.web.servlet.view.support.BindResult;
  * @version 1.0
  */
 @Controller(value = "sysDataGridContorller")
+@RequestMapping("/system/datagrid/")
 public class DataGridController {
 	private final Logger logger = LoggerFactory.getLogger(super.getClass());
 	/** 默认排序字段 */
 	private static final String DEFAULT_ORDER_FILED_NAME = "id";
 	/** 首页返回路径 */
-	private static final String INDEX_RETURN = "/system/datagrid/index";
+	private static final String INDEX_RETURN = "system/datagrid/index";
 	/** 新增对话返回路径 */
 	private static final String ADD_DIALOG_RETURN = "system/datagrid/adddialog";
 	/** 修改对话返回路径 */
@@ -68,13 +71,13 @@ public class DataGridController {
 	private DataGridService dataGridService;
 
 	/** 新增的对话框 */
-	@RequestMapping(value = "/system/datagrid/adddialog")
+	@RequestMapping(value = "adddialog")
 	public String addDialog() {
 		return ADD_DIALOG_RETURN;
 	}
 
 	/** 编辑对话框 */
-	@RequestMapping(value = "/system/datagrid/editdialog")
+	@RequestMapping(value = "editdialog")
 	public String editDialog(@RequestParam Long id, Model model) {
 		if (id != null) {
 			DataGrid dataGrid = this.dataGridService.doGetById(id);
@@ -86,26 +89,26 @@ public class DataGridController {
 	}
 
 	/** 首页显示 */
-	@RequestMapping(value = "/system/datagrid/index")
+	@RequestMapping(value = "index")
 	public String index() {
 		return INDEX_RETURN;
 	}
 
 	/** DataGrid列表 */
-	@RequestMapping(value = "/system/datagrid/combox")
+	@RequestMapping(value = "combox")
 	@ResponseBody
 	public String comobx() {
 		return this.dataGridService.doFindAllForCombox();
 	}
 
 	/** 首页显示 */
-	@RequestMapping(value = "/system/datagrid/comboxwithtype")
+	@RequestMapping(value = "comboxwithtype")
 	@ResponseBody
 	public String comobxByType(@RequestParam(required = false) String type) {
 		return this.dataGridService.doFindComboxByType(type);
 	}
 
-	@RequestMapping(value = "/system/datagrid/delete")
+	@RequestMapping(value = "delete")
 	@ResponseBody
 	public ModelAndView delete(@RequestParam Long id, ModelAndView modelAndView) {
 		Map<String, String> params = new HashMap<String, String>();
@@ -121,7 +124,7 @@ public class DataGridController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/system/datagrid/add")
+	@RequestMapping(value = "add")
 	@ResponseBody
 	public ModelAndView add(
 			@Valid @ModelAttribute("dataGrid") DataGridVo dataGridVo,
@@ -139,7 +142,7 @@ public class DataGridController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/system/datagrid/checktableid")
+	@RequestMapping(value = "checktableid")
 	@ResponseBody
 	public String checkTableId(String tableId) {
 		Boolean flag = true;
@@ -154,7 +157,7 @@ public class DataGridController {
 		return flag.toString();
 	}
 
-	@RequestMapping(value = "/system/datagrid/edit")
+	@RequestMapping(value = "edit")
 	@ResponseBody
 	public ModelAndView edit(
 			@Valid @ModelAttribute("dataGrid") DataGridVo dataGridVo,
@@ -185,9 +188,9 @@ public class DataGridController {
 	}
 
 	/** 列表显示 */
-	@RequestMapping(value = "/system/datagrid/lists")
+	@RequestMapping(value = "list")
 	@ResponseBody
-	public String lists(Model model,
+	public DataTable<DataGrid> lists(Model model,
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "15") int rows,
 			@RequestParam(required = false) String sort,
@@ -215,7 +218,8 @@ public class DataGridController {
 		if (StringUtils.isNotEmpty(type)) {
 			queryCriteria.addQueryCondition("type", type);
 		}
-		return this.dataGridService.doFindByCriteria(queryCriteria, INDEX_TB);
+		PageResult<DataGrid> pageResult = this.dataGridService.doFindByCriteria(queryCriteria);
+		return pageResult.getDataTable();
 	}
 
 }

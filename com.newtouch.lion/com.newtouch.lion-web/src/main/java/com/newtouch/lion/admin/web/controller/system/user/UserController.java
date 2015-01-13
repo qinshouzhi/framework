@@ -34,11 +34,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.newtouch.lion.admin.web.model.system.user.PasswordVo;
 import com.newtouch.lion.admin.web.model.system.user.UserVo;
 import com.newtouch.lion.common.lang.LongUtils;
+import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.system.Group;
 import com.newtouch.lion.model.system.Resource;
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
+import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.system.GroupService;
 import com.newtouch.lion.service.system.PasswordEncoderService;
@@ -71,6 +73,7 @@ import com.newtouch.lion.web.shiro.session.LoginSecurityUtil;
  * @version 1.0
  */
 @Controller(value = "sysUserController")
+@RequestMapping("/system/user")
 public class UserController {
 	private final Logger logger = LoggerFactory.getLogger(super.getClass());
 	/** 默认排序字段 */
@@ -110,13 +113,13 @@ public class UserController {
 	private ResourceService resourceService;
 
 	/** 首页显示 */
-	@RequestMapping(value = "/system/user/index")
+	@RequestMapping(value = "index")
 	public String index() {
 		return INDEX_RETURN;
 	}
 
 	/** 添加提交 */
-	@RequestMapping(value = "/system/user/add")
+	@RequestMapping(value = "add")
 	@ResponseBody
 	public ModelAndView add(@Valid @ModelAttribute("userVo") UserVo userVo,
 			Errors errors, ModelAndView modelAndView) {
@@ -153,7 +156,7 @@ public class UserController {
 	}
 
 	/** 授权 对话框 */
-	@RequestMapping(value = "/system/user/authdialog")
+	@RequestMapping(value = "authdialog")
 	public String authDialog(@RequestParam(required = false) Long id,
 			Model model) {
 		User user = this.userService.doFindById(id);
@@ -162,7 +165,7 @@ public class UserController {
 	}
 
 	/** 显示已关联的用户组 */
-	@RequestMapping(value = "/system/user/authgroups")
+	@RequestMapping(value = "authgroups")
 	@ResponseBody
 	public String authGroups(@RequestParam(required = false) Long id) {
 		return this.userService
@@ -170,14 +173,14 @@ public class UserController {
 	}
 
 	/** 显示已关联的角色 */
-	@RequestMapping(value = "/system/user/authroles")
+	@RequestMapping(value = "authroles")
 	@ResponseBody
 	public String authRoles(@RequestParam(required = false) Long id) {
 		return this.userService.doFindAllAuthRole(id, AUTH_USER_ROLES_LISTS);
 	}
 
 	/** 显示所有的角色 */
-	@RequestMapping(value = "/system/user/roles")
+	@RequestMapping(value = "roles")
 	@ResponseBody
 	public String roles() {
 		QueryCriteria queryCriteria = new QueryCriteria();
@@ -186,7 +189,7 @@ public class UserController {
 	}
 
 	/** 显示所有的角色 */
-	@RequestMapping(value = "/system/user/groups")
+	@RequestMapping(value = "groups")
 	@ResponseBody
 	public String groups() {
 		QueryCriteria queryCriteria = new QueryCriteria();
@@ -196,7 +199,7 @@ public class UserController {
 	}
 
 	/** 为用户添加用户组集合 */
-	@RequestMapping(value = "/system/user/addgroups")
+	@RequestMapping(value = "addgroups")
 	@ResponseBody
 	public ModelAndView addGroups(@RequestParam(required = false) Long userId,
 			@RequestParam(required = false) String groupId,
@@ -224,7 +227,7 @@ public class UserController {
 	}
 
 	/** 为用户添加用户组集合 */
-	@RequestMapping(value = "/system/user/addroles")
+	@RequestMapping(value = "addroles")
 	@ResponseBody
 	public ModelAndView addRoles(@RequestParam(required = false) Long userId,
 			@RequestParam(required = false) String roleId,
@@ -251,7 +254,7 @@ public class UserController {
 	}
 
 	/** 编辑对话框 */
-	@RequestMapping(value = "/system/user/editdialog")
+	@RequestMapping(value = "editdialog")
 	public String editDialog(@RequestParam(required = false) Long id,
 			Model model) {
 		User user = this.userService.doFindById(id);
@@ -260,7 +263,7 @@ public class UserController {
 	}
 
 	/** 编辑提交 */
-	@RequestMapping(value = "/system/user/edit")
+	@RequestMapping(value = "edit")
 	@ResponseBody
 	public ModelAndView edit(@Valid @ModelAttribute("userVo") UserVo userVo,
 			Errors errors, ModelAndView modelAndView) {
@@ -295,9 +298,9 @@ public class UserController {
 	}
 
 	/** 列表显示 */
-	@RequestMapping(value = "/system/user/lists")
+	@RequestMapping(value = "list")
 	@ResponseBody
-	public String lists(HttpServletRequest servletRequest, Model model,
+	public DataTable<User> lists(HttpServletRequest servletRequest, Model model,
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "15") int rows,
 			@RequestParam(required = false) String sort,
@@ -320,10 +323,11 @@ public class UserController {
 		if (StringUtils.isNotEmpty(username)) {
 			queryCriteria.addQueryCondition("username", "%" + username + "%");
 		}
-		return this.userService.doFindByCriteria(queryCriteria, INDEX_TB);
+		PageResult<User> pageResult = this.userService.doFindByCriteria(queryCriteria);
+		return pageResult.getDataTable();
 	}
 
-	@RequestMapping(value = "/system/user/pwdindex")
+	@RequestMapping(value = "pwdindex")
 	public String loadUserEditPasswordPage(HttpServletRequest request,
 			Model model) {
 		User user=LoginSecurityUtil.getUser();
@@ -333,7 +337,7 @@ public class UserController {
 		return EDIT_USER_PASSWORD_RETURN;
 	}
 
-	@RequestMapping(value = "/system/user/edituserpwd")
+	@RequestMapping(value = "edituserpwd")
 	@ResponseBody
 	public ModelAndView editUserPassword(
 			@Valid @ModelAttribute("passwordVo") PasswordVo passwordVo,
@@ -394,7 +398,7 @@ public class UserController {
 	}
 
 	/** 我的信息 */
-	@RequestMapping(value = "/system/user/userinfo")
+	@RequestMapping(value = "userinfo")
 	public String userInfo(Model model) {
 	 
 		model.addAttribute("user", LoginSecurityUtil.getUser());
@@ -402,7 +406,7 @@ public class UserController {
 	}
 
 	/** 我的资源 */
-	@RequestMapping(value = "/system/user/myresource")
+	@RequestMapping(value = "myresource")
 	@ResponseBody
 	public String myResource() {
 		User user =LoginSecurityUtil.getUser();
