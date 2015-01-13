@@ -30,9 +30,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.group.GroupVo;
 import com.newtouch.lion.common.lang.LongUtils;
+import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.model.system.Group;
+import com.newtouch.lion.model.system.Parameter;
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
+import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.system.GroupService;
 import com.newtouch.lion.service.system.RoleService;
@@ -285,9 +288,9 @@ public class GroupController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/system/group/lists")
+	@RequestMapping(value = "/system/group/list")
 	@ResponseBody
-	public String list(HttpServletRequest servletRequest, Model model,
+	public DataTable<Group> list(HttpServletRequest servletRequest, Model model,
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "15") int rows,
 			@RequestParam(required = false) String sort,
@@ -310,7 +313,7 @@ public class GroupController {
 		if (StringUtils.isNotEmpty(nameZh)) {
 			queryCriteria.addQueryCondition("nameZh", "%" + nameZh + "%");
 		}
-		return this.groupService
-				.doFindAuthGroups(queryCriteria, INDEX_LISTS_TB);
+		PageResult<Group> pageResult = groupService.doFindByCriteria(queryCriteria);
+		return pageResult.getDataTable();
 	}
 }
