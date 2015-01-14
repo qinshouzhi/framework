@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.code.CodeListVo;
-import com.newtouch.lion.common.date.DateUtil;
 import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.datagrid.DataColumn;
@@ -82,7 +81,7 @@ public class CodeListController {
 	@Autowired
 	private CodeTypeService codeTypeService;
 
-	@RequestMapping(value = "/editdialog")
+	@RequestMapping(value = "editdialog")
 	public String editDialog(@RequestParam Long id, Model model) {
 		if (id != null) {
 			CodeList codeList = this.codeListService.doFindById(id);
@@ -135,7 +134,7 @@ public class CodeListController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/adddialog")
+	@RequestMapping(value = "adddialog")
 	public String addDialog(HttpServletRequest servletRequest, Model model) {
 		return ADD_DIALOG_RETURN;
 	}

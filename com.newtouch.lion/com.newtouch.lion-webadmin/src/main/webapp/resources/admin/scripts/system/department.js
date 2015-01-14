@@ -4,7 +4,7 @@ $(function() {
 	Layout.init(); // init layout
 	Tasks.initDashboardWidget(); // init tash dashboard widget
 
-	$("#sys_role_lists_tb").datagrid({
+	$("#sys_department_lists").datagrid({
 		onLoadSuccess : function(data) {
  
 		}
@@ -16,7 +16,7 @@ $(function() {
 	 }
 	 //刷新
 	 $("#btnRefresh").on("click",function(){
-		 dataGridReload("sys_role_lists_tb");
+		 dataGridReload("sys_department_lists");
 	 });
 	 
 	 $("#btnAdd").on("click",function(){
