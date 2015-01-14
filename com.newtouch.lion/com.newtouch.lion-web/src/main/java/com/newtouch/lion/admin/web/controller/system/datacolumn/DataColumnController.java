@@ -27,7 +27,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.datacolumn.DataColumnVo;
+import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.model.datagrid.DataColumn;
+import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.datagrid.DataColumnService;
 import com.newtouch.lion.web.constant.ConstantMessage;
@@ -52,29 +54,30 @@ import com.newtouch.lion.web.servlet.view.support.BindResult;
  * @version 1.0
  */
 @Controller(value = "sysDataColumnController")
+@RequestMapping("/system/datacolumn/")
 public class DataColumnController {
 	private final Logger logger = LoggerFactory.getLogger(super.getClass());
 	/** 默认排序字段 */
 	private static final String DEFAULT_ORDER_FILED_NAME = "id";
 	/** 首页返回路径 */
-	private static final String INDEX_RETURN = "/system/datacolumn/index";
+	private static final String INDEX_RETURN = "system/datacolumn/index";
 	/** 新增对话返回路径 */
-	private static final String ADD_DIALOG_RETURN = "/system/datacolumn/adddialog";
+	private static final String ADD_DIALOG_RETURN = "system/datacolumn/adddialog";
 	/** 修改对话返回路径 */
-	private static final String EDIT_DIALOG_RETURN = "/system/datacolumn/editdialog";
+	private static final String EDIT_DIALOG_RETURN = "system/datacolumn/editdialog";
 	/** 首页显示列表名称 */
 	private static final String INDEX_TB = "datacolumn_tb";
 	@Autowired
 	private DataColumnService dataColumnService;
 
 	/** 新增的对话框 */
-	@RequestMapping(value = "/system/datacolumn/adddialog")
+	@RequestMapping(value = "adddialog")
 	public String addDialog() {
 		return ADD_DIALOG_RETURN;
 	}
 
 	/** 删除 */
-	@RequestMapping(value = "/system/datacolumn/delete")
+	@RequestMapping(value = "delete")
 	@ResponseBody
 	public ModelAndView delete(@RequestParam Long id, ModelAndView modelAndView) {
 		Map<String, String> params = new HashMap<String, String>();
@@ -91,7 +94,7 @@ public class DataColumnController {
 	}
 
 	/** 添加 */
-	@RequestMapping(value = "/system/datacolumn/add")
+	@RequestMapping(value = "add")
 	@ResponseBody
 	public ModelAndView add(
 			@Valid @ModelAttribute("dataGridVo") DataColumnVo dataColumnVo,
@@ -110,7 +113,7 @@ public class DataColumnController {
 	}
 
 	/** 编辑对话框 */
-	@RequestMapping(value = "/system/datacolumn/editdialog")
+	@RequestMapping(value = "editdialog")
 	public String editDialog(@RequestParam Long id, Model model) {
 		if (id != null) {
 			DataColumn dataColumn = this.dataColumnService.doGetById(id);
@@ -122,7 +125,7 @@ public class DataColumnController {
 	}
 
 	/** 编辑 */
-	@RequestMapping(value = "/system/datacolumn/edit")
+	@RequestMapping(value = "edit")
 	@ResponseBody
 	public ModelAndView edit(
 			@Valid @ModelAttribute("d") DataColumnVo dataColumnVo,
@@ -153,15 +156,15 @@ public class DataColumnController {
 	}
 
 	/** 首页显示 */
-	@RequestMapping(value = "/system/datacolumn/index")
+	@RequestMapping(value = "index")
 	public String index() {
 		return INDEX_RETURN;
 	}
 
 	/** 列表显示 */
-	@RequestMapping(value = "/system/datacolumn/lists")
+	@RequestMapping(value = "list")
 	@ResponseBody
-	public String lists(HttpServletRequest servletRequest, Model model,
+	public DataTable<DataColumn> lists(HttpServletRequest servletRequest, Model model,
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "15") int rows,
 			@RequestParam(required = false) String sort,
@@ -184,7 +187,8 @@ public class DataColumnController {
 		if (dataGridId != null) {
 			queryCriteria.addQueryCondition("dataGridId", dataGridId);
 		}
-		return this.dataColumnService.doFindByCriteria(queryCriteria, INDEX_TB);
+		PageResult<DataColumn> pageResult = this.dataColumnService.doFindByCriteria(queryCriteria);
+		return pageResult.getDataTable();
 	}
 
 }

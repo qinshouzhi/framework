@@ -132,12 +132,13 @@
 				 	</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn default" data-dismiss="modal"><i class="fa  fa-arrow-left"></i> 取 消 </button>
-				<button type="button" class="btn blue"><i class="fa fa-save"></i> 保 存</button>
+				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal"><i class="fa  fa-arrow-left"></i> 取 消 </button>
+				<button type="button" id="btnSave" class="btn blue"><i class="fa fa-save"></i> 保 存</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
 	</div>
+	
 	<!-- /.modal-dialog -->
 </div>
 
