@@ -81,7 +81,7 @@ public class CodeListController {
 	@Autowired
 	private CodeTypeService codeTypeService;
 
-	@RequestMapping(value = "editdialog")
+	@RequestMapping(value = "/editdialog")
 	public String editDialog(@RequestParam Long id, Model model) {
 		if (id != null) {
 			CodeList codeList = this.codeListService.doFindById(id);
@@ -134,7 +134,7 @@ public class CodeListController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "adddialog")
+	@RequestMapping(value = "/adddialog")
 	public String addDialog(HttpServletRequest servletRequest, Model model) {
 		return ADD_DIALOG_RETURN;
 	}
