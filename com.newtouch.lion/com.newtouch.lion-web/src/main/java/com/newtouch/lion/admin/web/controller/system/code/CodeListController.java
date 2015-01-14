@@ -31,6 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.code.CodeListVo;
 import com.newtouch.lion.common.date.DateUtil;
+import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.datagrid.DataColumn;
 import com.newtouch.lion.model.system.CodeList;
@@ -62,7 +63,7 @@ import com.newtouch.lion.web.servlet.view.support.BindResult;
  * @version 1.0
  */
 @Controller(value = "sysCodelistController")
-@RequestMapping("/system/codelist")
+@RequestMapping("/system/codelist/")
 public class CodeListController {
 
 	private final Logger logger = LoggerFactory.getLogger(super.getClass());
@@ -70,6 +71,8 @@ public class CodeListController {
 	private static final String ADD_DIALOG_RETURN = "/system/codelist/adddialog";
 	/** 参数编辑首页 */
 	private static final String EDIT_DIALOG_RETURN = "/system/codelist/editdialog";
+	/** 首页返回路径 */
+	private static final String INDEX_RETURN = "/system/codelist/index";
 	/** 默认排序字段 */
 	private static final String DEFAULT_FILED_NAME = "id";
 	@Autowired
@@ -137,7 +140,7 @@ public class CodeListController {
 		return ADD_DIALOG_RETURN;
 	}
 
-	@RequestMapping(value = "/add")
+	@RequestMapping(value = "add")
 	@ResponseBody
 	public ModelAndView add(
 			@Valid @ModelAttribute("codeList") CodeListVo codeListVo,
@@ -166,7 +169,7 @@ public class CodeListController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/delete")
+	@RequestMapping(value = "delete")
 	@ResponseBody
 	public ModelAndView delete(@RequestParam Long id, ModelAndView modelAndView) {
 		Map<String, String> params = new HashMap<String, String>();
@@ -196,9 +199,9 @@ public class CodeListController {
 		return flag;
 	}
 
-	@RequestMapping(value = "/lists")
+	@RequestMapping(value = "list")
 	@ResponseBody
-	public String list(HttpServletRequest servletRequest, Model model,
+	public DataTable<CodeList> list(HttpServletRequest servletRequest, Model model,
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "15") int rows,
 			@RequestParam(required = false) String sort,
@@ -226,13 +229,7 @@ public class CodeListController {
 		PageResult<CodeList> pageResult = codeListService
 				.doFindByCriteria(queryCriteria);
 
-		Set<String> filterColumn = this.getColumns("sys_codelist_tb");
-
-		String result = this.getJSONString(pageResult.getTotalCount(),
-				pageResult.getContent(), filterColumn,
-				DateUtil.FORMAT_DATETIME_YYYY_MM_DD_HH_MM_SS, Boolean.TRUE);
-
-		return result;
+		return pageResult.getDataTable();
 	}
 
 	/** 根据TableId配置DataGrid */
@@ -264,10 +261,16 @@ public class CodeListController {
 		return sb.toString();
 	}
 
-	@RequestMapping(value = "/checkisexitnameen")
+	@RequestMapping(value = "checkisexitnameen")
 	@ResponseBody
 	public String checkIsExistByNameEn(HttpServletRequest servletRequest, @RequestParam(required = false) String nameEn) {
 		Boolean flag = this.isExistByNameEn(nameEn) == true ? false : true;
 		return flag.toString();
+	}
+	
+	/** 首页显示 */
+	@RequestMapping(value = "index")
+	public String index() {
+		return INDEX_RETURN;
 	}
 }

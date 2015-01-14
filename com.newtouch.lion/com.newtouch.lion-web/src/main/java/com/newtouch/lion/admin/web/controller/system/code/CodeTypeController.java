@@ -30,8 +30,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.code.CodeTypeVo;
+import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.system.CodeType;
+import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.system.CodeTypeService;
 import com.newtouch.lion.web.constant.ConstantMessage;
@@ -56,6 +58,7 @@ import com.newtouch.lion.web.servlet.view.support.BindResult;
  * @version 1.0
  */
 @Controller("sysCodeTypeController")
+@RequestMapping("/system/codetype/")
 public class CodeTypeController {
 
 	private final Logger logger = LoggerFactory.getLogger(super.getClass());
@@ -63,7 +66,8 @@ public class CodeTypeController {
 	private static final String DEFAULT_FILED_NAME = "id";
 
 	private static final String INDEX_LIST_TB = "sys_codetype_lists_tb";
-
+	/** 首页返回路径 */
+	private static final String INDEX_RETURN = "system/codetype/index";
 	/** 参数编辑首页 */
 	private static final String EDIT_DIALOG_RETURN = "/system/codetype/editdialog";
 
@@ -73,7 +77,7 @@ public class CodeTypeController {
 	/**
 	 * 编码类型下拉列表
 	 * */
-	@RequestMapping("/system/codetype/combox")
+	@RequestMapping("combox")
 	@ResponseBody
 	public String combox() {
 		List<CodeType> codeTypes = this.codeTypeService.doFindAll();
@@ -84,7 +88,7 @@ public class CodeTypeController {
 		return JSONParser.toJSONString(codeTypes, filterColumn);
 	}
 
-	@RequestMapping(value = "/system/codetype/editdialog")
+	@RequestMapping(value = "editdialog")
 	public String editDialog(@RequestParam Long id, Model model) {
 		if (id != null) {
 			CodeType codeType = this.codeTypeService.doFindById(id);
@@ -95,7 +99,7 @@ public class CodeTypeController {
 		return EDIT_DIALOG_RETURN;
 	}
 
-	@RequestMapping(value = "/system/codetype/add")
+	@RequestMapping(value = "add")
 	@ResponseBody
 	public ModelAndView add(
 			@Valid @ModelAttribute("codeList") CodeTypeVo codeTypeVo,
@@ -114,7 +118,7 @@ public class CodeTypeController {
 	}
 
 	/** 编辑 */
-	@RequestMapping(value = "/system/codetype/edit")
+	@RequestMapping(value = "edit")
 	@ResponseBody
 	public ModelAndView edit(
 			@Valid @ModelAttribute("codeTypeVo") CodeTypeVo codeTypeVo,
@@ -144,7 +148,7 @@ public class CodeTypeController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/system/codetype/delete")
+	@RequestMapping(value = "delete")
 	@ResponseBody
 	public ModelAndView delete(@RequestParam Long id, ModelAndView modelAndView) {
 		Map<String, String> params = new HashMap<String, String>();
@@ -160,9 +164,9 @@ public class CodeTypeController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/system/codetype/lists")
+	@RequestMapping(value = "list")
 	@ResponseBody
-	public String list(HttpServletRequest servletRequest, Model model,
+	public DataTable<CodeType> list(HttpServletRequest servletRequest, Model model,
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "15") int rows,
 			@RequestParam(required = false) String sort,
@@ -186,8 +190,13 @@ public class CodeTypeController {
 		if (StringUtils.isNotEmpty(type)) {
 			queryCriteria.addQueryCondition("type", type);
 		}
-		String result = this.codeTypeService.doFindByCriteria(queryCriteria,
-				INDEX_LIST_TB);
-		return result;
+		PageResult<CodeType> pageResult = this.codeTypeService.doFindByCriteria(queryCriteria);
+		return pageResult.getDataTable();
+	}
+	
+	/** 首页显示 */
+	@RequestMapping(value = "index")
+	public String index() {
+		return INDEX_RETURN;
 	}
 }
