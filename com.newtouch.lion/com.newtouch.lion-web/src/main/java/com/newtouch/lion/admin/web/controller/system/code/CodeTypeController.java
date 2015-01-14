@@ -65,6 +65,7 @@ public class CodeTypeController {
 
 	private static final String DEFAULT_FILED_NAME = "id";
 
+	@SuppressWarnings("unused")
 	private static final String INDEX_LIST_TB = "sys_codetype_lists_tb";
 	/** 首页返回路径 */
 	private static final String INDEX_RETURN = "system/codetype/index";

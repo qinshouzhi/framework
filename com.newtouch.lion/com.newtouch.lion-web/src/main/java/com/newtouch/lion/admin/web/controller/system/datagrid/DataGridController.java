@@ -66,6 +66,7 @@ public class DataGridController {
 	private static final String EDIT_DIALOG_RETURN = "system/datagrid/editdialog";
 
 	/** 首页显示列表名称 */
+	@SuppressWarnings("unused")
 	private static final String INDEX_TB = "datagrid_dt";
 	@Autowired
 	private DataGridService dataGridService;

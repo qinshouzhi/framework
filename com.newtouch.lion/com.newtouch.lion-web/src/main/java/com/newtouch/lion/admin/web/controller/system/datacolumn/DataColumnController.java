@@ -66,6 +66,7 @@ public class DataColumnController {
 	/** 修改对话返回路径 */
 	private static final String EDIT_DIALOG_RETURN = "system/datacolumn/editdialog";
 	/** 首页显示列表名称 */
+	@SuppressWarnings("unused")
 	private static final String INDEX_TB = "datacolumn_tb";
 	@Autowired
 	private DataColumnService dataColumnService;
