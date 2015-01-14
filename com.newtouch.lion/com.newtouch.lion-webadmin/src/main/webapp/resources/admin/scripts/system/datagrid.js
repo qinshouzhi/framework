@@ -4,7 +4,7 @@ $(function() {
 	Layout.init(); // init layout
 	Tasks.initDashboardWidget(); // init tash dashboard widget
 
-	$("#sys_group_list_tb").datagrid({
+	$("#datagrid_dt").datagrid({
 		onLoadSuccess : function(data) {
  
 		}
@@ -16,7 +16,7 @@ $(function() {
 	 }
 	 //刷新
 	 $("#btnRefresh").on("click",function(){
-		 dataGridReload("sys_group_list_tb");
+		 dataGridReload("datagrid_dt");
 	 });
 	 
 	 $("#btnAdd").on("click",function(){
