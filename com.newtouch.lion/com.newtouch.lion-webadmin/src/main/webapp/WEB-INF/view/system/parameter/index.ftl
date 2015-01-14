@@ -37,7 +37,7 @@
 		<div class="row">
 			<div class="col-md-12 margin-bottom-10">
 				<form id="queryParameterform" class="form-horizontal">
-					<label class="control-label col-md-2" for="nameZh" >参数名称</label>
+					<label class="control-label col-md-1" for="nameZh" >名称</label>
 					<div class="col-md-2">
 						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="请输入参数名称"/>					
 					</div>
@@ -45,7 +45,7 @@
 					<div class="col-md-3">
 						<@lion.combobox id="sysParameterCodeList" codeName="SystemParamter" dataClass="bootstrap-select bs-select form-control input-small" title="请选择参数列表" dataSize="8" multipleDataMaxOptions="1"/>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-3 ">
 						<a href="javascript:void(0)" class="btn blue"><i class="fa fa-search"></i> 查 询 </a>
 					</div>
 				</form>
@@ -132,12 +132,13 @@
 				 	</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn default" data-dismiss="modal"><i class="fa  fa-arrow-left"></i> 取 消 </button>
-				<button type="button" class="btn blue"><i class="fa fa-save"></i> 保 存</button>
+				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal"><i class="fa  fa-arrow-left"></i> 取 消 </button>
+				<button type="button" id="btnSave" class="btn blue"><i class="fa fa-save"></i> 保 存</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
 	</div>
+	
 	<!-- /.modal-dialog -->
 </div>
 
