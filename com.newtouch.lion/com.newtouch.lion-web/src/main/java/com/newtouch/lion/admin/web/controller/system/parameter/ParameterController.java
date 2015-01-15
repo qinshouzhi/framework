@@ -68,9 +68,9 @@ public class ParameterController {
 	/** 参数首页 */
 	private static final String INDEX_RETURN = "/system/parameter/index";
 	/** 参数添加首页 */
-	private static final String ADD_DIALOG_RETURN = "/system/parameter/adddialog";
+	private static final String ADD_DIALOG_RETURN = "/system/parameter/dialog/add";
 	/** 参数编辑首页 */
-	private static final String EDIT_DIALOG_RETURN = "/system/parameter/editdialog";
+	private static final String EDIT_DIALOG_RETURN = "/system/parameter/dialog/edit";
 	/** 默认排序字段名称 */
 	private static final String DEFAULT_ORDER_FILED_NAME = "id";
 
@@ -85,15 +85,15 @@ public class ParameterController {
 		return INDEX_RETURN;
 	}
 
-	@RequestMapping(value = "editdialog")
+	@RequestMapping(value = "dialogedit.htm")
 	public String editDialog(@RequestParam(required = false) Long id,
 			Model model) {
-		Parameter parameter = parameterService.doFindById(id);
-		model.addAttribute("parameter", parameter);
+		//Parameter parameter = parameterService.doFindById(id);
+		//model.addAttribute("parameter", parameter);
 		return EDIT_DIALOG_RETURN;
 	}
 
-	@RequestMapping(value = "adddialog")
+	@RequestMapping(value = "dialog/add.htm")
 	public String addDialog(HttpServletRequest servletRequest, Model model) {
 		return ADD_DIALOG_RETURN;
 	}
@@ -119,9 +119,7 @@ public class ParameterController {
 		if (!errors.hasErrors()
 				&& this.isExistByNameEn(parameterVo.getNameEn(),
 						parameter.getNameEn())) {
-			errors.rejectValue(ParameterVo.NAMEEN,
-					"sys.parameter.form.nameen.existed.message",
-					new Object[] { parameterVo.getNameEn() }, null);
+			errors.rejectValue(ParameterVo.NAMEEN,"sys.parameter.form.nameen.existed.message",new Object[] { parameterVo.getNameEn() }, null);
 		}
 
 		if (errors.hasErrors()) {

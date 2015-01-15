@@ -45,7 +45,20 @@ $(function() {
 	 });
 	 //编辑
 	 $("#btnEdit").on("click",function(){
-		 alert("dd");
+		 var editModal = $("#editDialog");
+		 console.log("111");
+		 editModal.modal({
+				keyboard : false
+			});
+		 console.log("222");
+		 var  url="/admin/system/parameter/dialogedit.htm";
+		 console.log("3333");
+		 editModal.load(url, function() {
+			    editModal.modal("show");
+				$("#btnEdit").removeAttr("disabled");
+		  });
+		 console.log("444");
+		 return;
 	 });
 	 //删除
 	 $("#btnDelete").on("click",function(){

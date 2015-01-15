@@ -53,7 +53,9 @@
 		
 			<div class="col-md-12 margin-bottom-10" id="toolbar">
 				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic"><i class="fa fa-plus"></i> 新增  </a>
-				<a href="javascript:void(0)"id="btnEdit" class="btn btn-sm red"><i class="fa fa-edit"></i> 编辑 </a>
+				<a id="btnEdit" class="btn btn-sm red" role="button" data-toggle="modal" data-target="#editDialog"><i class="fa fa-edit"></i> 编辑
+					<div class="modal" id="editDialog" tabindex="-1"></div>
+				</a>
 				<a href="javascript:void(0)" id="btnDelete" class="btn btn-sm purple"><i class="fa fa-times"></i> 删除 </a>
 				<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue"><i class="fa fa-refresh"></i> 刷新  </a>
 				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> Excel </a>
@@ -65,7 +67,7 @@
 	</div>
 </div>
 <!-- END PAGE CONTENT INNER -->
-
+<!--Edit Dialog Start -->
 <div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -140,7 +142,6 @@
 	</div>
 	
 	<!-- /.modal-dialog -->
-</div>
-
+<!--Edit Dialog End -->
 </body>
 </html>
