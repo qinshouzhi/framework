@@ -6,9 +6,12 @@
 */
 package com.newtouch.lion.service.application.impl; 
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.application.ApplicationPropertyDao;
 import com.newtouch.lion.model.application.ApplicationProperty;
 import com.newtouch.lion.page.PageResult;
@@ -65,7 +68,27 @@ public class ApplicationPropertyServiceImpl implements
 	public PageResult<ApplicationProperty> doFindByCriteria(
 			QueryCriteria criteria) {
 		// TODO Auto-generated method stub
-		return null;
+		String queryEntry = " from ApplicationProperty ";
+
+		String[] whereBodies = {" tableId  like :tableId","type=:type"};
+
+		String fromJoinSubClause = "";
+
+		Map<String, Object> params = criteria.getQueryCondition();
+
+		String orderField =criteria.getOrderField();
+
+		String orderDirection = criteria.getOrderDirection();
+
+		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,whereBodies, orderField, orderDirection, params);
+
+		int pageSize = criteria.getPageSize();
+
+		int startIndex = criteria.getStartIndex();
+
+		PageResult<ApplicationProperty> pageResult = this.applicationPropertyDao.query(hql,HqlUtils.generateCountHql(hql, null), params, startIndex,pageSize);
+		
+		return pageResult;
 	}
 
 	/* (non-Javadoc)

@@ -1,19 +1,20 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50519
+Source Server         : localhost_3306
+Source Server Version : 50527
 Source Host           : localhost:3306
 Source Database       : newtouch_lion
 
 Target Server Type    : MYSQL
-Target Server Version : 50519
+Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2015-01-12 13:42:39
+Date: 2015-01-15 13:31:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
 -- ----------------------------
 -- Table structure for `bas_app_properties`
 -- ----------------------------
@@ -189,7 +190,7 @@ CREATE TABLE `bas_column` (
   `DELETE_DATE` datetime DEFAULT NULL COMMENT '删除日期',
   PRIMARY KEY (`BAS_COLUMN_ID`),
   KEY `FK_BAS_COLUMN_BAS_DATAGRID_ID` (`BAS_DATAGRID_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=utf8 COMMENT='DataGrid列属性配置';
+) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=utf8 COMMENT='DataGrid列属性配置';
 
 -- ----------------------------
 -- Records of bas_column
@@ -367,6 +368,11 @@ INSERT INTO `bas_column` VALUES ('180', '33', '5', 'cacheHits', '命中次数', 
 INSERT INTO `bas_column` VALUES ('181', '33', '6', 'inMemoryHits', '内存命中次数', '100.00', '0', '0', '0', 'asc', 'left', 'left', '0', '0', '', '', '', '', '1', '2014-04-21 15:32:26', '1', '2014-04-22 10:30:49', '0', '1', null);
 INSERT INTO `bas_column` VALUES ('182', '33', '7', 'onDiskHits', '磁盘命中次数', '100.00', '0', '0', '0', 'asc', 'left', 'left', '0', '0', '', '', '', '', '1', '2014-04-21 15:32:45', '1', '2014-04-22 10:30:55', '0', '1', null);
 INSERT INTO `bas_column` VALUES ('183', '33', '8', 'memoryStoreEvictionPolicy', '缓存策略', '100.00', '0', '0', '0', 'asc', 'left', 'left', '0', '0', '', '', '', '', '1', '2014-04-21 15:33:04', '1', '2014-04-22 10:30:59', '0', '1', null);
+INSERT INTO `bas_column` VALUES ('184', '34', '0', 'id', 'id', '100.00', '0', '0', '1', 'asc', 'left', 'left', '1', '0', null, null, null, null, '1', '2015-01-15 13:23:08', '1', '2015-01-15 13:23:11', '0', '0', null);
+INSERT INTO `bas_column` VALUES ('185', '34', '1', 'appId', 'app_id', '100.00', '0', '0', '1', 'asc', 'left', 'left', '0', '0', null, null, null, null, '1', '2015-01-15 12:48:34', '1', '2015-01-15 12:48:36', '0', '0', null);
+INSERT INTO `bas_column` VALUES ('186', '34', '2', 'key', '键', '100.00', '0', '0', '1', 'asc', 'left', 'left', '0', '0', null, null, null, null, '1', '2015-01-15 12:49:50', '1', '2015-01-15 12:49:52', '0', '0', null);
+INSERT INTO `bas_column` VALUES ('187', '34', '3', 'value', '值', '100.00', '0', '0', '1', 'asc', 'left', 'left', '0', '0', null, null, null, null, '1', '2015-01-15 12:50:36', '1', '2015-01-15 12:50:40', '0', '0', null);
+INSERT INTO `bas_column` VALUES ('188', '34', '4', 'description', '描述', '100.00', '0', '0', '1', 'asc', 'left', 'left', '0', '0', null, null, null, null, '1', '2015-01-15 12:51:52', '1', '2015-01-15 12:51:55', '0', '0', null);
 
 -- ----------------------------
 -- Table structure for `bas_datagrid`
@@ -417,37 +423,38 @@ CREATE TABLE `bas_datagrid` (
   `OPT_COUNTER` int(6) DEFAULT '0' COMMENT '记录操作次',
   `DELETE_DATE` datetime DEFAULT NULL COMMENT '删除日期',
   PRIMARY KEY (`BAS_DATAGRID_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COMMENT='DATAGRID 表格控件显示数据';
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COMMENT='DATAGRID 表格控件显示数据';
 
 -- ----------------------------
 -- Records of bas_datagrid
 -- ----------------------------
-INSERT INTO `bas_datagrid` VALUES ('6', 'datagrid_datagrid ', 'datacolumn_tb', 'DataGrid列管理列表', '0', '1', '1', '0', '1', '1', '1', 'post', '1', 'main/datacolumn_lists.action', '', '', '1', '1', '1', '1', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '1', '18', '', '', null, '', null, '1', '2013-04-01 22:25:07', '1', '2014-04-08 23:30:21', '0', '12', null);
-INSERT INTO `bas_datagrid` VALUES ('7', 'users_datagrid', 'usergroup_tb', '已关联用户组 ', '1', '1', '1', '0', '0', '1', '1', 'post', '1', 'main/auth_usergrouplist.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-02 11:10:42', '1', '2014-04-08 23:29:14', '0', '24', null);
-INSERT INTO `bas_datagrid` VALUES ('8', 'users_datagrid', 'userrole_tb', '已关联角色', '1', '1', '0', '0', '0', '1', '1', 'post', '1', 'main/role_lists.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-02 13:23:51', '1', '2014-04-08 23:47:06', '0', '5', null);
-INSERT INTO `bas_datagrid` VALUES ('9', 'users_datagrid', 'authgroup_tb', '', '0', '1', '1', '0', '0', '1', '1', 'post', '1', 'main/auth_grouplist.action', '', '', '1', '0', '1', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-02 14:41:23', '1', '2013-04-07 19:20:02', '0', '4', null);
-INSERT INTO `bas_datagrid` VALUES ('10', 'datagrid_datagrid ', 'datagrid_dt', 'DataGrid表格', '0', '1', '1', '0', '1', '1', '1', 'post', '1', 'main/datagrid_lists.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-05 17:41:16', '1', '2014-04-08 23:45:56', '0', '33', null);
-INSERT INTO `bas_datagrid` VALUES ('11', 'users_datagrid', 'userlist_dt', '用户列表', '0', '1', '1', '0', '1', '1', '1', 'post', '1', 'main/userlists.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-05 19:42:23', '1', '2014-04-08 23:47:18', '0', '1', null);
-INSERT INTO `bas_datagrid` VALUES ('12', 'users_datagrid', 'authrole_tb', null, '0', '1', '1', '0', '0', '1', '1', 'post', '1', 'main/auth_rolelist.action', '', '', '1', '0', '1', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-05 20:59:17', '1', '2013-04-08 15:06:57', '0', '8', null);
-INSERT INTO `bas_datagrid` VALUES ('13', 'users_datagrid', 'sys_group_list_tb', null, '0', '1', '0', '0', '1', '1', '1', 'post', '1', 'main/group_lists.action', '', '', '1', '1', '1', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-09 17:11:43', '1', '2013-04-09 17:11:43', '0', '0', null);
-INSERT INTO `bas_datagrid` VALUES ('14', 'users_datagrid', 'sys_authuserlistforgroup_tb', '已关联用户', '1', '1', '1', '0', '0', '1', '1', 'post', '1', 'main/auth_serlistforgroup.action', '', '', '0', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-09 20:25:43', '1', '2014-04-08 23:47:23', '0', '2', null);
-INSERT INTO `bas_datagrid` VALUES ('16', 'users_datagrid', 'sys_authrolelistforgroup_tb', '已关联角色', '1', '1', '0', '0', '0', '1', '1', 'post', '1', 'main/authgroup_rolelistforgroup.action', '', '', '0', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-09 21:03:09', '1', '2013-04-09 23:21:55', '0', '2', null);
-INSERT INTO `bas_datagrid` VALUES ('17', 'users_datagrid', 'sys_authuserforgroup_tb', '关联用户组', '0', '1', '1', '0', '0', '1', '1', 'post', '1', 'main/authgroup_userlist.action', '', '', '1', '0', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-09 21:08:50', '1', '2014-04-08 23:48:29', '0', '3', null);
-INSERT INTO `bas_datagrid` VALUES ('18', 'users_datagrid', 'sys_authroleforgroup_tb', '', '0', '1', '1', '0', '0', '1', '1', 'post', '1', 'main/authgroup_rolelist.action', '', '', '1', '0', '1', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-09 21:13:06', '1', '2013-04-09 22:01:22', '0', '2', null);
-INSERT INTO `bas_datagrid` VALUES ('19', 'users_datagrid', 'sys_rolelist_tb', '角色列表', '0', '1', '1', '0', '1', '1', '1', 'post', '1', 'main/role_lists.action', '', '', '1', '1', '1', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-10 20:37:53', '1', '2014-04-08 23:30:51', '0', '1', null);
-INSERT INTO `bas_datagrid` VALUES ('20', 'users_datagrid', 'sys_authrole_userlist_tb', '已关联用户组', '1', '1', '1', '0', '0', '1', '1', 'post', '1', 'main/authrole_userlist.action', '', '', '0', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-10 22:59:07', '1', '2014-04-08 23:47:34', '0', '1', null);
-INSERT INTO `bas_datagrid` VALUES ('21', 'users_datagrid', 'sys_authrole_grouplist_tb', null, '0', '1', '1', '0', '1', '1', '1', 'post', '1', 'main/authrole_grouplist.action', '', '', '1', '0', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-10 23:04:55', '1', '2014-04-08 17:30:07', '0', '1', null);
-INSERT INTO `bas_datagrid` VALUES ('22', 'users_datagrid', 'sys_authrole_resources_tb', null, '0', '1', '0', '0', '0', '1', '1', 'post', '1', 'main/authrole_resources.action', '', '', '1', '0', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '0', '1', '0', '18', '', '', null, '', null, '1', '2013-04-11 15:19:08', '1', '2013-04-11 16:16:02', '0', '7', null);
-INSERT INTO `bas_datagrid` VALUES ('23', 'users_datagrid', 'sys_authrole_groups_tb', null, '0', '1', '1', '0', '1', '1', '1', 'post', '1', 'main/authrole_groups.action', '', '', '1', '0', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-11 15:35:23', '1', '2014-04-02 17:23:29', '0', '5', null);
-INSERT INTO `bas_datagrid` VALUES ('24', 'users_datagrid', 'sys_authrole_users_tb', '角色授权表格', '0', '1', '1', '0', '0', '1', '1', 'post', '1', 'main/authrole_users.action', '', '', '1', '0', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-11 15:36:43', '1', '2014-04-08 23:48:03', '0', '7', null);
-INSERT INTO `bas_datagrid` VALUES ('25', 'code_datagrid', 'sys_codelist_tb', '编码列表', '0', '1', '1', '0', '1', '1', '1', 'post', '1', 'main/codelist_lists.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-14 09:05:30', '1', '2014-04-08 23:50:25', '0', '3', null);
-INSERT INTO `bas_datagrid` VALUES ('26', 'code_datagrid', 'sys_codetype_lists_tb', '编码类型列表', '0', '1', '1', '0', '1', '1', '1', 'post', '1', 'main/codetype_lists.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-14 09:47:00', '1', '2014-04-08 23:50:30', '0', '2', null);
-INSERT INTO `bas_datagrid` VALUES ('27', 'system_datagrid', 'sys_resource_lists_tb', '资源列表', '0', '1', '1', '0', '1', '1', '1', 'post', '1', 'main/resource_lists.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-14 11:45:43', '1', '2014-04-08 23:51:21', '0', '7', null);
-INSERT INTO `bas_datagrid` VALUES ('28', 'system_datagrid', 'sys_department_lists', '部门列表', '0', '1', '0', '0', '1', '1', '0', null, '0', 'main/department_lists.action', '', '', '1', '0', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', null, '0', '1', '0', '18', '', '', null, '', null, '1', '2013-04-14 16:35:22', '1', '2014-04-08 23:51:11', '0', '8', null);
+INSERT INTO `bas_datagrid` VALUES ('6', 'datagrid_datagrid ', 'datacolumn_tb', 'DataGrid列管理列表', '0', '0', '1', '0', '1', '1', '1', 'post', '1', 'main/datacolumn_lists.action', '', '', '1', '1', '1', '1', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '1', '18', '', '', null, '', null, '1', '2013-04-01 22:25:07', '1', '2014-04-08 23:30:21', '0', '12', null);
+INSERT INTO `bas_datagrid` VALUES ('7', 'users_datagrid', 'usergroup_tb', '已关联用户组 ', '1', '0', '1', '0', '0', '1', '1', 'post', '1', 'main/auth_usergrouplist.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-02 11:10:42', '1', '2014-04-08 23:29:14', '0', '24', null);
+INSERT INTO `bas_datagrid` VALUES ('8', 'users_datagrid', 'userrole_tb', '已关联角色', '1', '0', '0', '0', '0', '1', '1', 'post', '1', 'main/role_lists.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-02 13:23:51', '1', '2014-04-08 23:47:06', '0', '5', null);
+INSERT INTO `bas_datagrid` VALUES ('9', 'users_datagrid', 'authgroup_tb', '', '0', '0', '1', '0', '0', '1', '1', 'post', '1', 'main/auth_grouplist.action', '', '', '1', '0', '1', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-02 14:41:23', '1', '2013-04-07 19:20:02', '0', '4', null);
+INSERT INTO `bas_datagrid` VALUES ('10', 'datagrid_datagrid ', 'datagrid_dt', 'DataGrid表格', '0', '0', '1', '0', '1', '1', '1', 'post', '1', 'main/datagrid_lists.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-05 17:41:16', '1', '2014-04-08 23:45:56', '0', '33', null);
+INSERT INTO `bas_datagrid` VALUES ('11', 'users_datagrid', 'userlist_dt', '用户列表', '0', '0', '1', '0', '1', '1', '1', 'post', '1', 'main/userlists.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-05 19:42:23', '1', '2014-04-08 23:47:18', '0', '1', null);
+INSERT INTO `bas_datagrid` VALUES ('12', 'users_datagrid', 'authrole_tb', null, '0', '0', '1', '0', '0', '1', '1', 'post', '1', 'main/auth_rolelist.action', '', '', '1', '0', '1', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-05 20:59:17', '1', '2013-04-08 15:06:57', '0', '8', null);
+INSERT INTO `bas_datagrid` VALUES ('13', 'users_datagrid', 'sys_group_list_tb', null, '0', '0', '0', '0', '1', '1', '1', 'post', '1', 'main/group_lists.action', '', '', '1', '1', '1', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-09 17:11:43', '1', '2013-04-09 17:11:43', '0', '0', null);
+INSERT INTO `bas_datagrid` VALUES ('14', 'users_datagrid', 'sys_authuserlistforgroup_tb', '已关联用户', '1', '0', '1', '0', '0', '1', '1', 'post', '1', 'main/auth_serlistforgroup.action', '', '', '0', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-09 20:25:43', '1', '2014-04-08 23:47:23', '0', '2', null);
+INSERT INTO `bas_datagrid` VALUES ('16', 'users_datagrid', 'sys_authrolelistforgroup_tb', '已关联角色', '1', '0', '0', '0', '0', '1', '1', 'post', '1', 'main/authgroup_rolelistforgroup.action', '', '', '0', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-09 21:03:09', '1', '2013-04-09 23:21:55', '0', '2', null);
+INSERT INTO `bas_datagrid` VALUES ('17', 'users_datagrid', 'sys_authuserforgroup_tb', '关联用户组', '0', '0', '1', '0', '0', '1', '1', 'post', '1', 'main/authgroup_userlist.action', '', '', '1', '0', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-09 21:08:50', '1', '2014-04-08 23:48:29', '0', '3', null);
+INSERT INTO `bas_datagrid` VALUES ('18', 'users_datagrid', 'sys_authroleforgroup_tb', '', '0', '0', '1', '0', '0', '1', '1', 'post', '1', 'main/authgroup_rolelist.action', '', '', '1', '0', '1', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-09 21:13:06', '1', '2013-04-09 22:01:22', '0', '2', null);
+INSERT INTO `bas_datagrid` VALUES ('19', 'users_datagrid', 'sys_rolelist_tb', '角色列表', '0', '0', '1', '0', '1', '1', '1', 'post', '1', 'main/role_lists.action', '', '', '1', '1', '1', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-10 20:37:53', '1', '2014-04-08 23:30:51', '0', '1', null);
+INSERT INTO `bas_datagrid` VALUES ('20', 'users_datagrid', 'sys_authrole_userlist_tb', '已关联用户组', '1', '0', '1', '0', '0', '1', '1', 'post', '1', 'main/authrole_userlist.action', '', '', '0', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-10 22:59:07', '1', '2014-04-08 23:47:34', '0', '1', null);
+INSERT INTO `bas_datagrid` VALUES ('21', 'users_datagrid', 'sys_authrole_grouplist_tb', null, '0', '0', '1', '0', '1', '1', '1', 'post', '1', 'main/authrole_grouplist.action', '', '', '1', '0', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-10 23:04:55', '1', '2014-04-08 17:30:07', '0', '1', null);
+INSERT INTO `bas_datagrid` VALUES ('22', 'users_datagrid', 'sys_authrole_resources_tb', null, '0', '0', '0', '0', '0', '1', '1', 'post', '1', 'main/authrole_resources.action', '', '', '1', '0', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '0', '1', '0', '18', '', '', null, '', null, '1', '2013-04-11 15:19:08', '1', '2013-04-11 16:16:02', '0', '7', null);
+INSERT INTO `bas_datagrid` VALUES ('23', 'users_datagrid', 'sys_authrole_groups_tb', null, '0', '0', '1', '0', '1', '1', '1', 'post', '1', 'main/authrole_groups.action', '', '', '1', '0', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-11 15:35:23', '1', '2014-04-02 17:23:29', '0', '5', null);
+INSERT INTO `bas_datagrid` VALUES ('24', 'users_datagrid', 'sys_authrole_users_tb', '角色授权表格', '0', '0', '1', '0', '0', '1', '1', 'post', '1', 'main/authrole_users.action', '', '', '1', '0', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-11 15:36:43', '1', '2014-04-08 23:48:03', '0', '7', null);
+INSERT INTO `bas_datagrid` VALUES ('25', 'code_datagrid', 'sys_codelist_tb', '编码列表', '0', '0', '1', '0', '1', '1', '1', 'post', '1', 'main/codelist_lists.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-14 09:05:30', '1', '2014-04-08 23:50:25', '0', '3', null);
+INSERT INTO `bas_datagrid` VALUES ('26', 'code_datagrid', 'sys_codetype_lists_tb', '编码类型列表', '0', '0', '1', '0', '1', '1', '1', 'post', '1', 'main/codetype_lists.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-14 09:47:00', '1', '2014-04-08 23:50:30', '0', '2', null);
+INSERT INTO `bas_datagrid` VALUES ('27', 'system_datagrid', 'sys_resource_lists_tb', '资源列表', '0', '0', '1', '0', '1', '1', '1', 'post', '1', 'main/resource_lists.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-14 11:45:43', '1', '2014-04-08 23:51:21', '0', '7', null);
+INSERT INTO `bas_datagrid` VALUES ('28', 'system_datagrid', 'sys_department_lists', '部门列表', '0', '0', '0', '0', '1', '1', '0', null, '0', 'main/department_lists.action', '', '', '1', '0', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', null, '0', '1', '0', '18', '', '', null, '', null, '1', '2013-04-14 16:35:22', '1', '2014-04-08 23:51:11', '0', '8', null);
 INSERT INTO `bas_datagrid` VALUES ('29', 'system_datagrid', 'sys_parameter_lists_tb', '系统参数列表', '0', '0', '1', '0', '1', '1', '1', 'post', '1', 'main/parameter_lists.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-14 17:26:58', '1', '2014-04-08 23:50:57', '0', '2', null);
-INSERT INTO `bas_datagrid` VALUES ('30', 'system_datagrid', 'sys_department_lists2', null, '0', '1', '1', '0', '1', '1', '1', 'post', '1', '/main/system/department/lists.jhtml', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2014-04-04 01:04:59', '1', '2014-04-04 01:10:43', '0', '2', null);
-INSERT INTO `bas_datagrid` VALUES ('32', 'datagrid_datagrid ', 'sys_datagrid_tb1', 'DataGrid表格测试 ', '0', '1', '1', '0', '1', '1', '0', 'post', '1', 'sys_datagrid_tb1', '', '', '1', '0', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2014-04-08 23:04:00', '1', '2014-04-08 23:46:14', '0', '2', null);
-INSERT INTO `bas_datagrid` VALUES ('33', 'system_datagrid', 'sys_cachelist_tb', '缓存管理', '0', '1', '1', '0', '0', '1', '1', 'post', '1', 'sys_cachelist_tb', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '0', '1', '0', '18', '', '', null, '', null, '1', '2014-04-21 15:13:40', '1', '2014-04-22 10:30:01', '0', '1', null);
+INSERT INTO `bas_datagrid` VALUES ('30', 'system_datagrid', 'sys_department_lists2', null, '0', '0', '1', '0', '1', '1', '1', 'post', '1', '/main/system/department/lists.jhtml', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2014-04-04 01:04:59', '1', '2014-04-04 01:10:43', '0', '2', null);
+INSERT INTO `bas_datagrid` VALUES ('32', 'datagrid_datagrid ', 'sys_datagrid_tb1', 'DataGrid表格测试 ', '0', '0', '1', '0', '1', '1', '0', 'post', '1', 'sys_datagrid_tb1', '', '', '1', '0', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2014-04-08 23:04:00', '1', '2014-04-08 23:46:14', '0', '2', null);
+INSERT INTO `bas_datagrid` VALUES ('33', 'system_datagrid', 'sys_cachelist_tb', '缓存管理', '0', '0', '1', '0', '0', '1', '1', 'post', '1', 'sys_cachelist_tb', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '0', '1', '0', '18', '', '', null, '', null, '1', '2014-04-21 15:13:40', '1', '2014-04-22 10:30:01', '0', '1', null);
+INSERT INTO `bas_datagrid` VALUES ('34', 'system_datagrid', 'sys_app_property_list_tb', '项目属性配置', '0', '0', '1', '0', '1', '1', '1', 'POST', '1', 'main/applicationproperty_lists.action', null, null, '1', '1', '1', '1', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', '100', 'id', 'asc', '1', '1', '0', '18', null, null, null, null, null, '1', '2015-01-15 10:04:03', '1', '2015-01-15 10:04:06', '0', '2', null);
 
 -- ----------------------------
 -- Table structure for `bas_demo`
@@ -817,7 +824,7 @@ CREATE TABLE `bas_resource` (
   PRIMARY KEY (`BAS_RESOURCE_ID`),
   KEY `FK_BAS_PARENT_BAS_RESOURCE_ID` (`PARENT_BAS_RESOURCE_ID`),
   CONSTRAINT `FK_BAS_PARENT_BAS_RESOURCE_ID` FOREIGN KEY (`PARENT_BAS_RESOURCE_ID`) REFERENCES `bas_resource` (`BAS_RESOURCE_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 COMMENT='系统资源表';
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COMMENT='系统资源表';
 
 -- ----------------------------
 -- Records of bas_resource
@@ -837,7 +844,7 @@ INSERT INTO `bas_resource` VALUES ('13', '1', 'module_menu_category_item', '/ind
 INSERT INTO `bas_resource` VALUES ('14', '9', 'module_menu_category_item', '/system/role/index.htm', '角色管理', 'RoleManage', '角色管理', '0', null, '1', '_blank', 'icon-star', '1', '2013-03-25 19:59:34', '1', '2013-03-26 22:46:59', '0', '2', null);
 INSERT INTO `bas_resource` VALUES ('15', '9', 'module_menu_category_item', '/system/group/index.htm', '用户组管理', 'RoleManage', '用户组管理', '1', null, '1', '_blank', 'icon-star', '1', '2013-03-25 20:10:13', '1', '2013-03-26 22:47:25', '0', '2', null);
 INSERT INTO `bas_resource` VALUES ('16', '10', 'module_menu_category_item', '/system/codetype/index.htm', '通用编码类型', 'codeType', '通用编码类型', '0', null, '1', '_blank', 'icon-star', '1', '2013-03-26 22:49:20', '1', '2013-03-26 22:49:20', '0', '0', null);
-INSERT INTO `bas_resource` VALUES ('17', '10', 'module_menu_category_item', 'system/codelist/index.htm', '编码列表', 'codelist', '编码列表', '1', null, '1', '_blank', 'icon-star', '1', '2013-03-26 22:51:12', '1', '2013-03-27 21:00:16', '0', '1', null);
+INSERT INTO `bas_resource` VALUES ('17', '10', 'module_menu_category_item', '/system/codelist/index.htm', '编码列表', 'codelist', '编码列表', '1', null, '1', '_blank', 'icon-star', '1', '2013-03-26 22:51:12', '1', '2013-03-27 21:00:16', '0', '1', null);
 INSERT INTO `bas_resource` VALUES ('18', '9', 'module_menu_category_item', '/system/user/index.htm', '用户管理', 'userManage', '用户管理', '2', null, '1', '_blank', 'icon-star', '1', '2013-03-27 14:13:53', '1', '2013-03-27 14:13:53', '0', '0', null);
 INSERT INTO `bas_resource` VALUES ('19', '2', 'module_menu_category_item', '/system/department/index.htm', '部门管理', 'DepartmentManage', '部门管理', '1', '0', '1', '_blank', 'icon-star', '1', '2013-03-27 14:17:33', '1', '2014-05-22 10:24:05', '0', '1', null);
 INSERT INTO `bas_resource` VALUES ('20', '2', 'module_menu_category', 'DataGridManage', 'DataGrid管理', 'DataGrid', 'DataGrid管理', '5', '0', '1', '_blank', 'icon-star', '1', '2013-03-27 20:59:31', '1', '2013-03-30 10:59:06', '0', '11', null);
@@ -854,6 +861,7 @@ INSERT INTO `bas_resource` VALUES ('38', '36', 'module_menu_category_item', '/sy
 INSERT INTO `bas_resource` VALUES ('39', '36', 'module_menu_category_item', 'SYS_OS_MINITOR', '操作系统资源监控', 'SYS_OS_MINITOR', '操作系统资源监控', '3', '0', '1', '_blank', 'icon-star', '1', '2014-04-08 15:09:17', '1', '2014-04-08 15:09:17', '0', '0', null);
 INSERT INTO `bas_resource` VALUES ('40', '1', 'mobile_mdule_menu_item', 'mobile_board', '财务看板', 'mobile_board', '财务看板模块', '1', '0', '1', '_blank', 'icon-wallet', '1', '2014-04-08 21:19:04', '1', '2014-04-08 21:19:16', '0', '1', null);
 INSERT INTO `bas_resource` VALUES ('41', '40', 'mobile_mdule_menu', 'app_store', '应用大厅', 'app_store', '手机财务应用大厅', '0', '0', '1', '_blank', 'icon-star', '1', '2014-04-08 21:21:26', '1', '2014-04-08 21:21:26', '0', '0', null);
+INSERT INTO `bas_resource` VALUES ('42', '2', 'module', '/system/applicationproperty/index.htm', '项目属性配置', 'app_store', '手机财务应用大厅', '0', '1', '1', '_blank', 'icon-star', '1', '2015-01-14 17:30:47', '1', '2015-01-14 17:30:50', '0', '0', null);
 
 -- ----------------------------
 -- Table structure for `bas_role`

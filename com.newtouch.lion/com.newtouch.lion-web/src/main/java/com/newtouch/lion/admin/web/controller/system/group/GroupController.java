@@ -32,7 +32,6 @@ import com.newtouch.lion.admin.web.model.system.group.GroupVo;
 import com.newtouch.lion.common.lang.LongUtils;
 import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.model.system.Group;
-import com.newtouch.lion.model.system.Parameter;
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.page.PageResult;
