@@ -18,8 +18,8 @@ $(function() {
 	 $("#btnRefresh").on("click",function(){
 		 dataGridReload("sys_app_property_list_tb");
 	 });
-	 
+	 //新增
 	 $("#btnAdd").on("click",function(){
-		 alert("dd");
-	 });	
+		 return;
+	 });
 });

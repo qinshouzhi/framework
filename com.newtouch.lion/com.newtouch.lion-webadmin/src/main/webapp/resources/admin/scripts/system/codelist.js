@@ -12,9 +12,9 @@ $(function() {
 	//初始化下拉框
 	handleBootstrapSelect();
 	(function($){
-	$.sys.codetype={
+	$.sys.codelist={
 			querybtn:"queryBtn",
-			datagridId:"sys_codelist_lists_tb",
+			datagridId:"sys_codelist_tb",
 			dialogId:"sys_codelist_dialogData",
 			formId:"sys_codelist_data_form",
 			id:"sys_codelist_data_form_id",
@@ -23,7 +23,7 @@ $(function() {
 		};
 	})(jQuery);
 	//选择DataGrid单行
-	function getSelectedRow(){return $("#"+$.sys.codetype.datagridId).datagrid("getSelected");}
+	function getSelectedRow(){return $("#"+$.sys.codelist.datagridId).datagrid("getSelected");}
 	
 	$("#"+$.sys.codelist.datagridId).datagrid({
 		onLoadSuccess : function(data) {
@@ -54,8 +54,19 @@ $("#sysCodeList option").each(function () {
     row.codeValue=codeValue;
     data.push(row);
 });
-/**sys_code_type 加载列表*/
-function formatterCodeList(val,row) {
+/**sys_code_list 加载列表*/
+function formatterName(val,row) {
+	var codeText="";
+	for ( var obj in data) {
+		if (data[obj].codeValue ===val) {
+			codeText = data[obj].codeText;
+			break;
+		}
+	}
+	return codeText;
+}
+/**sys_code_list 加载列表*/
+function formatterEidtable(val,row) {
 	var codeText="";
 	for ( var obj in data) {
 		if (data[obj].codeValue ===val) {

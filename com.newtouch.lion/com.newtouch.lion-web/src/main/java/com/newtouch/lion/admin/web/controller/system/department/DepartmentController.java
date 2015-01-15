@@ -59,6 +59,7 @@ public class DepartmentController {
 	/** 参数首页 */
 	private static final String INDEX_RETURN = "/system/department/index";
 	
+	@SuppressWarnings("unused")
 	private static final String INDEX_LISTS_TB = "sys_department_lists";
 
 	private static final String ADD_DIALOG_RETURN = "/system/department/adddialog";

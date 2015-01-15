@@ -20,6 +20,6 @@ $(function() {
 	 });
 	 
 	 $("#btnAdd").on("click",function(){
-		 alert("dd");
+		 return;
 	 });	
 });

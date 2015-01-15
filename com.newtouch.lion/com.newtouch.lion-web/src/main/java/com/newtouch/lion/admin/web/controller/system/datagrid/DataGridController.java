@@ -61,7 +61,7 @@ public class DataGridController {
 	/** 首页返回路径 */
 	private static final String INDEX_RETURN = "system/datagrid/index";
 	/** 新增对话返回路径 */
-	private static final String ADD_DIALOG_RETURN = "system/datagrid/adddialog";
+	private static final String ADD_DIALOG_RETURN = "system/datagrid/dialog/add";
 	/** 修改对话返回路径 */
 	private static final String EDIT_DIALOG_RETURN = "system/datagrid/editdialog";
 
@@ -70,9 +70,9 @@ public class DataGridController {
 	private static final String INDEX_TB = "datagrid_dt";
 	@Autowired
 	private DataGridService dataGridService;
-
+	
 	/** 新增的对话框 */
-	@RequestMapping(value = "adddialog")
+	@RequestMapping(value = "dialog/add.htm")
 	public String addDialog() {
 		return ADD_DIALOG_RETURN;
 	}
