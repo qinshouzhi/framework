@@ -9,6 +9,7 @@ package com.newtouch.lion.admin.web.controller.system.department;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -25,7 +26,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.department.DepartmentVo;
+import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.model.system.Department;
+import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.service.system.DepartmentService;
 import com.newtouch.lion.web.constant.ConstantMessage;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
@@ -49,10 +52,13 @@ import com.newtouch.lion.web.servlet.view.support.BindResult;
  * @version 1.0
  */
 @Controller
+@RequestMapping("/system/department/")
 public class DepartmentController {
 
 	private final Logger logger = LoggerFactory.getLogger(super.getClass());
-
+	/** 参数首页 */
+	private static final String INDEX_RETURN = "/system/department/index";
+	
 	private static final String INDEX_LISTS_TB = "sys_department_lists";
 
 	private static final String ADD_DIALOG_RETURN = "/system/department/adddialog";
@@ -62,14 +68,14 @@ public class DepartmentController {
 	@Autowired
 	private DepartmentService departmentService;
 
-	@RequestMapping("/system/department/adddialog")
+	@RequestMapping("adddialog")
 	public String addAdialog(Model model,
 			@RequestParam(required = false) Long parentId) {
 		model.addAttribute("parentId", parentId);
 		return ADD_DIALOG_RETURN;
 	}
 
-	@RequestMapping("/system/department/editdialog")
+	@RequestMapping("editdialog")
 	public String editDialog(Model model,
 			@RequestParam(required = false) Long id) {
 		if (id != null) {
@@ -82,7 +88,7 @@ public class DepartmentController {
 		return EDIT_DIALOG_RETURN;
 	}
 
-	@RequestMapping(value = "/system/department/add")
+	@RequestMapping(value = "add")
 	@ResponseBody
 	public ModelAndView add(
 			@Valid @ModelAttribute("departmentVo") DepartmentVo departmentVo,
@@ -100,7 +106,7 @@ public class DepartmentController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/system/department/edit")
+	@RequestMapping(value = "edit")
 	@ResponseBody
 	public ModelAndView edit(
 			@Valid @ModelAttribute("departmentVo") DepartmentVo departmentVo,
@@ -129,7 +135,7 @@ public class DepartmentController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/system/department/delete")
+	@RequestMapping(value = "delete")
 	@ResponseBody
 	public ModelAndView delete(@RequestParam Long id, ModelAndView modelAndView) {
 		Map<String, String> params = new HashMap<String, String>();
@@ -145,18 +151,24 @@ public class DepartmentController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/system/department/lists")
+	@RequestMapping("list")
 	@ResponseBody
-	public String lists() {
-		return this.departmentService.doFindAll(INDEX_LISTS_TB);
+	public DataTable<Department> lists() {
+//		PageResult<Department> pageResult = this.departmentService.doFindAll();
+		return null;
 	}
 
-	@RequestMapping("/system/department/comboxtree")
+	@RequestMapping("comboxtree")
 	@ResponseBody
 	public String comboxTree() {
 		String jsonStr = departmentService.doFindFirstLevelToTree();
 		jsonStr = jsonStr.replace("departments", "children");
 		jsonStr = jsonStr.replace("nameZh", "text");
 		return jsonStr;
+	}
+	
+	@RequestMapping(value = "index")
+	public String index(HttpServletRequest servletRequest, Model model) {
+		return INDEX_RETURN;
 	}
 }
