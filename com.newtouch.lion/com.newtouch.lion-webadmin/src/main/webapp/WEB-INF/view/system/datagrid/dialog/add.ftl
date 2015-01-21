@@ -14,7 +14,6 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label">参数类型</label>
 													<div class="col-md-5">
-														<@lion.combobox id="sysParameterCodeList"  codeName="SystemParamter"  name="type" dataClass="bootstrap-select bs-select form-control" title="请选择参数列表" dataSize="8" multipleDataMaxOptions="1"/>
 													</div>
 												</div>
 												<div class="form-group">
@@ -64,7 +63,7 @@
 				 	</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal"><i class="fa  fa-arrow-left"></i> 取 消 </button>
+				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal"><i class="fa  fa-arrow-left"></i>取 消 </button>
 				<button type="button" id="btnSave" class="btn blue"><i class="fa fa-save"></i> 保 存</button>
 			</div>
 		</div>

@@ -36,13 +36,13 @@
 		<div class="row">
 			<div class="col-md-12 margin-bottom-10">
 				<form id="queryParameterform" class="form-horizontal">
-					<label class="control-label col-md-2" for="nameZh" >通用编码名称</label>
+					<label class="control-label col-md-2" for="nameZh" >编码列表名称</label>
 					<div class="col-md-2">
-						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="请输入通用编码名称"/>					
+						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="请输入编码列表名称"/>					
 					</div>
-					<label class="control-label col-md-2" for="sys_parameter_type" >通用编码类型</label>
+					<label class="control-label col-md-2" for="sys_parameter_type" >编码类型</label>
 					<div class="col-md-3">
-						<@lion.combobox id="sysCodeList" codeName="codeList" dataClass="bootstrap-select bs-select form-control input-small" title="请选择通用编码列表" dataSize="8" multipleDataMaxOptions="1"/>
+						<@lion.combobox id="sysCodeList" codeName="codeList" dataClass="bootstrap-select bs-select form-control input-small" title="请选择编码类型" dataSize="8" multipleDataMaxOptions="1"/>
 					</div>
 					<div class="col-md-2">
 						<a href="javascript:void(0)" class="btn blue"><i class="fa fa-search"></i> 查 询 </a>

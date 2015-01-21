@@ -229,9 +229,6 @@ public class ParameterController {
 
 		PageResult<Parameter> pageResult = parameterService
 				.doFindByCriteria(queryCriteria);
-
-		 
-		
 		return pageResult.getDataTable();
 	}
 

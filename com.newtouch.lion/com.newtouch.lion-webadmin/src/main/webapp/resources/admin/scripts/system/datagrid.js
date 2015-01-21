@@ -18,8 +18,4 @@ $(function() {
 	 $("#btnRefresh").on("click",function(){
 		 dataGridReload("datagrid_dt");
 	 });
-	 
-	 $("#btnAdd").on("click",function(){
-		 return;
-	 });	
 });
