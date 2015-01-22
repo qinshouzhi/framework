@@ -48,8 +48,7 @@
 					</div>
 					<label class="control-label col-md-2" for="sys_parameter_type" >参数类型</label>
 					<div class="col-md-3">
-						<!--<@lion.combobox id="sysParameterCodeList" codeName="SystemParamter" dataClass="bootstrap-select bs-select form-control input-small" title="请选择参数列表" dataSize="8" multipleDataMaxOptions="1"/>-->
-						 <select  id="parameterCodeList"  name="type" data-size="8" 
+					      <select  id="parameterCodeList"  name="type" data-size="8" 
 						 	data-maxoptions="1"   multiple placeholder="请选择参数列表..."  
 						 	class="lion-combo bootstrap-select form-control input-small" data-valueField='codeValue' 
 						 	data-textField='nameZh' data-loadURL="${base}/system/code/combox.htm?nameEn=SystemParamter">
