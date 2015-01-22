@@ -43,23 +43,22 @@ $(function() {
 	 $("#btnAdd").on("click",function(){
 		 return;
 	 });
-	 //编辑
-	 $("#btnEdit").on("click",function(){
-		 var editModal = $("#editDialog");
-		 console.log("111");
-		 editModal.modal({
-				keyboard : false
-			});
-		 console.log("222");
-		 var  url="/admin/system/parameter/dialogedit.htm";
-		 console.log("3333");
-		 editModal.load(url, function() {
-			    editModal.modal("show");
-				$("#btnEdit").removeAttr("disabled");
-		  });
-		 console.log("444");
-		 return;
+	 
+	 $("#editDialog").on("hidden.bs.modal", function() {
+		 	console.log("移动对话框数据");
+		    $(this).removeData("bs.modal");
 	 });
+	 //编辑
+//	 $("#btnEdit").on("click",function(){
+//		 console.log("进入BtnEdit function");
+//		 var editModal = $("#editDialog");
+//		 var  url="/admin/system/parameter/dialogedit.htm";
+//		 editModal.load(url,function(){
+//			 editModal.modal("show");
+//		});
+//		//$("#btnEdit").removeAttr("disabled");
+//		  
+//	 });
 	 //删除
 	 $("#btnDelete").on("click",function(){
 		 var row=getSelectedRow();

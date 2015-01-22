@@ -20,6 +20,7 @@ import com.newtouch.lion.common.Assert;
 
 public class HqlUtils {
 	private static final Logger log = LoggerFactory.getLogger(HqlUtils.class);
+	
 	public static final String LIKE_CHAR = "%";
 
 	public static String generateCountHql(String originalHql,
