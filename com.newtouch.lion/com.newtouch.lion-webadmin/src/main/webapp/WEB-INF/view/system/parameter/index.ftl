@@ -14,8 +14,11 @@
 <link href="${base}/resources/global/plugins/easyui/themes/icon.css" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" type="text/css">
-
-<!--EasyUI css End-->
+<!--lion UI css Start-->
+<link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css">
+<link href="${base}/resources/global/css/dialog/lion.dialog.css" rel="stylesheet" type="text/css">
+<link href=""${base}/resources/global/css/combo/lion.combo.css" rel="stylesheet" type="text/css">
+<!--lion UI css End-->
 <script src="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.js" type="text/javascript" ></script>
 <script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript" ></script>
 <script src="${base}/resources/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
@@ -24,6 +27,11 @@
 <script src="${base}/resources/global/plugins/easyui/jquery.easyui.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
 <!--EasyUI JavaScript End-->
+<!--lion UI JS Start-->
+<script src="${base}/resources/global/js/lion.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/dialog/dialog.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
+<!--lion UI JS End-->
 <script src="${base}/resources/global/scripts/framework.js" type="text/javascript"></script>
 <script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/scripts/system/parameter.js" type="text/javascript"></script>
@@ -41,7 +49,12 @@
 					</div>
 					<label class="control-label col-md-2" for="sys_parameter_type" >参数类型</label>
 					<div class="col-md-3">
-						<@lion.combobox id="sysParameterCodeList" codeName="SystemParamter" dataClass="bootstrap-select bs-select form-control input-small" title="请选择参数列表" dataSize="8" multipleDataMaxOptions="1"/>
+						<!--<@lion.combobox id="sysParameterCodeList" codeName="SystemParamter" dataClass="bootstrap-select bs-select form-control input-small" title="请选择参数列表" dataSize="8" multipleDataMaxOptions="1"/>-->
+						 <select  id="demoCombo"  name="type" data-size="8" 
+						 	data-maxoptions="1"   multiple placeholder="请选择参数列表..."  
+						 	class="lion-combo bootstrap-select form-control input-small" data-valueField='codeValue' 
+						 	data-textField='nameZh' data-loadURL="${base}/system/code/combox.htm?nameEn=SystemParamter">
+						 </select>
 					</div>
 					<div class="col-md-3 ">
 						<a href="javascript:void(0)" class="btn blue"><i class="fa fa-search"></i> 查 询 </a>
