@@ -1,9 +1,4 @@
-<!--Edit Dialog Start -->
-<div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal" aria-hidden="true" data-target="#editDialog"></button>
-	<h4 class="modal-title text-left"><i class="fa fa-edit"></i>编辑系统参数添加</h4>
-</div>
-<div class="modal-body">
+ 
  	<div class="row">
 		 	<div class="col-md-12 portlet-body form">
 		 		<!-- BEGIN FORM-->
@@ -12,7 +7,11 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">参数类型</label>
 							<div class="col-md-5">
-								<@lion.combobox id="sysParameterCodeList1"  codeName="SystemParamter"  name="type" dataClass="bootstrap-select bs-select form-control" title="请选择参数列表" dataSize="8" multipleDataMaxOptions="1"/>
+								 <select  id="editParameterCodeList"  name="type" data-size="8" 
+								 	data-maxoptions="1"   multiple placeholder="请选择参数列表..."  
+								 	class="lion-combo bootstrap-select form-control input-small" data-valueField='codeValue' 
+								 	data-textField='nameZh' data-loadURL="${base}/system/code/combox.htm?nameEn=SystemParamter">
+								 </select>
 							</div>
 						</div>
 						<div class="form-group">
@@ -59,24 +58,5 @@
 				</form>
 				<!-- END FORM-->	
 			</div>
- 	</div>
-</div>
-<div class="modal-footer">
-	<button type="button" id="btnCancel" class="btn default" data-dismiss="modal"  data-target="#editDialog"><i class="fa fa-arrow-left"></i> 取 消 </button>
-	<button type="button" id="btnSave" class="btn blue"><i class="fa fa-save"></i> 保 存</button>
-</div>
-		<!-- /.modal-content -->
-<!--Edit Dialog End -->
 <script type="text/javascript">
-$(function () {
-	var handleBootstrapSelect = function() {
-	        $('#sysParameterCodeList1').selectpicker({
-	            iconBase: 'fa',
-	            tickIcon: 'fa-check'
-	        });
-	}
-	//初始化下拉框
-	handleBootstrapSelect();
-	//alert("ddd");
-});
 </script>

@@ -33,7 +33,7 @@
         backdrop:'<div class="lion-modal-backdrop fade"></div>',
         //显示加载进度条
         loading:'<div class="page-loading page-loading-boxed">'+
-                    '<img src="/ui/resources/global/img/loading-spinner-grey.gif" alt="" class="loading">'+
+                    '<img src="/admin/resources/global/img/loading-spinner-grey.gif" alt="" class="loading">'+
                     '<span>&nbsp;&nbsp;Loading... </span>'+
                 '</div>',
         //对话框的内容

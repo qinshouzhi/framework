@@ -183,7 +183,6 @@
         constructor: Combo,
         //设置初始化方法
         init:function(){
-            console.dir(this.options);
             //获取this 并获取该对象的ID
             var that=this,id=this.$element.attr('id');
             //
@@ -230,8 +229,8 @@
                   '<span class="filter-option pull-left"></span>&nbsp;' +
                   '<span class="caret"></span>' +
                 '</button>' +
-                '<div class="dropdown-menu open" style="margin-top:-3px;">' +
-                  '<ul class="dropdown-menu inner  lion-combo" role="menu">' +
+                '<div class="lion-combo dropdown-menu open" style="margin-top:-3px;">' +
+                  '<ul class="dropdown-menu inner " role="menu">' +
                   '</ul>' +
                 '</div>' +
             '</div>';
@@ -623,12 +622,11 @@
           //Ajax调用获取并Select构建数据
           var that=this;
           function buildOptions(data,arg){
-            console.dir(data);
-            console.dir(arg);
+ 
             var value='codeValue',soption='';
             for(var i in data){
                var spValue,spText,selected;
-               console.log(data[i]);
+             
                if(that.options.valuefield==='value'&&that.options.textfield==='text'){
                     spValue=data[i].value;
                     spText=data[i].text;
@@ -661,16 +659,14 @@
               that.$element.append(soption);
             }
           }
-
           function reqError(xhr,textStatus,error){
+            //TODO
             console.dir(xhr);
             console.dir(textStatus);
             console.dir(error);
           }
           //Ajax请求
-          console.log(this.options.loadurl);
           util.get(this.options.loadurl,buildOptions,reqError);
-
         },
         //设置Li的高度
         setLiHeight:function(){
@@ -714,8 +710,6 @@
                   selectOffsetBot = $window.height() - selectOffsetTop - selectHeight;
                 };
             posVert();
-            console.dir(menu);
-            console.log("liHeight:"+liHeight+" selectHeight:"+selectHeight+menuPadding);
             if (this.options.header) menu.css('padding-top',0);
 
             if (this.options.size == 'auto') {
@@ -850,7 +844,7 @@
                    return;
                 }
                 getPlacement($(this));
-                console.log($drop.html());
+                
                 $drop.appendTo(that.options.container);
 
                 $drop.toggleClass('open', !$(this).hasClass('open'));
@@ -924,7 +918,7 @@
               }
           });
           dataObj+=']';
-          return dataObj;
+          return JSON.parse(dataObj);
        }
     };
 

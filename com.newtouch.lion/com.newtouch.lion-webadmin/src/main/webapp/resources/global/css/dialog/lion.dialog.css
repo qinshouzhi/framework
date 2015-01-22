@@ -2,11 +2,10 @@
  LION UI STYLE DIALOG COMPONENTS 
 *********************************/
 /***
-*Dialog css
+* lion Dialog css
 * lijun.wang1@newtouch.cn
 */
-
-.lion-modal {
+.lion-modal{
   position: fixed;
   top: 0;
   right: 0;
