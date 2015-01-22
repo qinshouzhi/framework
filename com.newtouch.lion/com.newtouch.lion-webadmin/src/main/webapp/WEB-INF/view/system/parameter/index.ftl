@@ -16,10 +16,8 @@
 <link href="${base}/resources/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" type="text/css">
 
 <!--EasyUI css End-->
-<script src="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript" ></script>
-<script src="${base}/resources/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+<script src="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.js" type="text/javascript" ></script>
 <script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript" ></script>
-<script src="${base}/resources/admin/pages/scripts/ui-toastr.js" type="text/javascript" ></script>
 <script src="${base}/resources/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
 
 <!--EasyUI JavaScript Start-->
@@ -53,8 +51,17 @@
 		
 			<div class="col-md-12 margin-bottom-10" id="toolbar">
 				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic"><i class="fa fa-plus"></i> 新增  </a>
-				<a id="btnEdit" class="btn btn-sm red" role="button" data-toggle="modal" data-target="#editDialog"><i class="fa fa-edit"></i> 编辑
-					<div class="modal" id="editDialog" tabindex="-1"></div>
+				<a id="btnEdit" class="btn btn-sm red"   data-toggle="modal" data-target="#editDialog"  href="${base}/system/parameter/dialogedit.htm"><i class="fa fa-edit"></i> 编辑
+					<div class="modal fade" id="editDialog" role="basic" aria-hidden="true" data-keyboard="false">
+						<div class="page-loading page-loading-boxed">
+							<img src="${base}/resources/global/img/loading-spinner-grey.gif" alt="" class="loading">
+							<span>&nbsp;&nbsp;Loading... </span>
+						</div>
+						<div class="modal-dialog">
+							<div class="modal-content">
+							</div>
+						</div>
+					</div>
 				</a>
 				<a href="javascript:void(0)" id="btnDelete" class="btn btn-sm purple"><i class="fa fa-times"></i> 删除 </a>
 				<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue"><i class="fa fa-refresh"></i> 刷新  </a>
@@ -142,6 +149,6 @@
 	</div>
 	
 	<!-- /.modal-dialog -->
-<!--Edit Dialog End -->
+
 </body>
 </html>
