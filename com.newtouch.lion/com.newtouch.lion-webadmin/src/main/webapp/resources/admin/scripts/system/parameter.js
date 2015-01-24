@@ -8,8 +8,9 @@ $(function() {
 
 	var addForm=$("#sysParameterForm");
 	var addDialog=$("#basic");
-	handleVForm(addForm);
-
+	
+	
+	handleVForm(addForm,submitForm);
 	//选择DataGrid单行
 	function getSelectedRow(){return $(datagridId).datagrid('getSelected');}
 	 
@@ -28,22 +29,29 @@ $(function() {
 	 });
 	 //新增
 	 $('#btnAdd').on('click',function(){
-		 addForm.reset();
-		 return;
+		addForm[0].reset();
+		addForm.find('.form-group').removeClass('has-error');
+		addForm.find('.help-block').remove();
+		$('.lion-combo').combo('reloadLi');
 	 });
 
 	 addForm.on('show.bs.modal',function(){
-
+	 	addForm[0].reset();
+	 	 
 	 });
 	 
 	 $('#editDialog').on('hidden.bs.modal', function() {
-		    $(this).removeData('bs.modal');
+		  $(this).removeData('bs.modal');
 	 });
 
 
 	 $('#btnSave').click(function(){
-
+	 		console.log('提交成功');
+	 		addForm.submit();
 	 });
+
+
+
 	 //编辑
 	 $('#btnEdit').on('click',function(){
 		 console.log('进入BtnEdit function');
@@ -88,49 +96,59 @@ $(function() {
 		 alert('dd');
 	 });
 });
+/**新增或编辑的提交代码*/
+function submitForm(frm){
+	var param=frm.serialize();
+	console.log(param);
+ 	console.dir(this);
+}
+
 //验证表单
-handleVForm=function(vForm){
+handleVForm=function(vForm,submitCallBackfn){
+	var addError = $('.alert-danger', vForm);
+    var addSuccess = $('.alert-success',vForm);
 	vForm.validate({
-        errorElement: 'span', //default input error message container
-        errorClass: 'help-block help-block-error', // default input error message class
-        focusInvalid: false, // do not focus the last invalid input
-        ignore: "",  // validate all fields including form hidden input
+        errorElement: 'span',
+        errorClass: 'help-block help-block-error', 
+        focusInvalid: false, 
+        onkeyup:false,
+        ignore: "", 
         messages: {
-        	addParameterCodeList:{
+        	type:{
         		required:'请选择参数类型'
         	},
         	nameZh:{
         		required:'请输入参数名称(中文)',
-        		range:jQuery.validator.format("参数名称(中文)长度为{0}和{1}字符之间")
+        		rangelength:jQuery.validator.format("参数名称(中文)长度为{0}和{1}字符之间")
         	},
             nameEn:{
         		required:'请输入参数名称(英文)',
-        		range:jQuery.validator.format("参数名称(英文)长度为{0}和{1}字符之间")
+        		rangelength:jQuery.validator.format("参数名称(英文)长度为{0}和{1}字符之间")
         	},
         	value:{
         		required:'请输入参数值',
-        	 	range:jQuery.validator.format("参数值必须介于{0}和{1}字符之间")
+        	 	rangelength:jQuery.validator.format("参数值必须介于{0}和{1}字符之间")
         	},
         	description:{
         		required:'请输入参数的描述',
-        		maxlength: jQuery.validator.format("参数的的最大长度为:{0}"),
+        		maxlength:jQuery.validator.format("参数的的最大长度为:{0}"),
         	}
         },
         rules: {
-            addParameterCodeList: {
-                required: true
+            type:{
+                required:true
             },
             nameZh: {
-                required: true,
-                range:[4,128]
+                required:true,
+                rangelength:[4,128]
             },
             nameEn:{
             	required: true,
-              	range:[4,128]
+              	rangelength:[4,128]
             },
             value:{
             	required: true,
-                range:[4,128]
+                rangelength:[4,128]
             },
             description:{
             	required:false,
@@ -138,12 +156,12 @@ handleVForm=function(vForm){
             }
         },
         invalidHandler: function (event, validator) {             
-            success1.hide();
-            error1.show();
-            Metronic.scrollTo(error1, -200);
+            addSuccess.hide();
+            addError.show();
+            Metronic.scrollTo(addError, -200);
         },
 
-        highlight: function (element) {  
+        highlight: function (element) {
             $(element).closest('.form-group').addClass('has-error'); 
         },
 
@@ -153,9 +171,18 @@ handleVForm=function(vForm){
         success: function (label) {
             label.closest('.form-group').removeClass('has-error'); 
         },
+        errorPlacement:function(error,element){
+        	//当遇到combo的对话框架的时，修改它的显示位置
+        	if (element.hasClass('lion-combo')){        	 
+        		error.insertAfter(element.parent().find('div.btn-group'));
+        	}else{
+        		error.insertAfter(element);
+        	}
+        },
         submitHandler: function (form) {
-            success1.show();
-            error1.hide();
+            addSuccess.show();
+            addError.hide();
+            submitCallBackfn(vForm);
         }
     });
 };

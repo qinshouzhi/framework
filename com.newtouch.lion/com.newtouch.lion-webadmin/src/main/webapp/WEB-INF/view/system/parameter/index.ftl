@@ -93,9 +93,9 @@
 													<div class="col-md-5">
 														<select  id="addParameterCodeList"  name="type" data-size="8" 
 														 	data-maxoptions="1"   multiple placeholder="请选择参数列表..."  
-														 	class="lion-combo bootstrap-select form-control" data-valueField='codeValue' 
+														 	class="lion-combo bootstrap-select form-control" data-valueField='codeValue'   value=""
 														 	data-textField='nameZh' data-loadURL="${base}/system/code/combox.htm?nameEn=SystemParamter">
-														 </select>
+														 </select>											 
 													</div>
 												</div>
 												<div class="form-group">

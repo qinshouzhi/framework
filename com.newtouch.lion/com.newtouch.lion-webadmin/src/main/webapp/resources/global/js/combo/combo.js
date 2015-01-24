@@ -203,6 +203,8 @@
             this.checkDisabled();
             //单点监听
             this.clickListener();
+            //添加焦点事件
+            this.focusoutListener();
             //加载数据
             this.render();
             //设置高度
@@ -344,9 +346,8 @@
         },
         //重新加载数据Li
         reloadLi: function () {
-            this.destroyLi();
-            var $li = this.createLi();
-            this.$menu.find('ul').append($li);
+          //this.destroyLi();
+          //var $li = this.buildSubLi();
         },
         //删除Li标签
         destroyLi: function () {
@@ -355,6 +356,14 @@
          //是否可用
         isDisabled:function(){
               return this.$element.is(':disabled');
+        },
+        //添加焦点去事件
+        focusoutListener:function(){
+          var that=this;
+          this.$menu.on('focusout', 'li a', function (e) {
+            //触发select的焦点事件
+             that.$element.trigger('focusout');
+          });
         },
         //添加事件
         clickListener: function () {
@@ -595,7 +604,6 @@
         //初始化检查是否可用
         checkDisabled: function () {
           var that = this;
-
           if (this.isDisabled()) {
             this.$button.addClass('disabled').attr('tabindex', -1);
           } else {
@@ -884,7 +892,8 @@
         deselectAll:function(){},
         //刷新拉列表数据
         refresh: function () {
-       },
+
+        },
        //更新数据
        update: function () {
          this.reloadLi();
