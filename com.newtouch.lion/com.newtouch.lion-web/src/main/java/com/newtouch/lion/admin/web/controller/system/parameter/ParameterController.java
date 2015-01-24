@@ -88,8 +88,8 @@ public class ParameterController {
 	@RequestMapping(value = "dialogedit")
 	public String editDialog(@RequestParam(required = false) Long id,
 			Model model) {
-		//Parameter parameter = parameterService.doFindById(id);
-		//model.addAttribute("parameter", parameter);
+		// Parameter parameter = parameterService.doFindById(id);
+		// model.addAttribute("parameter", parameter);
 		return EDIT_DIALOG_RETURN;
 	}
 
@@ -103,23 +103,20 @@ public class ParameterController {
 	public ModelAndView edit(
 			@Valid @ModelAttribute("parameter") ParameterVo parameterVo,
 			Errors errors, ModelAndView modelAndView) {
-
 		if (!errors.hasErrors() && parameterVo.getId() == null) {
 			errors.reject("sys.parameter.form.id.empty");
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
 			return modelAndView;
 		}
 		Parameter parameter = parameterService.doFindById(parameterVo.getId());
-		
 		if (parameter == null) {
 			errors.reject("sys.parameter.form.id.empty");
 			return modelAndView;
 		}
-
+		
 		if (!errors.hasErrors()
 				&& this.isExistByNameEn(parameterVo.getNameEn(),
-						parameter.getNameEn())) {
-			errors.rejectValue(ParameterVo.NAMEEN,"sys.parameter.form.nameen.existed.message",new Object[] { parameterVo.getNameEn() }, null);
+						parameter.getNameEn())) {errors.rejectValue(ParameterVo.NAMEEN,	"sys.parameter.form.nameen.existed.message",new Object[] { parameterVo.getNameEn() }, null);
 		}
 
 		if (errors.hasErrors()) {
@@ -142,11 +139,24 @@ public class ParameterController {
 		Map<String, String> params = new HashMap<String, String>();
 		int updateRow = this.parameterService.doDeleteById(id);
 		if (updateRow > 0) {
-			params.put(BindResult.SUCCESS, "sys.parameter.delete.success");
+			params.put(BindResult.SUCCESS,"sys.parameter.delete.success");
 		} else {
-			params.put(BindResult.SUCCESS, "sys.parameter.delete.fail");
+			params.put(BindResult.SUCCESS,"sys.parameter.delete.fail");
 		}
 		modelAndView.addObject(BindMessage.SUCCESS, params);
+		return modelAndView;
+	}
+	
+	
+	@RequestMapping(value = "padd")
+	@ResponseBody
+	public ModelAndView padd(
+			@ModelAttribute("parameter") ParameterVo parameterVo,
+			Errors errors, Model model,ModelAndView modelAndView) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(BindResult.SUCCESS, "sys.parameter.add.success");
+		modelAndView.addObject(BindMessage.SUCCESS, params);
+		modelAndView.setViewName("jsonView");
 		return modelAndView;
 	}
 
@@ -155,17 +165,17 @@ public class ParameterController {
 	public ModelAndView add(
 			@Valid @ModelAttribute("parameter") ParameterVo parameterVo,
 			Errors errors, ModelAndView modelAndView) {
-		if (!errors.hasErrors()
-				&& this.isExistByNameEn(parameterVo.getNameEn())) {
+		if (!errors.hasErrors()&& this.isExistByNameEn(parameterVo.getNameEn())) {
 			errors.rejectValue(ParameterVo.NAMEEN,
 					"sys.parameter.form.nameen.existed.message",
 					new Object[] { parameterVo.getNameEn() }, null);
 		}
+		//是否错误消息
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
+			modelAndView.setViewName("jsonView");
 			return modelAndView;
 		}
-
 		Parameter parameter = new Parameter();
 
 		BeanUtils.copyProperties(parameterVo, parameter);
@@ -173,6 +183,7 @@ public class ParameterController {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS, "sys.parameter.add.success");
 		modelAndView.addObject(BindMessage.SUCCESS, params);
+		modelAndView.setViewName("jsonView");
 		return modelAndView;
 	}
 
@@ -202,8 +213,8 @@ public class ParameterController {
 
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public DataTable<Parameter> list(HttpServletRequest servletRequest, Model model,
-			@RequestParam(defaultValue = "1") int page,
+	public DataTable<Parameter> list(HttpServletRequest servletRequest,
+			Model model, @RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "15") int rows,
 			@RequestParam(required = false) String sort,
 			@RequestParam(required = false) String order,
