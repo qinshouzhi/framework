@@ -88,8 +88,6 @@ public class ParameterController {
 	@RequestMapping(value = "dialogedit")
 	public String editDialog(@RequestParam(required = false) Long id,
 			Model model) {
-		// Parameter parameter = parameterService.doFindById(id);
-		// model.addAttribute("parameter", parameter);
 		return EDIT_DIALOG_RETURN;
 	}
 
@@ -116,7 +114,9 @@ public class ParameterController {
 		
 		if (!errors.hasErrors()
 				&& this.isExistByNameEn(parameterVo.getNameEn(),
+
 						parameter.getNameEn())) {errors.rejectValue(ParameterVo.NAMEEN,	"sys.parameter.form.nameen.existed.message",new Object[] { parameterVo.getNameEn() }, null);
+
 		}
 
 		if (errors.hasErrors()) {
@@ -144,19 +144,6 @@ public class ParameterController {
 			params.put(BindResult.SUCCESS,"sys.parameter.delete.fail");
 		}
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
-	}
-	
-	
-	@RequestMapping(value = "padd")
-	@ResponseBody
-	public ModelAndView padd(
-			@ModelAttribute("parameter") ParameterVo parameterVo,
-			Errors errors, Model model,ModelAndView modelAndView) {
-		Map<String, String> params = new HashMap<String, String>();
-		params.put(BindResult.SUCCESS, "sys.parameter.add.success");
-		modelAndView.addObject(BindMessage.SUCCESS, params);
-		modelAndView.setViewName("jsonView");
 		return modelAndView;
 	}
 
