@@ -143,6 +143,10 @@
 		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
+		<servlet-name>dispatcherServlet</servlet-name>
+		<url-pattern>*.json</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>sitemeshServlet</servlet-name>
 		<url-pattern>*.ftl</url-pattern>
 	</servlet-mapping>

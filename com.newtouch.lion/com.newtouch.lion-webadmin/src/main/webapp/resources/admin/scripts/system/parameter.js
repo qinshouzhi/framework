@@ -147,7 +147,7 @@ handleVForm=function(vForm,submitCallBackfn){
             	required: true,
               	rangelength:[4,128],
               	remote:{
-              			url:"checkisexitnameen.htm",     //后台处理程序
+              			url:"checkisexitnameen.htm", //后台处理程序
 					    type: "post",               //数据发送方式
 					    dataType: "json",           //接受数据格式   
 					    data: {                     //要传递的数据
