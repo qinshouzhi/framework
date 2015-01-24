@@ -123,7 +123,8 @@ handleVForm=function(vForm,submitCallBackfn){
         	},
             nameEn:{
         		required:'请输入参数名称(英文)',
-        		rangelength:jQuery.validator.format("参数名称(英文)长度为{0}和{1}字符之间")
+        		rangelength:jQuery.validator.format("参数名称(英文)长度为{0}和{1}字符之间"),
+        		remote:'该参数名称已存在，请输入其它参数名称'
         	},
         	value:{
         		required:'请输入参数值',
@@ -131,7 +132,7 @@ handleVForm=function(vForm,submitCallBackfn){
         	},
         	description:{
         		required:'请输入参数的描述',
-        		maxlength:jQuery.validator.format("参数的的最大长度为:{0}"),
+        		maxlength:jQuery.validator.format('参数的的最大长度为:{0}'),
         	}
         },
         rules: {
@@ -144,7 +145,16 @@ handleVForm=function(vForm,submitCallBackfn){
             },
             nameEn:{
             	required: true,
-              	rangelength:[4,128]
+              	rangelength:[4,128],
+              	remote:{
+              			url:"checkisexitnameen.htm",     //后台处理程序
+					    type: "post",               //数据发送方式
+					    dataType: "json",           //接受数据格式   
+					    data: {                     //要传递的数据
+					        nameEn: function() {
+					            return $("#nameEn").val();
+					        }
+					   	}}
             },
             value:{
             	required: true,

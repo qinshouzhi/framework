@@ -85,7 +85,7 @@ public class ParameterController {
 		return INDEX_RETURN;
 	}
 
-	@RequestMapping(value = "dialogedit.htm")
+	@RequestMapping(value = "dialogedit")
 	public String editDialog(@RequestParam(required = false) Long id,
 			Model model) {
 		//Parameter parameter = parameterService.doFindById(id);
@@ -93,7 +93,7 @@ public class ParameterController {
 		return EDIT_DIALOG_RETURN;
 	}
 
-	@RequestMapping(value = "dialog/add.htm")
+	@RequestMapping(value = "dialog/add")
 	public String addDialog(HttpServletRequest servletRequest, Model model) {
 		return ADD_DIALOG_RETURN;
 	}
@@ -110,7 +110,7 @@ public class ParameterController {
 			return modelAndView;
 		}
 		Parameter parameter = parameterService.doFindById(parameterVo.getId());
-
+		
 		if (parameter == null) {
 			errors.reject("sys.parameter.form.id.empty");
 			return modelAndView;
