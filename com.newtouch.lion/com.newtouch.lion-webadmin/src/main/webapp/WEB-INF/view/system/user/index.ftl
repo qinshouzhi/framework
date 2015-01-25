@@ -15,12 +15,20 @@
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" type="text/css">
 
+<!--lion UI css Start-->
+<link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css">
+<link href="${base}/resources/global/css/dialog/lion.dialog.css" rel="stylesheet" type="text/css">
+<link href="${base}/resources/global/css/combo/lion.combo.css" rel="stylesheet" type="text/css">
+
 <!--EasyUI css End-->
 <script src="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript" ></script>
 <script src="${base}/resources/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js"></script>
 <script src="${base}/resources/admin/pages/scripts/ui-toastr.js"></script>
-
+<!--lion UI css End-->
+<script src="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.js" type="text/javascript" ></script>
+<script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript" ></script>
+<script src="${base}/resources/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
 <!--EasyUI JavaScript Start-->
 <script src="${base}/resources/global/plugins/easyui/jquery.easyui.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
@@ -81,7 +89,7 @@
 													<label class="col-md-3 control-label">用户名</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text"  name="nameZh"  maxlength="100" class="form-control" placeholder="请输入参数名称（中文）" size="30"/>
+															<input type="text"  name="nameZh"  maxlength="100" class="form-control" placeholder="请输入用户名" size="30"/>
 														</div>
 													</div>
 												</div>
@@ -89,7 +97,7 @@
 													<label class="col-md-3 control-label">密码</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入参数名称（中文）" size="30"/>
+															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入密码" size="30"/>
 														</div>
 													</div>
 												</div>
@@ -97,7 +105,7 @@
 													<label class="col-md-3 control-label">密码提示</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入参数名称（中文）" size="30"/>
+															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入密码提示" size="30"/>
 														</div>
 													</div>
 												</div>
@@ -105,7 +113,7 @@
 													<label class="col-md-3 control-label">员工号</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入参数名称（中文）" size="30"/>
+															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入员工号" size="30"/>
 														</div>
 													</div>
 												</div>
@@ -113,7 +121,7 @@
 													<label class="col-md-3 control-label">真实姓名(中文)</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入参数名称（中文）" size="30"/>
+															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入真实姓名（中文）" size="30"/>
 														</div>
 													</div>
 												</div>
@@ -121,7 +129,7 @@
 													<label class="col-md-3 control-label">真实姓名(英文)</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入参数名称（中文）" size="30"/>
+															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入真实姓名（英文）" size="30"/>
 														</div>
 													</div>
 												</div>
@@ -129,7 +137,13 @@
 													<label class="col-md-3 control-label">性别</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入参数名称（中文）" size="30"/>
+															<select name="type" data-size="8" 
+															 	data-maxoptions="1"   multiple placeholder="请选择性别..."  
+															 	class="lion-combo bootstrap-select form-control input-small" data-valueField='codeValue' 
+															 	data-textField='nameZh'>
+															 	<option value="0">男</option>
+															 	<option value="1">女</option>
+															 </select>
 														</div>
 													</div>
 												</div>
@@ -137,7 +151,7 @@
 													<label class="col-md-3 control-label">角色描述</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入参数值" maxlength="255" size="30"/>
+															<input type="text" name="value" class="form-control" placeholder="请输入角色描述" maxlength="255" size="30"/>
 														</div>
 													</div>
 												</div>
@@ -145,7 +159,7 @@
 													<label class="col-md-3 control-label">用户类型</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入参数值" maxlength="255" size="30"/>
+															<input type="text" name="value" class="form-control" placeholder="请输入用户类型" maxlength="255" size="30"/>
 														</div>
 													</div>
 												</div>
@@ -153,7 +167,7 @@
 													<label class="col-md-3 control-label">认证类型</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入参数值" maxlength="255" size="30"/>
+															<input type="text" name="value" class="form-control" placeholder="请输入认证类型" maxlength="255" size="30"/>
 														</div>
 													</div>
 												</div>
@@ -161,7 +175,7 @@
 													<label class="col-md-3 control-label">电话</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入参数值" maxlength="255" size="30"/>
+															<input type="text" name="value" class="form-control" placeholder="请输入电话" maxlength="255" size="30"/>
 														</div>
 													</div>
 												</div>
@@ -169,7 +183,7 @@
 													<label class="col-md-3 control-label">手机</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入参数值" maxlength="255" size="30"/>
+															<input type="text" name="value" class="form-control" placeholder="请输入手机" maxlength="255" size="30"/>
 														</div>
 													</div>
 												</div>
@@ -177,7 +191,7 @@
 													<label class="col-md-3 control-label">邮箱</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入参数值" maxlength="255" size="30"/>
+															<input type="text" name="value" class="form-control" placeholder="请输入邮箱" maxlength="255" size="30"/>
 														</div>
 													</div>
 												</div>
@@ -185,7 +199,7 @@
 													<label class="col-md-3 control-label">办公电话</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入参数值" maxlength="255" size="30"/>
+															<input type="text" name="value" class="form-control" placeholder="请输入办公电话" maxlength="255" size="30"/>
 														</div>
 													</div>
 												</div>
@@ -193,7 +207,7 @@
 													<label class="col-md-3 control-label">传真</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入参数值" maxlength="255" size="30"/>
+															<input type="text" name="value" class="form-control" placeholder="请输入传真" maxlength="255" size="30"/>
 														</div>
 													</div>
 												</div>
@@ -201,7 +215,7 @@
 													<label class="col-md-3 control-label">邮编</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入参数值" maxlength="255" size="30"/>
+															<input type="text" name="value" class="form-control" placeholder="请输入邮编" maxlength="255" size="30"/>
 														</div>
 													</div>
 												</div>
@@ -209,7 +223,7 @@
 													<label class="col-md-3 control-label">地址</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入参数值" maxlength="255" size="30"/>
+															<input type="text" name="value" class="form-control" placeholder="请输入地址" maxlength="255" size="30"/>
 														</div>
 													</div>
 												</div>
@@ -217,7 +231,7 @@
 													<label class="col-md-3 control-label">到期时间</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入参数值" maxlength="255" size="30"/>
+															<input type="text" name="value" class="form-control" placeholder="请输入到期时间" maxlength="255" size="30"/>
 														</div>
 													</div>
 												</div>
@@ -225,7 +239,7 @@
 													<label class="col-md-3 control-label">证书是否到期</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入参数值" maxlength="255" size="30"/>
+															<input type="checkbox" class="form-control "  name="editable" checked="true" />
 														</div>
 													</div>
 												</div>
@@ -233,7 +247,7 @@
 													<label class="col-md-3 control-label">证书到期时间</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入参数值" maxlength="255" size="30"/>
+															<input type="text" name="value" class="form-control" placeholder="请输入证书到期时间" maxlength="255" size="30"/>
 														</div>
 													</div>
 												</div>
@@ -241,7 +255,7 @@
 													<label class="col-md-3 control-label">是否有效</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入参数值" maxlength="255" size="30"/>
+															<input type="checkbox" class="form-control "  name="editable" checked="true" />
 														</div>
 													</div>
 												</div>
@@ -249,7 +263,7 @@
 													<label class="col-md-3 control-label">描述</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入参数值" maxlength="255" size="30"/>
+															<input type="text" name="value" class="form-control" placeholder="请输入描述" maxlength="255" size="30"/>
 														</div>
 													</div>
 												</div>
