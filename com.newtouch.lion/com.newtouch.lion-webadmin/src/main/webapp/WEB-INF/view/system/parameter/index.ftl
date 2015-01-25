@@ -19,7 +19,7 @@
 <link href="${base}/resources/global/css/dialog/lion.dialog.css" rel="stylesheet" type="text/css">
 <link href="${base}/resources/global/css/combo/lion.combo.css" rel="stylesheet" type="text/css">
 <!--lion UI css End-->
-<script src="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.js" type="text/javascript" ></script>
+<script src="${base}/resources/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript" ></script>
 <script src="${base}/resources/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
 

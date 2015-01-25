@@ -144,7 +144,7 @@ public class ParameterController extends AbstractController{
 			params.put(BindResult.SUCCESS,"sys.parameter.delete.fail");
 		}
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		return this.getJsonView(modelAndView);
 	}
 
 	@RequestMapping(value = "add")

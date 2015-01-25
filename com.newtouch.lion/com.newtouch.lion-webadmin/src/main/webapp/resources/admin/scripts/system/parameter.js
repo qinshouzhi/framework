@@ -61,16 +61,10 @@ $(function() {
 			 return;
 		 }
 		 bootbox.confirm('确认要删除此记录？', function(result) {
-              if(result){
-            	 
-            	  var ps = '?id='+row.id;
-					//$.post('delete.htm' + ps, function(data) {
-					//	var dataJson=eval('(' + data + ')');
-					//	//parent.$.topCenterMsgBox(dataJson.message);
-					//	dataGridReload();
-					//	dataGridReload($.sys.parameter.datagridId);
-					//});
-            	  lion.util.success('提示!', '已删除成功');
+              if(result){            	 
+            	  var param={'id':row.id};
+                lion.util.post('delete.json',param,successForDelete,errorRequest);
+            	  //lion.util.success('提示!', '已删除成功');
               }
           }); 
 	 });
@@ -79,6 +73,22 @@ $(function() {
 		 alert('dd');
 	 });
 });
+
+function successForDelete(data,arg){
+   if(data!==null&&!(data.hasError)){
+      lion.util.success('提示',data.message);
+      $('#sys_parameter_lists_tb').datagrid('reload');
+   }else if(data!==null&&data.hasError){
+      var gmsg='';
+      for(var msg in data.errorMessage){
+        gmsg+=data.errorMessage[msg];
+      }
+      if(lion.util.isEmpty(gmsg)){
+        gmsg='未删除成功';
+      }
+      lion.util.error('提示',gmsg);
+  }
+}
 /**新增或编辑的提交代码*/
 function submitForm(frm){
 	var param=frm.serialize(),id=($('#id').val());
@@ -92,7 +102,7 @@ function submitForm(frm){
 
 //添加后&编辑后提交
 function successAddFrm(data,arg,id){
-  
+  //TODO
   if(data!==null&&!(data.hasError)){
   	lion.util.success('提示',data.message);
   	$('#basic').modal('toggle');
