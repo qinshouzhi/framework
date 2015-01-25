@@ -6,8 +6,8 @@ $(function() {
 	
 	var datagridId='#sys_parameter_lists_tb';
 
-	var addForm=$("#sysParameterForm");
-	var addDialog=$("#basic");
+	var addForm=$('#sysParameterForm');
+	var addDialog=$('#basic');
 	
 	
 	handleVForm(addForm,submitForm);
@@ -15,58 +15,43 @@ $(function() {
 	function getSelectedRow(){return $(datagridId).datagrid('getSelected');}
 	 
 	$(datagridId).datagrid({
-		onLoadSuccess : function(data) {
+		 onLoadSuccess : function(data) {
 		}
 	});
 		
-	 //重新加载DataGrid
-	 function dataGridReload(dataGridId){
-		$(datagridId).datagrid('reload');
-	 }
+	//重新加载DataGrid
+  function dataGridReload(dataGridId){
+     $(datagridId).datagrid('reload');
+  }
 	 //刷新
 	 $('#btnRefresh').on('click',function(){
-		 dataGridReload(datagridId);
+		   dataGridReload(datagridId);
 	 });
 	 //新增
 	 $('#btnAdd').on('click',function(){
-		addForm[0].reset();
-		addForm.find('.form-group').removeClass('has-error');
-		addForm.find('.help-block').remove();
-		$('.lion-combo').combo('reloadLi');
+		  addForm[0].reset();
+		  addForm.find('.form-group').removeClass('has-error');
+		  addForm.find('.help-block').remove();
+		  $('.lion-combo').combo('reloadLi');
 	 });
 
 	 addForm.on('show.bs.modal',function(){
-	 	addForm[0].reset();
-	 	 
-	 });
-	 
-	 $('#editDialog').on('hidden.bs.modal', function() {
-		  $(this).removeData('bs.modal');
-	 });
-
+	 	 addForm[0].reset(); 
+	 }); 
 
 	 $('#btnSave').click(function(){
 	 		addForm.submit();
 	 });
 
-
-
 	 //编辑
 	 $('#btnEdit').on('click',function(){
-		 console.log('进入BtnEdit function');
-		 var  loadPageUrl='/admin/system/parameter/dialogedit.htm?timestamp=' +(new Date()).getTime();
-		 modalDialog=new lion.ui.dialog(
-		 {id:'addDialog',
-			title:"编辑系统参数",
-			titleIcon:'fa-plus bule',
-			btnalign:'center',
-			loadurl:loadPageUrl,
-			backdrop:'true',
-			buttons:[
-	    			{id:'btnCancel',value:' 取 消 ',dismiss:'true',icon:'fa fa-save'},
-	    			{id:'btnSave',headler:function(){ },icon:'fa fa-save',className:'btn blue',value:' 确 认 ',dismiss:false},
-		 			]
-		  });
+		 var row=getSelectedRow();
+		 if(!row){
+			 lion.util.info('提示','请选择要编辑记录');
+			 return;
+		 }
+		 $('#basic').modal('toggle');
+		 addForm.fill(row);
 	 });
 	 //删除
 	 $('#btnDelete').on('click',function(){
@@ -96,14 +81,22 @@ $(function() {
 });
 /**新增或编辑的提交代码*/
 function submitForm(frm){
-	var param=frm.serialize();
- 	lion.util.post('add.json',param,successAddFrm,errorRequest);
+	var param=frm.serialize(),id=($('#id').val());
+  //ID为空时，为添加动作
+  if(lion.util.isEmpty(id)){
+ 	    lion.util.post('add.json',param,successAddFrm,errorRequest);
+  }else{
+      lion.util.post('edit.json',param,successAddFrm,errorRequest,param.id);
+  }
 }
-//添加成功后
-function successAddFrm(data,arg){
+
+//添加后&编辑后提交
+function successAddFrm(data,arg,id){
+  
   if(data!==null&&!(data.hasError)){
   	lion.util.success('提示',data.message);
-  	$("#basic").modal('toggle');
+  	$('#basic').modal('toggle');
+    $('#sys_parameter_lists_tb').datagrid('reload');
   }else if(data!==null&&data.hasError){
   	var gmsg='';
   	for(var msg in data.errorMessage){
@@ -131,23 +124,23 @@ handleVForm=function(vForm,submitCallBackfn){
         errorClass: 'help-block help-block-error', 
         focusInvalid: false, 
         onkeyup:false,
-        ignore: "", 
+        ignore: '', 
         messages: {
         	type:{
         		required:'请选择参数类型'
         	},
         	nameZh:{
         		required:'请输入参数名称(中文)',
-        		rangelength:jQuery.validator.format("参数名称(中文)长度为{0}和{1}字符之间")
+        		rangelength:jQuery.validator.format('参数名称(中文)长度为{0}和{1}字符之间')
         	},
             nameEn:{
         		required:'请输入参数名称(英文)',
-        		rangelength:jQuery.validator.format("参数名称(英文)长度为{0}和{1}字符之间"),
+        		rangelength:jQuery.validator.format('参数名称(英文)长度为{0}和{1}字符之间'),
         		remote:'该参数名称已存在，请输入其它参数名称'
         	},
         	value:{
         		required:'请输入参数值',
-        	 	rangelength:jQuery.validator.format("参数值必须介于{0}和{1}字符之间")
+        	 	rangelength:jQuery.validator.format('参数值必须介于{0}和{1}字符之间')
         	},
         	description:{
         		required:'请输入参数的描述',
@@ -166,14 +159,22 @@ handleVForm=function(vForm,submitCallBackfn){
             	required: true,
               	rangelength:[4,128],
               	remote:{
-              			url:"checkisexitnameen.htm", //后台处理程序
-					    type: "post",               //数据发送方式
-					    dataType: "json",           //接受数据格式   
-					    data: {                     //要传递的数据
-					        nameEn: function() {
-					            return $("#nameEn").val();
-					        }
-					   	}}
+              			url:'checkisexitnameen.htm', //后台处理程序
+      					    type: 'post',               //数据发送方式
+      					    dataType: 'json',           //接受数据格式   
+      					    data: {                     //要传递的数据
+  					           nameEn: function() {
+  					            return $('#nameEn').val();
+  					           },
+                       id:function(){
+                         var id=($('#id').val());
+                         if(lion.util.isNotEmpty(id)){
+                           return id;
+                         }
+                         return '';
+                       }
+					         	}
+             }
             },
             value:{
             	required: true,

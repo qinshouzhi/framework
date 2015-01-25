@@ -16,7 +16,7 @@
  * Depedencies css
  * bootstrap.css  lion.css,combo.css (Bootstrap v3.3.1)
  */
-(function($){
+;(function($){
   'use strict';// js hint ;_;
   this.ui = this.ui || {}; //定义ui对象。为避免覆盖如果存在ui对象则使用，不存在则新建
   var util = this.util, //用变量存储util.js中的方法，方便调用

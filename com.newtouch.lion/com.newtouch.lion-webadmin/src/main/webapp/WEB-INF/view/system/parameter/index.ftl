@@ -29,6 +29,7 @@
 <!--EasyUI JavaScript End-->
 <!--lion UI JS Start-->
 <script src="${base}/resources/global/js/lion.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/form/form.fill.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/dialog/dialog.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
 <!--lion UI JS End-->
@@ -87,6 +88,7 @@
 				 	<div class="col-md-12 portlet-body form">
 				 		<!-- BEGIN FORM-->
 										<form action="#" class="form-horizontal" name="sysParameterForm" id="sysParameterForm" method="post">
+											<input type="hidden" id='id' name='id' value="">
 											<div class="form-body">
 												<div class="form-group">
 													<label class="col-md-3 control-label">参数类型</label>
@@ -125,7 +127,7 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label">描述</label>
 													<div class="col-md-5">
-														<div class="input-group ">															 
+														<div class="input-group ">
 															<input type="text" class="form-control" name="description" placeholder="请输入参数描述" maxlength="255" size="40"/>
 														</div>
 													</div>

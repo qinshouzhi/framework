@@ -102,6 +102,7 @@ public class ParameterController extends AbstractController{
 	public ModelAndView edit(
 			@Valid @ModelAttribute("parameter") ParameterVo parameterVo,
 			Errors errors, ModelAndView modelAndView) {
+		modelAndView=this.getJsonView(modelAndView);
 		if (!errors.hasErrors() && parameterVo.getId() == null) {
 			errors.reject("sys.parameter.form.id.empty");
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
@@ -175,8 +176,19 @@ public class ParameterController extends AbstractController{
 	@RequestMapping(value = "checkisexitnameen")
 	@ResponseBody
 	public String checkIsExistByNameEn(HttpServletRequest servletRequest,
-			@RequestParam(required = false) String nameEn) {
-		Boolean flag = this.isExistByNameEn(nameEn) == true ? false : true;
+			@RequestParam(required = false) String nameEn,@RequestParam(required=false) Long id) {
+		Boolean flag=Boolean.FALSE;
+		
+		if(id==null){
+			flag = this.isExistByNameEn(nameEn)? false : true;
+		}else{
+			Parameter parameter = parameterService.doFindById(id);
+			if(parameter==null){
+				flag = this.isExistByNameEn(nameEn)? false : true;
+			}else{
+				flag=this.isExistByNameEn(nameEn, parameter.getNameEn())?false:true;
+			}
+		}
 		return flag.toString();
 	}
 
