@@ -15,20 +15,12 @@
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" type="text/css">
 
-<!--lion UI css Start-->
-<link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css">
-<link href="${base}/resources/global/css/dialog/lion.dialog.css" rel="stylesheet" type="text/css">
-<link href="${base}/resources/global/css/combo/lion.combo.css" rel="stylesheet" type="text/css">
-
 <!--EasyUI css End-->
 <script src="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript" ></script>
 <script src="${base}/resources/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js"></script>
 <script src="${base}/resources/admin/pages/scripts/ui-toastr.js"></script>
-<!--lion UI css End-->
-<script src="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.js" type="text/javascript" ></script>
-<script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript" ></script>
-<script src="${base}/resources/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+
 <!--EasyUI JavaScript Start-->
 <script src="${base}/resources/global/plugins/easyui/jquery.easyui.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
@@ -36,6 +28,8 @@
 <script src="${base}/resources/global/scripts/framework.js" type="text/javascript"></script>
 <script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/scripts/system/user.js" type="text/javascript"></script>
+<!--DatePicker-->
+<script src="${base}/resources/global/plugins/datepicker/WdatePicker.js" type="text/javascript" ></script>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed-hide-logo">
 <!-- BEGIN PAGE CONTENT INNER -->
@@ -137,10 +131,7 @@
 													<label class="col-md-3 control-label">性别</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<select name="type" data-size="8" 
-															 	data-maxoptions="1"   multiple placeholder="请选择性别..."  
-															 	class="lion-combo bootstrap-select form-control input-small" data-valueField='codeValue' 
-															 	data-textField='nameZh'>
+															<select>
 															 	<option value="0">男</option>
 															 	<option value="1">女</option>
 															 </select>
@@ -231,7 +222,7 @@
 													<label class="col-md-3 control-label">到期时间</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入到期时间" maxlength="255" size="30"/>
+															<input id="d11" type="text" onClick="WdatePicker()"/> 
 														</div>
 													</div>
 												</div>

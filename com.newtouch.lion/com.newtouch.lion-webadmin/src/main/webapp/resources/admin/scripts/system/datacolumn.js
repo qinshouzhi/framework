@@ -15,11 +15,10 @@ $(function() {
 		$("#"+dataGridId).datagrid("reload");
 	 }
 	 //刷新
-	 $("#btnRefresh").on("click",function(){
+	 $("#btnRefresh").on("click",function(){ 
 		 dataGridReload("datacolumn_tb");
 	 });
 	 
 	 $("#btnAdd").on("click",function(){
-		 alert("dd");
 	 });	
 });
