@@ -71,7 +71,6 @@ public class JsonView extends AbstractView {
 			String jsonStr=this.initBindStatus(request, response, modelAndView);
 			response.getWriter().write(jsonStr);
 		}else{
-			logger.warn("dddd");
 			String json=JSONParser.toJSONString(model);
 			response.getWriter().write(json);
 		}

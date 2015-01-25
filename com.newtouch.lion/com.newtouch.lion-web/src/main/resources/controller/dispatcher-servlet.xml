@@ -120,12 +120,11 @@
 		class="com.newtouch.lion.web.exception.ErrorCodeMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
-				<prop key="com.ibm.framework.exception.BaseException">common/errorpage.ftl</prop>
 				<prop key="java.lang.Throwable">common/errorpage.ftl</prop>
 			</props>
 		</property>
-		<property name="defaultErrorView" value="index/errorPage404.ftl" />
-		<!-- <property name="warnLogCategory" value="com.saic.ebiz.web.exception.ErrorCodeMappingExceptionResolver" 
-			/> -->
+		<property name="defaultErrorView">
+			<value>jsonView</value>
+		</property>
 	</bean>
 </beans>

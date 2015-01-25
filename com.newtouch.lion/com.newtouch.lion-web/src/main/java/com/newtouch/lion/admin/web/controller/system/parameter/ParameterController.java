@@ -38,6 +38,7 @@ import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.datagrid.DataColumnService;
 import com.newtouch.lion.service.system.ParameterService;
+import com.newtouch.lion.web.controller.AbstractController;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
 
@@ -60,7 +61,7 @@ import com.newtouch.lion.web.servlet.view.support.BindResult;
  */
 @Controller
 @RequestMapping("/system/parameter/")
-public class ParameterController {
+public class ParameterController extends AbstractController{
 
 	@SuppressWarnings("unused")
 	private final Logger logger = LoggerFactory.getLogger(super.getClass());
@@ -113,9 +114,7 @@ public class ParameterController {
 		}
 		
 		if (!errors.hasErrors()
-				&& this.isExistByNameEn(parameterVo.getNameEn(),
-
-						parameter.getNameEn())) {errors.rejectValue(ParameterVo.NAMEEN,	"sys.parameter.form.nameen.existed.message",new Object[] { parameterVo.getNameEn() }, null);
+				&& this.isExistByNameEn(parameterVo.getNameEn(),parameter.getNameEn())) {errors.rejectValue(ParameterVo.NAMEEN,	"sys.parameter.form.nameen.existed.message",new Object[] { parameterVo.getNameEn() }, null);
 
 		}
 
@@ -152,16 +151,15 @@ public class ParameterController {
 	public ModelAndView add(
 			@Valid @ModelAttribute("parameter") ParameterVo parameterVo,
 			Errors errors, ModelAndView modelAndView) {
-		if (!errors.hasErrors()&& this.isExistByNameEn(parameterVo.getNameEn())) {
-			errors.rejectValue(ParameterVo.NAMEEN,
-					"sys.parameter.form.nameen.existed.message",
-					new Object[] { parameterVo.getNameEn() }, null);
-		}
+		//if (!errors.hasErrors()&& this.isExistByNameEn(parameterVo.getNameEn())) {
+		//	errors.rejectValue(ParameterVo.NAMEEN,
+		//			"sys.parameter.form.nameen.existed.message",
+		//			new Object[] { parameterVo.getNameEn() }, null);
+		//}
 		//是否错误消息
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
-			modelAndView.setViewName("jsonView");
-			return modelAndView;
+			return this.getJsonView(modelAndView);
 		}
 		Parameter parameter = new Parameter();
 
@@ -170,8 +168,8 @@ public class ParameterController {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS, "sys.parameter.add.success");
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		modelAndView.setViewName("jsonView");
-		return modelAndView;
+		
+		return this.getJsonView(modelAndView);
 	}
 
 	@RequestMapping(value = "checkisexitnameen")

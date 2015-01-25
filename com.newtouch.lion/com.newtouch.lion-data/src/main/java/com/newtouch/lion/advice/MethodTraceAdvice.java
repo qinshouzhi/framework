@@ -52,7 +52,7 @@ public class MethodTraceAdvice implements MethodBeforeAdvice,
 	public static final String ERROR_MESSAGE_CODE_PREFIX = "";
 
 	@Autowired
-	@Qualifier("frameworkMessages")
+	@Qualifier("sysMessages")
 	private MessageResource msg = null;
 
 	private boolean enabledMethodTrace = false;

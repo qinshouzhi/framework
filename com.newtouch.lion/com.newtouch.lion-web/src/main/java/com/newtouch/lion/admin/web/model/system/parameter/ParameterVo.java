@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * <p>
@@ -43,7 +44,7 @@ public class ParameterVo implements Serializable{
 	/**
 	 * @Fields type：参数类型
 	 */
-	@NotNull(message="{sys.parameter.form.type.missing.message}")
+	@NotEmpty(message="{sys.parameter.form.type.missing.message}")
 	private String type;
 	
 	/**@Fileds editable 是否可编辑*/

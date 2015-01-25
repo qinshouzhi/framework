@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.web.support.editor.StringEscapeEditor;
 
@@ -44,7 +45,9 @@ import com.newtouch.lion.web.support.editor.StringEscapeEditor;
 public class AbstractController {
 	
 	/**日志*/
-	protected Logger logger=LoggerFactory.getLogger(super.getClass());
+	protected final Logger logger=LoggerFactory.getLogger(super.getClass());
+	/**JsonView*/
+	protected final String JSON_VIEW="jsonView";
 	
 	@InitBinder
 	public void initBinder(ServletRequestDataBinder binder) {
@@ -102,6 +105,15 @@ public class AbstractController {
 	protected HttpServletRequest  getRequest(){
 		ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();  
         return servletRequestAttributes.getRequest();     
+	}
+	/****
+	 * 返回JSON图
+	 * @param modelAndView
+	 * @return
+	 */
+	protected ModelAndView  getJsonView(ModelAndView modelAndView){
+		 modelAndView.setViewName(JSON_VIEW);
+		 return modelAndView;
 	}
 }
 

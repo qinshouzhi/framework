@@ -39,13 +39,17 @@ import com.newtouch.lion.excpetion.BaseException;
  */
 public class ErrorCodeMappingExceptionResolver extends
 		SimpleMappingExceptionResolver {
+	/**默认异常消息key*/
 	public static final String DEFAULT_EXCEPTION_MESSAGE_KEY = "exception.defaultMessage";
+	/**默认异常消息**/
 	public static final String DEFAULT_EXCEPTION_MESSAGE = "";
 	/** 日志 */
-	private static Logger logger = LoggerFactory
-			.getLogger(ErrorCodeMappingExceptionResolver.class);
+	private static Logger logger = LoggerFactory.getLogger(ErrorCodeMappingExceptionResolver.class);
+	/**异常处理*/
 	private Properties exceptionMappings;
+	/**异常处理*/
 	private Properties errorCodeMappings;
+	/**默认异常处理类*/
 	private String defaultErrorView;
 
 	protected ModelAndView doResolveException(HttpServletRequest request,
@@ -67,6 +71,7 @@ public class ErrorCodeMappingExceptionResolver extends
 				applyStatusCodeIfPossible(request, response,
 						statusCode.intValue());
 			}
+			logger.info("code:{},msg:{}",bex.getCode(),bex.getMessage());
 			return getModelAndView(viewName, bex, request);
 		}
 		return null;

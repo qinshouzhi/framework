@@ -68,6 +68,94 @@ lion.assemblyCache={};
 		 var indexNext= pathname.indexOf("/",1);
 		 return pathname.substr(0,indexNext);
    }();
+   /***
+   	*提交成功的提示
+   	*@param {[string]} [title] [提示标题]
+   	*@param {[string]} [content] [description]
+   	**/
+   exports.success=function(title,content){
+			 toastr.options = {
+				  "closeButton": true,
+				  "debug": false,
+				  "positionClass": "toast-top-center",
+				  "onclick": null,
+				  "showDuration": "1000",
+				  "hideDuration": "1000",
+				  "timeOut": "5000",
+				  "extendedTimeOut": "1000",
+				  "showEasing": "swing",
+				  "hideEasing": "linear",
+				  "showMethod": "fadeIn",
+				  "hideMethod": "fadeOut"
+			 };
+			 toastr.success(content, title);
+	};
+	/***
+   	*错误提示对话
+   	*@param {[string]} [title] [提示标题]
+   	*@param {[string]} [content] [description]
+   	**/
+	exports.error=function(title,content){
+			 toastr.options = {
+					  "closeButton": true,
+					  "debug": false,
+					  "positionClass": "toast-top-center",
+					  "onclick": null,
+					  "showDuration": "1000",
+					  "hideDuration": "0",
+					  "timeOut": "0",
+					  "extendedTimeOut": "0",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+				};
+			 toastr.error(content, title);
+	 };
+	 /***
+   	 *警告提示对话
+   	  *@param {[string]} [title] [提示标题]
+   	 *@param {[string]} [content] [description]
+   	 **/
+	  exports.warning=function(title,content){
+	 	 toastr.options = {
+	 			  "closeButton": true,
+	 			  "debug": false,
+	 			  "positionClass": "toast-top-center",
+	 			  "onclick": null,
+	 			  "showDuration": "1000",
+	 			  "hideDuration": "0",
+	 			  "timeOut": "0",
+	 			  "extendedTimeOut": "0",
+	 			  "showEasing": "swing",
+	 			  "hideEasing": "linear",
+	 			  "showMethod": "fadeIn",
+	 			  "hideMethod": "fadeOut"
+	 		};
+	 	 toastr.warning(content, title); 
+	  };
+	  /***
+   	 *info提示对话
+   	  *@param {[string]} [title] [提示标题]
+   	 *@param {[string]} [content] [description]
+   	 **/
+	  exports.info=function(title,content){
+	 	 toastr.options = {
+	 			  "closeButton": true,
+	 			  "debug": false,
+	 			  "positionClass": "toast-top-center",
+	 			  "onclick": null,
+	 			  "showDuration": "1000",
+	 			  "hideDuration": "1000",
+	 			  "timeOut": "5000",
+	 			  "extendedTimeOut": "1000",
+	 			  "showEasing": "swing",
+	 			  "hideEasing": "linear",
+	 			  "showMethod": "fadeIn",
+	 			  "hideMethod": "fadeOut"
+	 		};
+	 	 toastr.info(content, title);
+	  };
    /**连接超时时间*/
    exports.timeout=5000;
    /**Ajax POST请求

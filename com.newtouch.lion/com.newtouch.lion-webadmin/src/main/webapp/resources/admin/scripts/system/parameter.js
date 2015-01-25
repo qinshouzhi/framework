@@ -74,7 +74,7 @@ $(function() {
 	 $('#btnDelete').on('click',function(){
 		 var row=getSelectedRow();
 		 if(!row){
-			 $.lionui.notice.info('提示','请选择要删除记录');
+			 lion.util.info('提示','请选择要删除记录');
 			 return;
 		 }
 		 bootbox.confirm('确认要删除此记录？', function(result) {
@@ -87,7 +87,7 @@ $(function() {
 					//	dataGridReload();
 					//	dataGridReload($.sys.parameter.datagridId);
 					//});
-            	  $.lionui.notice.success('提示!', '已删除成功');
+            	  lion.util.success('提示!', '已删除成功');
               }
           }); 
 	 });
@@ -99,8 +99,23 @@ $(function() {
 /**新增或编辑的提交代码*/
 function submitForm(frm){
 	var param=frm.serialize();
-	console.log(param);
- 	console.dir(this);
+ 	lion.util.post('add.json',param,successAddFrm,errorRequest);
+}
+//添加成功后
+function successAddFrm(data,arg){
+  console.dir(data);
+  if(data!==null&&(!data.hasError)){
+  	lion.util.success('提示',data.message);
+  	//$("#basic").hide();
+  }else if(data!==null&&data.hasError){
+  	lion.uti.error('提示',data.errorMessage);
+  }else{
+  	lion.util.warning('警告',data.errorMessage);
+  }
+}
+//请求失败后信息
+function errorRequest(data,arg){
+	lion.util.error('提示','添加请求失败');
 }
 
 //验证表单
