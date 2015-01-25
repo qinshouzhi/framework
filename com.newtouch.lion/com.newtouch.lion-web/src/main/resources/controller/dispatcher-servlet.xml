@@ -124,6 +124,9 @@
 			</props>
 		</property>
 		<property name="defaultErrorView">
+			<value>common/errorpage.ftl</value>
+		</property>
+		<property name="jsonViewName">
 			<value>jsonView</value>
 		</property>
 	</bean>

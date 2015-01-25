@@ -1,5 +1,5 @@
 /*
- * Copyright (c)  2013, lion
+ * Copyright (c)  2013, Newtouch
  * All rights reserved. 
  *
  * $id: CombinedThrowAdvice.java 9552 2013-2-1 下午1:29:21 WangLijun$
@@ -21,7 +21,7 @@ import org.springframework.aop.ThrowsAdvice;
  * Copyright: Copyright (c) 2013
  * </p>
  * <p>
- * Company: lion
+ * Company: Newtouch
  * </p>
  * 
  * @author WangLijun

@@ -1,5 +1,5 @@
 /*
- * Copyright (c)  2013, lion
+ * Copyright (c)  2013, Newtouch
  * All rights reserved. 
  *
  * $id: MethodTraceAdvice.java 9552 2013-4-7 上午11:01:56 WangLijun$
@@ -38,7 +38,7 @@ import com.newtouch.lion.excpetion.SystemException;
  * Copyright: Copyright (c) 2013
  * </p>
  * <p>
- * Company: lion
+ * Company: Newtouch
  * </p>
  * 
  * @author WangLijun
@@ -68,8 +68,7 @@ public class MethodTraceAdvice implements MethodBeforeAdvice,
 	@Override
 	public void afterThrowing(Method method, Object[] objects, Object target,
 			Exception e) throws Throwable {
-		this.log.error(
-				this.msg.getMessage("SE0013", new Object[] {target.getClass().getName(), method.getName() }), e);
+		this.log.error(this.msg.getMessage("SE0013", new Object[] {target.getClass().getName(), method.getName() }), e);
 		if (e instanceof DataAccessException)
 			e = translateDataAccessException((DataAccessException) e);
 		else if (e instanceof TransactionException)
@@ -81,10 +80,16 @@ public class MethodTraceAdvice implements MethodBeforeAdvice,
 		this.log.error(e.getMessage(), e);
 
 		if (e instanceof SystemException) {
-			String code = ((SystemException) e).getCode();
-			Object[] params = ((SystemException) e).getParams();
-			String message = this.msg.getMessage(code, params);
-			e = new SystemException(code + ": " + message);
+			SystemException systemException=(SystemException) e;
+			String code = systemException.getCode();
+			String message;
+			if(systemException.getParams()!=null){
+				Object[] params=systemException.getParams();
+				message = this.msg.getMessage(code,params);
+			}else{
+				message = this.msg.getMessage(code);
+			}
+			e = new SystemException(code,message);
 		}
 		throw e;
 
@@ -94,7 +99,7 @@ public class MethodTraceAdvice implements MethodBeforeAdvice,
 		SystemException se = new SystemException("SE0002");
 
 		if (e instanceof ObjectNotFoundException) {
-			se = new SystemException("SE0003", new String[]{((ObjectNotFoundException) e) .getEntityName()});
+			se = new SystemException("SE0003",new String[]{((ObjectNotFoundException) e) .getEntityName()});
 		}
 
 		return se;

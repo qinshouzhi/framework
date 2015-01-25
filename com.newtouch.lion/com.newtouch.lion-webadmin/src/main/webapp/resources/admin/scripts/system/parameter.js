@@ -25,7 +25,7 @@ $(function() {
 	 }
 	 //刷新
 	 $('#btnRefresh').on('click',function(){
-		 dataGridReload($.sys.parameter.datagridId);
+		 dataGridReload(datagridId);
 	 });
 	 //新增
 	 $('#btnAdd').on('click',function(){
@@ -46,7 +46,6 @@ $(function() {
 
 
 	 $('#btnSave').click(function(){
-	 		console.log('提交成功');
 	 		addForm.submit();
 	 });
 
@@ -68,7 +67,6 @@ $(function() {
 	    			{id:'btnSave',headler:function(){ },icon:'fa fa-save',className:'btn blue',value:' 确 认 ',dismiss:false},
 		 			]
 		  });
-		  
 	 });
 	 //删除
 	 $('#btnDelete').on('click',function(){
@@ -103,19 +101,25 @@ function submitForm(frm){
 }
 //添加成功后
 function successAddFrm(data,arg){
-  console.dir(data);
-  if(data!==null&&(!data.hasError)){
+  if(data!==null&&!(data.hasError)){
   	lion.util.success('提示',data.message);
-  	//$("#basic").hide();
+  	$("#basic").modal('toggle');
   }else if(data!==null&&data.hasError){
-  	lion.uti.error('提示',data.errorMessage);
+  	var gmsg='';
+  	for(var msg in data.errorMessage){
+  		gmsg+=data.errorMessage[msg];
+  	}
+  	if(lion.util.isEmpty(gmsg)){
+  		gmsg='添加参数出错';
+  	}
+  	lion.util.error('提示',gmsg);
   }else{
-  	lion.util.warning('警告',data.errorMessage);
+  	lion.util.error('提示','添加参数失败');
   }
 }
 //请求失败后信息
 function errorRequest(data,arg){
-	lion.util.error('提示','添加请求失败');
+	lion.util.error('提示','网络连接异常');
 }
 
 //验证表单

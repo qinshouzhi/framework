@@ -6,6 +6,8 @@
  */
 package com.newtouch.lion.excpetion;
 
+import org.apache.commons.lang.StringUtils;
+
 
 /**
  * <p>
@@ -35,30 +37,29 @@ public class SystemException extends BaseException {
 	private Object[] params;
 
 	public SystemException(String code) {
-		this(code, null, null);
+		this(code,StringUtils.EMPTY);
+	}
+ 
+	
+	public SystemException(String code,String msg){
+		this(code,null,msg);
+	}
+	
+	public SystemException(String code,String[] params) {
+		this(code,params,null);
 	}
 
-	public SystemException(String code, String param) {
-		this(code, new String[] { param });
+	public SystemException(String code,String[] params,String msg) {
+		this(code,params,msg,null);
 	}
 
-	public SystemException(String code, String[] params) {
-		this(code, params, null);
-	}
-
-	public SystemException(String code, String[] params, Throwable cause) {
-		super(code, cause);
+	public SystemException(String code, String[] params,String msg, Throwable cause) {
+		super(code,msg,cause);
 		this.code = code;
 		this.params = params;
 	}
 
-	@Deprecated
-	public SystemException(String code, String[] params, String defaultMessage,
-			Throwable cause) {
-		super(defaultMessage, cause);
-		this.code = code;
-		this.params = params;
-	}
+	 
 
 	/**
 	 * @return the code

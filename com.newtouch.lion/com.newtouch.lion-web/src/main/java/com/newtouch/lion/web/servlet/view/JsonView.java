@@ -14,11 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.DirectFieldBindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.view.AbstractView;
 
 import com.newtouch.lion.common.date.DateUtil;
+import com.newtouch.lion.excpetion.BaseException;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
@@ -53,6 +56,9 @@ public class JsonView extends AbstractView {
 	private BindStatus bindStatus;
 
 	private RequestContext requestContext;
+	
+	/**获取ModelAndView对象的名称*/
+	private final static String  MODEL_AND_VEIW="modelAndView";
 
 	public JsonView() {
 		super();
@@ -65,15 +71,31 @@ public class JsonView extends AbstractView {
 			throws Exception {
 		response.setStatus(getResponseStatus());
 		response.setContentType(getContentType());
-		Object object=model.get("modelAndView");
+		String jsonStr;
+		//获取视图
+		Object object=model.get(MODEL_AND_VEIW);
+		Object objException=model.get(SimpleMappingExceptionResolver.DEFAULT_EXCEPTION_ATTRIBUTE);
 		if(object instanceof ModelAndView){
 			ModelAndView modelAndView=(ModelAndView) object;
-			String jsonStr=this.initBindStatus(request, response, modelAndView);
-			response.getWriter().write(jsonStr);
+			jsonStr=this.initBindStatus(request, response, modelAndView);
+		}else if(objException instanceof Throwable){
+			//异常处理
+			ModelAndView  modelAndView = null;
+			if(object==null){
+				  modelAndView=new ModelAndView();
+				  BaseException baseException=(BaseException) objException;
+			      Errors errors=new DirectFieldBindingResult(baseException,"jsonView");
+				  errors.reject("",this.getExceptionMessage(baseException));
+				  logger.info("baseException:{}",this.getExceptionMessage(baseException));
+				  modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);				  
+			}
+			jsonStr=this.initBindStatus(request, response,modelAndView);
 		}else{
-			String json=JSONParser.toJSONString(model);
-			response.getWriter().write(json);
+			jsonStr=JSONParser.toJSONString(model);
+			
 		}
+		logger.info("jsonStr:{}",jsonStr);
+		response.getWriter().write(jsonStr);
 		
 	}
 	/***
@@ -84,7 +106,8 @@ public class JsonView extends AbstractView {
 	 * @return
 	 */
 	protected String initBindStatus(HttpServletRequest request,HttpServletResponse response,ModelAndView  modelAndView){
-		Errors errors=(Errors) modelAndView.getModelMap().get(BindMessage.ERRORS_MODEL_KEY);
+	   
+		Errors errors=(Errors) modelAndView.getModelMap().get(BindMessage.ERRORS_MODEL_KEY);		 
 		this.initRequestContext(request, null, modelAndView.getModel());
 		String jsonStr=null;
 		if(errors!=null&&errors.hasErrors()){			
@@ -99,6 +122,14 @@ public class JsonView extends AbstractView {
 			jsonStr=JSONParser.toJSONString(bindMessage,datePattern);
 		}
 		return jsonStr;
+	}
+	/**获取异常信息*/
+	protected String getExceptionMessage(BaseException baseException){
+		StringBuilder builder=new StringBuilder();
+		builder.append(baseException.getCode());
+		builder.append(":");
+		builder.append(baseException.getMessage());
+		return builder.toString();
 	}
 	
 	/***
