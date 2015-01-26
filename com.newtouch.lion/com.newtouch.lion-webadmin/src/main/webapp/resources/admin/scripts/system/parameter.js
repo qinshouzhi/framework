@@ -7,6 +7,7 @@ $(function() {
 	var datagridId='#sys_parameter_lists_tb';
 
 	var addForm=$('#sysParameterForm');
+  var queryForm=$('#queryform');
 	var addDialog=$('#basic');
 	
 	
@@ -18,6 +19,15 @@ $(function() {
 		 onLoadSuccess : function(data) {
 		}
 	});
+/**
+ * [查询]
+ */
+ $('#btnQuery').click(function(){
+      var queryParams = $(datagridId).datagrid("options").queryParams,params=queryForm.serializeObject();
+      $.extend(queryParams,params);
+      dataGridReload(datagridId);
+
+ });
 		
 	//重新加载DataGrid
   function dataGridReload(dataGridId){

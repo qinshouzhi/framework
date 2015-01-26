@@ -215,7 +215,7 @@ public class ParameterController extends AbstractController{
 			@RequestParam(defaultValue = "15") int rows,
 			@RequestParam(required = false) String sort,
 			@RequestParam(required = false) String order,
-			@RequestParam(required = false) String type) {
+			@ModelAttribute("parameter") ParameterVo parameterVo) {
 		QueryCriteria queryCriteria = new QueryCriteria();
 
 		// 设置分页 启始页
@@ -231,8 +231,12 @@ public class ParameterController extends AbstractController{
 			queryCriteria.setOrderDirection("ASC");
 		}
 		// 查询条件 参数类型
-		if (StringUtils.isNotEmpty(type)) {
-			queryCriteria.addQueryCondition("type", type);
+		if (StringUtils.isNotEmpty(parameterVo.getType())) {
+			queryCriteria.addQueryCondition("type", parameterVo.getType());
+		}
+		//查询条件 中文参数名称按模糊查询
+		if(StringUtils.isNotEmpty(parameterVo.getNameZh())){
+			queryCriteria.addQueryCondition("nameZh","%"+parameterVo.getNameZh()+"%");
 		}
 
 		PageResult<Parameter> pageResult = parameterService

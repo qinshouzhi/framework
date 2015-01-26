@@ -179,7 +179,7 @@ public class ParameterServiceImpl extends AbstractService implements
 
 		String queryEntry = "select parameter ";
 
-		String[] whereBodies = { " parameter.type=:type " };
+		String[] whereBodies = { " parameter.type=:type "," parameter.nameZh  like :nameZh "};
 
 		String fromJoinSubClause = "from Parameter parameter";
 
