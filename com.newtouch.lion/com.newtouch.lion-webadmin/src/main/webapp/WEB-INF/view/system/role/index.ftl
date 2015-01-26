@@ -28,6 +28,9 @@
 <!--EasyUI JavaScript End-->
 <!--lion UI JS Start-->
 <script src="${base}/resources/global/js/lion.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/form/form.fill.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/dialog/dialog.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
 <!--lion UI JS End-->
 <script src="${base}/resources/global/scripts/framework.js" type="text/javascript"></script>
 <script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
@@ -53,16 +56,14 @@
 			</div>
 			<div class="col-md-12 margin-bottom-10" id="toolbar">
 				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic"><i class="fa fa-plus"></i> 新增  </a>
-				<a id="btnEdit" class="btn btn-sm red" role="button" data-toggle="modal" data-target="#editDialog"><i class="fa fa-edit"></i> 编辑
-					<div class="modal" id="editDialog" tabindex="-1"></div>
-				</a>
+				<a id="btnEdit" class="btn btn-sm red"><i class="fa fa-edit"></i> 编辑</a>
 				<a href="javascript:void(0)" id="btnDelete" class="btn btn-sm purple"><i class="fa fa-times"></i> 删除 </a>
 				<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue"><i class="fa fa-refresh"></i> 刷新  </a>
 				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> Excel </a>
 			</div>
 			<div class="col-md-12">
-				  <@lion.datagrids name="sys_rolelist_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/role/list.htm" dataOptions="" style="height:400px;"/>			</div>
-		</div>
+				<@lion.datagrids name="sys_rolelist_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/role/list.htm" dataOptions="" style="height:400px;"/>			</div>
+			</div>
 	</div>
 </div>
 <!-- END PAGE CONTENT INNER -->
@@ -79,6 +80,7 @@
 				 	<div class="col-md-12 portlet-body form">
 				 		<!-- BEGIN FORM-->
 										<form action="#" class="form-horizontal" name="sysRoleForm" id="sysRoleForm" method="post">
+											<input type="hidden" id='id' name='id' value="">
 											<div class="form-body">
 												<div class="form-group">
 													<label class="col-md-3 control-label">角色名称(中文)</label>
@@ -100,7 +102,7 @@
 													<label class="col-md-3 control-label">角色描述</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text" name="description" class="form-control" placeholder="请输入角色描述" maxlength="255" size="30"/>
+															<input type="text" name="description" id="description" class="form-control" placeholder="请输入角色描述" maxlength="255" size="30"/>
 														</div>
 													</div>
 												</div>

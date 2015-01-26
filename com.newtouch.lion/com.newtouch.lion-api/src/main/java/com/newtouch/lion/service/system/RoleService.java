@@ -171,18 +171,23 @@ public interface RoleService {
 
 	public String doFindByCriteria(QueryCriteria criteria, String tableId);
 	/**
-	 * 判断参数的英文名是否已存在，
+	 * 判断角色的英文名是否已存在，
 	 * @param nameEn
 	 * @return  boolean
 	 * @author maojiawei
 	 * */
 	public boolean doIsExistByNameEn(String nameEn); 
 	/***
-	 * 根据参数英文名称获取参数列表
+	 * 根据角色英文名称获取用户角色列表
 	 * @param type
 	 * @param nameEn
 	 * @author maojiawei
-	 * @return {@link Parameter}
+	 * @return {@link Role}
 	 */
 	public Role  doFindTypeByNameEn(String nameEn);
+	/***
+	 * 保存Role对象
+	 * @param role
+	 */
+	public void doCreate(Role role);
 }

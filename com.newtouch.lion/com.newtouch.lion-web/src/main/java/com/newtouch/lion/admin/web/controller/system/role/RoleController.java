@@ -34,7 +34,6 @@ import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.system.Attributes;
 import com.newtouch.lion.model.system.Group;
-import com.newtouch.lion.model.system.Parameter;
 import com.newtouch.lion.model.system.Resource;
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
@@ -115,18 +114,25 @@ public class RoleController extends AbstractController{
     @ResponseBody
 	public ModelAndView add(@Valid @ModelAttribute("role") RoleVo  roleVo,Errors  errors,ModelAndView modelAndView){    	
      
-    	if(errors.hasErrors()){
-    		modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY,errors);
-    		return modelAndView;
-    	}    	
-    	Role  role=new Role();
-     
-    	BeanUtils.copyProperties(roleVo,role);
-    	roleService.doCreateRole(role);
-    	Map<String,String> params=new  HashMap<String,String>();
-    	params.put(BindResult.SUCCESS,ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
-    	modelAndView.addObject(BindMessage.SUCCESS,params);
-    	return modelAndView;
+		if (!errors.hasErrors()&& this.isExistByNameEn(roleVo.getNameEn())) {
+			errors.rejectValue(RoleVo.NAMEEN,
+					"sys.role.form.nameen.existed.message",
+					new Object[] { roleVo.getNameEn() }, null);
+		}
+		//是否错误消息
+		if (errors.hasErrors()) {
+			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
+			return this.getJsonView(modelAndView);
+		}
+		Role role = new Role();
+
+		BeanUtils.copyProperties(roleVo, role);
+		roleService.doCreate(role);
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(BindResult.SUCCESS, "sys.role.add.success");
+		modelAndView.addObject(BindMessage.SUCCESS, params);
+		
+		return this.getJsonView(modelAndView);
 	}
 	
 	@RequestMapping(value = "authdialog")
@@ -327,15 +333,15 @@ public class RoleController extends AbstractController{
 	@RequestMapping(value="delete")
 	@ResponseBody
 	public ModelAndView delete(@RequestParam Long id,ModelAndView modelAndView){
-    	Map<String,String> params=new  HashMap<String,String>();
-    	int updateRow=this.roleService.doDeleteById(id);
-    	if(updateRow>0){
-    		params.put(BindResult.SUCCESS,ConstantMessage.DELETE_SUCCESS_MESSAGE_CODE);
-    	}else{
-    		params.put(BindResult.SUCCESS,ConstantMessage.DELETE_FAIL_MESSAGE_CODE);
-    	}
-    	modelAndView.addObject(BindMessage.SUCCESS,params);
-    	return modelAndView;
+		Map<String, String> params = new HashMap<String, String>();
+		int updateRow = this.roleService.doDeleteById(id);
+		if (updateRow > 0) {
+			params.put(BindResult.SUCCESS,"sys.role.delete.success");
+		} else {
+			params.put(BindResult.SUCCESS,"sys.role.delete.fail");
+		}
+		modelAndView.addObject(BindMessage.SUCCESS, params);
+		return this.getJsonView(modelAndView);
     }
 	
 	@RequestMapping(value = "editdialog")
@@ -353,27 +359,35 @@ public class RoleController extends AbstractController{
 	@ResponseBody
 	public ModelAndView edit(@Valid @ModelAttribute("role") RoleVo  roleVo,Errors  errors,ModelAndView modelAndView){
 		
-		Role role=null;
-		if(roleVo.getId()!=null){
-			role=this.roleService.doFindById(roleVo.getId());
-			if(role==null){
-				errors.reject(ConstantMessage.EDIT_ISEMPTY_FAIL_MESSAGE_CODE);
-			}
-    	}else{
-    		errors.reject(ConstantMessage.EDIT_ISEMPTY_FAIL_MESSAGE_CODE);
-    	}
+		modelAndView=this.getJsonView(modelAndView);
+		if (!errors.hasErrors() && roleVo.getId() == null) {
+			errors.reject("sys.parameter.form.id.empty");
+			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
+			return modelAndView; 
+		} 
+		Role role = roleService.doFindById(roleVo.getId());
+		if (role == null) {
+			errors.reject("sys.role.form.id.empty");
+			return modelAndView;
+		}
 		
-    	if(errors.hasErrors()){
-    		modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY,errors);
-    		return modelAndView;
-    	}
-    	
-    	BeanUtils.copyProperties(roleVo,role);
-    	roleService.doUpdate(role);
-    	Map<String,String> params=new  HashMap<String,String>();
-    	params.put(BindResult.SUCCESS,ConstantMessage.EDIT_SUCCESS_MESSAGE_CODE);
-    	modelAndView.addObject(BindMessage.SUCCESS,params);
-    	return modelAndView;
+		if (!errors.hasErrors()
+				&& this.isExistByNameEn(roleVo.getNameEn(),role.getNameEn())) {errors.rejectValue(roleVo.NAMEEN,	"sys.role.form.nameen.existed.message",new Object[] { roleVo.getNameEn() }, null);
+
+		}
+
+		if (errors.hasErrors()) {
+			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
+			return modelAndView;
+		}
+
+		BeanUtils.copyProperties(roleVo, role);
+		roleService.doUpdate(role);
+
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(BindResult.SUCCESS, "sys.role.edit.success");
+		modelAndView.addObject(BindMessage.SUCCESS, params);
+		return modelAndView;
 	}
 	
 	@RequestMapping(value = "list")

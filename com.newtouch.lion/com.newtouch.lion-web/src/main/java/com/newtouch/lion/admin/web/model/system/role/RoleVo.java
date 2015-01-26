@@ -6,6 +6,10 @@
  */
 package com.newtouch.lion.admin.web.model.system.role;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
 /**
  * <p>
  * Title: 角色VO
@@ -24,18 +28,33 @@ package com.newtouch.lion.admin.web.model.system.role;
  * @version 1.0
  */
 public class RoleVo {
-
-	/** 角色ID */
+	
+	
+	public static final  String NAMEEN="nameEn";
+	/**
+	 * @Fields id:参数序号
+	 */
 	private Long id;
-
-	/** 角色名称－中文 */
-	private String nameZh;
-	/** 角色名称－英文 */
+	
+	/**@Fileds editable 是否可编辑*/
+	private Boolean editable=Boolean.FALSE;
+	/**
+	 * @Fields nameEn：英文名称
+	 */
+	@NotNull(message="{sys.role.form.nameen.missing.message}")
+	@Length(max=128,min=4,message="{sys.role.form.nameen.length.message}")
 	private String nameEn;
-	/** 角色描述 */
+	/**
+	 * @Fields nameZh：中文名称
+	 */
+	@NotNull(message="{sys.role.form.namezh.missing.message}")
+	@Length(max=128,min=4,message="{sys.role.form.namezh.length.message}")
+	private String nameZh;
+	/**
+	 * @Fields description:角色描述
+	 */
+	@Length(min=0,max=512,message="{sys.role.form.description.length.message}")
 	private String description;
-	/** 是否可编辑 */
-	private Boolean editable = Boolean.FALSE;
 
 	/**
 	 * @return the id

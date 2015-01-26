@@ -4,11 +4,9 @@ $(function() {
 	Layout.init(); // init layout
 	Tasks.initDashboardWidget(); // init tash dashboard widget
 	
-	var datagridId='#sys_role_lists_tb';
-
+	var datagridId='#sys_rolelist_tb';
 	var addForm=$('#sysRoleForm');
 	var addDialog=$('#basic');
-	
 	
 	handleVForm(addForm,submitForm);
 	//选择DataGrid单行
@@ -20,9 +18,9 @@ $(function() {
 	});
 		
 	//重新加载DataGrid
-  function dataGridReload(dataGridId){
-     $(datagridId).datagrid('reload');
-  }
+	  function dataGridReload(dataGridId){
+	     $(datagridId).datagrid('reload');
+	  }
 	 //刷新
 	 $('#btnRefresh').on('click',function(){
 		   dataGridReload(datagridId);
@@ -77,7 +75,7 @@ $(function() {
 function successForDelete(data,arg){
    if(data!==null&&!(data.hasError)){
       lion.util.success('提示',data.message);
-      $('#sys_role_lists_tb').datagrid('reload');
+      $('#sys_rolelist_tb').datagrid('reload');
    }else if(data!==null&&data.hasError){
       var gmsg='';
       for(var msg in data.errorMessage){
@@ -113,11 +111,11 @@ function successAddFrm(data,arg,id){
   		gmsg+=data.errorMessage[msg];
   	}
   	if(lion.util.isEmpty(gmsg)){
-  		gmsg='添加参数出错';
+  		gmsg='添加角色出错';
   	}
   	lion.util.error('提示',gmsg);
   }else{
-  	lion.util.error('提示','添加参数失败');
+  	lion.util.error('提示','添加角色失败');
   }
 }
 //请求失败后信息

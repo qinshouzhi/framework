@@ -488,5 +488,15 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 			return true;
 		return false;
 	}
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.RoleService#doCreate(com.newtouch.lion.model.system.Role)
+	 */
+	@Override
+	public void doCreate(Role role) {
+		// TODO Auto-generated method stub
+		Assert.notNull(role);
+		roleDao.save(role);
+	}
 	
 }
