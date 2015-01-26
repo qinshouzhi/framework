@@ -88,7 +88,7 @@
 													<label class="col-md-3 control-label">角色名称(英文)</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入角色名称（英文）" size="30"/>
+															<input type="text"  id="nameEn" name="nameZZ" maxlength="100" class="form-control" placeholder="请输入角色名称（英文）" size="30"/>
 														</div>
 													</div>
 												</div>
