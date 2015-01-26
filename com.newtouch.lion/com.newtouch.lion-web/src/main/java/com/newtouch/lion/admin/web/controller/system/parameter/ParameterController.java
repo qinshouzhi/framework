@@ -38,6 +38,7 @@ import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.datagrid.DataColumnService;
 import com.newtouch.lion.service.system.ParameterService;
+import com.newtouch.lion.web.controller.AbstractController;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
 
@@ -60,7 +61,7 @@ import com.newtouch.lion.web.servlet.view.support.BindResult;
  */
 @Controller
 @RequestMapping("/system/parameter/")
-public class ParameterController {
+public class ParameterController extends AbstractController{
 
 	@SuppressWarnings("unused")
 	private final Logger logger = LoggerFactory.getLogger(super.getClass());
@@ -85,15 +86,13 @@ public class ParameterController {
 		return INDEX_RETURN;
 	}
 
-	@RequestMapping(value = "dialogedit.htm")
+	@RequestMapping(value = "dialogedit")
 	public String editDialog(@RequestParam(required = false) Long id,
 			Model model) {
-		//Parameter parameter = parameterService.doFindById(id);
-		//model.addAttribute("parameter", parameter);
 		return EDIT_DIALOG_RETURN;
 	}
 
-	@RequestMapping(value = "dialog/add.htm")
+	@RequestMapping(value = "dialog/add")
 	public String addDialog(HttpServletRequest servletRequest, Model model) {
 		return ADD_DIALOG_RETURN;
 	}
@@ -103,23 +102,21 @@ public class ParameterController {
 	public ModelAndView edit(
 			@Valid @ModelAttribute("parameter") ParameterVo parameterVo,
 			Errors errors, ModelAndView modelAndView) {
-
+		modelAndView=this.getJsonView(modelAndView);
 		if (!errors.hasErrors() && parameterVo.getId() == null) {
 			errors.reject("sys.parameter.form.id.empty");
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
 			return modelAndView;
 		}
 		Parameter parameter = parameterService.doFindById(parameterVo.getId());
-
 		if (parameter == null) {
 			errors.reject("sys.parameter.form.id.empty");
 			return modelAndView;
 		}
-
+		
 		if (!errors.hasErrors()
-				&& this.isExistByNameEn(parameterVo.getNameEn(),
-						parameter.getNameEn())) {
-			errors.rejectValue(ParameterVo.NAMEEN,"sys.parameter.form.nameen.existed.message",new Object[] { parameterVo.getNameEn() }, null);
+				&& this.isExistByNameEn(parameterVo.getNameEn(),parameter.getNameEn())) {errors.rejectValue(ParameterVo.NAMEEN,	"sys.parameter.form.nameen.existed.message",new Object[] { parameterVo.getNameEn() }, null);
+
 		}
 
 		if (errors.hasErrors()) {
@@ -142,12 +139,12 @@ public class ParameterController {
 		Map<String, String> params = new HashMap<String, String>();
 		int updateRow = this.parameterService.doDeleteById(id);
 		if (updateRow > 0) {
-			params.put(BindResult.SUCCESS, "sys.parameter.delete.success");
+			params.put(BindResult.SUCCESS,"sys.parameter.delete.success");
 		} else {
-			params.put(BindResult.SUCCESS, "sys.parameter.delete.fail");
+			params.put(BindResult.SUCCESS,"sys.parameter.delete.fail");
 		}
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		return this.getJsonView(modelAndView);
 	}
 
 	@RequestMapping(value = "add")
@@ -155,17 +152,16 @@ public class ParameterController {
 	public ModelAndView add(
 			@Valid @ModelAttribute("parameter") ParameterVo parameterVo,
 			Errors errors, ModelAndView modelAndView) {
-		if (!errors.hasErrors()
-				&& this.isExistByNameEn(parameterVo.getNameEn())) {
+		if (!errors.hasErrors()&& this.isExistByNameEn(parameterVo.getNameEn())) {
 			errors.rejectValue(ParameterVo.NAMEEN,
 					"sys.parameter.form.nameen.existed.message",
 					new Object[] { parameterVo.getNameEn() }, null);
 		}
+		//是否错误消息
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
-			return modelAndView;
+			return this.getJsonView(modelAndView);
 		}
-
 		Parameter parameter = new Parameter();
 
 		BeanUtils.copyProperties(parameterVo, parameter);
@@ -173,14 +169,26 @@ public class ParameterController {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS, "sys.parameter.add.success");
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		
+		return this.getJsonView(modelAndView);
 	}
 
 	@RequestMapping(value = "checkisexitnameen")
 	@ResponseBody
 	public String checkIsExistByNameEn(HttpServletRequest servletRequest,
-			@RequestParam(required = false) String nameEn) {
-		Boolean flag = this.isExistByNameEn(nameEn) == true ? false : true;
+			@RequestParam(required = false) String nameEn,@RequestParam(required=false) Long id) {
+		Boolean flag=Boolean.FALSE;
+		
+		if(id==null){
+			flag = this.isExistByNameEn(nameEn)? false : true;
+		}else{
+			Parameter parameter = parameterService.doFindById(id);
+			if(parameter==null){
+				flag = this.isExistByNameEn(nameEn)? false : true;
+			}else{
+				flag=this.isExistByNameEn(nameEn, parameter.getNameEn())?false:true;
+			}
+		}
 		return flag.toString();
 	}
 
@@ -202,8 +210,8 @@ public class ParameterController {
 
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public DataTable<Parameter> list(HttpServletRequest servletRequest, Model model,
-			@RequestParam(defaultValue = "1") int page,
+	public DataTable<Parameter> list(HttpServletRequest servletRequest,
+			Model model, @RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "15") int rows,
 			@RequestParam(required = false) String sort,
 			@RequestParam(required = false) String order,
