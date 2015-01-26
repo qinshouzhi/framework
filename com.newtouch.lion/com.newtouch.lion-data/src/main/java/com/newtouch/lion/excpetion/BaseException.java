@@ -34,14 +34,25 @@ public  class BaseException extends NestedRuntimeException {
 	 */
 	private static final long serialVersionUID = 1076714774087460610L;
     /**错误代码*/
-	private String code;
+	protected String code;
 	
+ 
 	/***
 	 * 
 	 * @param msg 错误消息
 	 */
-	public BaseException(String msg) {
+	public BaseException(String code) {
+		super("");
+		this.code=code;
+	}
+	/***
+	 * 
+	 * @param code 错误代码
+	 * @param msg 错误消息
+	 */
+	public BaseException(String code,String msg) {
 		super(msg);
+		this.code=code;
 	}
 
 	/**
@@ -53,12 +64,23 @@ public  class BaseException extends NestedRuntimeException {
 	public BaseException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
+	
+	/***
+	 * 
+	 * @param code
+	 * @param msg
+	 * @param cause
+	 */
+	public BaseException(String code,String msg,Throwable cause){
+		super(msg,cause);
+		this.code=code;
+	}
 
 	/**
 	 * @return the code
 	 */
 	public String getCode() {
-		return code;
+		return this.code;
 	}
 
 	/**
