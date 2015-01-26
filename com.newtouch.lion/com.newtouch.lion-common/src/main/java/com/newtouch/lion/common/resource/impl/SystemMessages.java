@@ -6,18 +6,19 @@
  */
 package com.newtouch.lion.common.resource.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.stereotype.Repository;
 
 import com.newtouch.lion.common.resource.MessageResource;
 
 /**
  * <p>
- * Title:
+ * Title:系统异常消息处理
  * </p>
  * <p>
- * Description:
+ * Description:系统异常消息处理
  * </p>
  * <p>
  * Copyright: Copyright (c) 2013
@@ -29,16 +30,19 @@ import com.newtouch.lion.common.resource.MessageResource;
  * @author WangLijun
  * @version 1.0
  */
-@Repository("frameworkMessages")
+
 public class SystemMessages extends ResourceBundleMessageSource implements
-		MessageResource {
-
-	private static final String BUNDLE_NAME = MessageResource.class.getPackage().getName() + ".messages";
-
+		MessageResource { 
+	/**日志*/
+	private final static Logger logger=LoggerFactory.getLogger(SystemMessages.class);
+	/**消息路径*/
+	private  final static String BUNDLE_NAME=MessageResource.class.getPackage().getName()+".messages";
+	/**消息访问对象*/
 	private static MessageSourceAccessor accessor = null;
 
-	public SystemMessages() {
+	public SystemMessages() {		
 		this(BUNDLE_NAME);
+		logger.info("BUNDLE_NAME:{}",BUNDLE_NAME);
 	}
 
 	public SystemMessages(String bundleName) {
@@ -59,5 +63,5 @@ public class SystemMessages extends ResourceBundleMessageSource implements
 
 	public String getMessage(String code, Object[] args) {
 		return getAccessor().getMessage(code, args);
-	}
+	}	
 }

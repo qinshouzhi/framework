@@ -6,6 +6,8 @@
  */
 package com.newtouch.lion.web.exception;
 
+import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Properties;
@@ -15,6 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
@@ -39,26 +47,66 @@ import com.newtouch.lion.excpetion.BaseException;
  */
 public class ErrorCodeMappingExceptionResolver extends
 		SimpleMappingExceptionResolver {
+	/** 默认异常消息key */
 	public static final String DEFAULT_EXCEPTION_MESSAGE_KEY = "exception.defaultMessage";
+	/** 默认异常消息 **/
 	public static final String DEFAULT_EXCEPTION_MESSAGE = "";
 	/** 日志 */
 	private static Logger logger = LoggerFactory
 			.getLogger(ErrorCodeMappingExceptionResolver.class);
+	/** 异常处理 */
 	private Properties exceptionMappings;
+	/** 异常处理 */
 	private Properties errorCodeMappings;
+	/** 默认异常处理类 */
 	private String defaultErrorView;
+	/** JSON视图处理图 */
+	private String jsonViewName;
 
 	protected ModelAndView doResolveException(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex) {
-		if ((request.getHeader("x-requested-with") != null)
-				&& (request.getHeader("x-requested-with")
-						.equalsIgnoreCase("XMLHttpRequest"))) {
-			response.setHeader("sessionstatus", "timeout");
-			return null;
+
+		
+		BaseException bex=null;
+		if(ex instanceof BaseException){
+			bex= (BaseException) ex;
+		}else{
+		   bex=new BaseException(ex.getMessage());
 		}
 
-		BaseException bex=(BaseException) ex;
-	 
+		// 如果是ajax请求，则返回到JSON视图处理异常信息
+		if ((request.getHeader("x-requested-with") != null)&& (request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest"))) {			
+			if(handler == null||StringUtils.isEmpty(jsonViewName)){
+				response.setHeader("sessionstatus", "timeout");
+				return null;
+			}
+			HandlerMethod handlerMethod = (HandlerMethod) handler;
+			Method method = handlerMethod.getMethod();
+
+			if (method == null) {
+				response.setHeader("sessionstatus", "timeout");
+				return null;
+			}
+			ResponseBody responseBodyAnnotation = AnnotationUtils.findAnnotation(method, ResponseBody.class);
+			if (responseBodyAnnotation != null) {
+
+				ResponseStatus responseStatusAnn = AnnotationUtils.findAnnotation(method, ResponseStatus.class);
+				if (responseStatusAnn != null) {
+					HttpStatus responseStatus = responseStatusAnn.value();
+					String reason = responseStatusAnn.reason();
+					if (!StringUtils.hasText(reason)) {
+						response.setStatus(responseStatus.value());
+					} else {
+						try {
+							response.sendError(responseStatus.value(), reason);
+						} catch (IOException e) {
+							logger.warn(e.getMessage(), e.getCause());
+						}
+					}
+				}
+				return getModelAndView(jsonViewName,bex, request);
+			}
+		}
 
 		String viewName = determineViewName(bex, request);
 		if (viewName != null) {
@@ -67,6 +115,7 @@ public class ErrorCodeMappingExceptionResolver extends
 				applyStatusCodeIfPossible(request, response,
 						statusCode.intValue());
 			}
+			logger.info("code:{},msg:{}", bex.getCode(), bex.getMessage());
 			return getModelAndView(viewName, bex, request);
 		}
 		return null;
@@ -140,18 +189,16 @@ public class ErrorCodeMappingExceptionResolver extends
 		if (ex instanceof BaseException)
 			bex = (BaseException) ex;
 		else {
-			bex = new BaseException(ex.getMessage(),ex);
+			bex = new BaseException(ex.getMessage(), ex);
 		}
 
-		//bex.setFriendlyMessage(bex.getFriendlyMessage());
+		// bex.setFriendlyMessage(bex.getFriendlyMessage());
 	}
 
 	protected String getFriendlyExceptionMessage(BaseException ex,
 			Locale locale, HttpServletRequest request) {
-		 return null;
+		return null;
 	}
-
- 
 
 	public void setErrorCodeMappings(Properties errorCodeMappings) {
 		this.errorCodeMappings = errorCodeMappings;
@@ -163,5 +210,20 @@ public class ErrorCodeMappingExceptionResolver extends
 
 	public void setDefaultErrorView(String defaultErrorView) {
 		this.defaultErrorView = defaultErrorView;
+	}
+
+	/**
+	 * @return the jsonViewName 返回JSON视图处理类的名称
+	 */
+	public String getJsonViewName() {
+		return jsonViewName;
+	}
+
+	/**
+	 * @param jsonViewName
+	 *            设置JSON视图处理类的名称
+	 */
+	public void setJsonViewName(String jsonViewName) {
+		this.jsonViewName = jsonViewName;
 	}
 }

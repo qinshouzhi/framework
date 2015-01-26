@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * <p>
@@ -43,26 +44,28 @@ public class ParameterVo implements Serializable{
 	/**
 	 * @Fields type：参数类型
 	 */
-	@NotNull(message="{sys.parameter.form.type.missing.message}")
+	@NotEmpty(message="{sys.parameter.form.type.missing.message}")
 	private String type;
 	
 	/**@Fileds editable 是否可编辑*/
 	private Boolean editable=Boolean.FALSE;
-	
 	/**
 	 * @Fields nameEn：英文名称
 	 */
-	@Length(max=100,min=4,message="{sys.parameter.form.nameen.length.message}")
+	@NotNull(message="{sys.parameter.form.nameen.missing.message}")
+	@Length(max=128,min=4,message="{sys.parameter.form.nameen.length.message}")
 	private String nameEn;
 	/**
 	 * @Fields nameZh：中文名称
 	 */
-	@Length(max=100,min=4,message="{sys.parameter.form.namezh.length.message}")
+	@NotNull(message="{sys.parameter.form.namezh.missing.message}")
+	@Length(max=128,min=4,message="{sys.parameter.form.namezh.length.message}")
 	private String nameZh;
 	/**
 	 * @Fields value:参数值
 	 */
-	@Size(max=255,min=1,message="{sys.parameter.form.value.length.message}")
+	@NotNull(message="{sys.parameter.form.value.missing.message}")
+	@Size(max=256,min=1,message="{sys.parameter.form.value.length.message}")
 	private String value;
 	/**
 	 * @Fields description:参数描述
