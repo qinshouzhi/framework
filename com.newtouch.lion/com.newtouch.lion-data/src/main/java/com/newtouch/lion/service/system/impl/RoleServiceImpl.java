@@ -15,10 +15,12 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.newtouch.lion.common.Assert;
 import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.system.RoleDao;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.system.Group;
+import com.newtouch.lion.model.system.Parameter;
 import com.newtouch.lion.model.system.Resource;
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
@@ -454,4 +456,37 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.RoleService#doFindTypeByNameEn(java.lang.String)
+	 * add by maojiawei
+	 */
+	@Override
+	public Role doFindTypeByNameEn(String nameEn) {
+		// TODO Auto-generated method stub
+		Assert.notNull(nameEn);
+		String hql = "from Role  where nameEn=:nameEn";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("nameEn", nameEn);
+		java.util.List<Role> roles = roleDao.query(hql, params);
+		if (roles != null && roles.size() > 0) {
+			return roles.get(0);
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.RoleService#doIsExistByNameEn(java.lang.String)
+	 * add by maojiawei
+	 */
+	@Override
+	public boolean doIsExistByNameEn(String nameEn) {
+		// TODO Auto-generated method stub
+		Assert.notNull(nameEn);
+		Role role = this.doFindTypeByNameEn(nameEn);
+		if (role != null)
+			return true;
+		return false;
+	}
+	
 }

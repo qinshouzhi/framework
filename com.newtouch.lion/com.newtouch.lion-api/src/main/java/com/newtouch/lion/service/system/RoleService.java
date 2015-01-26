@@ -9,6 +9,7 @@ package com.newtouch.lion.service.system;
 import java.util.List;
 
 import com.newtouch.lion.model.system.Group;
+import com.newtouch.lion.model.system.Parameter;
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.page.PageResult;
@@ -169,4 +170,19 @@ public interface RoleService {
 	public PageResult<Role> doFindByCriteria(QueryCriteria criteria);
 
 	public String doFindByCriteria(QueryCriteria criteria, String tableId);
+	/**
+	 * 判断参数的英文名是否已存在，
+	 * @param nameEn
+	 * @return  boolean
+	 * @author maojiawei
+	 * */
+	public boolean doIsExistByNameEn(String nameEn); 
+	/***
+	 * 根据参数英文名称获取参数列表
+	 * @param type
+	 * @param nameEn
+	 * @author maojiawei
+	 * @return {@link Parameter}
+	 */
+	public Role  doFindTypeByNameEn(String nameEn);
 }

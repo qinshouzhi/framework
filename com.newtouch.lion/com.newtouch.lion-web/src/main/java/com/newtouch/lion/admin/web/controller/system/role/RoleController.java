@@ -34,6 +34,7 @@ import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.system.Attributes;
 import com.newtouch.lion.model.system.Group;
+import com.newtouch.lion.model.system.Parameter;
 import com.newtouch.lion.model.system.Resource;
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
@@ -400,6 +401,41 @@ public class RoleController extends AbstractController{
 		PageResult<Role> pageResult = this.roleService.doFindByCriteria(queryCriteria);
 		
 		return pageResult.getDataTable();
+	}
+	/*add by maojiawei*/
+	private Boolean isExistByNameEn(String nameEn) {
+		Boolean flag = false;
+		if (StringUtils.isNotEmpty(nameEn)) {
+			flag = roleService.doIsExistByNameEn(nameEn.trim());
+		}
+		return flag;
+	}
+	/*add by maojiawei*/
+	private Boolean isExistByNameEn(String nameEn, String oldNameEn) {
+		Boolean flag = false;
+		if (StringUtils.isNotEmpty(nameEn) && !nameEn.equals(oldNameEn)) {
+			flag = roleService.doIsExistByNameEn(nameEn.trim());
+		}
+		return flag;
+	}
+	/*add by maojiawei*/
+	@RequestMapping(value = "checkisexitnameen")
+	@ResponseBody
+	public String checkIsExistByNameEn(HttpServletRequest servletRequest,
+			@RequestParam(required = false) String nameEn,@RequestParam(required=false) Long id) {
+		Boolean flag=Boolean.FALSE;
+		
+		if(id==null){
+			flag = this.isExistByNameEn(nameEn)? false : true;
+		}else{
+			Role role = roleService.doFindById(id);
+			if(role==null){
+				flag = this.isExistByNameEn(nameEn)? false : true;
+			}else{
+				flag=this.isExistByNameEn(nameEn, role.getNameEn())?false:true;
+			}
+		}
+		return flag.toString();
 	}
 }
 
