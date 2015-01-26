@@ -7,6 +7,7 @@ $(function() {
 	var datagridId='#sys_rolelist_tb';
 	var addForm=$('#sysRoleForm');
 	var addDialog=$('#basic');
+	var queryForm=$('#queryform');
 	
 	handleVForm(addForm,submitForm);
 	//选择DataGrid单行
@@ -16,7 +17,19 @@ $(function() {
 		 onLoadSuccess : function(data) {
 		}
 	});
-		
+	
+	/**
+	 * [查询]
+	 */
+	 $('#btnQuery').click(function(){
+		 var queryParams = $(datagridId).datagrid("options").queryParams;
+		 var params=queryForm.serializeObject();
+	      $.extend(queryParams,params);
+	      //重新加载数据
+	      dataGridReload(datagridId);
+	
+	 });
+	 
 	//重新加载DataGrid
 	  function dataGridReload(dataGridId){
 	     $(datagridId).datagrid('reload');

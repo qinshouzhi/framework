@@ -15,7 +15,7 @@
 <script type="text/javascript" src="${base}/resources/admin/pages/scripts/components-dropdowns.js"></script>
 
 
-<script src="${base}/resources/admin/scripts/test.js" type="text/javascript"></script>
+<script src="${base}/resources/admin/scripts/system/codetype.js" type="text/javascript"></script>
 
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed-hide-logo">
@@ -39,8 +39,7 @@
 				</select>
 			</div>
 			<div class="col-md-4">
-				<@lion.combobox id="parameterCodeList" codeName="SystemParamter" dataClass="bootstrap-select bs-select form-control input-small" title="请选择参数列表" dataSize="8" multipleDataMaxOptions="1"/>
-				 
+				<@lion.combobox id="sysCodeTypeList" codeName="codeType" dataClass="bootstrap-select bs-select form-control input-small" title="请选择通用编码列表" dataSize="8" multipleDataMaxOptions="1"/>
 			</div>
 		</div>
  	</div>

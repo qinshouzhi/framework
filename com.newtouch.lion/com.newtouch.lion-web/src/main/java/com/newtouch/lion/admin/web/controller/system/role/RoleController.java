@@ -28,12 +28,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.newtouch.lion.admin.web.model.system.parameter.ParameterVo;
 import com.newtouch.lion.admin.web.model.system.role.RoleVo;
 import com.newtouch.lion.common.lang.LongUtils;
 import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.system.Attributes;
 import com.newtouch.lion.model.system.Group;
+import com.newtouch.lion.model.system.Parameter;
 import com.newtouch.lion.model.system.Resource;
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
@@ -392,28 +394,33 @@ public class RoleController extends AbstractController{
 	
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public DataTable<Role> list(HttpServletRequest servletRequest,Model model,@RequestParam(defaultValue="1") int page, @RequestParam(defaultValue="15") int rows,@RequestParam(required=false) String sort,@RequestParam(required=false) String order,@RequestParam(required=false) String nameZh){
-		QueryCriteria queryCriteria=new QueryCriteria();
-		
+	public DataTable<Role> list(HttpServletRequest servletRequest,
+			Model model, @RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "15") int rows,
+			@RequestParam(required = false) String sort,
+			@RequestParam(required = false) String order,
+			@ModelAttribute("role") RoleVo roleVo) {
+		QueryCriteria queryCriteria = new QueryCriteria();
+
 		// 设置分页 启始页
-		queryCriteria.setStartIndex(rows*(page-1));
+		queryCriteria.setStartIndex(rows * (page - 1));
 		// 每页大小
-		 queryCriteria.setPageSize(rows);
+		queryCriteria.setPageSize(rows);
 		// 设置排序字段及排序方向
 		if (StringUtils.isNotEmpty(sort) && StringUtils.isNotEmpty(order)) {
 			queryCriteria.setOrderField(sort);
 			queryCriteria.setOrderDirection(order);
-		}else{
+		} else {
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
-			queryCriteria.setOrderDirection(QueryCriteria.ASC);
+			queryCriteria.setOrderDirection("ASC");
 		}
-		// 查询条件 参数类型
-		if (StringUtils.isNotEmpty(nameZh)) {
-			queryCriteria.addQueryCondition("nameZh","%"+nameZh.trim()+"%");
+		//查询条件 中文参数名称按模糊查询
+		if(StringUtils.isNotEmpty(roleVo.getNameZh())){
+			queryCriteria.addQueryCondition("nameZh","%"+roleVo.getNameZh()+"%");
 		}
-		
-		PageResult<Role> pageResult = this.roleService.doFindByCriteria(queryCriteria);
-		
+
+		PageResult<Role> pageResult = roleService
+				.doFindByCriteria(queryCriteria);
 		return pageResult.getDataTable();
 	}
 	/*add by maojiawei*/
