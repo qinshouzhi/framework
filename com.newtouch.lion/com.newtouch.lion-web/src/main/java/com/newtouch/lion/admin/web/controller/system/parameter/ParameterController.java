@@ -106,8 +106,8 @@ public class ParameterController extends AbstractController{
 		if (!errors.hasErrors() && parameterVo.getId() == null) {
 			errors.reject("sys.parameter.form.id.empty");
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
-			return modelAndView; 
-		} 
+			return modelAndView;
+		}
 		Parameter parameter = parameterService.doFindById(parameterVo.getId());
 		if (parameter == null) {
 			errors.reject("sys.parameter.form.id.empty");
