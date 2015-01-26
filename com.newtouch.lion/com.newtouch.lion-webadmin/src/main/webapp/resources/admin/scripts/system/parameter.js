@@ -62,7 +62,11 @@ $(function() {
 			 lion.util.info('提示','请选择要编辑记录');
 			 return;
 		 }
-		 $('#basic').modal('toggle');
+     addForm[0].reset();
+     addForm.find('.form-group').removeClass('has-error');
+     addForm.find('.help-block').remove();
+     addDialog.find('.modal-header h4').text('系统参数编辑');
+		 addDialog.modal('toggle');
 		 addForm.fill(row);
 	 });
 	 //删除

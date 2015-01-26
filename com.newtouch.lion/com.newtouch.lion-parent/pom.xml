@@ -581,6 +581,13 @@
 				<version>${commons-lang.version}</version>
 			</dependency>
 			<!-- commons End -->
+			<!-- POI Start -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>${poi.version}</version>
+			</dependency>
+			<!-- POI End -->
 			<!-- JSON Start -->
 			<dependency>
 				<groupId>com.alibaba</groupId>
