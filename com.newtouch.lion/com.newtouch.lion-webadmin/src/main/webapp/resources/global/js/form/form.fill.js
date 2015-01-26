@@ -193,6 +193,21 @@
 		$.fill.fill(obj,$(this), options);
 		return this;
 	};
+
+    $.fn.serializeObject=function(){
+      var oparams = {};
+      $.each(this.serializeArray(), function() {
+            if (oparams[this.name] !== undefined) {
+                if (!oparams[this.name].push) {
+                    oparams[this.name] = [oparams[this.name]];
+                }
+                oparams[this.name].push(this.value || '');
+            } else {
+                oparams[this.name] = this.value || '';
+            }
+       });
+       return oparams;
+    };
 	
 	$.fill = new Fill();
 
