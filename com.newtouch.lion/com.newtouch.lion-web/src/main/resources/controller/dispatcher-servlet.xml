@@ -108,8 +108,7 @@
 
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
 	<!-- 为了支持forward,redirect -->
-	<bean id="jsltViewResolver"
-		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+	<bean id="jsltViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="order" value="3" />
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/jsp/" />
