@@ -51,6 +51,12 @@
 			<artifactId>spring-context-support</artifactId>
 		</dependency>
 		<!-- Spring framework End -->
+		<!-- POI Start -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+		</dependency>
+		<!-- POI End -->
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
