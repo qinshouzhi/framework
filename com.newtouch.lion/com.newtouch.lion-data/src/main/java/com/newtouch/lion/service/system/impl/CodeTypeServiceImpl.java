@@ -7,6 +7,7 @@
 package com.newtouch.lion.service.system.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,10 +15,12 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.newtouch.lion.common.Assert;
 import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.system.CodeTypeDao;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.system.CodeType;
+import com.newtouch.lion.model.system.Group;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.AbstractService;
@@ -134,7 +137,7 @@ public class CodeTypeServiceImpl extends AbstractService implements  CodeTypeSer
 	public PageResult<CodeType> doFindByCriteria(QueryCriteria criteria) {
 		String queryEntry = "from CodeType";
 		
-		String[] whereBodies = {"type =:type","isDeleted=false" };
+		String[] whereBodies = {"type =:type","isDeleted=false"," nameZh  like :nameZh " };
 		
 		String fromJoinSubClause = "";
 		
@@ -215,4 +218,45 @@ public class CodeTypeServiceImpl extends AbstractService implements  CodeTypeSer
 		codeType.setIsDeleted(Boolean.TRUE);
 		this.doUpdate(codeType);
 	}
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.CodeTypeService#doIsExistByNameEn(java.lang.String)
+	 */
+	@Override
+	public boolean doIsExistByNameEn(String nameEn) {
+		// TODO Auto-generated method stub
+		Assert.notNull(nameEn);
+		CodeType codeType = this.doFindTypeByNameEn(nameEn);
+		if (codeType != null)
+			return true;
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.CodeTypeService#doFindTypeByNameEn(java.lang.String)
+	 */
+	@Override
+	public CodeType doFindTypeByNameEn(String nameEn) {
+		// TODO Auto-generated method stub
+		Assert.notNull(nameEn);
+		String hql = "from CodeType  where nameEn=:nameEn";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("nameEn", nameEn);
+		java.util.List<CodeType> codeTypes = codeTypeDao.query(hql, params);
+		if (codeTypes != null && codeTypes.size() > 0) {
+			return codeTypes.get(0);
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.CodeTypeService#doCreate(com.newtouch.lion.model.system.Group)
+	 */
+	@Override
+	public void doCreate(CodeType codeType) {
+		// TODO Auto-generated method stub
+		Assert.notNull(codeType);
+		codeTypeDao.save(codeType);
+	}
+	
 }

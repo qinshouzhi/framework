@@ -42,7 +42,7 @@
 	<div class="portlet-body">
 		<div class="row">
 			<div class="col-md-12 margin-bottom-10">
-				<form id="queryParameterform" class="form-horizontal">
+				<form id="queryform" class="form-horizontal">
 					<label class="control-label col-md-2" for="nameZh" >用户组名称</label>
 					<div class="col-md-3">
 						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="请输入用户组名称"/>					
@@ -51,7 +51,7 @@
 
 					</div>
 					<div class="col-md-2">
-						<a href="javascript:void(0)" class="btn blue"><i class="fa fa-search"></i>查 询 </a>
+						<a href="javascript:void(0)" id="btnQuery" class="btn blue"><i class="fa fa-search"></i> 查 询 </a>
 					</div>
 				</form>
 			</div>

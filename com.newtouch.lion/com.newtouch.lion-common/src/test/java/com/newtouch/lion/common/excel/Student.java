@@ -10,10 +10,10 @@ import java.util.Date;
 
 /**
  * <p>
- * Title:
+ * Title:Excel导出功能测试类
  * </p>
  * <p>
- * Description:
+ * Description:Excel导出功能测试类
  * </p>
  * <p>
  * Copyright: Copyright (c) 2015
@@ -34,20 +34,24 @@ public class Student {
 	private int age;
 	
 	private boolean sex;
+	
 	private Date birthday;
 
+	private Date regDate;
+	
 	public Student() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Student(long id, String name, int age, boolean sex, Date birthday) {
+	public Student(long id, String name, int age, boolean sex, Date birthday,Date regDate) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.age = age;
 		this.sex = sex;
 		this.birthday = birthday;
+		this.regDate=regDate;
 	}
 
 	public long getId() {
@@ -70,6 +74,20 @@ public class Student {
 		return age;
 	}
 
+	/**
+	 * @return the regDate
+	 */
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	/**
+	 * @param regDate the regDate to set
+	 */
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+
 	public void setAge(int age) {
 		this.age = age;
 	}
@@ -89,4 +107,6 @@ public class Student {
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
+	
+	
 }

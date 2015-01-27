@@ -9,6 +9,8 @@ package com.newtouch.lion.service.system;
 import java.util.List;
 
 import com.newtouch.lion.model.system.CodeType;
+import com.newtouch.lion.model.system.Group;
+import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 
@@ -82,4 +84,25 @@ public interface CodeTypeService {
 	 * @return String JSON字符串
 	 * */
 	public String doFindByCriteria(QueryCriteria criteria, String tableId);
+	/**
+	 * 判断角色的英文名是否已存在，
+	 * @param nameEn
+	 * @return  boolean
+	 * @author maojiawei
+	 * */
+	public boolean doIsExistByNameEn(String nameEn); 
+	/***
+	 * 根据角色英文名称获取用户角色列表
+	 * @param type
+	 * @param nameEn
+	 * @author maojiawei
+	 * @return {@link CodeType}
+	 */
+	public CodeType  doFindTypeByNameEn(String nameEn);
+	/***
+	 * 保存CodeType对象
+	 * @author maojiawei
+	 * @param role
+	 */
+	public void doCreate(CodeType codeType);
 }

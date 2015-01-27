@@ -73,6 +73,7 @@ public class RoleController extends AbstractController{
 	/**默认排序字段名称*/
 	private static final String DEFAULT_ORDER_FILED_NAME="id";
 	/**默认DataGrid表格名称*/
+	@SuppressWarnings("unused")
 	private static final String DEFAULT_TABLE_ID="sys_rolelist_tb";
 	/**角色关联用户列表*/
 	private static final String  AUTHROLE_USER_TABLE_ID="sys_authrole_userlist_tb";

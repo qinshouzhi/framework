@@ -36,7 +36,7 @@ import com.newtouch.lion.model.system.CodeType;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.system.CodeTypeService;
-import com.newtouch.lion.web.constant.ConstantMessage;
+import com.newtouch.lion.web.controller.AbstractController;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
 
@@ -59,12 +59,12 @@ import com.newtouch.lion.web.servlet.view.support.BindResult;
  */
 @Controller("sysCodeTypeController")
 @RequestMapping("/system/codetype/")
-public class CodeTypeController {
+public class CodeTypeController extends AbstractController{
 
 	private final Logger logger = LoggerFactory.getLogger(super.getClass());
 
-	private static final String DEFAULT_FILED_NAME = "id";
-
+	/**默认排序字段名称*/
+	private static final String DEFAULT_ORDER_FILED_NAME="id";
 	@SuppressWarnings("unused")
 	private static final String INDEX_LIST_TB = "sys_codetype_lists_tb";
 	/** 首页返回路径 */
@@ -105,17 +105,25 @@ public class CodeTypeController {
 	public ModelAndView add(
 			@Valid @ModelAttribute("codeList") CodeTypeVo codeTypeVo,
 			Errors errors, ModelAndView modelAndView) {
+		if (!errors.hasErrors()&& this.isExistByNameEn(codeTypeVo.getNameEn())) {
+			errors.rejectValue(codeTypeVo.NAMEEN,
+					"sys.codeType.form.nameen.existed.message",
+					new Object[] { codeTypeVo.getNameEn() }, null);
+		}
+		//是否错误消息
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
-			return modelAndView;
+			return this.getJsonView(modelAndView);
 		}
 		CodeType codeType = new CodeType();
+
 		BeanUtils.copyProperties(codeTypeVo, codeType);
-		codeTypeService.doCreateCodeType(codeType);
+		codeTypeService.doCreate(codeType);
 		Map<String, String> params = new HashMap<String, String>();
-		params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
+		params.put(BindResult.SUCCESS, "sys.codeType.add.success");
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		
+		return this.getJsonView(modelAndView);
 	}
 
 	/** 编辑 */
@@ -124,15 +132,21 @@ public class CodeTypeController {
 	public ModelAndView edit(
 			@Valid @ModelAttribute("codeTypeVo") CodeTypeVo codeTypeVo,
 			Errors errors, ModelAndView modelAndView) {
+		modelAndView=this.getJsonView(modelAndView);
+		if (!errors.hasErrors() && codeTypeVo.getId() == null) {
+			errors.reject("sys.codeType.form.id.empty");
+			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
+			return modelAndView;
+		}
+		CodeType codeType = codeTypeService.doFindById(codeTypeVo.getId());
+		if (codeType == null) {
+			errors.reject("sys.codeType.form.id.empty");
+			return modelAndView;
+		}
+		
+		if (!errors.hasErrors()
+				&& this.isExistByNameEn(codeTypeVo.getNameEn(),codeType.getNameEn())) {errors.rejectValue(CodeTypeVo.NAMEEN,	"sys.codeType.form.nameen.existed.message",new Object[] { codeTypeVo.getNameEn() }, null);
 
-		CodeType codeType = null;
-		if (codeTypeVo.getId() != null) {
-			codeType = this.codeTypeService.doFindById(codeTypeVo.getId());
-			if (codeType == null) {
-				errors.reject(ConstantMessage.EDIT_ISEMPTY_FAIL_MESSAGE_CODE);
-			}
-		} else {
-			errors.reject(ConstantMessage.EDIT_ISEMPTY_FAIL_MESSAGE_CODE);
 		}
 
 		if (errors.hasErrors()) {
@@ -142,9 +156,9 @@ public class CodeTypeController {
 
 		BeanUtils.copyProperties(codeTypeVo, codeType);
 		codeTypeService.doUpdate(codeType);
+
 		Map<String, String> params = new HashMap<String, String>();
-		params.put(BindResult.SUCCESS,
-				ConstantMessage.EDIT_SUCCESS_MESSAGE_CODE);
+		params.put(BindResult.SUCCESS, "sys.codeType.edit.success");
 		modelAndView.addObject(BindMessage.SUCCESS, params);
 		return modelAndView;
 	}
@@ -155,14 +169,12 @@ public class CodeTypeController {
 		Map<String, String> params = new HashMap<String, String>();
 		int updateRow = this.codeTypeService.doDeleteById(id);
 		if (updateRow > 0) {
-			params.put(BindResult.SUCCESS,
-					ConstantMessage.DELETE_SUCCESS_MESSAGE_CODE);
+			params.put(BindResult.SUCCESS,"sys.codeType.delete.success");
 		} else {
-			params.put(BindResult.SUCCESS,
-					ConstantMessage.DELETE_FAIL_MESSAGE_CODE);
+			params.put(BindResult.SUCCESS,"sys.codeType.delete.fail");
 		}
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		return this.getJsonView(modelAndView);
 	}
 
 	@RequestMapping(value = "list")
@@ -172,7 +184,7 @@ public class CodeTypeController {
 			@RequestParam(defaultValue = "15") int rows,
 			@RequestParam(required = false) String sort,
 			@RequestParam(required = false) String order,
-			@RequestParam(required = false) String type) {
+			@ModelAttribute("codetype") CodeTypeVo codeTypeVo) {
 		QueryCriteria queryCriteria = new QueryCriteria();
 
 		// 设置分页 启始页
@@ -184,14 +196,20 @@ public class CodeTypeController {
 			queryCriteria.setOrderField(sort);
 			queryCriteria.setOrderDirection(order);
 		} else {
-			queryCriteria.setOrderField(DEFAULT_FILED_NAME);
-			queryCriteria.setOrderDirection(QueryCriteria.ASC);
+			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+			queryCriteria.setOrderDirection("ASC");
 		}
 		// 查询条件 参数类型
-		if (StringUtils.isNotEmpty(type)) {
-			queryCriteria.addQueryCondition("type", type);
+		if (StringUtils.isNotEmpty(codeTypeVo.getType())) {
+			queryCriteria.addQueryCondition("type", codeTypeVo.getType());
 		}
-		PageResult<CodeType> pageResult = this.codeTypeService.doFindByCriteria(queryCriteria);
+		//查询条件 中文参数名称按模糊查询
+		if(StringUtils.isNotEmpty(codeTypeVo.getNameZh())){
+			queryCriteria.addQueryCondition("nameZh","%"+codeTypeVo.getNameZh()+"%");
+		}
+
+		PageResult<CodeType> pageResult = codeTypeService
+				.doFindByCriteria(queryCriteria);
 		return pageResult.getDataTable();
 	}
 	
@@ -199,5 +217,40 @@ public class CodeTypeController {
 	@RequestMapping(value = "index")
 	public String index() {
 		return INDEX_RETURN;
+	}
+	/*add by maojiawei*/
+	private Boolean isExistByNameEn(String nameEn) {
+		Boolean flag = false;
+		if (StringUtils.isNotEmpty(nameEn)) {
+			flag = codeTypeService.doIsExistByNameEn(nameEn.trim());
+		}
+		return flag;
+	}
+	/*add by maojiawei*/
+	private Boolean isExistByNameEn(String nameEn, String oldNameEn) {
+		Boolean flag = false;
+		if (StringUtils.isNotEmpty(nameEn) && !nameEn.equals(oldNameEn)) {
+			flag = codeTypeService.doIsExistByNameEn(nameEn.trim());
+		}
+		return flag;
+	}
+	/*add by maojiawei*/
+	@RequestMapping(value = "checkisexitnameen")
+	@ResponseBody
+	public String checkIsExistByNameEn(HttpServletRequest servletRequest,
+			@RequestParam(required = false) String nameEn,@RequestParam(required=false) Long id) {
+		Boolean flag=Boolean.FALSE;
+		
+		if(id==null){
+			flag = this.isExistByNameEn(nameEn)? false : true;
+		}else{
+			CodeType codeType = codeTypeService.doFindById(id);
+			if(codeType==null){
+				flag = this.isExistByNameEn(nameEn)? false : true;
+			}else{
+				flag=this.isExistByNameEn(nameEn, codeType.getNameEn())?false:true;
+			}
+		}
+		return flag.toString();
 	}
 }

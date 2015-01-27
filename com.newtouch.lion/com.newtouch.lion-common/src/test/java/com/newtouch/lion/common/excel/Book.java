@@ -8,10 +8,10 @@ package com.newtouch.lion.common.excel;
 
 /**
  * <p>
- * Title:
+ * Title:Excel导出功能测试类
  * </p>
  * <p>
- * Description:
+ * Description:Excel导出功能测试类
  * </p>
  * <p>
  * Copyright: Copyright (c) 2015
