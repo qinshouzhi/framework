@@ -38,6 +38,7 @@
 		<commons-logging.version>1.2</commons-logging.version>
 		<commons-collections.version>3.1</commons-collections.version>
 		<commons-lang.version>2.6</commons-lang.version>
+		<commons-io.version>2.4</commons-io.version>
 		<fastjson.version>1.2.3</fastjson.version>
 		<gson.version>2.2.4</gson.version>
 		<jackson-core.version>2.4.4</jackson-core.version>
@@ -579,6 +580,11 @@
 				<groupId>commons-lang</groupId>
 				<artifactId>commons-lang</artifactId>
 				<version>${commons-lang.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons-io.version}</version>
 			</dependency>
 			<!-- commons End -->
 			<!-- POI Start -->

@@ -237,7 +237,6 @@ public class CodeTypeServiceImpl extends AbstractService implements  CodeTypeSer
 	 */
 	@Override
 	public CodeType doFindTypeByNameEn(String nameEn) {
-		// TODO Auto-generated method stub
 		Assert.notNull(nameEn);
 		String hql = "from CodeType  where nameEn=:nameEn";
 		Map<String, Object> params = new HashMap<String, Object>();
