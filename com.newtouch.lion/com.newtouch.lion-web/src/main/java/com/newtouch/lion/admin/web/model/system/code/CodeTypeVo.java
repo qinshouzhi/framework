@@ -28,7 +28,7 @@ import java.io.Serializable;
 public class CodeTypeVo implements Serializable {
 
 	private static final long serialVersionUID = 7147121427618267071L;
-
+	public static final  String NAMEEN="nameEn";
 	/** 类型id */
 	private Long id;
 	/** 类型 */

@@ -88,7 +88,7 @@ $(function() {
 function successForDelete(data,arg){
    if(data!==null&&!(data.hasError)){
       lion.util.success('提示',data.message);
-      $(datagridId).datagrid('reload');
+      $('#sys_group_list_tb').datagrid('reload');
    }else if(data!==null&&data.hasError){
       var gmsg='';
       for(var msg in data.errorMessage){
@@ -117,7 +117,7 @@ function successAddFrm(data,arg,id){
   if(data!==null&&!(data.hasError)){
   	lion.util.success('提示',data.message);
   	$('#basic').modal('toggle');
-  	$(datagridId).datagrid('reload');
+  	$('#sys_group_list_tb').datagrid('reload');
   }else if(data!==null&&data.hasError){
   	var gmsg='';
   	for(var msg in data.errorMessage){

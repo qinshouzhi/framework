@@ -80,6 +80,7 @@
 	            <value>classpath:i18n/system/datagrid/datagrid</value>
 	            <value>classpath:i18n/system/datacolumn/datacolumn</value>
 	            <value>classpath:i18n/system/code/codeList</value>
+	            <value>classpath:i18n/system/code/codeType</value>
 	            <value>classpath:i18n/system/resource/resource</value>	
 			</list>
 		</property>

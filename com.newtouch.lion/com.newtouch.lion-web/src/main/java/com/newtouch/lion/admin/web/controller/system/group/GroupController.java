@@ -309,8 +309,10 @@ public class GroupController extends AbstractController{
 			@RequestParam(defaultValue = "15") int rows,
 			@RequestParam(required = false) String sort,
 			@RequestParam(required = false) String order,
-			@RequestParam(required = false) String nameZh) {
+			@RequestParam(required = false) String nameZh,
+			@ModelAttribute("group") GroupVo groupVo) {
 		QueryCriteria queryCriteria = new QueryCriteria();
+
 		// 设置分页 启始页
 		queryCriteria.setStartIndex(rows * (page - 1));
 		// 每页大小
@@ -321,13 +323,15 @@ public class GroupController extends AbstractController{
 			queryCriteria.setOrderDirection(order);
 		} else {
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
-			queryCriteria.setOrderDirection(QueryCriteria.ASC);
+			queryCriteria.setOrderDirection("ASC");
 		}
-		// 查询条件 参数类型
-		if (StringUtils.isNotEmpty(nameZh)) {
-			queryCriteria.addQueryCondition("nameZh", "%" + nameZh + "%");
+		//查询条件 中文参数名称按模糊查询
+		if(StringUtils.isNotEmpty(groupVo.getNameZh())){
+			queryCriteria.addQueryCondition("nameZh","%"+groupVo.getNameZh()+"%");
 		}
-		PageResult<Group> pageResult = groupService.doFindByCriteria(queryCriteria);
+
+		PageResult<Group> pageResult = groupService
+				.doFindByCriteria(queryCriteria);
 		return pageResult.getDataTable();
 	}
 	/*add by maojiawei*/
