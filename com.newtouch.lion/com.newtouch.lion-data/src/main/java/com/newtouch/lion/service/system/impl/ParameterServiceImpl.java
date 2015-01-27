@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.newtouch.lion.common.Assert;
-import com.newtouch.lion.common.bean.BeanUtils;
 import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.system.ParameterDao;
 import com.newtouch.lion.model.system.CodeList;
@@ -225,55 +224,7 @@ public class ParameterServiceImpl extends AbstractService implements
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.lion.framework.service.system.ParameterService#doExportExcel(com.
-	 * lion.framework.common.QueryCriteria)
-	 */
-	public void doExportExcel(QueryCriteria queryCriteria, String dataGridId) {
-		// TODO Auto-generated method stub
-
-		// 数据查询
-		String queryEntry = "select parameter ";
-
-		String[] whereBodies = { " parameter.type=:type " };
-
-		String fromJoinSubClause = "from Parameter parameter";
-
-		Map<String, Object> params = queryCriteria.getQueryCondition();
-
-		String orderField = queryCriteria.getOrderField();
-
-		String orderDirection = queryCriteria.getOrderDirection();
-
-		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
-				whereBodies, orderField, orderDirection, params);
-
-		int pageSize = queryCriteria.getPageSize();
-
-		int startIndex = queryCriteria.getStartIndex();
-
-		PageResult<Parameter> result = this.parameterDao.query(hql,HqlUtils.generateCountHql(hql, null), params, startIndex,pageSize);
-
-	}
-
-	/***
-	 * 解析为List对象
-	 * 
-	 * @param result
-	 *            查询结果
-	 * @return
-	 */
-	private List<Map<String, Object>> parserData(PageResult<Parameter> result) {
-		List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
-
-		for (Parameter parameter : result.getContent()) {
-			data.add(BeanUtils.convertBeanToMap(parameter));
-		}
-		return data;
-	}
+	 
 
 	/*
 	 * (non-Javadoc)

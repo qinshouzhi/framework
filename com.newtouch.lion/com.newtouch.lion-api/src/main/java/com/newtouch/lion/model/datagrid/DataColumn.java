@@ -41,7 +41,7 @@ public class DataColumn extends VersionEntity<Long> {
 	/** 列名显示字段 */
 	private String name;
 	/** 显示列宽度：eg width=30 */
-	private Long width;
+	private Integer width;
 	/** rowspan Indicate how many rows a cell should take up. */
 	private int rowspan;
 	/** colspan Indicate how many columns a cell should take up. */
@@ -133,7 +133,7 @@ public class DataColumn extends VersionEntity<Long> {
 	/**
 	 * @return the width
 	 */
-	public Long getWidth() {
+	public Integer getWidth() {
 		return width;
 	}
 
@@ -265,7 +265,7 @@ public class DataColumn extends VersionEntity<Long> {
 	 * @param width
 	 *            the width to set
 	 */
-	public void setWidth(Long width) {
+	public void setWidth(Integer width) {
 		this.width = width;
 	}
 

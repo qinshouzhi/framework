@@ -221,10 +221,9 @@ public class ExcelExport<T> {
 		styleRow.setBorderLeft(HSSFCellStyle.BORDER_THIN);
 		styleRow.setBorderRight(HSSFCellStyle.BORDER_THIN);
 		styleRow.setBorderTop(HSSFCellStyle.BORDER_THIN);
-		styleRow.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+		//styleRow.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 		styleRow.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
 		// 生成另一个字体
-		
 		// 把字体应用到当前的样式
 		styleRow.setFont(this.getFont(this.fontName,this.fontSize));
 		return styleRow;

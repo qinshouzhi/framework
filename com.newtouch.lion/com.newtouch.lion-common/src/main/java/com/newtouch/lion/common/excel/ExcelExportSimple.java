@@ -47,7 +47,7 @@ import com.newtouch.lion.common.number.NumberUtils;
 public class ExcelExportSimple<T> extends ExcelExport<T> {
 
 	/***
-	 * 导出根据ExcelSheet,数据集，输出流，IM转换、数据格式导出Excel
+	 * 根据ExcelSheet,数据集，输出流，IM转换、数据格式导出Excel
 	 * 
 	 * @param excelSheet 工作表定义，包含标题、标题栏、宽度
 	 * @param dataset   数据集

@@ -38,8 +38,8 @@ public  class BaseException extends NestedRuntimeException {
 	
  
 	/***
-	 * 
-	 * @param msg 错误消息
+	 * 代码消息为空
+	 * @param msg 错误代码
 	 */
 	public BaseException(String code) {
 		super("");
