@@ -187,6 +187,7 @@ public interface RoleService {
 	public Role  doFindTypeByNameEn(String nameEn);
 	/***
 	 * 保存Role对象
+	 * @author maojiawei
 	 * @param role
 	 */
 	public void doCreate(Role role);

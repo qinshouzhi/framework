@@ -28,14 +28,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.newtouch.lion.admin.web.model.system.parameter.ParameterVo;
 import com.newtouch.lion.admin.web.model.system.role.RoleVo;
 import com.newtouch.lion.common.lang.LongUtils;
 import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.system.Attributes;
 import com.newtouch.lion.model.system.Group;
-import com.newtouch.lion.model.system.Parameter;
 import com.newtouch.lion.model.system.Resource;
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
@@ -363,7 +361,7 @@ public class RoleController extends AbstractController{
 		
 		modelAndView=this.getJsonView(modelAndView);
 		if (!errors.hasErrors() && roleVo.getId() == null) {
-			errors.reject("sys.parameter.form.id.empty");
+			errors.reject("sys.group.form.id.empty");
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
 			return modelAndView; 
 		} 

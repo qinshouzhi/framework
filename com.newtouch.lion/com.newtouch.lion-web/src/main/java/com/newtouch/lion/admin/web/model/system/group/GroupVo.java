@@ -24,6 +24,7 @@ package com.newtouch.lion.admin.web.model.system.group;
  * @version 1.0
  */
 public class GroupVo {
+	public static final  String NAMEEN="nameEn";
 	/** ID */
 	private Long id;
 	/** 用户组名称－中文 */

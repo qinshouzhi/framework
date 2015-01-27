@@ -14,17 +14,24 @@
 <link href="${base}/resources/global/plugins/easyui/themes/icon.css" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" type="text/css">
-
-<!--EasyUI css End-->
-<script src="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript" ></script>
+<!--lion UI css Start-->
+<link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css">
+<link href="${base}/resources/global/css/dialog/lion.dialog.css" rel="stylesheet" type="text/css">
+<link href="${base}/resources/global/css/combo/lion.combo.css" rel="stylesheet" type="text/css">
+<!--lion UI css End-->
 <script src="${base}/resources/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
-<script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js"></script>
-<script src="${base}/resources/admin/pages/scripts/ui-toastr.js"></script>
-
+<script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript" ></script>
+<script src="${base}/resources/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
 <!--EasyUI JavaScript Start-->
 <script src="${base}/resources/global/plugins/easyui/jquery.easyui.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
 <!--EasyUI JavaScript End-->
+<!--lion UI JS Start-->
+<script src="${base}/resources/global/js/lion.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/form/form.fill.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/dialog/dialog.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
+<!--lion UI JS End-->
 <script src="${base}/resources/global/scripts/framework.js" type="text/javascript"></script>
 <script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/scripts/system/group.js" type="text/javascript"></script>
@@ -51,9 +58,7 @@
 		
 			<div class="col-md-12 margin-bottom-10" id="toolbar">
 				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic"><i class="fa fa-plus"></i> 新增  </a>
-				<a id="btnEdit" class="btn btn-sm red" role="button" data-toggle="modal" data-target="#editDialog"><i class="fa fa-edit"></i> 编辑
-					<div class="modal" id="editDialog" tabindex="-1"></div>
-				</a>
+				<a id="btnEdit" class="btn btn-sm red"><i class="fa fa-edit"></i> 编辑</a>
 				<a href="javascript:void(0)" id="btnDelete" class="btn btn-sm purple"><i class="fa fa-times"></i> 删除 </a>
 				<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue"><i class="fa fa-refresh"></i> 刷新  </a>
 				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> Excel </a>
@@ -77,7 +82,8 @@
 				 	<div class="row">
 				 	<div class="col-md-12 portlet-body form">
 				 		<!-- BEGIN FORM-->
-										<form action="#" class="form-horizontal">
+										<form action="#" class="form-horizontal" name="sysGroupForm" id="sysGroupForm" method="post">
+											<input type="hidden" id='id' name='id' value="">
 											<div class="form-body">
 												<div class="form-group">
 													<label class="col-md-3 control-label">角色组名称(中文)</label>
@@ -99,7 +105,7 @@
 													<label class="col-md-3 control-label">角色组描述</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入角色组描述" maxlength="255" size="30"/>
+															<input type="text" name="description" class="form-control" placeholder="请输入角色组描述" maxlength="255" size="30"/>
 														</div>
 													</div>
 												</div>

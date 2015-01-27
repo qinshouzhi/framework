@@ -129,4 +129,25 @@ public interface GroupService {
 	public PageResult<Group> doFindByCriteria(QueryCriteria criteria);
 
 	public List<DataColumn> doFindByTableId(String tableId);
+	/**
+	 * 判断角色的英文名是否已存在，
+	 * @param nameEn
+	 * @return  boolean
+	 * @author maojiawei
+	 * */
+	public boolean doIsExistByNameEn(String nameEn); 
+	/***
+	 * 根据角色英文名称获取用户角色列表
+	 * @param type
+	 * @param nameEn
+	 * @author maojiawei
+	 * @return {@link Role}
+	 */
+	public Group  doFindTypeByNameEn(String nameEn);
+	/***
+	 * 保存Role对象
+	 * @author maojiawei
+	 * @param role
+	 */
+	public void doCreate(Group group);
 }

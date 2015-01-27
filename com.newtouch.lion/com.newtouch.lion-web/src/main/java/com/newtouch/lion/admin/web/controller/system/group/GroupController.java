@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.group.GroupVo;
+import com.newtouch.lion.admin.web.model.system.role.RoleVo;
 import com.newtouch.lion.common.lang.LongUtils;
 import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.model.system.Group;
@@ -40,6 +41,7 @@ import com.newtouch.lion.service.system.GroupService;
 import com.newtouch.lion.service.system.RoleService;
 import com.newtouch.lion.service.system.UserService;
 import com.newtouch.lion.web.constant.ConstantMessage;
+import com.newtouch.lion.web.controller.AbstractController;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
 
@@ -62,7 +64,7 @@ import com.newtouch.lion.web.servlet.view.support.BindResult;
  */
 @Controller
 @RequestMapping("/system/group/")
-public class GroupController {
+public class GroupController extends AbstractController{
 
 	private final Logger logger = LoggerFactory.getLogger(super.getClass());
 	/** 默认排序字段名称 */
@@ -105,18 +107,25 @@ public class GroupController {
 	public ModelAndView add(@Valid @ModelAttribute("group") GroupVo groupVo,
 			Errors errors, ModelAndView modelAndView) {
 
+		if (!errors.hasErrors()&& this.isExistByNameEn(groupVo.getNameEn())) {
+			errors.rejectValue(RoleVo.NAMEEN,
+					"sys.group.form.nameen.existed.message",
+					new Object[] { groupVo.getNameEn() }, null);
+		}
+		//是否错误消息
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
-			return modelAndView;
+			return this.getJsonView(modelAndView);
 		}
-
 		Group group = new Group();
+
 		BeanUtils.copyProperties(groupVo, group);
-		groupService.doCreateGroup(group);
+		groupService.doCreate(group);
 		Map<String, String> params = new HashMap<String, String>();
-		params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
+		params.put(BindResult.SUCCESS, "sys.group.add.success");
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		
+		return this.getJsonView(modelAndView);
 	}
 
 	/** 用户组编辑对话框 */
@@ -137,14 +146,21 @@ public class GroupController {
 	public ModelAndView edit(@Valid @ModelAttribute("group") GroupVo groupVo,
 			Errors errors, ModelAndView modelAndView) {
 
-		Group group = null;
-		if (groupVo.getId() != null) {
-			group = this.groupService.doFindById(groupVo.getId());
-			if (group == null) {
-				errors.reject(ConstantMessage.EDIT_ISEMPTY_FAIL_MESSAGE_CODE);
-			}
-		} else {
-			errors.reject(ConstantMessage.EDIT_ISEMPTY_FAIL_MESSAGE_CODE);
+		modelAndView=this.getJsonView(modelAndView);
+		if (!errors.hasErrors() && groupVo.getId() == null) {
+			errors.reject("sys.group.form.id.empty");
+			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
+			return modelAndView; 
+		} 
+		Group group = groupService.doFindById(groupVo.getId());
+		if (group == null) {
+			errors.reject("sys.group.form.id.empty");
+			return modelAndView;
+		}
+		
+		if (!errors.hasErrors()
+				&& this.isExistByNameEn(groupVo.getNameEn(),group.getNameEn())) {errors.rejectValue(groupVo.NAMEEN,	"sys.group.form.nameen.existed.message",new Object[] { groupVo.getNameEn() }, null);
+
 		}
 
 		if (errors.hasErrors()) {
@@ -154,9 +170,9 @@ public class GroupController {
 
 		BeanUtils.copyProperties(groupVo, group);
 		groupService.doUpdate(group);
+
 		Map<String, String> params = new HashMap<String, String>();
-		params.put(BindResult.SUCCESS,
-				ConstantMessage.EDIT_SUCCESS_MESSAGE_CODE);
+		params.put(BindResult.SUCCESS, "sys.group.edit.success");
 		modelAndView.addObject(BindMessage.SUCCESS, params);
 		return modelAndView;
 	}
@@ -278,14 +294,12 @@ public class GroupController {
 		Map<String, String> params = new HashMap<String, String>();
 		int updateRow = this.groupService.doDeleteById(id);
 		if (updateRow > 0) {
-			params.put(BindResult.SUCCESS,
-					ConstantMessage.DELETE_SUCCESS_MESSAGE_CODE);
+			params.put(BindResult.SUCCESS,"sys.group.delete.success");
 		} else {
-			params.put(BindResult.SUCCESS,
-					ConstantMessage.DELETE_FAIL_MESSAGE_CODE);
+			params.put(BindResult.SUCCESS,"sys.group.delete.fail");
 		}
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		return this.getJsonView(modelAndView);
 	}
 
 	@RequestMapping(value = "list")
@@ -315,5 +329,40 @@ public class GroupController {
 		}
 		PageResult<Group> pageResult = groupService.doFindByCriteria(queryCriteria);
 		return pageResult.getDataTable();
+	}
+	/*add by maojiawei*/
+	private Boolean isExistByNameEn(String nameEn) {
+		Boolean flag = false;
+		if (StringUtils.isNotEmpty(nameEn)) {
+			flag = groupService.doIsExistByNameEn(nameEn.trim());
+		}
+		return flag;
+	}
+	/*add by maojiawei*/
+	private Boolean isExistByNameEn(String nameEn, String oldNameEn) {
+		Boolean flag = false;
+		if (StringUtils.isNotEmpty(nameEn) && !nameEn.equals(oldNameEn)) {
+			flag = groupService.doIsExistByNameEn(nameEn.trim());
+		}
+		return flag;
+	}
+	/*add by maojiawei*/
+	@RequestMapping(value = "checkisexitnameen")
+	@ResponseBody
+	public String checkIsExistByNameEn(HttpServletRequest servletRequest,
+			@RequestParam(required = false) String nameEn,@RequestParam(required=false) Long id) {
+		Boolean flag=Boolean.FALSE;
+		
+		if(id==null){
+			flag = this.isExistByNameEn(nameEn)? false : true;
+		}else{
+			Group group = groupService.doFindById(id);
+			if(group==null){
+				flag = this.isExistByNameEn(nameEn)? false : true;
+			}else{
+				flag=this.isExistByNameEn(nameEn, group.getNameEn())?false:true;
+			}
+		}
+		return flag.toString();
 	}
 }

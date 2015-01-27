@@ -76,19 +76,20 @@
 				 	<div class="row">
 				 	<div class="col-md-12 portlet-body form">
 				 		<!-- BEGIN FORM-->
-										<form action="#" class="form-horizontal">
+										<form action="#" class="form-horizontal" name="sysAppPropertyForm" id="sysAppPropertyForm" method="post">
+											<input type="hidden" id='id' name='id' value="">
 											<div class="form-body">
 												<div class="form-group">
 													<label class="col-md-3 control-label">AppId</label>
 													<div class="col-md-5">
-														<input type="text"  name="nameZh"  maxlength="100" class="form-control" placeholder="请输入AppId" size="30"/>
+														<input type="text"  name="appId"  maxlength="100" class="form-control" placeholder="请输入AppId" size="30"/>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label">键</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text"  name="nameZh"  maxlength="100" class="form-control" placeholder="请输入键" size="30"/>
+															<input type="text"  name="key"  maxlength="100" class="form-control" placeholder="请输入键" size="30"/>
 														</div>
 													</div>
 												</div>
@@ -96,7 +97,7 @@
 													<label class="col-md-3 control-label">值</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入值" size="30"/>
+															<input type="text"  id="value" name="value" maxlength="100" class="form-control" placeholder="请输入值" size="30"/>
 														</div>
 													</div>
 												</div>

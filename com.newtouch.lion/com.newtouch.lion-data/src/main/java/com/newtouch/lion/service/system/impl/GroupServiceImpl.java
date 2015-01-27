@@ -15,6 +15,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.newtouch.lion.common.Assert;
 import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.system.GroupDao;
 import com.newtouch.lion.json.JSONParser;
@@ -430,4 +431,45 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 		queryCriteria.setPageSize(99999999);
 		return this.doFindByCriteria(queryCriteria).getContent();
 	}
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.GroupService#doIsExistByNameEn(java.lang.String)
+	 */
+	@Override
+	public boolean doIsExistByNameEn(String nameEn) {
+		// TODO Auto-generated method stub
+		Assert.notNull(nameEn);
+		Group group = this.doFindTypeByNameEn(nameEn);
+		if (group != null)
+			return true;
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.GroupService#doFindTypeByNameEn(java.lang.String)
+	 */
+	@Override
+	public Group doFindTypeByNameEn(String nameEn) {
+		// TODO Auto-generated method stub
+		Assert.notNull(nameEn);
+		String hql = "from Group  where nameEn=:nameEn";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("nameEn", nameEn);
+		java.util.List<Group> groups = groupDao.query(hql, params);
+		if (groups != null && groups.size() > 0) {
+			return groups.get(0);
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.GroupService#doCreate(com.newtouch.lion.model.system.Group)
+	 */
+	@Override
+	public void doCreate(Group group) {
+		// TODO Auto-generated method stub
+		Assert.notNull(group);
+		groupDao.save(group);
+	}
+	
 }
