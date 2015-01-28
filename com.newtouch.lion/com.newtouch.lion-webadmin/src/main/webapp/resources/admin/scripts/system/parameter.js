@@ -94,10 +94,6 @@ $(function() {
 	 });
 });
 
-function successForExport(data){
-    console.dir(data);
-}
-
 function successForDelete(data,arg){
    if(data!==null&&!(data.hasError)){
       lion.util.success('提示',data.message);

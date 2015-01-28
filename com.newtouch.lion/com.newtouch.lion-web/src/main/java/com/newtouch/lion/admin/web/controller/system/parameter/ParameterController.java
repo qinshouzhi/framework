@@ -81,6 +81,8 @@ public class ParameterController extends AbstractController{
 	private static final String EDIT_DIALOG_RETURN = "/system/parameter/dialog/edit";
 	/** 默认排序字段名称 */
 	private static final String DEFAULT_ORDER_FILED_NAME = "id";
+	/**字典类型*/
+	private static final String CODE_TYPE="SystemParamter";
 	
 	@Autowired
 	private ParameterService parameterService;
@@ -99,6 +101,7 @@ public class ParameterController extends AbstractController{
 
 	@RequestMapping(value = "index")
 	public String index(HttpServletRequest servletRequest, Model model) {
+		model.addAttribute("codeType", CODE_TYPE);
 		return INDEX_RETURN;
 	}
 
@@ -270,7 +273,7 @@ public class ParameterController extends AbstractController{
 	@ResponseBody
 	public ModelAndView exportExcel(@RequestParam(required=false) String tableId,@ModelAttribute("parameter") ParameterVo parameterVo,ModelAndView modelAndView){
 		
-		String type="SystemParamter";
+	
 		
 		DataGrid dataGrid=dataGridService.doFindByTableId(tableId);
 		
@@ -287,7 +290,7 @@ public class ParameterController extends AbstractController{
 		PageResult<Parameter> result=parameterService.doFindByCriteria(queryCriteria);
 		
 		
-		CodeType codeType=codeTypeService.doFindTypeByNameEn(type);
+		CodeType codeType=codeTypeService.doFindTypeByNameEn(CODE_TYPE);
 		Map<Object, Object>  codeTypeMap=new HashMap<Object, Object>();
 		for(CodeList codeList:codeType.getCodeLists()){
 			codeTypeMap.put(codeList.getCodeValue(),codeList);

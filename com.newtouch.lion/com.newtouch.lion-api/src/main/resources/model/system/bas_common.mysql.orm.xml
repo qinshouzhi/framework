@@ -57,8 +57,7 @@
 		<table name="BAS_PARAMETER" />
 		<attributes>
 			<id name="id">
-				<column name="BAS_PARAMETER_ID" unique="true" nullable="false"
-					precision="11" scale="0" />
+				<column name="BAS_PARAMETER_ID" unique="true" nullable="false" precision="11" scale="0" />
 				<generated-value strategy="IDENTITY" />
 			</id>
 			<basic name="type">
