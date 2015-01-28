@@ -85,8 +85,6 @@ public abstract class AbstractAdapterService implements  AdapterService{
         long startTime=System.currentTimeMillis();
         //初始化
         AdCommand cmd = normalize(stransno, params);
-        // Get Connector
-        connector = this.getConnector();
         // Get Formatter
         Formatter formatter = this.getFormatter(stransno,new String[0]);
         // Format Request

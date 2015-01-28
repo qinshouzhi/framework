@@ -127,7 +127,7 @@ public abstract class FormatterBaseXML extends Formatter {
         sb.append("<response>");
         sb.append(returnXML);
         sb.append("</response>");
-        return returnXML;
+        return sb.toString();
     }
 
     /***

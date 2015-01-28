@@ -47,7 +47,6 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
  * @version 1.0
  */
 @XStreamAlias("response")
-//@XStreamImplicit(itemFieldName="return");
 public class CommandResponse0101  extends BaseCommand{
 	
 	private static final long serialVersionUID = 5594411002569072072L;
