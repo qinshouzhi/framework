@@ -79,9 +79,13 @@ $(function() {
               }
           }); 
 	 });
-	 //导出Excel
+	//导出Excel
 	 $('#btnExport').on('click',function(){
-		 alert('dd');
+		 var params=queryForm.serialize(),url='export.json?tableId='+$(datagridId).attr('id');
+       if(lion.util.isNotEmpty(params)){
+          url+='&'+params;
+       }
+       window.open(url,"_blank");
 	 });
 });
 
