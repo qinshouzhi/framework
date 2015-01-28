@@ -20,7 +20,6 @@ import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.system.CodeTypeDao;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.system.CodeType;
-import com.newtouch.lion.model.system.Group;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.AbstractService;

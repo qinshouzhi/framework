@@ -145,7 +145,7 @@ public class CodeListServiceImpl extends AbstractService implements
 	public PageResult<CodeList> doFindByCriteria(QueryCriteria criteria) {
 		String queryEntry = " select cl from CodeList as cl left join cl.codeType as ct ";
 
-		String[] whereBodies = {"ct.id =:codeTypeId"};
+		String[] whereBodies = {"ct.id =:codeTypeId"," cl.nameZh  like :nameZh " };
 
 		String fromJoinSubClause = "";
 
@@ -224,6 +224,18 @@ public class CodeListServiceImpl extends AbstractService implements
 		if(codelist!=null)
 			return true;
 		return false;
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.CodeListService#doCreate(com.newtouch.lion.model.system.CodeList)
+	 */
+	@Override
+	public void doCreate(CodeList codeList) {
+		// TODO Auto-generated method stub
+		Assert.notNull(codeList);
+		codeListDao.save(codeList);
 	}
 	
 	

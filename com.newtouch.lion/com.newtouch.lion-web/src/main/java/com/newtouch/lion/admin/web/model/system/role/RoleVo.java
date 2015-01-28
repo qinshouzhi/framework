@@ -130,6 +130,13 @@ public class RoleVo {
 	public void setEditable(Boolean editable) {
 		this.editable = editable;
 	}
+	
+	/**
+	 * @return the nameen
+	 */
+	public static String getNameen() {
+		return NAMEEN;
+	}
 
 	/*
 	 * (non-Javadoc)

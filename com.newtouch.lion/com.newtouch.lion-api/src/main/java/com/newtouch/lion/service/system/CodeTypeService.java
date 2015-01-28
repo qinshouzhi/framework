@@ -9,8 +9,6 @@ package com.newtouch.lion.service.system;
 import java.util.List;
 
 import com.newtouch.lion.model.system.CodeType;
-import com.newtouch.lion.model.system.Group;
-import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 

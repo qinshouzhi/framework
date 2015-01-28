@@ -134,6 +134,13 @@ public class GroupVo {
 	public GroupVo() {
 		super();
 	}
+	
+	/**
+	 * @return the nameen
+	 */
+	public static String getNameen() {
+		return NAMEEN;
+	}
 
 	/*
 	 * (non-Javadoc)

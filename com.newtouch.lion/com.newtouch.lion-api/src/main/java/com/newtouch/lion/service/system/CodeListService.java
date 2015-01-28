@@ -92,4 +92,10 @@ public interface CodeListService {
 	 * 根据通过编码类型英文名称，并返回JSON字符串
 	 */
 	// public String getCodeListForJSONByCodeTypeNameEn(String codeTypeNameEn);
+	/***
+	 * 保存CodeType对象
+	 * @author maojiawei
+	 * @param role
+	 */
+	public void doCreate(CodeList codeList);
 }
