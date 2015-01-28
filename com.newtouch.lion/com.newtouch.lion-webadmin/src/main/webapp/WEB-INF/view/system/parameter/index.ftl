@@ -69,7 +69,7 @@
 				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> Excel </a>
 			</div>
 			<div class="col-md-12">
-				  <@lion.datagrids name="sys_parameter_lists_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/parameter/list.htm" dataOptions="" style="height:400px;"/>
+				  <@lion.datagrids name="sys_parameter_lists_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/parameter/list.json" dataOptions="" style="height:400px;"/>
 			</div>
 		</div>
 	</div>

@@ -307,7 +307,7 @@ public class ParameterController extends AbstractController{
 		
 		modelAndView.addObject(FILENAME,fileName);
 		
-		logger.info("export Excel {} cost:{} time",dataGrid.getTitle(),costTime);
+		logger.info("export Excel {} cost:{} time,fileName:{}",dataGrid.getTitle(),costTime,fileName);
 		logger.info("out Excel导出");
 		return this.getExcelView(modelAndView);
 	}

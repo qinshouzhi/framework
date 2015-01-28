@@ -12,15 +12,15 @@
 <link href="${base}/resources/global/plugins/easyui/themes/metro/combo.css" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/global/plugins/easyui/themes/metro/combobox.css" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/global/plugins/easyui/themes/icon.css" rel="stylesheet" type="text/css"/>
+<!--EasyUI css End-->
+<!--bootstrap css Start-->
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" type="text/css">
-
-<!--EasyUI css End-->
+<!--bootstrap css End-->
 <script src="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript" ></script>
 <script src="${base}/resources/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js"></script>
 <script src="${base}/resources/admin/pages/scripts/ui-toastr.js"></script>
-
 <!--EasyUI JavaScript Start-->
 <script src="${base}/resources/global/plugins/easyui/jquery.easyui.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
