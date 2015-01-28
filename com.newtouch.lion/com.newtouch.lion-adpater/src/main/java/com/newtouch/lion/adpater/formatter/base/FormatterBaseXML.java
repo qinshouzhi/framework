@@ -8,8 +8,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.dom4j.Document;
-import org.dom4j.Element;
 import org.springframework.util.StringUtils;
 
 import com.newtouch.lion.adpater.command.AdCommand;
@@ -43,31 +41,7 @@ public abstract class FormatterBaseXML extends Formatter {
      * */
     protected final Pattern PATTERN_RESULT_XML = Pattern.compile(RegexParseXML.REGEX_RESULT_XML);
     
-    //生成请求报文Body
-    protected String generateRequestBody(Object command,String apiName){
-    	
-    	//生成正则表达式
-    	String REGEX_COMMAND_XML="<"+command.getClass().getSimpleName()+">([\\s\\S]*)</"+command.getClass().getSimpleName()+">";
-    	Pattern PATTERN_COMMAND_XML = Pattern.compile(REGEX_COMMAND_XML);
-    	
-    	//生成请求报文body
-        String commandXmlString=XMLUtil.toXml(command);
-        Matcher matcher = PATTERN_COMMAND_XML.matcher(commandXmlString);
-        String commandBodyXML = null;
-        if (matcher.find()) {
-        	commandBodyXML = matcher.group(1);
-        }
-        //拼接
-        StringBuffer buffer=new StringBuffer();
-        buffer.append("<api:"+apiName+">");
-        buffer.append(commandBodyXML);
-        buffer.append("</api:"+apiName+">");
-    	return buffer.toString()
-    			.replace("<search>", "<queryInfo><![CDATA[<search>")
-    			.replace("</search>", "</search>]]></queryInfo>")
-    			.replace("\n","")
-    			.replace(" ","");
-    }
+   
 
     //组织完整报文
     protected String loadXml(String requestXML) {
@@ -149,7 +123,8 @@ public abstract class FormatterBaseXML extends Formatter {
         if (matcher.find()) {
             returnXML = matcher.group();
         }
-     
+        StringBuilder sb=new StringBuilder();
+        sb.append("");
         return returnXML;
     }
 

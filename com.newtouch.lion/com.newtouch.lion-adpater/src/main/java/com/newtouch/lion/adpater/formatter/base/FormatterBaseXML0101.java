@@ -10,7 +10,6 @@ import org.springframework.util.StringUtils;
 
 import com.newtouch.lion.adpater.command.AdCommand;
 import com.newtouch.lion.adpater.command.AdapterCommand;
-import com.newtouch.lion.adpater.command.base.Command0101;
 import com.newtouch.lion.adpater.command.base.CommandResponse0101;
 import com.newtouch.lion.adpater.constant.TransResult;
 import com.newtouch.lion.adpater.constant.Transaction;
@@ -49,7 +48,6 @@ public class FormatterBaseXML0101  extends  FormatterBaseXML{
 		// 获取return根节点中的内容，不包含return节点本身
 		String returnXMLContent = this.parseReturnContent(responseXML);
 		returnXMLContent="<response>"+returnXMLContent+"</response>";
-		logger.info("returnXMLContent:{}",returnXMLContent);
 		List<AdCommand> list = new LinkedList<AdCommand>();
 		Map<String, String> param = new HashMap<String, String>();
 		if (!StringUtils.isEmpty(returnXMLContent)) {
