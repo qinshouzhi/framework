@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.newtouch.lion.adpater.command.AdCommand;
 import com.newtouch.lion.adpater.command.AdapterCommand;
-import com.newtouch.lion.adpater.command.base.Command0101;
 import com.newtouch.lion.adpater.command.base.CommandResponse0101;
 import com.newtouch.lion.adpater.constant.TransNo;
 import com.newtouch.lion.adpater.service.AdapterService;

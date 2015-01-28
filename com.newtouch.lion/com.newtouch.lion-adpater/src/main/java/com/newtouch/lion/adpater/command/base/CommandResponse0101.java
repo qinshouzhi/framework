@@ -11,7 +11,6 @@ import java.util.List;
 
 import com.newtouch.lion.adpater.command.base.command0101.Response0101;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamAliasType;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 /**
  * <p>

@@ -6,8 +6,6 @@
 */
 package com.newtouch.lion.adpater.command.base.command0101; 
 
-import java.awt.List;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 /**
  * <p>

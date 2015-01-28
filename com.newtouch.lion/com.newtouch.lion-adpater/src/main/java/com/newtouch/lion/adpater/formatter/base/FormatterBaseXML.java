@@ -124,7 +124,9 @@ public abstract class FormatterBaseXML extends Formatter {
             returnXML = matcher.group();
         }
         StringBuilder sb=new StringBuilder();
-        sb.append("");
+        sb.append("<response>");
+        sb.append(returnXML);
+        sb.append("</response>");
         return returnXML;
     }
 

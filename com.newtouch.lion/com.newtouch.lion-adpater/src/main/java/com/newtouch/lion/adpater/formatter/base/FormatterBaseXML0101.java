@@ -43,11 +43,8 @@ public class FormatterBaseXML0101  extends  FormatterBaseXML{
 	public AdapterCommand parseXml(String responseXML, Class<?> clazz) {
     	
     	logger.info("responseXML:{}",responseXML);
-    	
-    	
 		// 获取return根节点中的内容，不包含return节点本身
 		String returnXMLContent = this.parseReturnContent(responseXML);
-		returnXMLContent="<response>"+returnXMLContent+"</response>";
 		List<AdCommand> list = new LinkedList<AdCommand>();
 		Map<String, String> param = new HashMap<String, String>();
 		if (!StringUtils.isEmpty(returnXMLContent)) {
