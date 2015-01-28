@@ -32,12 +32,14 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.newtouch.lion.common.excel.CellAlign;
 import com.newtouch.lion.common.excel.CellDataType;
 import com.newtouch.lion.common.excel.ExcelExport;
+import com.newtouch.lion.common.file.FileUtil;
 import com.newtouch.lion.common.number.NumberUtils;
 import com.newtouch.lion.excpetion.ErrorCode;
 import com.newtouch.lion.excpetion.ExcelException;
@@ -69,7 +71,9 @@ public class ExcelExportServiceImpl extends ExcelExport<Object>  implements Exce
 	/** 日志 */
 	private final static Logger logger = LoggerFactory.getLogger(ExcelExportServiceImpl.class);	 
 	
-	
+	/***Excel临时存放目录*/
+	@Value("${excel.temp.path}")
+	protected String excelTempPath;
 	
 	
 	/* (non-Javadoc)
@@ -95,12 +99,13 @@ public class ExcelExportServiceImpl extends ExcelExport<Object>  implements Exce
 	 * @see com.newtouch.lion.service.excel.ExcelExportService#export(com.newtouch.lion.model.datagrid.DataGrid, java.util.Collection, java.lang.String, java.util.Map, java.util.Map)
 	 */
 	@Override
-	public void export(DataGrid dataGrid, Collection<?> data,
+	public String export(DataGrid dataGrid, Collection<?> data,
 			String fullFileName, Map<String, Map<Object, Object>> codeTypes,
 			Map<String, String> dataFormats) {
 		OutputStream out = null;
+		File file=FileUtil.newFile(this.excelTempPath,fullFileName);
+		fullFileName=file.getAbsolutePath();
 		try {
-			File file=new File(fullFileName);
 			out=new FileOutputStream(file);
 			this.export(dataGrid, data, out, codeTypes, dataFormats);
 		} catch (FileNotFoundException e) {
@@ -108,6 +113,7 @@ public class ExcelExportServiceImpl extends ExcelExport<Object>  implements Exce
 		}finally{
 			IOUtils.closeQuietly(out);
 		}
+		return fullFileName;
 	}
 
 
@@ -115,9 +121,9 @@ public class ExcelExportServiceImpl extends ExcelExport<Object>  implements Exce
 	 * @see com.newtouch.lion.service.excel.ExcelExportService#export(com.newtouch.lion.model.datagrid.DataGrid, java.util.Collection, java.lang.String, java.util.Map)
 	 */
 	@Override
-	public void export(DataGrid dataGrid, Collection<?> data,
+	public String export(DataGrid dataGrid, Collection<?> data,
 			String fullFileName, Map<String, Map<Object, Object>> codeTypes) {
-		this.export(dataGrid, data, fullFileName, codeTypes, null);
+		return this.export(dataGrid, data, fullFileName, codeTypes, null);
 	}
 
 
@@ -125,9 +131,9 @@ public class ExcelExportServiceImpl extends ExcelExport<Object>  implements Exce
 	 * @see com.newtouch.lion.service.excel.ExcelExportService#export(com.newtouch.lion.model.datagrid.DataGrid, java.util.Collection, java.lang.String)
 	 */
 	@Override
-	public void export(DataGrid dataGrid, Collection<?> data,
+	public String export(DataGrid dataGrid, Collection<?> data,
 			String fullFileName) {
-		this.export(dataGrid, data, fullFileName,null);
+		return this.export(dataGrid, data, fullFileName,null);
 	}
 
 
@@ -369,6 +375,17 @@ public class ExcelExportServiceImpl extends ExcelExport<Object>  implements Exce
 			throw new  ExcelException(ErrorCode.EXCEL_PROPERTY_READ.code(),e.getMessage(),e);
 		}
 		return value;
+	}
+	
+	public static void main(String[] args) {
+		File file =new File("D:/app/exce11l/temp/");    
+		//如果文件夹不存在则创建    
+		if(!file .exists()&&!file .isDirectory()){
+		    file.mkdirs();
+		}else{  
+		    System.out.println("//目录存在");  
+		} 
+		System.out.println(file.getPath());
 	}
 	
 }

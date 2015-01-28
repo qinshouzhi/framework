@@ -73,6 +73,8 @@ public class DateUtil {
 	public static final String FORMAT_TIME_HH_MM_SS = "HH:mm:ss";
 	/** FORMAT_TIME_HHMMSS:HHmmss */
 	public static final String FORMAT_TIME_HHMMSS = "HHmmss";
+	/** FORMAT_TIME_HHMMSS:HHmmssSSS*/
+	public static final String FORMAT_TIME_HHMMSS_SSS= "HHmmssSSS";
 
 	/**
 	 * 

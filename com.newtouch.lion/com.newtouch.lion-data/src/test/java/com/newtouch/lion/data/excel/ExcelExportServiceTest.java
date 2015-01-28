@@ -62,6 +62,7 @@ public class ExcelExportServiceTest extends AllTest {
 	@Autowired
 	private CodeTypeService codeTypeService;
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void export(){
 		String tableId="sys_parameter_lists_tb";

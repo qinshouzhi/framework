@@ -9,6 +9,7 @@ package com.newtouch.lion.web.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,6 +24,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.newtouch.lion.common.date.DateUtil;
 import com.newtouch.lion.web.support.editor.StringEscapeEditor;
 
 /**
@@ -127,6 +129,18 @@ public class AbstractController {
 	protected ModelAndView getExcelView(ModelAndView modelAndView){
 		 modelAndView.setViewName(EXCEL_VIEW);
 		 return modelAndView;
+	}
+	/***
+	 * 格式为：UUID+时分少毫秒+后缀名
+	 * @param extension 后缀名
+	 * @return 文件名
+	 */
+	protected String createFileName(String extension){
+		StringBuilder sb=new StringBuilder();
+		sb.append(UUID.randomUUID().toString().replace("-","").toUpperCase());
+		sb.append(DateUtil.formatDate(new Date(),DateUtil.FORMAT_TIME_HHMMSS_SSS));
+		sb.append(extension);
+		return sb.toString();
 	}
 }
 

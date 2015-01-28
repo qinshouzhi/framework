@@ -6,6 +6,8 @@
  */
 package com.newtouch.lion.service.datagrid.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -15,10 +17,13 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.newtouch.lion.common.sql.HqlUtils;
+import com.newtouch.lion.comparator.DataColumnComparator;
 import com.newtouch.lion.dao.datagrid.DataGridDao;
 import com.newtouch.lion.json.JSONParser;
+import com.newtouch.lion.model.datagrid.DataColumn;
 import com.newtouch.lion.model.datagrid.DataGrid;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
@@ -67,15 +72,38 @@ public class DataGridServiceImpl extends AbstractService implements DataGridServ
 	 */
 	@Override
 	public DataGrid doFindByTableId(String tableId) {
-		DataGrid dataGrid=null;
+		 
 		String hql="from  DataGrid where tableId=:tableId";
 		Map<String,Object> params=new HashMap<String, Object>();
 		params.put("tableId",tableId);
 		List<DataGrid>  dataGrids=this.dataGridDao.query(hql, params);
-		if(dataGrids!=null&&dataGrids.size()>0)
-			dataGrid=dataGrids.get(0);
-		return dataGrid;
+		if(!CollectionUtils.isEmpty(dataGrids))
+			return dataGrids.get(0);
+		return null;
 	}
+	
+	
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.datagrid.DataGridService#doFindByTableIdAndSort(java.lang.String)
+	 */
+	@Override
+	public DataGrid doFindByTableIdAndSort(String tableId) {
+		String hql="from  DataGrid where tableId=:tableId";
+		Map<String,Object> params=new HashMap<String, Object>();
+		params.put("tableId",tableId);
+		List<DataGrid>  dataGrids=this.dataGridDao.query(hql, params);
+		if(!CollectionUtils.isEmpty(dataGrids)){
+			DataGrid dataGrid=dataGrids.get(0);
+			List<DataColumn> dataColumns = new ArrayList<DataColumn>(dataGrid.getColumns());			
+			Collections.sort(dataColumns, new DataColumnComparator());			
+			dataGrid.setSortColumns(dataColumns);
+			return dataGrid;
+		}
+		return null;
+	}
+
+
 
 	/* (non-Javadoc)
 	 * @see com.lion.framework.service.datagrid.DataGridService#doGetById(java.lang.Long)

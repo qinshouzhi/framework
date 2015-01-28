@@ -61,30 +61,33 @@ public interface ExcelExportService{
 	public void export(DataGrid dataGrid, Collection<?> data,OutputStream out);
 	
 	/****
-	 * 根据dataGrid,数据集，文件全路径，IM转换、数据格式导出Excel
+	 * 根据dataGrid,数据集，文件名，IM转换、数据格式导出Excel
 	 * @param dataGrid 数据集
 	 * @param data
-	 * @param fullFileName 文件全路径(包含文件名和文件全路径)
+	 * @param fullFileName 文件名
 	 * @param codeTypes IM
 	 * @param dataFormats 数据格式定义
+	 * @return 文件名（全路径的文件名）
 	 */
-	public void export(DataGrid dataGrid, Collection<?> data,String fullFileName,Map<String, Map<Object, Object>> codeTypes,Map<String, String> dataFormats);
+	public String export(DataGrid dataGrid, Collection<?> data,String fullFileName,Map<String, Map<Object, Object>> codeTypes,Map<String, String> dataFormats);
 	
 	
 	/****
-	 * 根据dataGrid,数据集，文件全路径，IM转换导出Excel
+	 * 根据dataGrid,数据集，文件名，IM转换导出Excel
 	 * @param dataGrid
 	 * @param data
-	 * @param fullFileName 文件全路径(包含文件名和文件全路径)
+	 * @param fullFileName 文件名
 	 * @param codeTypes IM
+	 * @return 文件名（全路径的文件名）
 	 */
-	public void export(DataGrid dataGrid, Collection<?> data,String fullFileName,Map<String, Map<Object, Object>> codeTypes);
+	public String export(DataGrid dataGrid, Collection<?> data,String fullFileName,Map<String, Map<Object, Object>> codeTypes);
 	
 	/****
 	 * 根据dataGrid,数据集，文件全路径，IM转换导出Excel
 	 * @param dataGrid 
 	 * @param data 数据集
-	 * @param fullFileName  文件全路径(包含文件名和文件全路径)
+	 * @param fullFileName  文件名
+	 *   @return 文件名（全路径的文件名）
 	 */
-	public void export(DataGrid dataGrid, Collection<?> data,String fullFileName);
+	public String export(DataGrid dataGrid, Collection<?> data,String fullFileName);
 }

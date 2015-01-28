@@ -18,6 +18,8 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.newtouch.lion.common.file.FileUtil;
+
 /**
  * <p>
  * Title: Excel报表视图抽像类
@@ -45,7 +47,7 @@ public class ReportExcelView extends AbstractReportView{
 	/**The  content disposition for an Excel response*/
 	private static final String CONTENT_DISPOSITION="Content-disposition";
 	/** The extension to look for existing templates*/
-	private static final String EXTENSION = ".xls";
+	private static final String EXTENSION =FileUtil.EXCEL_EXTENSION;
 	/**attachment*/
 	private static final String ATTACHMENT="attachment;filename=";
 	/**参数名称*/

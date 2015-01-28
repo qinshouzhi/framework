@@ -14,10 +14,10 @@ import com.newtouch.lion.query.QueryCriteria;
 
 /**
  * <p>
- * Title:
+ * Title:DataGrid 数据表格
  * </p>
  * <p>
- * Description:
+ * Description:DataGrid 数据表格创建
  * </p>
  * <p>
  * Copyright: Copyright (c) 2013
@@ -30,10 +30,25 @@ import com.newtouch.lion.query.QueryCriteria;
  * @version 1.0
  */
 public interface DataGridService {
-
+	/**
+	 * 创建数据表格对象
+	 * @param dataGrid
+	 */
 	public void doCreateDataGrid(DataGrid dataGrid);
-
+	/***
+	 * 
+	 * 根据tableId的ID获取DataGrid数据表
+	 * @param tableId 表格ID
+	 * @return DataGrid
+	 */
+	@Deprecated
 	public DataGrid doFindByTableId(String tableId);
+	/****
+	 * 根据tableId的ID获取DataGrid数据表,并列表进行排序
+	 * @param tableId  表格ID
+	 * @return DataGrid 数据 
+	 */
+	public DataGrid doFindByTableIdAndSort(String tableId);
 
 	public List<DataGrid> doFindAll();
 
