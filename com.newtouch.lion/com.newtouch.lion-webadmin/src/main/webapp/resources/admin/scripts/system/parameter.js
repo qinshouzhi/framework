@@ -23,9 +23,8 @@ $(function() {
 	 * [查询]
 	 */
 	 $('#btnQuery').click(function(){
-	      var queryParams = $(datagridId).datagrid("options").queryParams,params=queryForm.serializeObject();
-	      $.extend(queryParams,params);
-	      var result=$.extend(queryParams,params);
+	      var params=queryForm.serializeObject();	      
+        $(datagridId).datagrid({queryParams:params});
 	      //重新加载数据
 	      dataGridReload(datagridId);
 	
@@ -87,10 +86,18 @@ $(function() {
 	 //导出Excel
 	 $('#btnExport').on('click',function(){
 		   var params=queryForm.serialize(),url='export.json?tableId='+$(datagridId).attr('id');
+       var options=$(datagridId).datagrid('options');       
+       if(options.hasOwnProperty('sortName')&&lion.util.isNotEmpty(options.sortName)){
+           url+='&sort='+options.sortName;
+       }
+       if(options.hasOwnProperty('sortOrder')&&lion.util.isNotEmpty(options.sortOrder)){
+          url+='&order='+options.sortOrder;
+       }
        if(lion.util.isNotEmpty(params)){
           url+='&'+params;
        }
-       window.open(url,"_blank");
+       console.dir(url);
+       window.open(url,'_blank');
 	 });
 });
 

@@ -51,7 +51,7 @@
 					<div class="col-md-3">
 						<select  id="CodeList"  name="type" data-size="8" 
 						 	data-maxoptions="1"   multiple placeholder="请选择编码类型列表..."  
-						 	class="lion-combo bootstrap-select form-control input-small" data-valueField='nameEn' 
+						 	class="lion-combo bootstrap-select form-control input-small" data-valueField='id' 
 						 	data-textField='nameZh' data-loadURL="${base}/system/codetype/combox.json">
 						 </select>
 					</div>

@@ -7,6 +7,8 @@
 package com.newtouch.lion.admin.web.controller.system.group;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,14 +31,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.group.GroupVo;
+import com.newtouch.lion.admin.web.model.system.parameter.ParameterVo;
 import com.newtouch.lion.admin.web.model.system.role.RoleVo;
+import com.newtouch.lion.common.date.DateUtil;
 import com.newtouch.lion.common.lang.LongUtils;
+import com.newtouch.lion.comparator.DataColumnComparator;
 import com.newtouch.lion.data.DataTable;
+import com.newtouch.lion.model.datagrid.DataColumn;
+import com.newtouch.lion.model.datagrid.DataGrid;
 import com.newtouch.lion.model.system.Group;
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
+import com.newtouch.lion.service.datagrid.DataGridService;
+import com.newtouch.lion.service.excel.ExcelExportService;
 import com.newtouch.lion.service.system.GroupService;
 import com.newtouch.lion.service.system.RoleService;
 import com.newtouch.lion.service.system.UserService;
@@ -94,6 +103,12 @@ public class GroupController extends AbstractController{
 	private UserService userService;
 	@Autowired
 	private RoleService roleService;
+	/**DataGrid表格*/
+	@Autowired
+	private DataGridService dataGridService;
+	/**Excel通用导出*/
+	@Autowired
+	private ExcelExportService excelExportService;
 
 	/** 用户组数据添加对话框 */
 	@RequestMapping(value = "adddialog")
@@ -368,5 +383,48 @@ public class GroupController extends AbstractController{
 			}
 		}
 		return flag.toString();
+	}
+	
+	/****
+	 * 
+	 * @param tableId
+	 * @param roleVo
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value = "export")
+	@ResponseBody
+	public ModelAndView exportExcel(@RequestParam(required=false) String tableId,@ModelAttribute("parameter") ParameterVo parameterVo,ModelAndView modelAndView){
+		
+		DataGrid dataGrid=dataGridService.doFindByTableId(tableId);
+		
+		List<DataColumn> dataColumns = new ArrayList<DataColumn>(dataGrid.getColumns());
+		
+		Collections.sort(dataColumns, new DataColumnComparator());
+		
+		dataGrid.setSortColumns(dataColumns);
+		
+		QueryCriteria queryCriteria=new QueryCriteria();
+		
+		queryCriteria.setPageSize(99999);
+		
+		PageResult<Group> result=groupService.doFindByCriteria(queryCriteria);
+		
+		Map<String, Map<Object, Object>> fieldCodeTypes = new HashMap<String, Map<Object, Object>>();
+
+		Map<String, String> dataFormats = new HashMap<String, String>();
+		
+		dataFormats.put("birthday", DateUtil.FORMAT_DATE_YYYY_MM_DD);
+		
+		String fileName="D:/app/excel/group"+DateUtil.formatDate(new Date(),DateUtil.FORMAT_DATETIME_YYYYMMDDHHMMSSSSS)+".xls";
+		
+		modelAndView.addObject(FILENAME,fileName);
+		modelAndView.addObject("title", dataGrid.getTitle());
+		Long startTime=System.currentTimeMillis();
+		excelExportService.export(dataGrid, result.getContent(), fileName, fieldCodeTypes, dataFormats);
+		Long costTime=System.currentTimeMillis()-startTime;
+		logger.info("export Excel {} cost:{} time",dataGrid.getTitle(),costTime);
+		logger.info("out Excel导出");
+		return this.getExcelView(modelAndView);
 	}
 }
