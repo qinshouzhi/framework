@@ -30,15 +30,61 @@ import com.newtouch.lion.model.datagrid.DataGrid;
  * @author WangLijun
  * @version 1.0
  */
-public interface ExcelExportService<T> {
+public interface ExcelExportService{
 	
 	/****
 	 * 根据dataGrid,数据集，输出流，IM转换、数据格式导出Excel
-	 * @param dataGrid
-	 * @param dataset
-	 * @param out
-	 * @param codeTypes
-	 * @param dataFormats
+	 * @param dataGrid 
+	 * @param dataset 数据集
+	 * @param out 输出流
+	 * @param codeTypes IM 
+	 * @param dataFormats 数据格式化
 	 */
-	public void export(DataGrid dataGrid, Collection<T> data,OutputStream out, Map<String, Map<Object, Object>> codeTypes,Map<String, String> dataFormats);
+	public void export(DataGrid dataGrid, Collection<?> data,OutputStream out, Map<String, Map<Object, Object>> codeTypes,Map<String, String> dataFormats);
+	
+	
+	/****
+	 * 根据dataGrid,数据集，输出流，IM转换、导出Excel
+	 * @param dataGrid 
+	 * @param dataset 数据集
+	 * @param out 输出流
+	 * @param codeTypes IM
+	 */
+	public void export(DataGrid dataGrid, Collection<?> data,OutputStream out, Map<String, Map<Object, Object>> codeTypes);
+	
+	/****
+	 * 根据dataGrid,数据集，输出流、导出Excel
+	 * @param dataGrid 
+	 * @param dataset 数据集
+	 * @param codeTypes IM
+	 */
+	public void export(DataGrid dataGrid, Collection<?> data,OutputStream out);
+	
+	/****
+	 * 根据dataGrid,数据集，文件全路径，IM转换、数据格式导出Excel
+	 * @param dataGrid
+	 * @param data
+	 * @param fullFileName 文件全路径(包含文件名和文件全路径)
+	 * @param codeTypes IM
+	 * @param dataFormats 数据格式定义
+	 */
+	public void export(DataGrid dataGrid, Collection<?> data,String fullFileName,Map<String, Map<Object, Object>> codeTypes,Map<String, String> dataFormats);
+	
+	
+	/****
+	 * 根据dataGrid,数据集，文件全路径，IM转换导出Excel
+	 * @param dataGrid
+	 * @param data
+	 * @param fullFileName 文件全路径(包含文件名和文件全路径)
+	 * @param codeTypes IM
+	 */
+	public void export(DataGrid dataGrid, Collection<?> data,String fullFileName,Map<String, Map<Object, Object>> codeTypes);
+	
+	/****
+	 * 根据dataGrid,数据集，文件全路径，IM转换导出Excel
+	 * @param dataGrid 
+	 * @param data 数据集
+	 * @param fullFileName  文件全路径(包含文件名和文件全路径)
+	 */
+	public void export(DataGrid dataGrid, Collection<?> data,String fullFileName);
 }

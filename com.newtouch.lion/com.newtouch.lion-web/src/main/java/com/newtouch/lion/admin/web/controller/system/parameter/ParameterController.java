@@ -6,11 +6,12 @@
  */
 package com.newtouch.lion.admin.web.controller.system.parameter;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -30,13 +31,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.parameter.ParameterVo;
+import com.newtouch.lion.common.date.DateUtil;
+import com.newtouch.lion.comparator.DataColumnComparator;
 import com.newtouch.lion.data.DataTable;
-import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.datagrid.DataColumn;
+import com.newtouch.lion.model.datagrid.DataGrid;
+import com.newtouch.lion.model.system.CodeList;
+import com.newtouch.lion.model.system.CodeType;
 import com.newtouch.lion.model.system.Parameter;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.datagrid.DataColumnService;
+import com.newtouch.lion.service.datagrid.DataGridService;
+import com.newtouch.lion.service.excel.ExcelExportService;
+import com.newtouch.lion.service.system.CodeTypeService;
 import com.newtouch.lion.service.system.ParameterService;
 import com.newtouch.lion.web.controller.AbstractController;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
@@ -62,8 +70,7 @@ import com.newtouch.lion.web.servlet.view.support.BindResult;
 @Controller
 @RequestMapping("/system/parameter/")
 public class ParameterController extends AbstractController{
-
-	@SuppressWarnings("unused")
+	
 	private final Logger logger = LoggerFactory.getLogger(super.getClass());
 
 	/** 参数首页 */
@@ -74,12 +81,21 @@ public class ParameterController extends AbstractController{
 	private static final String EDIT_DIALOG_RETURN = "/system/parameter/dialog/edit";
 	/** 默认排序字段名称 */
 	private static final String DEFAULT_ORDER_FILED_NAME = "id";
-
+	
 	@Autowired
 	private ParameterService parameterService;
-
+	/**表格行数*/
 	@Autowired
 	protected DataColumnService dataColumnService;
+	/**IM*/
+	@Autowired
+	private CodeTypeService codeTypeService;
+	/**DataGrid表格*/
+	@Autowired
+	private DataGridService dataGridService;
+	/**Excel通用导出*/
+	@Autowired
+	private ExcelExportService excelExportService;
 
 	@RequestMapping(value = "index")
 	public String index(HttpServletRequest servletRequest, Model model) {
@@ -243,33 +259,58 @@ public class ParameterController extends AbstractController{
 				.doFindByCriteria(queryCriteria);
 		return pageResult.getDataTable();
 	}
-
-	/** 根据TableId配置DataGrid */
-	protected Set<String> getColumns(String tableId) {
-		List<DataColumn> dataColumns = this.dataColumnService
-				.doFindByTableId(tableId);
-		Set<String> properties = new HashSet<String>();
-		for (DataColumn dataColumn : dataColumns) {
-			properties.add(dataColumn.getField());
+	/****
+	 * 
+	 * @param tableId
+	 * @param parameterVo
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value = "export")
+	public ModelAndView exportExcel(@RequestParam(required=false) String tableId,@ModelAttribute("parameter") ParameterVo parameterVo,ModelAndView modelAndView){
+		logger.info("in Excel导出");		
+		String type="SystemParamter";
+		
+		DataGrid dataGrid=dataGridService.doFindByTableId(tableId);
+		
+		List<DataColumn> dataColumns = new ArrayList<DataColumn>(dataGrid.getColumns());
+		
+		Collections.sort(dataColumns, new DataColumnComparator());
+		
+		dataGrid.setSortColumns(dataColumns);
+		
+		QueryCriteria queryCriteria=new QueryCriteria();
+		
+		queryCriteria.setPageSize(99999);
+		
+		PageResult<Parameter> result=parameterService.doFindByCriteria(queryCriteria);
+		
+		
+		CodeType codeType=codeTypeService.doFindTypeByNameEn(type);
+		Map<Object, Object>  codeTypeMap=new HashMap<Object, Object>();
+		for(CodeList codeList:codeType.getCodeLists()){
+			codeTypeMap.put(codeList.getCodeValue(),codeList);
 		}
-		return properties;
+		
+		Map<String, Map<Object, Object>> fieldCodeTypes = new HashMap<String, Map<Object, Object>>();
+		fieldCodeTypes.put("type",codeTypeMap);
+
+		Map<String, String> dataFormats = new HashMap<String, String>();
+		
+		dataFormats.put("birthday", DateUtil.FORMAT_DATE_YYYY_MM_DD);
+		
+		String fileName="D:/app/excel/parameter"+DateUtil.formatDate(new Date(),DateUtil.FORMAT_DATETIME_YYYYMMDDHHMMSSSSS)+".xls";
+		modelAndView.setViewName("reportExcelView");
+		
+		modelAndView.addObject(FILENAME,fileName);
+		modelAndView.addObject("title", dataGrid.getTitle());
+		Long startTime=System.currentTimeMillis();
+		excelExportService.export(dataGrid, result.getContent(), fileName, fieldCodeTypes, dataFormats);
+		Long costTime=System.currentTimeMillis()-startTime;
+		logger.info("export Excel {} cost:{} time",dataGrid.getTitle(),costTime);
+		logger.info("out Excel导出");
+		return this.getExcelView(modelAndView);
 	}
 
-	protected String getJSONString(Long total, List<Parameter> objects,
-			Set<String> properties, String datePattern,
-			Boolean includeProperties) {
-		StringBuffer sb = new StringBuffer();
-		sb.append("{\"total\":");
-		sb.append(total);
-		sb.append(",\"rows\":");
-		if (objects == null) {
-			// log.info("-----objects is null");
-		}
-		// log.info("objects.size():"+objects.size());
-		String objectJSONStr = JSONParser.toJSONString(objects, datePattern,
-				properties, includeProperties);
-		sb.append(objectJSONStr);
-		sb.append("}");
-		return sb.toString();
-	}
+	 
 }

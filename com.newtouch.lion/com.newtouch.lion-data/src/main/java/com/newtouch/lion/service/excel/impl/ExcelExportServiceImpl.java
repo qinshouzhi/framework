@@ -6,6 +6,9 @@
 */
 package com.newtouch.lion.service.excel.impl; 
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -16,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
@@ -28,6 +32,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.newtouch.lion.common.excel.CellAlign;
@@ -58,22 +63,79 @@ import com.newtouch.lion.service.excel.ExcelExportService;
  * @author WangLijun
  * @version 1.0
  */
-public class ExcelExportServiceImpl<T> extends ExcelExport<T>  implements ExcelExportService<T>{
+@Service
+public class ExcelExportServiceImpl extends ExcelExport<Object>  implements ExcelExportService{
 	
 	/** 日志 */
-	private final static Logger logger = LoggerFactory.getLogger(ExcelExportServiceImpl.class);
+	private final static Logger logger = LoggerFactory.getLogger(ExcelExportServiceImpl.class);	 
 	
-	/**默认调用*/
-	public ExcelExportServiceImpl() {
-		 super();
+	
+	
+	
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.excel.ExcelExportService#export(com.newtouch.lion.model.datagrid.DataGrid, java.util.Collection, java.io.OutputStream, java.util.Map)
+	 */
+	@Override
+	public void export(DataGrid dataGrid, Collection<?> data, OutputStream out,
+			Map<String, Map<Object, Object>> codeTypes) {
+		this.export(dataGrid, data, out, codeTypes, null);
 	}
-	
-	
+
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.excel.ExcelExportService#export(com.newtouch.lion.model.datagrid.DataGrid, java.util.Collection, java.io.OutputStream)
+	 */
+	@Override
+	public void export(DataGrid dataGrid, Collection<?> data, OutputStream out) {
+		this.export(dataGrid, data, out, null);
+	}
+
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.excel.ExcelExportService#export(com.newtouch.lion.model.datagrid.DataGrid, java.util.Collection, java.lang.String, java.util.Map, java.util.Map)
+	 */
+	@Override
+	public void export(DataGrid dataGrid, Collection<?> data,
+			String fullFileName, Map<String, Map<Object, Object>> codeTypes,
+			Map<String, String> dataFormats) {
+		OutputStream out = null;
+		try {
+			File file=new File(fullFileName);
+			out=new FileOutputStream(file);
+			this.export(dataGrid, data, out, codeTypes, dataFormats);
+		} catch (FileNotFoundException e) {
+		   throw new ExcelException(ErrorCode.EXCEL_FILE_NOTFOUND.code(),e.getMessage(),e);
+		}finally{
+			IOUtils.closeQuietly(out);
+		}
+	}
+
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.excel.ExcelExportService#export(com.newtouch.lion.model.datagrid.DataGrid, java.util.Collection, java.lang.String, java.util.Map)
+	 */
+	@Override
+	public void export(DataGrid dataGrid, Collection<?> data,
+			String fullFileName, Map<String, Map<Object, Object>> codeTypes) {
+		this.export(dataGrid, data, fullFileName, codeTypes, null);
+	}
+
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.excel.ExcelExportService#export(com.newtouch.lion.model.datagrid.DataGrid, java.util.Collection, java.lang.String)
+	 */
+	@Override
+	public void export(DataGrid dataGrid, Collection<?> data,
+			String fullFileName) {
+		this.export(dataGrid, data, fullFileName,null);
+	}
+
+
 	/* (non-Javadoc)
 	 * @see com.newtouch.lion.service.excel.ExcelExportService#export(com.newtouch.lion.model.datagrid.DataGrid, java.util.Collection, java.io.OutputStream, java.util.Map, java.util.Map)
 	 */
 	@Override
-	public void export(DataGrid dataGrid, Collection<T> data, OutputStream out,
+	public void export(DataGrid dataGrid, Collection<?> data, OutputStream out,
 			Map<String, Map<Object, Object>> codeTypes,
 			Map<String, String> dataFormats) {
 			// 声明一个工作薄
@@ -92,12 +154,12 @@ public class ExcelExportServiceImpl<T> extends ExcelExport<T>  implements ExcelE
 			this.setHeader(sheet,dataGrid.getTitle(),dataGrid.getSortColumns(), index);
 			index++;
 			// 遍历集合数据，产生数据行
-			Iterator<T> it = data.iterator();
+			Iterator<?> it = data.iterator();
 			
 			while (it.hasNext()) {
 				index++;
 				row = sheet.createRow(index);
-				T obj = (T) it.next();
+				Object obj = (Object) it.next();
 				for (int i = 0; i <dataGrid.getSortColumns().size(); i++) {
 					HSSFCell cell = row.createCell(i);
 					DataColumn  dataColumn=dataGrid.getSortColumns().get(i);
@@ -295,7 +357,7 @@ public class ExcelExportServiceImpl<T> extends ExcelExport<T>  implements ExcelE
 	 * @param obj 对象
 	 * @return Object的Value
 	 */
-	protected Object getProperty(T obj,String fieldName){
+	protected Object getProperty(Object obj,String fieldName){
 		Object value=null;
 		try {
 			value = PropertyUtils.getProperty(obj,fieldName);

@@ -48,6 +48,10 @@ public class AbstractController {
 	protected final Logger logger=LoggerFactory.getLogger(super.getClass());
 	/**JsonView*/
 	protected final String JSON_VIEW="jsonView";
+	/**excelView*/
+	protected final String EXCEL_VIEW="reportExcelView";
+	/**参数名称*/
+	protected static final String FILENAME="fileName";
 	
 	@InitBinder
 	public void initBinder(ServletRequestDataBinder binder) {
@@ -113,6 +117,15 @@ public class AbstractController {
 	 */
 	protected ModelAndView  getJsonView(ModelAndView modelAndView){
 		 modelAndView.setViewName(JSON_VIEW);
+		 return modelAndView;
+	}
+	/***
+	 * 返回Excel视图
+	 * @param modelAndView
+	 * @return ModelAndView
+	 */  
+	protected ModelAndView getExcelView(ModelAndView modelAndView){
+		 modelAndView.setViewName(EXCEL_VIEW);
 		 return modelAndView;
 	}
 }

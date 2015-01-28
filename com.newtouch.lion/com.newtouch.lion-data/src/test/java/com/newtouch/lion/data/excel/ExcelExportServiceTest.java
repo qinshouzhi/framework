@@ -73,13 +73,13 @@ public class ExcelExportServiceTest extends AllTest {
 		QueryCriteria queryCriteria=new QueryCriteria();
 		queryCriteria.setPageSize(99999);
 		PageResult<Parameter> result=parameterService.doFindByCriteria(queryCriteria);
-		ExcelExportService<Parameter> excelExportService=new ExcelExportServiceImpl<Parameter>();
+		ExcelExportService excelExportService=new ExcelExportServiceImpl();
 		
 		CodeType codeType=codeTypeService.doFindTypeByNameEn(type);
-		 Map<Object, Object>  codeTypeMap=new HashMap<Object, Object>();
-		 for(CodeList codeList:codeType.getCodeLists()){
-			 codeTypeMap.put(codeList.getCodeValue(),codeList);
-		 }
+		Map<Object, Object>  codeTypeMap=new HashMap<Object, Object>();
+		for(CodeList codeList:codeType.getCodeLists()){
+			codeTypeMap.put(codeList.getCodeValue(),codeList);
+		}
 		
 		Map<String, Map<Object, Object>> fieldCodeTypes = new HashMap<String, Map<Object, Object>>();
 		fieldCodeTypes.put("type",codeTypeMap);
@@ -89,7 +89,7 @@ public class ExcelExportServiceTest extends AllTest {
 		
 		OutputStream out=null;
 		try {
-			out = new FileOutputStream("D:/app/excel/parameter1.xls");
+			out = new FileOutputStream("D:/app/excel/parameter12.xls");
 			excelExportService.export(dataGrid, result.getContent(), out, fieldCodeTypes, dataFormats);
 			out.close();
 		} catch (IOException e) {

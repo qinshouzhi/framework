@@ -24,7 +24,8 @@ package com.newtouch.lion.excpetion;
  */
 public enum ErrorCode {
 	EXCEL_EXPORT_WRITE("EEW0001"),
-	EXCEL_PROPERTY_READ("EER0001");
+	EXCEL_PROPERTY_READ("EER0001"),
+	EXCEL_FILE_NOTFOUND("EER0002");
 	
 	/***
 	 * 错误代码
