@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	<context:component-scan  base-package="com.saic.wemall.adapter"/>
+	<!-- 加载接口配置文件  -->
+	<context:property-placeholder  local-override="false" file-encoding="UTF-8" location="classpath:application-adapter.properties"/>
+	
+	<!-- HTTP 连接适配 -->
+	<bean  id="adapterHttpHandler" class="com.newtouch.lion.adpater.http.impl.AdapterHttpHandlerImpl">
+		<!-- 连接超时时间  -->
+		<property name="connectionTimeout"  value="${httpclient.connectionTimeout}"/>
+		<!-- 回应超时时间 -->
+		<property name="connectionRequestTimeout"  value="${httpclient.connectionRequestTimeout}"/>
+		<!-- 闲置连接超时时间 -->
+		<property name="socketTimeOut" value="${httpclient.socketTimeOut}"/>
+		<!-- 每个路由最大连接数  -->		
+		<property name="maxRouteConnection" value="${httpclient.maxRouteConnection}"/>
+		<!-- 每台主机的最连接数 -->
+		<property name="maxTotal" value="${httpclient.maxTotal}"/>
+		<!-- 连接空闲的时间 -->
+		<property name="idleTimeout" value="${httpclient.idleTimeout}"/>
+	</bean>
+	
+	<!-- BMS Base 连接器 -->
+	<bean  id="baseConnector" class="com.newtouch.lion.adpater.connector.bms.BMSConnector">
+		 <property name="adapterHttpHandler" ref="adapterHttpHandler"/>
+		 <property name="addresss"  value="${bms.base.url}"/>
+	</bean>
+	<!-- base Service -->
+	<bean  id="adapterServiceBase" class="com.newtouch.lion.adpater.service.base.AdapterServiceBaseImpl">
+		<property name="connector"  ref="baseConnector"/>
+	</bean>	
+</beans>
