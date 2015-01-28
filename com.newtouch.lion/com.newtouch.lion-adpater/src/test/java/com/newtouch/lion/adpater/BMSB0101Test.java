@@ -12,6 +12,7 @@ import com.newtouch.lion.adpater.command.AdapterCommand;
 import com.newtouch.lion.adpater.command.base.CommandResponse0101;
 import com.newtouch.lion.adpater.constant.TransNo;
 import com.newtouch.lion.adpater.service.AdapterService;
+import com.newtouch.lion.adpater.util.JSONParser;
 
 /**
  *  BMS测试类<br> 
@@ -38,7 +39,9 @@ public class BMSB0101Test extends AppTest {
         Iterator<AdCommand> it = baseCommand.getList().iterator();
         while (it.hasNext()) {
         	CommandResponse0101 basicBean = (CommandResponse0101) it.next();
+        	String str=JSONParser.toJSONString(basicBean);
             logger.info("BMSB0101Test:"+basicBean.toString());
+            logger.info("str:{}",str);
         }
     }
     
