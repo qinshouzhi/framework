@@ -51,6 +51,10 @@
 		<sitemesh.version>2.5-atlassian-9</sitemesh.version>
 		<ehcache.version>2.7.0</ehcache.version>
 		<ehcache-spring-annotations.version>1.2.0</ehcache-spring-annotations.version>
+		<httpclient.version>4.3.5</httpclient.version>
+		<httpcore.version>4.3.2</httpcore.version>
+		<dom4j.version>1.6.1</dom4j.version>
+		<xstream.version>1.4.6</xstream.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -664,6 +668,26 @@
 				</exclusions>
 			</dependency>
 			<!-- Ehcache End -->
+			<dependency>
+				<groupId>dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+				<version>${dom4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.thoughtworks.xstream</groupId>
+				<artifactId>xstream</artifactId>
+				<version>${xstream.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>${httpclient.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpcore</artifactId>
+				<version>${httpcore.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<build>
