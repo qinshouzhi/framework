@@ -267,8 +267,9 @@ public class ParameterController extends AbstractController{
 	 * @return
 	 */
 	@RequestMapping(value = "export")
+	@ResponseBody
 	public ModelAndView exportExcel(@RequestParam(required=false) String tableId,@ModelAttribute("parameter") ParameterVo parameterVo,ModelAndView modelAndView){
-		logger.info("in Excel导出");		
+		
 		String type="SystemParamter";
 		
 		DataGrid dataGrid=dataGridService.doFindByTableId(tableId);
@@ -300,7 +301,6 @@ public class ParameterController extends AbstractController{
 		dataFormats.put("birthday", DateUtil.FORMAT_DATE_YYYY_MM_DD);
 		
 		String fileName="D:/app/excel/parameter"+DateUtil.formatDate(new Date(),DateUtil.FORMAT_DATETIME_YYYYMMDDHHMMSSSSS)+".xls";
-		modelAndView.setViewName("reportExcelView");
 		
 		modelAndView.addObject(FILENAME,fileName);
 		modelAndView.addObject("title", dataGrid.getTitle());

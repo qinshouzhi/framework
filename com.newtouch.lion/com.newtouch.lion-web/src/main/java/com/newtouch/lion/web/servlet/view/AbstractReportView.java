@@ -31,7 +31,7 @@ import org.springframework.web.servlet.view.AbstractView;
  */
 public abstract class AbstractReportView extends AbstractView {
 	/****
-	 * 生成下载报表的文件名,支持中文名称下载
+	 * 生成下载报表的文件名,支持中文名称下载，对下载文件名进行编码
 	 * @param prefixName 前缀名称
 	 * @param extension  扩展名
 	 * @param fileName   文件名

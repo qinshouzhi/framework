@@ -86,9 +86,17 @@ $(function() {
 	 });
 	 //导出Excel
 	 $('#btnExport').on('click',function(){
-		 alert('dd');
+		   var params=queryForm.serialize(),url='export.json?tableId='+$(datagridId).attr('id');
+       if(lion.util.isNotEmpty(params)){
+          url+='&'+params;
+       }
+       window.open(url,"_blank");
 	 });
 });
+
+function successForExport(data){
+    console.dir(data);
+}
 
 function successForDelete(data,arg){
    if(data!==null&&!(data.hasError)){

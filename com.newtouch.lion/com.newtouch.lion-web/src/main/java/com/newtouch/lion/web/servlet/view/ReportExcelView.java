@@ -71,6 +71,7 @@ public class ReportExcelView extends AbstractReportView{
         outputStream.write(FileUtils.readFileToByteArray(exportFile));
         outputStream.flush();
         outputStream.close();
+        FileUtils.deleteQuietly(exportFile);
         logger.info("下载ReportExcel文件视图");
 	}
 

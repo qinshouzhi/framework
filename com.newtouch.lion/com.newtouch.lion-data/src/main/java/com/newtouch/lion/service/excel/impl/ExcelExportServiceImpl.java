@@ -188,7 +188,7 @@ public class ExcelExportServiceImpl extends ExcelExport<Object>  implements Exce
 					//判断是否全部由数字组成
 					if (StringUtils.isNotEmpty(textValue)) {
 						if (NumberUtils.isNumeric(textValue)) {
-							dataType=CellDataType.BYTES;
+							dataType=CellDataType.NUMBER;
 							this.setCellForNumber(cell, textValue, rowStyle,dataType,dataColumn.getAlign());
 						} else {
 							this.setCellForString(cell, textValue, rowStyle,dataType,dataColumn.getAlign());

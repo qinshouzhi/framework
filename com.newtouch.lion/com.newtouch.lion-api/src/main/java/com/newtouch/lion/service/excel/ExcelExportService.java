@@ -62,7 +62,7 @@ public interface ExcelExportService{
 	
 	/****
 	 * 根据dataGrid,数据集，文件全路径，IM转换、数据格式导出Excel
-	 * @param dataGrid
+	 * @param dataGrid 数据集
 	 * @param data
 	 * @param fullFileName 文件全路径(包含文件名和文件全路径)
 	 * @param codeTypes IM
