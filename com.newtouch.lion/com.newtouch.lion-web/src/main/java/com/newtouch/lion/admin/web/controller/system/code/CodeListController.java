@@ -34,13 +34,12 @@ import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.datagrid.DataColumn;
 import com.newtouch.lion.model.system.CodeList;
-import com.newtouch.lion.model.system.CodeType;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.datagrid.DataColumnService;
 import com.newtouch.lion.service.system.CodeListService;
 import com.newtouch.lion.service.system.CodeTypeService;
-import com.newtouch.lion.web.constant.ConstantMessage;
+import com.newtouch.lion.web.controller.AbstractController;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
 
@@ -63,7 +62,7 @@ import com.newtouch.lion.web.servlet.view.support.BindResult;
  */
 @Controller(value = "sysCodelistController")
 @RequestMapping("/system/codelist/")
-public class CodeListController {
+public class CodeListController extends AbstractController{
 
 	private final Logger logger = LoggerFactory.getLogger(super.getClass());
 	/** 参数添加首页 */
@@ -72,8 +71,8 @@ public class CodeListController {
 	private static final String EDIT_DIALOG_RETURN = "/system/codelist/editdialog";
 	/** 首页返回路径 */
 	private static final String INDEX_RETURN = "/system/codelist/index";
-	/** 默认排序字段 */
-	private static final String DEFAULT_FILED_NAME = "id";
+	/**默认排序字段名称*/
+	private static final String DEFAULT_ORDER_FILED_NAME="id";
 	@Autowired
 	private CodeListService codeListService;
 	@Autowired
@@ -98,23 +97,21 @@ public class CodeListController {
 	public ModelAndView edit(
 			@Valid @ModelAttribute("codeListVo") CodeListVo codeListVo,
 			Errors errors, ModelAndView modelAndView) {
-
-		CodeList codeList = null;
-		if (codeListVo.getId() != null) {
-			codeList = this.codeListService.doFindById(codeListVo.getId());
-			if (codeList == null) {
-				errors.reject(ConstantMessage.EDIT_ISEMPTY_FAIL_MESSAGE_CODE);
-			}
-		} else {
-			errors.reject(ConstantMessage.EDIT_ISEMPTY_FAIL_MESSAGE_CODE);
+		modelAndView=this.getJsonView(modelAndView);
+		if (!errors.hasErrors() && codeListVo.getId() == null) {
+			errors.reject("sys.codeList.form.id.empty");
+			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
+			return modelAndView;
 		}
-
+		CodeList codeList = codeListService.doFindById(codeListVo.getId());
+		if (codeList == null) {
+			errors.reject("sys.codeList.form.id.empty");
+			return modelAndView;
+		}
+		
 		if (!errors.hasErrors()
-				&& this.isExistByNameEn(codeListVo.getNameEn(),
-						codeList.getNameEn())) {
-			errors.rejectValue(CodeListVo.NAMEEN,
-					"sys.codeList.form.nameen.existed.message",
-					new Object[] { codeListVo.getNameEn() }, null);
+				&& this.isExistByNameEn(codeListVo.getNameEn(),codeList.getNameEn())) {errors.rejectValue(CodeListVo.NAMEEN,	"sys.codeList.form.nameen.existed.message",new Object[] { codeListVo.getNameEn() }, null);
+
 		}
 
 		if (errors.hasErrors()) {
@@ -123,13 +120,10 @@ public class CodeListController {
 		}
 
 		BeanUtils.copyProperties(codeListVo, codeList);
-		CodeType codeType = this.codeTypeService.doFindById(codeListVo
-				.getCodeTypeId());
-		codeList.setCodeType(codeType);
 		codeListService.doUpdateObj(codeList);
+
 		Map<String, String> params = new HashMap<String, String>();
-		params.put(BindResult.SUCCESS,
-				ConstantMessage.EDIT_SUCCESS_MESSAGE_CODE);
+		params.put(BindResult.SUCCESS, "sys.codeList.edit.success");
 		modelAndView.addObject(BindMessage.SUCCESS, params);
 		return modelAndView;
 	}
@@ -145,27 +139,25 @@ public class CodeListController {
 			@Valid @ModelAttribute("codeList") CodeListVo codeListVo,
 			Errors errors, ModelAndView modelAndView) {
 
-		if (!errors.hasErrors() && this.isExistByNameEn(codeListVo.getNameEn())) {
+		if (!errors.hasErrors()&& this.isExistByNameEn(codeListVo.getNameEn())) {
 			errors.rejectValue(CodeListVo.NAMEEN,
 					"sys.codeList.form.nameen.existed.message",
 					new Object[] { codeListVo.getNameEn() }, null);
 		}
+		//是否错误消息
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
-			return modelAndView;
+			return this.getJsonView(modelAndView);
 		}
-
 		CodeList codeList = new CodeList();
 
 		BeanUtils.copyProperties(codeListVo, codeList);
-		CodeType codeType = this.codeTypeService.doFindById(codeListVo
-				.getCodeTypeId());
-		codeList.setCodeType(codeType);
-		codeListService.doCreateObj(codeList);
+		codeListService.doCreate(codeList);
 		Map<String, String> params = new HashMap<String, String>();
-		params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
+		params.put(BindResult.SUCCESS, "sys.codeList.add.success");
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		
+		return this.getJsonView(modelAndView);
 	}
 
 	@RequestMapping(value = "delete")
@@ -174,12 +166,12 @@ public class CodeListController {
 		Map<String, String> params = new HashMap<String, String>();
 		int updateRow = this.codeListService.doDeleteById(id);
 		if (updateRow > 0) {
-			params.put(BindResult.SUCCESS, "sys.codeList.delete.success");
+			params.put(BindResult.SUCCESS,"sys.codeList.delete.success");
 		} else {
-			params.put(BindResult.SUCCESS, "sys.codeList.delete.fail");
+			params.put(BindResult.SUCCESS,"sys.codeList.delete.fail");
 		}
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		return this.getJsonView(modelAndView);
 	}
 
 	private Boolean isExistByNameEn(String nameEn, String oldNameEn) {
@@ -205,7 +197,8 @@ public class CodeListController {
 			@RequestParam(defaultValue = "15") int rows,
 			@RequestParam(required = false) String sort,
 			@RequestParam(required = false) String order,
-			@RequestParam(required = false) String type) {
+			@RequestParam(required = false) String type,
+			@ModelAttribute("codelist") CodeListVo codeListVo){
 		QueryCriteria queryCriteria = new QueryCriteria();
 
 		// 设置分页 启始页
@@ -217,17 +210,20 @@ public class CodeListController {
 			queryCriteria.setOrderField(sort);
 			queryCriteria.setOrderDirection(order);
 		} else {
-			queryCriteria.setOrderField(DEFAULT_FILED_NAME);
+			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
 			queryCriteria.setOrderDirection("ASC");
 		}
 		// 查询条件 参数类型
-		if (StringUtils.isNotEmpty(type)) {
-			queryCriteria.addQueryCondition(QueryCriteria.ASC, type);
+		if (codeListVo.getCodeTypeId() != null) {
+			queryCriteria.addQueryCondition("codeTypeId", codeListVo.getCodeTypeId());
+		}
+		//查询条件 中文参数名称按模糊查询
+		if(StringUtils.isNotEmpty(codeListVo.getNameZh())){
+			queryCriteria.addQueryCondition("nameZh","%"+codeListVo.getNameZh()+"%");
 		}
 
 		PageResult<CodeList> pageResult = codeListService
 				.doFindByCriteria(queryCriteria);
-
 		return pageResult.getDataTable();
 	}
 
@@ -259,17 +255,30 @@ public class CodeListController {
 		sb.append("}");
 		return sb.toString();
 	}
-
-	@RequestMapping(value = "checkisexitnameen")
-	@ResponseBody
-	public String checkIsExistByNameEn(HttpServletRequest servletRequest, @RequestParam(required = false) String nameEn) {
-		Boolean flag = this.isExistByNameEn(nameEn) == true ? false : true;
-		return flag.toString();
-	}
 	
 	/** 首页显示 */
 	@RequestMapping(value = "index")
 	public String index() {
 		return INDEX_RETURN;
+	}
+	
+	/*add by maojiawei*/
+	@RequestMapping(value = "checkisexitnameen")
+	@ResponseBody
+	public String checkIsExistByNameEn(HttpServletRequest servletRequest,
+			@RequestParam(required = false) String nameEn,@RequestParam(required=false) Long id) {
+		Boolean flag=Boolean.FALSE;
+		
+		if(id==null){
+			flag = this.isExistByNameEn(nameEn)? false : true;
+		}else{
+			CodeList codeList = codeListService.doFindById(id);
+			if(codeList==null){
+				flag = this.isExistByNameEn(nameEn)? false : true;
+			}else{
+				flag=this.isExistByNameEn(nameEn, codeList.getNameEn())?false:true;
+			}
+		}
+		return flag.toString();
 	}
 }

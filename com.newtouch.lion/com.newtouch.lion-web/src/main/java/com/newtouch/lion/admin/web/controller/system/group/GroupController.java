@@ -159,7 +159,7 @@ public class GroupController extends AbstractController{
 		}
 		
 		if (!errors.hasErrors()
-				&& this.isExistByNameEn(groupVo.getNameEn(),group.getNameEn())) {errors.rejectValue(groupVo.NAMEEN,	"sys.group.form.nameen.existed.message",new Object[] { groupVo.getNameEn() }, null);
+				&& this.isExistByNameEn(groupVo.getNameEn(),group.getNameEn())) {errors.rejectValue(GroupVo.NAMEEN,	"sys.group.form.nameen.existed.message",new Object[] { groupVo.getNameEn() }, null);
 
 		}
 

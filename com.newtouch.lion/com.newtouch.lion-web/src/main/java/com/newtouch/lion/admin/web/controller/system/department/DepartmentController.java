@@ -28,7 +28,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.newtouch.lion.admin.web.model.system.department.DepartmentVo;
 import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.model.system.Department;
-import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.service.system.DepartmentService;
 import com.newtouch.lion.web.constant.ConstantMessage;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;

@@ -47,7 +47,7 @@
 					<div class="col-md-2">
 						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="请输入通用编码名称"/>					
 					</div>
-					<label class="control-label col-md-2" for="sys_parameter_type" >通用编码类型</label>
+					<label class="control-label col-md-2" for="type" >通用编码类型</label>
 					<div class="col-md-3">
 						<select  id="CodeTypeList"  name="type" data-size="8" 
 						 	data-maxoptions="1"   multiple placeholder="请选择通用编码类型列表..."  

@@ -154,4 +154,12 @@ public class CodeTypeVo implements Serializable {
 	public void setCodeLenLimit(Integer codeLenLimit) {
 		this.codeLenLimit = codeLenLimit;
 	}
+
+	/**
+	 * @return the nameen
+	 */
+	public static String getNameen() {
+		return NAMEEN;
+	}
+	
 }

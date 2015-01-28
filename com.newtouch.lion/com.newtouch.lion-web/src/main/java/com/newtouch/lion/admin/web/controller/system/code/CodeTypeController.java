@@ -7,10 +7,8 @@
 package com.newtouch.lion.admin.web.controller.system.code;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -31,7 +29,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.code.CodeTypeVo;
 import com.newtouch.lion.data.DataTable;
-import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.system.CodeType;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
@@ -80,13 +77,9 @@ public class CodeTypeController extends AbstractController{
 	 * */
 	@RequestMapping("combox")
 	@ResponseBody
-	public String combox() {
+	public List<CodeType> combox() {
 		List<CodeType> codeTypes = this.codeTypeService.doFindAll();
-		Set<String> filterColumn = new HashSet<String>();
-		filterColumn.add("id");
-		filterColumn.add("nameEn");
-		filterColumn.add("nameZh");
-		return JSONParser.toJSONString(codeTypes, filterColumn);
+		return codeTypes;
 	}
 
 	@RequestMapping(value = "editdialog")
@@ -106,7 +99,7 @@ public class CodeTypeController extends AbstractController{
 			@Valid @ModelAttribute("codeList") CodeTypeVo codeTypeVo,
 			Errors errors, ModelAndView modelAndView) {
 		if (!errors.hasErrors()&& this.isExistByNameEn(codeTypeVo.getNameEn())) {
-			errors.rejectValue(codeTypeVo.NAMEEN,
+			errors.rejectValue(CodeTypeVo.NAMEEN,
 					"sys.codeType.form.nameen.existed.message",
 					new Object[] { codeTypeVo.getNameEn() }, null);
 		}
@@ -184,7 +177,7 @@ public class CodeTypeController extends AbstractController{
 			@RequestParam(defaultValue = "15") int rows,
 			@RequestParam(required = false) String sort,
 			@RequestParam(required = false) String order,
-			@ModelAttribute("codetype") CodeTypeVo codeTypeVo) {
+			@ModelAttribute("codetype") CodeTypeVo codeTypeVo){
 		QueryCriteria queryCriteria = new QueryCriteria();
 
 		// 设置分页 启始页

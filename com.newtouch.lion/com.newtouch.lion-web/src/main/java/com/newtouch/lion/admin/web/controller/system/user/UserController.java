@@ -89,6 +89,7 @@ public class UserController {
 	/** 授权对话框 */
 	private static final String AUTH_DIALOG_RETURN = "/system/user/authdialog";
 	/** 首页列表名称 */
+	@SuppressWarnings("unused")
 	private static final String INDEX_TB = "userlist_dt";
 	/** 已授权组 */
 	private static final String AUTH_USER_GROUPS_TB = "usergroup_tb";

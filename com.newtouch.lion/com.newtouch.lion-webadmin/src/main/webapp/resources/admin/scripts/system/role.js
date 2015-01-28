@@ -22,7 +22,7 @@ $(function() {
 	 * [查询]
 	 */
 	 $('#btnQuery').click(function(){
-		 var queryParams = $(datagridId).datagrid("options").queryParams;
+		 var queryParams = $(datagridId).datagrid('options').queryParams;
 		 var params=queryForm.serializeObject();
 	      $.extend(queryParams,params);
 	      //重新加载数据

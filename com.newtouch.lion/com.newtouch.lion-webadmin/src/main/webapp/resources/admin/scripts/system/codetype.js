@@ -24,14 +24,9 @@ $(function() {
 	 $('#btnQuery').click(function(){
 	      var queryParams = $(datagridId).datagrid("options").queryParams;
 	      var params=queryForm.serializeObject();
-	     
 	      $.extend(queryParams,params);
-	      console.dir(queryParams);
-	      console.dir(params);
 	      //重新加载数据
 	      dataGridReload(datagridId);
-	      console.log("----------")
-	      console.dir(params);
 	 });
 		
 		//重新加载DataGrid

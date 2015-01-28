@@ -373,7 +373,7 @@ public class RoleController extends AbstractController{
 		}
 		
 		if (!errors.hasErrors()
-				&& this.isExistByNameEn(roleVo.getNameEn(),role.getNameEn())) {errors.rejectValue(roleVo.NAMEEN,	"sys.role.form.nameen.existed.message",new Object[] { roleVo.getNameEn() }, null);
+				&& this.isExistByNameEn(roleVo.getNameEn(),role.getNameEn())) {errors.rejectValue(RoleVo.NAMEEN,	"sys.role.form.nameen.existed.message",new Object[] { roleVo.getNameEn() }, null);
 
 		}
 
