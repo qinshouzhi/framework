@@ -388,7 +388,7 @@ public class GroupController extends AbstractController{
 	/****
 	 * 
 	 * @param tableId
-	 * @param roleVo
+	 * @param groupVo
 	 * @param modelAndView
 	 * @return
 	 */
@@ -396,6 +396,7 @@ public class GroupController extends AbstractController{
 	@ResponseBody
 	public ModelAndView exportExcel(@RequestParam(required=false) String tableId,@ModelAttribute("parameter") ParameterVo parameterVo,ModelAndView modelAndView){
 		
+		@SuppressWarnings("deprecation")
 		DataGrid dataGrid=dataGridService.doFindByTableId(tableId);
 		
 		List<DataColumn> dataColumns = new ArrayList<DataColumn>(dataGrid.getColumns());

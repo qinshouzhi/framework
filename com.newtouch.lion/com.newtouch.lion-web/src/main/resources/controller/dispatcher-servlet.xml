@@ -73,6 +73,7 @@
 			<list>
 				<value>classpath:i18n/messages</value>
 				<value>classpath:i18n/login/LoginAction</value>
+	            <value>classpath:i18n/system/application/applicationProperty</value>
 	            <value>classpath:i18n/system/parameter/parameter</value>
 	            <value>classpath:i18n/system/user/user</value>
 	            <value>classpath:i18n/system/role/role</value>

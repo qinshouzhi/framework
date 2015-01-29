@@ -6,10 +6,12 @@
 */
 package com.newtouch.lion.service.application.impl; 
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.application.ApplicationPropertyDao;
@@ -70,7 +72,7 @@ public class ApplicationPropertyServiceImpl implements
 		// TODO Auto-generated method stub
 		String queryEntry = " from ApplicationProperty ";
 
-		String[] whereBodies = {" tableId  like :tableId","type=:type"};
+		String[] whereBodies = {" tableId  like :tableId","appId like :appId","value like :value"};
 
 		String fromJoinSubClause = "";
 
@@ -95,12 +97,33 @@ public class ApplicationPropertyServiceImpl implements
 	 * @see com.newtouch.lion.service.application.ApplicationPropertyService#doDeleteById(java.lang.Long)
 	 */
 	@Override
-	public void doDeleteById(Long id) {
-		ApplicationProperty obj=new ApplicationProperty();
-		obj.setId(id);
-		this.applicationPropertyDao.remove(obj);
+	public int doDeleteById(Long id) {
+		String hql = "delete from ApplicationProperty p where p.id=:id";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
+		return this.applicationPropertyDao.updateHQL(hql, params);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.application.ApplicationPropertyService#doCreate(com.newtouch.lion.model.application.ApplicationProperty)
+	 */
+	@Override
+	public void doCreate(ApplicationProperty applicationProperty) {
+		// TODO Auto-generated method stub
+		Assert.notNull(applicationProperty);
+		this.applicationPropertyDao.save(applicationProperty);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.application.ApplicationPropertyService#doUpdate(com.newtouch.lion.model.application.ApplicationProperty)
+	 */
+	@Override
+	public void doUpdate(ApplicationProperty applicationProperty) {
+		// TODO Auto-generated method stub
+		Assert.notNull(applicationProperty);
+		this.applicationPropertyDao.update(applicationProperty);
+	}
+	
 }
 
 	
