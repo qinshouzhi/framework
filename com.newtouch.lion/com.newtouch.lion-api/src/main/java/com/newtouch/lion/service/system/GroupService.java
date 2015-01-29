@@ -10,7 +10,6 @@ import java.util.List;
 
 import com.newtouch.lion.model.datagrid.DataColumn;
 import com.newtouch.lion.model.system.Group;
-import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
@@ -130,24 +129,24 @@ public interface GroupService {
 
 	public List<DataColumn> doFindByTableId(String tableId);
 	/**
-	 * 判断角色的英文名是否已存在，
+	 * 判断角色组的英文名是否已存在，
 	 * @param nameEn
 	 * @return  boolean
 	 * @author maojiawei
 	 * */
 	public boolean doIsExistByNameEn(String nameEn); 
 	/***
-	 * 根据角色英文名称获取用户角色列表
+	 * 根据角色组英文名称获取用户角色列表
 	 * @param type
 	 * @param nameEn
 	 * @author maojiawei
-	 * @return {@link Role}
+	 * @return {@link Group}
 	 */
 	public Group  doFindTypeByNameEn(String nameEn);
 	/***
-	 * 保存Role对象
+	 * 保存Group对象
 	 * @author maojiawei
-	 * @param role
+	 * @param Group
 	 */
 	public void doCreate(Group group);
 }

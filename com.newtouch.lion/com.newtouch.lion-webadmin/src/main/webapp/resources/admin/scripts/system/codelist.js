@@ -22,9 +22,8 @@ $(function() {
 	 * [查询]
 	 */
 	 $('#btnQuery').click(function(){
-	      var queryParams = $(datagridId).datagrid('options').queryParams;
-	      var params=queryForm.serializeObject();
-	      $.extend(queryParams,params);
+		 var params=queryForm.serializeObject();	      
+	      $(datagridId).datagrid({queryParams:params});
 	      //重新加载数据
 	      dataGridReload(datagridId);
 	 });
@@ -84,7 +83,11 @@ $(function() {
 	 });
 	 //导出Excel
 	 $('#btnExport').on('click',function(){
-		 alert('dd');
+		   var params=queryForm.serialize(),url='export.json?tableId='+$(datagridId).attr('id');
+       if(lion.util.isNotEmpty(params)){
+          url+='&'+params;
+       }
+       window.open(url,"_blank");
 	 });
 });
 

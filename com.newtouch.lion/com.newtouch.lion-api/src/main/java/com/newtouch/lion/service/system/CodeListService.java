@@ -89,13 +89,13 @@ public interface CodeListService {
 	public boolean doIsExistByNameEn(String nameEn);
 
 	/***
-	 * 根据通过编码类型英文名称，并返回JSON字符串
+	 * 根据通过编码列表英文名称，并返回JSON字符串
 	 */
 	// public String getCodeListForJSONByCodeTypeNameEn(String codeTypeNameEn);
 	/***
-	 * 保存CodeType对象
+	 * 保存CodeList对象
 	 * @author maojiawei
-	 * @param role
+	 * @param codeList
 	 */
 	public void doCreate(CodeList codeList);
 }

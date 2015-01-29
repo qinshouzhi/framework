@@ -30,13 +30,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.code.CodeListVo;
+import com.newtouch.lion.common.date.DateUtil;
+import com.newtouch.lion.common.file.FileUtil;
 import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.datagrid.DataColumn;
+import com.newtouch.lion.model.datagrid.DataGrid;
 import com.newtouch.lion.model.system.CodeList;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.datagrid.DataColumnService;
+import com.newtouch.lion.service.datagrid.DataGridService;
+import com.newtouch.lion.service.excel.ExcelExportService;
 import com.newtouch.lion.service.system.CodeListService;
 import com.newtouch.lion.service.system.CodeTypeService;
 import com.newtouch.lion.web.controller.AbstractController;
@@ -79,7 +84,12 @@ public class CodeListController extends AbstractController{
 	protected DataColumnService dataColumnService;
 	@Autowired
 	private CodeTypeService codeTypeService;
-
+	/**DataGrid表格*/
+	@Autowired
+	private DataGridService dataGridService;
+	/**Excel通用导出*/
+	@Autowired
+	private ExcelExportService excelExportService;
 	@RequestMapping(value = "/editdialog")
 	public String editDialog(@RequestParam Long id, Model model) {
 		if (id != null) {
@@ -280,5 +290,61 @@ public class CodeListController extends AbstractController{
 			}
 		}
 		return flag.toString();
+	}
+	
+	/****
+	 * 
+	 * @param tableId
+	 * @param codeListVo
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value = "export")
+	@ResponseBody
+	public ModelAndView exportExcel(@RequestParam(required=false) String tableId,@RequestParam(required = false) String sort,@RequestParam(required = false) String order,@ModelAttribute("codeList") CodeListVo codeListVo,ModelAndView modelAndView){
+		
+		DataGrid dataGrid=dataGridService.doFindByTableIdAndSort(tableId);
+		QueryCriteria queryCriteria=new QueryCriteria();
+		queryCriteria.setPageSize(10000);
+		// 设置排序字段及排序方向
+		if (StringUtils.isNotEmpty(sort) && StringUtils.isNotEmpty(order)) {
+			queryCriteria.setOrderField(sort);
+			queryCriteria.setOrderDirection(order);
+		} else {
+			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+			queryCriteria.setOrderDirection("ASC");
+		}
+		// 查询条件 参数类型
+		if (codeListVo.getCodeTypeId() != null) {
+			queryCriteria.addQueryCondition("codeTypeId", codeListVo.getCodeTypeId());
+		}
+		//查询条件 中文参数名称按模糊查询
+		if(StringUtils.isNotEmpty(codeListVo.getNameZh())){
+			queryCriteria.addQueryCondition("nameZh","%"+codeListVo.getNameZh()+"%");
+		}
+
+		PageResult<CodeList> result=codeListService.doFindByCriteria(queryCriteria);
+		Map<String, Map<Object, Object>> fieldCodeTypes = new HashMap<String, Map<Object, Object>>();
+
+		Map<String, String> dataFormats = new HashMap<String, String>();		
+		dataFormats.put("birthday", DateUtil.FORMAT_DATE_YYYY_MM_DD);
+		//创建.xls的文件名
+		String fileName=this.createFileName(FileUtil.EXCEL_EXTENSION);
+		
+		modelAndView.addObject("title", dataGrid.getTitle());
+		
+		Long startTime=System.currentTimeMillis();
+		
+		fileName=excelExportService.export(dataGrid, result.getContent(), fileName, fieldCodeTypes, dataFormats);
+		
+		logger.info("fileName:{}",fileName);
+		
+		Long costTime=System.currentTimeMillis()-startTime;
+		
+		modelAndView.addObject(FILENAME,fileName);
+		
+		logger.info("export Excel {} cost:{} time,fileName:{}",dataGrid.getTitle(),costTime,fileName);
+		logger.info("out Excel导出");
+		return this.getExcelView(modelAndView);
 	}
 }

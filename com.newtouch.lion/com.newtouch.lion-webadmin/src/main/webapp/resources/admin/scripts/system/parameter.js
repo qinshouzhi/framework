@@ -24,10 +24,9 @@ $(function() {
 	 */
 	 $('#btnQuery').click(function(){
 	      var params=queryForm.serializeObject();	      
-        $(datagridId).datagrid({queryParams:params});
+	      $(datagridId).datagrid({queryParams:params});
 	      //重新加载数据
 	      dataGridReload(datagridId);
-	
 	 });
 		
 		//重新加载DataGrid

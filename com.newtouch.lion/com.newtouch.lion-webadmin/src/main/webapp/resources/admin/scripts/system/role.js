@@ -22,12 +22,10 @@ $(function() {
 	 * [查询]
 	 */
 	 $('#btnQuery').click(function(){
-		 var queryParams = $(datagridId).datagrid('options').queryParams;
-		 var params=queryForm.serializeObject();
-	      $.extend(queryParams,params);
+		 var params=queryForm.serializeObject();	      
+	      $(datagridId).datagrid({queryParams:params});
 	      //重新加载数据
 	      dataGridReload(datagridId);
-	
 	 });
 	 
 	//重新加载DataGrid

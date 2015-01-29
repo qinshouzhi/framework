@@ -47,9 +47,21 @@ public interface ApplicationPropertyService {
 	/**
 	 * 根据记录Id删除ApplicationProperty对象 
 	 * @param id
-	 * @return 
+	 * @return int
 	 * */
-	public void  doDeleteById(Long id);
+	public int doDeleteById(Long id);
+	/***
+	 * 保存ApplicationProperty对象
+	 * @author maojiawei
+	 * @param ApplicationProperty
+	 */
+	public void doCreate(ApplicationProperty applicationProperty);
+	/***
+	 * 修改ApplicationProperty对象
+	 * @author maojiawei
+	 * @param ApplicationProperty
+	 */
+	public void doUpdate(ApplicationProperty applicationProperty);
 }
 
 	
