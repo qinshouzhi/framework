@@ -7,8 +7,6 @@
 package com.newtouch.lion.admin.web.controller.system.role; 
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -30,14 +28,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.newtouch.lion.admin.web.model.system.parameter.ParameterVo;
 import com.newtouch.lion.admin.web.model.system.role.RoleVo;
 import com.newtouch.lion.common.date.DateUtil;
+import com.newtouch.lion.common.file.FileUtil;
 import com.newtouch.lion.common.lang.LongUtils;
-import com.newtouch.lion.comparator.DataColumnComparator;
 import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.json.JSONParser;
-import com.newtouch.lion.model.datagrid.DataColumn;
 import com.newtouch.lion.model.datagrid.DataGrid;
 import com.newtouch.lion.model.system.Attributes;
 import com.newtouch.lion.model.system.Group;
@@ -483,36 +479,45 @@ public class RoleController extends AbstractController{
 	 */
 	@RequestMapping(value = "export")
 	@ResponseBody
-	public ModelAndView exportExcel(@RequestParam(required=false) String tableId,@ModelAttribute("parameter") ParameterVo parameterVo,ModelAndView modelAndView){
+	public ModelAndView exportExcel(@RequestParam(required=false) String tableId,@RequestParam(required = false) String sort,@RequestParam(required = false) String order,@ModelAttribute("role") RoleVo roleVo,ModelAndView modelAndView){
 		
-		DataGrid dataGrid=dataGridService.doFindByTableId(tableId);
-		
-		List<DataColumn> dataColumns = new ArrayList<DataColumn>(dataGrid.getColumns());
-		
-		Collections.sort(dataColumns, new DataColumnComparator());
-		
-		dataGrid.setSortColumns(dataColumns);
-		
+		DataGrid dataGrid=dataGridService.doFindByTableIdAndSort(tableId);
 		QueryCriteria queryCriteria=new QueryCriteria();
-		
-		queryCriteria.setPageSize(99999);
-		
+		queryCriteria.setPageSize(10000);
+		// 设置排序字段及排序方向
+		if (StringUtils.isNotEmpty(sort) && StringUtils.isNotEmpty(order)) {
+			queryCriteria.setOrderField(sort);
+			queryCriteria.setOrderDirection(order);
+		} else {
+			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+			queryCriteria.setOrderDirection("ASC");
+		}
+		//查询条件 中文参数名称按模糊查询
+		if(StringUtils.isNotEmpty(roleVo.getNameZh())){
+			queryCriteria.addQueryCondition("nameZh","%"+roleVo.getNameZh()+"%");
+		}
+
 		PageResult<Role> result=roleService.doFindByCriteria(queryCriteria);
-		
 		Map<String, Map<Object, Object>> fieldCodeTypes = new HashMap<String, Map<Object, Object>>();
 
-		Map<String, String> dataFormats = new HashMap<String, String>();
-		
+		Map<String, String> dataFormats = new HashMap<String, String>();		
 		dataFormats.put("birthday", DateUtil.FORMAT_DATE_YYYY_MM_DD);
+		//创建.xls的文件名
+		String fileName=this.createFileName(FileUtil.EXCEL_EXTENSION);
 		
-		String fileName="D:/app/excel/role"+DateUtil.formatDate(new Date(),DateUtil.FORMAT_DATETIME_YYYYMMDDHHMMSSSSS)+".xls";
+		modelAndView.addObject("title", dataGrid.getTitle());
+		
+		Long startTime=System.currentTimeMillis();
+		
+		fileName=excelExportService.export(dataGrid, result.getContent(), fileName, fieldCodeTypes, dataFormats);
+		
+		logger.info("fileName:{}",fileName);
+		
+		Long costTime=System.currentTimeMillis()-startTime;
 		
 		modelAndView.addObject(FILENAME,fileName);
-		modelAndView.addObject("title", dataGrid.getTitle());
-		Long startTime=System.currentTimeMillis();
-		excelExportService.export(dataGrid, result.getContent(), fileName, fieldCodeTypes, dataFormats);
-		Long costTime=System.currentTimeMillis()-startTime;
-		logger.info("export Excel {} cost:{} time",dataGrid.getTitle(),costTime);
+		
+		logger.info("export Excel {} cost:{} time,fileName:{}",dataGrid.getTitle(),costTime,fileName);
 		logger.info("out Excel导出");
 		return this.getExcelView(modelAndView);
 	}

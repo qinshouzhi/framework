@@ -83,14 +83,14 @@ public interface CodeTypeService {
 	 * */
 	public String doFindByCriteria(QueryCriteria criteria, String tableId);
 	/**
-	 * 判断角色的英文名是否已存在，
+	 * 判断编码类型的英文名是否已存在，
 	 * @param nameEn
 	 * @return  boolean
 	 * @author maojiawei
 	 * */
 	public boolean doIsExistByNameEn(String nameEn); 
 	/***
-	 * 根据角色英文名称获取用户角色列表
+	 * 根据编码类型英文名称获取用户角色列表
 	 * @param type
 	 * @param nameEn
 	 * @author maojiawei
@@ -100,7 +100,7 @@ public interface CodeTypeService {
 	/***
 	 * 保存CodeType对象
 	 * @author maojiawei
-	 * @param role
+	 * @param codeType
 	 */
 	public void doCreate(CodeType codeType);
 }
