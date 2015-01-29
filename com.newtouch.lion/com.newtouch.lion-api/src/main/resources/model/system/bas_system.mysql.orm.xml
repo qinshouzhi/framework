@@ -41,11 +41,6 @@
 					<cascade-merge />
 				</cascade>
 			</one-to-many>
-			<one-to-many name="positions" fetch="LAZY" mapped-by="department">
-				<cascade>
-					<cascade-merge />
-				</cascade>
-			</one-to-many>
 			<one-to-many name="users" fetch="LAZY" mapped-by="department">
 				<cascade>
 					<cascade-merge />
@@ -72,10 +67,10 @@
 			<basic name="description">
 				<column name="DESCRIPTION" length="256" nullable="true" />
 			</basic>
-			<many-to-one name="department" fetch="LAZY">
+			<!--  <many-to-one name="department" fetch="LAZY">
 				<join-column name="BAS_DEPARTMENT_ID" insertable="true"
 					updatable="true" nullable="false" />
-			</many-to-one>
+			</many-to-one>-->
 			<many-to-one name="position" fetch="LAZY">
 				<join-column name="PARENT_BAS_POSITION_ID" insertable="true"
 					updatable="true" />
@@ -85,11 +80,11 @@
 					<cascade-merge />
 				</cascade>
 			</one-to-many>
-			<one-to-many name="users" fetch="LAZY" mapped-by="position">
+			<!-- <one-to-many name="users" fetch="LAZY" mapped-by="position">
 				<cascade>
 					<cascade-merge />
 				</cascade>
-			</one-to-many>
+			</one-to-many>-->
 		</attributes>
 	</entity>
 	<!-- 系统用户登录 -->
@@ -181,10 +176,6 @@
 			</basic>
 			<many-to-one name="department" fetch="LAZY">
 				<join-column name="BAS_DEPARTMENT_ID" insertable="false"
-					updatable="false" />
-			</many-to-one>
-			<many-to-one name="position" fetch="LAZY">
-				<join-column name="BAS_POSITION_ID" insertable="false"
 					updatable="false" />
 			</many-to-one>
 			<many-to-many name="roles" fetch="LAZY">

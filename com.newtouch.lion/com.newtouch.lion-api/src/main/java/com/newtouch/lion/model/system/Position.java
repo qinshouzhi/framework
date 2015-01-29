@@ -7,9 +7,6 @@
 */
 package com.newtouch.lion.model.system; 
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.newtouch.lion.model.VersionEntity;
 
 /**
@@ -51,12 +48,6 @@ public class Position extends VersionEntity<Long>{
 	private String description;
 	/**@Fields position： 父级岗位*/
 	private Position position;
-	/**@Fields department： 岗位所属部门*/
-	private Department department;
-	/**@Fields positions：该岗位所有下级岗位*/
-	private Set<Position> positions = new HashSet<Position>(0);
-	/**@Fields User 该岗位所有的用户集合*/
-	private Set<User> users = new HashSet<User>(0);
 	
 	@Override
 	public Long getId() {
@@ -105,19 +96,6 @@ public class Position extends VersionEntity<Long>{
 		this.description = description;
 	}
 
-	/**
-	 * @return the department
-	 */
-	public Department getDepartment() {
-		return department;
-	}
-
-	/**
-	 * @param department the department to set
-	 */
-	public void setDepartment(Department department) {
-		this.department = department;
-	}
 	
 	/**
 	 * @param id the id to set
@@ -138,34 +116,6 @@ public class Position extends VersionEntity<Long>{
 	 */
 	public void setPosition(Position position) {
 		this.position = position;
-	}
-
-	/**
-	 * @return the positions
-	 */
-	public Set<Position> getPositions() {
-		return positions;
-	}
-
-	/**
-	 * @param positions the positions to set
-	 */
-	public void setPositions(Set<Position> positions) {
-		this.positions = positions;
-	}
-
-	/**
-	 * @return the users
-	 */
-	public Set<User> getUsers() {
-		return users;
-	}
-
-	/**
-	 * @param users the users to set
-	 */
-	public void setUsers(Set<User> users) {
-		this.users = users;
 	}
 }
 

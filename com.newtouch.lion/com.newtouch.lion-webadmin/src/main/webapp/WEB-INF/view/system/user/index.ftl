@@ -66,9 +66,9 @@
 </div>
 <!-- END PAGE CONTENT INNER -->
 <!--Edit Dialog Start -->
-<div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
+<div class="modal fade bs-modal-lg " id="basic" tabindex="-1" role="basic" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content ">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 				<h4 class="modal-title"><i class="fa fa-plus"></i> 用户添加</h4>
@@ -80,91 +80,88 @@
 										<form action="#" class="form-horizontal">
 											<div class="form-body">
 												<div class="form-group">
-													<label class="col-md-3 control-label">用户名</label>
-													<div class="col-md-5">
+													<label class="col-md-1 control-label">用户名</label>
+													<div class="col-md-4">
 														<div class="input-group">
-															<input type="text"  name="nameZh"  maxlength="100" class="form-control" placeholder="请输入用户名" size="30"/>
+															<input type="text"  name="username"  maxlength="100" class="form-control" placeholder="请输入用户名" size="30"/>
+														</div>
+													</div>
+													<label class="col-md-1 control-label">员工号</label>
+													<div class="col-md-2">
+														<div class="input-group">
+															<input   type="text"  id="employeeCode" name="employeeCode" maxlength="100" class="form-control" placeholder="请输入员工号" size="30"/>
+														</div>
+													</div>
+													<label class="col-md-1 control-label">性别</label>
+													<div class="col-md-2">
+														<div class="input-group radio-list">	
+																<label class="radio-inline">
+																	<input type="radio" name="gender" id="gender0" value="0" checked>
+																	男
+																</label>
+																<label class="radio-inline">
+																	<input type="radio" name="gender" id="gender1" value="1">
+																	 女 
+															    </label>
+													
+
 														</div>
 													</div>
 												</div>
+											 
 												<div class="form-group">
-													<label class="col-md-3 control-label">密码</label>
-													<div class="col-md-5">
+													<label class="col-md-1 control-label">密码</label>
+													<div class="col-md-4">
 														<div class="input-group">
 															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入密码" size="30"/>
 														</div>
 													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label">密码提示</label>
-													<div class="col-md-5">
+													<label class="col-md-1 control-label">密码提示</label>
+													<div class="col-md-4">
 														<div class="input-group">
 															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入密码提示" size="30"/>
 														</div>
 													</div>
+													
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label">员工号</label>
-													<div class="col-md-5">
+													<label class="col-md-1 control-label">姓名(中文)</label>
+													<div class="col-md-4">
 														<div class="input-group">
-															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入员工号" size="30"/>
+															<input type="text"  id="realnameZh" name="realnameZh" maxlength="100" class="form-control" placeholder="请输入真实姓名（中文）" size="30"/>
+														</div>
+													</div>
+													<label class="col-md-1 control-label">姓名(英文)</label>
+													<div class="col-md-4">
+														<div class="input-group">
+															<input type="text"  id="realnameEn" name="realnameEn" maxlength="100" class="form-control" placeholder="请输入真实姓名（英文）" size="30"/>
 														</div>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label">真实姓名(中文)</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入真实姓名（中文）" size="30"/>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label">真实姓名(英文)</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入真实姓名（英文）" size="30"/>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label">性别</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<select>
-															 	<option value="0">男</option>
-															 	<option value="1">女</option>
-															 </select>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label">角色描述</label>
-													<div class="col-md-5">
+													<label class="col-md-1 control-label">角色描述</label>
+													<div class="col-md-4">
 														<div class="input-group">
 															<input type="text" name="value" class="form-control" placeholder="请输入角色描述" maxlength="255" size="30"/>
 														</div>
 													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label">用户类型</label>
-													<div class="col-md-5">
+													<label class="col-md-1 control-label">用户类型</label>
+													<div class="col-md-4">
 														<div class="input-group">
 															<input type="text" name="value" class="form-control" placeholder="请输入用户类型" maxlength="255" size="30"/>
 														</div>
 													</div>
 												</div>
+												 
 												<div class="form-group">
-													<label class="col-md-3 control-label">认证类型</label>
-													<div class="col-md-5">
+													<label class="col-md-1 control-label">认证类型</label>
+													<div class="col-md-4">
 														<div class="input-group">
 															<input type="text" name="value" class="form-control" placeholder="请输入认证类型" maxlength="255" size="30"/>
 														</div>
 													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label">电话</label>
-													<div class="col-md-5">
+													<label class="col-md-1 control-label">电话</label>
+													<div class="col-md-4">
 														<div class="input-group">
 															<input type="text" name="value" class="form-control" placeholder="请输入电话" maxlength="255" size="30"/>
 														</div>

@@ -60,8 +60,7 @@ public class Department extends VersionEntity<Long> {
 	private Department department;
 	/** 该部门所属下级所有部门集合 */
 	private Set<Department> departments = new HashSet<Department>(0);
-	/** 该部门所属的岗位集合 */
-	private Set<Position> positions = new HashSet<Position>(0);
+	 
 	/** 排序 */
 	private List<Department> sortedChildDepartment;
 
@@ -286,22 +285,6 @@ public class Department extends VersionEntity<Long> {
 	 */
 	public void setSortedChildDepartment(List<Department> sortedChildDepartment) {
 		this.sortedChildDepartment = sortedChildDepartment;
-	}
-	
-	
-
-	/**
-	 * @return the positions
-	 */
-	public Set<Position> getPositions() {
-		return positions;
-	}
-
-	/**
-	 * @param positions the positions to set
-	 */
-	public void setPositions(Set<Position> positions) {
-		this.positions = positions;
 	}
 
 	/*

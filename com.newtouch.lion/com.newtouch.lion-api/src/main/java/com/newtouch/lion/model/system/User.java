@@ -85,8 +85,6 @@ public class User extends VersionEntity<Long> {
 	private String description;
 	/** 该用户部门 */
 	private Department department;
-	/**该用户岗位信息*/
-	private Position position;
 	/** 该用户所有权限列表 */
 	private Set<Role> roles = new HashSet<Role>(0);
 	/** 该用户所有用户组 */
@@ -525,18 +523,4 @@ public class User extends VersionEntity<Long> {
 	public void setGroups(Set<Group> groups) {
 		this.groups = groups;
 	}
-
-	/**
-	 * @return the position
-	 */
-	public Position getPosition() {
-		return position;
-	}
-
-	/**
-	 * @param position the position to set
-	 */
-	public void setPosition(Position position) {
-		this.position = position;
-	}	
 }
