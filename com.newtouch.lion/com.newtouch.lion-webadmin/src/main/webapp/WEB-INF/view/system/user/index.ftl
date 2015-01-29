@@ -38,34 +38,63 @@
 		<div class="row">
 			<div class="col-md-12 margin-bottom-10">
 				<form id="queryParameterform" class="form-horizontal">
-					<label class="control-label col-md-2" for="nameZh" >用户名称</label>
-					<div class="col-md-3">
-						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="请输入用户名称"/>					
-					</div>
+					<label class="control-label col-md-1" for="nameZh" >用户名</label>
 					<div class="col-md-2">
+						<input class="form-control input-small" type="text" size="30" name="username" id="nameZh"  placeholder="请输入用户名称"/>					
 					</div>
+					<label class="control-label col-md-1" for="nameZh" >员工号</label>
 					<div class="col-md-2">
+						<input class="form-control input-small" type="text" size="30" name="username" id="nameZh"  placeholder="请输入用户名称"/>					
+					</div>
+					<label class="control-label col-md-1" for="nameZh" >邮箱</label>
+					<div class="col-md-2">
+						<input class="form-control input-small" type="text" size="30" name="username" id="nameZh"  placeholder="请输入用户名称"/>					
+					</div>	
+					<div class="col-md-1">
 						<a href="javascript:void(0)" class="btn blue"><i class="fa fa-search"></i> 查 询 </a>
 					</div>
 				</form>
 			</div>
 		
 			<div class="col-md-12 margin-bottom-10" id="toolbar">
-				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic"><i class="fa fa-plus"></i> 新增  </a>
-				<a id="btnEdit" class="btn btn-sm red" role="button" data-toggle="modal" data-target="#editDialog"><i class="fa fa-edit"></i> 编辑
-					<div class="modal" id="editDialog" tabindex="-1"></div>
+				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic">
+					<i class="fa fa-plus"></i>  <@spring.message "common.toolbar.btn.add.text"/> </a>
+				<a id="btnEdit" class="btn btn-sm red" role="button">
+					<i class="fa fa-edit"></i>
+					 <@spring.message "common.toolbar.btn.edit.text"/> 				 
 				</a>
-				<a href="javascript:void(0)" id="btnDelete" class="btn btn-sm purple"><i class="fa fa-times"></i> 删除 </a>
-				<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue"><i class="fa fa-refresh"></i> 刷新  </a>
-				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> Excel </a>
+				<a href="javascript:void(0)" id="btnDelete" class="btn btn-sm purple"><i class="fa fa-times"></i> <@spring.message "common.toolbar.btn.delete.text"/> </a>
+				<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue">
+					<i class="fa fa-refresh"></i> <@spring.message "common.toolbar.btn.reload.text"/> 
+				</a>
+				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green">
+					<i class="fa  fa-file-excel-o"></i> <@spring.message "common.toolbar.btn.export.text"/> 
+				</a>
+				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm  btn-primary">
+					<i class="fa  fa-gear"></i> 
+					<@spring.message "common.toolbar.btn.auth.text"/>  
+				</a>
+				<a href="javascript:void(0)" class="btn btn-sm red" id="lokcedBtn">
+				    <i class="fa   fa-lock"></i> 
+					<@spring.message "common.toolbar.btn.locked.text"/>
+				</a>
+				<a href="javascript:void(0)" class="btn btn-sm blue-hoki" id="unlockBtn">
+					<i class="fa  fa-unlock-alt"></i> 
+					<@spring.message "common.toolbar.btn.unlock.text"/>
+				</a> 
+				<a href="javascript:void(0)" class="btn btn-sm default" id="detailsBtn">
+					<i class="fa   fa-th"></i> 
+					<@spring.message "common.toolbar.btn.details.text"/>
+				</a> 
 			</div>
 			<div class="col-md-12">
-				  <@lion.datagrids name="userlist_dt" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/user/list.htm" dataOptions="" style="height:400px;"/>			</div>
+				  <@lion.datagrids name="userlist_dt" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/user/list.htm" dataOptions="" style="height:400px;"/>
+			</div>
 		</div>
 	</div>
 </div>
 <!-- END PAGE CONTENT INNER -->
-<!--Edit Dialog Start -->
+<!--Dialog Start -->
 <div class="modal fade bs-modal-lg " id="basic" tabindex="-1" role="basic" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content ">
@@ -75,209 +104,174 @@
 			</div>
 			<div class="modal-body">
 				 	<div class="row">
-				 	<div class="col-md-12 portlet-body form">
-				 		<!-- BEGIN FORM-->
-										<form action="#" class="form-horizontal">
-											<div class="form-body">
-												<div class="form-group">
-													<label class="col-md-1 control-label">用户名</label>
-													<div class="col-md-4">
-														<div class="input-group">
-															<input type="text"  name="username"  maxlength="100" class="form-control" placeholder="请输入用户名" size="30"/>
-														</div>
-													</div>
-													<label class="col-md-1 control-label">员工号</label>
-													<div class="col-md-2">
-														<div class="input-group">
-															<input   type="text"  id="employeeCode" name="employeeCode" maxlength="100" class="form-control" placeholder="请输入员工号" size="30"/>
-														</div>
-													</div>
-													<label class="col-md-1 control-label">性别</label>
-													<div class="col-md-2">
-														<div class="input-group radio-list">	
-																<label class="radio-inline">
-																	<input type="radio" name="gender" id="gender0" value="0" checked>
-																	男
-																</label>
-																<label class="radio-inline">
-																	<input type="radio" name="gender" id="gender1" value="1">
-																	 女 
-															    </label>
-													
-
-														</div>
+					 	<div class="col-md-12 portlet-body form">
+					 		<!-- BEGIN FORM-->
+									<form action="#" class="form-horizontal">
+										<div class="form-body">
+											<div class="form-group">
+												<label class="col-md-2 control-label">用户名</label>
+												<div class="col-md-3">
+													<div class="input-group">
+														<input type="text"  name="username"  maxlength="100" class="form-control" placeholder="请输入用户名" size="30"/>
 													</div>
 												</div>
-											 
-												<div class="form-group">
-													<label class="col-md-1 control-label">密码</label>
-													<div class="col-md-4">
-														<div class="input-group">
-															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入密码" size="30"/>
-														</div>
-													</div>
-													<label class="col-md-1 control-label">密码提示</label>
-													<div class="col-md-4">
-														<div class="input-group">
-															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入密码提示" size="30"/>
-														</div>
-													</div>
-													
-												</div>
-												<div class="form-group">
-													<label class="col-md-1 control-label">姓名(中文)</label>
-													<div class="col-md-4">
-														<div class="input-group">
-															<input type="text"  id="realnameZh" name="realnameZh" maxlength="100" class="form-control" placeholder="请输入真实姓名（中文）" size="30"/>
-														</div>
-													</div>
-													<label class="col-md-1 control-label">姓名(英文)</label>
-													<div class="col-md-4">
-														<div class="input-group">
-															<input type="text"  id="realnameEn" name="realnameEn" maxlength="100" class="form-control" placeholder="请输入真实姓名（英文）" size="30"/>
-														</div>
+												<label class="col-md-2 control-label">员工号</label>
+												<div class="col-md-2">
+													<div class="input-group">
+														<input   type="text"  id="employeeCode" name="employeeCode" maxlength="100" class="form-control" placeholder="请输入员工号" size="30"/>
 													</div>
 												</div>
-												<div class="form-group">
-													<label class="col-md-1 control-label">角色描述</label>
-													<div class="col-md-4">
-														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入角色描述" maxlength="255" size="30"/>
-														</div>
-													</div>
-													<label class="col-md-1 control-label">用户类型</label>
-													<div class="col-md-4">
-														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入用户类型" maxlength="255" size="30"/>
-														</div>
-													</div>
-												</div>
-												 
-												<div class="form-group">
-													<label class="col-md-1 control-label">认证类型</label>
-													<div class="col-md-4">
-														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入认证类型" maxlength="255" size="30"/>
-														</div>
-													</div>
-													<label class="col-md-1 control-label">电话</label>
-													<div class="col-md-4">
-														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入电话" maxlength="255" size="30"/>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label">手机</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入手机" maxlength="255" size="30"/>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label">邮箱</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入邮箱" maxlength="255" size="30"/>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label">办公电话</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入办公电话" maxlength="255" size="30"/>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label">传真</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入传真" maxlength="255" size="30"/>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label">邮编</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入邮编" maxlength="255" size="30"/>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label">地址</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入地址" maxlength="255" size="30"/>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label">到期时间</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input id="d11" type="text" onClick="WdatePicker()"/> 
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label">证书是否到期</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="checkbox" class="form-control "  name="editable" checked="true" />
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label">证书到期时间</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入证书到期时间" maxlength="255" size="30"/>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label">是否有效</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="checkbox" class="form-control "  name="editable" checked="true" />
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label">描述</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入描述" maxlength="255" size="30"/>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label">是否可编辑</label>
-													<div class="col-md-5 control-label">
-														<div class="input-group">
-															<input type="checkbox" class="form-control "  name="editable" checked="true" />
-														</div>
+												<label class="col-md-1 control-label">性别</label>
+												<div class="col-md-2">
+													<div class="input-group radio-list">	
+															<label class="radio-inline">
+																<input type="radio" name="gender" id="gender0" value="0" checked>
+																男
+															</label>
+															<label class="radio-inline">
+																<input type="radio" name="gender" id="gender1" value="1">
+																 女 
+														    </label>
 													</div>
 												</div>
 											</div>
-										</form>
+											<div class="form-group">
+												<label class="col-md-2 control-label">邮箱</label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入密码" size="30"/>
+													</div>
+												</div>
+												<label class="col-md-2 control-label">部门</label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入输入确认密码" size="30"/>
+													</div>
+												</div>												
+											</div>								 
+											<div class="form-group">
+												<label class="col-md-2 control-label">密码</label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入密码" size="30"/>
+													</div>
+												</div>
+												<label class="col-md-2 control-label">确认密码</label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入输入确认密码" size="30"/>
+													</div>
+												</div>												
+											</div>
+											<div class="form-group">									
+												<label class="col-md-2 control-label">密码有效期</label>
+												<div class="col-md-2">
+													<div class="input-group">
+														<input type="text" name="value" class="form-control" placeholder="请选择密码有效期" maxlength="255" size="30"/>
+													</div>
+												</div>
+												<label class="col-md-2 control-label">
+													密码是否有效 
+													<input type="checkbox" class="form-control"  name="editable" checked="true" />						 
+												</label>
+												<label class="col-md-2 control-label">账户有效期</label>
+												<div class="col-md-2">
+													<div class="input-group">
+														<input id="d11" type="text" class="form-control"  placeholder="请选择账户有效期"/>
+													</div>
+												</div>
+												<label class="col-md-2 control-label">
+													账户是否有效
+													<input type="checkbox" class="form-control"  name="editable" checked="true" />  
+												</label>
+											</div>			
+											<div class="form-group">
+												<label class="col-md-2 control-label">真实姓名(中文)</label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<input type="text"  id="realnameZh" name="realnameZh" maxlength="100" class="form-control" placeholder="请输入真实姓名（中文）" size="30"/>
+													</div>
+												</div>
+												<label class="col-md-2 control-label">真实姓名(英文)</label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<input type="text"  id="realnameEn" name="realnameEn" maxlength="100" class="form-control" placeholder="请输入真实姓名（英文）" size="30"/>
+													</div>
+												</div>
+											</div>										 
+											<div class="form-group">
+												<label class="col-md-2 control-label">电话</label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<input type="text" name="value" class="form-control" placeholder="请输入电话" maxlength="255" size="30"/>
+													</div>
+												</div>
+												<label class="col-md-2 control-label">手机</label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<input type="text" name="value" class="form-control" placeholder="请输入手机" maxlength="255" size="30"/>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">										
+												<label class="col-md-2 control-label">办公电话</label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<input type="text" name="value" class="form-control" placeholder="请输入办公电话" maxlength="255" size="30"/>
+													</div>
+												</div>
+												<label class="col-md-2 control-label">传真</label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<input type="text" name="value" class="form-control" placeholder="请输入传真" maxlength="255" size="30"/>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">										
+												<label class="col-md-2 control-label">地址</label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<input type="text" name="value" class="form-control" placeholder="请输入地址" maxlength="255" size="30"/>
+													</div>
+												</div>
+												<label class="col-md-2 control-label">邮编</label>
+												<div class="col-md-2">
+													<div class="input-group">
+														<input type="text" name="value" class="form-control" placeholder="请输入邮编" maxlength="255" size="30"/>
+													</div>
+												</div>
+												<label class="col-md-2 control-label">
+													是否可编辑
+													<input type="checkbox" class="form-control"  name="editable" checked="true" />
+													</label>
+												</div>
+											</div>
+																			 
+											<div class="form-group">
+												<label class="col-md-2 control-label">描述</label>
+												<div class="col-md-10">
+													<div class="input-group">
+														<input type="text" name="value" class="form-control input-xlarge" placeholder="请输入描述" maxlength="255" size="30"/>
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
 									<!-- END FORM-->
-							</div>
-				 	</div>
+								</div>
+					 	</div>
+				 	<div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal"><i class="fa  fa-arrow-left"></i> 取 消 </button>
-				<button type="button" id="btnSave" class="btn blue"><i class="fa fa-save"></i> 保 存</button>
+				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal">
+					<i class="fa  fa-arrow-left"></i> 取 消 </button>
+				<button type="button" id="btnSave" class="btn blue">
+					<i class="fa fa-save"></i> 保 存</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
 	</div>
-	
-	<!-- /.modal-dialog -->
-<!--Edit Dialog End -->
+</div>
+<!--Dialog End -->
 </body>
 </html>
