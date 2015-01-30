@@ -669,9 +669,9 @@
           }
           function reqError(xhr,textStatus,error){
             //TODO
-            console.dir(xhr);
-            console.dir(textStatus);
-            console.dir(error);
+            // console.dir(xhr);
+            //console.dir(textStatus);
+            // console.dir(error);
           }
           //Ajax请求
           util.get(this.options.loadurl,buildOptions,reqError);
@@ -870,7 +870,6 @@
            });
 
            $('html').on('click', function (e) {
-
              if ($(e.target).closest(that.$newElement).length < 1) {
                 $drop.removeClass('open');
              }
