@@ -491,7 +491,11 @@ public class BaseDaoImpl<T extends BaseEntity<PK>, PK> implements BaseDao<T, PK>
 	 */
 	@Override
 	public void update(T obj, Date updateDate) {
-		this.updateEntity((AuditEntity<PK>) obj, updateDate);
+		if(obj instanceof AuditEntity){
+			this.updateEntity((AuditEntity<PK>) obj, updateDate);
+		}else{
+			this.mergeObject(obj);
+		}
 	}
 
 	/*
@@ -502,8 +506,7 @@ public class BaseDaoImpl<T extends BaseEntity<PK>, PK> implements BaseDao<T, PK>
 	 */
 	@Override
 	public void updateObjects(Collection<T> objs) {
-		updateObjects(objs, null);
-
+		this.updateObjects(objs, null);
 	}
 
 	/*
@@ -512,14 +515,16 @@ public class BaseDaoImpl<T extends BaseEntity<PK>, PK> implements BaseDao<T, PK>
 	 * @see com.lion.framework.dao.BaseDao#updateObjects(com.lion.framework
 	 * .model.BaseEntity, java.util.Date)
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void updateObjects(Collection<T> objs, Date updateDate) {
-		// TODO Auto-generated method stub
 		for (Iterator<T> localIterator = objs.iterator(); localIterator
 				.hasNext();) {
-			Object obj = localIterator.next();
-			updateEntity((AuditEntity<PK>) obj, updateDate);
+			T obj = localIterator.next();
+			if(obj instanceof AuditEntity){
+				this.updateEntity((AuditEntity<PK>) obj, updateDate);
+			}else{
+				this.mergeObject(obj);
+			}
 		}
 	}
 
