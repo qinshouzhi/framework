@@ -519,7 +519,9 @@ public class BaseDaoImpl<T extends BaseEntity<PK>, PK> implements BaseDao<T, PK>
 		for (Iterator<T> localIterator = objs.iterator(); localIterator
 				.hasNext();) {
 			Object obj = localIterator.next();
-			updateEntity((AuditEntity<PK>) obj, updateDate);
+			if(obj instanceof AuditEntity){
+				updateEntity((AuditEntity<PK>) obj, updateDate);
+			}
 		}
 	}
 
