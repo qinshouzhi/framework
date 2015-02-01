@@ -58,11 +58,11 @@
 			</div>
 		
 			<div class="col-md-12 margin-bottom-10" id="toolbar">
-				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic"><i class="fa fa-plus"></i> 新增  </a>
-				<a id="btnEdit" class="btn btn-sm red"><i class="fa fa-edit"></i> 编辑</a>
-				<a href="javascript:void(0)" id="btnDelete" class="btn btn-sm purple"><i class="fa fa-times"></i> 删除 </a>
-				<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue"><i class="fa fa-refresh"></i> 刷新  </a>
-				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> Excel </a>
+				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic"><i class="fa fa-plus"></i> <@spring.message "common.toolbar.btn.add.text"/>  </a>
+				<a id="btnEdit" class="btn btn-sm red"><i class="fa fa-edit"></i> <@spring.message "common.toolbar.btn.edit.text"/></a>
+				<a href="javascript:void(0)" id="btnDelete" class="btn btn-sm purple"><i class="fa fa-times"></i> <@spring.message "common.toolbar.btn.delete.text"/> </a>
+				<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue"><i class="fa fa-refresh"></i> <@spring.message "common.toolbar.btn.reload.text"/>   </a>
+				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> <@spring.message "common.toolbar.btn.export.text"/> </a>
 			</div>
 			<div class="col-md-12">
 				 <@lion.datagrids name="sys_app_property_list_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/applicationproperty/list.htm" dataOptions="" style="height:400px;"/>	
@@ -77,7 +77,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-				<h4 class="modal-title"><i class="fa fa-plus"></i> 项目属性配置添加</h4>
+				<h4 class="modal-title"><i class="fa fa-plus"></i> <@spring.message "sys.applicationProperty.form.adddialog.text"/></h4>
 			</div>
 			<div class="modal-body">
 				 	<div class="row">
@@ -87,32 +87,32 @@
 											<input type="hidden" id='id' name='id' value="">
 											<div class="form-body">
 												<div class="form-group">
-													<label class="col-md-3 control-label">AppId</label>
+													<label class="col-md-3 control-label"><@spring.message "sys.applicationProperty.query.appId.text"/></label>
 													<div class="col-md-5">
-														<input type="text"  name="appId"  maxlength="100" class="form-control" placeholder="请输入AppId" size="30"/>
+														<input type="text"  name="appId"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.role.form.adddialog.text"/>" size="30"/>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label">键</label>
+													<label class="col-md-3 control-label"><@spring.message "sys.applicationProperty.form.key.text"/></label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text"  name="key"  maxlength="100" class="form-control" placeholder="请输入键" size="30"/>
+															<input type="text"  name="key"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.applicationProperty.form.key.missing.message"/>" size="30"/>
 														</div>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label">值</label>
+													<label class="col-md-3 control-label"><@spring.message "sys.applicationProperty.form.value.text"/></label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text"  id="value" name="value" maxlength="100" class="form-control" placeholder="请输入值" size="30"/>
+															<input type="text"  id="value" name="value" maxlength="100" class="form-control" placeholder="<@spring.message "sys.applicationProperty.form.value.missing.message"/>" size="30"/>
 														</div>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label">描述</label>
+													<label class="col-md-3 control-label"><@spring.message "sys.applicationProperty.form.description.text"/></label>
 													<div class="col-md-5">
 														<div class="input-group ">															 
-															<input type="text" class="form-control" name="description" placeholder="请输入项目属性描述" maxlength="255" size="40"/>
+															<input type="text" class="form-control" name="description" placeholder="<@spring.message "sys.applicationProperty.form.description.text"/>" maxlength="255" size="40"/>
 														</div>
 													</div>
 												</div>
@@ -123,8 +123,8 @@
 				 	</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal"><i class="fa  fa-arrow-left"></i> 取 消 </button>
-				<button type="button" id="btnSave" class="btn blue"><i class="fa fa-save"></i> 保 存</button>
+				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal"><i class="fa  fa-arrow-left"></i> <@spring.message "common.diaglog.btn.cancel"/> </button>
+				<button type="button" id="btnSave" class="btn blue"><i class="fa fa-save"></i> <@spring.message "common.diaglog.btn.save"/></button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
