@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2015-01-15 13:31:39
+Date: 2015-02-02 11:32:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,29 +24,38 @@ CREATE TABLE `bas_app_properties` (
   `APP_ID` varchar(20) NOT NULL DEFAULT '' COMMENT '应用名称',
   `KEY_` varchar(120) NOT NULL DEFAULT '' COMMENT '参数名称',
   `VALUE_` varchar(225) NOT NULL COMMENT '数参值',
-  `DESCRIPTION` varchar(225) DEFAULT NULL COMMENT '数参描述',
+  `DESCRIPTION` varchar(225) NOT NULL COMMENT '数参描述',
+  `CREATE_BY` int(11) NOT NULL,
+  `CREATE_DATE` datetime NOT NULL,
+  `UPDATE_BY` int(11) NOT NULL,
+  `UPDATE_DATE` datetime NOT NULL,
+  `MARK_FOR_DELETE` int(1) DEFAULT NULL,
+  `OPT_COUNTER` int(6) DEFAULT NULL,
+  `DELETE_DATE` datetime DEFAULT NULL,
   PRIMARY KEY (`APP_PROPERTIES_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='应用参数表';
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='应用参数表';
 
 -- ----------------------------
 -- Records of bas_app_properties
 -- ----------------------------
-INSERT INTO `bas_app_properties` VALUES ('1', 'lion', 'hibernate.cache.provider_class', 'net.sf.ehcache.hibernate.SingletonEhCacheProvider', '配置使用二级缓存的类－提供商');
-INSERT INTO `bas_app_properties` VALUES ('2', 'lion', 'hibernate.cache.region.factory_class', 'net.sf.ehcache.hibernate.EhCacheRegionFactory', '解决使用echache2.5以后的版本时出现的异常问题 ');
-INSERT INTO `bas_app_properties` VALUES ('3', 'lion', 'hibernate.cache.use_minimal_puts', 'true', '以频繁的读操作为代价，优化二级缓存来最小化写操作，默认是开启的，取值为：true|false');
-INSERT INTO `bas_app_properties` VALUES ('4', 'lion', 'hibernate.cache.use_query_cache', 'false', '是否开启一级缓存');
-INSERT INTO `bas_app_properties` VALUES ('5', 'lion', 'hibernate.cache.use_second_level_cache', 'false', '是否开启二级缓存');
-INSERT INTO `bas_app_properties` VALUES ('6', 'lion', 'hibernate.dialect', 'org.hibernate.dialect.MySQLDialect', 'Hibernate SQL方言');
-INSERT INTO `bas_app_properties` VALUES ('7', 'lion', 'hibernate.format_sql', 'true', '是否格式SQL');
-INSERT INTO `bas_app_properties` VALUES ('8', 'lion', 'hibernate.generate_statistics', 'true', '如果开启，Hibernate将收集有助性能调节的统计数据');
-INSERT INTO `bas_app_properties` VALUES ('9', 'lion', 'hibernate.hbm2ddl.auto', 'none', '在SessionFactory创建时，自动检查数据库结构，或者将数据库schema的DDL导出数据库，使用create-drop时，在显示关闭SessionFactory时，将drop掉数据库schema，取值:vaildate|update|create|create-drop|no');
-INSERT INTO `bas_app_properties` VALUES ('10', 'lion', 'hibernate.jdbc.batch_size', '50', '允许Hibernate使用JDBC的批量更新，取值建议在5到50之间的值');
-INSERT INTO `bas_app_properties` VALUES ('11', 'lion', 'hibernate.jdbc.fetch_size', '100', '设置JDBC抓取数量的大小（调用Statement.setFetchSize()）');
-INSERT INTO `bas_app_properties` VALUES ('12', 'lion', 'hibernate.max_fetch_depth', '3', '设置外连接抓取的最大深度取值，建议设置为0~3之间');
-INSERT INTO `bas_app_properties` VALUES ('13', 'lion', 'hibernate.order-updates', 'true', '强制Hibernate按照被更新数据的主键，为SQL更新排序，将减少在高并发系统中事务的死锁。取值:true|false');
-INSERT INTO `bas_app_properties` VALUES ('14', 'lion', 'hibernate.show_sql', 'true', '是否显示SQL');
-INSERT INTO `bas_app_properties` VALUES ('15', 'lion', 'hibernate.use_sql_comments', 'true', '如果开启，Hibernate将在SQL中生成有助于调试的注释信息，默认值为：false,取值：true|false');
-INSERT INTO `bas_app_properties` VALUES ('16', 'lion', 'database.prefix', 'mysql', 'ORM配置文件前缀，用于切换不同数据库');
+INSERT INTO `bas_app_properties` VALUES ('1', 'lion', 'hibernate.cache.provider_class', 'net.sf.ehcache.hibernate.SingletonEhCacheProvider', '配置使用二级缓存的类－提供商', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', null, null, null);
+INSERT INTO `bas_app_properties` VALUES ('2', 'lion', 'hibernate.cache.region.factory_class', 'net.sf.ehcache.hibernate.EhCacheRegionFactory', '解决使用echache2.5以后的版本时出现的异常问题 ', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', null, null, null);
+INSERT INTO `bas_app_properties` VALUES ('3', 'lion', 'hibernate.cache.use_minimal_puts', 'true', '以频繁的读操作为代价，优化二级缓存来最小化写操作，默认是开启的，取值为：true|false', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', null, null, null);
+INSERT INTO `bas_app_properties` VALUES ('4', 'lion', 'hibernate.cache.use_query_cache', 'false', '是否开启一级缓存', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', null, null, null);
+INSERT INTO `bas_app_properties` VALUES ('5', 'lion', 'hibernate.cache.use_second_level_cache', 'false', '是否开启二级缓存', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', null, null, null);
+INSERT INTO `bas_app_properties` VALUES ('6', 'lion', 'hibernate.dialect', 'org.hibernate.dialect.MySQLDialect', 'Hibernate SQL方言', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', null, null, null);
+INSERT INTO `bas_app_properties` VALUES ('7', 'lion', 'hibernate.format_sql', 'true', '是否格式SQL', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', null, null, null);
+INSERT INTO `bas_app_properties` VALUES ('8', 'lion', 'hibernate.generate_statistics', 'true', '如果开启，Hibernate将收集有助性能调节的统计数据', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', null, null, null);
+INSERT INTO `bas_app_properties` VALUES ('9', 'lion', 'hibernate.hbm2ddl.auto', 'none', '在SessionFactory创建时，自动检查数据库结构，或者将数据库schema的DDL导出数据库，使用create-drop时，在显示关闭SessionFactory时，将drop掉数据库schema，取值:vaildate|update|create|create-drop|no', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', null, null, null);
+INSERT INTO `bas_app_properties` VALUES ('10', 'lion', 'hibernate.jdbc.batch_size', '50', '允许Hibernate使用JDBC的批量更新，取值建议在5到50之间的值', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', null, null, null);
+INSERT INTO `bas_app_properties` VALUES ('11', 'lion', 'hibernate.jdbc.fetch_size', '100', '设置JDBC抓取数量的大小（调用Statement.setFetchSize()）', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', null, null, null);
+INSERT INTO `bas_app_properties` VALUES ('12', 'lion', 'hibernate.max_fetch_depth', '3', '设置外连接抓取的最大深度取值，建议设置为0~3之间', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', null, null, null);
+INSERT INTO `bas_app_properties` VALUES ('13', 'lion', 'hibernate.order-updates', 'true', '强制Hibernate按照被更新数据的主键，为SQL更新排序，将减少在高并发系统中事务的死锁。取值:true|false', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', null, null, null);
+INSERT INTO `bas_app_properties` VALUES ('14', 'lion', 'hibernate.show_sql', 'true', '是否显示SQL', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', null, null, null);
+INSERT INTO `bas_app_properties` VALUES ('15', 'lion', 'hibernate.use_sql_comments', 'true', '如果开启，Hibernate将在SQL中生成有助于调试的注释信息，默认值为：false,取值：true|false', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', null, null, null);
+INSERT INTO `bas_app_properties` VALUES ('16', 'lion', 'database.prefix', 'mysql', 'ORM配置文件前缀，用于切换不同数据库', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', null, null, null);
+INSERT INTO `bas_app_properties` VALUES ('17', 'lion', 'excel.temp.path', 'D:\\app\\excel', 'excel导出路径', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', null, null, null);
+INSERT INTO `bas_app_properties` VALUES ('21', 'lion', 'hibernate', 'hibernate', 'hibernate111', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', null, null, null);
 
 -- ----------------------------
 -- Table structure for `bas_code_list`
@@ -73,7 +82,7 @@ CREATE TABLE `bas_code_list` (
   UNIQUE KEY `UK_BAS_CODE_LIST_NAME_EN` (`NAME_EN`),
   KEY `FK_BAS_CODE_TYPE_ID_001` (`BAS_CODE_TYPE_ID`),
   CONSTRAINT `FK_BAS_CODE_TYPE_ID_001` FOREIGN KEY (`BAS_CODE_TYPE_ID`) REFERENCES `bas_code_type` (`BAS_CODE_TYPE_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COMMENT='通用编码表';
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8 COMMENT='通用编码表';
 
 -- ----------------------------
 -- Records of bas_code_list
@@ -190,7 +199,7 @@ CREATE TABLE `bas_column` (
   `DELETE_DATE` datetime DEFAULT NULL COMMENT '删除日期',
   PRIMARY KEY (`BAS_COLUMN_ID`),
   KEY `FK_BAS_COLUMN_BAS_DATAGRID_ID` (`BAS_DATAGRID_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=utf8 COMMENT='DataGrid列属性配置';
+) ENGINE=InnoDB AUTO_INCREMENT=189 DEFAULT CHARSET=utf8 COMMENT='DataGrid列属性配置';
 
 -- ----------------------------
 -- Records of bas_column
@@ -369,7 +378,7 @@ INSERT INTO `bas_column` VALUES ('181', '33', '6', 'inMemoryHits', '内存命中
 INSERT INTO `bas_column` VALUES ('182', '33', '7', 'onDiskHits', '磁盘命中次数', '100.00', '0', '0', '0', 'asc', 'left', 'left', '0', '0', '', '', '', '', '1', '2014-04-21 15:32:45', '1', '2014-04-22 10:30:55', '0', '1', null);
 INSERT INTO `bas_column` VALUES ('183', '33', '8', 'memoryStoreEvictionPolicy', '缓存策略', '100.00', '0', '0', '0', 'asc', 'left', 'left', '0', '0', '', '', '', '', '1', '2014-04-21 15:33:04', '1', '2014-04-22 10:30:59', '0', '1', null);
 INSERT INTO `bas_column` VALUES ('184', '34', '0', 'id', 'id', '100.00', '0', '0', '1', 'asc', 'left', 'left', '1', '0', null, null, null, null, '1', '2015-01-15 13:23:08', '1', '2015-01-15 13:23:11', '0', '0', null);
-INSERT INTO `bas_column` VALUES ('185', '34', '1', 'appId', 'app_id', '100.00', '0', '0', '1', 'asc', 'left', 'left', '0', '0', null, null, null, null, '1', '2015-01-15 12:48:34', '1', '2015-01-15 12:48:36', '0', '0', null);
+INSERT INTO `bas_column` VALUES ('185', '34', '1', 'appId', 'app_id', '30.00', '0', '0', '1', 'asc', 'left', 'left', '0', '0', null, null, null, null, '1', '2015-01-15 12:48:34', '1', '2015-01-15 12:48:36', '0', '0', null);
 INSERT INTO `bas_column` VALUES ('186', '34', '2', 'key', '键', '100.00', '0', '0', '1', 'asc', 'left', 'left', '0', '0', null, null, null, null, '1', '2015-01-15 12:49:50', '1', '2015-01-15 12:49:52', '0', '0', null);
 INSERT INTO `bas_column` VALUES ('187', '34', '3', 'value', '值', '100.00', '0', '0', '1', 'asc', 'left', 'left', '0', '0', null, null, null, null, '1', '2015-01-15 12:50:36', '1', '2015-01-15 12:50:40', '0', '0', null);
 INSERT INTO `bas_column` VALUES ('188', '34', '4', 'description', '描述', '100.00', '0', '0', '1', 'asc', 'left', 'left', '0', '0', null, null, null, null, '1', '2015-01-15 12:51:52', '1', '2015-01-15 12:51:55', '0', '0', null);
@@ -435,7 +444,7 @@ INSERT INTO `bas_datagrid` VALUES ('9', 'users_datagrid', 'authgroup_tb', '', '0
 INSERT INTO `bas_datagrid` VALUES ('10', 'datagrid_datagrid ', 'datagrid_dt', 'DataGrid表格', '0', '0', '1', '0', '1', '1', '1', 'post', '1', 'main/datagrid_lists.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-05 17:41:16', '1', '2014-04-08 23:45:56', '0', '33', null);
 INSERT INTO `bas_datagrid` VALUES ('11', 'users_datagrid', 'userlist_dt', '用户列表', '0', '0', '1', '0', '1', '1', '1', 'post', '1', 'main/userlists.action', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-05 19:42:23', '1', '2014-04-08 23:47:18', '0', '1', null);
 INSERT INTO `bas_datagrid` VALUES ('12', 'users_datagrid', 'authrole_tb', null, '0', '0', '1', '0', '0', '1', '1', 'post', '1', 'main/auth_rolelist.action', '', '', '1', '0', '1', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-05 20:59:17', '1', '2013-04-08 15:06:57', '0', '8', null);
-INSERT INTO `bas_datagrid` VALUES ('13', 'users_datagrid', 'sys_group_list_tb', null, '0', '0', '0', '0', '1', '1', '1', 'post', '1', 'main/group_lists.action', '', '', '1', '1', '1', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-09 17:11:43', '1', '2013-04-09 17:11:43', '0', '0', null);
+INSERT INTO `bas_datagrid` VALUES ('13', 'users_datagrid', 'sys_group_list_tb', '', '0', '0', '0', '0', '1', '1', '1', 'post', '1', 'main/group_lists.action', '', '', '1', '1', '1', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-09 17:11:43', '1', '2013-04-09 17:11:43', '0', '0', null);
 INSERT INTO `bas_datagrid` VALUES ('14', 'users_datagrid', 'sys_authuserlistforgroup_tb', '已关联用户', '1', '0', '1', '0', '0', '1', '1', 'post', '1', 'main/auth_serlistforgroup.action', '', '', '0', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-09 20:25:43', '1', '2014-04-08 23:47:23', '0', '2', null);
 INSERT INTO `bas_datagrid` VALUES ('16', 'users_datagrid', 'sys_authrolelistforgroup_tb', '已关联角色', '1', '0', '0', '0', '0', '1', '1', 'post', '1', 'main/authgroup_rolelistforgroup.action', '', '', '0', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-09 21:03:09', '1', '2013-04-09 23:21:55', '0', '2', null);
 INSERT INTO `bas_datagrid` VALUES ('17', 'users_datagrid', 'sys_authuserforgroup_tb', '关联用户组', '0', '0', '1', '0', '0', '1', '1', 'post', '1', 'main/authgroup_userlist.action', '', '', '1', '0', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2013-04-09 21:08:50', '1', '2014-04-08 23:48:29', '0', '3', null);
@@ -454,7 +463,7 @@ INSERT INTO `bas_datagrid` VALUES ('29', 'system_datagrid', 'sys_parameter_lists
 INSERT INTO `bas_datagrid` VALUES ('30', 'system_datagrid', 'sys_department_lists2', null, '0', '0', '1', '0', '1', '1', '1', 'post', '1', '/main/system/department/lists.jhtml', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2014-04-04 01:04:59', '1', '2014-04-04 01:10:43', '0', '2', null);
 INSERT INTO `bas_datagrid` VALUES ('32', 'datagrid_datagrid ', 'sys_datagrid_tb1', 'DataGrid表格测试 ', '0', '0', '1', '0', '1', '1', '0', 'post', '1', 'sys_datagrid_tb1', '', '', '1', '0', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '1', '1', '0', '18', '', '', null, '', null, '1', '2014-04-08 23:04:00', '1', '2014-04-08 23:46:14', '0', '2', null);
 INSERT INTO `bas_datagrid` VALUES ('33', 'system_datagrid', 'sys_cachelist_tb', '缓存管理', '0', '0', '1', '0', '0', '1', '1', 'post', '1', 'sys_cachelist_tb', '', '', '1', '1', '0', '0', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', null, '', 'asc', '0', '1', '0', '18', '', '', null, '', null, '1', '2014-04-21 15:13:40', '1', '2014-04-22 10:30:01', '0', '1', null);
-INSERT INTO `bas_datagrid` VALUES ('34', 'system_datagrid', 'sys_app_property_list_tb', '项目属性配置', '0', '0', '1', '0', '1', '1', '1', 'POST', '1', 'main/applicationproperty_lists.action', null, null, '1', '1', '1', '1', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', '100', 'id', 'asc', '1', '1', '0', '18', null, null, null, null, null, '1', '2015-01-15 10:04:03', '1', '2015-01-15 10:04:06', '0', '2', null);
+INSERT INTO `bas_datagrid` VALUES ('34', 'system_datagrid', 'sys_app_property_list_tb', '项目属性配置', '0', '0', '1', '0', '1', '1', '1', 'post', '1', 'main/applicationproperty_lists.action', null, null, '1', '1', '1', '1', 'bottom', '1', '15', '[10,15,20,25,30,40,50,100]', '100', 'id', 'asc', '1', '1', '0', '18', null, null, null, null, null, '1', '2015-01-15 10:04:03', '1', '2015-01-15 10:04:06', '0', '2', null);
 
 -- ----------------------------
 -- Table structure for `bas_demo`
@@ -669,7 +678,7 @@ CREATE TABLE `bas_parameter` (
   `DELETE_DATE` datetime DEFAULT NULL COMMENT '删除日期',
   PRIMARY KEY (`BAS_PARAMETER_ID`),
   UNIQUE KEY `UK_BAS_PARAMETER_NAMEEN` (`NAME_ZH`)
-) ENGINE=InnoDB AUTO_INCREMENT=181 DEFAULT CHARSET=utf8 COMMENT=' 系统参数定义表';
+) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=utf8 COMMENT=' 系统参数定义表';
 
 -- ----------------------------
 -- Records of bas_parameter
@@ -677,15 +686,15 @@ CREATE TABLE `bas_parameter` (
 INSERT INTO `bas_parameter` VALUES ('1', 'Files', 'uploadFilePath1', '上传文件路径11', 'c:/temp/', '0', '文件上传路径', '1', '2012-12-16 20:31:11', '1', '2014-04-02 15:57:37', '0', '3', null);
 INSERT INTO `bas_parameter` VALUES ('4', 'systems', 'uploadFilePath111', '上传文件路径111', 'c:/temp/111', '1', '文件上传路径', '1', '2012-12-16 21:28:26', '1', '2013-04-14 22:19:47', '0', '3', null);
 INSERT INTO `bas_parameter` VALUES ('5', 'Users', 'uploadFilePath', '上传文件路径', 'c:/temp/temp/', '1', '文件上传路径1', '1', '2012-12-16 21:28:27', '1', '2014-04-02 17:19:57', '0', '17', null);
-INSERT INTO `bas_parameter` VALUES ('9', 'systems', 'systemName', '系统名称', 'eCommerce', '1', '', '1', '2013-03-12 16:24:21', '1', '2013-04-05 11:39:52', '0', '3', null);
+INSERT INTO `bas_parameter` VALUES ('9', 'systems', 'systemName', '系统名称', 'eCommerce', '1', '电子', '1', '2013-03-12 16:24:21', '1', '2015-01-28 16:36:44', '0', '3', null);
 INSERT INTO `bas_parameter` VALUES ('78', 'systems', 'PwdInitialization', '用户初始化密码', '111aaa', '1', '用户初始化密码,用于管理系统用户的创建的密码', '1', '2013-03-23 18:36:53', '1', '2014-03-28 13:55:56', '0', '1', null);
 INSERT INTO `bas_parameter` VALUES ('99', 'Files', 'name2', 'name2', 'name2', '1', 'name2', '1', '2013-04-14 23:02:55', '1', '2013-04-14 23:02:55', '0', '0', null);
 INSERT INTO `bas_parameter` VALUES ('101', 'Files', 'name3', 'name3', 'name3', '1', 'name3', '1', '2013-04-14 23:04:06', '1', '2014-04-05 11:49:24', '0', '1', null);
-INSERT INTO `bas_parameter` VALUES ('120', 'systems', 'uploadFilePath1', '上传文ss', 'c:/temp/', null, '文件上传路径', '1', '2013-04-20 22:30:05', '1', '2013-04-20 22:30:05', '0', '0', null);
-INSERT INTO `bas_parameter` VALUES ('128', 'systems', 'name2222', 'name222', 'name', '0', '', '1', '2013-05-21 20:35:31', '1', '2013-05-21 20:35:31', '0', '0', null);
+INSERT INTO `bas_parameter` VALUES ('120', 'systems', 'uploadFilePath1', '上传文ss', 'c:/temp/', '0', '文件上传路径', '1', '2013-04-20 22:30:05', '1', '2015-01-28 16:35:56', '0', '0', null);
+INSERT INTO `bas_parameter` VALUES ('128', 'systems', 'name2222', 'name222', 'name', '0', '姓名', '1', '2013-05-21 20:35:31', '1', '2015-01-28 16:36:47', '0', '0', null);
 INSERT INTO `bas_parameter` VALUES ('135', 'Users', 'name223333', 'name22', 'name22', '1', '22ddd', '1', '2014-03-27 15:22:05', '1', '2014-03-30 13:23:08', '0', '1', null);
-INSERT INTO `bas_parameter` VALUES ('138', 'systems', 'name2333222', 'name222dd', 'nameeeddd', '1', '', '1', '2014-03-27 15:25:28', '1', '2014-03-27 15:25:28', '0', '0', null);
-INSERT INTO `bas_parameter` VALUES ('139', 'systems', 'name23332221', 'name222dd1', 'nameeeddd1', '1', '', '1', '2014-03-27 15:26:07', '1', '2014-03-27 15:26:07', '0', '0', null);
+INSERT INTO `bas_parameter` VALUES ('138', 'systems', 'name2333222', 'name222dd', 'nameeeddd', '1', 'nameeeddd', '1', '2014-03-27 15:25:28', '1', '2015-01-28 16:36:54', '0', '0', null);
+INSERT INTO `bas_parameter` VALUES ('139', 'systems', 'name23332221', 'name222dd1', 'nameeeddd1', '1', 'nameeeddd1', '1', '2014-03-27 15:26:07', '1', '2015-01-28 16:36:58', '0', '0', null);
 INSERT INTO `bas_parameter` VALUES ('140', 'systems', 'wanglijun', 'wanglijun', 'wanglijun', '1', '3333', '1', '2014-03-27 15:26:30', '1', '2014-03-27 15:26:30', '0', '0', null);
 INSERT INTO `bas_parameter` VALUES ('141', 'systems', 'wanglijun1', 'wanglijun1', 'wanglijun1', '1', 'wanglijun1', '1', '2014-03-27 15:27:53', '1', '2014-03-27 15:27:53', '0', '0', null);
 INSERT INTO `bas_parameter` VALUES ('142', 'systems', 'wanglijun3', 'wanglijun3', 'wanglijun3', '1', 'wanglijun3', '1', '2014-03-27 15:32:15', '1', '2014-03-27 15:32:15', '0', '0', null);
@@ -719,6 +728,7 @@ INSERT INTO `bas_parameter` VALUES ('177', 'sysInterface', 'mpi.signCert.type', 
 INSERT INTO `bas_parameter` VALUES ('178', 'sysInterface', 'mpi.encryptCert.path', '密码加密证书路径', '/weblog10/bea/deploy_files/ICBC/tel/PM_enc.cer', '1', '密码加密证书路径，敏感信息加密证书路径，请根据实际情况进行修改', '1', '2014-06-01 22:07:26', '1', '2014-06-01 22:07:26', '0', '0', null);
 INSERT INTO `bas_parameter` VALUES ('179', 'sysInterface', 'mpi.validateCert.dir', '验证签名证书目录', '/weblog10/bea/deploy_files/ICBC/tel', '1', '验证签名证书目录，验证银联系统返回报文的证书目录', '1', '2014-06-01 22:08:05', '1', '2014-06-01 22:08:19', '0', '1', null);
 INSERT INTO `bas_parameter` VALUES ('180', 'sysInterface', 'mpi.merchantNo', '银联在线商户号', '102310063000015', '1', '银联在线商户号', '1', '2014-06-01 22:08:48', '1', '2014-06-01 22:08:48', '0', '0', null);
+INSERT INTO `bas_parameter` VALUES ('183', 'Files', 'demo', 'demo', 'demo22', '1', 'demo', '1', '2015-01-26 15:54:59', '1', '2015-01-26 15:55:30', '0', '1', null);
 
 -- ----------------------------
 -- Table structure for `bas_position`

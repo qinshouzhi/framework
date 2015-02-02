@@ -52,7 +52,7 @@
 						<input class="form-control input-small" type="text" size="30" name="value" id="value"  placeholder="请输入value"/>					
 					</div>
 					<div class="col-md-2">
-						<a href="javascript:void(0)" id="btnQuery" class="btn blue"><i class="fa fa-search"></i> 查 询 </a>
+						<a href="javascript:void(0)" id="btnQuery" class="btn blue"><i class="fa fa-search"></i> <@spring.message "common.query.btn.text"/> </a>
 					</div>
 				</form>
 			</div>
