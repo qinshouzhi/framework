@@ -68,10 +68,6 @@ public class ParameterController extends AbstractController{
 
 	/** 参数首页 */
 	private static final String INDEX_RETURN = "/system/parameter/index";
-	/** 参数添加首页 */
-	private static final String ADD_DIALOG_RETURN = "/system/parameter/dialog/add";
-	/** 参数编辑首页 */
-	private static final String EDIT_DIALOG_RETURN = "/system/parameter/dialog/edit";
 	/** 默认排序字段名称 */
 	private static final String DEFAULT_ORDER_FILED_NAME = "id";
 	/**字典类型*/
@@ -98,16 +94,7 @@ public class ParameterController extends AbstractController{
 		return INDEX_RETURN;
 	}
 
-	@RequestMapping(value = "dialogedit")
-	public String editDialog(@RequestParam(required = false) Long id,
-			Model model) {
-		return EDIT_DIALOG_RETURN;
-	}
-
-	@RequestMapping(value = "dialog/add")
-	public String addDialog(HttpServletRequest servletRequest, Model model) {
-		return ADD_DIALOG_RETURN;
-	}
+ 
 
 	@RequestMapping(value = "edit")
 	@ResponseBody

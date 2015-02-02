@@ -22,13 +22,13 @@ function addHoverDom(treeId, treeNode) {
         zTree.addNodes(treeNode, {id:(1000 + newCount), pId:treeNode.id, name:"new node" + (newCount++)});
         return false;
     });
-};
+}
 
 function removeHoverDom(treeId, treeNode) {
     $("#addBtn_"+treeNode.tId).unbind().remove();
     $("#removeBtn_"+treeNode.tId).unbind().remove();
     $("#editBtn_"+treeNode.tId).unbind().remove();
-};
+}
 
 var setting = {
     check: {
@@ -191,3 +191,98 @@ var setting1 = {
 		setCheck();			
 	 
 	});
+
+    var lastSelectNodetId;
+
+    var settingSelect = {
+            view: {
+                dblClickExpand: false
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                beforeClick:beforeClick,
+                onClick: onClick
+            }
+        };
+
+        var zNodesSelect =[
+            {id:1, pId:0, name:"北京"},
+            {id:2, pId:0, name:"天津"},
+            {id:3, pId:0, name:"上海"},
+            {id:6, pId:0, name:"重庆"},
+            {id:4, pId:0, name:"河北省", open:true},
+            {id:41, pId:4, name:"石家庄"},
+            {id:42, pId:4, name:"保定"},
+            {id:43, pId:4, name:"邯郸"},
+            {id:44, pId:4, name:"承德"},
+            {id:5, pId:0, name:"广东省", open:true},
+            {id:51, pId:5, name:"广州"},
+            {id:52, pId:5, name:"深圳"},
+            {id:53, pId:5, name:"东莞"},
+            {id:54, pId:5, name:"佛山"},
+            {id:6, pId:0, name:"福建省", open:true},
+            {id:61, pId:6, name:"福州"},
+            {id:62, pId:6, name:"厦门"},
+            {id:63, pId:6, name:"泉州"},
+            {id:64, pId:6, name:"三明"}
+         ];
+
+        function beforeClick(treeId, treeNode) {
+            if(treeNode.tId===lastSelectNodetId){
+                console.dir(treeNode.tId);
+                console.dir(lastSelectNodetId);
+                var zTree = $.fn.zTree.getZTreeObj("treeDemo1");
+                zTree.cancelSelectedNode(treeNode);
+                var cityObj = $("#citySel");
+                cityObj.find('span').text(cityObj.attr('placeholder'));
+                lastSelectNodetId="";
+                return false;
+            }else{
+                 lastSelectNodetId=treeNode.tId;
+            }
+        }
+        
+        function onClick(e, treeId, treeNode) {
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo1"),
+            nodes = zTree.getSelectedNodes(),v = "";
+            
+            nodes.sort(function compare(a,b){return a.id-b.id;});
+            for (var i=0, l=nodes.length; i<l; i++) {
+                v += nodes[i].name + ",";
+            }
+            if (v.length > 0 ) v = v.substring(0, v.length-1);
+            var cityObj = $("#citySel");
+            cityObj.find('span').text(v); 
+        }
+
+        function showMenu() {
+            var cityObj = $("#citySel");
+            var cityOffset =cityObj.offset();
+            $("#menuContent").css({left:'0px', top:cityObj.outerHeight() + "px"}).slideDown("fast");
+
+            $("body").bind("mousedown", onBodyDown);
+        }
+        function hideMenu() {
+            $("#menuContent").fadeOut("fast");
+            $("body").unbind("mousedown", onBodyDown);
+        }
+        function onBodyDown(event) {
+            if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+                hideMenu();
+            }
+        }
+
+        $(document).ready(function(){
+            $.fn.zTree.init($("#treeDemo1"), settingSelect, zNodesSelect);
+            $("#citySel").click(function(){
+                return  showMenu();
+            });
+
+            $("#departmentId").combotree('treeOnClick',function(e, treeId, treeNode){
+                
+            });
+        });
