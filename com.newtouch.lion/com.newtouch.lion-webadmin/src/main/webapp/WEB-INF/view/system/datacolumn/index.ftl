@@ -14,17 +14,24 @@
 <link href="${base}/resources/global/plugins/easyui/themes/icon.css" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" type="text/css">
-
-<!--EasyUI css End-->
-<script src="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript" ></script>
+<!--lion UI css Start-->
+<link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css">
+<link href="${base}/resources/global/css/dialog/lion.dialog.css" rel="stylesheet" type="text/css">
+<link href="${base}/resources/global/css/combo/lion.combo.css" rel="stylesheet" type="text/css">
+<!--lion UI css End-->
 <script src="${base}/resources/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
-<script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js"></script>
-<script src="${base}/resources/admin/pages/scripts/ui-toastr.js"></script>
-
+<script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript" ></script>
+<script src="${base}/resources/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
 <!--EasyUI JavaScript Start-->
 <script src="${base}/resources/global/plugins/easyui/jquery.easyui.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
 <!--EasyUI JavaScript End-->
+<!--lion UI JS Start-->
+<script src="${base}/resources/global/js/lion.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/form/form.fill.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/dialog/dialog.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
+<!--lion UI JS End-->
 <script src="${base}/resources/global/scripts/framework.js" type="text/javascript"></script>
 <script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/scripts/system/datacolumn.js" type="text/javascript"></script>
@@ -35,7 +42,7 @@
 	<div class="portlet-body">
 		<div class="row">
 			<div class="col-md-12 margin-bottom-10">
-				<form id="queryParameterform" class="form-horizontal">
+				<form id="queryform" class="form-horizontal">
 					<label class="control-label col-md-2" for="name" ><@spring.message "sys.datacolumn.query.name.text"/></label>
 					<div class="col-md-5">
 						<input class="form-control input-small" type="text" size="30" name="name" id="name"  placeholder="<@spring.message "sys.datacolumn.query.name.missing.message"/>"/>					
@@ -74,7 +81,8 @@
 				 	<div class="row">
 					 	<div class="col-md-12 portlet-body form">
 					 		<!-- BEGIN FORM-->
-									<form action="#" class="form-horizontal">
+									<form action="#" class="form-horizontal" name="sysDataColumnForm" id="sysDataColumnForm" method="post">
+										<input type="hidden" id='id' name='id' value="">
 										<div class="form-body">
 											<div class="form-group">
 												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.dataGridId.text"/></label>

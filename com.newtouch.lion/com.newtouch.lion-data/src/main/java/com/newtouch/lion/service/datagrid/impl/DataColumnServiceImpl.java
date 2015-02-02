@@ -15,6 +15,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.newtouch.lion.common.Assert;
 import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.datagrid.DataColumnDao;
 import com.newtouch.lion.json.JSONParser;
@@ -211,4 +212,46 @@ public class DataColumnServiceImpl extends AbstractService implements
 		Set<String> properties = this.doFindColumnsByTableId(tableId);
 		return JSONParser.toJSONDataGridString(pageResult, properties);
 	}
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.datagrid.DataColumnService#doIsExistByName(java.lang.String)
+	 */
+	@Override
+	public boolean doIsExistByName(String name) {
+		// TODO Auto-generated method stub
+		Assert.notNull(name);
+		DataColumn dataColumn = this.doFindTypeByName(name);
+		if (dataColumn != null)
+			return true;
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.datagrid.DataColumnService#doFindTypeByName(java.lang.String)
+	 */
+	@Override
+	public DataColumn doFindTypeByName(String name) {
+		// TODO Auto-generated method stub
+		Assert.notNull(name);
+		String hql = "from DataColumn  where name=:name";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("name", name);
+		java.util.List<DataColumn> dataColumns = dataColumnDao.query(hql, params);
+		if (dataColumns != null && dataColumns.size() > 0) {
+			return dataColumns.get(0);
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.datagrid.DataColumnService#doCreate(com.newtouch.lion.model.datagrid.DataColumn)
+	 */
+	@Override
+	public void doCreate(DataColumn dataColumn) {
+		// TODO Auto-generated method stub
+		Assert.notNull(dataColumn);
+		dataColumnDao.save(dataColumn);
+	}
+	
+	
 }

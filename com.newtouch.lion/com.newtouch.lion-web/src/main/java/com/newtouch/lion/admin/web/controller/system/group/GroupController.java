@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.group.GroupVo;
-import com.newtouch.lion.admin.web.model.system.role.RoleVo;
 import com.newtouch.lion.common.date.DateUtil;
 import com.newtouch.lion.common.file.FileUtil;
 import com.newtouch.lion.common.lang.LongUtils;
@@ -119,7 +118,7 @@ public class GroupController extends AbstractController{
 			Errors errors, ModelAndView modelAndView) {
 
 		if (!errors.hasErrors()&& this.isExistByNameEn(groupVo.getNameEn())) {
-			errors.rejectValue(RoleVo.NAMEEN,
+			errors.rejectValue(GroupVo.NAMEEN,
 					"sys.group.form.nameen.existed.message",
 					new Object[] { groupVo.getNameEn() }, null);
 		}

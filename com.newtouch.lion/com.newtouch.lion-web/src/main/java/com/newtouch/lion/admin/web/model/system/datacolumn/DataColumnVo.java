@@ -31,6 +31,7 @@ public class DataColumnVo implements Serializable {
 		 * 
 		 */
 	private static final long serialVersionUID = 8656623018269420199L;
+	public static final  String NAME="name";
 	private Long id;
 	/** 当前显示顺序从1开始，用于控制列显示顺序 */
 	private int showOrder = 1;
@@ -41,7 +42,7 @@ public class DataColumnVo implements Serializable {
 	/** 列名显示字段 */
 	private String name;
 	/** 显示列宽度：eg width=30 */
-	private Long width;
+	private Integer width;
 	/** rowspan Indicate how many rows a cell should take up. */
 	private int rowspan;
 	/** colspan Indicate how many columns a cell should take up. */
@@ -167,7 +168,7 @@ public class DataColumnVo implements Serializable {
 	/**
 	 * @return the width
 	 */
-	public Long getWidth() {
+	public Integer getWidth() {
 		return width;
 	}
 
@@ -175,7 +176,7 @@ public class DataColumnVo implements Serializable {
 	 * @param width
 	 *            the width to set
 	 */
-	public void setWidth(Long width) {
+	public void setWidth(Integer width) {
 		this.width = width;
 	}
 

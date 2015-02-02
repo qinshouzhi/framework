@@ -27,12 +27,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.datacolumn.DataColumnVo;
+import com.newtouch.lion.common.date.DateUtil;
+import com.newtouch.lion.common.file.FileUtil;
 import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.model.datagrid.DataColumn;
+import com.newtouch.lion.model.datagrid.DataGrid;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.datagrid.DataColumnService;
-import com.newtouch.lion.web.constant.ConstantMessage;
+import com.newtouch.lion.service.datagrid.DataGridService;
+import com.newtouch.lion.service.excel.ExcelExportService;
+import com.newtouch.lion.web.controller.AbstractController;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
 
@@ -55,7 +60,7 @@ import com.newtouch.lion.web.servlet.view.support.BindResult;
  */
 @Controller(value = "sysDataColumnController")
 @RequestMapping("/system/datacolumn/")
-public class DataColumnController {
+public class DataColumnController extends AbstractController{
 	private final Logger logger = LoggerFactory.getLogger(super.getClass());
 	/** 默认排序字段 */
 	private static final String DEFAULT_ORDER_FILED_NAME = "id";
@@ -70,7 +75,13 @@ public class DataColumnController {
 	private static final String INDEX_TB = "datacolumn_tb";
 	@Autowired
 	private DataColumnService dataColumnService;
-
+	/**DataGrid表格*/
+	@Autowired
+	private DataGridService dataGridService;
+	/**Excel通用导出*/
+	@Autowired
+	private ExcelExportService excelExportService;
+	
 	/** 新增的对话框 */
 	@RequestMapping(value = "adddialog")
 	public String addDialog() {
@@ -84,14 +95,12 @@ public class DataColumnController {
 		Map<String, String> params = new HashMap<String, String>();
 		int updateRow = this.dataColumnService.doDeleteById(id);
 		if (updateRow > 0) {
-			params.put(BindResult.SUCCESS,
-					ConstantMessage.DELETE_SUCCESS_MESSAGE_CODE);
+			params.put(BindResult.SUCCESS,"sys.datacolumn.delete.success");
 		} else {
-			params.put(BindResult.SUCCESS,
-					ConstantMessage.DELETE_FAIL_MESSAGE_CODE);
+			params.put(BindResult.SUCCESS,"sys.datacolumn.delete.fail");
 		}
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		return this.getJsonView(modelAndView);
 	}
 
 	/** 添加 */
@@ -100,17 +109,25 @@ public class DataColumnController {
 	public ModelAndView add(
 			@Valid @ModelAttribute("dataGridVo") DataColumnVo dataColumnVo,
 			Errors errors, ModelAndView modelAndView) {
+		if (!errors.hasErrors()&& this.isExistByName(dataColumnVo.getName())) {
+			errors.rejectValue(DataColumnVo.NAME,
+					"sys.dataColumn.form.nameen.existed.message",
+					new Object[] { dataColumnVo.getName() }, null);
+		}
+		//是否错误消息
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
-			return modelAndView;
+			return this.getJsonView(modelAndView);
 		}
 		DataColumn dataColumn = new DataColumn();
+
 		BeanUtils.copyProperties(dataColumnVo, dataColumn);
-		this.dataColumnService.doCreateDataColumn(dataColumn);
+		dataColumnService.doCreate(dataColumn);
 		Map<String, String> params = new HashMap<String, String>();
-		params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
+		params.put(BindResult.SUCCESS, "sys.datacolumn.add.success");
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		
+		return this.getJsonView(modelAndView);
 	}
 
 	/** 编辑对话框 */
@@ -129,29 +146,36 @@ public class DataColumnController {
 	@RequestMapping(value = "edit")
 	@ResponseBody
 	public ModelAndView edit(
-			@Valid @ModelAttribute("d") DataColumnVo dataColumnVo,
+			@Valid @ModelAttribute("dataColumn") DataColumnVo dataColumnVo,
 			Errors errors, ModelAndView modelAndView) {
 
-		DataColumn dataColumn = null;
-		if (dataColumnVo.getId() != null) {
-			dataColumn = this.dataColumnService.doGetById(dataColumnVo.getId());
-			if (dataColumn == null) {
-				errors.reject(ConstantMessage.EDIT_ISEMPTY_FAIL_MESSAGE_CODE);
-			}
-		} else {
-			errors.reject(ConstantMessage.EDIT_ISEMPTY_FAIL_MESSAGE_CODE);
+		modelAndView=this.getJsonView(modelAndView);
+		if (!errors.hasErrors() && dataColumnVo.getId() == null) {
+			errors.reject("sys.dataColumn.form.id.empty");
+			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
+			return modelAndView; 
+		} 
+		DataColumn dataColumn = dataColumnService.doGetById(dataColumnVo.getId());
+		if (dataColumn == null) {
+			errors.reject("sys.datacolumn.form.id.empty");
+			return modelAndView;
+		}
+		
+		if (!errors.hasErrors()
+				&& this.isExistByName(dataColumnVo.getName(),dataColumn.getName())) {errors.rejectValue(DataColumnVo.NAME,	"sys.dataColumn.form.name.existed.message",new Object[] { dataColumnVo.getName() }, null);
+
 		}
 
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
 			return modelAndView;
 		}
-		BeanUtils.copyProperties(dataColumnVo, dataColumn);
 
-		this.dataColumnService.doUpdate(dataColumn);
+		BeanUtils.copyProperties(dataColumnVo, dataColumn);
+		dataColumnService.doUpdate(dataColumn);
+
 		Map<String, String> params = new HashMap<String, String>();
-		params.put(BindResult.SUCCESS,
-				ConstantMessage.EDIT_SUCCESS_MESSAGE_CODE);
+		params.put(BindResult.SUCCESS, "sys.datacolumn.edit.success");
 		modelAndView.addObject(BindMessage.SUCCESS, params);
 		return modelAndView;
 	}
@@ -191,5 +215,95 @@ public class DataColumnController {
 		PageResult<DataColumn> pageResult = this.dataColumnService.doFindByCriteria(queryCriteria);
 		return pageResult.getDataTable();
 	}
+	
+	/*add by maojiawei*/
+	private Boolean isExistByName(String name) {
+		Boolean flag = false;
+		if (StringUtils.isNotEmpty(name)) {
+			flag = dataColumnService.doIsExistByName(name.trim());
+		}
+		return flag;
+	}
+	/*add by maojiawei*/
+	private Boolean isExistByName(String name, String oldName) {
+		Boolean flag = false;
+		if (StringUtils.isNotEmpty(name) && !name.equals(oldName)) {
+			flag = dataColumnService.doIsExistByName(name.trim());
+		}
+		return flag;
+	}
+	/*add by maojiawei*/
+	@RequestMapping(value = "checkisexitnameen")
+	@ResponseBody
+	public String checkIsExistByNameEn(HttpServletRequest servletRequest,
+			@RequestParam(required = false) String name,@RequestParam(required=false) Long id) {
+		Boolean flag=Boolean.FALSE;
+		
+		if(id==null){
+			flag = this.isExistByName(name)? false : true;
+		}else{
+			DataColumn dataColumn = dataColumnService.doGetById(id);
+			if(dataColumn==null){
+				flag = this.isExistByName(name)? false : true;
+			}else{
+				flag=this.isExistByName(name, dataColumn.getName())?false:true;
+			}
+		}
+		return flag.toString();
+	}
+	
+	/****
+	 * 
+	 * @param tableId
+	 * @param dataColumnVo
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value = "export")
+	@ResponseBody
+	public ModelAndView exportExcel(@RequestParam(required=false) String tableId,@RequestParam(required = false) String sort,@RequestParam(required = false) String order,@ModelAttribute("dataColumn") DataColumnVo dataColumnVo,ModelAndView modelAndView){
+				
+		DataGrid dataGrid=dataGridService.doFindByTableIdAndSort(tableId);
+		QueryCriteria queryCriteria=new QueryCriteria();
+		queryCriteria.setPageSize(10000);
+		// 设置排序字段及排序方向
+		if (StringUtils.isNotEmpty(sort) && StringUtils.isNotEmpty(order)) {
+			queryCriteria.setOrderField(sort);
+			queryCriteria.setOrderDirection(order);
+		} else {
+			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+			queryCriteria.setOrderDirection("ASC");
+		}
+		//查询条件 dataGirdId按模糊查询
+		if(dataColumnVo.getDataGridId() != null){
+			queryCriteria.addQueryCondition("dataGridId",dataColumnVo.getDataGridId());
+		}
+		// 查询条件 name
+		if (StringUtils.isNotEmpty(dataColumnVo.getName())) {
+			queryCriteria.addQueryCondition("name", "%"+dataColumnVo.getName()+"%");
+		}
+		PageResult<DataColumn> result=dataColumnService.doFindByCriteria(queryCriteria);
+		Map<String, Map<Object, Object>> fieldCodeTypes = new HashMap<String, Map<Object, Object>>();
 
+		Map<String, String> dataFormats = new HashMap<String, String>();		
+		dataFormats.put("birthday", DateUtil.FORMAT_DATE_YYYY_MM_DD);
+		//创建.xls的文件名
+		String fileName=this.createFileName(FileUtil.EXCEL_EXTENSION);
+		
+		modelAndView.addObject("title", dataGrid.getTitle());
+		
+		Long startTime=System.currentTimeMillis();
+		
+		fileName=excelExportService.export(dataGrid, result.getContent(), fileName, fieldCodeTypes, dataFormats);
+		
+		logger.info("fileName:{}",fileName);
+		
+		Long costTime=System.currentTimeMillis()-startTime;
+		
+		modelAndView.addObject(FILENAME,fileName);
+		
+		logger.info("export Excel {} cost:{} time,fileName:{}",dataGrid.getTitle(),costTime,fileName);
+		logger.info("out Excel导出");
+		return this.getExcelView(modelAndView);
+	}
 }

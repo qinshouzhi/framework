@@ -60,4 +60,25 @@ public interface DataColumnService {
 	 * @return String JSON字符串
 	 */
 	public String doFindByCriteria(QueryCriteria queryCriteria, String tableId);
+	/**
+	 * 判断DataColumn的name是否已存在，
+	 * @param name
+	 * @return  boolean
+	 * @author maojiawei
+	 * */
+	public boolean doIsExistByName(String name); 
+	/***
+	 * 根据name称获取DataColumn
+	 * @param type
+	 * @param name
+	 * @author maojiawei
+	 * @return {@link DataColumn}
+	 */
+	public DataColumn doFindTypeByName(String name);
+	/***
+	 * 保存DataColumn对象
+	 * @author maojiawei
+	 * @param DataColumn
+	 */
+	public void doCreate(DataColumn dataColumn);
 }
