@@ -54,7 +54,7 @@ public class CustomObjectMapper extends ObjectMapper {
 	    list.add(module);
 	    list.add(new Hibernate4Module());
 	    Hibernate4Module hibernate4Module=new Hibernate4Module();
-	    hibernate4Module.configure(Hibernate4Module.Feature.SERIALIZE_IDENTIFIER_FOR_LAZY_NOT_LOADED_OBJECTS, true);
+	    hibernate4Module.configure(Hibernate4Module.Feature.SERIALIZE_IDENTIFIER_FOR_LAZY_NOT_LOADED_OBJECTS,true);
 	    hibernate4Module.configure(Hibernate4Module.Feature.FORCE_LAZY_LOADING,false);
 	    this.registerModules(module,hibernate4Module);
 

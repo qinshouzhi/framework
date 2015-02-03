@@ -22,7 +22,7 @@
 	<mvc:annotation-driven validator="validator">
 		<mvc:message-converters>
 			<bean class="com.newtouch.lion.web.converter.escape.StringEscapeHttpMessageConverter" />
-			<bean name="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+			<bean name="mappingJacksonHttpMessageConverter" class="com.newtouch.lion.web.json.MappingJsonHttpMessageConverter">
 				<property name="supportedMediaTypes">
 					<list>
 						<value>text/html;charset=UTF-8</value>

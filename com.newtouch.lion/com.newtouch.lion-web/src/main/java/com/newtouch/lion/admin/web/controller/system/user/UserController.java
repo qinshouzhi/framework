@@ -325,6 +325,9 @@ public class UserController {
 			queryCriteria.addQueryCondition("username", "%" + username + "%");
 		}
 		PageResult<User> pageResult = this.userService.doFindByCriteria(queryCriteria);
+		for(User user:pageResult.getContent()){
+				user.getDepartment().getNameZh();
+		}
 		return pageResult.getDataTable();
 	}
 
