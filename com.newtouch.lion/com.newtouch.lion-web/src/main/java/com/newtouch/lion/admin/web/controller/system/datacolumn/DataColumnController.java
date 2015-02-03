@@ -194,8 +194,11 @@ public class DataColumnController extends AbstractController{
 			@RequestParam(defaultValue = "15") int rows,
 			@RequestParam(required = false) String sort,
 			@RequestParam(required = false) String order,
-			@RequestParam(required = false) Long dataGridId) {
+			@RequestParam(required = false) String name,
+			@RequestParam(required = false) Long dataGridId,
+			@ModelAttribute("dataColumn") DataColumnVo dataColumnVo) {
 		QueryCriteria queryCriteria = new QueryCriteria();
+
 		// 设置分页 启始页
 		queryCriteria.setStartIndex(rows * (page - 1));
 		// 每页大小
@@ -206,13 +209,19 @@ public class DataColumnController extends AbstractController{
 			queryCriteria.setOrderDirection(order);
 		} else {
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
-			queryCriteria.setOrderDirection(QueryCriteria.ASC);
+			queryCriteria.setOrderDirection("ASC");
 		}
-		// 查询条件 参数类型
-		if (dataGridId != null) {
-			queryCriteria.addQueryCondition("dataGridId", dataGridId);
+		//查询条件 dataGirdId按模糊查询
+		if(dataColumnVo.getDataGridId() != null){
+			queryCriteria.addQueryCondition("dataGridId",dataColumnVo.getDataGridId());
 		}
-		PageResult<DataColumn> pageResult = this.dataColumnService.doFindByCriteria(queryCriteria);
+		// 查询条件 name
+		if (StringUtils.isNotEmpty(dataColumnVo.getName())) {
+			queryCriteria.addQueryCondition("name", "%"+dataColumnVo.getName()+"%");
+		}
+
+		PageResult<DataColumn> pageResult = dataColumnService
+				.doFindByCriteria(queryCriteria);
 		return pageResult.getDataTable();
 	}
 	

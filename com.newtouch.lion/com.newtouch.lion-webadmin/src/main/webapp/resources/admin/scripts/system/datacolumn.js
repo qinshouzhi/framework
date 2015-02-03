@@ -279,3 +279,23 @@ handleVForm=function(vForm,submitCallBackfn){
         }
     });
 };
+//获取下拉列表数据
+/**sys_code_type 加载列表*/
+function formatterCodeList(val,row) {
+	var codeText='',data=$('#dataGridList').combo('getData');
+	for (var i in data) {
+		if (data[i].codeValue ==val) {
+			codeText = data[i].nameZh;
+			break;
+		}
+	}
+	return codeText;
+}
+//判断是否编辑
+function formatterEidtable(val,row) {
+	var name =$.loin.lang.editable.n;
+	if (val) {
+		name = $.loin.lang.editable.y;
+	}
+	return name;
+}

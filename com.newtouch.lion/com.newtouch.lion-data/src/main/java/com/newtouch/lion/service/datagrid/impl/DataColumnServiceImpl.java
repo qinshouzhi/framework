@@ -174,7 +174,7 @@ public class DataColumnServiceImpl extends AbstractService implements
 	public PageResult<DataColumn> doFindByCriteria(QueryCriteria criteria) {
 		String queryEntry = " from DataColumn ";
 
-		String[] whereBodies = { "name =:name", "dataGridId=:dataGridId" };
+		String[] whereBodies = { "name like:name", "dataGridId=:dataGridId" };
 
 		String fromJoinSubClause = "";
 
