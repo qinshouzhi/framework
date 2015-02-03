@@ -6,9 +6,12 @@
  */
 package com.newtouch.lion.web.json;
  
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -47,8 +50,13 @@ public class CustomObjectMapper extends ObjectMapper {
 	    this.setSerializationInclusion(Include.NON_NULL);
 	    //当找不到对应的序列化器时 忽略此字段  
 	    this.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-		this.registerModule(module);
-		this.registerModule(new Hibernate4Module());
+	    List<Module> list=new ArrayList<Module>();
+	    list.add(module);
+	    list.add(new Hibernate4Module());
+	    Hibernate4Module hibernate4Module=new Hibernate4Module();
+	    hibernate4Module.configure(Hibernate4Module.Feature.SERIALIZE_IDENTIFIER_FOR_LAZY_NOT_LOADED_OBJECTS, true);
+	    hibernate4Module.configure(Hibernate4Module.Feature.FORCE_LAZY_LOADING,false);
+	    this.registerModules(module,hibernate4Module);
 
 	}
 }
