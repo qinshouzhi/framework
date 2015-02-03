@@ -15,18 +15,37 @@
 <!--EasyUI css End-->
 <!--bootstrap css Start-->
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+<link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" type="text/css">
 <!--bootstrap css End-->
+<!--zTree css Start-->
+<link href="${base}/resources/global/plugins/ztree/css/metro.css" rel="stylesheet" type="text/css"/>
+<!--lion UI css Start-->
+<link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css">
+<link href="${base}/resources/global/css/dialog/lion.dialog.css" rel="stylesheet" type="text/css">
+<link href="${base}/resources/global/css/combo/lion.combo.css" rel="stylesheet" type="text/css">
+<link href="${base}/resources/global/css/combotree/combotree.css" rel="stylesheet" type="text/css" />
+<!--lion UI css End-->
+
 <script src="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript" ></script>
 <script src="${base}/resources/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js"></script>
 <script src="${base}/resources/admin/pages/scripts/ui-toastr.js"></script>
+
 <!--EasyUI JavaScript Start-->
 <script src="${base}/resources/global/plugins/easyui/jquery.easyui.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
 <!--EasyUI JavaScript End-->
-<script src="${base}/resources/global/scripts/framework.js" type="text/javascript"></script>
-<script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
+<!--ztree js-->
+<script src="${base}/resources/global/plugins/ztree/js/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
+<!--lion UI JS Start-->
+<script src="${base}/resources/global/js/lion.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/form/form.fill.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/dialog/dialog.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
+<!--lion UI JS End-->
+<script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/scripts/system/user.js" type="text/javascript"></script>
 <!--DatePicker-->
 <script src="${base}/resources/global/plugins/datepicker/WdatePicker.js" type="text/javascript" ></script>
@@ -90,7 +109,7 @@
 				</a> 
 			</div>
 			<div class="col-md-12">
-				  <@lion.datagrids name="userlist_dt" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/user/list.htm" dataOptions="" style="height:400px;"/>
+				  <@lion.datagrids name="userlist_dt" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/user/list.json" dataOptions="" style="height:400px;"/>
 			</div>
 		</div>
 	</div>
@@ -147,7 +166,9 @@
 												<label class="col-md-2 control-label">部门</label>
 												<div class="col-md-4">
 													<div class="input-group">
-														<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入输入确认密码" size="30"/>
+														 <input  id="departmentId"  name="departmentId"  
+				 	  	  placeholder="请选择部门…"  type="text" 
+				 		  class="lion-combotree form-control input-small" value="1" data-loadURL="${base}/system/department/comboxtree.json" data-width="200px" data-height="300px"/>
 													</div>
 												</div>												
 											</div>								 

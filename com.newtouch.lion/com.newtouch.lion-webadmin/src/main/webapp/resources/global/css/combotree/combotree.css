@@ -14,7 +14,7 @@
 	background-color:#fff;
 	z-index:999999;
 	overflow-y:auto;
-	overflow-x:hidden;
+	overflow-x:auto;
 	width: auto;
 	height:300px;
 	border:1px solid #ccc;
@@ -26,6 +26,11 @@
 .lion-combotree .content ul{
 	margin-top:0px;
 	width:auto;
+	background-color:#fff;
+	border:1px solid #ccc;
+	-webkit-border-radius: 3px;
+  	-moz-border-radius: 3px;
+  	border-radius: 3px;
 }
 .lion-combotree .open{
 	display:block;

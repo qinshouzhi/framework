@@ -23,3 +23,19 @@ $(function() {
 		 return;
 	 });	
 });
+//判断是否编辑
+function formatterEidtable(val,row) {
+	var name =$.loin.lang.editable.n;
+	if (val) {
+		name = $.loin.lang.editable.y;
+	}
+	return name;
+}
+//加载部门
+function formatterShowDepartment(val, row) {
+	var name = "";
+	if (val) {
+		name = val.nameZh;
+	}
+	return name;
+}

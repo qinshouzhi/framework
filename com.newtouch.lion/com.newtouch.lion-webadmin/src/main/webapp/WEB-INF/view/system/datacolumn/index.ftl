@@ -44,10 +44,16 @@
 			<div class="col-md-12 margin-bottom-10">
 				<form id="queryform" class="form-horizontal">
 					<label class="control-label col-md-2" for="name" ><@spring.message "sys.datacolumn.query.name.text"/></label>
-					<div class="col-md-5">
+					<div class="col-md-3">
 						<input class="form-control input-small" type="text" size="30" name="name" id="name"  placeholder="<@spring.message "sys.datacolumn.query.name.missing.message"/>"/>					
 					</div>
+					<label class="control-label col-md-2" for="name" ><@spring.message "sys.datacolumn.query.datagrid.text"/></label>
 					<div class="col-md-3">
+						<select  id="dataGridList"  name="dataGridId" data-size="8" 
+						 	data-maxoptions="1"   multiple placeholder="<@spring.message "sys.datacolumn.query.datagrid.missing.message"/>..."  
+						 	class="lion-combo bootstrap-select form-control input-small" data-valueField='id' 
+						 	data-textField='tableId' data-loadURL="${base}/system/datagrid/combox.json">
+						 </select>
 					</div>
 					<div class="col-md-2">
 						<a href="javascript:void(0)" id="btnQuery" class="btn blue"><i class="fa fa-search"></i> <@spring.message "common.query.btn.text"/> </a>
@@ -87,14 +93,16 @@
 											<div class="form-group">
 												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.dataGridId.text"/></label>
 												<div class="col-md-4">
-													<div class="input-group">
-														<input type="text"  name="dataGridId"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.dataGridId.missing.message"/>" size="30"/>
-													</div>
+													 <select  id="addDataGridList"  name="dataGridId" data-size="8" 
+													 	data-maxoptions="1"   multiple placeholder="<@spring.message "sys.datacolumn.form.dataGridId.missing.message"/>..."  
+													 	class="lion-combo bootstrap-select form-control" data-valueField='id'   value=""
+													 	data-textField='tableId' data-loadURL="${base}/system/datagrid/combox.json">
+													 </select>
 												</div>
 												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.showOrder.text"/></label>
 												<div class="col-md-4">
 													<div class="input-group">
-														<input   type="text"  id="showOrder" name="showOrder" maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.showOrder.missing.message"/>" size="30"/>
+														<input type="text"  id="showOrder" name="showOrder" maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.showOrder.missing.message"/>" size="30"/>
 													</div>
 												</div>
 											</div>
@@ -102,7 +110,7 @@
 												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.field.text"/></label>
 												<div class="col-md-4">
 													<div class="input-group">
-														<input type="text"  id="field" name="field" maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.field.missing.message"/>" size="30"/>
+														<input type="text"  name="field"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.field.missing.message"/>" size="30"/>
 													</div>
 												</div>
 												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.name.text"/></label>
@@ -116,7 +124,7 @@
 												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.width.text"/></label>
 												<div class="col-md-4">
 													<div class="input-group">
-														<input type="text"  id="width" name="width" maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.width.missing.message"/>" size="30"/>
+														<input type="text"  name="width"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.width.missing.message"/>" size="30"/>
 													</div>
 												</div>
 												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.rowspan.text"/></label>
@@ -130,17 +138,24 @@
 												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.colspan.text"/></label>
 												<div class="col-md-4">
 													<div class="input-group">
-														<input type="text"  id="colspan" name="colspan" maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.colspan.missing.message"/>" size="30"/>
+														<input type="text"  name="colspan"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.colspan.missing.message"/>" size="30"/>
 													</div>
 												</div>		
 												<label class="col-md-1 control-label"><@spring.message "sys.datacolumn.form.order.text"/></label>
-												<div class="col-md-2">
+												<div class="col-md-3">
 													<div class="input-group">
-														<input id="order" type="text" class="form-control"  placeholder="<@spring.message "sys.datacolumn.form.order.missing.message"/>"/>
+														<label class="radio-inline">
+															<input type="radio" name="order" id="order0" value="asc" checked>
+															asc
+														</label>
+														<label class="radio-inline">
+															<input type="radio" name="order" id="order1" value="desc">
+															 desc
+													    </label>
 													</div>
 												</div>
 												<label class="col-md-1 control-label"><@spring.message "sys.datacolumn.form.sortable.text"/></label>
-												<div class="col-md-2">
+												<div class="col-md-1">
 													<div class="input-group">
 														<input type="checkbox" class="form-control"  name="sortable" checked="true" />
 													</div>
@@ -150,13 +165,35 @@
 												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.headerAlign.text"/></label>
 												<div class="col-md-4">
 													<div class="input-group">
-														<input type="text"  id="headerAlign" name="headerAlign" maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.headerAlign.missing.message"/>" size="30"/>
+														<label class="radio-inline">
+															<input type="radio" name="headerAlign" id="headerAlign0" value="left" checked>
+															left
+														</label>
+														<label class="radio-inline">
+															<input type="radio" name="headerAlign" id="headerAlign1" value="center">
+															 center
+													    </label>
+														<label class="radio-inline">
+															<input type="radio" name="headerAlign" id="headerAlign2" value="right">
+															 right
+													    </label>
 													</div>
 												</div>
 												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.align.text"/></label>
 												<div class="col-md-4">
 													<div class="input-group">
-														<input type="text"  id="align" name="align" maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.align.missing.message"/>" size="30"/>
+														<label class="radio-inline">
+															<input type="radio" name="align" id="align0" value="left" checked>
+															left
+														</label>
+														<label class="radio-inline">
+															<input type="radio" name="align" id="align1" value="center">
+															 center
+													    </label>
+														<label class="radio-inline">
+															<input type="radio" name="align" id="align2" value="right">
+															 right
+													    </label>
 													</div>
 												</div>
 											</div>										 
@@ -184,7 +221,7 @@
 												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.styler.text"/></label>
 												<div class="col-md-4">
 													<div class="input-group">
-														<input type="text" name="styler" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.styler.missing.message"/>" maxlength="255" size="30"/>
+														<input type="text"  name="styler"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.styler.missing.message"/>" size="30"/>
 													</div>
 												</div>
 												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.editor.text"/></label>

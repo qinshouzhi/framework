@@ -15,6 +15,7 @@
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" type="text/css">
 <!--EasyUI css End-->
+
 <!--lion UI css Start-->
 <link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css">
 <link href="${base}/resources/global/css/dialog/lion.dialog.css" rel="stylesheet" type="text/css">

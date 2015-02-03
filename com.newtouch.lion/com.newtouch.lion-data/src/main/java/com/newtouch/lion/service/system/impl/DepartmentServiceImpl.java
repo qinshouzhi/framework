@@ -237,7 +237,25 @@ public class DepartmentServiceImpl extends AbstractService implements
 				properties);
 		return jsonStr.replace("parentDepartmentId", "_parentId");
 	}
+	
+	
+	
 
+	
+	/***
+	 * 将List<Department>转换为Map<Long,Department>
+	 * @param departments List
+	 * @return Map<Long,Department>
+	 */
+	@SuppressWarnings("unused")
+	private Map<Long,Department>  convertToMap(List<Department> departments){
+		Map<Long,Department> departmentsMap=new HashMap<Long, Department>();
+		for(Department department:departments){
+			departmentsMap.put(department.getId(),department);
+		}
+		return departmentsMap;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

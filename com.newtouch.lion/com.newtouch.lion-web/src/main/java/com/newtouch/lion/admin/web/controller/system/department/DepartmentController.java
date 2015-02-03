@@ -7,6 +7,7 @@
 package com.newtouch.lion.admin.web.controller.system.department;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,10 +29,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.newtouch.lion.admin.web.model.system.department.DepartmentVo;
 import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.model.system.Department;
-import com.newtouch.lion.service.system.DepartmentService;
+import com.newtouch.lion.service.system.ExtendDepartmentService;
 import com.newtouch.lion.web.constant.ConstantMessage;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
+import com.newtouch.lion.ztree.TreeNode;
 
 /**
  * <p>
@@ -66,7 +68,7 @@ public class DepartmentController {
 	private static final String EDIT_DIALOG_RETURN = "/system/department/editdialog";
 
 	@Autowired
-	private DepartmentService departmentService;
+	private ExtendDepartmentService  extendDepartmentService;
 
 	@RequestMapping("adddialog")
 	public String addAdialog(Model model,
@@ -79,7 +81,7 @@ public class DepartmentController {
 	public String editDialog(Model model,
 			@RequestParam(required = false) Long id) {
 		if (id != null) {
-			Department department = this.departmentService
+			Department department = this.extendDepartmentService
 					.doFindDepartmentById(id);
 			model.addAttribute("department", department);
 		} else {
@@ -99,7 +101,7 @@ public class DepartmentController {
 		}
 		Department department = new Department();
 		BeanUtils.copyProperties(departmentVo, department);
-		this.departmentService.doCreateDepartment(department);
+		this.extendDepartmentService.doCreateDepartment(department);
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
 		modelAndView.addObject(BindMessage.SUCCESS, params);
@@ -113,7 +115,7 @@ public class DepartmentController {
 			Errors errors, ModelAndView modelAndView) {
 		Department department = null;
 		if (departmentVo.getId() != null) {
-			department = this.departmentService
+			department = this.extendDepartmentService
 					.doFindDepartmentById(departmentVo.getId());
 			if (department == null) {
 				errors.reject(ConstantMessage.EDIT_ISEMPTY_FAIL_MESSAGE_CODE);
@@ -127,7 +129,7 @@ public class DepartmentController {
 			return modelAndView;
 		}
 		BeanUtils.copyProperties(departmentVo, department);
-		this.departmentService.doUpdate(department);
+		this.extendDepartmentService.doUpdate(department);
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS,
 				ConstantMessage.EDIT_SUCCESS_MESSAGE_CODE);
@@ -139,7 +141,7 @@ public class DepartmentController {
 	@ResponseBody
 	public ModelAndView delete(@RequestParam Long id, ModelAndView modelAndView) {
 		Map<String, String> params = new HashMap<String, String>();
-		Department department = this.departmentService.doDelete(id);
+		Department department = this.extendDepartmentService.doDelete(id);
 		if (department != null) {
 			params.put(BindResult.SUCCESS,
 					ConstantMessage.DELETE_SUCCESS_MESSAGE_CODE);
@@ -160,11 +162,9 @@ public class DepartmentController {
 
 	@RequestMapping("comboxtree")
 	@ResponseBody
-	public String comboxTree() {
-		String jsonStr = departmentService.doFindFirstLevelToTree();
-		jsonStr = jsonStr.replace("departments", "children");
-		jsonStr = jsonStr.replace("nameZh", "text");
-		return jsonStr;
+	public List<TreeNode> comboxTree() {
+		List<TreeNode> list=extendDepartmentService.doFindDepartmentToTree();		
+		return list;
 	}
 	
 	@RequestMapping(value = "index")

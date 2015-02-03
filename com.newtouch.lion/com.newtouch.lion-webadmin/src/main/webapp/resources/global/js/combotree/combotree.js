@@ -35,28 +35,6 @@
 					'</button>',
 			bodyTree:'<div class="content"><ul  class="ztree"><li>ddd<li></ul></div>'
 	   };
-	   //临时参数
-	   var zNodesSelect =[
-            {id:1, pId:0, name:"北京"},
-            {id:2, pId:0, name:"天津"},
-            {id:3, pId:0, name:"上海"},
-            {id:6, pId:0, name:"重庆"},
-            {id:4, pId:0, name:"河北省", open:true},
-            {id:41, pId:4, name:"石家庄"},
-            {id:42, pId:4, name:"保定"},
-            {id:43, pId:4, name:"邯郸"},
-            {id:44, pId:4, name:"承德"},
-            {id:5, pId:0, name:"广东省", open:true},
-            {id:51, pId:5, name:"广州"},
-            {id:52, pId:5, name:"深圳"},
-            {id:53, pId:5, name:"东莞"},
-            {id:54, pId:5, name:"佛山"},
-            {id:6, pId:0, name:"福建省", open:true},
-            {id:61, pId:6, name:"福州"},
-            {id:62, pId:6, name:"厦门"},
-            {id:63, pId:6, name:"泉州"},
-            {id:64, pId:6, name:"三明"}
-         ];
 	   //默认参数
 	   var defaults={
 	       //控件ID
@@ -78,10 +56,8 @@
 			                //onClick: onClick
 			            }
 		        	},
-	       //zTree的数据
-	       dateNodes:zNodesSelect,
 	       //下拉列表的高度 auto||300px;
-	       height:'300px',
+	       height:'auto',
 	       //下拉列表宽度
 	       width:'auto',
 	       //单项选择
@@ -109,7 +85,9 @@
           this.$button = null;
           //下拉列表
           this.$content=null;
-          //树数据
+     	  //树结构的数据
+     	  this.$treeNodes=null;
+          //树DOM
           this.$tree=null;
           //树对象
           this.$treeObj=null;
@@ -137,6 +115,8 @@
 	            this.clickListener();
 	            //设置标题
 	            this.setTitle();
+	            //加载数据
+	            this.loadData();
 	            //设置Tree树型结构
 	            this.setTree();
 	            //初始化默认选择
@@ -170,8 +150,9 @@
 	        },
 	        clickListener:function(){
 	        	var $btn=this.$button,that=this;
-	        	$btn.click(function(){
+	        	$btn.click(function(e){
 	        		 that.show();
+	        		 e.preventDefault();
 	        	});
 	        },
 	        show:function(){
@@ -202,12 +183,40 @@
 		            return valueId;
 	        	}else{	        		 
 	        		var node =this.$treeObj.getNodeByParam('id',id);
-					this.$treeObj.selectNode(node,true);
-					$('#'+node.tId+'_a').click();
+	        		if(node){
+						this.$treeObj.selectNode(node,true);
+						$('#'+node.tId+'_a').click();
+					}
 	        	}	
 	        },
+	        //刷新数据 加载数据，设置树、默认值
+	        refresh:function(){
+	        	this.loadData();
+	        	this.setTree();
+	        	this.defalutVal();
+	        },
+	        //加载数据
+	        loadData:function(){
+	        	var loadurl=this.options.loadurl,that=this;
+	        	console.dir(loadurl);
+	        	if(util.isEmpty(loadurl)){
+	        		return;
+	        	}
+	        	util.post(loadurl,'',success,error);
+	        	//数据加载成功
+	       		function success(data){	       		 
+	       			that.$treeNodes=data;
+	       		}
+	       		//数据加载失败
+	       		function error(xhr, textStatus, error){
+	       			console.dir(textStatus);
+	       			console.dir(error);
+	       			console.dir(xhr);
+	       		}
+	        },
+	        //设置数据结构
 	        setTree:function(){
-	        	var tree=this.$tree,setting=this.options.setting,nodes=zNodesSelect,that=this;
+	        	var tree=this.$tree,setting=this.options.setting,nodes=this.$treeNodes,that=this;
 	        	setting.callback={
 	        		beforeClick:that.treeBeforeClick,
 	        		onClick:that.treeOnClick
@@ -262,19 +271,31 @@
 	        },
 	        //设置位置及布局
 	       	layout:function(){
-	       		var that = this,pos=this.$element.offset(),actualHeight=this.$button.outerHeight(),thatpos=this.$newElement.offset();
+	       		var that = this,
+	       			pos=this.$element.offset(),
+	       			actualHeight=this.options.height||this.$button.outerHeight(),
+	       			thatpos=this.$newElement.offset(),
+	       			outerWidth=this.options.width||this.$element[0].offsetWidth;
+	       			console.dir(actualHeight);
 	       		this.$newElement.css({
                 'top':'0px',
-                'width':this.$element[0].offsetWidth,
-                'height':actualHeight+'px',
-                'position':'absolute'
+                'width':outerWidth,
+                'height':this.$button.outerHeight(),
+                'position':'absolute',
+                 'z-index':'14999',
                 });
-                actualHeight=this.$button.outerHeight();
-                var outerWidth=this.$button.outerWidth();
+                var actualTop=this.$button.outerHeight();
                 if(this.$content.outerWidth()>this.$button.outerWidth()){
                 	outerWidth=this.$content.outerWidth();
                 }
-                this.$content.css({top:actualHeight,width:outerWidth});
+
+
+                this.$content.css({
+                	top:actualTop,
+                	width:outerWidth,
+                	height:actualHeight,
+                	'z-index':'15000',
+                	'position':'absolute'});
 
                 $(window).resize(function () {
                       //getPlacement(that.$newElement);

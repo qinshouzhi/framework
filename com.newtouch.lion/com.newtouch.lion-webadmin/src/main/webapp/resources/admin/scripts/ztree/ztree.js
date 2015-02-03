@@ -286,3 +286,11 @@ var setting1 = {
                 
             });
         });
+
+
+$(function () {
+    $("#btnTree").click(function(){
+            console.dir("请求");
+        $("#departmentId").combotree('refresh');
+    });
+});

@@ -7,6 +7,7 @@
 package com.newtouch.lion.admin.web.controller.system.datagrid;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -98,8 +99,8 @@ public class DataGridController {
 	/** DataGrid列表 */
 	@RequestMapping(value = "combox")
 	@ResponseBody
-	public String comobx() {
-		return this.dataGridService.doFindAllForCombox();
+	public List<DataGrid> comobx() {
+		return this.dataGridService.doFindAll();
 	}
 
 	/** 首页显示 */

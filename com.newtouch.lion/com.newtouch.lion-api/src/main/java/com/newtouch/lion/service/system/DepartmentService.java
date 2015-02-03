@@ -90,7 +90,7 @@ public interface DepartmentService {
 
 	/***
 	 */
-	public abstract List<Department> makeTree(List<Department> elements,
+	public  List<Department> makeTree(List<Department> elements,
 			List<Department> structures);
 
 	/**
@@ -99,6 +99,8 @@ public interface DepartmentService {
 	 * @return json
 	 * */
 	public String doFindFirstLevelToTree();
+	
+
 
 	/***
 	 * 根据
