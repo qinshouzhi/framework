@@ -234,6 +234,9 @@ public class CodeListController extends AbstractController{
 
 		PageResult<CodeList> pageResult = codeListService
 				.doFindByCriteria(queryCriteria);
+		for(CodeList codeList:pageResult.getContent()){
+			codeList.getCodeType().getNameZh();
+		}
 		return pageResult.getDataTable();
 	}
 

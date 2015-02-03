@@ -31,7 +31,7 @@ public class DataGridVo implements Serializable {
 	 * *
 	 */
 	private static final long serialVersionUID = -3608093159721187393L;
-
+	public static final  String TABLEID="tableId";
 	/** ID 为DataGrid Id */
 	private Long id;
 	/** 表格类型 */
@@ -113,7 +113,7 @@ public class DataGridVo implements Serializable {
 	 * The scrollbar width(when scrollbar is vertical) or height(when scrollbar
 	 * is horizontal).
 	 */
-	private int scrollbarSize = 18;
+	private Integer scrollbarSize = 18;
 	/**
 	 * Return style such as 'background:red'. The function take two parameter:
 	 * rowIndex: the row index, start with 0 rowData: the record corresponding
@@ -503,7 +503,7 @@ public class DataGridVo implements Serializable {
 	/**
 	 * @return the scrollbarSize
 	 */
-	public int getScrollbarSize() {
+	public Integer getScrollbarSize() {
 		return scrollbarSize;
 	}
 
@@ -511,7 +511,7 @@ public class DataGridVo implements Serializable {
 	 * @param scrollbarSize
 	 *            the scrollbarSize to set
 	 */
-	public void setScrollbarSize(int scrollbarSize) {
+	public void setScrollbarSize(Integer scrollbarSize) {
 		this.scrollbarSize = scrollbarSize;
 	}
 

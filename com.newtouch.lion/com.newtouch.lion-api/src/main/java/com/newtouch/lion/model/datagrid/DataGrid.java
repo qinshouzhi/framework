@@ -117,7 +117,7 @@ public class DataGrid extends VersionEntity<Long> {
 	 * The scrollbar width(when scrollbar is vertical) or height(when scrollbar
 	 * is horizontal).
 	 */
-	private int scrollbarSize;
+	private Integer scrollbarSize;
 	/**
 	 * Return style such as 'background:red'. The function take two parameter:
 	 * rowIndex: the row index, start with 0 rowData: the record corresponding
@@ -371,7 +371,7 @@ public class DataGrid extends VersionEntity<Long> {
 	 * @return the scrollbarSize
 	 */
 
-	public int getScrollbarSize() {
+	public Integer getScrollbarSize() {
 		return scrollbarSize;
 	}
 
@@ -651,7 +651,7 @@ public class DataGrid extends VersionEntity<Long> {
 	 * @param scrollbarSize
 	 *            the scrollbarSize to set
 	 */
-	public void setScrollbarSize(int scrollbarSize) {
+	public void setScrollbarSize(Integer scrollbarSize) {
 		this.scrollbarSize = scrollbarSize;
 	}
 

@@ -248,7 +248,7 @@ handleVForm=function(vForm,submitCallBackfn){
 function formatterCodeList(val,row) {
 	var codeText='',data=$('#CodeList').combo('getData');
 	for (var i in data) {
-		if (data[i].codeValue ==val) {
+		if (data[i].id ==val) {
 			codeText = data[i].nameZh;
 			break;
 		}

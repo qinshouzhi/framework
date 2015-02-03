@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import com.newtouch.lion.common.Assert;
 import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.comparator.DataColumnComparator;
 import com.newtouch.lion.dao.datagrid.DataGridDao;
@@ -160,7 +161,7 @@ public class DataGridServiceImpl extends AbstractService implements DataGridServ
 	public PageResult<DataGrid> doFindByCriteria(QueryCriteria criteria) {
 		String queryEntry = " from DataGrid ";
 
-		String[] whereBodies = {" tableId  like :tableId","type=:type"};
+		String[] whereBodies = {" tableId  like :tableId","type=:type","title like: title"};
 
 		String fromJoinSubClause = "";
 
@@ -238,6 +239,52 @@ public class DataGridServiceImpl extends AbstractService implements DataGridServ
 		}
 		List<DataGrid> dataGrids=this.doFindByType(type);
 		return JSONParser.toJSONString(dataGrids,properties);
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.datagrid.DataGridService#doIsExistByTableId(java.lang.String)
+	 */
+	@Override
+	public boolean doIsExistByTableId(String tableId) {
+		// TODO Auto-generated method stub
+		Assert.notNull(tableId);
+		DataGrid dataGrid = this.doFindTypeByTableId(tableId);
+		if (dataGrid != null)
+			return true;
+		return false;
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.datagrid.DataGridService#doFindTypeByTableId(java.lang.String)
+	 */
+	@Override
+	public DataGrid doFindTypeByTableId(String tableId) {
+		// TODO Auto-generated method stub
+		Assert.notNull(tableId);
+		String hql = "from DataGrid  where tableId=:tableId";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("tableId", tableId);
+		java.util.List<DataGrid> dataGrids = dataGridDao.query(hql, params);
+		if (dataGrids != null && dataGrids.size() > 0) {
+			return dataGrids.get(0);
+		}
+		return null;
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.datagrid.DataGridService#doCreate(com.newtouch.lion.model.datagrid.DataGrid)
+	 */
+	@Override
+	public void doCreate(DataGrid dataGrid) {
+		// TODO Auto-generated method stub
+		Assert.notNull(dataGrid);
+		dataGridDao.save(dataGrid);
 	}
 	
 	

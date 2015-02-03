@@ -151,7 +151,7 @@ public class DataColumnController extends AbstractController{
 
 		modelAndView=this.getJsonView(modelAndView);
 		if (!errors.hasErrors() && dataColumnVo.getId() == null) {
-			errors.reject("sys.dataColumn.form.id.empty");
+			errors.reject("sys.datacolumn.form.id.empty");
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
 			return modelAndView; 
 		} 

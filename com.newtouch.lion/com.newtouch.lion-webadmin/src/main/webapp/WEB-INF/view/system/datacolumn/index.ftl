@@ -140,27 +140,28 @@
 													<div class="input-group">
 														<input type="text"  name="colspan"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.colspan.missing.message"/>" size="30"/>
 													</div>
-												</div>		
-												<label class="col-md-1 control-label"><@spring.message "sys.datacolumn.form.order.text"/></label>
-												<div class="col-md-3">
+												</div>	
+												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.formatter.text"/></label>
+												<div class="col-md-4">
 													<div class="input-group">
-														<label class="radio-inline">
-															<input type="radio" name="order" id="order0" value="asc" checked>
-															asc
-														</label>
-														<label class="radio-inline">
-															<input type="radio" name="order" id="order1" value="desc">
-															 desc
-													    </label>
+														<input type="text" name="formatter" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.formatter.missing.message"/>" maxlength="255" size="30"/>
+													</div>
+												</div>	
+											</div>	
+											<div class="form-group">										
+												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.styler.text"/></label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<input type="text"  name="styler"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.styler.missing.message"/>" size="30"/>
 													</div>
 												</div>
-												<label class="col-md-1 control-label"><@spring.message "sys.datacolumn.form.sortable.text"/></label>
-												<div class="col-md-1">
+												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.editor.text"/></label>
+												<div class="col-md-4">
 													<div class="input-group">
-														<input type="checkbox" class="form-control"  name="sortable" checked="true" />
+														<input type="text" name="editor" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.editor.missing.message"/>" maxlength="255" size="30"/>
 													</div>
 												</div>
-											</div>			
+											</div>		
 											<div class="form-group">
 												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.headerAlign.text"/></label>
 												<div class="col-md-4">
@@ -198,36 +199,31 @@
 												</div>
 											</div>										 
 											<div class="form-group">
-												<label class="col-md-1 control-label"><@spring.message "sys.datacolumn.form.hidden.text"/></label>
-												<div class="col-md-2">
-													<div class="input-group">
-														<input type="checkbox" class="form-control"  name="hidden" checked="true" />						 
-													</div>
+												<div class="col-md-3 control-label">
+													<@spring.message "sys.datacolumn.form.hidden.text"/>
+													<input type="checkbox" class="form-control"  name="hidden" checked="true" />						 
 												</div>
-												<label class="col-md-1 control-label"><@spring.message "sys.datacolumn.form.checkbox.text"/></label>
-												<div class="col-md-2">
+												<div class="col-md-3 control-label">
 													<div class="input-group">
+														<@spring.message "sys.datacolumn.form.checkbox.text"/>
 														<input type="checkbox" class="form-control"  name="checkbox" checked="true" />						 
 													</div>
 												</div>
-												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.formatter.text"/></label>
-												<div class="col-md-4">
-													<div class="input-group">
-														<input type="text" name="formatter" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.formatter.missing.message"/>" maxlength="255" size="30"/>
-													</div>
+												<div class="col-md-2 control-label">
+													<@spring.message "sys.datacolumn.form.sortable.text"/>
+													<input type="checkbox" class="form-control"  name="sortable" checked="true" />
 												</div>
-											</div>
-											<div class="form-group">										
-												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.styler.text"/></label>
-												<div class="col-md-4">
+												<label class="col-md-1 control-label"><@spring.message "sys.datacolumn.form.order.text"/></label>
+												<div class="col-md-3">
 													<div class="input-group">
-														<input type="text"  name="styler"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.styler.missing.message"/>" size="30"/>
-													</div>
-												</div>
-												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.editor.text"/></label>
-												<div class="col-md-4">
-													<div class="input-group">
-														<input type="text" name="editor" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.editor.missing.message"/>" maxlength="255" size="30"/>
+														<label class="radio-inline">
+															<input type="radio" name="order" id="order0" value="asc" checked>
+															asc
+														</label>
+														<label class="radio-inline">
+															<input type="radio" name="order" id="order1" value="desc">
+															 desc
+													    </label>
 													</div>
 												</div>
 											</div>

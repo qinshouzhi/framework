@@ -69,4 +69,25 @@ public interface DataGridService {
 	public String doFindAllForCombox();
 
 	public String doFindComboxByType(String type);
+	/**
+	 * 判断DataGrid的tableId是否已存在，
+	 * @param tableId
+	 * @return  boolean
+	 * @author maojiawei
+	 * */
+	public boolean doIsExistByTableId(String tableId); 
+	/***
+	 * 根据tableId称获取DataGrid
+	 * @param type
+	 * @param tableId
+	 * @author maojiawei
+	 * @return {@link DataGrid}
+	 */
+	public DataGrid doFindTypeByTableId(String tableId);
+	/***
+	 * 保存DataGrid对象
+	 * @author maojiawei
+	 * @param DataGrid
+	 */
+	public void doCreate(DataGrid dataGrid);
 }
