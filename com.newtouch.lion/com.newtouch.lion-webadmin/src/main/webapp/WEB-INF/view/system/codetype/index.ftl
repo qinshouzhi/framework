@@ -107,7 +107,7 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label">通用编码类型名称(英文)<@spring.message "sys.codeType.form.nameen.text"/></label>
+													<label class="col-md-3 control-label"><@spring.message "sys.codeType.form.nameen.text"/></label>
 													<div class="col-md-5">
 														<div class="input-group">
 															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="<@spring.message "sys.codeType.form.nameen.missing.message"/>" size="30"/>
@@ -115,7 +115,7 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label">编码参数值长度<@spring.message "sys.codeType.form.value.text"/></label>
+													<label class="col-md-3 control-label"><@spring.message "sys.codeType.form.value.text"/></label>
 													<div class="col-md-5">
 														<div class="input-group">
 															<input type="text" name="codeLenLimit" class="form-control" placeholder="<@spring.message "sys.codeType.form.value.missing.message"/>" maxlength="255" size="30"/>
@@ -123,7 +123,7 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label">是否可编辑<@spring.message "sys.codeType.form.editable.text"/></label>
+													<label class="col-md-3 control-label"><@spring.message "sys.codeType.form.editable.text"/></label>
 													<div class="col-md-5 control-label">
 														<div class="input-group">
 															<input type="checkbox" class="form-control "  name="editable" checked="true" />
