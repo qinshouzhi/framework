@@ -27,10 +27,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.department.DepartmentVo;
-import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.model.system.Department;
 import com.newtouch.lion.service.system.ExtendDepartmentService;
 import com.newtouch.lion.web.constant.ConstantMessage;
+import com.newtouch.lion.web.controller.AbstractController;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
 import com.newtouch.lion.ztree.TreeNode;
@@ -54,7 +54,7 @@ import com.newtouch.lion.ztree.TreeNode;
  */
 @Controller
 @RequestMapping("/system/department/")
-public class DepartmentController {
+public class DepartmentController extends AbstractController{
 
 	private final Logger logger = LoggerFactory.getLogger(super.getClass());
 	/** 参数首页 */
@@ -155,9 +155,11 @@ public class DepartmentController {
 
 	@RequestMapping("list")
 	@ResponseBody
-	public DataTable<Department> lists() {
-//		PageResult<Department> pageResult = this.departmentService.doFindAll();
-		return null;
+	public  ModelAndView lists(ModelAndView modelAndView) {			
+		String str=this.extendDepartmentService.doFindFirstLevelToTree();
+		str=str.replace("departments","children");
+		logger.info("str:{}",str);
+		return this.getStrJsonView(str, modelAndView);
 	}
 
 	@RequestMapping("comboxtree")

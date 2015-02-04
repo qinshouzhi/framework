@@ -108,6 +108,8 @@
 	</bean>
 	<!-- JSON View -->
 	<bean id="jsonView" class="com.newtouch.lion.web.servlet.view.JsonView"/>
+	<!-- String JSON View -->
+	<bean id="stringJsonView" class="com.newtouch.lion.web.servlet.view.StringJsonView"/>
 	<!-- Excel Report View -->
 	<bean id="reportExcelView" class="com.newtouch.lion.web.servlet.view.ReportExcelView"/>
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->

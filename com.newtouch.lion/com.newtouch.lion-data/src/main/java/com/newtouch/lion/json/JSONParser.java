@@ -126,8 +126,7 @@ public class JSONParser implements Serializable {
 				SerializerFeature.DisableCircularReferenceDetect };
 		SerializeWriter out = new SerializeWriter(features);
 		JSONSerializer serializer = new JSONSerializer(out, config(datePattern));
-		serializer.getPropertyPreFilters().add(
-				configPropertyFilter(properties, isIncludeProperties));
+		serializer.getPropertyPreFilters().add(configPropertyFilter(properties, isIncludeProperties));
 		serializer.write(object);
 		return out.toString();
 	}

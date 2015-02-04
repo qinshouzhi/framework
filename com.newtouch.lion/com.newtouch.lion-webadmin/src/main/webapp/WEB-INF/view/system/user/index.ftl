@@ -93,25 +93,25 @@
 				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green">
 					<i class="fa  fa-file-excel-o"></i> <@spring.message "common.toolbar.btn.export.text"/> 
 				</a>
-				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm  btn-primary">
+				<a href="javascript:void(0)" id="btnAuth"  class="btn btn-sm  btn-primary">
 					<i class="fa  fa-gear"></i> 
 					<@spring.message "common.toolbar.btn.auth.text"/>  
 				</a>
-				<a href="javascript:void(0)" class="btn btn-sm red" id="lokcedBtn">
+				<a href="javascript:void(0)" id="lokcedBtn" class="btn btn-sm red" >
 				    <i class="fa   fa-lock"></i> 
 					<@spring.message "common.toolbar.btn.locked.text"/>
 				</a>
-				<a href="javascript:void(0)" class="btn btn-sm blue-hoki" id="unlockBtn">
+				<a href="javascript:void(0)" id="unlockBtn" class="btn btn-sm blue-hoki">
 					<i class="fa  fa-unlock-alt"></i> 
 					<@spring.message "common.toolbar.btn.unlock.text"/>
 				</a> 
-				<a href="javascript:void(0)" class="btn btn-sm default" id="detailsBtn">
+				<a href="javascript:void(0)" id="detailsBtn" class="btn btn-sm default">
 					<i class="fa   fa-th"></i> 
 					<@spring.message "common.toolbar.btn.details.text"/>
 				</a> 
 			</div>
 			<div class="col-md-12">
-				  <@lion.datagrids name="userlist_dt" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/user/list.json" dataOptions="" style="height:400px;"/>
+				  <@lion.datagrids name="userlist_dt" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/user/list.json" dataOptions="" style="height:400px;width:auto"/>
 			</div>
 		</div>
 	</div>

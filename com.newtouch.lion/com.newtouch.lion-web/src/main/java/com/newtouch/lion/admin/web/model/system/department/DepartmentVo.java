@@ -6,12 +6,15 @@
  */
 package com.newtouch.lion.admin.web.model.system.department;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * <p>
- * Title:
+ * Title:部门Vo
  * </p>
  * <p>
- * Description:
+ * Description:部门Vo
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -27,12 +30,19 @@ public class DepartmentVo {
 	/*** 部门ID */
 	private Long id;
 	/** 上一级部门ID */
+	//@NotEmpty(message="{sys.department.parentid.missing}")
 	private Long parentDepartmentId;
 	/** 部门编号 */
-	private String departmentNO;
+	@NotEmpty(message="{sys.department.departmentno.missing}")
+	@Length(max=30,min=4,message="{sys.department.departmentno.length}")
+	private String departmentNo;
 	/** 部门中文名称 */
+	@NotEmpty(message="{sys.department.namezh.missing}")
+	@Length(max=128,min=4,message="{sys.department.namezh.length}")
 	private String nameZh;
 	/** 部门英文名称 */
+	@NotEmpty(message="{sys.department.nameen.missing}")
+	@Length(max=128,min=4,message="{sys.department.nameen.length}")
 	private String nameEn;
 	/** 部门描述 */
 	private String description;
@@ -70,18 +80,18 @@ public class DepartmentVo {
 	}
 
 	/**
-	 * @return the departmentNO
+	 * @return the departmentNo
 	 */
-	public String getDepartmentNO() {
-		return departmentNO;
+	public String getdepartmentNo() {
+		return departmentNo;
 	}
 
 	/**
-	 * @param departmentNO
-	 *            the departmentNO to set
+	 * @param departmentNo
+	 *            the departmentNo to set
 	 */
-	public void setDepartmentNO(String departmentNO) {
-		this.departmentNO = departmentNO;
+	public void setdepartmentNo(String departmentNo) {
+		this.departmentNo = departmentNo;
 	}
 
 	/**
@@ -156,7 +166,7 @@ public class DepartmentVo {
 	@Override
 	public String toString() {
 		return "DepartmentVo [id=" + id + ", parentDepartmentId="
-				+ parentDepartmentId + ", departmentNO=" + departmentNO
+				+ parentDepartmentId + ", departmentNo=" + departmentNo
 				+ ", nameZh=" + nameZh + ", nameEn=" + nameEn
 				+ ", description=" + description + ", editable=" + editable
 				+ "]";

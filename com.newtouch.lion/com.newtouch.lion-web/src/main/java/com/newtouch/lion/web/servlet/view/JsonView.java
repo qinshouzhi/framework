@@ -46,7 +46,7 @@ import com.newtouch.lion.web.servlet.view.support.RequestContext;
  * @version 1.0
  */
 public class JsonView extends AbstractView {
-	/**日志分析*/
+	/**日志*/
 	private final static Logger logger=LoggerFactory.getLogger(JsonView.class);
 	/**日期格式*/
 	private String datePattern =DateUtil.FORMAT_DATETIME_YYYY_MM_DD_HH_MM_SS;

@@ -56,6 +56,11 @@ public class AbstractController {
 	protected static final String FILENAME="fileName";
 	/**添加成功**/
 	protected static final String ADD_SUCCESS_MSG="";
+	/**JSON字符串*/
+	protected final String STR_JSON_VIEW="stringJsonView";
+	/**JSON字符串参数属性名称*/
+	protected final String STR_JSON__KEY="json";
+	
 	
 	@InitBinder
 	public void initBinder(ServletRequestDataBinder binder) {
@@ -131,6 +136,28 @@ public class AbstractController {
 	protected ModelAndView getExcelView(ModelAndView modelAndView){
 		 modelAndView.setViewName(EXCEL_VIEW);
 		 return modelAndView;
+	}
+	/***
+	 * 设置JSON字符串视图
+	 * @param str JSON字符串
+	 * @param modelAndView  
+	 * @return ModelAndView
+	 */
+	protected ModelAndView getStrJsonView(String str,ModelAndView modelAndView){
+		modelAndView.setViewName(this.STR_JSON_VIEW);
+		modelAndView.addObject(STR_JSON__KEY,str);
+		return modelAndView;
+	}
+	
+	/***
+	 * 设置JSON字符串视图
+	 * @param str JSON字符串
+	 * @param modelAndView  
+	 * @return ModelAndView
+	 */
+	protected ModelAndView getStrJsonView(ModelAndView modelAndView){
+		modelAndView.setViewName(this.STR_JSON_VIEW);		 
+		return modelAndView;
 	}
 	
 	/***

@@ -59,7 +59,7 @@ public class ReportExcelView extends AbstractReportView{
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model,HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		logger.info("进入ReportExcel文件视图");
+		logger.info("in ReportExcel文件视图");
 		String filePath=(String) model.get(FILENAME);
 		File exportFile=new File(filePath);
 		String title=(String) model.get("title");
@@ -74,7 +74,7 @@ public class ReportExcelView extends AbstractReportView{
         outputStream.flush();
         outputStream.close();
         FileUtils.deleteQuietly(exportFile);
-        logger.info("下载ReportExcel文件视图");
+        logger.info("out ReportExcel文件视图");
 	}
 
 
