@@ -32,8 +32,7 @@
 <script src="${base}/resources/global/js/dialog/dialog.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
 <!--lion UI JS End-->
-<script src="${base}/resources/global/scripts/framework.js" type="text/javascript"></script>
-<script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/scripts/system/role.js" type="text/javascript"></script>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed-hide-logo">
@@ -73,7 +72,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-				<h4 class="modal-title"><i class="fa fa-plus"></i> <@spring.message "sys.role.form.adddialog.text"/></h4>
+				<h4 class="modal-title"><i class="fa fa-plus"></i> <span><@spring.message "sys.role.form.adddialog.text"/></span></h4>
 			</div>
 			<div class="modal-body">
 				 	<div class="row">

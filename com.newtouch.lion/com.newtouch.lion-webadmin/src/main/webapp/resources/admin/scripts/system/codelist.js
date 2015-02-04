@@ -41,6 +41,7 @@ $(function() {
 		  addForm[0].reset();
 		  addForm.find('.form-group').removeClass('has-error');
 		  addForm.find('.help-block').remove();
+		  addDialog.find('.modal-header h4 span').text('添加编码列表');
 		  $('.lion-combo').combo('reloadLi');
 	 });
 
@@ -59,10 +60,10 @@ $(function() {
 			 lion.util.info('提示','请选择要编辑记录');
 			 return;
 		 }
-     addForm[0].reset();
-     addForm.find('.form-group').removeClass('has-error');
-     addForm.find('.help-block').remove();
-     addDialog.find('.modal-header h4').text('系统参数编辑');
+	     addForm[0].reset();
+	     addForm.find('.form-group').removeClass('has-error');
+	     addForm.find('.help-block').remove();
+	     addDialog.find('.modal-header h4').text('编辑编码列表');
 		 addDialog.modal('toggle');
 		 addForm.fill(row);
 	 });
