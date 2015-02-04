@@ -23,11 +23,14 @@
 	<!-- Transaction Advisor -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="doFind*" read-only="true" propagation="SUPPORTS" />
-			<tx:method name="doGet*" read-only="true" propagation="SUPPORTS" />
-			<tx:method name="do*"  propagation="REQUIRED" />
-			<tx:method name="ido*" propagation="REQUIRES_NEW" />
-			<tx:method name="*"    propagation="SUPPORTS" />
+			<tx:method name="doFind*" read-only="true"   propagation="SUPPORTS" />
+			<tx:method name="find*"   read-only="true"   propagation="SUPPORTS" />
+			<tx:method name="get*"    read-only="true"   propagation="SUPPORTS" />
+			<tx:method name="check*"  read-only="true"   propagation="SUPPORTS" />
+			<tx:method name="doGet*"  read-only="true"  propagation="SUPPORTS" />
+			<tx:method name="do*"     propagation="REQUIRED" />
+			<tx:method name="ido*"    propagation="REQUIRES_NEW" />
+			<tx:method name="*"       propagation="SUPPORTS" />
 			<!-- 必须在事务中运行 -->
 		</tx:attributes>
 	</tx:advice>

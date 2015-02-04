@@ -173,9 +173,13 @@
 	        },
 	        //默认选中值
 	        defalutVal:function(){
-	        	var id=this.$element.val();
-	        	if(util.isNotEmpty(id))
-	        		this.val(id);
+	        	var id=this.$element.val(),value='';
+	        	if(util.isNotEmpty(id)){
+	        		value=this.val(id);
+	        	}
+	        	if(util.isEmpty(value)){
+	        			this.setTitle();
+	        	}
 	        },
 	        //获取数据或设置选中的数据
 	        val:function(id){
@@ -188,8 +192,7 @@
 	        		for (var i=0, l=nodes.length; i<l; i++) {
 		                v += nodes[i].name + ',';
 		                valueId=nodes[i].id;
-		            }
-		            
+		            }		            
 		            return valueId;
 	        	}else{	        		 
 	        		var node =this.$treeObj.getNodeByParam('id',id);
@@ -208,7 +211,6 @@
 	        //加载数据
 	        loadData:function(){
 	        	var loadurl=this.options.loadurl,that=this;
-	        	console.dir(loadurl);
 	        	if(util.isEmpty(loadurl)){
 	        		return;
 	        	}

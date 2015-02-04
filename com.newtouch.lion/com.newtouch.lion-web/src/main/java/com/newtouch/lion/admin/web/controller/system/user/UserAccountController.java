@@ -6,7 +6,6 @@
  */
 package com.newtouch.lion.admin.web.controller.system.user;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.service.system.UserService;
 
 /**
@@ -50,12 +48,8 @@ public class UserAccountController {
 	 */
 	@RequestMapping(value = "/checkusername")
 	@ResponseBody
-	public Boolean checkIsExistByNameEn(@RequestParam(required = false) String username) {
-		if(StringUtils.isEmpty(username)){
-			return Boolean.FALSE;
-		}
-		Boolean flag = this.isExistByNameEn(username) == true ? false : true;
-		return flag;
+	public Boolean checkIsExistByNameEn(@RequestParam(required = false) String username,@RequestParam(required = false) Long id) {
+		return userService.checkUsername(username,id)?false:true;
 	}
 	
 	/***
@@ -65,11 +59,8 @@ public class UserAccountController {
 	 */
 	@RequestMapping(value="/checkemployeecode")
 	@ResponseBody
-	public Boolean checkEmployeeCode(@RequestParam(required=false) String employeeCode){
-		if(StringUtils.isEmpty(employeeCode)){
-			return Boolean.FALSE;
-		}
-		return Boolean.TRUE;
+	public Boolean checkEmployeeCode(@RequestParam(required=false) String employeeCode,@RequestParam(required = false) Long id){
+		 return userService.checkEmployeeCode(employeeCode,id)?false:true;
 	}
 	/***
 	 * 检查邮箱是否已存在
@@ -78,23 +69,11 @@ public class UserAccountController {
 	 */
 	@RequestMapping(value="/checkemail")
 	@ResponseBody
-	public Boolean checkEmail(@RequestParam(required=false) String email){
-		if(StringUtils.isEmpty(email)){
-			return Boolean.FALSE;
-		}
-		return Boolean.TRUE;
+	public Boolean checkEmail(@RequestParam(required=false) String email,@RequestParam(required = false) Long id){
+		 return this.userService.checkEmail(email,id)?false:true;
 	}
 
-	private Boolean isExistByNameEn(String username) {
-		Boolean flag = false;
-		if (StringUtils.isNotEmpty(username)) {
-			User user = userService.doFindByUserName(username.trim());
-			if (user != null && user.getUsername().equals(username)) {
-				flag = true;
-			}
-		}
-		return flag;
-	}
+	 
 
 	/** 显示激活 */
 	@RequestMapping(value = "/activeusers")

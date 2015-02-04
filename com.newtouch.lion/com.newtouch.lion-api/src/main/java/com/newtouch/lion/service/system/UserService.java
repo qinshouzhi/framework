@@ -34,11 +34,56 @@ public interface UserService {
 	/***
 	 * 根据用户名获取User对象
 	 * 
-	 * @param userName
+	 * @param username
 	 *            用户名
 	 * @return  用户对象
 	 */
-	public User doFindByUserName(String userName);
+	public User doFindByUserName(String username);
+	
+	/****
+	 * 检查用户名是否已存在
+	 * @param username
+	 * @return 存在则返回true,不存在则返回false
+	 */
+	public Boolean checkUsername(String username);
+	
+	/**
+	 * 检查员工号是否已经存在
+	 * @param employeeCode 员工号
+	 * @return  存在则返回true,不存在则返回false
+	 */
+	public Boolean checkEmployeeCode(String employeeCode);
+	
+	/**
+	 * 检查员邮箱是否已经存在
+	 * @param employeeCode 员工号
+	 * @return  存在则返回true,不存在则返回false
+	 */
+	public Boolean checkEmail(String email);
+	
+	/****
+	 * 检查用户名是否已存在
+	 * @param username
+	 * @param id 用户ID
+	 * @return 存在则返回true,不存在则返回false
+	 */
+	public Boolean checkUsername(String username,Long id);
+	
+	/**
+	 * 检查员工号是否已经存在
+	 * @param employeeCode 员工号
+	 * @param id 用户ID
+	 * @return  存在则返回true,不存在则返回false
+	 */
+	public Boolean checkEmployeeCode(String employeeCode,Long id);
+	
+	/**
+	 * 检查员邮箱是否已经存在
+	 * @param employeeCode 员工号
+	 * @param id 用户ID
+	 * @return  存在则返回true,不存在则返回false
+	 */
+	public Boolean checkEmail(String email,Long id);
 	
 	/***
 	 * 根据员工号查找用户
@@ -93,12 +138,33 @@ public interface UserService {
 	 * @param deleteRoleIds
 	 * @param user
 	 */
-	public void doAuthRoleToUser(List<Long> targetRoleIds,
-			List<Long> deleteRoleIds, User user);
+	public void doAuthRoleToUser(List<Long> targetRoleIds,List<Long> deleteRoleIds, User user);
+	
+	/***
+	 * 获取系统超级用户名
+	 * @return String 系统超级用户名
+	 */
+	public String getSuperUsername();
+	/***
+	 * 根据用户ID检查是否超级用户名
+	 * @param id 用户名
+	 * @return  是则返回true,否则返回false
+	 */
+	public boolean checkSuperUserById(Long id);
+	/***
+	 * 根据用户ID检查是否超级用户名
+	 * @param id 用户名
+	 * @return  是则返回true,否则返回false
+	 */
+	public boolean checkSuperUserByUserName(String username);
 
 	public void doDelete(User user);
-
-	public User doDeleteById(Long id);
+	/****
+	 * 根据ID删除用户记录数，并返回删除记录
+	 * @param id
+	 * @return int 删除记录
+	 */
+	public int doDeleteById(Long id);
 
 	public User doFindById(Long id);
 

@@ -216,6 +216,7 @@
         $this.find('.form-group').removeClass('has-error');
         $this.find('.form-filed').removeClass('has-error');
         $this.find('.help-block').remove();
+        $this.find('.lion-combotree').combotree('refresh');
     };
 	
 	$.fill = new Fill();

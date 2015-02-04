@@ -54,6 +54,8 @@ public class AbstractController {
 	protected final String EXCEL_VIEW="reportExcelView";
 	/**参数名称*/
 	protected static final String FILENAME="fileName";
+	/**添加成功**/
+	protected static final String ADD_SUCCESS_MSG="";
 	
 	@InitBinder
 	public void initBinder(ServletRequestDataBinder binder) {

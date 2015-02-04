@@ -49,7 +49,6 @@ import com.newtouch.lion.service.datagrid.DataGridService;
 import com.newtouch.lion.service.excel.ExcelExportService;
 import com.newtouch.lion.service.system.DepartmentService;
 import com.newtouch.lion.service.system.GroupService;
-import com.newtouch.lion.service.system.PasswordEncoderService;
 import com.newtouch.lion.service.system.ResourceService;
 import com.newtouch.lion.service.system.RoleService;
 import com.newtouch.lion.service.system.UserService;
@@ -153,18 +152,38 @@ public class UserController extends AbstractController {
 	@ResponseBody
 	public ModelAndView add(@Valid @ModelAttribute("userVo") UserVo userVo,
 			Errors errors, ModelAndView modelAndView) {
-
+		//检查基于Model的验证框架
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
 			return this.getJsonView(modelAndView);
 		}
 		
 		//检查用户是否已存在
+		if(userService.checkUsername(userVo.getUsername())){
+			errors.rejectValue("username",	"sys.user.username.existed.message",new Object[] {userVo.getUsername()}, null);
+		}
+		//检查员工号是否已存在
+		if(userService.checkEmployeeCode(userVo.getEmployeeCode())){
+			errors.rejectValue("employeeCode",	"sys.user.employeecode.existed",new Object[] {userVo.getEmployeeCode()}, null);
+		}
+		//检查邮箱是否已经存在
+		if(userService.checkEmail(userVo.getEmail())){
+			errors.rejectValue("email",	"sys.user.email.existed",new Object[] {userVo.getEmail()}, null);
+		}
+		//再次检查是否出错
+		if (errors.hasErrors()) {
+			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
+			return this.getJsonView(modelAndView);
+		}
 		
 		
 		User user = new User();
 
 		BeanUtils.copyProperties(userVo, user);
+		//去空格 用户名、员工号、邮箱的空格
+		user.setUsername(userVo.getUsername().trim());
+		user.setEmployeeCode(userVo.getEmployeeCode().trim());
+		user.setEmail(userVo.getEmail().trim());
 
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.YEAR, 1);// TODO 默认账户有效期为一年；
@@ -175,6 +194,7 @@ public class UserController extends AbstractController {
 		user.setAccountExpiredDate(calendar.getTime());
 		user.setCredentialExpiredDate(credentialExpiredCalendar.getTime());
 		String passwordEncoder = passwordEncoderService.encodePassword(DEFAULT_PASSWORD,user.getUsername());
+		logger.info("passwordEncoder:{}",passwordEncoder);
 		// 密码加密码
 		user.setPassword(passwordEncoder);
 		// 将登录用户转换为小写
@@ -185,7 +205,7 @@ public class UserController extends AbstractController {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		return  this.getJsonView(modelAndView);
 	}
 
 	/** 授权 对话框 */
@@ -285,7 +305,33 @@ public class UserController extends AbstractController {
 		modelAndView.addObject(BindMessage.SUCCESS, params);
 		return modelAndView;
 	}
-
+	/***
+	 * 根据ID删除用户数据，超级用户不能删除
+	 * @param id
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value = "delete")
+	@ResponseBody
+	public ModelAndView delete(@RequestParam Long id, ModelAndView modelAndView) {
+		Map<String, String> params = new HashMap<String, String>();	    
+		//检查用户是否超级删除
+		if(this.userService.checkSuperUserById(id)){
+			params.put(BindResult.SUCCESS,"sys.user.super.username.delete");
+			modelAndView.addObject(BindMessage.SUCCESS, params);
+			return this.getJsonView(modelAndView);
+		}
+		
+		int updateRow= this.userService.doDeleteById(id);
+		if (updateRow>0) {
+			params.put(BindResult.SUCCESS,ConstantMessage.DELETE_SUCCESS_MESSAGE_CODE);
+		} else {
+			params.put(BindResult.SUCCESS,ConstantMessage.DELETE_FAIL_MESSAGE_CODE);
+		}
+		modelAndView.addObject(BindMessage.SUCCESS, params);
+		return this.getJsonView(modelAndView);
+	}
+	
 	/** 编辑对话框 */
 	@RequestMapping(value = "editdialog")
 	public String editDialog(@RequestParam(required = false) Long id,
@@ -313,21 +359,42 @@ public class UserController extends AbstractController {
 
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
-			return modelAndView;
+			return this.getJsonView(modelAndView);
 		}
+		//检查用户是否已存在
+		if(userService.checkUsername(userVo.getUsername(),userVo.getId())){
+			errors.rejectValue("username",	"sys.user.username.existed.message",new Object[] {userVo.getUsername()}, null);
+		}
+		//检查员工号是否已存在
+		if(userService.checkEmployeeCode(userVo.getEmployeeCode(),userVo.getId())){
+			errors.rejectValue("employeeCode",	"sys.user.employeecode.existed",new Object[] {userVo.getEmployeeCode()}, null);
+		}
+		//检查邮箱是否已经存在
+		if(userService.checkEmail(userVo.getEmail(),userVo.getId())){
+			errors.rejectValue("email",	"sys.user.email.existed",new Object[] {userVo.getEmail()}, null);
+		}
+		//再次检查是否出错
+		if (errors.hasErrors()) {
+			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
+			return this.getJsonView(modelAndView);
+		}
+		
 		userVo.setAccountExpiredDate(user.getAccountExpiredDate());
 		userVo.setCredentialExpiredDate(user.getCredentialExpiredDate());
 		userVo.setPassword(user.getPassword());
 
 		BeanUtils.copyProperties(userVo, user);
+		//去空格 用户名、员工号、邮箱的空格
+		user.setUsername(userVo.getUsername().trim());
+		user.setEmployeeCode(userVo.getEmployeeCode().trim());
+		user.setEmail(userVo.getEmail().trim());
 		// 将登录用户转换为小写
 		user.setUsername(user.getUsername().toLowerCase());
 		this.userService.doUpdate(user);
 		Map<String, String> params = new HashMap<String, String>();
-		params.put(BindResult.SUCCESS,
-				ConstantMessage.EDIT_SUCCESS_MESSAGE_CODE);
+		params.put(BindResult.SUCCESS,ConstantMessage.EDIT_SUCCESS_MESSAGE_CODE);
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		return this.getJsonView(modelAndView);
 	}
 
 	/** 列表显示 */

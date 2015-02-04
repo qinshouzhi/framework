@@ -13,7 +13,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -60,6 +62,8 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	@Autowired
 	private RoleService roleService;
 	
+	@Value("${super.username}")
+	private String superUserName;
 	
 
 	/* (non-Javadoc)
@@ -76,6 +80,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 		}
 		return new ArrayList<Role>(userRoles);
 	}
+	
 
 	/*
 	 * (non-Javadoc)
@@ -127,6 +132,115 @@ public class UserServiceImpl extends AbstractService implements UserService {
 		}
 		return null;
 	}
+	
+	
+	
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.UserService#checkUsername(java.lang.String)
+	 */
+	@Override
+	public Boolean checkUsername(String username) {
+		boolean flag=false;
+		if(StringUtils.isEmpty(username)){
+			return true;
+		}		
+		User user = this.doFindByUserName(username.trim());
+		if (user != null && user.getUsername().equals(username)) {
+			flag =true;
+		}
+		return flag;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.UserService#checkEmployeeCode(java.lang.String)
+	 */
+	@Override
+	public Boolean checkEmployeeCode(String employeeCode) {
+		boolean flag=false;
+		if(StringUtils.isEmpty(employeeCode)){
+			return true;
+		}		
+		User user = this.doFindByEmpolyeeCode(employeeCode.trim());
+		if (user != null && user.getEmployeeCode().equals(employeeCode.trim())) {
+			flag =true;
+		}
+		return flag;
+	}
+	
+	
+
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.UserService#checkEmail(java.lang.String)
+	 */
+	@Override
+	public Boolean checkEmail(String email) {
+		boolean flag=false;
+		if(StringUtils.isEmpty(email)){
+			return true;
+		}		
+		User user = this.doFindByEmail(email.trim());
+		if (user != null && user.getEmail().equals(email.trim())) {
+			flag =true;
+		}
+		return flag;
+	}
+
+	
+	
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.UserService#checkUsername(java.lang.String, java.lang.Long)
+	 */
+	@Override
+	public Boolean checkUsername(String username, Long id) {
+		boolean flag=false;
+		if(StringUtils.isEmpty(username)){
+			return true;
+		}		
+		User user = this.doFindByUserName(username.trim());
+		if (user != null&&!user.getId().equals(id)&& user.getUsername().equals(username)) {
+			flag =true;
+		}
+		return flag;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.UserService#checkEmployeeCode(java.lang.String, java.lang.Long)
+	 */
+	@Override
+	public Boolean checkEmployeeCode(String employeeCode, Long id) {
+		boolean flag=false;
+		if(StringUtils.isEmpty(employeeCode)){
+			return true;
+		}		
+		User user = this.doFindByEmpolyeeCode(employeeCode.trim());
+		if (user != null&&!user.getId().equals(id) && user.getEmployeeCode().equals(employeeCode.trim())) {
+			flag =true;
+		}
+		return flag;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.UserService#checkEmail(java.lang.String, java.lang.Long)
+	 */
+	@Override
+	public Boolean checkEmail(String email, Long id) {
+		boolean flag=false;
+		if(StringUtils.isEmpty(email)){
+			return true;
+		}		
+		User user = this.doFindByEmail(email.trim());
+		if (user != null &&!user.getId().equals(id)&& user.getEmail().equals(email.trim())) {
+			flag =true;
+		}
+		return flag;
+	}
+
 
 	/*
 	 * (non-Javadoc)
@@ -138,6 +252,47 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	public void doCreateUser(User user) {
 		this.userDao.save(user);
 	}
+	
+	
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.UserService#getSuperUsername()
+	 */
+	@Override
+	public String getSuperUsername() {
+		return this.getSuperUsername();
+	}
+
+	
+
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.UserService#checkSuperUserById(java.lang.Long)
+	 */
+	@Override
+	public boolean checkSuperUserById(Long id) {
+		boolean flag=false;
+		User user=this.doFindById(id);
+		if(user!=null&&user.getUsername().equals(this.superUserName)){
+			 flag=true;
+		}
+		return flag;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.UserService#checkSuperUserByUserName(java.lang.String)
+	 */
+	@Override
+	public boolean checkSuperUserByUserName(String username) {
+		boolean flag=false;
+		User user=this.doFindByUserName(username);
+		if(user!=null&&user.getUsername().equals(this.superUserName)){
+			flag=true;
+		}
+		return flag;
+	}
+
 
 	/*
 	 * (non-Javadoc)
@@ -157,13 +312,11 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	 * .Long)
 	 */
 	@Override
-	public User doDeleteById(Long id) {
-		// TODO Auto-generated method stub
-		User user = this.doGetById(id);
-		if (user != null) {
-			this.doDelete(user);
-		}
-		return user;
+	public int doDeleteById(Long id) {
+		String hql = "delete from User u where u.id=:id";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
+		return this.userDao.updateHQL(hql, params);
 	}
 
 	/*

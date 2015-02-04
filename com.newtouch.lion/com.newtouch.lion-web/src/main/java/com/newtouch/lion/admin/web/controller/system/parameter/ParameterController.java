@@ -39,6 +39,7 @@ import com.newtouch.lion.service.datagrid.DataGridService;
 import com.newtouch.lion.service.excel.ExcelExportService;
 import com.newtouch.lion.service.system.CodeService;
 import com.newtouch.lion.service.system.ParameterService;
+import com.newtouch.lion.web.constant.ConstantMessage;
 import com.newtouch.lion.web.controller.AbstractController;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
@@ -113,8 +114,8 @@ public class ParameterController extends AbstractController{
 			return modelAndView;
 		}
 		
-		if (!errors.hasErrors()
-				&& this.isExistByNameEn(parameterVo.getNameEn(),parameter.getNameEn())) {errors.rejectValue(ParameterVo.NAMEEN,	"sys.parameter.form.nameen.existed.message",new Object[] { parameterVo.getNameEn() }, null);
+		if (!errors.hasErrors()&& this.isExistByNameEn(parameterVo.getNameEn(),parameter.getNameEn())) {
+			errors.rejectValue(ParameterVo.NAMEEN,	"sys.parameter.form.nameen.existed.message",new Object[] { parameterVo.getNameEn() }, null);
 
 		}
 
@@ -138,9 +139,9 @@ public class ParameterController extends AbstractController{
 		Map<String, String> params = new HashMap<String, String>();
 		int updateRow = this.parameterService.doDeleteById(id);
 		if (updateRow > 0) {
-			params.put(BindResult.SUCCESS,"sys.parameter.delete.success");
+			params.put(BindResult.SUCCESS,ConstantMessage.DELETE_SUCCESS_MESSAGE_CODE);
 		} else {
-			params.put(BindResult.SUCCESS,"sys.parameter.delete.fail");
+			params.put(BindResult.SUCCESS,ConstantMessage.DELETE_FAIL_MESSAGE_CODE);
 		}
 		modelAndView.addObject(BindMessage.SUCCESS, params);
 		return this.getJsonView(modelAndView);
@@ -166,7 +167,7 @@ public class ParameterController extends AbstractController{
 		BeanUtils.copyProperties(parameterVo, parameter);
 		parameterService.doCreate(parameter);
 		Map<String, String> params = new HashMap<String, String>();
-		params.put(BindResult.SUCCESS, "sys.parameter.add.success");
+		params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
 		modelAndView.addObject(BindMessage.SUCCESS, params);
 		
 		return this.getJsonView(modelAndView);

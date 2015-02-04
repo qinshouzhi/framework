@@ -139,7 +139,8 @@ function successAddFrm(data,arg,id){
   		gmsg+=data.errorMessage[msg];
   	}
   	if(lion.util.isEmpty(gmsg)){
-  		gmsg='添加参数出错';
+      
+  		  gmsg='添加参数出错';
   	}
   	lion.util.error('提示',gmsg);
   }else{
@@ -210,7 +211,7 @@ handleVForm=function(vForm,submitCallBackfn){
                          return '';
                        }
 					         	}
-             }
+                }
             },
             value:{
             	required: true,

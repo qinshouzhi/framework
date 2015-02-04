@@ -225,13 +225,13 @@
 												<label class="col-md-2 control-label">真实姓名(中文)</label>
 												<div class="col-md-4">
 													<div class="input-group">
-														<input type="text"  id="realnameZh" name="realnameZh" maxlength="100" class="form-control" placeholder="请输入真实姓名（中文）" size="30"/>
+														<input type="text"  id="realnameZh" name="realnameZh" maxlength="128" class="form-control" placeholder="请输入真实姓名（中文）" size="30"/>
 													</div>
 												</div>
 												<label class="col-md-2 control-label">真实姓名(英文)</label>
 												<div class="col-md-4">
 													<div class="input-group">
-														<input type="text"  id="realnameEn" name="realnameEn" maxlength="100" class="form-control" placeholder="请输入真实姓名（英文）" size="30"/>
+														<input type="text"  id="realnameEn" name="realnameEn" maxlength="128" class="form-control" placeholder="请输入真实姓名（英文）" size="30"/>
 													</div>
 												</div>
 											</div>										 
@@ -239,13 +239,13 @@
 												<label class="col-md-2 control-label">电话</label>
 												<div class="col-md-4">
 													<div class="input-group">
-														<input type="text" name="value" class="form-control" placeholder="请输入电话" maxlength="255" size="30"/>
+														<input type="text" name="telephone" class="form-control" placeholder="请输入电话" maxlength="30" size="30"/>
 													</div>
 												</div>
 												<label class="col-md-2 control-label">手机</label>
 												<div class="col-md-4">
 													<div class="input-group">
-														<input type="text" name="value" class="form-control" placeholder="请输入手机" maxlength="255" size="30"/>
+														<input type="text" name="mobile" class="form-control" placeholder="请输入手机" maxlength="30" size="30"/>
 													</div>
 												</div>
 											</div>
@@ -253,13 +253,13 @@
 												<label class="col-md-2 control-label">办公电话</label>
 												<div class="col-md-4">
 													<div class="input-group">
-														<input type="text" name="value" class="form-control" placeholder="请输入办公电话" maxlength="255" size="30"/>
+														<input type="text" name="officePhone" class="form-control" placeholder="请输入办公电话" maxlength="30" size="30"/>
 													</div>
 												</div>
 												<label class="col-md-2 control-label">传真</label>
 												<div class="col-md-4">
 													<div class="input-group">
-														<input type="text" name="value" class="form-control" placeholder="请输入传真" maxlength="255" size="30"/>
+														<input type="text" name="fax" class="form-control" placeholder="请输入传真" maxlength="30" size="30"/>
 													</div>
 												</div>
 											</div>
@@ -267,13 +267,13 @@
 												<label class="col-md-2 control-label">地址</label>
 												<div class="col-md-4">
 													<div class="input-group">
-														<input type="text" name="value" class="form-control" placeholder="请输入地址" maxlength="255" size="30"/>
+														<input type="text" name="location" class="form-control" placeholder="请输入地址" maxlength="256" size="30"/>
 													</div>
 												</div>
 												<label class="col-md-2 control-label">邮编</label>
 												<div class="col-md-2">
 													<div class="input-group">
-														<input type="text" name="value" class="form-control" placeholder="请输入邮编" maxlength="255" size="30"/>
+														<input type="text" name="postcode" class="form-control" placeholder="请输入邮编" maxlength="6" size="30"/>
 													</div>
 												</div>
 												<label class="col-md-2 control-label">
@@ -287,7 +287,7 @@
 												<label class="col-md-2 control-label">描述</label>
 												<div class="col-md-10">
 													<div class="input-group">
-														<input type="text" name="value" class="form-control input-xlarge" placeholder="请输入描述" maxlength="255" size="30"/>
+														<input type="text" name="description" class="form-control input-xlarge" placeholder="请输入描述" maxlength="256" size="30"/>
 													</div>
 												</div>
 											</div>

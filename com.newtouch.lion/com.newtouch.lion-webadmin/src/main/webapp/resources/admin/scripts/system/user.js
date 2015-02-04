@@ -14,7 +14,8 @@ $(function() {
 	//验证菜单
 	handleVForm(addForm,submitForm);
 
-
+	//选择DataGrid单行
+	function getSelectedRow(){return $(datagridId).datagrid('getSelected');}
 	$(datagridId).datagrid({onLoadSuccess:function(data) {}});
 	
 	/**
@@ -37,11 +38,38 @@ $(function() {
 	 
 	 $("#btnAdd").on("click",function(){
 	 	 addForm.reset();
+	 	 addDialog.find('.modal-header h4 span').text('添加用户');
 		 return;
+	 });
+	 //编辑
+	 $('#btnEdit').on('click',function(){
+		 var row=getSelectedRow();
+		 if(!row){
+			 lion.util.info('提示','请选择要编辑记录');
+			 return;
+		 }
+ 		 addForm.reset();
+     	 addDialog.find('.modal-header h4 span').text('编辑用户');
+		 addDialog.modal('toggle');
+		 addForm.fill(row);
+	 });
+	 //删除
+	$('#btnDelete').on('click',function(){
+		 var row=getSelectedRow();
+		 if(!row){
+			 lion.util.info('提示','请选择要删除记录');
+			 return;
+		 }
+		 bootbox.confirm('确认要删除此记录？', function(result) {
+              if(result){            	 
+            	  var param={'id':row.id};
+                  lion.util.post('delete.json',param,successForDelete,errorRequest);
+              }
+          }); 
 	 });
 	 //保存方法
 	$('#btnSave').click(function(){
-	 		addForm.submit();
+	 	addForm.submit();
 	 });
 	 //导出Excel
 	 $('#btnExport').on('click',function(){
@@ -59,6 +87,23 @@ $(function() {
        window.open(url,'_blank');
 	 });	
 });
+
+function successForDelete(data,arg){
+   if(data!==null&&!(data.hasError)){
+      lion.util.success('提示',data.message);
+      $('#userlist_dt').datagrid('reload');
+   }else if(data!==null&&data.hasError){
+      var gmsg='';
+      for(var msg in data.errorMessage){
+        gmsg+=data.errorMessage[msg];
+      }
+      if(lion.util.isEmpty(gmsg)){
+        gmsg='未删除成功';
+      }
+      lion.util.error('提示',gmsg);
+  }
+}
+
 /**新增或编辑的提交代码*/
 function submitForm(frm){
 	var param=frm.serialize(),id=($('#id').val());
@@ -76,18 +121,18 @@ function successAddFrm(data,arg,id){
   if(data!==null&&!(data.hasError)){
   	lion.util.success('提示',data.message);
   	$('#basic').modal('toggle');
-    $('#sys_parameter_lists_tb').datagrid('reload');
+    $('#userlist_dt').datagrid('reload');
   }else if(data!==null&&data.hasError){
   	var gmsg='';
   	for(var msg in data.errorMessage){
   		gmsg+=data.errorMessage[msg];
   	}
   	if(lion.util.isEmpty(gmsg)){
-  		gmsg='添加参数出错';
+  		gmsg='添加用户失败';
   	}
   	lion.util.error('提示',gmsg);
   }else{
-  	lion.util.error('提示','添加参数失败');
+  	lion.util.error('提示','添加用户失败');
   }
 }
 //请求失败后信息
@@ -122,10 +167,12 @@ handleVForm=function(vForm,submitCallBackfn){
         	email:{
         		required:'请输入邮箱',
         		email:'请输入正确格式的邮箱',
-        		maxlength:jQuery.validator.format('邮箱的长度为{0}字符'),
+        		maxlength:jQuery.validator.format('邮箱的最大长度为{0}字符'),
         		remote:'该邮箱已存在'
         	},
-        	departmentId:{required:'请选择部门'}
+        	departmentId:{required:'请选择部门'},
+        	realnameZh:{maxlength:'真实姓名(中文)的最大长度为{0}字符'},
+        	realnameEn:{maxlength:'真实姓名(中文)的最大长度为{0}字符'},
         },
         rules: {
             username:{
@@ -195,6 +242,12 @@ handleVForm=function(vForm,submitCallBackfn){
             departmentId:{
             	required:true
             },
+            realnameZh:{
+            	maxlength:128,
+            },
+            realnameEn:{
+            	maxlength:128,
+            }
         },
         invalidHandler: function (event, validator) {             
             addSuccess.hide();

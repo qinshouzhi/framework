@@ -9,9 +9,9 @@ package com.newtouch.lion.admin.web.model.system.user;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
 /**
@@ -77,7 +77,8 @@ public class UserVo implements Serializable {
 	private String officePhone;
 	/** E-mail */
 	@NotNull(message="{sys.user.email.missing}")
-	@Max(value=128,message="{sys.user.email.length}")
+	@Email(message="{sys.user.email.pattern}")
+	@Length(max=128,min=1,message="{sys.user.email.length}")
 	private String email;
 	/** 性别 */
 	private Integer gender;
