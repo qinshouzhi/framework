@@ -107,7 +107,7 @@ public class DataColumnController extends AbstractController{
 	@RequestMapping(value = "add")
 	@ResponseBody
 	public ModelAndView add(
-			@Valid @ModelAttribute("dataGridVo") DataColumnVo dataColumnVo,
+			@Valid @ModelAttribute("dataColumnVo") DataColumnVo dataColumnVo,
 			Errors errors, ModelAndView modelAndView) {
 		if (!errors.hasErrors()&& this.isExistByName(dataColumnVo.getName())) {
 			errors.rejectValue(DataColumnVo.NAME,

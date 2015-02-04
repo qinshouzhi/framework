@@ -161,7 +161,7 @@ public class DataGridServiceImpl extends AbstractService implements DataGridServ
 	public PageResult<DataGrid> doFindByCriteria(QueryCriteria criteria) {
 		String queryEntry = " from DataGrid ";
 
-		String[] whereBodies = {" tableId  like :tableId","type=:type","title like: title"};
+		String[] whereBodies = {" tableId  like :tableId","type=:type","title like :title"};
 
 		String fromJoinSubClause = "";
 

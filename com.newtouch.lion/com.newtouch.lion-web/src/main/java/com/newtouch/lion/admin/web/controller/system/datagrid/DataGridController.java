@@ -27,12 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.newtouch.lion.admin.web.model.system.datacolumn.DataColumnVo;
 import com.newtouch.lion.admin.web.model.system.datagrid.DataGridVo;
 import com.newtouch.lion.common.date.DateUtil;
 import com.newtouch.lion.common.file.FileUtil;
 import com.newtouch.lion.data.DataTable;
-import com.newtouch.lion.model.datagrid.DataColumn;
 import com.newtouch.lion.model.datagrid.DataGrid;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
@@ -136,7 +134,7 @@ public class DataGridController extends AbstractController {
 	@RequestMapping(value = "add")
 	@ResponseBody
 	public ModelAndView add(
-			@Valid @ModelAttribute("dataGrid") DataGridVo dataGridVo,
+			@Valid @ModelAttribute("dataGridVo") DataGridVo dataGridVo,
 			Errors errors, ModelAndView modelAndView) {
 		
 		if (!errors.hasErrors()&& this.isExistByTableId(dataGridVo.getTableId())) {
@@ -293,23 +291,24 @@ public class DataGridController extends AbstractController {
 	 * 
 	 * @param tableId
 	 * @param dataGridVo
+	 * @param queryVo
 	 * @param modelAndView
 	 * @return
 	 */
 	@RequestMapping(value = "export")
 	@ResponseBody
-	public ModelAndView exportExcel(@RequestParam(required=false) String tableId,@RequestParam(required = false) String sort,@RequestParam(required = false) String order,@ModelAttribute("dataGrid") DataGridVo dataGridVo,ModelAndView modelAndView){
+	public ModelAndView exportExcel(@RequestParam(required=false) String tableId1,@RequestParam(required = false) String sort,@RequestParam(required = false) String order,@ModelAttribute("dataGrid") DataGridVo dataGridVo,ModelAndView modelAndView){
 				
-		DataGrid dataGrid=dataGridService.doFindByTableIdAndSort(tableId);
+		DataGrid dataGrid=dataGridService.doFindByTableIdAndSort(tableId1);
 		QueryCriteria queryCriteria=new QueryCriteria();
 		queryCriteria.setPageSize(10000);
 		// 设置排序字段及排序方向
-		if (StringUtils.isNotEmpty(sort) && StringUtils.isNotEmpty(order)) {
+		if (StringUtils.isNotEmpty(sort) && StringUtils.isNotEmpty(sort)) {
 			queryCriteria.setOrderField(sort);
-			queryCriteria.setOrderDirection(order);
+			queryCriteria.setOrderDirection(sort);
 		} else {
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
-			queryCriteria.setOrderDirection("ASC");
+			queryCriteria.setOrderDirection(QueryCriteria.ASC);
 		}
 		// 查询条件 参数类型
 		if (StringUtils.isNotEmpty(dataGridVo.getType())) {

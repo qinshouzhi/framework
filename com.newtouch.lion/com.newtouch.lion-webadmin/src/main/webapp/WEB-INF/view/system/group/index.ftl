@@ -43,25 +43,25 @@
 		<div class="row">
 			<div class="col-md-12 margin-bottom-10">
 				<form id="queryform" class="form-horizontal">
-					<label class="control-label col-md-2" for="nameZh" >用户组名称</label>
+					<label class="control-label col-md-2" for="nameZh" ><@spring.message "sys.group.query.namezh.text"/></label>
 					<div class="col-md-3">
-						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="请输入用户组名称"/>					
+						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="请输入<@spring.message "sys.group.form.namezh.missing.message"/>"/>					
 					</div>
 					<div class="col-md-5">
 
 					</div>
 					<div class="col-md-2">
-						<a href="javascript:void(0)" id="btnQuery" class="btn blue"><i class="fa fa-search"></i> 查 询 </a>
+						<a href="javascript:void(0)" id="btnQuery" class="btn blue"><i class="fa fa-search"></i> <@spring.message "common.query.btn.text"/> </a>
 					</div>
 				</form>
 			</div>
 		
 			<div class="col-md-12 margin-bottom-10" id="toolbar">
-				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic"><i class="fa fa-plus"></i> 新增  </a>
-				<a id="btnEdit" class="btn btn-sm red"><i class="fa fa-edit"></i> 编辑</a>
-				<a href="javascript:void(0)" id="btnDelete" class="btn btn-sm purple"><i class="fa fa-times"></i> 删除 </a>
-				<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue"><i class="fa fa-refresh"></i> 刷新  </a>
-				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> Excel </a>
+				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic"><i class="fa fa-plus"></i> <@spring.message "common.toolbar.btn.add.text"/>  </a>
+				<a id="btnEdit" class="btn btn-sm red"><i class="fa fa-edit"></i> <@spring.message "common.toolbar.btn.edit.text"/></a>
+				<a href="javascript:void(0)" id="btnDelete" class="btn btn-sm purple"><i class="fa fa-times"></i> <@spring.message "common.toolbar.btn.delete.text"/> </a>
+				<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue"><i class="fa fa-refresh"></i> <@spring.message "common.toolbar.btn.reload.text"/>   </a>
+				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> <@spring.message "common.toolbar.btn.export.text"/> </a>
 			</div>
 			<div class="col-md-12">
 				 <@lion.datagrids name="sys_group_list_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/group/list.htm" dataOptions="" style="height:400px;"/>	
@@ -76,7 +76,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-				<h4 class="modal-title"><i class="fa fa-plus"></i> 角色组添加</h4>
+				<h4 class="modal-title"><i class="fa fa-plus"></i> <@spring.message "sys.group.form.adddialog.text"/></h4>
 			</div>
 			<div class="modal-body">
 				 	<div class="row">
@@ -86,31 +86,31 @@
 											<input type="hidden" id='id' name='id' value="">
 											<div class="form-body">
 												<div class="form-group">
-													<label class="col-md-3 control-label">角色组名称(中文)</label>
+													<label class="col-md-3 control-label"><@spring.message "sys.group.form.namezh.text"/></label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text"  name="nameZh"  maxlength="100" class="form-control" placeholder="请输入角色组名称（中文）" size="30"/>
+															<input type="text"  name="nameZh"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.group.form.namezh.missing.message"/>" size="30"/>
 														</div>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label">角色组名称(英文)</label>
+													<label class="col-md-3 control-label"><@spring.message "sys.group.form.nameen.text"/></label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入角色组名称（英文）" size="30"/>
+															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="<@spring.message "sys.group.form.nameen.missing.message"/>" size="30"/>
 														</div>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label">角色组描述</label>
+													<label class="col-md-3 control-label"><@spring.message "sys.group.form.description.text"/></label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text" name="description" class="form-control" placeholder="请输入角色组描述" maxlength="255" size="30"/>
+															<input type="text" name="description" class="form-control" placeholder="<@spring.message sys.group.form.description.missing.message"/>" maxlength="255" size="30"/>
 														</div>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label">是否可编辑</label>
+													<label class="col-md-3 control-label"><@spring.message "sys.group.form.editable.text"/></label>
 													<div class="col-md-5 control-label">
 														<div class="input-group">
 															<input type="checkbox" class="form-control "  name="editable" checked="true" />
@@ -124,8 +124,8 @@
 				 	</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal"><i class="fa  fa-arrow-left"></i> 取 消 </button>
-				<button type="button" id="btnSave" class="btn blue"><i class="fa fa-save"></i> 保 存</button>
+				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal"><i class="fa  fa-arrow-left"></i> <@spring.message "common.diaglog.btn.cancel"/> </button>
+				<button type="button" id="btnSave" class="btn blue"><i class="fa fa-save"></i> <@spring.message "common.diaglog.btn.save"/></button>
 			</div>
 		</div>
 		<!-- /.modal-content -->

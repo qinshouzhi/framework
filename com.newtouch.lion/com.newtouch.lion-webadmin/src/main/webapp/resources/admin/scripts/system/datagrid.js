@@ -79,7 +79,7 @@ $(function() {
 	 });
 	//导出Excel
 	 $('#btnExport').on('click',function(){
-		 var params=queryForm.serialize(),url='export.json?tableId='+$(datagridId).attr('id');
+		var params=queryForm.serialize(),url='export.json?tableId1='+$(datagridId).attr('id');
        if(lion.util.isNotEmpty(params)){
           url+='&'+params;
        }
@@ -177,8 +177,7 @@ handleVForm=function(vForm,submitCallBackfn){
               rangelength: jQuery.validator.format('loadMsg长度为{0}和{1}字符之间')
             },
             pagePosition:{
-              required: '请输入pagePosition',
-              rangelength: jQuery.validator.format('pagePosition长度为{0}和{1}字符之间')
+              required: '请选择pagePosition'
             },
             pageNumber:{
               required: '请输入pageNumber',
@@ -189,8 +188,7 @@ handleVForm=function(vForm,submitCallBackfn){
               number: '请输入正确的数字'
             },
             pageList:{
-              required: '请输入pageList',
-              rangelength: jQuery.validator.format('pageList长度为{0}和{1}字符之间')
+              required: '请选择pageList'
             },
             queryParams:{
               rangelength: jQuery.validator.format('queryParams长度为{0}和{1}字符之间')

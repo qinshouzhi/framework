@@ -57,7 +57,7 @@
 				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> Excel </a>
 			</div>
 			<div class="col-md-12">
-				  <@lion.datagrids name="sys_rolelist_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/role/list.htm" dataOptions="" style="height:400px;"/>			</div>
+				  <@lion.datagrids name="sys_resource_lists_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/resource/list.htm" dataOptions="" style="height:400px;"/>			</div>
 		</div>
 	</div>
 </div>
