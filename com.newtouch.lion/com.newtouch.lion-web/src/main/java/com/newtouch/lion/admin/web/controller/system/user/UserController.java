@@ -33,15 +33,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.user.PasswordVo;
 import com.newtouch.lion.admin.web.model.system.user.UserVo;
+import com.newtouch.lion.common.date.DateUtil;
+import com.newtouch.lion.common.file.FileUtil;
 import com.newtouch.lion.common.lang.LongUtils;
 import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.json.JSONParser;
+import com.newtouch.lion.model.datagrid.DataGrid;
 import com.newtouch.lion.model.system.Group;
 import com.newtouch.lion.model.system.Resource;
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
+import com.newtouch.lion.service.datagrid.DataGridService;
+import com.newtouch.lion.service.excel.ExcelExportService;
+import com.newtouch.lion.service.system.DepartmentService;
 import com.newtouch.lion.service.system.GroupService;
 import com.newtouch.lion.service.system.PasswordEncoderService;
 import com.newtouch.lion.service.system.ResourceService;
@@ -51,8 +57,11 @@ import com.newtouch.lion.tree.TreeNode;
 import com.newtouch.lion.util.ResourceConvertUtil;
 import com.newtouch.lion.util.ResourceTreeUtil;
 import com.newtouch.lion.web.constant.ConstantMessage;
+import com.newtouch.lion.web.controller.AbstractController;
+import com.newtouch.lion.web.model.QueryVo;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
+import com.newtouch.lion.web.shiro.credentials.PasswordEncoder;
 import com.newtouch.lion.web.shiro.session.LoginSecurityUtil;
 
 /**
@@ -74,7 +83,7 @@ import com.newtouch.lion.web.shiro.session.LoginSecurityUtil;
  */
 @Controller(value = "sysUserController")
 @RequestMapping("/system/user")
-public class UserController {
+public class UserController extends AbstractController {
 	private final Logger logger = LoggerFactory.getLogger(super.getClass());
 	/** 默认排序字段 */
 	private static final String DEFAULT_ORDER_FILED_NAME = "id";
@@ -109,13 +118,33 @@ public class UserController {
 	@Autowired
 	private GroupService groupService;
 	@Autowired
-	private PasswordEncoderService passwordEncoderService;
+	private PasswordEncoder passwordEncoderService;
 	@Autowired
 	private ResourceService resourceService;
+	/**DataGrid表格*/
+	@Autowired
+	private DataGridService dataGridService;
+	/**Excel通用导出*/
+	@Autowired
+	private ExcelExportService excelExportService;
+	/**部门列表*/
+	@Autowired
+	private DepartmentService departmentService;
 
 	/** 首页显示 */
 	@RequestMapping(value = "index")
-	public String index() {
+	public String index(Model model) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.YEAR, 1);// TODO 默认账户有效期为一年；
+
+		model.addAttribute("accountExpiredDate",DateUtil.formatDate(calendar.getTime(),DateUtil.FORMAT_DATE_YYYY_MM_DD));
+		
+		Calendar credentialExpiredCalendar = Calendar.getInstance();
+		
+		credentialExpiredCalendar.add(Calendar.MONTH, 3);// TODO 默认密码有效期为3个月；
+		
+		model.addAttribute("credentialExpiredDate",DateUtil.formatDate(credentialExpiredCalendar.getTime(),DateUtil.FORMAT_DATE_YYYY_MM_DD));
+		
 		return INDEX_RETURN;
 	}
 
@@ -127,8 +156,12 @@ public class UserController {
 
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
-			return modelAndView;
+			return this.getJsonView(modelAndView);
 		}
+		
+		//检查用户是否已存在
+		
+		
 		User user = new User();
 
 		BeanUtils.copyProperties(userVo, user);
@@ -141,9 +174,8 @@ public class UserController {
 
 		user.setAccountExpiredDate(calendar.getTime());
 		user.setCredentialExpiredDate(credentialExpiredCalendar.getTime());
-		String passwordEncoder = passwordEncoderService.encodePassword(
-				DEFAULT_PASSWORD, null);
-		// TODO 密码加密码
+		String passwordEncoder = passwordEncoderService.encodePassword(DEFAULT_PASSWORD,user.getUsername());
+		// 密码加密码
 		user.setPassword(passwordEncoder);
 		// 将登录用户转换为小写
 		user.setUsername(user.getUsername().toLowerCase());
@@ -301,29 +333,33 @@ public class UserController {
 	/** 列表显示 */
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public DataTable<User> lists(HttpServletRequest servletRequest, Model model,
-			@RequestParam(defaultValue = "1") int page,
-			@RequestParam(defaultValue = "15") int rows,
-			@RequestParam(required = false) String sort,
-			@RequestParam(required = false) String order,
-			@RequestParam(required = false) String username) {
+	public DataTable<User> lists(@ModelAttribute("queryVo")QueryVo queryVo,@ModelAttribute("user") UserVo userVo) {
 		QueryCriteria queryCriteria = new QueryCriteria();
 		// 设置分页 启始页
-		queryCriteria.setStartIndex(rows * (page - 1));
+		queryCriteria.setStartIndex(queryVo.getRows() * (queryVo.getPage() - 1));
 		// 每页大小
-		queryCriteria.setPageSize(rows);
+		queryCriteria.setPageSize(queryVo.getRows());
 		// 设置排序字段及排序方向
-		if (StringUtils.isNotEmpty(sort) && StringUtils.isNotEmpty(order)) {
-			queryCriteria.setOrderField(sort);
-			queryCriteria.setOrderDirection(order);
+		if (StringUtils.isNotEmpty(queryVo.getSort()) && StringUtils.isNotEmpty(queryVo.getOrder())) {
+			queryCriteria.setOrderField(queryVo.getOrder());
+			queryCriteria.setOrderDirection(queryVo.getOrder());
 		} else {
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
-			queryCriteria.setOrderDirection(QueryCriteria.ASC);
 		}
-		// 查询条件 参数类型
-		if (StringUtils.isNotEmpty(username)) {
-			queryCriteria.addQueryCondition("username", "%" + username + "%");
+		// 查询条件 参数类型 用户名
+		if (StringUtils.isNotEmpty(userVo.getUsername())) {
+			queryCriteria.addQueryCondition("username", "%" + userVo.getUsername() + "%");
 		}
+		
+		// 查询条件 参数类型 员工号
+		if (StringUtils.isNotEmpty(userVo.getEmployeeCode())) {
+			queryCriteria.addQueryCondition("employeeCode", "%" + userVo.getEmployeeCode() + "%");
+		}
+		// 查询条件 参数类型 邮箱
+		if (StringUtils.isNotEmpty(userVo.getEmail())) {
+			queryCriteria.addQueryCondition("email", "%" + userVo.getEmail()+ "%");
+		}
+		
 		PageResult<User> pageResult = this.userService.doFindByCriteria(queryCriteria);
 		for(User user:pageResult.getContent()){
 				user.getDepartment().getNameZh();
@@ -331,6 +367,74 @@ public class UserController {
 		return pageResult.getDataTable();
 	}
 
+	
+	/****
+	 * 
+	 * @param tableId
+	 * @param parameterVo
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value = "export")
+	@ResponseBody
+	public ModelAndView exportExcel(@ModelAttribute("queryVo")QueryVo queryVo,@ModelAttribute("user") UserVo userVo,Errors errors, ModelAndView modelAndView){
+				
+		DataGrid dataGrid=dataGridService.doFindByTableIdAndSort(queryVo.getTableId());
+		QueryCriteria queryCriteria=new QueryCriteria();
+		queryCriteria.setPageSize(10000);
+	 
+		// 设置分页 启始页
+		queryCriteria.setStartIndex(queryVo.getRows() * (queryVo.getPage() - 1));
+		// 每页大小
+		queryCriteria.setPageSize(queryVo.getRows());
+		// 设置排序字段及排序方向
+		if (StringUtils.isNotEmpty(queryVo.getSort()) && StringUtils.isNotEmpty(queryVo.getOrder())) {
+			queryCriteria.setOrderField(queryVo.getOrder());
+			queryCriteria.setOrderDirection(queryVo.getOrder());
+		} else {
+			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+		}
+		// 查询条件 参数类型 用户名
+		if (StringUtils.isNotEmpty(userVo.getUsername())) {
+			queryCriteria.addQueryCondition("username", "%" + userVo.getUsername() + "%");
+		}
+		
+		// 查询条件 参数类型 员工号
+		if (StringUtils.isNotEmpty(userVo.getEmployeeCode())) {
+			queryCriteria.addQueryCondition("employeeCode", "%" + userVo.getEmployeeCode() + "%");
+		}
+		// 查询条件 参数类型 邮箱
+		if (StringUtils.isNotEmpty(userVo.getEmail())) {
+			queryCriteria.addQueryCondition("email", "%" + userVo.getEmail()+ "%");
+		}
+
+		PageResult<User> result=this.userService.doFindByCriteria(queryCriteria);
+		Map<String, Map<Object, Object>> fieldDepartment= new HashMap<String, Map<Object, Object>>();
+		
+	 
+		fieldDepartment.put("department",null);
+
+		Map<String, String> dataFormats = new HashMap<String, String>();		
+		dataFormats.put("accountExpiredDate", DateUtil.FORMAT_DATE_YYYY_MM_DD);
+		//创建.xls的文件名
+		String fileName=this.createFileName(FileUtil.EXCEL_EXTENSION);
+		
+		modelAndView.addObject("title", dataGrid.getTitle());
+		
+		Long startTime=System.currentTimeMillis();
+		
+		fileName=excelExportService.export(dataGrid, result.getContent(), fileName,fieldDepartment,dataFormats);
+		
+		logger.info("fileName:{}",fileName);
+		
+		Long costTime=System.currentTimeMillis()-startTime;
+		
+		modelAndView.addObject(FILENAME,fileName);
+		
+		logger.info("export Excel {} cost:{} time,fileName:{}",dataGrid.getTitle(),costTime,fileName);
+		logger.info("out Excel导出");
+		return this.getExcelView(modelAndView);
+	}
 	@RequestMapping(value = "pwdindex")
 	public String loadUserEditPasswordPage(HttpServletRequest request,
 			Model model) {
@@ -388,8 +492,7 @@ public class UserController {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
 			return modelAndView;
 		}
-		String newPasswordEncoder = this.passwordEncoderService.encodePassword(
-				passwordVo.getPwd(), null);
+		String newPasswordEncoder = this.passwordEncoderService.encodePassword(passwordVo.getPwd(), null);
 		user.setPassword(newPasswordEncoder);
 		this.userService.doUpdate(user);
 
@@ -420,11 +523,10 @@ public class UserController {
 		List<Resource> userResources = this.resourceService.doFindByUserId(user.getId());
 
 		Map<Long, Resource> menuResourcesMap = ResourceConvertUtil.convertListToMap(userResources);
-
-		List<TreeNode> children = ResourceTreeUtil.resourceAttrUser(resources,menuResourcesMap, Boolean.TRUE, 0);
-
-		Set<String> properties = new HashSet<String>();
 		
+		List<TreeNode> children = ResourceTreeUtil.resourceAttrUser(resources,menuResourcesMap, Boolean.TRUE, 0);
+		
+		Set<String> properties = new HashSet<String>();		
 		properties.add("id");
 		properties.add("text");
 		properties.add("checked");

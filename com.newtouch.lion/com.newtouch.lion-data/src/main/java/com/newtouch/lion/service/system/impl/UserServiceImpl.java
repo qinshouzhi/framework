@@ -85,10 +85,42 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	 * .String)
 	 */
 	@Override
-	public User doFindByUserName(String userName) {
-		String hql = "from  User u where u.username=:userName";
+	public User doFindByUserName(String username) {
+		String hql = "from  User u where u.username=:username";
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("userName", userName);
+		params.put("username", username);
+		List<User> list = this.userDao.query(hql, params);
+		if (!CollectionUtils.isEmpty(list)) {
+			return list.get(0);
+		}
+		return null;
+	}
+	
+	
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.UserService#doFindByEmpolyeeCode(java.lang.String)
+	 */
+	@Override
+	public User doFindByEmpolyeeCode(String employeeCode) {
+		String hql="from User u where u.employeeCode=:employeeCode";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("employeeCode", employeeCode);
+		List<User> list = this.userDao.query(hql, params);
+		if (!CollectionUtils.isEmpty(list)) {
+			return list.get(0);
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.UserService#doFindByEmail(java.lang.String)
+	 */
+	@Override
+	public User doFindByEmail(String email) {
+		String hql="from User u where u.email=:email";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("email", email);
 		List<User> list = this.userDao.query(hql, params);
 		if (!CollectionUtils.isEmpty(list)) {
 			return list.get(0);
@@ -244,7 +276,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	public PageResult<User> doFindByCriteria(QueryCriteria criteria) {
 		String queryEntry = " from User ";
 
-		String[] whereBodies = { "username like :username" };
+		String[] whereBodies = { "username like :username", "employeeCode like :employeeCode","email like :email" };
 
 		String fromJoinSubClause = "";
 

@@ -28,12 +28,12 @@
 	       events = {};//按钮事件缓存区
 	   //默认HTML模板
 	   var templates={
-	   		container:'<div class="btn-group lion-combotree bootstrap-select form-control  input-small"><div>',
-	   		button:'<button class="btn  input-small form-control dropdown-toggle">'+
+	   		container:'<div class="btn-group lion-combotree bootstrap-select form-control"><div>',
+	   		button:'<button class="btn  form-control dropdown-toggle">'+
 					    '<span class="pull-left"></span>'+
 						'<i class="caret"></i>'+
 					'</button>',
-			bodyTree:'<div class="content"><ul  class="ztree"><li>ddd<li></ul></div>'
+			bodyTree:'<div class="content"><ul  class="ztree"></ul></div>'
 	   };
 	   //默认参数
 	   var defaults={
@@ -92,7 +92,9 @@
           //树对象
           this.$treeObj=null;
           //初始化          
-          this.init();         
+          this.init();   
+          //失去焦点的事件
+          this.focusoutListener();      
 	   };	
 	   //版本数据
 	   Combotree.version=defaults.version;
@@ -154,6 +156,14 @@
 	        		 that.show();
 	        		 e.preventDefault();
 	        	});
+	        },
+	        //添加焦点去事件
+	        focusoutListener:function(){
+	          var that=this;
+	          this.$content.on('focusout', 'li a', function (e) {
+	            //触发select的焦点事件
+	             that.$element.trigger('focusout');
+	          });
 	        },
 	        show:function(){
 	   	       this.$content.slideDown('fast');
@@ -282,7 +292,7 @@
                 'width':outerWidth,
                 'height':this.$button.outerHeight(),
                 'position':'absolute',
-                 'z-index':'14999',
+                'z-index':'10000',
                 });
                 var actualTop=this.$button.outerHeight();
                 if(this.$content.outerWidth()>this.$button.outerWidth()){

@@ -227,7 +227,6 @@ public class ParameterController extends AbstractController{
 			queryCriteria.setOrderDirection(order);
 		} else {
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
-			queryCriteria.setOrderDirection("ASC");
 		}
 		// 查询条件 参数类型
 		if (StringUtils.isNotEmpty(parameterVo.getType())) {
@@ -275,7 +274,7 @@ public class ParameterController extends AbstractController{
 
 		PageResult<Parameter> result=parameterService.doFindByCriteria(queryCriteria);
 		Map<String, Map<Object, Object>> fieldCodeTypes = new HashMap<String, Map<Object, Object>>();
-		fieldCodeTypes.put("type",this.codeService.doFindMap(CODE_TYPE));
+		fieldCodeTypes.put("id",this.codeService.doFindMap(CODE_TYPE));
 
 		Map<String, String> dataFormats = new HashMap<String, String>();		
 		dataFormats.put("birthday", DateUtil.FORMAT_DATE_YYYY_MM_DD);

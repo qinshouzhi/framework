@@ -7,6 +7,7 @@
 package com.newtouch.lion.service.system;
 
 import java.util.List;
+import java.util.Map;
 
 import com.newtouch.lion.model.system.Department;
 
@@ -110,5 +111,10 @@ public interface DepartmentService {
 	 * @return String JOSN字符串
 	 */
 	public String doFindAll(String tableId);
+	/***
+	 * 查询所有部门列表，并转换为Map
+	 * @return Map<Object,Object>
+	 */
+	public Map<Object,Object> doFindDapartmentAll();
 
 }

@@ -9,6 +9,11 @@ package com.newtouch.lion.admin.web.model.system.user;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
 /**
  * <p>
  * Title: 系统用户验证类
@@ -34,18 +39,24 @@ public class UserVo implements Serializable {
 	 */
 	private Long id;
 	/** 部门ID */
+	@NotNull(message="${sys.user.departement.missing}")
 	private Long departmentId;
 	/** 经理ID */
 	private Long managerId;
 	/** 登录用户名 */
+	@NotNull(message="${sys.user.username.missing.message}")
+	@Length(max=30,min=4,message="{sys.user.username.length.message}")
 	private String username;
 	/** 超级管理员 */
 	private String sapUsername;
 	/** 登录密码 */
+	
 	private String password;
 	/** 密码提示语 */
 	private String passwordHint;
 	/** 员工号 */
+	@NotNull(message="${sys.user.employeecode.missing}")
+	@Length(max=30,min=4,message="{sys.user.employeecode.length}")
 	private String employeeCode;
 	/** 认证类型 LDAP, DB, DUMMY */
 	private String authtype;
@@ -65,9 +76,11 @@ public class UserVo implements Serializable {
 	/** 联系电话－办公室 */
 	private String officePhone;
 	/** E-mail */
+	@NotNull(message="{sys.user.email.missing}")
+	@Max(value=128,message="{sys.user.email.length}")
 	private String email;
 	/** 性别 */
-	private int gender;
+	private Integer gender;
 	/** 办公室位置 */
 	private String location;
 	/** 传真 */
@@ -345,7 +358,7 @@ public class UserVo implements Serializable {
 	/**
 	 * @return the gender
 	 */
-	public int getGender() {
+	public Integer getGender() {
 		return gender;
 	}
 
@@ -353,7 +366,7 @@ public class UserVo implements Serializable {
 	 * @param gender
 	 *            the gender to set
 	 */
-	public void setGender(int gender) {
+	public void setGender(Integer gender) {
 		this.gender = gender;
 	}
 

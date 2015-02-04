@@ -83,7 +83,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-				<h4 class="modal-title"><i class="fa fa-plus"></i> 系统参数添加</h4>
+				<h4 class="modal-title"><i class="fa fa-plus"></i><span>系统参数添加</span></h4>
 			</div>
 			<div class="modal-body">
 				 	<div class="row">

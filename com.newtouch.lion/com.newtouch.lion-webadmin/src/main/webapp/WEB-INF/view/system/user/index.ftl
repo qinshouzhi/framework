@@ -31,6 +31,8 @@
 <script src="${base}/resources/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js"></script>
 <script src="${base}/resources/admin/pages/scripts/ui-toastr.js"></script>
+<script src="${base}/resources/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+
 
 <!--EasyUI JavaScript Start-->
 <script src="${base}/resources/global/plugins/easyui/jquery.easyui.min.js" type="text/javascript"></script>
@@ -56,21 +58,21 @@
 	<div class="portlet-body">
 		<div class="row">
 			<div class="col-md-12 margin-bottom-10">
-				<form id="queryParameterform" class="form-horizontal">
-					<label class="control-label col-md-1" for="nameZh" >用户名</label>
+				<form id="queryform" class="form-horizontal">
+					<label class="control-label col-md-1" for="username" >用户名</label>
 					<div class="col-md-2">
-						<input class="form-control input-small" type="text" size="30" name="username" id="nameZh"  placeholder="请输入用户名称"/>					
+						<input class="form-control input-small" type="text" size="30" name="username" id="username"  placeholder="请输入用户名称"/>					
 					</div>
-					<label class="control-label col-md-1" for="nameZh" >员工号</label>
+					<label class="control-label col-md-1" for="queryEmployeeCode" >员工号</label>
 					<div class="col-md-2">
-						<input class="form-control input-small" type="text" size="30" name="username" id="nameZh"  placeholder="请输入用户名称"/>					
+						<input class="form-control input-small" type="text" size="30" name="employeeCode" id="queryEmployeeCode"  placeholder="请输入员工号称"/>					
 					</div>
-					<label class="control-label col-md-1" for="nameZh" >邮箱</label>
+					<label class="control-label col-md-1" for="queryemail" >邮箱</label>
 					<div class="col-md-2">
-						<input class="form-control input-small" type="text" size="30" name="username" id="nameZh"  placeholder="请输入用户名称"/>					
+						<input class="form-control input-small" type="text" size="30" name="email" id="queryemail"  placeholder="请输入邮箱称"/>					
 					</div>	
 					<div class="col-md-1">
-						<a href="javascript:void(0)" class="btn blue"><i class="fa fa-search"></i>
+						<a href="javascript:void(0)" class="btn blue" id="btnQuery"><i class="fa fa-search"></i>
 						 <@spring.message "common.query.btn.text"/> 
 						</a>
 					</div>
@@ -121,62 +123,73 @@
 		<div class="modal-content ">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-				<h4 class="modal-title"><i class="fa fa-plus"></i> 用户添加</h4>
+				<h4 class="modal-title"><i class="fa fa-plus"></i><span>添加用户</span></h4>
 			</div>
 			<div class="modal-body">
 				 	<div class="row">
 					 	<div class="col-md-12 portlet-body form">
 					 		<!-- BEGIN FORM-->
-									<form action="#" class="form-horizontal">
+									<form action="#" id="addform" class="form-horizontal">
+									    <input type="hidden" id='id' name='id' value="">
 										<div class="form-body">
 											<div class="form-group">
-												<label class="col-md-2 control-label">用户名</label>
-												<div class="col-md-3">
-													<div class="input-group">
-														<input type="text"  name="username"  maxlength="100" class="form-control" placeholder="请输入用户名" size="30"/>
+												<div class="form-filed">
+													<label class="col-md-2 control-label" for="username">用户名<i class="fa required">*</i></label>
+													<div class="col-md-3">
+														<div class="input-group">
+															<input type="text"  id="username" name="username"  maxlength="100" class="form-control" placeholder="请输入用户名" size="30"/>
+														</div>
 													</div>
 												</div>
-												<label class="col-md-2 control-label">员工号</label>
-												<div class="col-md-2">
-													<div class="input-group">
-														<input   type="text"  id="employeeCode" name="employeeCode" maxlength="100" class="form-control" placeholder="请输入员工号" size="30"/>
+												<div class="form-filed">
+													<label class="col-md-2 control-label" for="employeeCode">员工号</label>
+													<div class="col-md-2">
+														<div class="input-group">
+															<input   type="text"  id="employeeCode" name="employeeCode" maxlength="100" class="form-control" placeholder="请输入员工号" size="30"/>
+														</div>
 													</div>
 												</div>
+												<div class="form-filed">
 												<label class="col-md-1 control-label">性别</label>
-												<div class="col-md-2">
-													<div class="input-group radio-list">	
-															<label class="radio-inline">
-																<input type="radio" name="gender" id="gender0" value="0" checked>
-																男
-															</label>
-															<label class="radio-inline">
-																<input type="radio" name="gender" id="gender1" value="1">
-																 女 
-														    </label>
+													<div class="col-md-2">
+														<div class="input-group radio-list">	
+																<label class="radio-inline">
+																	<input type="radio" name="gender" id="gender0" value="0" checked>
+																	男
+																</label>
+																<label class="radio-inline">
+																	<input type="radio" name="gender" id="gender1" value="1">
+																	 女 
+															    </label>
+														</div>
 													</div>
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-md-2 control-label">邮箱</label>
-												<div class="col-md-4">
-													<div class="input-group">
-														<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入密码" size="30"/>
+												<div class="form-filed">
+													<label class="col-md-2 control-label" for="email">邮箱</label>
+													<div class="col-md-4">
+														<div class="input-group">
+															<input type="text"  id="email" name="email" maxlength="100" class="form-control" placeholder="请输入邮箱" size="30"/>
+														</div>
 													</div>
 												</div>
-												<label class="col-md-2 control-label">部门</label>
-												<div class="col-md-4">
-													<div class="input-group">
-														 <input  id="departmentId"  name="departmentId"  
-				 	  	  placeholder="请选择部门…"  type="text" 
-				 		  class="lion-combotree form-control input-small" value="1" data-loadURL="${base}/system/department/comboxtree.json" data-width="200px" data-height="300px"/>
+												<div class="form-filed">
+													<label class="col-md-2 control-label" for="departmentId">所属部门</label>
+													<div class="col-md-4">
+														<div class="input-group">
+															 <input  id="departmentId"  name="departmentId"  
+					 	  	  placeholder="请选择部门…"  type="text" 
+					 		  class="lion-combotree form-control"   data-loadURL="${base}/system/department/comboxtree.json" data-width="200px" data-height="300px"/>
+														</div>
 													</div>
 												</div>												
 											</div>								 
-											<div class="form-group">
+											<!--<div class="form-group">
 												<label class="col-md-2 control-label">密码</label>
 												<div class="col-md-4">
 													<div class="input-group">
-														<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入密码" size="30"/>
+														<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control"  placeholder="请输入密码" size="30"/>
 													</div>
 												</div>
 												<label class="col-md-2 control-label">确认密码</label>
@@ -185,12 +198,12 @@
 														<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入输入确认密码" size="30"/>
 													</div>
 												</div>												
-											</div>
+											</div>-->
 											<div class="form-group">									
 												<label class="col-md-2 control-label">密码有效期</label>
 												<div class="col-md-2">
 													<div class="input-group">
-														<input type="text" name="value" class="form-control" placeholder="请选择密码有效期" maxlength="255" size="30"/>
+														<input type="text" name="value" class="form-control" placeholder="请选择密码有效期" maxlength="10" size="20" readonly="true" value="${credentialExpiredDate!}" />
 													</div>
 												</div>
 												<label class="col-md-2 control-label">
@@ -200,7 +213,7 @@
 												<label class="col-md-2 control-label">账户有效期</label>
 												<div class="col-md-2">
 													<div class="input-group">
-														<input id="d11" type="text" class="form-control"  placeholder="请选择账户有效期"/>
+														<input id="d11" type="text" class="form-control"  placeholder="请选择账户有效期"  maxlength="10" size="20"  readonly="true"  value="${accountExpiredDate!}" />
 													</div>
 												</div>
 												<label class="col-md-2 control-label">

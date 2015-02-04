@@ -36,9 +36,22 @@ public interface UserService {
 	 * 
 	 * @param userName
 	 *            用户名
-	 * @return 登录密码
+	 * @return  用户对象
 	 */
 	public User doFindByUserName(String userName);
+	
+	/***
+	 * 根据员工号查找用户
+	 * @param String employeeCode  员工号
+	 * @return
+	 */
+	public User doFindByEmpolyeeCode(String employeeCode);
+	/***
+	 * 根据用户邮箱查找用户
+	 * @param String email 邮箱
+	 * @return User 用户对象
+	 */ 
+	public User doFindByEmail(String email);
 
 	/***
 	 * 

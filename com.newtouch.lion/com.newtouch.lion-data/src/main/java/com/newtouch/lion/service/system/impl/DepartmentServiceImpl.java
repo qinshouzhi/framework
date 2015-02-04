@@ -200,7 +200,6 @@ public class DepartmentServiceImpl extends AbstractService implements
 			if (departmentTemp.getDepartments().iterator().hasNext()) {
 				this.makeTreeChildren(departmentTemp);
 			}
-			log.info("departmentTemp.getNameEn():" + departmentTemp.getNameEn());
 			departmentTemp.getNameEn();
 		}
 	}
@@ -256,6 +255,23 @@ public class DepartmentServiceImpl extends AbstractService implements
 		return departmentsMap;
 	}
 	
+	
+	
+	
+	
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.DepartmentService#doFindDapartmentAll()
+	 */
+	@Override
+	public Map<Object, Object> doFindDapartmentAll() {
+		List<Department>  list=this.doFindAll();
+		Map<Object,Object> departmentsMap=new HashMap<Object, Object>();
+		for(Department department:list){
+			departmentsMap.put(department.getId(),department);
+		}
+		return departmentsMap;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

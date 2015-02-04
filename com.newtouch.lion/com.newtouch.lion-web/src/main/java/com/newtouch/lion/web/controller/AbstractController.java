@@ -61,7 +61,7 @@ public class AbstractController {
 		 * 自动转换日期类型的字段格式
 		 */
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(
-				new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"), true));
+				new SimpleDateFormat(DateUtil.FORMAT_DATETIME_YYYY_MM_DD_HH_MM_SS), true));
 		/**
 		 * 防止XSS攻击
 		 */

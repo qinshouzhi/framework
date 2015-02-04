@@ -6,8 +6,6 @@
  */
 package com.newtouch.lion.admin.web.controller.system.user;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,18 +39,50 @@ import com.newtouch.lion.service.system.UserService;
 public class UserAccountController {
 
 	private String ACTIVEUSERS_RETURN = "/system/user/activeusers";
-
+	/**用户服务类*/
 	@Autowired
 	private UserService userService;
-	//@Autowired
-	//private AccountUserService accountUserService;
 
+	/***
+	 * 检查员用户名是否已存在
+	 * @param employeeCode 用户名
+	 * @return 存在返回false,不存在则返回true
+	 */
 	@RequestMapping(value = "/checkusername")
 	@ResponseBody
-	public String checkIsExistByNameEn(HttpServletRequest servletRequest,
-			@RequestParam(required = false) String username) {
+	public Boolean checkIsExistByNameEn(@RequestParam(required = false) String username) {
+		if(StringUtils.isEmpty(username)){
+			return Boolean.FALSE;
+		}
 		Boolean flag = this.isExistByNameEn(username) == true ? false : true;
-		return flag.toString();
+		return flag;
+	}
+	
+	/***
+	 * 检查员工号是否已存在
+	 * @param employeeCode 员工号
+	 * @return  存在返回false,不存在则返回true
+	 */
+	@RequestMapping(value="/checkemployeecode")
+	@ResponseBody
+	public Boolean checkEmployeeCode(@RequestParam(required=false) String employeeCode){
+		if(StringUtils.isEmpty(employeeCode)){
+			return Boolean.FALSE;
+		}
+		return Boolean.TRUE;
+	}
+	/***
+	 * 检查邮箱是否已存在
+	 * @param email 邮箱
+	 * @return 存在返回false,不存在则返回true
+	 */
+	@RequestMapping(value="/checkemail")
+	@ResponseBody
+	public Boolean checkEmail(@RequestParam(required=false) String email){
+		if(StringUtils.isEmpty(email)){
+			return Boolean.FALSE;
+		}
+		return Boolean.TRUE;
 	}
 
 	private Boolean isExistByNameEn(String username) {

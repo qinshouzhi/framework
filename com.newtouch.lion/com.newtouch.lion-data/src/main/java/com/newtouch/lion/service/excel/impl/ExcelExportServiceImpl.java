@@ -46,6 +46,7 @@ import com.newtouch.lion.excpetion.ExcelException;
 import com.newtouch.lion.model.datagrid.DataColumn;
 import com.newtouch.lion.model.datagrid.DataGrid;
 import com.newtouch.lion.model.system.CodeList;
+import com.newtouch.lion.model.system.Department;
 import com.newtouch.lion.service.excel.ExcelExportService;
 
 /**
@@ -175,9 +176,9 @@ public class ExcelExportServiceImpl extends ExcelExport<Object>  implements Exce
 					String textValue = null;
 					/**默认为字符串*/
 					CellDataType dataType=CellDataType.STRING;
-					if(value instanceof String){
+					
+					if(!CollectionUtils.isEmpty(codeTypes)&&codeTypes.containsKey(fieldName)){
 						textValue=this.getCellValueForCodeList(fieldName, value, codeTypes);
-					 
 					}else if (value instanceof Boolean) {
 						textValue = this.getCellValueForBoolean(value, fieldName,codeTypes);
 						dataType=CellDataType.BOOLEAN;
@@ -189,18 +190,17 @@ public class ExcelExportServiceImpl extends ExcelExport<Object>  implements Exce
 						this.setCellForImage(sheet, patriarch, i, index, row, cell,value, rowStyle);
 					} else {
 						//其它数据类型都当作字符串简单处理
-						textValue = String.valueOf(value);
+						textValue = String.valueOf(value==null?StringUtils.EMPTY:value);
 					}
-					//判断是否全部由数字组成
-					if (StringUtils.isNotEmpty(textValue)) {
-						if (NumberUtils.isNumeric(textValue)) {
+					
+					if(value instanceof String && StringUtils.isNotEmpty(textValue)){
+						this.setCellForString(cell, textValue, rowStyle,dataType,dataColumn.getAlign());
+					}else if (StringUtils.isNotEmpty(textValue)&&NumberUtils.isNumeric(textValue)) {						 
 							dataType=CellDataType.NUMBER;
 							this.setCellForNumber(cell, textValue, rowStyle,dataType,dataColumn.getAlign());
-						} else {
-							this.setCellForString(cell, textValue, rowStyle,dataType,dataColumn.getAlign());
-						}
 					} else {
-						cell.setCellStyle(rowStyle);
+						textValue=(StringUtils.isEmpty(textValue)?StringUtils.EMPTY:textValue);
+						this.setCellForString(cell,textValue, rowStyle,dataType,dataColumn.getAlign());
 					}
 				}
 			}
@@ -307,6 +307,10 @@ public class ExcelExportServiceImpl extends ExcelExport<Object>  implements Exce
 	 */
 	protected String getCellValueForCodeList(String fieldName,Object value,Map<String,Map<Object,Object>> codeTypes){
 		String filedValue=String.valueOf(value);
+		if(value instanceof Department){
+			 Department department=(Department) value;
+			 return department.getNameZh();
+		}
 		if(!CollectionUtils.isEmpty(codeTypes)&&codeTypes.containsKey(fieldName)){
 			 Map<Object,Object>  codeLists=codeTypes.get(fieldName);
 			 if(!CollectionUtils.isEmpty(codeLists)&&codeLists.containsKey(filedValue)){

@@ -208,6 +208,15 @@
        });
        return oparams;
     };
+
+
+    $.fn.reset=function(){
+        var $this=this;
+        $this[0].reset();
+        $this.find('.form-group').removeClass('has-error');
+        $this.find('.form-filed').removeClass('has-error');
+        $this.find('.help-block').remove();
+    };
 	
 	$.fill = new Fill();
 

@@ -7,7 +7,7 @@ $(function() {
 	var datagridId='#sys_parameter_lists_tb';
 
 	var addForm=$('#sysParameterForm');
-    var queryForm=$('#queryform');
+  var queryForm=$('#queryform');
 	var addDialog=$('#basic');
 	
 	
@@ -42,6 +42,7 @@ $(function() {
 		  addForm[0].reset();
 		  addForm.find('.form-group').removeClass('has-error');
 		  addForm.find('.help-block').remove();
+      addDialog.find('.modal-header h4 span').text('添加系统参数');
 		  $('.lion-combo').combo('reloadLi');
 	 });
 
@@ -63,7 +64,7 @@ $(function() {
      addForm[0].reset();
      addForm.find('.form-group').removeClass('has-error');
      addForm.find('.help-block').remove();
-     addDialog.find('.modal-header h4').text('系统参数编辑');
+     addDialog.find('.modal-header h4 span').text('编辑系统参数');
 		 addDialog.modal('toggle');
 		 addForm.fill(row);
 	 });
@@ -95,7 +96,6 @@ $(function() {
        if(lion.util.isNotEmpty(params)){
           url+='&'+params;
        }
-       console.dir(url);
        window.open(url,'_blank');
 	 });
 });
