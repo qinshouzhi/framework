@@ -215,7 +215,10 @@ public class DepartmentServiceImpl extends AbstractService implements
 		List<Department> departments = this.doFindFirstLevel();
 		Set<String> properties = new HashSet<String>();
 		properties.add("id");
+		properties.add("nameEn");
 		properties.add("nameZh");
+		properties.add("description");
+		properties.add("departmentNo");
 		properties.add("departments");
 		return JSONParser.toJSONString(departments, properties);
 	}
@@ -231,9 +234,8 @@ public class DepartmentServiceImpl extends AbstractService implements
 	public String doFindAll(String tableId) {
 		Set<String> properties = this.dataColumnService
 				.doFindColumnsByTableId(tableId);
-		List<Department> departments = this.doFindAll();
-		String jsonStr = JSONParser.toJSONDataGridString(departments,
-				properties);
+		List<Department> departments = this.doFindFirstLevel();
+		String jsonStr = JSONParser.toJSONDataGridString(departments,properties);
 		return jsonStr.replace("parentDepartmentId", "_parentId");
 	}
 	

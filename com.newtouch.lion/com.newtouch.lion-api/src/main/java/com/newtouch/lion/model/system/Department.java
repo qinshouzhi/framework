@@ -78,7 +78,7 @@ public class Department extends VersionEntity<Long> {
 	}
 
 	/**
-	 * @return the departmentNO
+	 * @return the departmentNo
 	 */
 
 	public String getDepartmentNo() {

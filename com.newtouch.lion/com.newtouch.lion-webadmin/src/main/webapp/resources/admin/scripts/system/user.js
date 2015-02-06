@@ -8,10 +8,10 @@ $(function() {
 	var datagridId='#userlist_dt';
 
 	var addForm=$('#addform');
-  	var queryForm=$('#queryform');
+  var queryForm=$('#queryform');
 	var addDialog=$('#basic');
 
-	//验证菜单
+	//验证表单
 	handleVForm(addForm,submitForm);
 
 	//选择DataGrid单行
@@ -49,9 +49,10 @@ $(function() {
 			 return;
 		 }
  		 addForm.reset();
-     	 addDialog.find('.modal-header h4 span').text('编辑用户');
+     addDialog.find('.modal-header h4 span').text('编辑用户');
 		 addDialog.modal('toggle');
 		 addForm.fill(row);
+		 $("#departmentId").combotree('val',$("#departmentId").val());
 	 });
 	 //删除
 	$('#btnDelete').on('click',function(){
