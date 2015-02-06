@@ -215,6 +215,7 @@ public class DepartmentServiceImpl extends AbstractService implements
 		List<Department> departments = this.doFindFirstLevel();
 		Set<String> properties = new HashSet<String>();
 		properties.add("id");
+		properties.add("parentDepartmentId");
 		properties.add("nameEn");
 		properties.add("nameZh");
 		properties.add("description");

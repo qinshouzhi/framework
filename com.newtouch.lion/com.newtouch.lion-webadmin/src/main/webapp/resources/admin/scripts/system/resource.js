@@ -5,15 +5,15 @@ $(function() {
 	Tasks.initDashboardWidget(); // init tash dashboard widget
 	
 	var datagridId='#sys_resource_lists_tb';
-	var addForm=$('#sysAppPropertyForm');
+	var addForm=$('#addform');
 	var addDialog=$('#basic');
 	var queryForm=$('#queryform');
 	
 	handleVForm(addForm,submitForm);
 	//选择DataGrid单行
-	function getSelectedRow(){return $(datagridId).datagrid('getSelected');}
+	function getSelectedRow(){return $(datagridId).treegrid('getSelected');}
 	 
-	$(datagridId).datagrid({
+	$(datagridId).treegrid({
 		 onLoadSuccess : function(data) {
 		}
 	});
@@ -22,7 +22,7 @@ $(function() {
 	 * [查询]
 	 */
 	 $('#btnQuery').click(function(){
-		 var queryParams = $(datagridId).datagrid('options').queryParams;
+		 var queryParams = $(datagridId).treegrid('options').queryParams;
 		 var params=queryForm.serializeObject();
 	      $.extend(queryParams,params);
 	      //重新加载数据
@@ -32,7 +32,7 @@ $(function() {
 	 
 	//重新加载DataGrid
 	  function dataGridReload(dataGridId){
-	     $(datagridId).datagrid('reload');
+	     $(datagridId).treegrid('reload');
 	  }
 	 //刷新
 	 $('#btnRefresh').on('click',function(){
@@ -92,7 +92,7 @@ $(function() {
 function successForDelete(data,arg){
    if(data!==null&&!(data.hasError)){
       lion.util.success('提示',data.message);
-      $('#sys_resource_lists_tb').datagrid('reload');
+      $('#sys_resource_lists_tb').treegrid('reload');
    }else if(data!==null&&data.hasError){
       var gmsg='';
       for(var msg in data.errorMessage){
@@ -121,7 +121,7 @@ function successAddFrm(data,arg,id){
   if(data!==null&&!(data.hasError)){
   	lion.util.success('提示',data.message);
   	$('#basic').modal('toggle');
-  	$('#sys_resource_lists_tb').datagrid('reload');
+  	$('#sys_resource_lists_tb').treegrid('reload');
   }else if(data!==null&&data.hasError){
   	var gmsg='';
   	for(var msg in data.errorMessage){
@@ -138,6 +138,27 @@ function successAddFrm(data,arg,id){
 //请求失败后信息
 function errorRequest(data,arg){
 	lion.util.error('提示','网络连接异常');
+}
+//判断是否编辑
+function formatterEidtable(val,row) {
+  var name =$.loin.lang.editable.n;
+  if (val) {
+    name = $.loin.lang.editable.y;
+  }
+  return name;
+}
+/**sys_code_type 加载列表*/
+function formatterCodeResource(val, row) {
+  var data =$("#sysresourcetype").combo('getData');
+  console.dir(data);
+  var nameZh = "";
+  for ( var obj in data) {
+    if (data[obj].codeValue == val) {
+      nameZh = data[obj].nameZh;
+      break;
+    }
+  }
+  return nameZh;
 }
 
 //验证表单

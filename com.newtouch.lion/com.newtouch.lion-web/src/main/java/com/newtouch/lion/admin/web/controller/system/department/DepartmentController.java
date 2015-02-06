@@ -27,10 +27,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.department.DepartmentVo;
+import com.newtouch.lion.admin.web.model.system.user.UserVo;
+import com.newtouch.lion.common.date.DateUtil;
+import com.newtouch.lion.common.file.FileUtil;
+import com.newtouch.lion.model.datagrid.DataGrid;
 import com.newtouch.lion.model.system.Department;
+import com.newtouch.lion.query.QueryCriteria;
+import com.newtouch.lion.service.datagrid.DataGridService;
+import com.newtouch.lion.service.excel.ExcelExportService;
 import com.newtouch.lion.service.system.ExtendDepartmentService;
 import com.newtouch.lion.web.constant.ConstantMessage;
 import com.newtouch.lion.web.controller.AbstractController;
+import com.newtouch.lion.web.model.QueryVo;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
 import com.newtouch.lion.ztree.TreeNode;
@@ -61,34 +69,16 @@ public class DepartmentController extends AbstractController{
 	private static final String INDEX_RETURN = "/system/department/index";
 	
 	@SuppressWarnings("unused")
-	private static final String INDEX_LISTS_TB = "sys_department_lists";
-
-	private static final String ADD_DIALOG_RETURN = "/system/department/adddialog";
-
-	private static final String EDIT_DIALOG_RETURN = "/system/department/editdialog";
-
+	private static final String INDEX_LISTS_TB = "sys_department_lists";	 
+	/**部门扩展*/
 	@Autowired
 	private ExtendDepartmentService  extendDepartmentService;
-
-	@RequestMapping("adddialog")
-	public String addAdialog(Model model,
-			@RequestParam(required = false) Long parentId) {
-		model.addAttribute("parentId", parentId);
-		return ADD_DIALOG_RETURN;
-	}
-
-	@RequestMapping("editdialog")
-	public String editDialog(Model model,
-			@RequestParam(required = false) Long id) {
-		if (id != null) {
-			Department department = this.extendDepartmentService
-					.doFindDepartmentById(id);
-			model.addAttribute("department", department);
-		} else {
-			logger.error("Eidt Object id is not null!");
-		}
-		return EDIT_DIALOG_RETURN;
-	}
+	/**Excel通用导出*/
+	@Autowired
+	private ExcelExportService excelExportService;
+	/**DataGrid表格*/
+	@Autowired
+	private DataGridService dataGridService;
 
 	@RequestMapping(value = "add")
 	@ResponseBody
@@ -97,7 +87,7 @@ public class DepartmentController extends AbstractController{
 			Errors errors, ModelAndView modelAndView) {
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
-			return modelAndView;
+			return this.getJsonView(modelAndView);
 		}
 		Department department = new Department();
 		BeanUtils.copyProperties(departmentVo, department);
@@ -105,7 +95,7 @@ public class DepartmentController extends AbstractController{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		return this.getJsonView(modelAndView);
 	}
 
 	@RequestMapping(value = "edit")
@@ -126,7 +116,7 @@ public class DepartmentController extends AbstractController{
 
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
-			return modelAndView;
+			return this.getJsonView(modelAndView);
 		}
 		BeanUtils.copyProperties(departmentVo, department);
 		this.extendDepartmentService.doUpdate(department);
@@ -134,12 +124,13 @@ public class DepartmentController extends AbstractController{
 		params.put(BindResult.SUCCESS,
 				ConstantMessage.EDIT_SUCCESS_MESSAGE_CODE);
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		return this.getJsonView(modelAndView);
 	}
 
 	@RequestMapping(value = "delete")
 	@ResponseBody
 	public ModelAndView delete(@RequestParam Long id, ModelAndView modelAndView) {
+		logger.info("delete id:{}",id);
 		Map<String, String> params = new HashMap<String, String>();
 		Department department = this.extendDepartmentService.doDelete(id);
 		if (department != null) {
@@ -150,18 +141,62 @@ public class DepartmentController extends AbstractController{
 					ConstantMessage.DELETE_FAIL_MESSAGE_CODE);
 		}
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		return this.getJsonView(modelAndView);
 	}
-
+	
 	@RequestMapping("list")
 	@ResponseBody
 	public  ModelAndView lists(ModelAndView modelAndView) {			
 		String str=this.extendDepartmentService.doFindFirstLevelToTree();
-		str=str.replace("departments","children");
-		logger.info("str:{}",str);
+		str=str.replace("departments","children").replace("parentDepartmentId", "_parentId");
 		return this.getStrJsonView(str, modelAndView);
 	}
+	/****
+	 * 
+	 * @param tableId
+	 * @param parameterVo
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value = "export")
+	@ResponseBody
+	public ModelAndView exportExcel(@ModelAttribute("queryVo")QueryVo queryVo,@ModelAttribute("department") DepartmentVo departmentVo,Errors errors, ModelAndView modelAndView){
+				
+		DataGrid dataGrid=dataGridService.doFindByTableIdAndSort(queryVo.getTableId());
+		QueryCriteria queryCriteria=new QueryCriteria();
+		queryCriteria.setPageSize(10000);
+	 
+		// 设置分页 启始页
+		queryCriteria.setStartIndex(queryVo.getRows() * (queryVo.getPage() - 1));
+		// 每页大小
+		queryCriteria.setPageSize(queryVo.getRows());	 
+	 
 
+	    List<Department> result=this.extendDepartmentService.doFindAll();
+		Map<String, Map<Object, Object>> fieldDepartment= new HashMap<String, Map<Object, Object>>();
+		fieldDepartment.put("department",null);
+
+		Map<String, String> dataFormats = new HashMap<String, String>();		
+		dataFormats.put("accountExpiredDate", DateUtil.FORMAT_DATE_YYYY_MM_DD);
+		//创建.xls的文件名
+		String fileName=this.createFileName(FileUtil.EXCEL_EXTENSION);
+		
+		modelAndView.addObject("title", dataGrid.getTitle());
+		
+		Long startTime=System.currentTimeMillis();
+		
+		fileName=excelExportService.export(dataGrid, result,fileName,fieldDepartment,dataFormats);
+		
+		logger.info("fileName:{}",fileName);
+		
+		Long costTime=System.currentTimeMillis()-startTime;
+		
+		modelAndView.addObject(FILENAME,fileName);
+		
+		logger.info("export Excel {} cost:{} time,fileName:{}",dataGrid.getTitle(),costTime,fileName);
+		logger.info("out Excel导出");
+		return this.getExcelView(modelAndView);
+	}
 	@RequestMapping("comboxtree")
 	@ResponseBody
 	public List<TreeNode> comboxTree() {

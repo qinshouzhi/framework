@@ -288,8 +288,7 @@
 	       			actualHeight=this.options.height||this.$button.outerHeight(),
 	       			thatpos=this.$newElement.offset(),
 	       			outerWidth=this.options.width||this.$element[0].offsetWidth;
-	       			console.dir(actualHeight);
-	       		this.$newElement.css({
+	      	       	this.$newElement.css({
                 'top':'0px',
                 'width':outerWidth,
                 'height':this.$button.outerHeight(),

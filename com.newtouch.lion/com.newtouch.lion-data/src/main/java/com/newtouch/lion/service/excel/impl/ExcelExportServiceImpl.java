@@ -66,7 +66,7 @@ import com.newtouch.lion.service.excel.ExcelExportService;
  * @author WangLijun
  * @version 1.0
  */
-@Service
+@Service("excelExportService")
 public class ExcelExportServiceImpl extends ExcelExport<Object>  implements ExcelExportService{
 	
 	/** 日志 */

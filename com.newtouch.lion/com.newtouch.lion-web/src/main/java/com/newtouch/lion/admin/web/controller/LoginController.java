@@ -31,7 +31,7 @@ import com.newtouch.lion.web.shiro.session.LoginSecurityUtil;
  * @author WangLijun
  * @version 1.0
  */
-@Controller("adminLoginController")
+@Controller("adminLoginController1")
 public class LoginController extends AbstractController {
 	/** 进入登录页面 */
 	private static final String LOGIN_RETURN = "/login";

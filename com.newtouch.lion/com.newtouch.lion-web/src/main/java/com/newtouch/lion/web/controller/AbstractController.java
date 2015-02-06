@@ -19,7 +19,6 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -82,7 +81,7 @@ public class AbstractController {
 	 * @param view 名称(不加后缀)
 	 * @return 指定view页面
 	 */
-	@RequestMapping("/{folder}/{jspName}")
+	//@RequestMapping("/{folder}/{jspName}")
 	public String redirectJsp(@PathVariable String folder,
 			@PathVariable String jspName) {
 		return "/" + folder + "/" + jspName;

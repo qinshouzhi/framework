@@ -26,6 +26,10 @@ $(function() {
 	 $('#btnAdd').on('click',function(){
 		 addForm.reset();
 	 	 addDialog.find('.modal-header h4 span').text('添加部门');
+	 	 var row=getSelectedRow();
+		 if(row){
+			 $("#parentDepartmentId").combotree('val',row.id);
+		 }
 		 return;
 	 });
 	 //保存方法
@@ -44,7 +48,7 @@ $(function() {
     	 addDialog.find('.modal-header h4 span').text('编辑部门');
 		 addDialog.modal('toggle');
 		 addForm.fill(row);
-		 $("#parentDepartmentId").combotree('val',$("#parentDepartmentId").val());
+		 $("#parentDepartmentId").combotree('val',row._parentId);
 	 });
 	  //删除
 	$('#btnDelete').on('click',function(){
@@ -62,8 +66,8 @@ $(function() {
 	 });
 	 //导出Excel
 	 $('#btnExport').on('click',function(){
-		   var params=queryForm.serialize(),url='export.json?tableId='+$(datagridId).attr('id');
-	       var options=$(datagridId).datagrid('options');       
+		     var params=queryForm.serialize(),url='export.json?tableId='+$(treegridId).attr('id');
+	       var options=$(treegridId).treegrid('options');       
 	       if(options.hasOwnProperty('sortName')&&lion.util.isNotEmpty(options.sortName)){
 	           url+='&sort='+options.sortName;
 	       }
@@ -76,10 +80,45 @@ $(function() {
 	       window.open(url,'_blank');
 	 });		
 });
+/**新增或编辑的提交代码*/
+function submitForm(frm){
+	var param=frm.serialize(),id=($('#id').val());
+  //ID为空时，为添加动作
+  if(lion.util.isEmpty(id)){
+ 	    lion.util.post('add.json',param,successAddFrm,errorRequest);
+  }else{
+      lion.util.post('edit.json',param,successAddFrm,errorRequest,param.id);
+  }
+}
+
+//添加后&编辑后提交
+function successAddFrm(data,arg,id){
+  //TODO
+  if(data!==null&&!(data.hasError)){
+  	lion.util.success('提示',data.message);
+  	$('#basic').modal('toggle');
+    $('#sys_department_lists').treegrid('reload');
+  }else if(data!==null&&data.hasError){
+  	var gmsg='';
+  	for(var msg in data.errorMessage){
+  		gmsg+=data.errorMessage[msg];
+  	}
+  	if(lion.util.isEmpty(gmsg)){
+  		gmsg='添加用户失败';
+  	}
+  	lion.util.error('提示',gmsg);
+  }else{
+  	lion.util.error('提示','添加用户失败');
+  }
+}
+//请求失败后信息
+function errorRequest(data,arg){
+	lion.util.error('提示','网络连接异常');
+}
 function successForDelete(data,arg){
    if(data!==null&&!(data.hasError)){
       lion.util.success('提示',data.message);
-      $('#sys_department_lists').datagrid('reload');
+      $('#sys_department_lists').treegrid('reload');
    }else if(data!==null&&data.hasError){
       var gmsg='';
       for(var msg in data.errorMessage){
@@ -143,41 +182,7 @@ handleVForm=function(vForm,submitCallBackfn){
     });
 };
 
-/**新增或编辑的提交代码*/
-function submitForm(frm){
-	var param=frm.serialize(),id=($('#id').val());
-  //ID为空时，为添加动作
-  if(lion.util.isEmpty(id)){
- 	    lion.util.post('add.json',param,successAddFrm,errorRequest);
-  }else{
-      lion.util.post('edit.json',param,successAddFrm,errorRequest,param.id);
-  }
-}
 
-//添加后&编辑后提交
-function successAddFrm(data,arg,id){
-  //TODO
-  if(data!==null&&!(data.hasError)){
-  	lion.util.success('提示',data.message);
-  	$('#basic').modal('toggle');
-    $('#sys_department_lists').datagrid('reload');
-  }else if(data!==null&&data.hasError){
-  	var gmsg='';
-  	for(var msg in data.errorMessage){
-  		gmsg+=data.errorMessage[msg];
-  	}
-  	if(lion.util.isEmpty(gmsg)){
-  		gmsg='添加用户失败';
-  	}
-  	lion.util.error('提示',gmsg);
-  }else{
-  	lion.util.error('提示','添加用户失败');
-  }
-}
-//请求失败后信息
-function errorRequest(data,arg){
-	lion.util.error('提示','网络连接异常');
-}
 
 //判断是否编辑
 function formatterEidtable(val,row) {

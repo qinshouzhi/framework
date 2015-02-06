@@ -38,16 +38,14 @@ public class ExtendDepartmentServiceImpl extends DepartmentServiceImpl implement
 	 * @see com.newtouch.lion.service.system.DepartmentService#doFindDepartmentToTree()
 	 */
 	@Override
-	public List<TreeNode> doFindDepartmentToTree() {
-		//List<Department> departments = this.doFindFirstLevel();		
-		//Map<Long,Department> departmentsMap=this.convertToMap(departments);
+	public List<TreeNode> doFindDepartmentToTree() {		
 		
 		List<TreeNode> list=new ArrayList<TreeNode>();
 		
 		List<Department>  departmentsAll=this.doFindAll();
 		for(Department department:departmentsAll){
 			TreeNode node=null;
-			if(department.getParentDepartmentId()==null||department.equals(0L)){
+			if(department.getParentDepartmentId()==null||department.getParentDepartmentId().equals(0L)){
 				node=new TreeNode(department.getId(),0L,department.getNameZh(),Boolean.TRUE);
 			}else{
 				node=new TreeNode(department.getId(),department.getParentDepartmentId(),department.getNameZh(),Boolean.FALSE);

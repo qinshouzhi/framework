@@ -230,8 +230,11 @@ public class ResourceServiceImpl extends AbstractService implements
 	@Override
 	public String doFindAllToTree(String tableId) {
 		Set<String> properties=this.dataColumnService.doFindColumnsByTableId(tableId);
-		List<Resource> resources=this.doFindAll();
-		String jsonStr=JSONParser.toJSONDataGridString(resources, properties);
+		List<Resource> resources=this.doFindFirstLevel();
+		for(Resource resource:resources){
+			resource.getResources();
+		}
+		String jsonStr=JSONParser.toJSONString(resources, properties);
 		return jsonStr.replace("parentResourceId", "_parentId");
 	}
 

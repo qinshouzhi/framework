@@ -208,8 +208,8 @@ public class Department extends VersionEntity<Long> {
 	}
 
 	/**
-	 * @param departmentNO
-	 *            the departmentNO to set
+	 * @param departmentNo
+	 *            the departmentNo to set
 	 */
 	public void setDepartmentNo(String departmentNo) {
 		this.departmentNo = departmentNo;
