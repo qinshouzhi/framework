@@ -81,7 +81,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-				<h4 class="modal-title"><i class="fa fa-plus"></i> <@spring.message "sys.codeType.form.adddialog.message"/></h4>
+				<h4 class="modal-title"><i class="fa fa-plus"></i> <span><@spring.message "sys.codeType.form.adddialog.text"/></span></h4>
 			</div>
 			<div class="modal-body">
 				 	<div class="row">

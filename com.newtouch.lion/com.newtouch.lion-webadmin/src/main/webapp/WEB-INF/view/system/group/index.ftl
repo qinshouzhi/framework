@@ -76,7 +76,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-				<h4 class="modal-title"><i class="fa fa-plus"></i> <@spring.message "sys.group.form.adddialog.text"/></h4>
+				<h4 class="modal-title"><i class="fa fa-plus"></i> <span><@spring.message "sys.group.form.adddialog.text"/></span></h4>
 			</div>
 			<div class="modal-body">
 				 	<div class="row">
@@ -110,10 +110,10 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label"><@spring.message "sys.group.form.editable.text"/></label>
-													<div class="col-md-5 control-label">
+													<div class="col-md-8 control-label">
 														<div class="input-group">
-															<input type="checkbox" class="form-control "  name="editable" checked="true" />
+															<@spring.message "sys.group.form.editable.text"/>
+															<input type="checkbox" class="form-control" name="editable" checked="true" />
 														</div>
 													</div>
 												</div>
