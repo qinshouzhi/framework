@@ -99,6 +99,8 @@ public class DataGridVo implements Serializable {
 	private Long pageSize = 15L;
 	/** When set pagination property, initialize the page size selecting list. */
 	private String pageList;
+	/** When request remote data, sending additional parameters also. */
+	private String queryParams;
 	/** Defines which column can be sorted. */
 	private String sortName;
 	/** Defines the column sort order, can only be 'asc' or 'desc'. */
@@ -139,6 +141,8 @@ public class DataGridVo implements Serializable {
 	private String loadFilter;
 	/** Defines the editor when editing a row. */
 	private String editors;
+	/** Defines the view of datagrid. */
+	private String view;
 
 	/**
 	 * @return the id
@@ -648,6 +652,34 @@ public class DataGridVo implements Serializable {
 	 */
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	/**
+	 * @return the queryParams
+	 */
+	public String getQueryParams() {
+		return queryParams;
+	}
+
+	/**
+	 * @param queryParams the queryParams to set
+	 */
+	public void setQueryParams(String queryParams) {
+		this.queryParams = queryParams;
+	}
+
+	/**
+	 * @return the view
+	 */
+	public String getView() {
+		return view;
+	}
+
+	/**
+	 * @param view the view to set
+	 */
+	public void setView(String view) {
+		this.view = view;
 	}
 
 }

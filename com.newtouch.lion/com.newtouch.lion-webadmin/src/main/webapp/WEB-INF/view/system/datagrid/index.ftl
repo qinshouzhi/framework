@@ -73,7 +73,7 @@
 				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> <@spring.message "common.toolbar.btn.export.text"/> </a>
 			</div>
 			<div class="col-md-12">
-				 <@lion.datagrids name="datagrid_dt" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/datagrid/list.htm" dataOptions="" style="height:400px;"/>	
+				 <@lion.datagrids name="datagrid_dt" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/datagrid/list.json" dataOptions="" style="height:400px;"/>	
 			</div>
 		</div>
 	</div>
@@ -117,7 +117,7 @@
 												</div>
 												<div class="col-md-3">
 													<@spring.message "sys.datagrid.form.showTitle.text"/>
-													<input type="checkbox" class="form-control "  name="showTitle" />
+													<input type="checkbox" class="form-control "  name="showTitle" checked/>
 												</div>
 											</div>
 											<div class="form-group">
@@ -192,7 +192,7 @@
 												</div>
 												<div class="col-md-2 control-label">
 													<@spring.message "sys.datagrid.form.remoteSort.text"/>
-													<input type="checkbox" class="form-control "  name="remoteSort" />
+													<input type="checkbox" class="form-control "  name="remoteSort" checked/>
 												</div>
 												<label class="col-md-1 control-label"><@spring.message "sys.datagrid.form.sortOrder.text"/></label>
 												<div class="col-md-3">
@@ -223,11 +223,11 @@
 												</div>
 												<div class="col-md-2">
 													<@spring.message "sys.datagrid.form.showHeader.text"/>
-													<input type="checkbox" class="form-control "  name="showHeader" />
+													<input type="checkbox" class="form-control "  name="showHeader" checked/>
 												</div>
 												<div class="col-md-3">
 													<@spring.message "sys.datagrid.form.showFooter.text"/>
-													<input type="checkbox" class="form-control "  name="showFooter" />
+													<input type="checkbox" class="form-control "  name="showFooter" checked/>
 												</div>
 											</div>		
 											<div class="form-group">
@@ -259,49 +259,49 @@
 											<div class="form-group">
 												<div class="col-md-2">
 													<@spring.message "sys.datagrid.form.fit.text"/>
-													<input type="checkbox" class="form-control "  name="fit" />
+													<input type="checkbox" class="form-control "  name="fit" checked/>
 												</div>												
 												<div class="col-md-2">
 													<@spring.message "sys.datagrid.form.frozen.text"/>
-													<input type="checkbox" class="form-control "  name="frozen" />
+													<input type="checkbox" class="form-control "  name="frozen" checked/>
 												</div>												
 												<div class="col-md-2">
 													<@spring.message "sys.datagrid.form.showGroup.text"/>
-													<input type="checkbox" class="form-control "  name="showGroup" />
+													<input type="checkbox" class="form-control "  name="showGroup" checked/>
 												</div>												
 												<div class="col-md-2">
 													<@spring.message "sys.datagrid.form.pagination.text"/>
-													<input type="checkbox" class="form-control "  name="pagination" />
+													<input type="checkbox" class="form-control "  name="pagination" checked/>
 												</div>												
 												<div class="col-md-2">
 													<@spring.message "sys.datagrid.form.fitColumns.text"/>
-													<input type="checkbox" class="form-control "  name="fitColumns" />
+													<input type="checkbox" class="form-control "  name="fitColumns" checked/>
 												</div>												
 												<div class="col-md-2">
 													<@spring.message "sys.datagrid.form.striped.text"/>
-													<input type="checkbox" class="form-control "  name="Striped" />
+													<input type="checkbox" class="form-control "  name="Striped" checked/>
 												</div>	
 											</div>	
 											<div class="form-group">
 												<div class="col-md-2">
 													<@spring.message "sys.datagrid.form.nowrap.text"/>
-													<input type="checkbox" class="form-control "  name="nowrap" />
+													<input type="checkbox" class="form-control "  name="nowrap" checked/>
 												</div>
 												<div class="col-md-2">
 													<@spring.message "sys.datagrid.form.rownumbers.text"/>
-													<input type="checkbox" class="form-control "  name="rownumbers" />
+													<input type="checkbox" class="form-control "  name="rownumbers" checked/>
 												</div>
 												<div class="col-md-2">
 													<@spring.message "sys.datagrid.form.singleSelect.text"/>
-													<input type="checkbox" class="form-control "  name="singleSelect" />
+													<input type="checkbox" class="form-control "  name="singleSelect" checked/>
 												</div>
 												<div class="col-md-2">
 													<@spring.message "sys.datagrid.form.checkOnSelect.text"/>
-													<input type="checkbox" class="form-control "  name="checkOnSelect" />
+													<input type="checkbox" class="form-control "  name="checkOnSelect" checked/>
 												</div>
 												<div class="col-md-2">
 													<@spring.message "sys.datagrid.form.selectOnCheck.text"/>	
-													<input type="checkbox" class="form-control "  name="selectOnCheck" />
+													<input type="checkbox" class="form-control "  name="selectOnCheck" checked/>
 												</div>
 											</div>															
 										</div>								 

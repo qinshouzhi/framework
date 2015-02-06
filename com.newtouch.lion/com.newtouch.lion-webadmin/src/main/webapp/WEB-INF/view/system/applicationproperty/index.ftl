@@ -43,13 +43,13 @@
 		<div class="row">
 			<div class="col-md-12 margin-bottom-10">
 				<form id="queryform" class="form-horizontal">
-					<label class="control-label col-md-2" for="appId" >appId</label>
-					<div class="col-md-3">
-						<input class="form-control input-small" type="text" size="30" name="appId" id="appId"  placeholder="请输入appId"/>					
+					<label class="control-label col-md-2" for="nameZh" ><@spring.message "sys.applicationProperty.query.appId.text"/></label>
+					<div class="col-md-2">
+						<input class="form-control input-small" type="text" size="30" name="appId" id="appId"  placeholder="<@spring.message "sys.applicationProperty.query.appId.missing.message"/>"/>					
 					</div>
-					<label class="control-label col-md-2" for="value" >value</label>
+					<label class="control-label col-md-2" for="type" ><@spring.message "sys.applicationProperty.query.value.text"/></label>
 					<div class="col-md-3">
-						<input class="form-control input-small" type="text" size="30" name="value" id="value"  placeholder="请输入value"/>					
+						<input class="form-control input-small" type="text" size="30" name="value" id="value"  placeholder="<@spring.message "sys.applicationProperty.query.value.missing.message"/>"/>					
 					</div>
 					<div class="col-md-2">
 						<a href="javascript:void(0)" id="btnQuery" class="btn blue"><i class="fa fa-search"></i> <@spring.message "common.query.btn.text"/> </a>
@@ -65,7 +65,7 @@
 				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> <@spring.message "common.toolbar.btn.export.text"/> </a>
 			</div>
 			<div class="col-md-12">
-				 <@lion.datagrids name="sys_app_property_list_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/applicationproperty/list.htm" dataOptions="" style="height:400px;"/>	
+				 <@lion.datagrids name="sys_app_property_list_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/applicationproperty/list.json" dataOptions="" style="height:400px;"/>	
 			</div>
 		</div>
 	</div>

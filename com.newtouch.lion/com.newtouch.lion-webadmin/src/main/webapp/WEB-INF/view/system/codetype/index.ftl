@@ -52,7 +52,7 @@
 						<select  id="CodeTypeList"  name="type" data-size="8" 
 						 	data-maxoptions="1"   multiple placeholder="<@spring.message "sys.codeType.form.type.missing.message"/>..."  
 						 	class="lion-combo bootstrap-select form-control input-small" data-valueField='codeValue' 
-						 	data-textField='nameZh' data-loadURL="${base}/system/code/combox.htm?nameEn=codeTypes">
+						 	data-textField='nameZh' data-loadURL="${base}/system/code/combox.json?nameEn=codeTypes">
 						 </select>
 					</div>
 					<div class="col-md-2">
@@ -69,7 +69,7 @@
 				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> <@spring.message "common.toolbar.btn.export.text"/> </a>
 			</div>
 			<div class="col-md-12">
-				  <@lion.datagrids name="sys_codetype_lists_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/codetype/list.htm" dataOptions="" style="height:400px;"/>
+				  <@lion.datagrids name="sys_codetype_lists_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/codetype/list.json" dataOptions="" style="height:400px;"/>
 			</div>
 		</div>
 	</div>

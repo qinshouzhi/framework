@@ -69,7 +69,7 @@
 				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> <@spring.message "common.toolbar.btn.export.text"/> </a>
 			</div>
 			<div class="col-md-12">
-				 <@lion.datagrids name="datacolumn_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/datacolumn/list.htm" dataOptions="" style="height:400px;"/>	
+				 <@lion.datagrids name="datacolumn_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/datacolumn/list.json" dataOptions="" style="height:400px;"/>	
 			</div>
 		</div>
 	</div>
