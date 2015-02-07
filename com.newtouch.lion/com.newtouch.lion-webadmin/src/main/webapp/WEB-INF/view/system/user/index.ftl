@@ -278,8 +278,8 @@
 												<th class="table-checkbox">
 													<input type="checkbox" class="group-checkable" data-set="#sample_3.checkboxes"/>
 												</th>
-												<th>用户组名称(中文)</th>
-												<th>用户组名称(英文)</th>
+												<th>角色名称(中文)</th>
+												<th>角色名称(英文)</th>
 												<th>描述</th>
 											</tr>
 											</thead>
@@ -466,9 +466,9 @@
 									 	<th class="table-checkbox">
 									 		<input type="checkbox" class="group-checkable" data-set="#sample_3.checkboxes"/>
 									 	</th>
-									 	<th>用户组名称(中文)</th>
-									 	<th>用户组名称(英文)</th>
-									 	<th>描述</th>
+									 	<th>角色名称(中文)</th>
+									 	<th>角色名称(英文)</th>
+									 	<th>角色描述</th>
 									 </tr>
 									 </thead>
 									 <tbody>											 
