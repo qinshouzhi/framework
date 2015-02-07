@@ -3,6 +3,8 @@
 <html lang="en" class="no-js">
 <head>
 <title>资源管理</title>
+<!--zTree css Start-->
+<link href="${base}/resources/global/plugins/ztree/css/metro.css" rel="stylesheet" type="text/css"/>
 <!--EasyUI css Start-->
 <link href="${base}/resources/global/plugins/easyui/themes/metro/easyui.css" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/global/plugins/easyui/themes/icon.css" rel="stylesheet" type="text/css"/>
@@ -14,8 +16,7 @@
 <link href="${base}/resources/global/css/dialog/lion.dialog.css" rel="stylesheet" type="text/css">
 <link href="${base}/resources/global/css/combo/lion.combo.css" rel="stylesheet" type="text/css">
 <link href="${base}/resources/global/css/combotree/combotree.css" rel="stylesheet" type="text/css" />
-<!--zTree css Start-->
-<link href="${base}/resources/global/plugins/ztree/css/metro.css" rel="stylesheet" type="text/css"/>
+<!--lion UI css End-->
 <script src="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript" ></script>
 <script src="${base}/resources/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js"></script>
@@ -82,9 +83,9 @@
             ">
 				<thead>
 					<tr>
-						<th field="id"                width="10" align="center" halign="center"checkbox="true"sortable="true"order="asc">id</th>
-				 		<th field="nameZh"    width="80" align="left" halign="left"sortable="true"order="asc">资源名称(中文)</th>
-				 		<th field="type"     width="40" align="left" halign="left"sortable="true"order="asc" formatter="formatterCodeResource">资源类型</th>
+						<th field="id"  width="10" align="center" halign="center"checkbox="true"sortable="true"order="asc">id</th>
+				 		<th field="nameZh" width="80" align="left" halign="left"sortable="true"order="asc">资源名称(中文)</th>
+				 		<th field="type" width="40" align="left" halign="left"sortable="true"order="asc" formatter="formatterCodeResource">资源类型</th>
 				 		<th field="path"   width="200" align=""left"" halign="left"sortable="true"order="asc">路径</th>
 				 		<th field="seqNum"  width="20" align="left" halign="left"sortable="true"order="asc">排序</th>
 				 		<th field="editable"  width="20" align="center" halign="center"sortable="true"order="asc"formatter="formatterEidtable">可编辑</th>
@@ -127,67 +128,80 @@
 														<label class="col-md-3 control-label">资源类型</label>
 														<div class="col-md-5">
 															<select  id="sysresourcetype"  name="type" data-size="8" 
-															 	data-maxoptions="1"   multiple placeholder="请选择参数列表..."  
+															 	data-maxoptions="1"   multiple placeholder="请选择资源类型..."  
 															 	class="lion-combo bootstrap-select form-control" data-valueField='codeValue'   value=""
 															 	data-textField='nameZh' data-loadURL="${base}/system/code/combox.htm?nameEn=ResourceType">
-															 </select>											 
+															 </select>								 
 														</div>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label">资源名称(中文)</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入资源名称（英文）" size="30"/>
+													<div class="form-filed">
+														<label class="col-md-3 control-label">资源名称(中文)</label>
+														<div class="col-md-5">
+															<div class="input-group">
+																<input type="text"  id="nameZh" name="nameZh" maxlength="100" class="form-control" placeholder="请输入资源名称（中文）" size="30"/>
+															</div>
 														</div>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label">资源名称(英文)</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入资源名称（英文）" size="30"/>
+													<div class="form-filed">
+														<label class="col-md-3 control-label">资源名称(英文)</label>
+														<div class="col-md-5">
+															<div class="input-group">
+																<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入资源名称（英文）" size="30"/>
+															</div>
 														</div>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label">路径</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="text"  id="path" name="path" maxlength="100" class="form-control" placeholder="请输入资源路径" size="30"/>
+													<div class="form-filed">
+														<label class="col-md-3 control-label">路径</label>
+														<div class="col-md-5">
+															<div class="input-group">
+																<input type="text"  id="path" name="path" maxlength="100" class="form-control" placeholder="请输入资源路径" size="30"/>
+															</div>
 														</div>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label">Target</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="text"  id="target" name="target" maxlength="100" class="form-control" placeholder="请输入资源路径" size="30"/>
+													<div class="form-filed">
+														<label class="col-md-3 control-label">Target</label>
+														<div class="col-md-5">
+															<div class="input-group">
+																<input type="text"  id="target" name="target" maxlength="100" class="form-control" placeholder="请输入Target" size="30"/>
+															</div>
 														</div>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label">显示顺序</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="text"  id="seqNum" name="seqNum" maxlength="100" class="form-control" placeholder="请输入示顺序" size="30"/>
+													<div class="form-filed">
+														<label class="col-md-3 control-label">显示顺序</label>
+														<div class="col-md-5">
+															<div class="input-group">
+																<input type="text"  id="seqNum" name="seqNum" maxlength="100" class="form-control" placeholder="请输入示顺序" size="30"/>
+															</div>
 														</div>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label">资源描述</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="text" name="value" class="form-control" placeholder="请输入资源描述" maxlength="255" size="30"/>
+													<div class="form-filed">
+														<label class="col-md-3 control-label">资源描述</label>
+														<div class="col-md-5">
+															<div class="input-group">
+																<input type="text" name="value" class="form-control" placeholder="请输入资源描述" maxlength="255" size="30"/>
+															</div>
 														</div>
 													</div>
 												</div>
-
 												<div class="form-group">
-													<label class="col-md-3 control-label">是否可编辑</label>
-													<div class="col-md-5 control-label">
-														<div class="input-group">
-															<input type="checkbox" class="form-control "  name="editable" checked="true" />
+													<div class="form-filed">
+														<label class="col-md-3 control-label">是否可编辑</label>
+														<div class="col-md-5 control-label">
+															<div class="input-group">
+																<input type="checkbox" class="form-control "  name="editable" checked="true" />
+															</div>
 														</div>
 													</div>
 												</div>

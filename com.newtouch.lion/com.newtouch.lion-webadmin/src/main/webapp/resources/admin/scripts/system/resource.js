@@ -13,37 +13,22 @@ $(function() {
 	//选择DataGrid单行
 	function getSelectedRow(){return $(datagridId).treegrid('getSelected');}
 	 
-	$(datagridId).treegrid({
-		 onLoadSuccess : function(data) {
-		}
-	});
-	
-	/**
-	 * [查询]
-	 */
-	 $('#btnQuery').click(function(){
-		 var queryParams = $(datagridId).treegrid('options').queryParams;
-		 var params=queryForm.serializeObject();
-	      $.extend(queryParams,params);
-	      //重新加载数据
-	      dataGridReload(datagridId);
-	
-	 });
-	 
-	//重新加载DataGrid
-	  function dataGridReload(dataGridId){
-	     $(datagridId).treegrid('reload');
-	  }
+	$(datagridId).treegrid({onLoadSuccess : function(data) {}	});		 
+	 //重新加载DataGrid
+	 function dataGridReload(dataGridId){$(datagridId).treegrid('reload');}
 	 //刷新
 	 $('#btnRefresh').on('click',function(){
 		   dataGridReload(datagridId);
 	 });
 	 //新增
 	 $('#btnAdd').on('click',function(){
-		  addForm[0].reset();
-		  addForm.find('.form-group').removeClass('has-error');
-		  addForm.find('.help-block').remove();
-		  $('.lion-combo').combo('reloadLi');
+		  addForm.reset();
+      addDialog.find('.modal-header h4 span').text('添加资源');
+      var row=getSelectedRow();
+      if(row){
+        $("#parentResourceId").combotree('val',row.id);
+      }
+      return;
 	 });
 
 	 addForm.on('show.bs.modal',function(){
@@ -61,8 +46,10 @@ $(function() {
 			 lion.util.info('提示','请选择要编辑记录');
 			 return;
 		 }
-		 $('#basic').modal('toggle');
+		 addDialog.find('.modal-header h4 span').text('编辑资源');
+     addDialog.modal('toggle');
 		 addForm.fill(row);
+      $("#parentResourceId").combotree('val',row._parentId);
 	 });
 	 //删除
 	 $('#btnDelete').on('click',function(){
@@ -128,16 +115,16 @@ function successAddFrm(data,arg,id){
   		gmsg+=data.errorMessage[msg];
   	}
   	if(lion.util.isEmpty(gmsg)){
-  		gmsg='添加角色出错';
+  		gmsg='添加资源出错';
   	}
   	lion.util.error('提示',gmsg);
   }else{
-  	lion.util.error('提示','添加角色失败');
+  	lion.util.error('提示','添加资源失败');
   }
 }
 //请求失败后信息
 function errorRequest(data,arg){
-	lion.util.error('提示','网络连接异常');
+	 lion.util.error('提示','网络连接异常');
 }
 //判断是否编辑
 function formatterEidtable(val,row) {
@@ -163,49 +150,27 @@ function formatterCodeResource(val, row) {
 
 //验证表单
 handleVForm=function(vForm,submitCallBackfn){
-	var addError = $('.alert-danger', vForm);
-    var addSuccess = $('.alert-success',vForm);
-	vForm.validate({
+    var addError = $('.alert-danger', vForm), addSuccess = $('.alert-success',vForm);
+	   vForm.validate({
         errorElement: 'span',
         errorClass: 'help-block help-block-error', 
         focusInvalid: false, 
         onkeyup:false,
         ignore: '', 
         messages: {
-        	appId:{
-        		required:'请输入appId',
-        		maxlength:jQuery.validator.format('appId的最大长度为:{0}')
-        	},
-        	key:{
-        		required:'请输入键',
-        		rangelength:jQuery.validator.format('键的长度为{0}和{1}字符之间')
-        	},
-        	value:{
-        		required:'请输入值',
-        		rangelength:jQuery.validator.format('值的长度为{0}和{1}字符之间')
-        	},
+          type:{required:'请选择资源类型'},
+          nameZh:{required:'请输入资源名称(中文)',rangelength:'资源名称(中文)的最大长度为{0}和{1}字符之间'},
+          nameEn:{required:'请输入资源名称(英文)',rangelength:'资源名称(中文)的最大长度为{0}和{1}字符之间'},
         	description:{
-        		required:'请输入描述',
+        		required:'请输入资源描述',
         		maxlength:jQuery.validator.format('描述的最大长度为:{0}')
         	}
         },
         rules: {
-            appId: {
-                required:true,
-                maxlength:20
-            },
-            key: {
-            	required:true,
-            	rangelength:[4,120]
-            },
-            value:{
-            	required: true,
-              	rangelength:[4,120]
-            },
-            description:{
-            	required:false,
-            	maxlength:255
-            }
+            type:{required:true},
+            nameZh:{required:true,rangelength:[2,128]},
+            nameEn:{required:true,rangelength:[2,128]},
+            description:{required:false,maxlength:255}
         },
         invalidHandler: function (event, validator) {             
             addSuccess.hide();
@@ -214,18 +179,20 @@ handleVForm=function(vForm,submitCallBackfn){
         },
 
         highlight: function (element) {
-            $(element).closest('.form-group').addClass('has-error'); 
+            $(element).closest('.form-filed').addClass('has-error'); 
         },
 
         unhighlight: function (element) {
-            $(element).closest('.form-group').removeClass('has-error'); 
+            $(element).closest('.form-filed').removeClass('has-error'); 
         },
         success: function (label) {
-            label.closest('.form-group').removeClass('has-error'); 
+            label.closest('.form-filed').removeClass('has-error'); 
         },
         errorPlacement:function(error,element){
         	//当遇到combo的对话框架的时，修改它的显示位置
-        	if (element.hasClass('lion-combo')){        	 
+        	if (element.hasClass('lion-combotree')){
+              error.insertAfter(element.parent().find('div.btn-group'));
+          }else if(element.hasClass('lion-combo')){        	 
         		error.insertAfter(element.parent().find('div.btn-group'));
         	}else{
         		error.insertAfter(element);

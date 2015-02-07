@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.department.DepartmentVo;
-import com.newtouch.lion.admin.web.model.system.user.UserVo;
 import com.newtouch.lion.common.date.DateUtil;
 import com.newtouch.lion.common.file.FileUtil;
 import com.newtouch.lion.model.datagrid.DataGrid;

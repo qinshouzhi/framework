@@ -22,7 +22,6 @@ $(function() {
 	 * [查询]
 	 */
 	 $('#btnQuery').click(function(){
-	 	  console.dir(queryForm.serializeObject());
 	      $(datagridId).datagrid({queryParams:queryForm.serializeObject()});
 	      //重新加载数据
 	      dataGridReload(datagridId);
@@ -269,8 +268,7 @@ handleVForm=function(vForm,submitCallBackfn){
         errorPlacement:function(error,element){
         	//当遇到combo的对话框架的时，修改它的显示位置
         	if (element.hasClass('lion-combotree')){
-        	    console.dir('dddd'); 
-        		error.insertAfter(element.parent().find('div.btn-group'));
+        		  error.insertAfter(element.parent().find('div.btn-group'));
         	}else{
         		error.insertAfter(element);
         	}

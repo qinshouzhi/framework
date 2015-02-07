@@ -28,14 +28,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.newtouch.lion.admin.web.model.system.department.DepartmentVo;
 import com.newtouch.lion.admin.web.model.system.resource.ResourceVo;
 import com.newtouch.lion.common.codelist.CodeListConstant;
 import com.newtouch.lion.common.date.DateUtil;
 import com.newtouch.lion.common.file.FileUtil;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.datagrid.DataGrid;
-import com.newtouch.lion.model.system.Department;
 import com.newtouch.lion.model.system.Resource;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.query.QueryCriteria;

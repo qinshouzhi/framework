@@ -158,6 +158,7 @@ public class DataGridController extends AbstractController {
 		return this.getJsonView(modelAndView);
 	}
 
+	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "checktableid")
 	@ResponseBody
 	public String checkTableId(String tableId) {
