@@ -161,7 +161,8 @@ handleVForm=function(vForm,submitCallBackfn){
           type:{required:'请选择资源类型'},
           nameZh:{required:'请输入资源名称(中文)',rangelength:'资源名称(中文)的最大长度为{0}和{1}字符之间'},
           nameEn:{required:'请输入资源名称(英文)',rangelength:'资源名称(中文)的最大长度为{0}和{1}字符之间'},
-        	description:{
+        	seqNum:{required:'请输入资源显示顺序',digits:'资源显示顺序为数字'},
+          description:{
         		required:'请输入资源描述',
         		maxlength:jQuery.validator.format('描述的最大长度为:{0}')
         	}
@@ -170,6 +171,7 @@ handleVForm=function(vForm,submitCallBackfn){
             type:{required:true},
             nameZh:{required:true,rangelength:[2,128]},
             nameEn:{required:true,rangelength:[2,128]},
+            seqNum:{required:true,digits:true},
             description:{required:false,maxlength:255}
         },
         invalidHandler: function (event, validator) {             

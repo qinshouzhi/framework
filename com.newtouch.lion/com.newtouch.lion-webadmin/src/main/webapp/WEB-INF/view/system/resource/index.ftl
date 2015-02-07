@@ -140,7 +140,7 @@
 														<label class="col-md-3 control-label">资源名称(中文)</label>
 														<div class="col-md-5">
 															<div class="input-group">
-																<input type="text"  id="nameZh" name="nameZh" maxlength="100" class="form-control" placeholder="请输入资源名称（中文）" size="30"/>
+																<input type="text"  id="nameZh" name="nameZh" maxlength="128" class="form-control" placeholder="请输入资源名称（中文）" size="30"/>
 															</div>
 														</div>
 													</div>
@@ -150,7 +150,7 @@
 														<label class="col-md-3 control-label">资源名称(英文)</label>
 														<div class="col-md-5">
 															<div class="input-group">
-																<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入资源名称（英文）" size="30"/>
+																<input type="text"  id="nameEn" name="nameEn" maxlength="128" class="form-control" placeholder="请输入资源名称（英文）" size="30"/>
 															</div>
 														</div>
 													</div>
@@ -160,7 +160,7 @@
 														<label class="col-md-3 control-label">路径</label>
 														<div class="col-md-5">
 															<div class="input-group">
-																<input type="text"  id="path" name="path" maxlength="100" class="form-control" placeholder="请输入资源路径" size="30"/>
+																<input type="text"  id="path" name="path" maxlength="1024" class="form-control" placeholder="请输入资源路径" size="30"/>
 															</div>
 														</div>
 													</div>
@@ -170,7 +170,7 @@
 														<label class="col-md-3 control-label">Target</label>
 														<div class="col-md-5">
 															<div class="input-group">
-																<input type="text"  id="target" name="target" maxlength="100" class="form-control" placeholder="请输入Target" size="30"/>
+																<input type="text"  id="target" name="target" maxlength="16" class="form-control" placeholder="请输入Target" size="30"/>
 															</div>
 														</div>
 													</div>
@@ -180,7 +180,7 @@
 														<label class="col-md-3 control-label">显示顺序</label>
 														<div class="col-md-5">
 															<div class="input-group">
-																<input type="text"  id="seqNum" name="seqNum" maxlength="100" class="form-control" placeholder="请输入示顺序" size="30"/>
+																<input type="text"  id="seqNum" name="seqNum" maxlength="11" class="form-control" placeholder="请输入示顺序" size="30"/>
 															</div>
 														</div>
 													</div>

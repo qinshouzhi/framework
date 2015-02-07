@@ -6,6 +6,11 @@
  */
 package com.newtouch.lion.admin.web.model.system.resource;
 
+import javax.validation.constraints.Digits;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.newtouch.lion.model.system.Attributes;
 
 /**
@@ -33,17 +38,24 @@ public class ResourceVo {
 	/** 资源父ID */
 	private Long parentResourceId;
 	/** 资源类型 */
+	@NotEmpty(message="{sys.resource.type.missing}")
 	private String type;
 	/** 资源路径 URL Class.Method */
 	private String path;
 	/** 资源名称－中文 */
+	@NotEmpty(message="{sys.resource.namezh.missing}")
+	@Length(max=128,min=4,message="{sys.resource.namezh.length}")
 	private String nameZh;
 	/** 资源名称－英文 */
+	@NotEmpty(message="{sys.resource.namezh.missing}")
+	@Length(max=128,min=4,message="{sys.resource.namezh.length}")
 	private String nameEn;
 	/** 资源描述 */
 	private String description;
 	/** 资源排序 */
-	private int seqNum;
+	@NotEmpty(message="{sys.resource.seqnum.missing}")
+	@Digits(fraction=0,integer=10,message="{sys.resource.seqnum.digits}")
+	private Integer seqNum;
 	/** 资源是否叶节点，其下没有子资源 默认为：true */
 	private Boolean isLeaf = Boolean.FALSE;
 	/** 资源是否可编辑 */
@@ -165,7 +177,7 @@ public class ResourceVo {
 	/**
 	 * @return the seqNum
 	 */
-	public int getSeqNum() {
+	public Integer getSeqNum() {
 		return seqNum;
 	}
 
@@ -173,7 +185,7 @@ public class ResourceVo {
 	 * @param seqNum
 	 *            the seqNum to set
 	 */
-	public void setSeqNum(int seqNum) {
+	public void setSeqNum(Integer seqNum) {
 		this.seqNum = seqNum;
 	}
 
