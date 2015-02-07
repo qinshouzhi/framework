@@ -95,7 +95,7 @@ public class ResourceController extends AbstractController{
 			Errors errors, ModelAndView modelAndView) {
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
-			return modelAndView;
+			return this.getJsonView(modelAndView);
 		}
 		Resource resource = new Resource();
 		BeanUtils.copyProperties(resourceVo, resource);
@@ -103,7 +103,7 @@ public class ResourceController extends AbstractController{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		return this.getJsonView(modelAndView);
 	}
 
 	@RequestMapping(value = "edit")
@@ -123,14 +123,14 @@ public class ResourceController extends AbstractController{
 
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
-			return modelAndView;
+			return this.getJsonView(modelAndView);
 		}
 		BeanUtils.copyProperties(resourceVo, resource);
 		this.resourceService.doUpdate(resource);
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS,ConstantMessage.EDIT_SUCCESS_MESSAGE_CODE);
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		return this.getJsonView(modelAndView);
 	}
 
 	@RequestMapping(value = "delete")
@@ -144,7 +144,7 @@ public class ResourceController extends AbstractController{
 			params.put(BindResult.SUCCESS,ConstantMessage.DELETE_FAIL_MESSAGE_CODE);
 		}
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		return this.getJsonView(modelAndView);
 	}
 
 	@RequestMapping(value = "menutree")

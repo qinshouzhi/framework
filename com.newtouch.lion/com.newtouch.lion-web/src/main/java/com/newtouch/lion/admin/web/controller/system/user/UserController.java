@@ -129,7 +129,6 @@ public class UserController extends AbstractController {
 	/**部门列表*/
 	@Autowired
 	private DepartmentService departmentService;
-
 	/** 首页显示 */
 	@RequestMapping(value = "index")
 	public String index(Model model) {
@@ -199,9 +198,7 @@ public class UserController extends AbstractController {
 		user.setPassword(passwordEncoder);
 		// 将登录用户转换为小写
 		user.setUsername(user.getUsername().toLowerCase());
-
 		userService.doCreateUser(user);
-
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
 		modelAndView.addObject(BindMessage.SUCCESS, params);
@@ -220,9 +217,9 @@ public class UserController extends AbstractController {
 	/** 显示已关联的用户组 */
 	@RequestMapping(value = "authgroups")
 	@ResponseBody
-	public String authGroups(@RequestParam(required = false) Long id) {
-		return this.userService
-				.doFindAllAuthGroupsById(id, AUTH_USER_GROUPS_TB);
+	public ModelAndView authGroups(@RequestParam(required = false) Long id,ModelAndView modelAndView) {
+		String str=this.userService.doFindAllAuthGroupsById(id, AUTH_USER_GROUPS_TB);
+		return this.getStrJsonView(str, modelAndView);
 	}
 
 	/** 显示已关联的角色 */

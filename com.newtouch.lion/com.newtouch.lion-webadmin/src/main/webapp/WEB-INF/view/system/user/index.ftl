@@ -49,8 +49,6 @@
 <!--lion UI JS End-->
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/scripts/system/user.js" type="text/javascript"></script>
-<!--DatePicker-->
-<script src="${base}/resources/global/plugins/datepicker/WdatePicker.js" type="text/javascript" ></script>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed-hide-logo">
 <!-- BEGIN PAGE CONTENT INNER -->
@@ -97,16 +95,16 @@
 					<i class="fa  fa-gear"></i> 
 					<@spring.message "common.toolbar.btn.auth.text"/>  
 				</a>
-				<a href="javascript:void(0)" id="lokcedBtn" class="btn btn-sm red" >
-				    <i class="fa   fa-lock"></i> 
+				<a href="javascript:void(0)" id="btnLokced" class="btn btn-sm red" >
+				    <i class="fa fa-lock"></i> 
 					<@spring.message "common.toolbar.btn.locked.text"/>
 				</a>
-				<a href="javascript:void(0)" id="unlockBtn" class="btn btn-sm blue-hoki">
-					<i class="fa  fa-unlock-alt"></i> 
+				<a href="javascript:void(0)" id="btnUnlock" class="btn btn-sm blue-hoki">
+					<i class="fa fa-unlock-alt"></i> 
 					<@spring.message "common.toolbar.btn.unlock.text"/>
 				</a> 
-				<a href="javascript:void(0)" id="detailsBtn" class="btn btn-sm default">
-					<i class="fa   fa-th"></i> 
+				<a href="javascript:void(0)" id="btnDetails" class="btn btn-sm default">
+					<i class="fa  fa-th"></i> 
 					<@spring.message "common.toolbar.btn.details.text"/>
 				</a> 
 			</div>
@@ -117,6 +115,554 @@
 	</div>
 </div>
 <!-- END PAGE CONTENT INNER -->
+
+<!--Modal Auth Start-->
+<div class="modal fade bs-modal-lg" id="modalUserAuth" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<h4 class="modal-title"><i class="fa fa-gear"></i> <span>用户授权</span></h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+						<div  class="col-md-12">
+							<ul class="nav nav-tabs">
+								<li class="active">
+									<a href="#tab_3_1" data-toggle="tab">已授权信息 </a>
+								</li>
+								<li>
+									<a href="#tab_3_2" data-toggle="tab">关联用户组 </a>
+								</li>
+								<li>
+									<a href="#tab_3_3" data-toggle="tab">关联角色</a>
+								</li>
+							</ul>
+							<div class="tab-content">
+								<div role="tabpanel" class="tab-pane active" id="tab_3_1">
+									<div class="table-scrollable">
+										<table class="table table-bordered table-hover">
+											<thead>
+												<tr>
+													<th>用户名</th>
+													<th>工号</th>
+													<th>账户锁定状态</th>
+													<th>账户有效日期</th>
+													<th>账户有效状态</th>
+													<th>密码有效日期</th>
+													<th>密码有效状态</th>
+													<th>所属部门</th>
+												</tr>
+											</thead>
+											<tbody>
+											  <tr>
+											  	<td><span id="auth_username"></span></td>
+												<td><span id="auth_employeeCode"></span></td>
+												<td><span id="auth_accountLocked"></span></td>
+												<td><span id="auth_accountExpiredDate"></span></td>
+												<td><span id="auth_accountExpired"></span></td>
+												<td><span id="auth_credentialExpiredDate"></span></td>
+												<td><span id="auth_credentialExpired"></span></td>
+												<td><span id="auth_department"></span></td>
+											  </tr>								 
+											</tbody>
+										</table>
+				  					</div>
+									<div>										 
+										<div>
+											<div class="caption">
+												<i class="fa"></i><strong>已关联用户组</strong>
+											</div>
+											<table class="table table-striped table-bordered table-hover" id="sample_3">
+											<thead>
+											<tr>
+												<th class="table-checkbox">
+													<input type="checkbox" class="group-checkable" data-set="#sample_3.checkboxes"/>
+												</th>
+												<th>用户组名称(中文)</th>
+												<th>用户组名称(英文)</th>
+												<th>描述</th>
+											</tr>
+											</thead>
+											<tbody>											 
+												<tr class="odd gradeX">
+													<td>
+														<input type="checkbox" class="checkboxes" value="1"/>
+													</td>
+													<td>
+														 looper
+													</td>
+													<td>
+														
+														looper90@gmail.com 
+													</td>
+													<td>
+														<span class="label label-sm label-warning">
+														Suspended </span>
+													</td>
+												</tr>
+												<tr class="odd gradeX">
+													<td>
+														<input type="checkbox" class="checkboxes" value="1"/>
+													</td>
+													<td>
+														 userwow
+													</td>
+													<td>
+														userwow@yahoo.com 
+													</td>
+													<td>
+														<span class="label label-sm label-success">
+														Approved </span>
+													</td>
+												</tr>
+												<tr class="odd gradeX">
+													<td>
+														<input type="checkbox" class="checkboxes" value="1"/>
+													</td>
+													<td>
+														 user1wow
+													</td>
+													<td>
+														
+														userwow@gmail.com 
+													</td>
+													<td>
+														<span class="label label-sm label-default">
+														Blocked </span>
+													</td>
+												</tr>
+												<tr class="odd gradeX">
+													<td>
+														<input type="checkbox" class="checkboxes" value="1"/>
+													</td>
+													<td>
+														 restest
+													</td>
+													<td>
+														
+														test@gmail.com 
+													</td>
+													<td>
+														<span class="label label-sm label-success">
+														Approved </span>
+													</td>
+												</tr>
+												<tr class="odd gradeX">
+													<td>
+														<input type="checkbox" class="checkboxes" value="1"/>
+													</td>
+													<td>
+														 restest
+													</td>
+													<td>
+														
+														test@gmail.com 
+													</td>
+													<td>
+														<span class="label label-sm label-success">
+														Approved </span>
+													</td>
+												</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div>
+										<div class="caption">
+											<i class="fa"></i><strong>已关联角色</strong>
+										</div>
+										<table class="table table-striped table-bordered table-hover" id="sample_3">
+											<thead>
+											<tr>
+												<th class="table-checkbox">
+													<input type="checkbox" class="group-checkable" data-set="#sample_3.checkboxes"/>
+												</th>
+												<th>用户组名称(中文)</th>
+												<th>用户组名称(英文)</th>
+												<th>描述</th>
+											</tr>
+											</thead>
+											<tbody>											 
+												<tr class="odd gradeX">
+													<td>
+														<input type="checkbox" class="checkboxes" value="1"/>
+													</td>
+													<td>
+														 looper
+													</td>
+													<td>
+														
+														looper90@gmail.com 
+													</td>
+													<td>
+														<span class="label label-sm label-warning">
+														Suspended </span>
+													</td>
+												</tr>
+												<tr class="odd gradeX">
+													<td>
+														<input type="checkbox" class="checkboxes" value="1"/>
+													</td>
+													<td>
+														 userwow
+													</td>
+													<td>
+														userwow@yahoo.com 
+													</td>
+													<td>
+														<span class="label label-sm label-success">
+														Approved </span>
+													</td>
+												</tr>
+												<tr class="odd gradeX">
+													<td>
+														<input type="checkbox" class="checkboxes" value="1"/>
+													</td>
+													<td>
+														 user1wow
+													</td>
+													<td>
+														
+														userwow@gmail.com 
+													</td>
+													<td>
+														<span class="label label-sm label-default">
+														Blocked </span>
+													</td>
+												</tr>
+												<tr class="odd gradeX">
+													<td>
+														<input type="checkbox" class="checkboxes" value="1"/>
+													</td>
+													<td>
+														 restest
+													</td>
+													<td>
+														
+														test@gmail.com 
+													</td>
+													<td>
+														<span class="label label-sm label-success">
+														Approved </span>
+													</td>
+												</tr>
+												<tr class="odd gradeX">
+													<td>
+														<input type="checkbox" class="checkboxes" value="1"/>
+													</td>
+													<td>
+														 restest
+													</td>
+													<td>
+														
+														test@gmail.com 
+													</td>
+													<td>
+														<span class="label label-sm label-success">
+														Approved </span>
+													</td>
+												</tr>
+												</tbody>
+											</table>
+									</div>
+								</div>
+								<div  role="tabpanel" class="tab-pane fade" id="tab_3_2">
+									 <table class="table table-striped table-bordered table-hover" id="sample_3">
+									 <thead>
+									 <tr>
+									 	<th class="table-checkbox">
+									 		<input type="checkbox" class="group-checkable" data-set="#sample_3.checkboxes"/>
+									 	</th>
+									 	<th>用户组名称(中文)</th>
+									 	<th>用户组名称(英文)</th>
+									 	<th>描述</th>
+									 </tr>
+									 </thead>
+									 <tbody>											 
+									 	<tr class="odd gradeX">
+									 		<td>
+									 			<input type="checkbox" class="checkboxes" value="1"/>
+									 		</td>
+									 		<td>
+									 			 looper
+									 		</td>
+									 		<td>
+									 			
+									 			looper90@gmail.com 
+									 		</td>
+									 		<td>
+									 			<span class="label label-sm label-warning">
+									 			Suspended </span>
+									 		</td>
+									 	</tr>
+									 	<tr class="odd gradeX">
+									 		<td>
+									 			<input type="checkbox" class="checkboxes" value="1"/>
+									 		</td>
+									 		<td>
+									 			 userwow
+									 		</td>
+									 		<td>
+									 			userwow@yahoo.com 
+									 		</td>
+									 		<td>
+									 			<span class="label label-sm label-success">
+									 			Approved </span>
+									 		</td>
+									 	</tr>
+									 	<tr class="odd gradeX">
+									 		<td>
+									 			<input type="checkbox" class="checkboxes" value="1"/>
+									 		</td>
+									 		<td>
+									 			 user1wow
+									 		</td>
+									 		<td>
+									 			userwow@gmail.com 
+									 		</td>
+									 		<td>
+									 			<span class="label label-sm label-default">
+									 			Blocked </span>
+									 		</td>
+									 	</tr>
+									 	<tr class="odd gradeX">
+									 		<td>
+									 			<input type="checkbox" class="checkboxes" value="1"/>
+									 		</td>
+									 		<td>
+									 			 restest
+									 		</td>
+									 		<td>									 			
+									 			test@gmail.com 
+									 		</td>
+									 		<td>
+									 			<span class="label label-sm label-success">
+									 			Approved </span>
+									 		</td>
+									 	</tr>
+									 	<tr class="odd gradeX">
+									 		<td>
+									 			<input type="checkbox" class="checkboxes" value="1"/>
+									 		</td>
+									 		<td>
+									 			 restest
+									 		</td>
+									 		<td>
+									 			test@gmail.com
+									 		</td>
+									 		<td>
+									 			<span class="label label-sm label-success">
+									 			Approved </span>
+									 		</td>
+									 	</tr>
+									 	</tbody>
+									 </table>
+								</div>
+								<div role="tabpanel" class="tab-pane fade" id="tab_3_3">
+									 <table class="table table-striped table-bordered table-hover" id="sample_3">
+									 <thead>
+									 <tr>
+									 	<th class="table-checkbox">
+									 		<input type="checkbox" class="group-checkable" data-set="#sample_3.checkboxes"/>
+									 	</th>
+									 	<th>用户组名称(中文)</th>
+									 	<th>用户组名称(英文)</th>
+									 	<th>描述</th>
+									 </tr>
+									 </thead>
+									 <tbody>											 
+									 	<tr class="odd gradeX">
+									 		<td>
+									 			<input type="checkbox" class="checkboxes" value="1"/>
+									 		</td>
+									 		<td>
+									 			 looper
+									 		</td>
+									 		<td>
+									 			looper90@gmail.com
+									 		</td>
+									 		<td>
+									 			<span class="label label-sm label-warning">
+									 			Suspended </span>
+									 		</td>
+									 	</tr>
+									 	<tr class="odd gradeX">
+									 		<td>
+									 			<input type="checkbox" class="checkboxes" value="1"/>
+									 		</td>
+									 		<td>
+									 			 userwow
+									 		</td>
+									 		<td>
+									 			userwow@yahoo.com 
+									 		</td>
+									 		<td>
+									 			<span class="label label-sm label-success">
+									 			Approved </span>
+									 		</td>
+									 	</tr>
+									 	<tr class="odd gradeX">
+									 		<td>
+									 			<input type="checkbox" class="checkboxes" value="1"/>
+									 		</td>
+									 		<td>
+									 			 user1wow
+									 		</td>
+									 		<td>
+									 			userwow@gmail.com
+									 		</td>
+									 		<td>
+									 			<span class="label label-sm label-default">
+									 			Blocked </span>
+									 		</td>
+									 	</tr>
+									 	<tr class="odd gradeX">
+									 		<td>
+									 			<input type="checkbox" class="checkboxes" value="1"/>
+									 		</td>
+									 		<td>
+									 			 restest
+									 		</td>
+									 		<td>
+									 			test@gmail.com
+									 		</td>
+									 		<td>
+									 			<span class="label label-sm label-success">
+									 			Approved </span>
+									 		</td>
+									 	</tr>
+									 	<tr class="odd gradeX">
+									 		<td>
+									 			<input type="checkbox" class="checkboxes" value="1"/>
+									 		</td>
+									 		<td>
+									 			 restest
+									 		</td>
+									 		<td>								 			
+									 			test@gmail.com
+									 		</td>
+									 		<td>
+									 			<span class="label label-sm label-success">
+									 			Approved </span>
+									 		</td>
+									 	</tr>
+									 	</tbody>
+									 </table>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal">
+					<i class="fa  fa-arrow-left"></i> 取 消 </button>
+				<button type="button" id="btnSave" class="btn blue">
+					<i class="fa fa-save"></i> 保 存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Modal Auth End-->
+
+<!--Modal UserInfo Start-->
+<div class="modal fade bs-modal-lg" id="modaluserinfo" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<h4 class="modal-title"><i class="fa fa-th"></i> <span>用户明细信息</span></h4>
+			</div>
+			<div class="modal-body">
+					<div class="caption">
+							<i class="fa"></i><strong>基本信息</strong>
+					</div>
+			 		<div class="table-scrollable">
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>用户名</th>
+									<th>员工号</th>
+									<th>性别</th>							
+									<th>真实姓名(中文)</th>
+									<th>真实姓名(英文)</th>
+									<th>联系电话</th>
+									<th>手机</th>
+									<th>邮箱</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td><span id="user_username"></span></td>
+									<td><span id="user_employeeCode"></span></td>
+									<th><span id="user_gender"></span></th>	
+									<td><span id="user_realnameZh"></span></td>
+									<td><span id="user_realnameEn"></span></td>
+									<td><span id="user_telephone"></span></td>
+									<td><span id="user_mobile"></span></td>
+									<td><span id="user_email"></span></td>
+								</tr>								 
+							</tbody>
+						</table>
+					</div>
+					<div class="caption">
+							<i class="fa"></i><strong>账户状态</strong>
+					</div>
+					<div class="table-scrollable">
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>账户锁定状态</th>
+									<th>账户有效日期</th>
+									<th>账户有效状态</th>
+									<th>密码有效日期</th>
+									<th>密码有效状态</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td><span id="user_accountLocked"></span></td>
+									<td><span id="user_accountExpiredDate"></span></td>
+									<td><span id="user_accountExpired"></span></td>
+									<td><span id="user_credentialExpiredDate"></span></td>
+									<td><span id="user_credentialExpired"></span></td>
+								</tr>								 
+							</tbody>
+						</table>
+				   </div>
+				   	<div class="caption">
+							<i class="fa"></i><strong>其它信息</strong>
+					</div>
+					<div class="table-scrollable">
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>所属门部</th>
+									<th>办公室电话</th>
+									<th>传真</th>
+									<th>邮编</th>
+									<th>地址</th>
+									<th>描述</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td><span id="user_department"></span></td>
+									<td><span id="user_officePhone"></span></td>
+									<td><span id="user_fax"></span></td>
+									<td><span id="user_postcode"></span></td>
+									<td><span id="user_location"></span></td>
+									<td><span id="user_description"></span></td>
+								</tr>					 
+							</tbody>
+						</table>
+				  </div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Modal UserInfo End-->
+
 <!--Dialog Start -->
 <div class="modal fade bs-modal-lg " id="basic" tabindex="-1" role="basic" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
@@ -203,22 +749,22 @@
 												<label class="col-md-2 control-label">密码有效期</label>
 												<div class="col-md-2">
 													<div class="input-group">
-														<input type="text" name="value" class="form-control" placeholder="请选择密码有效期" maxlength="10" size="20" readonly="true" value="${credentialExpiredDate!}" />
+														<input type="text"   id='credentialExpiredDate' name="credentialExpiredDate" class="form-control" placeholder="请选择密码有效期" maxlength="25" size="20" readonly="true" value="${credentialExpiredDate!}" />
 													</div>
 												</div>
 												<label class="col-md-2 control-label">
 													密码是否有效 
-													<input type="checkbox" class="form-control"  name="editable" checked="true" />						 
+													<input type="checkbox" id="credentialExpired" class="form-control"  name="credentialExpired" checked="true" value="1"/>						 
 												</label>
 												<label class="col-md-2 control-label">账户有效期</label>
 												<div class="col-md-2">
 													<div class="input-group">
-														<input id="d11" type="text" class="form-control"  placeholder="请选择账户有效期"  maxlength="10" size="20"  readonly="true"  value="${accountExpiredDate!}" />
+														<input id="credentialExpiredDate"  name="credentialExpiredDate" type="text" class="form-control"  placeholder="请选择账户有效期"  maxlength="25" size="20"  readonly="true"  value="${accountExpiredDate!}" />
 													</div>
 												</div>
 												<label class="col-md-2 control-label">
-													账户是否有效
-													<input type="checkbox" class="form-control"  name="editable" checked="true" />  
+													账户状态：
+													<input type="checkbox" class="form-control" id="accountExpired" name="accountExpired" checked="true"  value="1" />  
 												</label>
 											</div>			
 											<div class="form-group">

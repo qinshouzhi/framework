@@ -9,7 +9,8 @@ $(function() {
 
 	var addForm=$('#addform');
   var queryForm=$('#queryform');
-	var addDialog=$('#basic');
+	var addDialog=$('#basic'),userinfo=$('#modaluserinfo'),modalUserAuth=$('#modalUserAuth');
+
 
 	//验证表单
 	handleVForm(addForm,submitForm);
@@ -17,7 +18,54 @@ $(function() {
 	//选择DataGrid单行
 	function getSelectedRow(){return $(datagridId).datagrid('getSelected');}
 	$(datagridId).datagrid({onLoadSuccess:function(data) {}});
-	
+  //用户授权
+  $('#btnAuth').click(function(){
+     var row=getSelectedRow();
+     if(!row){
+       lion.util.info('提示','请选择要授权用户记录');
+       return;
+     }
+     $('#auth_username').text(row.username);
+     $('#auth_employeeCode').text(row.employeeCode);
+     $('#auth_accountLocked').text(row.accountLocked===true?'已锁定':'未锁定');
+     $('#auth_accountExpired').text(row.accountExpired===false?'有效':'无效');
+     $('#auth_credentialExpired').text(row.credentialExpired===false?'有效':'无效');
+     $('#auth_accountExpiredDate').text(formatterDate(row.accountExpiredDate));
+     $('#auth_credentialExpiredDate').text(formatterDate(row.credentialExpiredDate));
+     $('#auth_department').text(formatterShowDepartment(row.department));
+     modalUserAuth.modal('toggle');
+  });
+  //查看用户明细信息
+  $('#btnDetails').click(function(){
+     var row=getSelectedRow();
+     if(!row){
+       lion.util.info('提示','请选择查看明细信息记录');
+       return;
+     }
+     //userinfo.modal({remote:"page.jsp"});
+    
+     $('#user_username').text(row.username);
+     $('#user_employeeCode').text(row.employeeCode);
+     $('#user_realnameZh').text(row.realnameZh);
+     $('#user_realnameEn').text(row.realnameEn);
+     $('#user_gender').text(row.gender===0?'男':'女');
+     $('#user_telephone').text(row.telephone);
+     $('#user_mobile').text(row.mobile);
+     $('#user_email').text(row.email);
+     $('#user_accountLocked').text(row.accountLocked===true?'已锁定':'未锁定');
+     $('#user_accountExpired').text(row.accountExpired===false?'有效':'无效');
+     $('#user_credentialExpired').text(row.credentialExpired===false?'有效':'无效');
+     $('#user_accountExpiredDate').text(formatterDate(row.accountExpiredDate));
+     $('#user_credentialExpiredDate').text(formatterDate(row.credentialExpiredDate));
+     $('#user_department').text(formatterShowDepartment(row.department));
+     $('#user_officePhone').text(row.officePhone);
+     $('#user_fax').text(row.fax);
+     $('#user_postcode').text(row.postcode);
+     $('#user_location').text(row.location);
+     $('#user_description').text(row.description);
+     userinfo.modal('toggle');
+
+  });
 	/**
 	 * [查询]
 	 */
@@ -34,7 +82,7 @@ $(function() {
 	 $("#btnRefresh").on("click",function(){
 		 dataGridReload(datagridId);
 	 });
-	 
+	 //添加
 	 $("#btnAdd").on("click",function(){
 	 	 addForm.reset();
 	 	 addDialog.find('.modal-header h4 span').text('添加用户');
@@ -282,11 +330,26 @@ handleVForm=function(vForm,submitCallBackfn){
 };
 //判断是否编辑
 function formatterEidtable(val,row) {
-	var name =$.loin.lang.editable.n;
-	if (val) {
-		name = $.loin.lang.editable.y;
+	var name ='有效';
+	if (val&&val===true) {
+		name ='失效';
 	}
 	return name;
+}
+//判断是否编辑
+function formatterAccountLocked(val,row) {
+  var name ='未锁定';
+  if (val&&val===true) {
+    name ='已锁定';
+  }
+  return name;
+}
+//截取日期-YYYY-MM-DD
+function formatterDate(val,row) {
+  if (val) {
+      return val.substring(0,10);
+  }
+  return val;
 }
 //加载部门
 function formatterShowDepartment(val, row) {
@@ -295,4 +358,11 @@ function formatterShowDepartment(val, row) {
 		name = val.nameZh;
 	}
 	return name;
+}
+function formatterCheckBox(value, row, index) {
+  var checkBoxId = "";
+  if (value) {
+    checkBoxId = "<input type='checkbox' checked='true'  disabled='true'/>";
+  }
+  return checkBoxId;
 }

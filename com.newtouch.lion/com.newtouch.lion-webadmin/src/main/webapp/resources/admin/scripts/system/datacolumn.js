@@ -205,11 +205,11 @@ handleVForm=function(vForm,submitCallBackfn){
             },
             field:{
             	required: true,
-            	rangelength:[4,100]
+            	rangelength:[1,100]
             },
             name:{
             	required: true,
-            	rangelength:[4,100],
+            	rangelength:[1,100],
             	remote:{
           			url:'checkisexitnameen.htm', //后台处理程序
   					    type: 'post',               //数据发送方式

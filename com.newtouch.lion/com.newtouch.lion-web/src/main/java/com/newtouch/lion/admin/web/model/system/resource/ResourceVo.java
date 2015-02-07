@@ -53,7 +53,7 @@ public class ResourceVo {
 	/** 资源描述 */
 	private String description;
 	/** 资源排序 */
-	@NotEmpty(message="{sys.resource.seqnum.missing}")
+	//@NotNull(message="{sys.resource.seqnum.missing}")
 	@Digits(fraction=0,integer=10,message="{sys.resource.seqnum.digits}")
 	private Integer seqNum;
 	/** 资源是否叶节点，其下没有子资源 默认为：true */
