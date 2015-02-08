@@ -264,7 +264,6 @@ function formatterEidtable(val,row) {
 	}
 	return name;
 }
-<!--framework.js-->
 
 // 将JSON复杂对象显示到DataGird中
 function formatterName(val, row) {
