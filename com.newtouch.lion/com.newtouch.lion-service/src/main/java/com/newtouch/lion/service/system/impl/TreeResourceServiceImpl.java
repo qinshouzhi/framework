@@ -26,7 +26,7 @@ import com.newtouch.lion.ztree.TreeNode;
  * Copyright: Copyright (c) 2015
  * </p>
  * <p>
- * Company: Newtouch
+ * Company: Newtouch 
  * </p>
  * 
  * @author WangLijun
