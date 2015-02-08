@@ -32,8 +32,7 @@
 <script src="${base}/resources/global/js/dialog/dialog.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
 <!--lion UI JS End-->
-<script src="${base}/resources/global/scripts/framework.js" type="text/javascript"></script>
-<script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/scripts/system/applicationproperty.js" type="text/javascript"></script>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed-hide-logo">
@@ -43,13 +42,13 @@
 		<div class="row">
 			<div class="col-md-12 margin-bottom-10">
 				<form id="queryform" class="form-horizontal">
-					<label class="control-label col-md-2" for="appId" >appId</label>
+					<label class="control-label col-md-2" for="appId" ><@spring.message "sys.applicationProperty.query.appId.text"/></label>
 					<div class="col-md-3">
-						<input class="form-control input-small" type="text" size="30" name="appId" id="appId"  placeholder="请输入appId"/>					
+						<input class="form-control input-small" type="text" size="30" name="appId" id="appId"  placeholder="<@spring.message "sys.applicationProperty.query.appId.missing.message"/>"/>					
 					</div>
-					<label class="control-label col-md-2" for="value" >value</label>
+					<label class="control-label col-md-2" for="value" ><@spring.message "sys.applicationProperty.query.value.text"/></label>
 					<div class="col-md-3">
-						<input class="form-control input-small" type="text" size="30" name="value" id="value"  placeholder="请输入value"/>					
+						<input class="form-control input-small" type="text" size="30" name="value" id="value"  placeholder="<@spring.message "sys.applicationProperty.query.value.missing.message"/>"/>					
 					</div>
 					<div class="col-md-2">
 						<a href="javascript:void(0)" id="btnQuery" class="btn blue"><i class="fa fa-search"></i> <@spring.message "common.query.btn.text"/> </a>
@@ -87,9 +86,9 @@
 											<input type="hidden" id='id' name='id' value="">
 											<div class="form-body">
 												<div class="form-group">
-													<label class="col-md-3 control-label"><@spring.message "sys.applicationProperty.query.appId.text"/></label>
+													<label class="col-md-3 control-label"><@spring.message "sys.applicationProperty.form.appId.text"/></label>
 													<div class="col-md-5">
-														<input type="text"  name="appId"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.role.form.adddialog.text"/>" size="30"/>
+														<input type="text"  name="appId"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.applicationProperty.form.appId.missing.message"/>" size="30"/>
 													</div>
 												</div>
 												<div class="form-group">
@@ -112,7 +111,7 @@
 													<label class="col-md-3 control-label"><@spring.message "sys.applicationProperty.form.description.text"/></label>
 													<div class="col-md-5">
 														<div class="input-group ">															 
-															<input type="text" class="form-control" name="description" placeholder="<@spring.message "sys.applicationProperty.form.description.text"/>" maxlength="255" size="40"/>
+															<input type="text" class="form-control" name="description" placeholder="<@spring.message "sys.applicationProperty.form.description.missing.message"/>" maxlength="255" size="40"/>
 														</div>
 													</div>
 												</div>

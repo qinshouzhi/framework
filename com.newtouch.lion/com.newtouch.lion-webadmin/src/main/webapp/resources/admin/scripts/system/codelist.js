@@ -264,3 +264,13 @@ function formatterEidtable(val,row) {
 	}
 	return name;
 }
+<!--framework.js-->
+
+// 将JSON复杂对象显示到DataGird中
+function formatterName(val, row) {
+	var name = "";
+	if (val != null) {
+		name = val.nameZh;
+	}
+	return name;
+}

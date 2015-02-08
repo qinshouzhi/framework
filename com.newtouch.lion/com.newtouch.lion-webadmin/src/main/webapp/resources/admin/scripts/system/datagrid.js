@@ -345,3 +345,11 @@ handleVForm=function(vForm,submitCallBackfn){
         }
     });
 };
+//判断是否编辑
+function formatterEidtable(val,row) {
+	var name =$.loin.lang.editable.n;
+	if (val) {
+		name = $.loin.lang.editable.y;
+	}
+	return name;
+}
