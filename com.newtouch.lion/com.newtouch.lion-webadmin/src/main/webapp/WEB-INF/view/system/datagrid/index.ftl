@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head> 
-<title>DataGrid信息</title>
+<title><@spring.message "sys.datagrid.html.title"/></title>
 <!--EasyUI css Start-->
 <link href="${base}/resources/global/plugins/easyui/themes/metro/panel.css" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/global/plugins/easyui/themes/metro/linkbutton.css" rel="stylesheet" type="text/css"/>

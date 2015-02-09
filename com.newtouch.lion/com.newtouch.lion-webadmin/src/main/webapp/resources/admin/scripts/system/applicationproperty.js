@@ -40,9 +40,7 @@ $(function() {
 	 });
 	 //新增
 	 $('#btnAdd').on('click',function(){
-		  addForm[0].reset();
-		  addForm.find('.form-group').removeClass('has-error');
-		  addForm.find('.help-block').remove();
+		 addForm.reset();
 		  addDialog.find('.modal-header h4 span').text('添加项目属性配置');
 		  $('.lion-combo').combo('reloadLi');
 	 });
