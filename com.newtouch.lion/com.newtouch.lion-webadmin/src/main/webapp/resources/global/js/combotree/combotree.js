@@ -377,7 +377,7 @@
     // SELECTPICKER NO CONFLICT
     // ========================
     $.fn.combotree.noConflict = function () {
-       $.fn.selectpicker = old;
+       $.fn.combotree = old;
        return this;
     }; 
 	//加载combotree组件

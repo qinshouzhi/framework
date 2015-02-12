@@ -2,8 +2,31 @@ var Eidtable_Y="是";
 var Eidtable_N="否";
 var gender_male="男";
 var gender_female="女";
-(function($){
-	$.loin={lang:"lang",common:"common"};
+;(function($){
+	'use strict';// js hint ;_;
+	this.lang = this.lang || {}; //定义ui对象。为避免覆盖如果存在ui对象则使用，不存在则新建
+	var exports = this.lang;
+	var editable={y:'是',n:'否'};
+
+	//exports.editable=editable;
+
+  	exports.datatables={
+  			 language: {
+                "aria": {
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                },
+                "emptyTable": "No data available in table",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "No entries found",
+                "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                "lengthMenu": "Show _MENU_ entries",
+                "search": "Search:",
+                "zeroRecords": "No matching records found"
+            }
+  	};
+
+	$.loin={lang:'lang',common:'common',datatables:'datatables'};
 	$.loin.lang={
 		editable:{ y:"是",n:"否"},
 		gender:{m:"男",f:"女"},
@@ -18,4 +41,5 @@ var gender_female="女";
 			}
 		}
 	};
-})(jQuery);
+	 
+}).call(lion,jQuery);

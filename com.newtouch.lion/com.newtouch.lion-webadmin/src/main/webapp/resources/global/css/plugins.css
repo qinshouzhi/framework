@@ -1087,18 +1087,24 @@ Extended pagination
 Scroller Extension
 ***/
 .dataTables_scroll {
-  margin-bottom: 10px;
+  margin-bottom:0px;
+  border-bottom: 0 !important;
 }
 
 .dataTables_scrollHead {
-  border-bottom: 2px solid #ddd !important;
+  margin:0px;
+  padding:0px;
+  border-bottom: 1px solid #ddd !important;
+}
+.dataTables_scrollHead .table .dataTable{
+  margin:0px;
 }
 .dataTables_scrollHead thead th {
   border-bottom: 0 !important;
 }
 
 .dataTables_scrollBody {
-  border-bottom: 1px solid #ddd !important;
+  border-bottom: 0px solid #ddd !important;
 }
 
 /***

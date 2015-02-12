@@ -45,7 +45,8 @@ public class QueryVo{
 	 * @return 当前页索引
 	 */
 	public Integer getPage() {
-		return page;
+		 
+		return this.page;
 	}
 
 	/**

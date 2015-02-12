@@ -453,7 +453,7 @@ public class UserController extends AbstractController {
 		queryCriteria.setPageSize(queryVo.getRows());
 		// 设置排序字段及排序方向
 		if (StringUtils.isNotEmpty(queryVo.getSort()) && StringUtils.isNotEmpty(queryVo.getOrder())) {
-			queryCriteria.setOrderField(queryVo.getOrder());
+			queryCriteria.setOrderField(queryVo.getSort());
 			queryCriteria.setOrderDirection(queryVo.getOrder());
 		} else {
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);

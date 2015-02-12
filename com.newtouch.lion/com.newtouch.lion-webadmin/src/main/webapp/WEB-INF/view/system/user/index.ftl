@@ -40,12 +40,21 @@
 <!--EasyUI JavaScript End-->
 <!--ztree js-->
 <script src="${base}/resources/global/plugins/ztree/js/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
+<!-- DataTables js Start -->
+<script type="text/javascript" src="${base}/resources/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/datatables/media/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/Scroller/js/dataTables.scroller.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+<!-- DataTables js End -->
 <!--lion UI JS Start-->
 <script src="${base}/resources/global/js/lion.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/form/form.fill.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/dialog/dialog.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <!--lion UI JS End-->
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/scripts/system/user.js" type="text/javascript"></script>
@@ -173,98 +182,29 @@
 											<div class="caption">
 												<i class="fa"></i><strong>已关联用户组</strong>
 											</div>
-											<table class="table table-striped table-bordered table-hover" id="sample_3">
-											<thead>
-											<tr>
-												<th class="table-checkbox">
-													<input type="checkbox" class="group-checkable" data-set="#sample_3.checkboxes"/>
-												</th>
-												<th>用户组名称(中文)</th>
-												<th>用户组名称(英文)</th>
-												<th>描述</th>
-											</tr>
-											</thead>
-											<tbody>											 
-												<tr class="odd gradeX">
-													<td>
-														<input type="checkbox" class="checkboxes" value="1"/>
-													</td>
-													<td>
-														 looper
-													</td>
-													<td>
-														
-														looper90@gmail.com 
-													</td>
-													<td>
-														<span class="label label-sm label-warning">
-														Suspended </span>
-													</td>
-												</tr>
-												<tr class="odd gradeX">
-													<td>
-														<input type="checkbox" class="checkboxes" value="1"/>
-													</td>
-													<td>
-														 userwow
-													</td>
-													<td>
-														userwow@yahoo.com 
-													</td>
-													<td>
-														<span class="label label-sm label-success">
-														Approved </span>
-													</td>
-												</tr>
-												<tr class="odd gradeX">
-													<td>
-														<input type="checkbox" class="checkboxes" value="1"/>
-													</td>
-													<td>
-														 user1wow
-													</td>
-													<td>
-														
-														userwow@gmail.com 
-													</td>
-													<td>
-														<span class="label label-sm label-default">
-														Blocked </span>
-													</td>
-												</tr>
-												<tr class="odd gradeX">
-													<td>
-														<input type="checkbox" class="checkboxes" value="1"/>
-													</td>
-													<td>
-														 restest
-													</td>
-													<td>
-														
-														test@gmail.com 
-													</td>
-													<td>
-														<span class="label label-sm label-success">
-														Approved </span>
-													</td>
-												</tr>
-												<tr class="odd gradeX">
-													<td>
-														<input type="checkbox" class="checkboxes" value="1"/>
-													</td>
-													<td>
-														 restest
-													</td>
-													<td>
-														
-														test@gmail.com 
-													</td>
-													<td>
-														<span class="label label-sm label-success">
-														Approved </span>
-													</td>
-												</tr>
-												</tbody>
+												<table  id="userauth_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false", data-scrollX="true" data-scrollY="100px" data-loadUrl="/admin/user/dt/list.json" data-scrollCollapse="true" data-jQueryUI="true" data-checkbox="true" data-pageSize="5" data-paginate="true" data-loading="false">
+												<thead>
+													<tr>
+														<th class="table-checkbox" data-field='id' data-checkbox="true">
+													 		<input type="checkbox" class="group-checkable" data-set="#sample_1.checkboxes"  data-sortable="false" />
+													 	</th>
+														<th data-field='username' data-sortDir="asc">
+															用户名
+														</th>
+														<th data-field="employeeCode" >
+														 	员工号
+														</th>
+														<th data-field="department"  data-formatter="formatterDarptment">
+															部门
+														</th>
+														<th data-field="realnameZh">
+															真实姓名
+														</th>
+														<th  data-field="email">
+															邮箱
+														</th>
+													</tr>
+												</thead>
 											</table>
 										</div>
 									</div>

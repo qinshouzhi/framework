@@ -172,7 +172,12 @@ public class PageResult<T> implements Serializable {
 	 *获取DataGrid数据集,包含总记录数、数据集合
 	 */
 	public DataTable<T> getDataTable(){
-		return new DataTable<T>(this.totalCount,this.content);
+		return new DataTable<T>(this.totalCount,this.content,this.getCurrentIndex());
+	}
+	
+	public DataTable<T> getDataTable(int draw){
+			
+		return new DataTable<T>(this.totalCount,this.content,draw);
 	}
 
 }
