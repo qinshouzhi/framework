@@ -236,3 +236,12 @@ function formatterEidtable(val,row) {
 	}
 	return name;
 }
+
+//部门显示方法
+function formatterDarptment(data,type,full){
+  //console.dir(data);
+  if(data){
+    return data.nameZh;
+  }
+  return '';
+}

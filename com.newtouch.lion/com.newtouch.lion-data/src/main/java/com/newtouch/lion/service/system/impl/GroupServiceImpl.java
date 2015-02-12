@@ -351,7 +351,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 	public PageResult<Group> doFindByCriteria(QueryCriteria criteria) {
 		String queryEntry = " from Group ";
 
-		String[] whereBodies = { "nameZh like :nameZh" };
+		String[] whereBodies = { "nameZh like :nameZh","Group.users.id=:userid"};
 
 		String fromJoinSubClause = "";
 

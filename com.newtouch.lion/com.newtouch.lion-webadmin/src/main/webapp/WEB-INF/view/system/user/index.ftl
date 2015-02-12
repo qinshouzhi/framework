@@ -15,9 +15,14 @@
 <!--EasyUI css End-->
 <!--bootstrap css Start-->
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
-<link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" type="text/css">
 <!--bootstrap css End-->
+<!--DataTable css Start-->
+<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/select2/select2.css"/>
+<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css"/>
+<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css"/>
+<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+<!-- END PAGE LEVEL STYLES -->
 <!--zTree css Start-->
 <link href="${base}/resources/global/plugins/ztree/css/metro.css" rel="stylesheet" type="text/css"/>
 <!--lion UI css Start-->
@@ -40,12 +45,21 @@
 <!--EasyUI JavaScript End-->
 <!--ztree js-->
 <script src="${base}/resources/global/plugins/ztree/js/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
+<!-- DataTables js Start -->
+<script type="text/javascript" src="${base}/resources/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/datatables/media/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/Scroller/js/dataTables.scroller.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+<!-- DataTables js End -->
 <!--lion UI JS Start-->
 <script src="${base}/resources/global/js/lion.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/form/form.fill.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/dialog/dialog.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <!--lion UI JS End-->
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/scripts/system/user.js" type="text/javascript"></script>
@@ -140,8 +154,8 @@
 							</ul>
 							<div class="tab-content">
 								<div role="tabpanel" class="tab-pane active" id="tab_3_1">
-									<div class="table-scrollable">
-										<table class="table table-bordered table-hover">
+									<div class="col-md-12">
+										<table class="table table-bordered table-hover" width="853px" style="display:none">
 											<thead>
 												<tr>
 													<th>用户名</th>
@@ -168,387 +182,92 @@
 											</tbody>
 										</table>
 				  					</div>
-									<div>										 
-										<div>
+									<div class="col-md-12">
 											<div class="caption">
 												<i class="fa"></i><strong>已关联用户组</strong>
-											</div>
-											<table class="table table-striped table-bordered table-hover" id="sample_3">
-											<thead>
-											<tr>
-												<th class="table-checkbox">
-													<input type="checkbox" class="group-checkable" data-set="#sample_3.checkboxes"/>
-												</th>
-												<th>用户组名称(中文)</th>
-												<th>用户组名称(英文)</th>
-												<th>描述</th>
-											</tr>
-											</thead>
-											<tbody>											 
-												<tr class="odd gradeX">
-													<td>
-														<input type="checkbox" class="checkboxes" value="1"/>
-													</td>
-													<td>
-														 looper
-													</td>
-													<td>
-														
-														looper90@gmail.com 
-													</td>
-													<td>
-														<span class="label label-sm label-warning">
-														Suspended </span>
-													</td>
-												</tr>
-												<tr class="odd gradeX">
-													<td>
-														<input type="checkbox" class="checkboxes" value="1"/>
-													</td>
-													<td>
-														 userwow
-													</td>
-													<td>
-														userwow@yahoo.com 
-													</td>
-													<td>
-														<span class="label label-sm label-success">
-														Approved </span>
-													</td>
-												</tr>
-												<tr class="odd gradeX">
-													<td>
-														<input type="checkbox" class="checkboxes" value="1"/>
-													</td>
-													<td>
-														 user1wow
-													</td>
-													<td>
-														
-														userwow@gmail.com 
-													</td>
-													<td>
-														<span class="label label-sm label-default">
-														Blocked </span>
-													</td>
-												</tr>
-												<tr class="odd gradeX">
-													<td>
-														<input type="checkbox" class="checkboxes" value="1"/>
-													</td>
-													<td>
-														 restest
-													</td>
-													<td>
-														
-														test@gmail.com 
-													</td>
-													<td>
-														<span class="label label-sm label-success">
-														Approved </span>
-													</td>
-												</tr>
-												<tr class="odd gradeX">
-													<td>
-														<input type="checkbox" class="checkboxes" value="1"/>
-													</td>
-													<td>
-														 restest
-													</td>
-													<td>
-														
-														test@gmail.com 
-													</td>
-													<td>
-														<span class="label label-sm label-success">
-														Approved </span>
-													</td>
-												</tr>
-												</tbody>
+											</div>									 
+												<table  id="usergroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",    data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="10" cellspacing="0"   width="853px" data-scrollY="100px" >
+												<thead>
+													<tr>
+														<th class="table-checkbox" data-field='id' data-checkbox="true" >
+													 		<input type="checkbox" class="group-checkable" data-set="#usergroup_list.checkboxes"  data-sortable="false"  />
+													 	</th>
+														<th data-field='nameEn' data-sortDir="asc"    style="width:100px;">
+															用户组名称(英文)
+														</th>
+														<th data-field="nameZh" style="width:100px;">
+														 	用户组名称(中文)
+														</th>
+														<th data-field="description" style="width:100px;">
+															描述
+														</th>
+													</tr>
+												</thead>
 											</table>
-										</div>
 									</div>
-									<div>
+									<div class="col-md-12">
 										<div class="caption">
 											<i class="fa"></i><strong>已关联角色</strong>
 										</div>
-										<table class="table table-striped table-bordered table-hover" id="sample_3">
-											<thead>
-											<tr>
-												<th class="table-checkbox">
-													<input type="checkbox" class="group-checkable" data-set="#sample_3.checkboxes"/>
-												</th>
-												<th>角色名称(中文)</th>
-												<th>角色名称(英文)</th>
-												<th>描述</th>
-											</tr>
-											</thead>
-											<tbody>											 
-												<tr class="odd gradeX">
-													<td>
-														<input type="checkbox" class="checkboxes" value="1"/>
-													</td>
-													<td>
-														 looper
-													</td>
-													<td>
-														
-														looper90@gmail.com 
-													</td>
-													<td>
-														<span class="label label-sm label-warning">
-														Suspended </span>
-													</td>
-												</tr>
-												<tr class="odd gradeX">
-													<td>
-														<input type="checkbox" class="checkboxes" value="1"/>
-													</td>
-													<td>
-														 userwow
-													</td>
-													<td>
-														userwow@yahoo.com 
-													</td>
-													<td>
-														<span class="label label-sm label-success">
-														Approved </span>
-													</td>
-												</tr>
-												<tr class="odd gradeX">
-													<td>
-														<input type="checkbox" class="checkboxes" value="1"/>
-													</td>
-													<td>
-														 user1wow
-													</td>
-													<td>
-														
-														userwow@gmail.com 
-													</td>
-													<td>
-														<span class="label label-sm label-default">
-														Blocked </span>
-													</td>
-												</tr>
-												<tr class="odd gradeX">
-													<td>
-														<input type="checkbox" class="checkboxes" value="1"/>
-													</td>
-													<td>
-														 restest
-													</td>
-													<td>
-														
-														test@gmail.com 
-													</td>
-													<td>
-														<span class="label label-sm label-success">
-														Approved </span>
-													</td>
-												</tr>
-												<tr class="odd gradeX">
-													<td>
-														<input type="checkbox" class="checkboxes" value="1"/>
-													</td>
-													<td>
-														 restest
-													</td>
-													<td>
-														
-														test@gmail.com 
-													</td>
-													<td>
-														<span class="label label-sm label-success">
-														Approved </span>
-													</td>
-												</tr>
-												</tbody>
+										 <table  id="userrole_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   d  data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="10"   width="853px" data-scrollY="100px" cellspacing="0"  >
+												<thead>
+													<tr>
+														<th class="table-checkbox" data-field='id' data-checkbox="true" >
+													 		<input type="checkbox" class="group-checkable" data-set="#userrole_list.checkboxes"  data-sortable="false"  />
+													 	</th>
+														<th data-field='nameEn' data-sortDir="asc"    style="width:100px;">
+															角色名称(英文)
+														</th>
+														<th data-field="nameZh" style="width:100px;">
+														 	角色组名称(中文)
+														</th>
+														<th data-field="description" style="width:100px;">
+															描述
+														</th>
+													</tr>
+												</thead>
 											</table>
 									</div>
 								</div>
 								<div  role="tabpanel" class="tab-pane fade" id="tab_3_2">
-									 <table class="table table-striped table-bordered table-hover" id="sample_3">
-									 <thead>
-									 <tr>
-									 	<th class="table-checkbox">
-									 		<input type="checkbox" class="group-checkable" data-set="#sample_3.checkboxes"/>
-									 	</th>
-									 	<th>用户组名称(中文)</th>
-									 	<th>用户组名称(英文)</th>
-									 	<th>描述</th>
-									 </tr>
-									 </thead>
-									 <tbody>											 
-									 	<tr class="odd gradeX">
-									 		<td>
-									 			<input type="checkbox" class="checkboxes" value="1"/>
-									 		</td>
-									 		<td>
-									 			 looper
-									 		</td>
-									 		<td>
-									 			
-									 			looper90@gmail.com 
-									 		</td>
-									 		<td>
-									 			<span class="label label-sm label-warning">
-									 			Suspended </span>
-									 		</td>
-									 	</tr>
-									 	<tr class="odd gradeX">
-									 		<td>
-									 			<input type="checkbox" class="checkboxes" value="1"/>
-									 		</td>
-									 		<td>
-									 			 userwow
-									 		</td>
-									 		<td>
-									 			userwow@yahoo.com 
-									 		</td>
-									 		<td>
-									 			<span class="label label-sm label-success">
-									 			Approved </span>
-									 		</td>
-									 	</tr>
-									 	<tr class="odd gradeX">
-									 		<td>
-									 			<input type="checkbox" class="checkboxes" value="1"/>
-									 		</td>
-									 		<td>
-									 			 user1wow
-									 		</td>
-									 		<td>
-									 			userwow@gmail.com 
-									 		</td>
-									 		<td>
-									 			<span class="label label-sm label-default">
-									 			Blocked </span>
-									 		</td>
-									 	</tr>
-									 	<tr class="odd gradeX">
-									 		<td>
-									 			<input type="checkbox" class="checkboxes" value="1"/>
-									 		</td>
-									 		<td>
-									 			 restest
-									 		</td>
-									 		<td>									 			
-									 			test@gmail.com 
-									 		</td>
-									 		<td>
-									 			<span class="label label-sm label-success">
-									 			Approved </span>
-									 		</td>
-									 	</tr>
-									 	<tr class="odd gradeX">
-									 		<td>
-									 			<input type="checkbox" class="checkboxes" value="1"/>
-									 		</td>
-									 		<td>
-									 			 restest
-									 		</td>
-									 		<td>
-									 			test@gmail.com
-									 		</td>
-									 		<td>
-									 			<span class="label label-sm label-success">
-									 			Approved </span>
-									 		</td>
-									 	</tr>
-									 	</tbody>
-									 </table>
+									 <table  id="authgroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",     data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="10" width="853px"  >
+												<thead>
+													<tr>
+														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
+													 		<input type="checkbox" class="group-checkable" data-set="#authgroup_list.checkboxes"  data-sortable="false"  />
+													 	</th>
+														<th data-field='nameEn' data-sortDir="asc"    style="width:100px;">
+															用户组名称(英文)
+														</th>
+														<th data-field="nameZh" style="width:100px;">
+														 	用户组名称(中文)
+														</th>
+														<th data-field="description" style="width:100px;">
+															描述
+														</th>
+													</tr>
+												</thead>
+											</table>
 								</div>
 								<div role="tabpanel" class="tab-pane fade" id="tab_3_3">
-									 <table class="table table-striped table-bordered table-hover" id="sample_3">
-									 <thead>
-									 <tr>
-									 	<th class="table-checkbox">
-									 		<input type="checkbox" class="group-checkable" data-set="#sample_3.checkboxes"/>
-									 	</th>
-									 	<th>角色名称(中文)</th>
-									 	<th>角色名称(英文)</th>
-									 	<th>角色描述</th>
-									 </tr>
-									 </thead>
-									 <tbody>											 
-									 	<tr class="odd gradeX">
-									 		<td>
-									 			<input type="checkbox" class="checkboxes" value="1"/>
-									 		</td>
-									 		<td>
-									 			 looper
-									 		</td>
-									 		<td>
-									 			looper90@gmail.com
-									 		</td>
-									 		<td>
-									 			<span class="label label-sm label-warning">
-									 			Suspended </span>
-									 		</td>
-									 	</tr>
-									 	<tr class="odd gradeX">
-									 		<td>
-									 			<input type="checkbox" class="checkboxes" value="1"/>
-									 		</td>
-									 		<td>
-									 			 userwow
-									 		</td>
-									 		<td>
-									 			userwow@yahoo.com 
-									 		</td>
-									 		<td>
-									 			<span class="label label-sm label-success">
-									 			Approved </span>
-									 		</td>
-									 	</tr>
-									 	<tr class="odd gradeX">
-									 		<td>
-									 			<input type="checkbox" class="checkboxes" value="1"/>
-									 		</td>
-									 		<td>
-									 			 user1wow
-									 		</td>
-									 		<td>
-									 			userwow@gmail.com
-									 		</td>
-									 		<td>
-									 			<span class="label label-sm label-default">
-									 			Blocked </span>
-									 		</td>
-									 	</tr>
-									 	<tr class="odd gradeX">
-									 		<td>
-									 			<input type="checkbox" class="checkboxes" value="1"/>
-									 		</td>
-									 		<td>
-									 			 restest
-									 		</td>
-									 		<td>
-									 			test@gmail.com
-									 		</td>
-									 		<td>
-									 			<span class="label label-sm label-success">
-									 			Approved </span>
-									 		</td>
-									 	</tr>
-									 	<tr class="odd gradeX">
-									 		<td>
-									 			<input type="checkbox" class="checkboxes" value="1"/>
-									 		</td>
-									 		<td>
-									 			 restest
-									 		</td>
-									 		<td>								 			
-									 			test@gmail.com
-									 		</td>
-									 		<td>
-									 			<span class="label label-sm label-success">
-									 			Approved </span>
-									 		</td>
-									 	</tr>
-									 	</tbody>
-									 </table>
+									<table  id="authrole_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="10"   width="853px"   >
+												<thead>
+													<tr>
+														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
+													 		<input type="checkbox" class="group-checkable" data-set="#authrole_list.checkboxes"  data-sortable="false"  />
+													 	</th>
+														<th data-field='nameEn' data-sortDir="asc"    style="width:100px;">
+															用户组名称(英文)
+														</th>
+														<th data-field="nameZh" style="width:100px;">
+														 	用户组名称(中文)
+														</th>
+														<th data-field="description" style="width:100px;">
+															描述
+														</th>
+													</tr>
+												</thead>
+											</table>
 								</div>
 							</div>
 						</div>

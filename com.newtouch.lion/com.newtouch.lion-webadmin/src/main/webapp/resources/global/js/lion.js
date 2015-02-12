@@ -182,7 +182,30 @@ lion.assemblyCache={};
             }
         });
    };
-
+   /**
+    * [postjson JSON字符串请求]
+    * @param  {[type]} url       [URL]
+    * @param  {[type]} data      [JSON对象]
+    * @param  {[type]} successfn [请求成功回调函数]
+    * @param  {[type]} errorfn   [失败回调函数]
+    * @param  {[type]} arg       [参数]
+    */
+   exports.postjson=function(url,data,successfn,errorfn,arg){
+   		 $.ajax({
+				dataType:'json',
+				type : 'POST',
+				url:url,
+				data:JSON.stringify(data),
+				success : function(data) {
+            		successfn.call(this,data,arg);
+            	},
+				contentType:'application/json',
+				timeout : 5000, // 连接超时时间
+				error:function(xhr, textStatus, error) {
+					errorfn.call(this,xhr,textStatus,error);
+				},
+			});
+   };
      /**Ajax POST请求
    	 * @param url 请求URL
    	 * @param successfn 成功回调函数

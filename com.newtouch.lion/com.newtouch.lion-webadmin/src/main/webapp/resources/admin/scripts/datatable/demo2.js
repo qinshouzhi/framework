@@ -1,34 +1,45 @@
 $(function () {
-	//加载bootstrap
+
 	Metronic.init(); // init metronic core componets
 	Layout.init(); // init layout
 	Tasks.initDashboardWidget(); // init tash dashboard widget
 
-	var groupdg=$("#sys_group_list_tb");
+	var demoDt=$("#sample_1");
 
 	var queryForm=$('#queryform');
 
 	$("#btnQuery").click(function(){
-		groupdg.datagrids({querydata:queryForm.serializeObject()});
-		var queryparam=groupdg.datagrids('queryparams'); 
+		demoDt.datagrids({querydata:queryForm.serializeObject()});
+		var queryparam=demoDt.datagrids('queryparams'); 
 		demoDt.datagrids('reload');
 	});
 
 	$("#btnRefresh").click(function(){
-		//groupdg.datagrids({querydata:{userid:1}});
-        groupdg.datagrids('reload');
+		demoDt.datagrids({querydata:{userid:1}});
+        demoDt.datagrids('reload');
         //var settings=demoDt.datagrids('settings');
         //console.dir(settings);
     });
 
     $("#btnAdd").click(function(){
-      	
+        row=demoDt.datagrids('getSelected');
+        console.dir(row);
     });
 
     //获取多行数据
     $("#btnEdit").click(function(){
-        var rows=groupdg.datagrids('getSelections');
+        var rows=demoDt.datagrids('getSelections');
        
         console.dir(rows);
     });
+
 });
+
+//部门显示方法
+function formatterDarptment(data,type,full){
+	//console.dir(data);
+	if(data){
+		return data.nameZh;
+	}
+	return '';
+}

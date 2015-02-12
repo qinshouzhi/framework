@@ -10,7 +10,7 @@ $(function() {
 	var addForm=$('#addform');
   var queryForm=$('#queryform');
 	var addDialog=$('#basic'),userinfo=$('#modaluserinfo'),modalUserAuth=$('#modalUserAuth');
-
+  var $userauthdg=$('#userauth_list');
 
 	//验证表单
 	handleVForm(addForm,submitForm);
@@ -63,8 +63,8 @@ $(function() {
      $('#user_postcode').text(row.postcode);
      $('#user_location').text(row.location);
      $('#user_description').text(row.description);
+     $('#userauth_list').datagrids('reload');
      userinfo.modal('toggle');
-
   });
 	/**
 	 * [查询]
@@ -365,4 +365,12 @@ function formatterCheckBox(value, row, index) {
     checkBoxId = "<input type='checkbox' checked='true'  disabled='true'/>";
   }
   return checkBoxId;
+}
+//部门显示方法
+function formatterDarptment(data,type,full){
+  //console.dir(data);
+  if(data){
+    return data.nameZh;
+  }
+  return '';
 }

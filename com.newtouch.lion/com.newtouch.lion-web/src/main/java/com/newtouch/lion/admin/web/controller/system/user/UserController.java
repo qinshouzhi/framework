@@ -57,6 +57,7 @@ import com.newtouch.lion.util.ResourceConvertUtil;
 import com.newtouch.lion.util.ResourceTreeUtil;
 import com.newtouch.lion.web.constant.ConstantMessage;
 import com.newtouch.lion.web.controller.AbstractController;
+import com.newtouch.lion.web.model.QueryDt;
 import com.newtouch.lion.web.model.QueryVo;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
@@ -220,6 +221,27 @@ public class UserController extends AbstractController {
 	public ModelAndView authGroups(@RequestParam(required = false) Long id,ModelAndView modelAndView) {
 		String str=this.userService.doFindAllAuthGroupsById(id, AUTH_USER_GROUPS_TB);
 		return this.getStrJsonView(str, modelAndView);
+	}
+	
+	/** 显示已关联的用户组 */
+	@RequestMapping(value = "authgroup")
+	@ResponseBody
+	public DataTable<Group> authGroup(QueryDt query,@RequestParam(required = false) Long id,ModelAndView modelAndView) {
+		QueryCriteria queryCriteria = new QueryCriteria();
+		// 设置分页 启始页
+		queryCriteria.setStartIndex(query.getPage());
+		// 每页大小
+		queryCriteria.setPageSize(query.getRows());
+		 
+		// 设置排序字段及排序方向
+		if (StringUtils.isNotEmpty(query.getSort()) && StringUtils.isNotEmpty(query.getOrder())) {
+			queryCriteria.setOrderField(query.getSort());
+			queryCriteria.setOrderDirection(query.getOrder());
+		} else {
+			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+		}
+		PageResult<Group>  pageResult=groupService.doFindByCriteria(queryCriteria);
+		return  pageResult.getDataTable(query.getRequestId());
 	}
 
 	/** 显示已关联的角色 */
@@ -453,7 +475,7 @@ public class UserController extends AbstractController {
 		queryCriteria.setPageSize(queryVo.getRows());
 		// 设置排序字段及排序方向
 		if (StringUtils.isNotEmpty(queryVo.getSort()) && StringUtils.isNotEmpty(queryVo.getOrder())) {
-			queryCriteria.setOrderField(queryVo.getOrder());
+			queryCriteria.setOrderField(queryVo.getSort());
 			queryCriteria.setOrderDirection(queryVo.getOrder());
 		} else {
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);

@@ -46,6 +46,7 @@ import com.newtouch.lion.service.system.RoleService;
 import com.newtouch.lion.service.system.UserService;
 import com.newtouch.lion.web.constant.ConstantMessage;
 import com.newtouch.lion.web.controller.AbstractController;
+import com.newtouch.lion.web.model.QueryDt;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
 
@@ -314,35 +315,28 @@ public class GroupController extends AbstractController{
 
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public DataTable<Group> list(HttpServletRequest servletRequest, Model model,
-			@RequestParam(defaultValue = "1") int page,
-			@RequestParam(defaultValue = "15") int rows,
-			@RequestParam(required = false) String sort,
-			@RequestParam(required = false) String order,
-			@RequestParam(required = false) String nameZh,
-			@ModelAttribute("group") GroupVo groupVo) {
+	public DataTable<Group> list(QueryDt query,@ModelAttribute("group") GroupVo groupVo) {
 		QueryCriteria queryCriteria = new QueryCriteria();
 
 		// 设置分页 启始页
-		queryCriteria.setStartIndex(rows * (page - 1));
+		queryCriteria.setStartIndex(query.getPage());
 		// 每页大小
-		queryCriteria.setPageSize(rows);
+		queryCriteria.setPageSize(query.getRows());
 		// 设置排序字段及排序方向
-		if (StringUtils.isNotEmpty(sort) && StringUtils.isNotEmpty(order)) {
-			queryCriteria.setOrderField(sort);
-			queryCriteria.setOrderDirection(order);
+		if (StringUtils.isNotEmpty(query.getSort()) && StringUtils.isNotEmpty(query.getOrder())) {
+			queryCriteria.setOrderField(query.getSort());
+			queryCriteria.setOrderDirection(query.getOrder());
 		} else {
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
-			queryCriteria.setOrderDirection("ASC");
+			queryCriteria.setOrderDirection(QueryCriteria.ASC);
 		}
 		//查询条件 中文参数名称按模糊查询
 		if(StringUtils.isNotEmpty(groupVo.getNameZh())){
 			queryCriteria.addQueryCondition("nameZh","%"+groupVo.getNameZh()+"%");
 		}
 
-		PageResult<Group> pageResult = groupService
-				.doFindByCriteria(queryCriteria);
-		return pageResult.getDataTable();
+		PageResult<Group> pageResult = groupService.doFindByCriteria(queryCriteria);
+		return pageResult.getDataTable(query.getRequestId());
 	}
 	/*add by maojiawei*/
 	private Boolean isExistByNameEn(String nameEn) {
