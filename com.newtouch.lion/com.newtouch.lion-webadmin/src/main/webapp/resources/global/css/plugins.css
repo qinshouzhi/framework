@@ -886,7 +886,7 @@ Datatables Plugin(in v1.3)
 }
 
 .dataTable .table-checkbox {
-  width: 20px !important;
+  width: 15px !important;
 }
 
 @media (max-width: 768px) {

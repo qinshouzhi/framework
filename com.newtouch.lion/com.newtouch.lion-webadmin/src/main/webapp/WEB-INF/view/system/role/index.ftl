@@ -48,9 +48,7 @@
 					<div class="col-md-3">
 						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="<@spring.message "sys.role.query.namezh.missing.message"/>"/>					
 					</div>
-					<div class="col-md-2">
-					</div>
-					<div class="col-md-2">
+					<div class="col-md-7">
 						<a href="javascript:void(0)" id="btnQuery" class="btn blue"><i class="fa fa-search"></i> <@spring.message "common.query.btn.text"/> </a>
 					</div>
 				</form>
@@ -175,22 +173,24 @@
 							</form>
 						<!-- END FORM-->
 				 	</div>
+				 	</div>
 			</div>
+			<!--modal body end-->
+			<!--footer start-->
 			<div class="modal-footer">
 				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal">
-					<i class="fa  fa-arrow-left"></i>
-					<@spring.message "common.diaglog.btn.cancel"/>
+					<i class="fa  fa-arrow-left"></i> 
+					<@spring.message "common.diaglog.btn.cancel"/> 
 				</button>
 				<button type="button" id="btnSave" class="btn blue">
-					<i class="fa fa-save"></i> 
+					<i class="fa fa-save"></i>
 					<@spring.message "common.diaglog.btn.save"/>
 				</button>
 			</div>
+			<!--footer end-->
 		</div>
-		<!-- /.modal-content -->
 	</div>
 </div>
-	<!-- /.modal-dialog -->
 <!--Edit Dialog End -->
 </body>
 </html>

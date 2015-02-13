@@ -1,4 +1,4 @@
-var groupdg=$("#sys_group_list_tb"); //datagrids
+var groupdg=$('#sys_group_list_tb'); //datagrids
 var addForm=$('#sysGroupForm');  //编辑或添加表单
 var addDialog=$('#basic'); //编辑或添加对话框
 $(function () {
@@ -10,34 +10,59 @@ $(function () {
 	groupdg=$("#sys_group_list_tb");
 	addForm=$('#sysGroupForm');
 	addDialog=$('#basic');
-	modalGroupAuth=$('#modalGroupAuth');
+	var modalGroupAuth=$('#modalGroupAuth');
 	var queryForm=$('#queryform');
-	
+  
+  //默认隐藏第一个tab的modal-footer
+  modalGroupAuth.find('.modal-footer').hide();
+	//绑定tab事件
+  modalGroupAuth.find('.nav-tabs a').click(function(){
+      var tabHref=$(this).attr('href');
+      if(tabHref==='#tab_3_1'){
+            modalGroupAuth.find('.modal-footer').hide();
+      }else{
+          modalGroupAuth.find('.modal-footer').show();
+      }
+  });
 	//验证表单
 	handleVForm(addForm,submitForm);
 	//用户组授权
 	$('#btnAuth').click(function(){
-		modalGroupAuth.modal('toggle');	
+      var row=groupdg.datagrids('getSelected');
+      if(!row){
+        lion.util.info('提示','请选择要授权记录');
+        return;
+      }
+		  modalGroupAuth.modal('toggle');	
 	});
+  //用户组授权保存
+  $('#btnAuthSave').click(function(){
+      var selectTabId=modalGroupAuth.find('.tab-pane.active').attr('id');
+      if(selectTabId==='tab_3_2'){
+          console.dir('关联角色');
+      }else{
+          console.dir('关联用户');
+      }
+  }); 
 	//查询
-	$("#btnQuery").click(function(){
+	$('#btnQuery').click(function(){
 		groupdg.datagrids({querydata:queryForm.serializeObject()});
 		var queryparam=groupdg.datagrids('queryparams'); 
 		groupdg.datagrids('reload');
 	});
 	//刷新
-	$("#btnRefresh").click(function(){		 
+	$('#btnRefresh').click(function(){		 
         groupdg.datagrids('reload');
     });
 	//添加
-    $("#btnAdd").click(function(){
-      	 addForm.reset();
-	 	 addDialog.find('.modal-header h4 span').text('添加用户组');
-		 return;
+    $('#btnAdd').click(function(){
+      	addForm.reset();
+	 	    addDialog.find('.modal-header h4 span').text('添加用户组');
+		    return;
     });
 
     //编辑
-    $("#btnEdit").click(function(){
+    $('#btnEdit').click(function(){
         var row=groupdg.datagrids('getSelected');
         if(!row){
 			 lion.util.info('提示','请选择要编辑记录');
@@ -69,7 +94,7 @@ $(function () {
         if(lion.util.isNotEmpty(params)){
           url+='&'+params;
         }
-      	 window.open(url,"_blank");
+      	 window.open(url,'_blank');
 	 });
 	 //保存
 	 $('#btnSave').click(function(){

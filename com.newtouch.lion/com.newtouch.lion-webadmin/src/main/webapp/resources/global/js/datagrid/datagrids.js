@@ -286,12 +286,32 @@
         },
        	//表格重绘回调函数
        	drawCallback:function(){
-       		var that=this,$thatelement=that.$element;
-          
+       		var that=this,
+              $thatelement=that.$element,
+              $wrapper=$('#'+this.id+'_wrapper'),
+              tbodytr=$thatelement.find('tbody tr'),
+              tbodytrsize=tbodytr.length;
+          //多行选择取消
+          if(this.options.checkbox){
+              $thatelement.find('thead th input[type=checkbox]').each(function(){                
+                  var $box=$(this); 
+                  $box.removeAttr('checked');
+                  $box.parent('span').removeClass('checked');
+              });
+          }
+          //表单美化
        		$thatelement.find('tbody tr input,textarea,select,button').uniform();
-       		$thatelement.find('tbody tr').click(function(e){
-       				that.selectedrow=this;
+          //单点checkbox
+          $thatelement.find('tbody tr td input[type=checkbox]').click(function(e){
+            //console.dir('ddd');
+            $(e.target ).closest('tr').trigger('click');
+            //console.dir(obj);           
+
+          });
+          //单元格事件
+       		tbodytr.click(function(e){
                     var $thattr=$(this),$checkbox=$thattr.find('input[type=checkbox]');
+                    that.selectedrow=this;
                     if(that.options.singleselect===true){
                         $thatelement.find('tbody tr td input[type=checkbox]').each(function(){
                             var $box=$(this); 
@@ -303,14 +323,37 @@
                         $checkbox.attr('checked',true);
                         $checkbox.parent('span').addClass('checked');
                         $thattr.addClass('selected');
+                    }else{
+                        $checkbox.removeAttr('checked');
+                        $checkbox.parent('span').removeClass('checked');
+                        $thattr.removeClass('selected');
                     }
-                    //事件停止
-                    event.stopPropagation();
+      
+                  
+                    if(that.options.checkbox){
+                       var selectedsize=$thatelement.find('tbody tr input[type=checkbox]:checked').length;
+                       if(selectedsize===tbodytrsize){
+                          $thatelement.find('thead th input[type=checkbox]').each(function(){                
+                              var $box=$(this); 
+                              $box.attr("checked",true);
+                              $box.parent('span').addClass('checked');
+                          });
+                      }else{
+                           $thatelement.find('thead th input[type=checkbox]').each(function(){                
+                              var $box=$(this); 
+                              $box.removeAttr('checked');
+                              $box.parent('span').removeClass('checked');
+                          });
+                      }
+                    }
+
+                  //事件停止
+                  event.stopPropagation();
             });
        	},
        	//初始化事件,提供给外部使用
        	initComplete:function(){
-       		var e = $.Event('init');
+       		var e = $.Event('datagrids.init');
             this.$element.trigger(e);
             //如已经事件阻止，则返回
             if (e.isDefaultPrevented()) return;

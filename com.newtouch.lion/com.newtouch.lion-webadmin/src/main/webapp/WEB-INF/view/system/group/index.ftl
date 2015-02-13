@@ -110,84 +110,75 @@
 						<div  class="col-md-12">
 							<ul class="nav nav-tabs">
 								<li class="active">
-									<a href="#tab_3_1" data-toggle="tab">已授权信息 </a>
+									<a href="#tab_3_1"  data-toggle="tab">已授权信息 </a>
 								</li>
 								<li>
-									<a href="#tab_3_2" data-toggle="tab">关联用户组 </a>
+									<a href="#tab_3_2"  data-toggle="tab">关联角色</a>
 								</li>
 								<li>
-									<a href="#tab_3_3" data-toggle="tab">关联角色</a>
+									<a href="#tab_3_3"  data-toggle="tab">关联用户</a>
 								</li>
 							</ul>
 							<div class="tab-content">
 								<div role="tabpanel" class="tab-pane active" id="tab_3_1">
-
-									<div class="row">
-										 
-									<div class="col-md-12">
-											<div class="caption">
-												<i class="fa"></i><strong>已关联用户组</strong>
-											</div>									 
-											<table  id="usergroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",    data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="3" cellspacing="0"   width="853px"  >
-												<thead>
-													<tr>
-														<th class="table-checkbox" data-field='id' data-checkbox="true" >
-													 		<input type="checkbox" class="group-checkable" data-set="#usergroup_list.checkboxes"  data-sortable="false"  />
-													 	</th>
-														<th data-field='nameEn' data-sortDir="asc" >
-															用户组名称(英文)
-														</th>
-														<th data-field="nameZh" class="name">
-														 	用户组名称(中文)
-														</th>
-														<th data-field="description" >
-															描述
-														</th>
-													</tr>
-												</thead>
-											</table>
-									</div>
-									<div class="col-md-12">
-										<div class="caption">
-											<i class="fa"></i><strong>已关联角色</strong>
-										</div>
-										 <table  id="userrole_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   d  data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="3"   width="853px" data-scrollY="100px" cellspacing="0"  >
-												<thead>
-													<tr>
-														<th class="table-checkbox" data-field='id' data-checkbox="true" >
-													 		<input type="checkbox" class="group-checkable" data-set="#userrole_list.checkboxes"  data-sortable="false"  />
-													 	</th>
-														<th data-field='nameEn' data-sortDir="asc"    >
-															角色名称(英文)
-														</th>
-														<th data-field="nameZh" >
-														 	角色组名称(中文)
-														</th>
-														<th data-field="description" >
-															描述
-														</th>
-													</tr>
-												</thead>
-											</table>
-									</div>
-									</div>
+								 
+										<div class="col-md-12">	
+												<i class="fa"></i><strong>已关联角色</strong>
+												<table  id="usergroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",    data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="3" cellspacing="0"    >
+													<thead>
+														<tr>
+															<th class="table-checkbox" data-field='id' data-checkbox="true" width="19px">
+														 		<input type="checkbox" class="group-checkable" data-set="#usergroup_list.checkboxes"  data-sortable="false"  />
+														 	</th>
+															<th data-field='nameEn' width="200px;" data-sortDir="asc" >
+																角色名称(英文)
+															</th>
+															<th data-field="nameZh"  width="200px;" >
+															 	角色组名称(中文)
+															</th>
+															<th data-field="description"  width="200px;"  >
+																描述
+															</th>
+														</tr>
+													</thead>
+												</table>						 						
+												<i class="fa"></i><strong>已经用户</strong>
+												<table  id="usergroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",    data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="3" cellspacing="0"    >
+													<thead>
+														<tr>
+															<th class="table-checkbox" data-field='id' data-checkbox="true" width="19px">
+														 		<input type="checkbox" class="group-checkable" data-set="#usergroup_list.checkboxes"  data-sortable="false"  />
+														 	</th>
+															<th data-field='nameEn' width="200px;" data-sortDir="asc" >
+																用户组名称(英文)
+															</th>
+															<th data-field="nameZh"  width="200px;" >
+															 	用户组名称(中文)
+															</th>
+															<th data-field="description"  width="200px;">
+																描述
+															</th>
+														</tr>
+													</thead>
+												</table>
+										</div>				 
 								</div>
 								<div  role="tabpanel" class="tab-pane fade" id="tab_3_2">
 									 <div class="row">
 											<div class="col-md-12">
-									 <table  id="authgroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",     data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="5" width="853px"  >
+									 <table  id="authgroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",     data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="5"  >
 												<thead>
 													<tr>
 														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
 													 		<input type="checkbox" class="group-checkable" data-set="#authgroup_list.checkboxes"  data-sortable="false"  />
 													 	</th>
-														<th data-field='nameEn' data-sortDir="asc"   >
+														<th data-field='nameEn' width="200px;"  data-sortDir="asc"   >
 															用户组名称(英文)
 														</th>
-														<th data-field="nameZh" >
+														<th data-field="nameZh"  width="200px;"  >
 														 	用户组名称(中文)
 														</th>
-														<th data-field="description">
+														<th data-field="description" width="200px;" >
 															描述
 														</th>
 													</tr>
@@ -199,20 +190,20 @@
 								<div role="tabpanel" class="tab-pane fade" id="tab_3_3">
 									<div class="row">
 											<div class="col-md-12">
-												<table  id="authrole_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="5"   width="853px"   >
+												<table  id="authrole_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="5">
 												<thead>
 													<tr>
 														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
 													 		<input type="checkbox" class="group-checkable" data-set="#authrole_list.checkboxes"  data-sortable="false"  />
 													 	</th>
-														<th data-field='nameEn' data-sortDir="asc"   >
-															用户组名称(英文)
+														<th data-field='nameEn' width="200px;"  data-sortDir="asc"   >
+															用户名(英文)
 														</th>
-														<th data-field="nameZh" >
-														 	用户组名称(中文)
+														<th data-field="nameZh"  width="200px;" >
+														 	用户姓名(中文)
 														</th>
-														<th data-field="description" >
-															描述
+														<th data-field="description" width="200px;" >
+															员工号
 														</th>
 													</tr>
 												</thead>
@@ -228,7 +219,7 @@
 			<div class="modal-footer">
 				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal">
 					<i class="fa  fa-arrow-left"></i> 取 消 </button>
-				<button type="button" id="btnSave" class="btn blue">
+				<button type="button" id="btnAuthSave" class="btn blue">
 					<i class="fa fa-save"></i> 保 存</button>
 			</div>
 		</div>
