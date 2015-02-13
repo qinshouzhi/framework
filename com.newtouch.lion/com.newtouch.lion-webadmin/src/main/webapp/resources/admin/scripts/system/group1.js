@@ -57,7 +57,6 @@ $(function() {
 		 addForm.find('.help-block').remove();
 		 addDialog.find('.modal-header h4').text('编辑用户组');
 		 addDialog.modal('toggle');
-		 addForm.fill(row);
 	 });
 	 //删除
 	 $('#btnDelete').on('click',function(){

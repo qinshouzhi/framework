@@ -1,33 +1,42 @@
+var groupdg=$("#sys_group_list_tb"); //datagrids
+var addForm=$('#sysGroupForm');  //编辑或添加表单
+var addDialog=$('#basic'); //编辑或添加对话框
 $(function () {
 	//加载bootstrap
 	Metronic.init(); // init metronic core componets
 	Layout.init(); // init layout
 	Tasks.initDashboardWidget(); // init tash dashboard widget
 
-	var groupdg=$("#sys_group_list_tb");
+	groupdg=$("#sys_group_list_tb");
+	addForm=$('#sysGroupForm');
+	addDialog=$('#basic');
+	modalGroupAuth=$('#modalGroupAuth');
 	var queryForm=$('#queryform');
-	var addForm=$('#sysGroupForm');
-	var addDialog=$('#basic');
+	
 	//验证表单
 	handleVForm(addForm,submitForm);
-
+	//用户组授权
+	$('#btnAuth').click(function(){
+		modalGroupAuth.modal('toggle');	
+	});
+	//查询
 	$("#btnQuery").click(function(){
 		groupdg.datagrids({querydata:queryForm.serializeObject()});
 		var queryparam=groupdg.datagrids('queryparams'); 
 		groupdg.datagrids('reload');
 	});
-
+	//刷新
 	$("#btnRefresh").click(function(){		 
         groupdg.datagrids('reload');
     });
-
+	//添加
     $("#btnAdd").click(function(){
       	 addForm.reset();
 	 	 addDialog.find('.modal-header h4 span').text('添加用户组');
 		 return;
     });
 
-    //获取多行数据
+    //编辑
     $("#btnEdit").click(function(){
         var row=groupdg.datagrids('getSelected');
         if(!row){
@@ -51,7 +60,6 @@ $(function () {
               if(result){            	 
             	  var param={'id':row.id};
                   lion.util.post('delete.json',param,successForDelete,errorRequest);
-            	  //lion.util.success('提示!', '已删除成功');
               }
           }); 
 	 });
@@ -63,8 +71,7 @@ $(function () {
         }
       	 window.open(url,"_blank");
 	 });
-
-
+	 //保存
 	 $('#btnSave').click(function(){
 	 		addForm.submit();
 	 });
@@ -83,13 +90,11 @@ $(function () {
 	        gmsg='未删除成功';
 	      }
 	      lion.util.error('提示',gmsg);
+		}
 	}
-}
 
 });
-var groupdg=$("#sys_group_list_tb");
-var addForm=$('#sysGroupForm');
-var addDialog=$('#basic');
+
 
 /**新增或编辑的提交代码*/
 function submitForm(frm){

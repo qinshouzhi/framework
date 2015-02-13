@@ -135,7 +135,6 @@ public class GroupController extends AbstractController{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS, "sys.group.add.success");
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		
 		return this.getJsonView(modelAndView);
 	}
 
@@ -400,8 +399,9 @@ public class GroupController extends AbstractController{
 		if(StringUtils.isNotEmpty(groupVo.getNameZh())){
 			queryCriteria.addQueryCondition("nameZh","%"+groupVo.getNameZh()+"%");
 		}
-
-		PageResult<Role> result=roleService.doFindByCriteria(queryCriteria);
+		//查询用户组
+		PageResult<Group> result=groupService.doFindByCriteria(queryCriteria);
+		
 		Map<String, Map<Object, Object>> fieldCodeTypes = new HashMap<String, Map<Object, Object>>();
 
 		Map<String, String> dataFormats = new HashMap<String, String>();		

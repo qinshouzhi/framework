@@ -44,7 +44,7 @@
 				<form id="queryform" class="form-horizontal">
 					<label class="control-label col-md-2" for="nameZh" ><@spring.message "sys.group.query.namezh.text"/></label>
 					<div class="col-md-3">
-						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="请输入<@spring.message "sys.group.form.namezh.missing.message"/>"/>					
+						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="<@spring.message "sys.group.form.namezh.missing.message"/>"/>					
 					</div>
 					<div class="col-md-7">
 						<a href="javascript:void(0)" id="btnQuery" class="btn blue"><i class="fa fa-search"></i> <@spring.message "common.query.btn.text"/> </a>
@@ -96,7 +96,171 @@
 		</div>
 	</div>
 </div>
-<!--Edit Dialog Start -->
+
+<!--Auth Modal Dialog Start-->
+<div class="modal fade bs-modal-lg" id="modalGroupAuth" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<h4 class="modal-title"><i class="fa fa-gear"></i> <span>用户组授权</span></h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+						<div  class="col-md-12">
+							<ul class="nav nav-tabs">
+								<li class="active">
+									<a href="#tab_3_1" data-toggle="tab">已授权信息 </a>
+								</li>
+								<li>
+									<a href="#tab_3_2" data-toggle="tab">关联用户组 </a>
+								</li>
+								<li>
+									<a href="#tab_3_3" data-toggle="tab">关联角色</a>
+								</li>
+							</ul>
+							<div class="tab-content">
+								<div role="tabpanel" class="tab-pane active" id="tab_3_1">
+									<div class="col-md-12">
+										<table class="table table-bordered table-hover" width="853px" style="display:none">
+											<thead>
+												<tr>
+													<th>用户名</th>
+													<th>工号</th>
+													<th>账户锁定状态</th>
+													<th>账户有效日期</th>
+													<th>账户有效状态</th>
+													<th>密码有效日期</th>
+													<th>密码有效状态</th>
+													<th>所属部门</th>
+												</tr>
+											</thead>
+											<tbody>
+											  <tr>
+											  	<td><span id="auth_username"></span></td>
+												<td><span id="auth_employeeCode"></span></td>
+												<td><span id="auth_accountLocked"></span></td>
+												<td><span id="auth_accountExpiredDate"></span></td>
+												<td><span id="auth_accountExpired"></span></td>
+												<td><span id="auth_credentialExpiredDate"></span></td>
+												<td><span id="auth_credentialExpired"></span></td>
+												<td><span id="auth_department"></span></td>
+											  </tr>								 
+											</tbody>
+										</table>
+				  					</div>
+									<div class="col-md-12">
+											<div class="caption">
+												<i class="fa"></i><strong>已关联用户组</strong>
+											</div>									 
+											<table  id="usergroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",    data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="3" cellspacing="0"   width="853px"  >
+												<thead>
+													<tr>
+														<th class="table-checkbox" data-field='id' data-checkbox="true" >
+													 		<input type="checkbox" class="group-checkable" data-set="#usergroup_list.checkboxes"  data-sortable="false"  />
+													 	</th>
+														<th data-field='nameEn' data-sortDir="asc" >
+															用户组名称(英文)
+														</th>
+														<th data-field="nameZh" >
+														 	用户组名称(中文)
+														</th>
+														<th data-field="description" >
+															描述
+														</th>
+													</tr>
+												</thead>
+											</table>
+									</div>
+									<div class="col-md-12">
+										<div class="caption">
+											<i class="fa"></i><strong>已关联角色</strong>
+										</div>
+										 <table  id="userrole_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   d  data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="3"   width="853px" data-scrollY="100px" cellspacing="0"  >
+												<thead>
+													<tr>
+														<th class="table-checkbox" data-field='id' data-checkbox="true" >
+													 		<input type="checkbox" class="group-checkable" data-set="#userrole_list.checkboxes"  data-sortable="false"  />
+													 	</th>
+														<th data-field='nameEn' data-sortDir="asc"    >
+															角色名称(英文)
+														</th>
+														<th data-field="nameZh" >
+														 	角色组名称(中文)
+														</th>
+														<th data-field="description" >
+															描述
+														</th>
+													</tr>
+												</thead>
+											</table>
+									</div>
+								</div>
+								<div  role="tabpanel" class="tab-pane fade" id="tab_3_2">
+									 <div class="row">
+											<div class="col-md-12">
+									 <table  id="authgroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",     data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="10" width="853px"  >
+												<thead>
+													<tr>
+														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
+													 		<input type="checkbox" class="group-checkable" data-set="#authgroup_list.checkboxes"  data-sortable="false"  />
+													 	</th>
+														<th data-field='nameEn' data-sortDir="asc"   >
+															用户组名称(英文)
+														</th>
+														<th data-field="nameZh" >
+														 	用户组名称(中文)
+														</th>
+														<th data-field="description">
+															描述
+														</th>
+													</tr>
+												</thead>
+											</table>
+										</div>
+									</div>
+								</div>
+								<div role="tabpanel" class="tab-pane fade" id="tab_3_3">
+									<div class="row">
+											<div class="col-md-12">
+												<table  id="authrole_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="10"   width="853px"   >
+												<thead>
+													<tr>
+														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
+													 		<input type="checkbox" class="group-checkable" data-set="#authrole_list.checkboxes"  data-sortable="false"  />
+													 	</th>
+														<th data-field='nameEn' data-sortDir="asc"   >
+															用户组名称(英文)
+														</th>
+														<th data-field="nameZh" >
+														 	用户组名称(中文)
+														</th>
+														<th data-field="description" >
+															描述
+														</th>
+													</tr>
+												</thead>
+											</table>
+											</div>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal">
+					<i class="fa  fa-arrow-left"></i> 取 消 </button>
+				<button type="button" id="btnSave" class="btn blue">
+					<i class="fa fa-save"></i> 保 存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Auth Modal Dialog End-->
+
+<!--Edit Modal Dialog Start -->
 <div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -180,6 +344,6 @@
 		</div>
 	</div>
 </div>
-<!--Edit Dialog End -->
+<!--Edit Modal Dialog End -->
 </body>
 </html>
