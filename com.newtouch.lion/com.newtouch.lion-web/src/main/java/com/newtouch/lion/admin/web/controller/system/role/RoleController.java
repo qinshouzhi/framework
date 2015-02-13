@@ -52,6 +52,7 @@ import com.newtouch.lion.tree.State;
 import com.newtouch.lion.tree.TreeNode;
 import com.newtouch.lion.web.constant.ConstantMessage;
 import com.newtouch.lion.web.controller.AbstractController;
+import com.newtouch.lion.web.model.QueryDt;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
 
@@ -405,34 +406,28 @@ public class RoleController extends AbstractController{
 	
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public DataTable<Role> list(HttpServletRequest servletRequest,
-			Model model, @RequestParam(defaultValue = "1") int page,
-			@RequestParam(defaultValue = "15") int rows,
-			@RequestParam(required = false) String sort,
-			@RequestParam(required = false) String order,
-			@ModelAttribute("role") RoleVo roleVo) {
+	public DataTable<Role> list(QueryDt query,@ModelAttribute("role") RoleVo roleVo) {
 		QueryCriteria queryCriteria = new QueryCriteria();
 
 		// 设置分页 启始页
-		queryCriteria.setStartIndex(rows * (page - 1));
+		queryCriteria.setStartIndex(query.getPage());
 		// 每页大小
-		queryCriteria.setPageSize(rows);
+		queryCriteria.setPageSize(query.getRows());
 		// 设置排序字段及排序方向
-		if (StringUtils.isNotEmpty(sort) && StringUtils.isNotEmpty(order)) {
-			queryCriteria.setOrderField(sort);
-			queryCriteria.setOrderDirection(order);
+		if (StringUtils.isNotEmpty(query.getSort()) && StringUtils.isNotEmpty(query.getOrder())) {
+			queryCriteria.setOrderField(query.getSort());
+			queryCriteria.setOrderDirection(query.getOrder());
 		} else {
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
-			queryCriteria.setOrderDirection("ASC");
+			queryCriteria.setOrderDirection(QueryCriteria.ASC);
 		}
 		//查询条件 中文参数名称按模糊查询
 		if(StringUtils.isNotEmpty(roleVo.getNameZh())){
 			queryCriteria.addQueryCondition("nameZh","%"+roleVo.getNameZh()+"%");
 		}
 
-		PageResult<Role> pageResult = roleService
-				.doFindByCriteria(queryCriteria);
-		return pageResult.getDataTable();
+		PageResult<Role> pageResult = roleService.doFindByCriteria(queryCriteria);
+		return pageResult.getDataTable(query.getRequestId());
 	}
 	/*add by maojiawei*/
 	private Boolean isExistByNameEn(String nameEn) {

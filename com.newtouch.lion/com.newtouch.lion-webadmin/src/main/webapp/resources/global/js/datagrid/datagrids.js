@@ -232,6 +232,7 @@
               deferRender:that.options.deferRender,
               lengthMenu:that.options.pagelist,
               pageLength:that.options.pagesize,
+              bAutoWidth:false,
               initComplete:function(){
                 that.loadinitComplete();
               },//初始化事件

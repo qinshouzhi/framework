@@ -1,73 +1,49 @@
-$(function() {
+$(function () {
 	//加载bootstrap
 	Metronic.init(); // init metronic core componets
 	Layout.init(); // init layout
 	Tasks.initDashboardWidget(); // init tash dashboard widget
-	
+
 	var datagridId='#sys_rolelist_tb';
 	var addForm=$('#sysRoleForm');
 	var addDialog=$('#basic');
 	var queryForm=$('#queryform');
 	
+	//验证表单
 	handleVForm(addForm,submitForm);
-	//选择DataGrid单行
-	function getSelectedRow(){return $(datagridId).datagrid('getSelected');}
-	 
-	$(datagridId).datagrid({
-		 onLoadSuccess : function(data) {
-		}
+
+	$("#btnQuery").click(function(){
+		groupdg.datagrids({querydata:queryForm.serializeObject()});
+		var queryparam=groupdg.datagrids('queryparams'); 
+		groupdg.datagrids('reload');
 	});
-	
-	/**
-	 * [查询]
-	 */
-	 $('#btnQuery').click(function(){
-		 var params=queryForm.serializeObject();	      
-	      $(datagridId).datagrid({queryParams:params});
-	      //重新加载数据
-	      dataGridReload(datagridId);
-	 });
-	 
-	//重新加载DataGrid
-	  function dataGridReload(dataGridId){
-	     $(datagridId).datagrid('reload');
-	  }
-	 //刷新
-	 $('#btnRefresh').on('click',function(){
-		   dataGridReload(datagridId);
-	 });
-	 //新增
-	 $('#btnAdd').on('click',function(){
-		 addForm.reset();
-		  addDialog.find('.modal-header h4 span').text('添加角色');
-		  $('.lion-combo').combo('reloadLi');
-	 });
 
-	 addForm.on('show.bs.modal',function(){
-	 	 addForm[0].reset(); 
-	 }); 
+	$("#btnRefresh").click(function(){		 
+        groupdg.datagrids('reload');
+    });
 
-	 $('#btnSave').click(function(){
-	 		addForm.submit();
-	 });
+    $("#btnAdd").click(function(){
+      	 addForm.reset();
+	 	 addDialog.find('.modal-header h4 span').text('添加角色');
+		 return;
+    });
 
-	 //编辑
-	 $('#btnEdit').on('click',function(){
-		 var row=getSelectedRow();
-		 if(!row){
+    //获取多行数据
+    $("#btnEdit").click(function(){
+        var row=groupdg.datagrids('getSelected');
+        if(!row){
 			 lion.util.info('提示','请选择要编辑记录');
 			 return;
-		 }
-		 addForm[0].reset();
-		 addForm.find('.form-group').removeClass('has-error');
-		 addForm.find('.help-block').remove();
-		 addDialog.find('.modal-header h4').text('编辑角色');
-		 $('#basic').modal('toggle');
-		 addForm.fill(row);
-	 });
-	 //删除
+		}
+		addForm.reset();
+		addDialog.find('.modal-header h4 span').text('编辑角色');
+		addDialog.modal('toggle');
+		addForm.fill(row);
+    });
+
+     //删除
 	 $('#btnDelete').on('click',function(){
-		 var row=getSelectedRow();
+		 var row=groupdg.datagrids('getSelected');
 		 if(!row){
 			 lion.util.info('提示','请选择要删除记录');
 			 return;
@@ -75,36 +51,47 @@ $(function() {
 		 bootbox.confirm('确认要删除此记录？', function(result) {
               if(result){            	 
             	  var param={'id':row.id};
-                lion.util.post('delete.json',param,successForDelete,errorRequest);
+                  lion.util.post('delete.json',param,successForDelete,errorRequest);
             	  //lion.util.success('提示!', '已删除成功');
               }
           }); 
 	 });
-	//导出Excel
+	 //导出Excel
 	 $('#btnExport').on('click',function(){
-		   var params=queryForm.serialize(),url='export.json?tableId='+$(datagridId).attr('id');
-       if(lion.util.isNotEmpty(params)){
+		 var params=queryForm.serialize(),url='export.json?tableId='+groupdg.attr('id');
+        if(lion.util.isNotEmpty(params)){
           url+='&'+params;
-       }
-       window.open(url,"_blank");
+        }
+      	 window.open(url,"_blank");
 	 });
-});
 
-function successForDelete(data,arg){
-   if(data!==null&&!(data.hasError)){
-      lion.util.success('提示',data.message);
-      $('#sys_rolelist_tb').datagrid('reload');
-   }else if(data!==null&&data.hasError){
-      var gmsg='';
-      for(var msg in data.errorMessage){
-        gmsg+=data.errorMessage[msg];
-      }
-      if(lion.util.isEmpty(gmsg)){
-        gmsg='未删除成功';
-      }
-      lion.util.error('提示',gmsg);
-  }
+
+	 $('#btnSave').click(function(){
+	 		addForm.submit();
+	 });
+
+	 //删除成功
+	function successForDelete(data,arg){
+	   if(data!==null&&!(data.hasError)){
+	      lion.util.success('提示',data.message);
+	      groupdg.datagrids('reload');
+	   }else if(data!==null&&data.hasError){
+	      var gmsg='';
+	      for(var msg in data.errorMessage){
+	        gmsg+=data.errorMessage[msg];
+	      }
+	      if(lion.util.isEmpty(gmsg)){
+	        gmsg='未删除成功';
+	      }
+	      lion.util.error('提示',gmsg);
+	}
 }
+
+});
+var groupdg=$("#sys_rolelist_tb");
+var addForm=$('#sysRoleForm');
+var addDialog=$('#basic');
+
 /**新增或编辑的提交代码*/
 function submitForm(frm){
 	var param=frm.serialize(),id=($('#id').val());
@@ -121,8 +108,8 @@ function successAddFrm(data,arg,id){
   //TODO
   if(data!==null&&!(data.hasError)){
   	lion.util.success('提示',data.message);
-  	$('#basic').modal('toggle');
-  	$('#sys_rolelist_tb').datagrid('reload');
+  	addDialog.modal('toggle');
+  	groupdg.datagrids('reload');
   }else if(data!==null&&data.hasError){
   	var gmsg='';
   	for(var msg in data.errorMessage){
@@ -163,7 +150,7 @@ handleVForm=function(vForm,submitCallBackfn){
         	},
         	description:{
         		required:'请输入角色的描述',
-        		maxlength:jQuery.validator.format('参数描述的最大长度为:{0}'),
+        		maxlength:jQuery.validator.format('参数描述的最大长度为:{0}')
         	}
         },
         rules: {
@@ -226,8 +213,9 @@ handleVForm=function(vForm,submitCallBackfn){
             addError.hide();
             submitCallBackfn(vForm);
         }
-    });
+  });
 };
+
 //判断是否编辑
 function formatterEidtable(val,row) {
 	var name =$.loin.lang.editable.n;
@@ -235,13 +223,4 @@ function formatterEidtable(val,row) {
 		name = $.loin.lang.editable.y;
 	}
 	return name;
-}
-
-//部门显示方法
-function formatterDarptment(data,type,full){
-  //console.dir(data);
-  if(data){
-    return data.nameZh;
-  }
-  return '';
 }

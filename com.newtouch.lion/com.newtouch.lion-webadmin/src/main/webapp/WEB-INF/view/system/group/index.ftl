@@ -121,34 +121,9 @@
 							</ul>
 							<div class="tab-content">
 								<div role="tabpanel" class="tab-pane active" id="tab_3_1">
-									<div class="col-md-12">
-										<table class="table table-bordered table-hover" width="853px" style="display:none">
-											<thead>
-												<tr>
-													<th>用户名</th>
-													<th>工号</th>
-													<th>账户锁定状态</th>
-													<th>账户有效日期</th>
-													<th>账户有效状态</th>
-													<th>密码有效日期</th>
-													<th>密码有效状态</th>
-													<th>所属部门</th>
-												</tr>
-											</thead>
-											<tbody>
-											  <tr>
-											  	<td><span id="auth_username"></span></td>
-												<td><span id="auth_employeeCode"></span></td>
-												<td><span id="auth_accountLocked"></span></td>
-												<td><span id="auth_accountExpiredDate"></span></td>
-												<td><span id="auth_accountExpired"></span></td>
-												<td><span id="auth_credentialExpiredDate"></span></td>
-												<td><span id="auth_credentialExpired"></span></td>
-												<td><span id="auth_department"></span></td>
-											  </tr>								 
-											</tbody>
-										</table>
-				  					</div>
+
+									<div class="row">
+										 
 									<div class="col-md-12">
 											<div class="caption">
 												<i class="fa"></i><strong>已关联用户组</strong>
@@ -162,7 +137,7 @@
 														<th data-field='nameEn' data-sortDir="asc" >
 															用户组名称(英文)
 														</th>
-														<th data-field="nameZh" >
+														<th data-field="nameZh" class="name">
 														 	用户组名称(中文)
 														</th>
 														<th data-field="description" >
@@ -195,11 +170,12 @@
 												</thead>
 											</table>
 									</div>
+									</div>
 								</div>
 								<div  role="tabpanel" class="tab-pane fade" id="tab_3_2">
 									 <div class="row">
 											<div class="col-md-12">
-									 <table  id="authgroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",     data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="10" width="853px"  >
+									 <table  id="authgroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",     data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="5" width="853px"  >
 												<thead>
 													<tr>
 														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
@@ -223,7 +199,7 @@
 								<div role="tabpanel" class="tab-pane fade" id="tab_3_3">
 									<div class="row">
 											<div class="col-md-12">
-												<table  id="authrole_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="10"   width="853px"   >
+												<table  id="authrole_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="5"   width="853px"   >
 												<thead>
 													<tr>
 														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
