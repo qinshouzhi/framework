@@ -389,7 +389,6 @@
            util.post(url,param,handleAjaxSuccess,handleAjaxError);
            //加载成功的函数
            function handleAjaxSuccess(data,arg){
-             
            		fnCallback.call(this,data);
            }
            //加载失败的错误
