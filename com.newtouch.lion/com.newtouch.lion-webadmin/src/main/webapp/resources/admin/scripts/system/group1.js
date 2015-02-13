@@ -48,6 +48,7 @@ $(function() {
 	 //编辑
 	 $('#btnEdit').on('click',function(){
 		 var row=getSelectedRow();
+<<<<<<< HEAD
 		 if(!row){
 			 lion.util.info('提示','请选择要编辑记录');
 			 return;
@@ -57,7 +58,6 @@ $(function() {
 		 addForm.find('.help-block').remove();
 		 addDialog.find('.modal-header h4').text('编辑用户组');
 		 addDialog.modal('toggle');
-		 addForm.fill(row);
 	 });
 	 //删除
 	 $('#btnDelete').on('click',function(){
