@@ -76,59 +76,78 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-				<h4 class="modal-title"><i class="fa fa-plus"></i> <span><@spring.message "sys.applicationProperty.form.adddialog.text"/></span></h4>
+				<h4 class="modal-title">
+					<i class="fa fa-plus"></i> 
+					<span>
+						<@spring.message "sys.applicationProperty.form.adddialog.text"/>
+					</span>
+				</h4>
 			</div>
 			<div class="modal-body">
 				 	<div class="row">
 				 	<div class="col-md-12 portlet-body form">
 				 		<!-- BEGIN FORM-->
-										<form action="#" class="form-horizontal" name="sysAppPropertyForm" id="sysAppPropertyForm" method="post">
-											<input type="hidden" id='id' name='id' value="">
-											<div class="form-body">
-												<div class="form-group">
-													<label class="col-md-3 control-label"><@spring.message "sys.applicationProperty.form.appId.text"/></label>
-													<div class="col-md-5">
-														<input type="text"  name="appId"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.applicationProperty.form.appId.missing.message"/>" size="30"/>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label"><@spring.message "sys.applicationProperty.form.key.text"/></label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="text"  name="key"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.applicationProperty.form.key.missing.message"/>" size="30"/>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label"><@spring.message "sys.applicationProperty.form.value.text"/></label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="text"  id="value" name="value" maxlength="100" class="form-control" placeholder="<@spring.message "sys.applicationProperty.form.value.missing.message"/>" size="30"/>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label"><@spring.message "sys.applicationProperty.form.description.text"/></label>
-													<div class="col-md-5">
-														<div class="input-group ">															 
-															<input type="text" class="form-control" name="description" placeholder="<@spring.message "sys.applicationProperty.form.description.missing.message"/>" maxlength="255" size="40"/>
-														</div>
-													</div>
-												</div>
+							<form action="#" class="form-horizontal" name="sysAppPropertyForm" id="sysAppPropertyForm" method="post">
+								<input type="hidden" id='id' name='id' value="">
+								<div class="form-body">
+									<div class="form-group">
+										<label class="col-md-3 control-label">
+											<@spring.message "sys.applicationProperty.form.appId.text"/>
+										</label>
+										<div class="col-md-5">
+											<input type="text"  name="appId"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.applicationProperty.form.appId.missing.message"/>" size="30"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">
+											<@spring.message "sys.applicationProperty.form.key.text"/>
+										</label>
+										<div class="col-md-5">
+											<div class="input-group">
+												<input type="text"  name="key"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.applicationProperty.form.key.missing.message"/>" size="30"/>
 											</div>
-										</form>
-									<!-- END FORM-->
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">
+											<@spring.message "sys.applicationProperty.form.value.text"/>
+										</label>
+										<div class="col-md-5">
+											<div class="input-group">
+												<input type="text"  id="value" name="value" maxlength="100" class="form-control" placeholder="<@spring.message "sys.applicationProperty.form.value.missing.message"/>" size="30"/>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">
+											<@spring.message "sys.applicationProperty.form.description.text"/>
+										</label>
+										<div class="col-md-5">
+											<div class="input-group ">															 
+												<input type="text" class="form-control" name="description" placeholder="<@spring.message "sys.applicationProperty.form.description.missing.message"/>" maxlength="255" size="40"/>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						<!-- END FORM-->
 							</div>
 				 	</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal"><i class="fa  fa-arrow-left"></i> <@spring.message "common.diaglog.btn.cancel"/> </button>
-				<button type="button" id="btnSave" class="btn blue"><i class="fa fa-save"></i> <@spring.message "common.diaglog.btn.save"/></button>
+				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal">
+					<i class="fa  fa-arrow-left"></i> 
+					<@spring.message "common.diaglog.btn.cancel"/>
+				</button>
+				<button type="button" id="btnSave" class="btn blue">
+					<i class="fa fa-save"></i>
+					<@spring.message "common.diaglog.btn.save"/>
+				</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
 	</div>
-	
+</div>
 	<!-- /.modal-dialog -->
 <!--Edit Dialog End -->
 </body>
