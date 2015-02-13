@@ -1,48 +1,67 @@
-$(function () {
+$(function() {
 	//加载bootstrap
 	Metronic.init(); // init metronic core componets
 	Layout.init(); // init layout
 	Tasks.initDashboardWidget(); // init tash dashboard widget
-
-	var groupdg=$("#sys_group_list_tb");
-	var queryForm=$('#queryform');
+	
+	var datagridId='#sys_group_list_tb';
 	var addForm=$('#sysGroupForm');
 	var addDialog=$('#basic');
-	//验证表单
+	var queryForm=$('#queryform');
+	
 	handleVForm(addForm,submitForm);
+	//选择DataGrid单行
+	function getSelectedRow(){return $(datagridId).datagrids('getSelected');}	
+	/**
+	 * [查询]
+	 */
+	 $('#btnQuery').click(function(){
+		 var params=queryForm.serializeObject();	      
+	      $(datagridId).datagrids({querydata:params});
+	      //重新加载数据
+	      dataGridReload(datagridId);
+	 });
+	 
+	 //重新加载DataGrid
+	  function dataGridReload(dataGridId){
+	     $(datagridId).datagrids('reload');
+	  }
+	 //刷新
+	 $('#btnRefresh').on('click',function(){
+		   dataGridReload(datagridId);
+	 });
+	 //新增
+	 $('#btnAdd').on('click',function(){
+		  addForm.reset();
+		  addDialog.find('.modal-header h4 span').text('添加用户组');
+		  $('.lion-combo').combo('reloadLi');
+	 });
 
-	$("#btnQuery").click(function(){
-		groupdg.datagrids({querydata:queryForm.serializeObject()});
-		var queryparam=groupdg.datagrids('queryparams'); 
-		groupdg.datagrids('reload');
-	});
+	 addForm.on('show.bs.modal',function(){
+	 	 addForm[0].reset(); 
+	 }); 
 
-	$("#btnRefresh").click(function(){		 
-        groupdg.datagrids('reload');
-    });
+	 $('#btnSave').click(function(){
+	 		addForm.submit();
+	 });
 
-    $("#btnAdd").click(function(){
-      	 addForm.reset();
-	 	 addDialog.find('.modal-header h4 span').text('添加用户组');
-		 return;
-    });
-
-    //获取多行数据
-    $("#btnEdit").click(function(){
-        var row=groupdg.datagrids('getSelected');
-        if(!row){
+	 //编辑
+	 $('#btnEdit').on('click',function(){
+		 var row=getSelectedRow();
+		 if(!row){
 			 lion.util.info('提示','请选择要编辑记录');
 			 return;
-		}
-		addForm.reset();
-		addDialog.find('.modal-header h4 span').text('编辑用户组');
-		addDialog.modal('toggle');
-		addForm.fill(row);
-    });
-
-     //删除
+		 }
+		 addForm[0].reset();
+		 addForm.find('.form-group').removeClass('has-error');
+		 addForm.find('.help-block').remove();
+		 addDialog.find('.modal-header h4').text('编辑用户组');
+		 addDialog.modal('toggle');
+		 addForm.fill(row);
+	 });
+	 //删除
 	 $('#btnDelete').on('click',function(){
-		 var row=groupdg.datagrids('getSelected');
+		 var row=getSelectedRow();
 		 if(!row){
 			 lion.util.info('提示','请选择要删除记录');
 			 return;
@@ -50,47 +69,36 @@ $(function () {
 		 bootbox.confirm('确认要删除此记录？', function(result) {
               if(result){            	 
             	  var param={'id':row.id};
-                  lion.util.post('delete.json',param,successForDelete,errorRequest);
+                lion.util.post('delete.json',param,successForDelete,errorRequest);
             	  //lion.util.success('提示!', '已删除成功');
               }
           }); 
 	 });
-	 //导出Excel
+	//导出Excel
 	 $('#btnExport').on('click',function(){
-		 var params=queryForm.serialize(),url='export.json?tableId='+groupdg.attr('id');
-        if(lion.util.isNotEmpty(params)){
+		 var params=queryForm.serialize(),url='export.json?tableId='+$(datagridId).attr('id');
+       if(lion.util.isNotEmpty(params)){
           url+='&'+params;
-        }
-      	 window.open(url,"_blank");
+       }
+       window.open(url,"_blank");
 	 });
-
-
-	 $('#btnSave').click(function(){
-	 		addForm.submit();
-	 });
-
-	 //删除成功
-	function successForDelete(data,arg){
-	   if(data!==null&&!(data.hasError)){
-	      lion.util.success('提示',data.message);
-	      groupdg.datagrids('reload');
-	   }else if(data!==null&&data.hasError){
-	      var gmsg='';
-	      for(var msg in data.errorMessage){
-	        gmsg+=data.errorMessage[msg];
-	      }
-	      if(lion.util.isEmpty(gmsg)){
-	        gmsg='未删除成功';
-	      }
-	      lion.util.error('提示',gmsg);
-	}
-}
-
 });
-var groupdg=$("#sys_group_list_tb");
-var addForm=$('#sysGroupForm');
-var addDialog=$('#basic');
 
+function successForDelete(data,arg){
+   if(data!==null&&!(data.hasError)){
+      lion.util.success('提示',data.message);
+      $('#sys_group_list_tb').datagrid('reload');
+   }else if(data!==null&&data.hasError){
+      var gmsg='';
+      for(var msg in data.errorMessage){
+        gmsg+=data.errorMessage[msg];
+      }
+      if(lion.util.isEmpty(gmsg)){
+        gmsg='未删除成功';
+      }
+      lion.util.error('提示',gmsg);
+  }
+}
 /**新增或编辑的提交代码*/
 function submitForm(frm){
 	var param=frm.serialize(),id=($('#id').val());
@@ -107,19 +115,19 @@ function successAddFrm(data,arg,id){
   //TODO
   if(data!==null&&!(data.hasError)){
   	lion.util.success('提示',data.message);
-  	addDialog.modal('toggle');
-  	groupdg.datagrids('reload');
+  	$('#basic').modal('toggle');
+  	$('#sys_group_list_tb').datagrid('reload');
   }else if(data!==null&&data.hasError){
   	var gmsg='';
   	for(var msg in data.errorMessage){
   		gmsg+=data.errorMessage[msg];
   	}
   	if(lion.util.isEmpty(gmsg)){
-  		gmsg='添加用户组出错';
+  		gmsg='添加角色出错';
   	}
   	lion.util.error('提示',gmsg);
   }else{
-  	lion.util.error('提示','添加用户组失败');
+  	lion.util.error('提示','添加角色失败');
   }
 }
 //请求失败后信息
@@ -139,17 +147,17 @@ handleVForm=function(vForm,submitCallBackfn){
         ignore: '', 
         messages: {
         	nameZh:{
-        		required:'请输入用户组名称(中文)',
-        		rangelength:jQuery.validator.format('用户组名称(中文)长度为{0}和{1}字符之间')
+        		required:'请输入角色名称(中文)',
+        		rangelength:jQuery.validator.format('角色名称(中文)长度为{0}和{1}字符之间')
         	},
             nameEn:{
-        		required:'请输入用户组名称(英文)',
-        		rangelength:jQuery.validator.format('用户组名称(英文)长度为{0}和{1}字符之间'),
-        		remote:'该用户组名称已存在，请输入其它用户组名称'
+        		required:'请输入角色名称(英文)',
+        		rangelength:jQuery.validator.format('角色名称(英文)长度为{0}和{1}字符之间'),
+        		remote:'该角色名称已存在，请输入其它角色名称'
         	},
         	description:{
-        		required:'请输入用户组的描述',
-        		maxlength:jQuery.validator.format('用户组描述的最大长度为:{0}'),
+        		required:'请输入角色的描述',
+        		maxlength:jQuery.validator.format('参数描述的最大长度为:{0}'),
         	}
         },
         rules: {
@@ -214,7 +222,6 @@ handleVForm=function(vForm,submitCallBackfn){
         }
     });
 };
-
 //判断是否编辑
 function formatterEidtable(val,row) {
 	var name =$.loin.lang.editable.n;

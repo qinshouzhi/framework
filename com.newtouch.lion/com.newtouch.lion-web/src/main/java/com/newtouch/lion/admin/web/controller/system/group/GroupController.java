@@ -409,7 +409,7 @@ public class GroupController extends AbstractController{
 		//创建.xls的文件名
 		String fileName=this.createFileName(FileUtil.EXCEL_EXTENSION);
 		
-		modelAndView.addObject("title", dataGrid.getTitle());
+		modelAndView.addObject("title", dataGrid.getTitle()==null?"用户组":dataGrid.getTitle());
 		
 		Long startTime=System.currentTimeMillis();
 		
