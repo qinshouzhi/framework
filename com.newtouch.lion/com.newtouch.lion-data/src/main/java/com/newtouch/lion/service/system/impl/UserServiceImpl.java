@@ -21,10 +21,12 @@ import org.springframework.util.CollectionUtils;
 
 import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.system.UserDao;
+import com.newtouch.lion.dao.system.UserGroupDao;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.system.Group;
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
+import com.newtouch.lion.model.system.UserGroup;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.AbstractService;
@@ -55,6 +57,9 @@ public class UserServiceImpl extends AbstractService implements UserService {
 
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private UserGroupDao userGroupDao;
+	
 	@Autowired
 	private DataColumnService dataColumnService;
 	@Autowired
@@ -245,7 +250,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.lion.framework.service.system.UserService#doCreateUser(com.lion
+	 * @see com.newtouch.framework.service.system.UserService#doCreateUser(com.lion
 	 * .framework.model.system.User)
 	 */
 	@Override
@@ -418,11 +423,79 @@ public class UserServiceImpl extends AbstractService implements UserService {
 		user.getRoles().removeAll(deleteRoles);
 		this.userDao.update(user);
 	}
+	
+	
+	
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.UserService#doFindByCriteriaUserGroup(com.newtouch.lion.query.QueryCriteria)
+	 */
+	@Override
+	public PageResult<UserGroup> doFindUserGroupByCriteria(
+			QueryCriteria criteria) {
+		
+		String queryEntry = "select new com.newtouch.lion.model.system.UserGroup(id,username,employeeCode,realnameZh,realnameEn) from User ";
+
+		String[] whereBodies = { "username like :username", "employeeCode like :employeeCode","email like :email" };
+
+		String fromJoinSubClause = "";
+
+		Map<String, Object> params = criteria.getQueryCondition();
+
+		String orderField = criteria.getOrderField();
+
+		String orderDirection = criteria.getOrderDirection();
+
+		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
+				whereBodies, orderField, orderDirection, params);
+
+		int pageSize = criteria.getPageSize();
+
+		int startIndex = criteria.getStartIndex();
+
+		PageResult<UserGroup> pageResult = this.userGroupDao.query(hql,
+				HqlUtils.generateCountHql(hql, null), params, startIndex,
+				pageSize);
+		return pageResult;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.UserService#doFindByCriteriaAndGroup(com.newtouch.lion.query.QueryCriteria)
+	 */
+	@Override
+	public PageResult<User> doFindByCriteriaAndGroup(QueryCriteria criteria) {
+		String queryEntry = " select user from User as  user inner join fetch user.groups g ";
+
+		String[] whereBodies = { "user.nameZh like :nameZh","g.id =:groupId","user.id in(:userIds)"};
+
+		String fromJoinSubClause = "";
+
+		Map<String, Object> params = criteria.getQueryCondition();
+
+		String orderField = criteria.getOrderField();
+
+		String orderDirection = criteria.getOrderDirection();
+
+		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
+				whereBodies, orderField, orderDirection, params);
+		
+		String countHql=HqlUtils.generateCountHql(hql,"user.id ");
+
+		int pageSize = criteria.getPageSize();
+
+		int startIndex = criteria.getStartIndex();
+
+		PageResult<User> pageResult = this.userDao.query(hql,countHql, params, startIndex,pageSize);
+		
+		return pageResult;
+	}
+
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.lion.framework.service.system.UserService#doFindByCriteria(com
+	 * @see com.newtotuch.framework.service.system.UserService#doFindByCriteria(com
 	 * .lion.framework.common.QueryCriteria)
 	 */
 	@Override

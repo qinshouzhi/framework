@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.newtouch.lion.data.AllTest;
 import com.newtouch.lion.model.system.User;
+import com.newtouch.lion.model.system.UserGroup;
+import com.newtouch.lion.page.PageResult;
+import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.system.UserService;
 
 /**
@@ -39,6 +42,23 @@ public class UserServiceTest extends AllTest{
 		String userName="wanglijun";
 		User user=userService.doFindByUserName(userName);
 		logger.info("user.username:{}",user.getUsername());
+	}
+	
+	@Test
+	public void doFindQuery(){
+		QueryCriteria queryCriteria = new QueryCriteria();
+		// 设置分页 启始页
+		queryCriteria.setStartIndex(0);
+		// 每页大小
+		queryCriteria.setPageSize(10);
+		
+		PageResult<UserGroup> result=userService.doFindUserGroupByCriteria(queryCriteria);
+		
+		for(UserGroup userGroup:result.getContent()){
+			 logger.info(userGroup.getUsername());
+		}
+		
+	
 	}
 	
 	

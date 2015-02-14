@@ -189,7 +189,7 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 
 		String queryEntry = " from Role ";
 
-		String[] whereBodies = { "nameZh like :nameZh" };
+		String[] whereBodies = { "nameZh like :nameZh"};
 
 		String fromJoinSubClause = "";
 
@@ -210,6 +210,40 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 				HqlUtils.generateCountHql(hql, null), params, startIndex,
 				pageSize);
 
+		return pageResult;
+	}
+	
+	
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.RoleService#doFindByCriteriaAndGroup(com.newtouch.lion.query.QueryCriteria)
+	 */
+	@Override
+	public PageResult<Role> doFindByCriteriaAndGroup(QueryCriteria criteria) {
+		String queryEntry = " select role from Role as  role inner join fetch role.groups g ";
+
+		String[] whereBodies = { "role.nameZh like :nameZh","g.id =:groupId"};
+
+		String fromJoinSubClause = "";
+
+		Map<String, Object> params = criteria.getQueryCondition();
+
+		String orderField = criteria.getOrderField();
+
+		String orderDirection = criteria.getOrderDirection();
+
+		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
+				whereBodies, orderField, orderDirection, params);
+		
+		String countHql=HqlUtils.generateCountHql(hql,"role.id ");
+
+		int pageSize = criteria.getPageSize();
+
+		int startIndex = criteria.getStartIndex();
+
+		PageResult<Role> pageResult = this.roleDao.query(hql,
+				countHql, params, startIndex,
+				pageSize);
 		return pageResult;
 	}
 
@@ -437,7 +471,7 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 	 */
 	@Override
 	public List<Role> doFindByUserId(Long userId) {
-		String hql = " select role from Role role join role.users  user where user.id=:userId";
+		String hql = "select role from Role role join role.users  user where user.id=:userId";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("userId", userId);
 		return this.roleDao.query(hql, params);

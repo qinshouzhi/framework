@@ -104,6 +104,7 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 				<h4 class="modal-title"><i class="fa fa-gear"></i> <span>用户组授权</span></h4>
+				<input type="hidden" id='groupId' name='id' value="">
 			</div>
 			<div class="modal-body">
 				<div class="row">
@@ -124,13 +125,13 @@
 								 
 										<div class="col-md-12">	
 												<i class="fa"></i><strong>已关联角色</strong>
-												<table  id="usergroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",    data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="3" cellspacing="0"    >
+												<table  id="grouprole_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",    data-loadUrl="${base}/system/group/authroles.json"   data-checkbox="true" data-pageSize="3" cellspacing="0"   data-loading="false">
 													<thead>
 														<tr>
 															<th class="table-checkbox" data-field='id' data-checkbox="true" width="19px">
-														 		<input type="checkbox" class="group-checkable" data-set="#usergroup_list.checkboxes"  data-sortable="false"  />
+														 		<input type="checkbox" class="group-checkable" data-set="#grouprole_list.checkboxes"  data-sortable="false"  />
 														 	</th>
-															<th data-field='nameEn' width="200px;" data-sortDir="asc" >
+															<th data-field='nameEn' width="200px;" data-sortDir="asc" data-formatter="formatterCheckBox">
 																角色名称(英文)
 															</th>
 															<th data-field="nameZh"  width="200px;" >
@@ -142,21 +143,21 @@
 														</tr>
 													</thead>
 												</table>						 						
-												<i class="fa"></i><strong>已经用户</strong>
-												<table  id="usergroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",    data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="3" cellspacing="0"    >
+												<i class="fa"></i><strong>已关联用户</strong>
+												<table  id="groupuser_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",    data-loadUrl="${base}/system/group/authusers.json"   data-checkbox="true" data-pageSize="3" cellspacing="0"   data-loading="false" >
 													<thead>
 														<tr>
 															<th class="table-checkbox" data-field='id' data-checkbox="true" width="19px">
-														 		<input type="checkbox" class="group-checkable" data-set="#usergroup_list.checkboxes"  data-sortable="false"  />
+														 		<input type="checkbox" class="group-checkable" data-set="#groupuser_list.checkboxes"  data-sortable="false"  />
 														 	</th>
-															<th data-field='nameEn' width="200px;" data-sortDir="asc" >
-																用户组名称(英文)
+															<th data-field='username' width="200px;" data-sortDir="asc" >
+																用户名
 															</th>
-															<th data-field="nameZh"  width="200px;" >
-															 	用户组名称(中文)
+															<th data-field="realnameZh"  width="200px;" >
+															 	用户姓名(中文)
 															</th>
-															<th data-field="description"  width="200px;">
-																描述
+															<th data-field="employeeCode"  width="200px;">
+																员工
 															</th>
 														</tr>
 													</thead>
@@ -166,20 +167,20 @@
 								<div  role="tabpanel" class="tab-pane fade" id="tab_3_2">
 									 <div class="row">
 											<div class="col-md-12">
-									 <table  id="authgroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",     data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="5"  >
+									 <table  id="authgroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",     data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="5" data-loading="false">
 												<thead>
 													<tr>
 														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
 													 		<input type="checkbox" class="group-checkable" data-set="#authgroup_list.checkboxes"  data-sortable="false"  />
 													 	</th>
-														<th data-field='nameEn' width="200px;"  data-sortDir="asc"   >
-															用户组名称(英文)
+														<th data-field='nameEn' width="200px;"  data-sortDir="asc">
+															角色名称(英文)
 														</th>
-														<th data-field="nameZh"  width="200px;"  >
-														 	用户组名称(中文)
+														<th data-field="nameZh"  width="200px;" >
+														 	角色组名称(中文)
 														</th>
-														<th data-field="description" width="200px;" >
-															描述
+														<th data-field="employeeCode" width="200px;" >
+															 描述
 														</th>
 													</tr>
 												</thead>
@@ -190,20 +191,20 @@
 								<div role="tabpanel" class="tab-pane fade" id="tab_3_3">
 									<div class="row">
 											<div class="col-md-12">
-												<table  id="authrole_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="5">
+												<table  id="authuser_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   data-loadUrl="${base}/system/group/users.json"  data-loading="false"  data-checkbox="true" data-pageSize="5">
 												<thead>
 													<tr>
 														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
-													 		<input type="checkbox" class="group-checkable" data-set="#authrole_list.checkboxes"  data-sortable="false"  />
+													 		<input type="checkbox" class="group-checkable" data-set="#authuser_list.checkboxes"  data-sortable="false"  />
 													 	</th>
-														<th data-field='nameEn' width="200px;"  data-sortDir="asc"   >
-															用户名(英文)
+														<th data-field='username' width="200px;" data-sortDir="asc" >
+																用户名
 														</th>
-														<th data-field="nameZh"  width="200px;" >
+														<th data-field="realnameZh"  width="200px;" >
 														 	用户姓名(中文)
 														</th>
-														<th data-field="description" width="200px;" >
-															员工号
+														<th data-field="employeeCode"  width="200px;">
+															员工
 														</th>
 													</tr>
 												</thead>

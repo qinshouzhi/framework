@@ -37,7 +37,7 @@ import com.newtouch.lion.model.VersionEntity;
 public class Group extends VersionEntity<Long> {
 
 	/**
-	 * 
+	 * 序列化
 	 */
 	private static final long serialVersionUID = 3219823117459262329L;
 	/***

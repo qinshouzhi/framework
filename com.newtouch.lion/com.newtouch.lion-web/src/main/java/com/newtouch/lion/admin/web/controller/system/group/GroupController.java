@@ -21,6 +21,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,7 @@ import com.newtouch.lion.model.datagrid.DataGrid;
 import com.newtouch.lion.model.system.Group;
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
+import com.newtouch.lion.model.system.UserGroup;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.datagrid.DataGridService;
@@ -76,12 +78,6 @@ public class GroupController extends AbstractController{
 	private static final String DEFAULT_ORDER_FILED_NAME = "id";
 	/** 默认列表 */
 	public static final String INDEX_LISTS_TB = "sys_group_list_tb";
-	/** 所有用户组列表名称 */
-	private static final String AUTH_GROUP_USERS__TB = "sys_authuserlistforgroup_tb";
-	/** 所有角色列表名称 */
-	private static final String AUTH_GROUP_ROLES_TB = "sys_authrolelistforgroup_tb";
-	/** 所有用户组列表名称 */
-	private static final String AUTH_USERS_TB = "sys_authuserforgroup_tb";
 	/** 所有角色列表名称 */
 	private static final String AUTH_ROLES_TB = "sys_authroleforgroup_tb";
 	/** 用户组管理首页 */
@@ -169,7 +165,7 @@ public class GroupController extends AbstractController{
 		}
 		
 		if (!errors.hasErrors()
-				&& this.isExistByNameEn(groupVo.getNameEn(),group.getNameEn())) {errors.rejectValue(GroupVo.NAMEEN,	"sys.group.form.nameen.existed.message",new Object[] { groupVo.getNameEn() }, null);
+			&& this.isExistByNameEn(groupVo.getNameEn(),group.getNameEn())) {errors.rejectValue(GroupVo.NAMEEN,	"sys.group.form.nameen.existed.message",new Object[] { groupVo.getNameEn() }, null);
 
 		}
 
@@ -262,25 +258,122 @@ public class GroupController extends AbstractController{
 	/** 查询用户组已授权的角色 */
 	@RequestMapping(value = "authroles")
 	@ResponseBody
-	public String authRoles(@RequestParam(required = false) Long id) {
-		return this.groupService.doFindAuthRolesById(id, AUTH_GROUP_ROLES_TB);
+	public DataTable<Role> authRoles(QueryDt query,@RequestParam(required = false) Long id) {
+		QueryCriteria queryCriteria = new QueryCriteria();
+		// 设置分页 启始页
+		queryCriteria.setStartIndex(query.getPage());
+		// 每页大小
+		queryCriteria.setPageSize(query.getRows());
+		 
+		// 设置排序字段及排序方向
+		if (StringUtils.isNotEmpty(query.getSort()) && StringUtils.isNotEmpty(query.getOrder())) {
+			queryCriteria.setOrderField("role."+query.getSort());
+			queryCriteria.setOrderDirection(query.getOrder());
+		} else {
+			queryCriteria.setOrderField("role."+DEFAULT_ORDER_FILED_NAME);
+		}
+		 
+		// 查询条件 参数类型 用户名
+		if (id!=null&&id>0) {
+			queryCriteria.addQueryCondition("groupId",id);
+		}
+		
+		PageResult<Role> pageResult = this.roleService.doFindByCriteriaAndGroup(queryCriteria);
+		
+		return pageResult.getDataTable(query.getRequestId());
 	}
 
 	/** 查询用户组已授权的用户 */
 	@RequestMapping(value = "authusers")
 	@ResponseBody
-	public String authUsers(@RequestParam(required = false) Long id) {
-		return this.groupService.doFindAuthUsersById(id, AUTH_GROUP_USERS__TB);
+	public DataTable<User> authUsers(QueryDt query,@RequestParam(required = false) Long id) {
+		QueryCriteria queryCriteria = new QueryCriteria();
+		// 设置分页 启始页
+		queryCriteria.setStartIndex(query.getPage());
+		// 每页大小
+		queryCriteria.setPageSize(query.getRows());
+		 
+		// 设置排序字段及排序方向
+		if (StringUtils.isNotEmpty(query.getSort()) && StringUtils.isNotEmpty(query.getOrder())) {
+			queryCriteria.setOrderField("user."+query.getSort());
+			queryCriteria.setOrderDirection(query.getOrder());
+		} else {
+			queryCriteria.setOrderField("user."+DEFAULT_ORDER_FILED_NAME);
+		}
+		 
+		// 查询条件 参数类型 用户名
+		if (id!=null&&id>0) {
+			queryCriteria.addQueryCondition("groupId",id);
+		}
+		
+		PageResult<User> pageResult = this.userService.doFindByCriteriaAndGroup(queryCriteria);
+		
+		return pageResult.getDataTable(query.getRequestId());
 	}
 
 	/** 查询所有的用户 */
 	@RequestMapping(value = "users")
 	@ResponseBody
-	public String users() {
+	public DataTable<UserGroup> users(QueryDt query,@RequestParam(required = false) Long id) {
 		QueryCriteria queryCriteria = new QueryCriteria();
-		queryCriteria.setPageSize(99999999);
-		return this.userService.doFindAllByCriteria(queryCriteria,
-				AUTH_USERS_TB);
+		// 设置分页 启始页
+		queryCriteria.setStartIndex(query.getPage());
+		// 每页大小
+		queryCriteria.setPageSize(query.getRows());
+		 
+		// 设置排序字段及排序方向
+		if (StringUtils.isNotEmpty(query.getSort()) && StringUtils.isNotEmpty(query.getOrder())) {
+			queryCriteria.setOrderField(query.getSort());
+			queryCriteria.setOrderDirection(query.getOrder());
+		} else {
+			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+		} 
+		
+		PageResult<UserGroup> pageResult = this.userService.doFindUserGroupByCriteria(queryCriteria);
+		
+		
+		if(CollectionUtils.isEmpty(pageResult.getContent())){
+			return pageResult.getDataTable(query.getRequestId());
+		}
+		List<UserGroup> userGroups=pageResult.getContent();
+		List<Long> userIds=new ArrayList<Long>();
+		for(UserGroup userGroup:userGroups){
+			userIds.add(userGroup.getId());
+		}
+		queryCriteria = new QueryCriteria();
+		// 设置分页 启始页
+		queryCriteria.setStartIndex(1);
+		// 每页大小
+		queryCriteria.setPageSize(query.getRows());
+		// 查询条件 参数类型 用户名
+		if (id!=null&&id>0) {
+			queryCriteria.addQueryCondition("groupId",id);
+		}
+		//查询所有空的
+		if(!CollectionUtils.isEmpty(userIds)){
+			queryCriteria.addQueryCondition("userIds", userIds);
+		}
+		PageResult<User> userPageResult=this.userService.doFindByCriteriaAndGroup(queryCriteria);
+		
+		Map<Long,Long> userIdsMap=new HashMap<Long,Long>();
+		
+		for(User user:userPageResult.getContent()){
+			userIdsMap.put(user.getId(), user.getId());
+		}
+		
+		List<UserGroup> contents=new ArrayList<UserGroup>();
+		
+		for(UserGroup userGroup:userGroups){
+			if(userIdsMap.containsKey(userGroup.getId())){
+				userGroup.setGroupId(id);
+			}
+			contents.add(userGroup);
+		}
+		
+		pageResult.setContent(contents);
+		
+		return pageResult.getDataTable(query.getRequestId());
+	 
 	}
 
 	/** 查询所有的角色 */

@@ -165,8 +165,20 @@ public interface RoleService {
 	public Role doGetById(Long id);
 
 	public void doUpdate(Role role);
-
+	/***
+	 * 多条件组合查询，并返回分页对象
+	 * @param criteria 查询条件
+	 * @return  PageResult<Role>
+	 */
 	public PageResult<Role> doFindByCriteria(QueryCriteria criteria);
+	
+	/***
+	 * 多条件组合查询，并返回分页对象,关联Group对象
+	 * @param criteria 查询条件
+	 * @return  PageResult<Role>
+	 */
+	public PageResult<Role> doFindByCriteriaAndGroup(QueryCriteria criteria);
+	
 
 	public String doFindByCriteria(QueryCriteria criteria, String tableId);
 	/**

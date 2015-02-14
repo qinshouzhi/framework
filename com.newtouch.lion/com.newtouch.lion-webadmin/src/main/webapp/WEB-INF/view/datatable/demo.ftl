@@ -108,7 +108,7 @@
 								<thead>
 									<tr>
 										<th class="table-checkbox" data-field='id' data-checkbox="true">
-									 		<input type="checkbox" class="group-checkable" data-set="#sample_1.checkboxes"  data-sortable="false" />
+									 		<input type="checkbox" class="group-checkable" data-set="#sample_2.checkboxes"  data-sortable="false" />
 									 	</th>
 										<th data-field='username' data-sortDir="asc">
 											用户名

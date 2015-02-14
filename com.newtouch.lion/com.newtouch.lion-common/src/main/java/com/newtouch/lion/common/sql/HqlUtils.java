@@ -37,16 +37,15 @@ public class HqlUtils {
 		}
 		String countField = null;
 		if (distinctName != null)
-			countField = "distinct " + distinctName;
+			countField = distinctName;
 		else {
 			countField = "*";
 		}
-
-		return "select count("
-				+ countField
-				+ ")"
-				+ originalHql.substring(beginPos, endPos).replaceAll(
-						"join fetch ", "join ");
+		StringBuffer sb=new StringBuffer("select count( ");
+		sb.append(countField);
+		sb.append(" )");
+		sb.append(originalHql.substring(beginPos, endPos).replaceAll("join fetch ", "join "));
+		return sb.toString();
 	}
 
 	public static String generateHql(String queryFields,

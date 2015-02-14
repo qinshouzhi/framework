@@ -21,6 +21,15 @@ $(function () {
         //console.dir(settings);
     });
 
+
+	demoDt.bind("datagrids.initcomplete",function(){
+		console.dir('ddd');
+	});
+
+	demoDt.on('datagrids.createdrow',function(){
+		console.dir('dddd111');
+	});
+
     $("#btnAdd").click(function(){
         row=demoDt.datagrids('getSelected');
         console.dir(row);
@@ -29,13 +38,15 @@ $(function () {
     //获取多行数据
     $("#btnEdit").click(function(){
         var rows=demoDt.datagrids('getSelections');
-       
         console.dir(rows);
     });
 
-	var demoDt=$("#sample_1");
+	 
+	demoDt.datagrids({initComplete:function(){
+		console.dir('initComplete');
+	}});
 
-	 var queryForm=$('#queryform');
+	  
 
 	$("#btnQuery").click(function(){
 		demoDt.datagrids({querydata:queryForm.serializeObject()});

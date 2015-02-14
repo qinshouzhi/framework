@@ -173,7 +173,7 @@ lion.assemblyCache={};
             type : 'post',              
             data : data,
             dataType:"json",
-        	timeout:exports.timeout,
+        	timeout:5000,
         	error :function(xhr, textStatus, error) {
 				errorfn.call(this,xhr,textStatus,error);
 			},

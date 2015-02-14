@@ -116,14 +116,15 @@
         	//创建列
         	//this.columns();
         	this.osettings=this.settings();
-
+          //加载事件
+          this.initComplete();
         },
         //查询参数
         queryparams:function(data){
-            //console.dir(data);
            if(util.isEmpty(data)){
               return this.options.querydata;
            }else{
+              console.dir(data);
               this.options.querydata=data;
            }
 
@@ -147,14 +148,16 @@
        	},
        	//创建自定义列
        	columnDefs:function(){
-          var colDefs=[],colDef={};
+          var colDefs=[{'sDefaultContent': '','aTargets':'_all'}],colDef={};
           if(this.sorttargets.length>0){
               colDef['bSortable']=false;
               colDef['aTargets']=this.sorttargets;
+              
               colDefs.push(colDef);
           }else{
-       		   colDefs=[{'bSortable':false,'aTargets': [0]}];
+       		   colDefs=[{'bSortable':false,'aTargets': [0],},{'sDefaultContent': '','aTargets':'_all'}];
           }
+
        		return colDefs;
        	},
        	//表格头构造
@@ -233,15 +236,20 @@
               lengthMenu:that.options.pagelist,
               pageLength:that.options.pagesize,
               bAutoWidth:false,
-              initComplete:function(){
+              fnInitComplete:function(){
                 that.loadinitComplete();
+                that.initComplete();
               },//初始化事件
               fnDrawCallback:function(){
                 that.drawCallback();
               },//表格重绘回调函数
               fnServerData:function(source, sdata, fnCallback){
                  that.loaddata(source,sdata,fnCallback);
-              }};//加载服务器数据};
+              },//加载服务器数据
+              createdRow:function(row, data, index){
+                that.createdRow(row, data, index);
+              },//创建行调用回调
+              };
               //console.dir(that.options);
               //垂直滚动条
               if(util.isNotEmpty(that.options.scrolly)){
@@ -302,11 +310,8 @@
           //表单美化
        		$thatelement.find('tbody tr input,textarea,select,button').uniform();
           //单点checkbox
-          $thatelement.find('tbody tr td input[type=checkbox]').click(function(e){
-            //console.dir('ddd');
-            $(e.target ).closest('tr').trigger('click');
-            //console.dir(obj);           
-
+          $thatelement.find('tbody tr td input[type=checkbox]').click(function(e){            
+              $(e.target ).closest('tr').trigger('click');
           });
           //单元格事件
        		tbodytr.click(function(e){
@@ -346,14 +351,18 @@
                           });
                       }
                     }
-
                   //事件停止
-                  event.stopPropagation();
+                 // event.stopPropagation();
             });
+
+          var e = $.Event('datagrids.reload');
+          this.$element.trigger(e);
+            //如已经事件阻止，则返回
+          if (e.isDefaultPrevented()) return;
        	},
        	//初始化事件,提供给外部使用
-       	initComplete:function(){
-       		var e = $.Event('datagrids.init');
+       	initComplete:function(){            
+       		  var e = $.Event('datagrids.initcomplete');
             this.$element.trigger(e);
             //如已经事件阻止，则返回
             if (e.isDefaultPrevented()) return;
@@ -369,13 +378,13 @@
           $wrapper.find('.dataTables_scrollHead table').each(function(){
                  $(this).css({'width':that.$element.attr('width')});
           });
+          //调用初始化事件
+         
        		//单行选择的和checkbox,表头的checkbox设置为:disabled
        		if(this.options.singleselect===true&&this.options.checkbox){
                  $thatelement.find('thead th input[type=checkbox]').each(function(){         				
                         $(this).attr('disabled',true);
                  });
-                 //调用初始化事件
-               	 //this.initComplete();
                  return;
             }
            	//多行选择
@@ -402,12 +411,30 @@
 	                    $thcheckbox.parent('span').addClass('checked');
 	                }
 	                //事件停止
-	                event.stopPropagation();
+	               event.stopPropagation();
             	});
            	}
-           	//调用初始化事件
-            this.initComplete();
        	},
+        //检查选中状态
+        checkselected:function(){
+             var $thatelement=this.$element,
+                  tbodytrsize=$thatelement.find('tbody tr').length,
+                  selectedsize=$thatelement.find('tbody tr input[type=checkbox]:checked').length;
+             if(selectedsize===tbodytrsize){
+                $thatelement.find('thead th input[type=checkbox]').each(function(){                
+                    var $box=$(this); 
+                    $box.attr("checked",true);
+                    $box.parent('span').addClass('checked');
+                });
+            }
+        },
+        //让所有checkboxdis
+        checkboxdisabled:function(){
+            var $thatelement=this.$element;
+            $thatelement.find('input[type=checkbox]').each(function(){
+                 $(this).attr('disabled',true);
+            });
+        },
        	//重新加载数据
        	reload:function(){
        		var odatatable=this.$element.dataTable();
@@ -418,11 +445,22 @@
 	                $(this).parent('span').removeClass('checked');
 	       		});
        		}
+          var e = $.Event('datagrids.reload');
+          this.$element.trigger(e);
+            //如已经事件阻止，则返回
+          if (e.isDefaultPrevented()) return;
        	},
+        //创建行回调函数
+        createdRow:function(row, data, index){
+           var e = $.Event('datagrids.createdrow');
+           this.$element.trigger(e,[row,data,index]);
+            //如已经事件阻止，则返回
+           if (e.isDefaultPrevented()) return;
+        },
         //加载列表
        	loaddata:function(url, data, fnCallback){
            //是否初始化立即加载数据 
-           var param=this.params(data),that=this,$thatelement=this.$element;
+           var param=this.params(data),that=this,$thatelement=this.$element,processing=$('#'+that.id+'_processing');
            if(!this.options.loading){              
               var vdata={'draw':param.requestId,'recordsFiltered':0,'recordsTotal':0,'total':0,'data':{}};
               this.options.loading=true;              
@@ -436,14 +474,12 @@
            		fnCallback.call(this,data);
            }
            //加载失败的错误
-   		     function handleAjaxError(xhr,
-						textStatus, error) {
-				 		//console.dir(xhr);
-				 		//console.dir(textStatus);
-				 		///console.dir(error);
-            //$thatelement.dataTable().fnClearTable(false);
-            $(that.osettings.aanFeatures.r).css('display','none');
-		    }
+   		     function handleAjaxError(xhr,textStatus, error) {
+             console.dir(error);
+             console.dir(textStatus);
+             //$(that.osettings.aanFeatures.r).css('display','none');
+              processing.css('display','none');
+		        }
         },
         //请求参数构建
         params:function(sdata){
@@ -529,12 +565,12 @@
                  param[sortCol]=columnName;
                  param[dir]=tempOrder.dir;
              }
-             //添加查询参数             
+             //添加查询参数  
+             //console.dir(this.options.querydata);           
              $.each(this.options.querydata,function(key,item){
                   param[key]=item;
                   //console.dir(key+"  item:"+item);
-             });
-              
+             });              
              //console.dir(param);
         	   return param;
         }

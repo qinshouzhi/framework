@@ -12,29 +12,90 @@ $(function () {
 	addDialog=$('#basic');
 	var modalGroupAuth=$('#modalGroupAuth');
 	var queryForm=$('#queryform');
+  //已关联角色
+  var grouproledg=$("#grouprole_list");
+  //已关联用户
+  var groupuserdg=$("#groupuser_list");
+  //授权用户列表
+  var authuserdg=$('#authuser_list');
   
   //默认隐藏第一个tab的modal-footer
   modalGroupAuth.find('.modal-footer').hide();
 	//绑定tab事件
   modalGroupAuth.find('.nav-tabs a').click(function(){
+      var row=groupdg.datagrids('getSelected');
+      var idObj={'id':row.id};
       var tabHref=$(this).attr('href');
       if(tabHref==='#tab_3_1'){
-            modalGroupAuth.find('.modal-footer').hide();
-      }else{
-          modalGroupAuth.find('.modal-footer').show();
+         modalGroupAuth.find('.modal-footer').hide();
+         return;
+      }else if(tabHref==='#tab_3_2'){
+        modalGroupAuth.find('.modal-footer').show();
+      }else if(tabHref==='#tab_3_3'){
+        authuserdg.datagrids({querydata:idObj});
+        authuserdg.datagrids('reload');
+        modalGroupAuth.find('.modal-footer').show();
       }
   });
+  
+  //用户授权列表创建行调用
+  authuserdg.on('datagrids.createdrow',function(row,data,index){
+      if(index.hasOwnProperty('groupId')){
+           selectedChecked(row,data,index);
+      }
+  });
+   //重新加载数据完成
+  authuserdg.on('datagrids.reload',function(){
+      grouproledg.datagrids('checkselected');
+      //groupuserdg.datagrids('checkboxdisabled');
+  });
+  //创建行回调事件
+  groupuserdg.on('datagrids.createdrow',function(row,data,index){
+      selectedChecked(row,data,index);
+  });
+  //创建行内回调事件
+  grouproledg.on('datagrids.createdrow',function(row,data,index){
+      selectedChecked(row,data,index);
+  });
+
+  function selectedChecked(row,data,index){
+     var $checkbox=$(data).find("td input[type=checkbox]");
+     $checkbox.attr('checked',true);
+     $checkbox.parent('span').addClass('checked');
+  }
+
 	//验证表单
 	handleVForm(addForm,submitForm);
 	//用户组授权
 	$('#btnAuth').click(function(){
+      var selectTabId=modalGroupAuth.find('.tab-pane.active').attr('id');
       var row=groupdg.datagrids('getSelected');
       if(!row){
         lion.util.info('提示','请选择要授权记录');
         return;
       }
-		  modalGroupAuth.modal('toggle');	
+      //打开对话框架
+      modalGroupAuth.modal('toggle'); 
+      //重新加载 用户组角色数据
+      var idObj={'id':row.id};
+      grouproledg.datagrids({querydata:idObj});
+      grouproledg.datagrids('reload');
+      //重新加载 用户组所关联用户数据 
+      groupuserdg.datagrids({querydata:idObj});
+      groupuserdg.datagrids('reload');
+      
 	});
+  //重新加载数据完成
+  groupuserdg.on('datagrids.reload',function(){
+      groupuserdg.datagrids('checkselected');
+      //groupuserdg.datagrids('checkboxdisabled');
+  });
+  //重新加载数据完成
+  grouproledg.on('datagrids.reload',function(){
+      grouproledg.datagrids('checkselected');
+      //groupuserdg.datagrids('checkboxdisabled');
+  });
+
   //用户组授权保存
   $('#btnAuthSave').click(function(){
       var selectTabId=modalGroupAuth.find('.tab-pane.active').attr('id');
@@ -44,6 +105,8 @@ $(function () {
           console.dir('关联用户');
       }
   }); 
+
+
 	//查询
 	$('#btnQuery').click(function(){
 		groupdg.datagrids({querydata:queryForm.serializeObject()});
@@ -161,7 +224,7 @@ function errorRequest(data,arg){
 handleVForm=function(vForm,submitCallBackfn){
 	var addError = $('.alert-danger', vForm);
     var addSuccess = $('.alert-success',vForm);
-	vForm.validate({
+	      vForm.validate({
         errorElement: 'span',
         errorClass: 'help-block help-block-error', 
         focusInvalid: false, 
@@ -245,10 +308,18 @@ handleVForm=function(vForm,submitCallBackfn){
     });
 };
 
+//测试选择中checkbox
+function formatterCheckBox(data,type,full){
+  //console.dir(this);
+  //console.dir(data);
+ // console.dir(type);
+  //console.dir(full);
+  return data;
+}
 //判断是否编辑
-function formatterEidtable(val,row) {
+function formatterEidtable(data,type,full) {
 	var name =$.loin.lang.editable.n;
-	if (val) {
+	if (data) {
 		name = $.loin.lang.editable.y;
 	}
 	return name;

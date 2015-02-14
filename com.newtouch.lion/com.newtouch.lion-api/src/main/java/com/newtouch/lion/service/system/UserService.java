@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
+import com.newtouch.lion.model.system.UserGroup;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 
@@ -178,8 +179,14 @@ public interface UserService {
 
 	/** 更新对象 */
 	public User doUpdate(User user);
+	
+	/** 用户与用户组查询查询，并返回分页对象 */
+	public PageResult<UserGroup> doFindUserGroupByCriteria(QueryCriteria criteria);
+	
+	/** 用户关联用户组查询，并返回分页对象 */
+	public PageResult<User> doFindByCriteriaAndGroup(QueryCriteria criteria);
 
-	/** 通用类型编码查询，并返回分页对象 */
+	/** 用户查询，并返回分页对象 */
 	public PageResult<User> doFindByCriteria(QueryCriteria criteria);
 
 	/**
