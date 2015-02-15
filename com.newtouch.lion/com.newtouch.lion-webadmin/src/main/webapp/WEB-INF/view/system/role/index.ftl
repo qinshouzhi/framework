@@ -75,6 +75,10 @@
 					<i class="fa  fa-file-excel-o"></i>
 					<@spring.message "common.toolbar.btn.export.text"/>
 				</a>
+				<a href="javascript:void(0)" id="btnAuth"  class="btn btn-sm  btn-primary">
+					<i class="fa  fa-gear"></i> 
+					<@spring.message "common.toolbar.btn.auth.text"/>  
+				</a>
 			</div>
 			<div class="col-md-12">
 				<table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_rolelist_tb" data-singleselect="true",   data-loadUrl="/admin/system/role/list.json" data-checkbox="true" data-pageSize="10">
@@ -83,7 +87,7 @@
 							<th class="table-checkbox" data-field='id' data-checkbox="true">
 						 		<input type="checkbox" class="group-checkable" data-set="#sys_group_list_tb.checkboxes"  data-sortable="false" />
 						 	</th>
-							<th data-field='nameEn' data-sortDir="asc"    style="width:100px;">
+							<th data-field='nameEn' data-sortDir="asc" style="width:100px;">
 								角色名称(英文)
 							</th>
 							<th data-field="nameZh" style="width:100px;">
@@ -109,6 +113,137 @@
 	</div>
 </div>
 <!-- END PAGE CONTENT INNER -->
+
+<!--Auth Modal Dialog Start-->
+<div class="modal fade bs-modal-lg" id="modalGroupAuth" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<h4 class="modal-title"><i class="fa fa-gear"></i> <span>角色授权</span></h4>
+				<input type="hidden" id='roleId' name='id' value="">
+			</div>
+			<div class="modal-body">
+				<div class="row">
+						<div  class="col-md-12">
+							<ul class="nav nav-tabs">
+								<li class="active">
+									<a href="#tab_3_1"  data-toggle="tab">已授权信息 </a>
+								</li>
+								<li>
+									<a href="#tab_3_2"  data-toggle="tab">关联用户组</a>
+								</li>
+								<li>
+									<a href="#tab_3_3"  data-toggle="tab">关联用户</a>
+								</li>
+							</ul>
+							<div class="tab-content">
+								<div role="tabpanel" class="tab-pane active" id="tab_3_1">
+								 
+										<div class="col-md-12">	
+												<i class="fa"></i><strong>已关联用户组</strong>
+												<table  id="rolegroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",    data-loadUrl="${base}/system/role/authgroups.json"   data-checkbox="true" data-pageSize="3" cellspacing="0"   data-loading="false">
+													<thead>
+														<tr>
+															<th class="table-checkbox" data-field='id' data-checkbox="true" width="19px">
+														 		<input type="checkbox" class="group-checkable" data-set="#rolegroup_list.checkboxes"  data-sortable="false"  />
+														 	</th>
+															<th data-field='nameEn' width="200px;" data-sortDir="asc" data-formatter="formatterCheckBox">
+																用户组名称(英文)
+															</th>
+															<th data-field="nameZh"  width="200px;" >
+															 	用户组名称(中文)
+															</th>
+															<th data-field="description"  width="200px;"  >
+																描述
+															</th>
+														</tr>
+													</thead>
+												</table>						 						
+												<i class="fa"></i><strong>已关联用户</strong>
+												<table  id="roleuser_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",    data-loadUrl="${base}/system/role/authusers.json"   data-checkbox="true" data-pageSize="3" cellspacing="0"   data-loading="false" >
+													<thead>
+														<tr>
+															<th class="table-checkbox" data-field='id' data-checkbox="true" width="19px">
+														 		<input type="checkbox" class="group-checkable" data-set="#roleuser_list.checkboxes"  data-sortable="false"  />
+														 	</th>
+															<th data-field='username' width="200px;" data-sortDir="asc" >
+																用户名
+															</th>
+															<th data-field="realnameZh"  width="200px;" >
+															 	用户姓名(中文)
+															</th>
+															<th data-field="employeeCode"  width="200px;">
+																员工
+															</th>
+														</tr>
+													</thead>
+												</table>
+										</div>				 
+								</div>
+								<div  role="tabpanel" class="tab-pane fade" id="tab_3_2">
+									 <div class="row">
+										<div class="col-md-12">
+											<table  id="authgroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",data-loadUrl="${base}/system/role/groups.json"   data-checkbox="true" data-pageSize="5" data-loading="false">
+												<thead>
+													<tr>
+														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
+													 		<input type="checkbox" class="group-checkable" data-set="#authgroup_list.checkboxes"  data-sortable="false"  />
+													 	</th>
+														<th data-field='nameEn' width="200px;"  data-sortDir="asc">
+															用户组名称(英文)
+														</th>
+														<th data-field="nameZh"  width="200px;" >
+														 	用户组名称(中文)
+														</th>
+														<th data-field="employeeCode" width="200px;" >
+															 描述
+														</th>
+													</tr>
+												</thead>
+											</table>
+										</div>
+									</div>
+								</div>
+								<div role="tabpanel" class="tab-pane fade" id="tab_3_3">
+									<div class="row">
+										<div class="col-md-12">
+											<table  id="authuser_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   data-loadUrl="${base}/system/role/users.json"  data-loading="false"  data-checkbox="true" data-pageSize="5">
+												<thead>
+													<tr>
+														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
+													 		<input type="checkbox" class="group-checkable" data-set="#authuser_list.checkboxes"  data-sortable="false"  />
+													 	</th>
+														<th data-field='username' width="200px;" data-sortDir="asc" >
+															用户名
+														</th>
+														<th data-field="realnameZh"  width="200px;" >
+														 	用户姓名(中文)
+														</th>
+														<th data-field="employeeCode"  width="200px;">
+															员工
+														</th>
+													</tr>
+												</thead>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal">
+					<i class="fa  fa-arrow-left"></i> 取 消 </button>
+				<button type="button" id="btnAuthSave" class="btn blue">
+					<i class="fa fa-save"></i> 保 存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Auth Modal Dialog End-->
+
 <!--Edit Dialog Start -->
 <div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
 	<div class="modal-dialog">
@@ -133,7 +268,7 @@
 										<label class="col-md-3 control-label">
 											<@spring.message "sys.role.form.namezh.text"/>
 										</label>
-										<div class="col-md-5">
+										<div class="col-md-9">
 											<div class="input-group">
 												<input type="text"  name="nameZh"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.role.form.namezh.missing.message"/>" size="30"/>
 											</div>
@@ -143,7 +278,7 @@
 										<label class="col-md-3 control-label">
 											<@spring.message "sys.role.form.nameen.text"/>
 										</label>
-										<div class="col-md-5">
+										<div class="col-md-9">
 											<div class="input-group">
 												<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="<@spring.message "sys.role.form.nameen.missing.message"/>" size="30"/>
 											</div>
@@ -153,7 +288,7 @@
 										<label class="col-md-3 control-label">
 											<@spring.message "sys.role.form.description.text"/>
 										</label>
-										<div class="col-md-5">
+										<div class="col-md-9">
 											<div class="input-group">
 												<input type="text" name="description" id="description" class="form-control" placeholder="<@spring.message "sys.role.form.description.missing.message"/>" maxlength="255" size="30"/>
 											</div>
@@ -163,7 +298,7 @@
 										<label class="col-md-3 control-label">
 											<@spring.message "sys.role.form.editable.text"/>
 										</label>
-										<div class="col-md-5 control-label">
+										<div class="col-md-9 control-label">
 											<div class="input-group">
 												<input type="checkbox" class="form-control" name="editable" checked="true" />
 											</div>

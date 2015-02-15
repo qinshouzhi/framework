@@ -18,9 +18,11 @@ import org.springframework.stereotype.Service;
 import com.newtouch.lion.common.Assert;
 import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.system.GroupDao;
+import com.newtouch.lion.dao.system.GroupRoleDao;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.datagrid.DataColumn;
 import com.newtouch.lion.model.system.Group;
+import com.newtouch.lion.model.system.GroupRole;
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.page.PageResult;
@@ -62,6 +64,9 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 
 	@Autowired
 	private RoleService roleService;
+	
+	@Autowired
+	private GroupRoleDao groupRoleDao;
 
 	/*
 	 * (non-Javadoc)
@@ -470,6 +475,71 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 		// TODO Auto-generated method stub
 		Assert.notNull(group);
 		groupDao.save(group);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.GroupService#doFindGroupRoleByCriteria(com.newtouch.lion.query.QueryCriteria)
+	 */
+	@Override
+	public PageResult<GroupRole> doFindGroupRoleByCriteria(
+			QueryCriteria criteria) {
+		// TODO Auto-generated method stub
+		String queryEntry = "select new com.newtouch.lion.model.system.GroupRole(id,nameZh,nameEn,description) from Group ";
+
+		String[] whereBodies = { "nameZh like :nameZh", "nameEn like :nameEn","description like :description" };
+
+		String fromJoinSubClause = "";
+
+		Map<String, Object> params = criteria.getQueryCondition();
+
+		String orderField = criteria.getOrderField();
+
+		String orderDirection = criteria.getOrderDirection();
+
+		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
+				whereBodies, orderField, orderDirection, params);
+
+		int pageSize = criteria.getPageSize();
+
+		int startIndex = criteria.getStartIndex();
+
+		PageResult<GroupRole> pageResult = this.groupRoleDao.query(hql,
+				HqlUtils.generateCountHql(hql, null), params, startIndex,
+				pageSize);
+		return pageResult;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.GroupService#doFindByCriteriaAndRole(com.newtouch.lion.query.QueryCriteria)
+	 */
+	@Override
+	public PageResult<Group> doFindByCriteriaAndRole(QueryCriteria criteria) {
+		// TODO Auto-generated method stub
+		String queryEntry = " select groups from Group groups inner join groups.roles r ";
+
+		String[] whereBodies = { "groups.nameZh like :nameZh","r.id =:roleId","groups.id in(:groupIds)"};
+
+		String fromJoinSubClause = "";
+
+		Map<String, Object> params = criteria.getQueryCondition();
+
+		String orderField = criteria.getOrderField();
+
+		String orderDirection = criteria.getOrderDirection();
+
+		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
+				whereBodies, orderField, orderDirection, params);
+		
+		String countHql=HqlUtils.generateCountHql(hql,"groups.id");
+
+		int pageSize = criteria.getPageSize();
+
+		int startIndex = criteria.getStartIndex();
+
+		PageResult<Group> pageResult = this.groupDao.query(hql,countHql, params, startIndex,pageSize);
+		
+		return pageResult;
+		
 	}
 	
 }

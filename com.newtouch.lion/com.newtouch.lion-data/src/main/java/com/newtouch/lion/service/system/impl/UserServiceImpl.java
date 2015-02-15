@@ -22,11 +22,13 @@ import org.springframework.util.CollectionUtils;
 import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.system.UserDao;
 import com.newtouch.lion.dao.system.UserGroupDao;
+import com.newtouch.lion.dao.system.UserRoleDao;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.system.Group;
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.model.system.UserGroup;
+import com.newtouch.lion.model.system.UserRole;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.AbstractService;
@@ -59,7 +61,8 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	private UserDao userDao;
 	@Autowired
 	private UserGroupDao userGroupDao;
-	
+	@Autowired
+	private UserRoleDao userRoleDao;
 	@Autowired
 	private DataColumnService dataColumnService;
 	@Autowired
@@ -458,7 +461,38 @@ public class UserServiceImpl extends AbstractService implements UserService {
 				pageSize);
 		return pageResult;
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.UserService#doFindByCriteriaUserGroup(com.newtouch.lion.query.QueryCriteria)
+	 */
+	@Override
+	public PageResult<UserRole> doFindUserRoleByCriteria(
+			QueryCriteria criteria) {
+		
+		String queryEntry = "select new com.newtouch.lion.model.system.UserRole(id,username,employeeCode,realnameZh,realnameEn) from User ";
 
+		String[] whereBodies = { "username like :username", "employeeCode like :employeeCode","email like :email" };
+
+		String fromJoinSubClause = "";
+
+		Map<String, Object> params = criteria.getQueryCondition();
+
+		String orderField = criteria.getOrderField();
+
+		String orderDirection = criteria.getOrderDirection();
+
+		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
+				whereBodies, orderField, orderDirection, params);
+
+		int pageSize = criteria.getPageSize();
+
+		int startIndex = criteria.getStartIndex();
+
+		PageResult<UserRole> pageResult = this.userRoleDao.query(hql,
+				HqlUtils.generateCountHql(hql, null), params, startIndex,
+				pageSize);
+		return pageResult;
+	}
 
 	/* (non-Javadoc)
 	 * @see com.newtouch.lion.service.system.UserService#doFindByCriteriaAndGroup(com.newtouch.lion.query.QueryCriteria)
@@ -491,7 +525,37 @@ public class UserServiceImpl extends AbstractService implements UserService {
 		return pageResult;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.UserService#doFindByCriteriaAndGroup(com.newtouch.lion.query.QueryCriteria)
+	 */
+	@Override
+	public PageResult<User> doFindByCriteriaAndRole(QueryCriteria criteria) {
+		String queryEntry = " select user from User as  user inner join fetch user.roles r ";
 
+		String[] whereBodies = { "user.nameZh like :nameZh","r.id =:roleId","user.id in(:userIds)"};
+
+		String fromJoinSubClause = "";
+
+		Map<String, Object> params = criteria.getQueryCondition();
+
+		String orderField = criteria.getOrderField();
+
+		String orderDirection = criteria.getOrderDirection();
+
+		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
+				whereBodies, orderField, orderDirection, params);
+		
+		String countHql=HqlUtils.generateCountHql(hql,"user.id ");
+
+		int pageSize = criteria.getPageSize();
+
+		int startIndex = criteria.getStartIndex();
+
+		PageResult<User> pageResult = this.userDao.query(hql,countHql, params, startIndex,pageSize);
+		
+		return pageResult;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
