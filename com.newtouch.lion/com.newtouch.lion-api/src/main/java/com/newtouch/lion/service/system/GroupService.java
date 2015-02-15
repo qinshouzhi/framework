@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.newtouch.lion.model.datagrid.DataColumn;
 import com.newtouch.lion.model.system.Group;
+import com.newtouch.lion.model.system.GroupRole;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
@@ -149,4 +150,9 @@ public interface GroupService {
 	 * @param Group
 	 */
 	public void doCreate(Group group);
+	
+	/** 用户组与角色查询查询，并返回分页对象 */
+	public PageResult<GroupRole> doFindGroupRoleByCriteria(QueryCriteria criteria);
+	
+	public PageResult<Group> doFindByCriteriaAndRole(QueryCriteria criteria);
 }

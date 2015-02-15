@@ -21,6 +21,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,9 +38,11 @@ import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.datagrid.DataGrid;
 import com.newtouch.lion.model.system.Attributes;
 import com.newtouch.lion.model.system.Group;
+import com.newtouch.lion.model.system.GroupRole;
 import com.newtouch.lion.model.system.Resource;
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
+import com.newtouch.lion.model.system.UserRole;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.datagrid.DataGridService;
@@ -82,12 +85,15 @@ public class RoleController extends AbstractController{
 	@SuppressWarnings("unused")
 	private static final String DEFAULT_TABLE_ID="sys_rolelist_tb";
 	/**角色关联用户列表*/
+	@SuppressWarnings("unused")
 	private static final String  AUTHROLE_USER_TABLE_ID="sys_authrole_userlist_tb";
 	/**角色关联用户组列表*/
 	private static final String AUTHROLE_USERGROUPS_TABLE_ID="sys_authrole_grouplist_tb";
 	/**角色所有用户组列表*/
+	@SuppressWarnings("unused")
 	private static final String AUTHROLE_GROUPS_TB="sys_authrole_groups_tb";
 	/**角色所有用户列表*/
+	@SuppressWarnings("unused")
 	private static final String AUTHROLE_USERS_TB="sys_authrole_users_tb";
 	/**系统角色首页*/
 	private static final String INDEX_RETURN="/system/role/index";
@@ -162,9 +168,59 @@ public class RoleController extends AbstractController{
 	/**加载角色所有关联用户列表*/
 	@RequestMapping(value = "authusers")
 	@ResponseBody
-	public String authUsersForRole(@RequestParam(required=false) Long id){
-		return this.roleService.doFindAuthUsersById(id, AUTHROLE_USER_TABLE_ID);
+	public DataTable<User> authUsers(QueryDt query,@RequestParam(required = false) Long id) {
+		QueryCriteria queryCriteria = new QueryCriteria();
+		// 设置分页 启始页
+		queryCriteria.setStartIndex(query.getPage());
+		// 每页大小
+		queryCriteria.setPageSize(query.getRows());
+		 
+		// 设置排序字段及排序方向
+		if (StringUtils.isNotEmpty(query.getSort()) && StringUtils.isNotEmpty(query.getOrder())) {
+			queryCriteria.setOrderField("user."+query.getSort());
+			queryCriteria.setOrderDirection(query.getOrder());
+		} else {
+			queryCriteria.setOrderField("user."+DEFAULT_ORDER_FILED_NAME);
+		}
+		 
+		// 查询条件 参数类型 用户名
+		if (id!=null&&id>0) {
+			queryCriteria.addQueryCondition("roleId",id);
+		}
+		
+		PageResult<User> pageResult = this.userService.doFindByCriteriaAndRole(queryCriteria);
+		
+		return pageResult.getDataTable(query.getRequestId());
 	}
+	
+	/**加载角色所有关联用户列表*/
+	@RequestMapping(value = "authgroups")
+	@ResponseBody
+	public DataTable<Group> authGroups(QueryDt query,@RequestParam(required = false) Long id) {
+		QueryCriteria queryCriteria = new QueryCriteria();
+		// 设置分页 启始页
+		queryCriteria.setStartIndex(query.getPage());
+		// 每页大小
+		queryCriteria.setPageSize(query.getRows());
+		 
+		// 设置排序字段及排序方向
+		if (StringUtils.isNotEmpty(query.getSort()) && StringUtils.isNotEmpty(query.getOrder())) {
+			queryCriteria.setOrderField("groups."+query.getSort());
+			queryCriteria.setOrderDirection(query.getOrder());
+		} else {
+			queryCriteria.setOrderField("groups."+DEFAULT_ORDER_FILED_NAME);
+		}
+		 
+		// 查询条件 参数类型 用户名
+		if (id!=null&&id>0) {
+			queryCriteria.addQueryCondition("roleId",id);
+		}
+		
+		PageResult<Group> pageResult = this.groupService.doFindByCriteriaAndRole(queryCriteria);
+		
+		return pageResult.getDataTable(query.getRequestId());
+	}
+	
 	/**加载角色所有关联用户组列表*/
 	@RequestMapping(value = "authusergroups")
 	@ResponseBody
@@ -208,24 +264,6 @@ public class RoleController extends AbstractController{
 			treeNodes.add(treeNode);
 		}
 		return JSONParser.toJSONString(treeNodes,properties);
-	}
-	
-	
-	/**显示所有用户组列表*/
-	@RequestMapping(value="groups")
-	@ResponseBody
-	public String groups(){
-		QueryCriteria  queryCriteria=new QueryCriteria();
-		queryCriteria.setPageSize(99999999);
-		return this.groupService.doFindAuthGroups(queryCriteria,AUTHROLE_GROUPS_TB);
-	}
-	/**显示所有用户列表*/
-	@RequestMapping(value="users")
-	@ResponseBody
-	public String users(){
-		QueryCriteria  queryCriteria=new QueryCriteria();
-		queryCriteria.setPageSize(99999999);
-		return this.userService.doFindAllByCriteria(queryCriteria,AUTHROLE_USERS_TB);
 	}
 	
 	/**为角色添加用户集合*/
@@ -515,6 +553,136 @@ public class RoleController extends AbstractController{
 		logger.info("export Excel {} cost:{} time,fileName:{}",dataGrid.getTitle(),costTime,fileName);
 		logger.info("out Excel导出");
 		return this.getExcelView(modelAndView);
+	}
+	
+	/** 查询所有的用户 add by maojiawei */
+	@RequestMapping(value = "users")
+	@ResponseBody
+	public DataTable<UserRole> users(QueryDt query,@RequestParam(required = false) Long id) {
+		QueryCriteria queryCriteria = new QueryCriteria();
+		// 设置分页 启始页
+		queryCriteria.setStartIndex(query.getPage());
+		// 每页大小
+		queryCriteria.setPageSize(query.getRows());
+		 
+		// 设置排序字段及排序方向
+		if (StringUtils.isNotEmpty(query.getSort()) && StringUtils.isNotEmpty(query.getOrder())) {
+			queryCriteria.setOrderField(query.getSort());
+			queryCriteria.setOrderDirection(query.getOrder());
+		} else {
+			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+		} 
+		
+		PageResult<UserRole> pageResult = this.userService.doFindUserRoleByCriteria(queryCriteria);
+		
+		
+		if(CollectionUtils.isEmpty(pageResult.getContent())){
+			return pageResult.getDataTable(query.getRequestId());
+		}
+		List<UserRole> userRoles=pageResult.getContent();
+		List<Long> userIds=new ArrayList<Long>();
+		for(UserRole userRole:userRoles){
+			userIds.add(userRole.getId());
+		}
+		queryCriteria = new QueryCriteria();
+		// 设置分页 启始页
+		queryCriteria.setStartIndex(1);
+		// 每页大小
+		queryCriteria.setPageSize(query.getRows());
+		// 查询条件 参数类型 用户名
+		if (id!=null&&id>0) {
+			queryCriteria.addQueryCondition("roleId",id);
+		}
+		//查询所有空的
+		if(!CollectionUtils.isEmpty(userIds)){
+			queryCriteria.addQueryCondition("userIds", userIds);
+		}
+		PageResult<User> userPageResult=this.userService.doFindByCriteriaAndGroup(queryCriteria);
+		
+		Map<Long,Long> userIdsMap=new HashMap<Long,Long>();
+		
+		for(User user:userPageResult.getContent()){
+			userIdsMap.put(user.getId(), user.getId());
+		}
+		
+		List<UserRole> contents=new ArrayList<UserRole>();
+		
+		for(UserRole userRole:userRoles){
+			if(userIdsMap.containsKey(userRole.getId())){
+				userRole.setRoleId(id);
+			}
+			contents.add(userRole);
+		}
+		
+		pageResult.setContent(contents);
+		
+		return pageResult.getDataTable(query.getRequestId());
+	 
+	}
+	
+	/** 查询所有的用户 add by maojiawei */
+	@RequestMapping(value = "groups")
+	@ResponseBody
+	public DataTable<GroupRole> groups(QueryDt query,@RequestParam(required = false) Long id) {
+		QueryCriteria queryCriteria = new QueryCriteria();
+		// 设置分页 启始页
+		queryCriteria.setStartIndex(query.getPage());
+		// 每页大小
+		queryCriteria.setPageSize(query.getRows());
+		 
+		// 设置排序字段及排序方向
+		if (StringUtils.isNotEmpty(query.getSort()) && StringUtils.isNotEmpty(query.getOrder())) {
+			queryCriteria.setOrderField(query.getSort());
+			queryCriteria.setOrderDirection(query.getOrder());
+		} else {
+			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+		} 
+		
+		PageResult<GroupRole> pageResult = this.groupService.doFindGroupRoleByCriteria(queryCriteria);
+		
+		
+		if(CollectionUtils.isEmpty(pageResult.getContent())){
+			return pageResult.getDataTable(query.getRequestId());
+		}
+		List<GroupRole> groupRoles=pageResult.getContent();
+		List<Long> groupIds=new ArrayList<Long>();
+		for(GroupRole groupRole:groupRoles){
+			groupIds.add(groupRole.getId());
+		}
+		queryCriteria = new QueryCriteria();
+		// 设置分页 启始页
+		queryCriteria.setStartIndex(1);
+		// 每页大小
+		queryCriteria.setPageSize(query.getRows());
+		// 查询条件 参数类型 用户名
+		if (id!=null&&id>0) {
+			queryCriteria.addQueryCondition("roleId",id);
+		}
+		//查询所有空的
+		if(!CollectionUtils.isEmpty(groupIds)){
+			queryCriteria.addQueryCondition("groupIds", groupIds);
+		}
+		PageResult<Group> groupPageResult=this.groupService.doFindByCriteriaAndRole(queryCriteria);
+		
+		Map<Long,Long> groupIdsMap=new HashMap<Long,Long>();
+		
+		for(Group group:groupPageResult.getContent()){
+			groupIdsMap.put(group.getId(), group.getId());
+		}
+		
+		List<GroupRole> contents=new ArrayList<GroupRole>();
+		
+		for(GroupRole groupRole:groupRoles){
+			if(groupIdsMap.containsKey(groupRole.getId())){
+				groupRole.setRoleId(id);
+			}
+			contents.add(groupRole);
+		}
+		
+		pageResult.setContent(contents);
+		
+		return pageResult.getDataTable(query.getRequestId());
+	 
 	}
 }
 
