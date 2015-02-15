@@ -24,11 +24,14 @@ import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.newtouch.lion.admin.web.model.system.auth.AuthModel;
 import com.newtouch.lion.admin.web.model.system.group.GroupVo;
 import com.newtouch.lion.common.date.DateUtil;
 import com.newtouch.lion.common.file.FileUtil;
@@ -37,6 +40,7 @@ import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.model.datagrid.DataGrid;
 import com.newtouch.lion.model.system.Group;
 import com.newtouch.lion.model.system.Role;
+import com.newtouch.lion.model.system.RoleGroup;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.model.system.UserGroup;
 import com.newtouch.lion.page.PageResult;
@@ -78,8 +82,6 @@ public class GroupController extends AbstractController{
 	private static final String DEFAULT_ORDER_FILED_NAME = "id";
 	/** 默认列表 */
 	public static final String INDEX_LISTS_TB = "sys_group_list_tb";
-	/** 所有角色列表名称 */
-	private static final String AUTH_ROLES_TB = "sys_authroleforgroup_tb";
 	/** 用户组管理首页 */
 	public static final String INDEX_RETURN = "/system/group/index";
 	/** 添加页面 */
@@ -226,14 +228,14 @@ public class GroupController extends AbstractController{
 	}
 
 	/** 授权到角色 */
-	@RequestMapping(value = "addroletogroup")
+	@RequestMapping(value = "addroletogroup",method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView addRoles(@RequestParam(required = false) Long groupId,
-			@RequestParam(required = false) String roleId,
-			ModelAndView modelAndView) {
+	public ModelAndView addRoles(@RequestBody(required=false)AuthModel authModel,ModelAndView modelAndView) {
 		// TODO 验证输入
+		Long groupId=1L;
+		Long roleId=1L;
 		Group group = this.groupService.doFindById(groupId);
-		List<Long> targetRoleIds = LongUtils.parserStringToLong(roleId,LongUtils.SPARATOR_COMMA);
+		List<Long> targetRoleIds=new ArrayList<Long>();
 		List<Long> deleteRoleIds = new ArrayList<Long>();
 		for (Role role : group.getRoles()) {
 			if (targetRoleIds.contains(role.getId())) {
@@ -242,13 +244,16 @@ public class GroupController extends AbstractController{
 				deleteRoleIds.add(role.getId());
 			}
 		}
-
 		if (logger.isInfoEnabled()) {
 			logger.info("targetUserIds[]：" + targetRoleIds.toString());
 			logger.info("deleteUserIds[]:" + deleteRoleIds.toString());
+			Map<String, String> params = new HashMap<String, String>();
+			params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
+			modelAndView.addObject(BindMessage.SUCCESS, params);
+			return this.getJsonView(modelAndView);
 		}
-		this.groupService
-				.doAuthRoleToGroup(targetRoleIds, deleteRoleIds, group);
+		
+		this.groupService.doAuthRoleToGroup(targetRoleIds, deleteRoleIds, group);
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
 		modelAndView.addObject(BindMessage.SUCCESS, params);
@@ -342,7 +347,7 @@ public class GroupController extends AbstractController{
 		}
 		queryCriteria = new QueryCriteria();
 		// 设置分页 启始页
-		queryCriteria.setStartIndex(1);
+		queryCriteria.setStartIndex(0);
 		// 每页大小
 		queryCriteria.setPageSize(query.getRows());
 		// 查询条件 参数类型 用户名
@@ -379,10 +384,24 @@ public class GroupController extends AbstractController{
 	/** 查询所有的角色 */
 	@RequestMapping(value = "roles")
 	@ResponseBody
-	public String roles() {
+	public DataTable<RoleGroup> roles(QueryDt query,@RequestParam(required = false) Long id) {
 		QueryCriteria queryCriteria = new QueryCriteria();
-		queryCriteria.setPageSize(99999999);
-		return this.roleService.doFindByCriteria(queryCriteria, AUTH_ROLES_TB);
+		// 设置分页 启始页
+		queryCriteria.setStartIndex(query.getPage());
+		// 每页大小
+		queryCriteria.setPageSize(query.getRows());
+		 
+		// 设置排序字段及排序方向
+		if (StringUtils.isNotEmpty(query.getSort()) && StringUtils.isNotEmpty(query.getOrder())) {
+			queryCriteria.setOrderField(query.getSort());
+			queryCriteria.setOrderDirection(query.getOrder());
+		} else {
+			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+		} 
+		
+		PageResult<RoleGroup> pageResult = this.roleService.doFindRoleGroupByCriteria(queryCriteria,id);		
+		 
+		return pageResult.getDataTable(query.getRequestId());
 	}
 
 	@RequestMapping(value = "index")

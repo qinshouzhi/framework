@@ -288,9 +288,13 @@
        		 }
            return '';
        	},
-        //
-        selectAll:function(){
-
+        //获取所有数据
+        getdata:function(){
+            var aoData=this.settings().aoData,datas=[];
+            $.each(aoData,function(key,item){
+                 datas.push(item._aData);
+            });
+            return datas;
         },
        	//表格重绘回调函数
        	drawCallback:function(){

@@ -193,13 +193,14 @@ lion.assemblyCache={};
    exports.postjson=function(url,data,successfn,errorfn,arg){
    		 $.ajax({
 				dataType:'json',
-				type : 'POST',
+				contentType:'application/json',
+				type :'POST',
 				url:url,
+				async : false,
 				data:JSON.stringify(data),
 				success : function(data) {
             		successfn.call(this,data,arg);
-            	},
-				contentType:'application/json',
+            	},				
 				timeout : 5000, // 连接超时时间
 				error:function(xhr, textStatus, error) {
 					errorfn.call(this,xhr,textStatus,error);

@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.newtouch.lion.model.system.Group;
 import com.newtouch.lion.model.system.Role;
+import com.newtouch.lion.model.system.RoleGroup;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
@@ -171,13 +172,19 @@ public interface RoleService {
 	 * @return  PageResult<Role>
 	 */
 	public PageResult<Role> doFindByCriteria(QueryCriteria criteria);
+	/***
+	 * 查询角色列表，并关联GroupId
+	 * @param queryCriteria
+	 * @return PageResult<RoleGroup>
+	 */
+	public PageResult<RoleGroup> doFindRoleGroupByCriteria(QueryCriteria queryCriteria,Long groupId);
 	
 	/***
 	 * 多条件组合查询，并返回分页对象,关联Group对象
-	 * @param criteria 查询条件
+	 * @param queryCriteria 查询条件
 	 * @return  PageResult<Role>
 	 */
-	public PageResult<Role> doFindByCriteriaAndGroup(QueryCriteria criteria);
+	public PageResult<Role> doFindByCriteriaAndGroup(QueryCriteria queryCriteria);
 	
 
 	public String doFindByCriteria(QueryCriteria criteria, String tableId);

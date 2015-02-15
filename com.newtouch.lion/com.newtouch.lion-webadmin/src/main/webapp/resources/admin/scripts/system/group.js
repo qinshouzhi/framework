@@ -18,6 +18,8 @@ $(function () {
   var groupuserdg=$("#groupuser_list");
   //授权用户列表
   var authuserdg=$('#authuser_list');
+  //授权角色列表
+  var authroledg=$('#authrole_list');
   
   //默认隐藏第一个tab的modal-footer
   modalGroupAuth.find('.modal-footer').hide();
@@ -27,17 +29,39 @@ $(function () {
       var idObj={'id':row.id};
       var tabHref=$(this).attr('href');
       if(tabHref==='#tab_3_1'){
+         //重新加载 用户组角色数据
+         grouproledg.datagrids({querydata:idObj});
+         grouproledg.datagrids('reload');
+         //重新加载 用户组所关联用户数据 
+         groupuserdg.datagrids({querydata:idObj});
+         groupuserdg.datagrids('reload');
          modalGroupAuth.find('.modal-footer').hide();
          return;
       }else if(tabHref==='#tab_3_2'){
-        modalGroupAuth.find('.modal-footer').show();
+         authroledg.datagrids({querydata:idObj});
+         authroledg.datagrids('reload');
+         modalGroupAuth.find('.modal-footer').show();
+         return;
       }else if(tabHref==='#tab_3_3'){
-        authuserdg.datagrids({querydata:idObj});
-        authuserdg.datagrids('reload');
-        modalGroupAuth.find('.modal-footer').show();
+         authuserdg.datagrids({querydata:idObj});
+         authuserdg.datagrids('reload');
+         modalGroupAuth.find('.modal-footer').show();
+         return;
       }
   });
   
+  //角色授权列表创建行调用
+  authroledg.on('datagrids.createdrow',function(row,data,index){
+      if(index.hasOwnProperty('groupId')){
+           selectedChecked(row,data,index);
+      }
+  });
+   //角色加载数据完成
+  authroledg.on('datagrids.reload',function(){
+      grouproledg.datagrids('checkselected');
+      //groupuserdg.datagrids('checkboxdisabled');
+  });
+
   //用户授权列表创建行调用
   authuserdg.on('datagrids.createdrow',function(row,data,index){
       if(index.hasOwnProperty('groupId')){
@@ -74,16 +98,31 @@ $(function () {
         lion.util.info('提示','请选择要授权记录');
         return;
       }
-      //打开对话框架
-      modalGroupAuth.modal('toggle'); 
-      //重新加载 用户组角色数据
       var idObj={'id':row.id};
-      grouproledg.datagrids({querydata:idObj});
-      grouproledg.datagrids('reload');
-      //重新加载 用户组所关联用户数据 
-      groupuserdg.datagrids({querydata:idObj});
-      groupuserdg.datagrids('reload');
-      
+      //设置ID
+      $('#groupId').val(row.id);
+      //显示对话框
+      modalGroupAuth.modal('toggle');
+      if(selectTabId==='tab_3_1'){
+         //重新加载 用户组角色数据
+         grouproledg.datagrids({querydata:idObj});
+         grouproledg.datagrids('reload');
+         //重新加载 用户组所关联用户数据 
+         groupuserdg.datagrids({querydata:idObj});
+         groupuserdg.datagrids('reload');
+         modalGroupAuth.find('.modal-footer').hide();
+         return;
+      }else if(selectTabId==='tab_3_2'){
+         authroledg.datagrids({querydata:idObj});
+         authroledg.datagrids('reload');
+         modalGroupAuth.find('.modal-footer').show();
+         return;
+      }else if(selectTabId==='tab_3_3'){
+         authuserdg.datagrids({querydata:idObj});
+         authuserdg.datagrids('reload');
+         modalGroupAuth.find('.modal-footer').show();
+         return;
+      }
 	});
   //重新加载数据完成
   groupuserdg.on('datagrids.reload',function(){
@@ -99,13 +138,41 @@ $(function () {
   //用户组授权保存
   $('#btnAuthSave').click(function(){
       var selectTabId=modalGroupAuth.find('.tab-pane.active').attr('id');
+      var groupId=$('#groupId').val();
+      var row=groupdg.datagrids('getSelected');
+      groupId=row.id;
       if(selectTabId==='tab_3_2'){
+          var param=authSelected(groupId,authroledg);
+          console.dir(JSON.stringify(param));
+          lion.util.postjson('addroletogroup.json',param,authSuccess,errorRequest);
+          
+          console.dir(param);
           console.dir('关联角色');
-      }else{
+      }else if(selectTabId==='tab_3_3'){
+          var params=authSelected(groupId,authuserdg);
+          console.dir(params);
           console.dir('关联用户');
       }
   }); 
 
+  function authSuccess(data){
+      console.dir(data);
+  }
+  //将授权信息组合成一个请求对象
+  function authSelected(groupId,authdg){
+     var allData=authdg.datagrids('getdata'),
+          selctedData=authdg.datagrids('getSelections'),
+          roleIds=[],
+          selectedRoledIds=[];
+      $.each(allData,function(key,item){
+           roleIds.push(item.id);
+      });
+      $.each(selctedData,function(key,item){
+          selectedRoledIds.push(item.id);
+      });
+      var param={'id':groupId,'auths':roleIds,'selecteds':selectedRoledIds};
+      return param;
+  }
 
 	//查询
 	$('#btnQuery').click(function(){
@@ -216,7 +283,10 @@ function successAddFrm(data,arg,id){
   }
 }
 //请求失败后信息
-function errorRequest(data,arg){
+function errorRequest(xhr,textStatus,error){
+  console.dir(xhr);
+  console.dir(textStatus);
+  console.dir(error);
 	lion.util.error('提示','网络连接异常');
 }
 

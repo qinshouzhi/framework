@@ -167,11 +167,11 @@
 								<div  role="tabpanel" class="tab-pane fade" id="tab_3_2">
 									 <div class="row">
 											<div class="col-md-12">
-									 <table  id="authgroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",     data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="5" data-loading="false">
+									 <table  id="authrole_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",     data-loadUrl="${base}/system/group/roles.json"   data-checkbox="true" data-pageSize="5" data-loading="false">
 												<thead>
 													<tr>
 														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
-													 		<input type="checkbox" class="group-checkable" data-set="#authgroup_list.checkboxes"  data-sortable="false"  />
+													 		<input type="checkbox" class="group-checkable" data-set="#authrole_list.checkboxes"  data-sortable="false"  />
 													 	</th>
 														<th data-field='nameEn' width="200px;"  data-sortDir="asc">
 															角色名称(英文)

@@ -6,6 +6,7 @@
  */
 package com.newtouch.lion.service.system.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -14,14 +15,17 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.newtouch.lion.common.Assert;
 import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.system.RoleDao;
+import com.newtouch.lion.dao.system.RoleGroupDao;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.system.Group;
 import com.newtouch.lion.model.system.Resource;
 import com.newtouch.lion.model.system.Role;
+import com.newtouch.lion.model.system.RoleGroup;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
@@ -54,7 +58,10 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 
 	@Autowired
 	private RoleDao roleDao;
-
+	/**用户及用户组查询*/
+	@Autowired
+	private RoleGroupDao  roleGroupDao;
+	
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -214,6 +221,78 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 	}
 	
 	
+	
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.RoleService#doFindRoleGroupByCriteria(com.newtouch.lion.query.QueryCriteria, java.lang.Long)
+	 */
+	@Override
+	public PageResult<RoleGroup> doFindRoleGroupByCriteria(
+			QueryCriteria criteria, Long groupId) {
+		
+		String queryEntry = "select new com.newtouch.lion.model.system.RoleGroup(id,nameZh,nameEn,description) from Role ";
+
+		String[] whereBodies = { "nameZh like :nameZh"};
+
+		String fromJoinSubClause = "";
+
+		Map<String, Object> params = criteria.getQueryCondition();
+
+		String orderField = criteria.getOrderField();
+
+		String orderDirection = criteria.getOrderDirection();
+
+		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
+				whereBodies, orderField, orderDirection, params);
+
+		int pageSize = criteria.getPageSize();
+
+		int startIndex = criteria.getStartIndex();
+
+		PageResult<RoleGroup> pageResult = this.roleGroupDao.query(hql,HqlUtils.generateCountHql(hql, null), params, startIndex,pageSize);
+		
+		//如果查询为空，则直接返回数据
+		if(CollectionUtils.isEmpty(pageResult.getContent())){
+			return pageResult;
+		}
+		//以下代码检查是否已授权到用户组的角色
+		criteria=new QueryCriteria();
+		criteria.setStartIndex(0);
+		criteria.setPageSize(pageResult.getPageSize());
+		//当前ID集合
+		List<RoleGroup> roleGroups=pageResult.getContent();
+		List<Long> roleIds=new ArrayList<Long>();
+		for(RoleGroup roleGroup:roleGroups){
+			roleIds.add(roleGroup.getId());
+		}
+		// 查询条件 参数类型 用户名
+		if (groupId!=null&&groupId>0) {
+			criteria.addQueryCondition("groupId",groupId);
+		}
+		//查询所有空的
+		if(!CollectionUtils.isEmpty(roleIds)){
+			criteria.addQueryCondition("roleIds",roleIds);
+		}
+		
+		PageResult<Role> result=this.doFindByCriteriaAndGroup(criteria);
+		
+		Map<Long,Long> userIdsMap=new HashMap<Long,Long>();
+		
+		for(Role user:result.getContent()){
+			userIdsMap.put(user.getId(), user.getId());
+		}
+		
+		List<RoleGroup> contents=new ArrayList<RoleGroup>();
+		
+		for(RoleGroup roleGroup:roleGroups){
+			if(userIdsMap.containsKey(roleGroup.getId())){
+				roleGroup.setGroupId(groupId);
+			}
+			contents.add(roleGroup);
+		}
+		pageResult.setContent(contents);
+		return pageResult;
+	}
 
 	/* (non-Javadoc)
 	 * @see com.newtouch.lion.service.system.RoleService#doFindByCriteriaAndGroup(com.newtouch.lion.query.QueryCriteria)
@@ -222,7 +301,7 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 	public PageResult<Role> doFindByCriteriaAndGroup(QueryCriteria criteria) {
 		String queryEntry = " select role from Role as  role inner join fetch role.groups g ";
 
-		String[] whereBodies = { "role.nameZh like :nameZh","g.id =:groupId"};
+		String[] whereBodies = { "role.nameZh like :nameZh","g.id =:groupId","role.id in(:roleIds)"};
 
 		String fromJoinSubClause = "";
 
