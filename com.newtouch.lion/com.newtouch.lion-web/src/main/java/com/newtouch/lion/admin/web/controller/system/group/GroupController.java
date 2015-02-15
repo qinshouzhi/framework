@@ -35,7 +35,6 @@ import com.newtouch.lion.admin.web.model.system.auth.AuthModel;
 import com.newtouch.lion.admin.web.model.system.group.GroupVo;
 import com.newtouch.lion.common.date.DateUtil;
 import com.newtouch.lion.common.file.FileUtil;
-import com.newtouch.lion.common.lang.LongUtils;
 import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.model.datagrid.DataGrid;
 import com.newtouch.lion.model.system.Group;
@@ -198,16 +197,26 @@ public class GroupController extends AbstractController{
 	}
 
 	/** 授权到用户 */
-	@RequestMapping(value = "addusertogroup")
+	@RequestMapping(value = "addusertogroup",method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView addUsers(@RequestParam(required = false) Long groupId,
-			@RequestParam(required = false) String userId,
-			ModelAndView modelAndView) {
-		// TODO 验证输入
-		Group group = this.groupService.doFindById(groupId);
-		List<Long> targetUserIds = LongUtils.parserStringToLong(userId,LongUtils.SPARATOR_COMMA);
+	public ModelAndView addUsers(@RequestBody(required=false)AuthModel authModel,ModelAndView modelAndView) {
+		//查询用户列表
+		QueryCriteria queryCriteria = new QueryCriteria(0,9999);
+		// 查询条件 参数类型 用户名
+		if (authModel.getId()>0) {
+			queryCriteria.addQueryCondition("groupId",authModel.getId());
+		}
+		//查询所有空的
+		if(!CollectionUtils.isEmpty(authModel.getAuths())){
+			queryCriteria.addQueryCondition("userIds",authModel.getAuths());
+		}
+		PageResult<User> userPageResult=this.userService.doFindByCriteriaAndGroup(queryCriteria);
+		
+		
+		Group group = this.groupService.doFindById(authModel.getId());
+		List<Long> targetUserIds =authModel.getSelecteds();
 		List<Long> deleteUserIds = new ArrayList<Long>();
-		for (User user : group.getUsers()) {
+		for (User user :userPageResult.getContent()) {
 			if (targetUserIds.contains(user.getId())) {
 				targetUserIds.remove(user.getId());
 			} else {
@@ -219,45 +228,51 @@ public class GroupController extends AbstractController{
 			logger.info("targetUserIds[]：" + targetUserIds.toString());
 			logger.info("deleteUserIds[]:" + deleteUserIds.toString());
 		}
-		this.groupService.idoAuthUserToGroup(targetUserIds, deleteUserIds,
-				group);
+		this.groupService.idoAuthUserToGroup(targetUserIds, deleteUserIds,group);
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		return this.getJsonView(modelAndView);
 	}
 
 	/** 授权到角色 */
 	@RequestMapping(value = "addroletogroup",method=RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView addRoles(@RequestBody(required=false)AuthModel authModel,ModelAndView modelAndView) {
-		// TODO 验证输入
-		Long groupId=1L;
-		Long roleId=1L;
-		Group group = this.groupService.doFindById(groupId);
-		List<Long> targetRoleIds=new ArrayList<Long>();
-		List<Long> deleteRoleIds = new ArrayList<Long>();
-		for (Role role : group.getRoles()) {
+		//查询角色列表
+		QueryCriteria queryCriteria = new QueryCriteria(0,9999);
+		// 查询条件用户组ID
+		if (authModel.getId()>0) {
+			queryCriteria.addQueryCondition("groupId",authModel.getId());
+		}
+		//查询所有空的
+		if(!CollectionUtils.isEmpty(authModel.getAuths())){
+			queryCriteria.addQueryCondition("roleIds",authModel.getAuths());
+		}
+		PageResult<Role> pageResult=this.roleService.doFindByCriteriaAndGroup(queryCriteria);
+		//验证输入
+		
+		List<Long> targetRoleIds=authModel.getSelecteds();
+		List<Long> deleteRoleIds=new ArrayList<Long>();
+		for (Role role : pageResult.getContent()) {
+			//过滤已授权的列表
 			if (targetRoleIds.contains(role.getId())) {
 				targetRoleIds.remove(role.getId());
 			} else {
+				//删除未授权
 				deleteRoleIds.add(role.getId());
 			}
 		}
 		if (logger.isInfoEnabled()) {
 			logger.info("targetUserIds[]：" + targetRoleIds.toString());
 			logger.info("deleteUserIds[]:" + deleteRoleIds.toString());
-			Map<String, String> params = new HashMap<String, String>();
-			params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
-			modelAndView.addObject(BindMessage.SUCCESS, params);
-			return this.getJsonView(modelAndView);
 		}
-		
+		Group group = this.groupService.doFindById(authModel.getId());
 		this.groupService.doAuthRoleToGroup(targetRoleIds, deleteRoleIds, group);
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		return   this.getJsonView(modelAndView);
 	}
 
 	/** 查询用户组已授权的角色 */

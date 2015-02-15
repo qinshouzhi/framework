@@ -70,8 +70,7 @@ $(function () {
   });
    //重新加载数据完成
   authuserdg.on('datagrids.reload',function(){
-      grouproledg.datagrids('checkselected');
-      //groupuserdg.datagrids('checkboxdisabled');
+      authuserdg.datagrids('checkselected');
   });
   //创建行回调事件
   groupuserdg.on('datagrids.createdrow',function(row,data,index){
@@ -127,36 +126,44 @@ $(function () {
   //重新加载数据完成
   groupuserdg.on('datagrids.reload',function(){
       groupuserdg.datagrids('checkselected');
-      //groupuserdg.datagrids('checkboxdisabled');
   });
   //重新加载数据完成
   grouproledg.on('datagrids.reload',function(){
       grouproledg.datagrids('checkselected');
-      //groupuserdg.datagrids('checkboxdisabled');
   });
 
   //用户组授权保存
   $('#btnAuthSave').click(function(){
       var selectTabId=modalGroupAuth.find('.tab-pane.active').attr('id');
-      var groupId=$('#groupId').val();
       var row=groupdg.datagrids('getSelected');
-      groupId=row.id;
+      var groupId=row.id,param='';
       if(selectTabId==='tab_3_2'){
-          var param=authSelected(groupId,authroledg);
-          console.dir(JSON.stringify(param));
-          lion.util.postjson('addroletogroup.json',param,authSuccess,errorRequest);
-          
-          console.dir(param);
-          console.dir('关联角色');
+          param=authSelected(groupId,authroledg);         
+          lion.util.postjson('addroletogroup.json',param,authRoleSuccess,errorRequest,authroledg);
       }else if(selectTabId==='tab_3_3'){
-          var params=authSelected(groupId,authuserdg);
-          console.dir(params);
+          param=authSelected(groupId,authuserdg);
+          console.dir(JSON.stringify(param));           
           console.dir('关联用户');
+          lion.util.postjson('addusertogroup.json',param,authRoleSuccess,errorRequest,authuserdg);
       }
   }); 
 
-  function authSuccess(data){
-      console.dir(data);
+  function authRoleSuccess(data,authdg){
+      if(data!==null&&!(data.hasError)){
+        lion.util.success('提示',data.message);
+        authdg.datagrids('reload');
+      }else if(data!==null&&data.hasError){
+        var gmsg='';
+        for(var msg in data.errorMessage){
+          gmsg+=data.errorMessage[msg];
+        }
+        if(lion.util.isEmpty(gmsg)){
+          gmsg='授权出错';
+        }
+         lion.util.error('提示',gmsg);
+      }else{
+         lion.util.error('提示','授权出错');
+      }
   }
   //将授权信息组合成一个请求对象
   function authSelected(groupId,authdg){

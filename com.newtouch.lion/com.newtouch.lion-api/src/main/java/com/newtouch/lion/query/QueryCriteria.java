@@ -47,6 +47,27 @@ public class QueryCriteria implements Serializable {
 	private String orderDirection = QueryCriteria.ASC;
 	/** 查询条件 */
 	private Map<String, Object> queryCondition = new HashMap<String, Object>();
+	
+	/***
+	 * 默认构造函数
+	 */
+	public QueryCriteria() {
+		super();
+	};
+	
+	 
+
+	/**
+	 * @param startIndex
+	 * @param pageSize
+	 */
+	public QueryCriteria(int startIndex, int pageSize) {
+		super();
+		this.startIndex = startIndex;
+		this.pageSize = pageSize;
+	}
+
+
 
 	/***
 	 * 添加查询条件，key-value
