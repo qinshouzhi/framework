@@ -1,3 +1,4 @@
+
 /*
  * Copyright (c)  2013, Newtouch
  * All rights reserved. 
@@ -517,6 +518,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 	@Override
 	public PageResult<GroupRole> doFindGroupRoleByCriteria(
 			QueryCriteria criteria,Long roleId) {
+ 
 		String queryEntry = "select new com.newtouch.lion.model.system.GroupRole(id,nameZh,nameEn,description) from Group ";
 
 		String[] whereBodies = { "nameZh like :nameZh", "nameEn like :nameEn","description like :description" };
@@ -646,7 +648,6 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 			contents.add(roleGroup);
 		}
 		pageResult.setContent(contents);
-		
 		return pageResult;
 	}
 
