@@ -162,6 +162,7 @@ public interface GroupService {
 	public void doCreate(Group group);
 	
 	/** 用户组与角色查询，并返回分页对象 */
+
 	public PageResult<GroupRole> doFindGroupRoleByCriteria(QueryCriteria criteria,Long roleId);
 	
 	public PageResult<Group> doFindByCriteriaAndRole(QueryCriteria criteria);

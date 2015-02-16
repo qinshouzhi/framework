@@ -10,44 +10,68 @@ $(function () {
 	roledg=$("#sys_rolelist_tb");
 	addForm=$('#sysRoleForm');
 	addDialog=$('#basic');
-	var modalGroupAuth=$('#modalGroupAuth');
+	var modalRoleAuth=$('#modalRoleAuth');
 	var queryForm=$('#queryform');
-  //已关联角色
-  var rolegroupdg=$("#rolegroup_list");
-  //已关联用户
-  var roleuserdg=$("#roleuser_list");
-  //授权用户列表
-  var authuserdg=$('#authuser_list');
+	//已关联用户组
+	var rolegroupdg=$("#rolegroup_list");
+	//已关联用户
+	var roleuserdg=$("#roleuser_list");
+	//授权用户列表
+	var authuserdg=$('#authuser_list');
+	//授权用户组列表
+	var authgroupdg=$('#authgroup_list');
   
-  //默认隐藏第一个tab的modal-footer
-  modalGroupAuth.find('.modal-footer').hide();
+    //默认隐藏第一个tab的modal-footer
+    modalRoleAuth.find('.modal-footer').hide();
 	//绑定tab事件
-  modalGroupAuth.find('.nav-tabs a').click(function(){
+    modalRoleAuth.find('.nav-tabs a').click(function(){
       var row=roledg.datagrids('getSelected');
       var idObj={'id':row.id};
       var tabHref=$(this).attr('href');
       if(tabHref==='#tab_3_1'){
-         modalGroupAuth.find('.modal-footer').hide();
+         //重新加载 用户组角色数据
+         rolegroupdg.datagrids({querydata:idObj});
+         rolegroupdg.datagrids('reload');
+         //重新加载 用户组所关联用户数据 
+         roleuserdg.datagrids({querydata:idObj});
+         roleuserdg.datagrids('reload');
+         modalRoleAuth.find('.modal-footer').hide();
          return;
       }else if(tabHref==='#tab_3_2'){
-        modalGroupAuth.find('.modal-footer').show();
+    	  //console.dir(idObj);
+         //authgroupdg.datagrids({querydata:idObj});
+         authgroupdg.datagrids('reload');
+         modalRoleAuth.find('.modal-footer').show();
+         return;
       }else if(tabHref==='#tab_3_3'){
-        authuserdg.datagrids({querydata:idObj});
-        authuserdg.datagrids('reload');
-        modalGroupAuth.find('.modal-footer').show();
+         authuserdg.datagrids({querydata:idObj});
+         authuserdg.datagrids('reload');
+         modalRoleAuth.find('.modal-footer').show();
+         return;
       }
   });
   
+  //角色授权列表创建行调用
+  authgroupdg.on('datagrids.createdrow',function(row,data,index){
+      if(index.hasOwnProperty('roleId')){
+           selectedChecked(row,data,index);
+      }
+  });
+   //角色加载数据完成
+  authgroupdg.on('datagrids.reload',function(){
+      rolegroupdg.datagrids('checkselected');
+      //roleuserdg.datagrids('checkboxdisabled');
+  });
+
   //用户授权列表创建行调用
   authuserdg.on('datagrids.createdrow',function(row,data,index){
-      if(index.hasOwnProperty('groupId')){
+      if(index.hasOwnProperty('roleId')){
            selectedChecked(row,data,index);
       }
   });
    //重新加载数据完成
   authuserdg.on('datagrids.reload',function(){
-      rolegroupdg.datagrids('checkselected');
-      //roleuserdg.datagrids('checkboxdisabled');
+      authuserdg.datagrids('checkselected');
   });
   //创建行回调事件
   roleuserdg.on('datagrids.createdrow',function(row,data,index){
@@ -68,44 +92,95 @@ $(function () {
 	handleVForm(addForm,submitForm);
 	//用户组授权
 	$('#btnAuth').click(function(){
-      var selectTabId=modalGroupAuth.find('.tab-pane.active').attr('id');
+      var selectTabId=modalRoleAuth.find('.tab-pane.active').attr('id');
       var row=roledg.datagrids('getSelected');
       if(!row){
         lion.util.info('提示','请选择要授权记录');
         return;
       }
-      //打开对话框架
-      modalGroupAuth.modal('toggle'); 
-      //重新加载 用户组角色数据
       var idObj={'id':row.id};
-      rolegroupdg.datagrids({querydata:idObj});
-      rolegroupdg.datagrids('reload');
-      //重新加载 用户组所关联用户数据 
-      roleuserdg.datagrids({querydata:idObj});
-      roleuserdg.datagrids('reload');
-      
+      //设置ID
+      $('#roleId').val(row.id);
+      //显示对话框
+      modalRoleAuth.modal('toggle');
+      if(selectTabId==='tab_3_1'){
+         //重新加载 用户组角色数据
+         rolegroupdg.datagrids({querydata:idObj});
+         rolegroupdg.datagrids('reload');
+         //重新加载 用户组所关联用户数据 
+         roleuserdg.datagrids({querydata:idObj});
+         roleuserdg.datagrids('reload');
+         modalRoleAuth.find('.modal-footer').hide();
+         return;
+      }else if(selectTabId==='tab_3_2'){
+         authgroupdg.datagrids({querydata:idObj});
+         authgroupdg.datagrids('reload');
+         modalRoleAuth.find('.modal-footer').show();
+         return;
+      }else if(selectTabId==='tab_3_3'){
+         authuserdg.datagrids({querydata:idObj});
+         authuserdg.datagrids('reload');
+         modalRoleAuth.find('.modal-footer').show();
+         return;
+      }
 	});
   //重新加载数据完成
   roleuserdg.on('datagrids.reload',function(){
       roleuserdg.datagrids('checkselected');
-      //roleuserdg.datagrids('checkboxdisabled');
   });
   //重新加载数据完成
   rolegroupdg.on('datagrids.reload',function(){
       rolegroupdg.datagrids('checkselected');
-      //roleuserdg.datagrids('checkboxdisabled');
   });
 
   //用户组授权保存
   $('#btnAuthSave').click(function(){
-      var selectTabId=modalGroupAuth.find('.tab-pane.active').attr('id');
+      var selectTabId=modalRoleAuth.find('.tab-pane.active').attr('id');
+      var row=roledg.datagrids('getSelected');
+      var roleId=row.id,param='';
       if(selectTabId==='tab_3_2'){
-          console.dir('关联角色');
-      }else{
+          param=authSelected(roleId,authgroupdg);         
+          lion.util.postjson('addgrouptorole.json',param,authgroupSuccess,errorRequest,authgroupdg);
+      }else if(selectTabId==='tab_3_3'){
+          param=authSelected(roleId,authuserdg);
+          console.dir(JSON.stringify(param));           
           console.dir('关联用户');
+          lion.util.postjson('addusertorole.json',param,authgroupSuccess,errorRequest,authuserdg);
       }
   }); 
 
+  function authgroupSuccess(data,authdg){
+      if(data!==null&&!(data.hasError)){
+        lion.util.success('提示',data.message);
+        authdg.datagrids('reload');
+      }else if(data!==null&&data.hasError){
+        var gmsg='';
+        for(var msg in data.errorMessage){
+          gmsg+=data.errorMessage[msg];
+        }
+        if(lion.util.isEmpty(gmsg)){
+          gmsg='授权出错';
+        }
+         lion.util.error('提示',gmsg);
+      }else{
+         lion.util.error('提示','授权出错');
+      }
+  }
+  //将授权信息组合成一个请求对象
+  function authSelected(roleId,authdg){
+     var allData=authdg.datagrids('getdata'),
+          selctedData=authdg.datagrids('getSelections'),
+          roleIds=[],
+          selectedRoledIds=[];
+      $.each(allData,function(key,item){
+           roleIds.push(item.id);
+      });
+      $.each(selctedData,function(key,item){
+          selectedRoledIds.push(item.id);
+      });
+      var param={'id':roleId,'auths':roleIds,'selecteds':selectedRoledIds};
+      return param;
+  }
 
 	//查询
 	$('#btnQuery').click(function(){
@@ -120,7 +195,7 @@ $(function () {
 	//添加
     $('#btnAdd').click(function(){
       	addForm.reset();
-	 	    addDialog.find('.modal-header h4 span').text('添加用户组');
+	 	    addDialog.find('.modal-header h4 span').text('添加角色');
 		    return;
     });
 
@@ -132,7 +207,7 @@ $(function () {
 			 return;
 		}
 		addForm.reset();
-		addDialog.find('.modal-header h4 span').text('编辑用户组');
+		addDialog.find('.modal-header h4 span').text('编辑角色');
 		addDialog.modal('toggle');
 		addForm.fill(row);
     });
@@ -208,15 +283,18 @@ function successAddFrm(data,arg,id){
   		gmsg+=data.errorMessage[msg];
   	}
   	if(lion.util.isEmpty(gmsg)){
-  		gmsg='添加用户组出错';
+  		gmsg='添加角色出错';
   	}
   	lion.util.error('提示',gmsg);
   }else{
-  	lion.util.error('提示','添加用户组失败');
+  	lion.util.error('提示','添加角色失败');
   }
 }
 //请求失败后信息
-function errorRequest(data,arg){
+function errorRequest(xhr,textStatus,error){
+  console.dir(xhr);
+  console.dir(textStatus);
+  console.dir(error);
 	lion.util.error('提示','网络连接异常');
 }
 
