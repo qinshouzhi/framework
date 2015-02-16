@@ -209,4 +209,12 @@ public interface RoleService {
 	 * @param role
 	 */
 	public void doCreate(Role role);
+	/** 将角色授权给用户 */
+	public void idoAuthUserToRole(List<Long> targetUserIds,
+			List<Long> deleteUserIds, Role role);
+	
+	/** 将角色授权给用户组 */
+	public void idoAuthGroupToRole(List<Long> targetGroupIds,
+			List<Long> deleteGroupIds, Role role); 
+	
 }

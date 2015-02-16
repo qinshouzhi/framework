@@ -115,7 +115,7 @@
 <!-- END PAGE CONTENT INNER -->
 
 <!--Auth Modal Dialog Start-->
-<div class="modal fade bs-modal-lg" id="modalGroupAuth" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bs-modal-lg" id="modalRoleAuth" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -184,20 +184,20 @@
 								<div  role="tabpanel" class="tab-pane fade" id="tab_3_2">
 									 <div class="row">
 										<div class="col-md-12">
-											<table  id="authgroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",data-loadUrl="${base}/system/role/groups.json"   data-checkbox="true" data-pageSize="5" data-loading="false">
+											<table  id="authgroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   data-loadUrl="${base}/system/role/groups.json"  data-loading="false"  data-checkbox="true" data-pageSize="5">
 												<thead>
 													<tr>
 														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
 													 		<input type="checkbox" class="group-checkable" data-set="#authgroup_list.checkboxes"  data-sortable="false"  />
 													 	</th>
-														<th data-field='nameEn' width="200px;"  data-sortDir="asc">
+														<th data-field='nameEn' width="200px;" data-sortDir="asc" data-formatter="formatterCheckBox">
 															用户组名称(英文)
 														</th>
 														<th data-field="nameZh"  width="200px;" >
 														 	用户组名称(中文)
 														</th>
-														<th data-field="employeeCode" width="200px;" >
-															 描述
+														<th data-field="description"  width="200px;"  >
+															描述
 														</th>
 													</tr>
 												</thead>

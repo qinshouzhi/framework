@@ -11,7 +11,7 @@ import com.newtouch.lion.model.BaseEntity;
 
 /**
  * <p>
- * Title: 
+ * Title: 用户与角色查询类
  * </p>
  * <p>
  * Description: 
@@ -45,6 +45,30 @@ public class UserRole extends BaseEntity<Long>{
 	/** 角色ID*/
 	private Long  roleId;
 	
+	/**
+	 * 
+	 */
+	public UserRole() {
+		super();
+	} 
+
+	/**
+	 * @param id
+	 * @param username
+	 * @param employeeCode
+	 * @param realnameZh
+	 * @param realnameEn
+	 */
+	public UserRole(Long id, String username, String employeeCode,
+			String realnameZh, String realnameEn) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.employeeCode = employeeCode;
+		this.realnameZh = realnameZh;
+		this.realnameEn = realnameEn;
+	}
+
 	/* (non-Javadoc)
 	 * @see com.newtouch.lion.model.BaseEntity#getId()
 	 */

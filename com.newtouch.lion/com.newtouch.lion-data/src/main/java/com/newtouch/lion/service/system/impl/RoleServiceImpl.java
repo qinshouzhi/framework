@@ -610,5 +610,27 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 		Assert.notNull(role);
 		roleDao.save(role);
 	}
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.RoleService#idoAuthUserToRole(java.util.List, java.util.List, com.newtouch.lion.model.system.Role)
+	 */
+	@Override
+	public void idoAuthUserToRole(List<Long> targetUserIds,
+			List<Long> deleteUserIds, Role role) {
+		// TODO Auto-generated method stub
+		this.doDeleteUsersFromRole(deleteUserIds, role);
+		this.doAddUsersToRole(targetUserIds, role);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.RoleService#idoAuthUserToRole(java.util.List, java.util.List, com.newtouch.lion.model.system.Role)
+	 */
+	@Override
+	public void idoAuthGroupToRole(List<Long> targetGroupIds,
+			List<Long> deleteGroupIds, Role role) {
+		// TODO Auto-generated method stub
+		this.doDeleteGroupsFromRole(deleteGroupIds, role);
+		this.doAddGroupsToRole(targetGroupIds, role);
+	}
 	
 }

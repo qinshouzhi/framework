@@ -185,7 +185,7 @@ public interface UserService {
 	public PageResult<UserGroup> doFindUserGroupByCriteria(QueryCriteria criteria);
 	
 	/** 用户与角色查询查询，并返回分页对象 */
-	public PageResult<UserRole> doFindUserRoleByCriteria(QueryCriteria criteria);
+	public PageResult<UserRole> doFindUserRoleByCriteria(QueryCriteria criteria,Long roleId);
 	
 	/** 用户关联用户组查询，并返回分页对象 */
 	public PageResult<User> doFindByCriteriaAndGroup(QueryCriteria criteria);

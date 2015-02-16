@@ -467,12 +467,12 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	 */
 	@Override
 	public PageResult<UserRole> doFindUserRoleByCriteria(
-			QueryCriteria criteria) {
+			QueryCriteria criteria,Long roleId) {
 		
 		String queryEntry = "select new com.newtouch.lion.model.system.UserRole(id,username,employeeCode,realnameZh,realnameEn) from User ";
-
+		
 		String[] whereBodies = { "username like :username", "employeeCode like :employeeCode","email like :email" };
-
+		
 		String fromJoinSubClause = "";
 
 		Map<String, Object> params = criteria.getQueryCondition();
@@ -487,10 +487,49 @@ public class UserServiceImpl extends AbstractService implements UserService {
 		int pageSize = criteria.getPageSize();
 
 		int startIndex = criteria.getStartIndex();
-
-		PageResult<UserRole> pageResult = this.userRoleDao.query(hql,
-				HqlUtils.generateCountHql(hql, null), params, startIndex,
-				pageSize);
+		
+		PageResult<UserRole> pageResult = this.userRoleDao.query(hql,HqlUtils.generateCountHql(hql, null),params,startIndex,pageSize);
+		
+		//如果查询为空，则直接返回数据
+		if(CollectionUtils.isEmpty(pageResult.getContent())){
+			return pageResult;
+		}
+		//以下代码检查是否已授权到用户组的角色
+		criteria=new QueryCriteria();
+		criteria.setStartIndex(0);
+		criteria.setPageSize(pageResult.getPageSize());
+		//当前ID集合
+		List<UserRole> userRoles=pageResult.getContent();
+		List<Long> userIds=new ArrayList<Long>();
+		for(UserRole userRole:userRoles){
+			userIds.add(userRole.getId());
+		}
+		// 查询条件 参数类型 用户名
+		if (roleId!=null&&roleId>0) {
+			criteria.addQueryCondition("roleId",roleId);
+		}
+		//查询所有空的
+		if(!CollectionUtils.isEmpty(userIds)){
+			criteria.addQueryCondition("userIds",userIds);
+		}
+		
+		PageResult<User> result=this.doFindByCriteriaAndRole(criteria);
+		
+		Map<Long,Long> userIdsMap=new HashMap<Long,Long>();
+		
+		for(User user:result.getContent()){
+			userIdsMap.put(user.getId(), user.getId());
+		}
+		
+		List<UserRole> contents=new ArrayList<UserRole>();
+		
+		for(UserRole userRole:userRoles){
+			if(userIdsMap.containsKey(userRole.getId())){
+				userRole.setRoleId(roleId);
+			}
+			contents.add(userRole);
+		}
+		pageResult.setContent(contents);
 		return pageResult;
 	}
 

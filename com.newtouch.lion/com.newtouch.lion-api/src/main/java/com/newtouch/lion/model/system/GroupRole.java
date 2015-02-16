@@ -7,11 +7,11 @@
 */
 package com.newtouch.lion.model.system; 
 
-import com.newtouch.lion.model.VersionEntity;
+import com.newtouch.lion.model.BaseEntity;
 
 /**
  * <p>
- * Title: 
+ * Title: 用户组与角色查询类
  * </p>
  * <p>
  * Description: 
@@ -26,7 +26,7 @@ import com.newtouch.lion.model.VersionEntity;
  * @author MaoJiaWei
  * @version 1.0
  */
-public class GroupRole extends VersionEntity<Long> {
+public class GroupRole extends BaseEntity<Long> {
 	/**
 	 * 
 	 */
@@ -53,16 +53,13 @@ public class GroupRole extends VersionEntity<Long> {
 	 * @param nameZh
 	 * @param nameEn
 	 * @param description
-	 * @param roleId
 	 */
-	public GroupRole(Long id, String nameZh, String nameEn, String description,
-			Long roleId) {
+	public GroupRole(Long id, String nameZh, String nameEn, String description) {
 		super();
 		this.id = id;
 		this.nameZh = nameZh;
 		this.nameEn = nameEn;
 		this.description = description;
-		this.roleId = roleId;
 	}
 	/* (non-Javadoc)
 	 * @see com.newtouch.lion.model.BaseEntity#getId()
