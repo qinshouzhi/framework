@@ -48,10 +48,10 @@
 					</div>
 					<label class="control-label col-md-2" for="type" ><@spring.message "sys.codeList.query.type.text"/></label>
 					<div class="col-md-3">
-						<select  id="CodeList"  name="type" data-size="8" 
+						<select  id="CodeList"  name="codeTypeId" data-size="8" 
 						 	data-maxoptions="1"   multiple placeholder="<@spring.message "sys.codeList.query.type.missing.message"/>..."  
 						 	class="lion-combo bootstrap-select form-control input-small" data-valueField='id' 
-						 	data-textField='nameZh' data-loadURL="${base}/system/code/combox.json?nameEn=datagrid_type">
+						 	data-textField='nameZh' data-loadURL="${base}/system/code/typecombox.json">
 						 </select>
 					</div>
 					<div class="col-md-2">
