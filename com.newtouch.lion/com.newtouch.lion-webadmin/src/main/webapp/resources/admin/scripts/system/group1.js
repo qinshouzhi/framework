@@ -69,7 +69,6 @@ $(function() {
               if(result){            	 
             	  var param={'id':row.id};
                 lion.util.post('delete.json',param,successForDelete,errorRequest);
-            	  //lion.util.success('提示!', '已删除成功');
               }
           }); 
 	 });
