@@ -25,10 +25,10 @@ $(function () {
     modalRoleAuth.find('.modal-footer').hide();
 	//绑定tab事件
     modalRoleAuth.find('.nav-tabs a').click(function(){
-      var selectTabId=modalRoleAuth.find('.tab-pane.active').attr('id');
+      //var selectTabId=modalRoleAuth.find('.tab-pane.active').attr('id');
       var row=roledg.datagrids('getSelected');
       var idObj={'id':row.id};
-      var tabHref=$(this).attr('href');
+      var selectTabId=$(this).attr('href').substring(1);
       switchTab(selectTabId,idObj);
   });
   
@@ -102,9 +102,9 @@ $(function () {
 	         modalRoleAuth.find('.modal-footer').show();
 	         return;
 	      }else if(selectTabId==='tab_3_3'){
+           modalRoleAuth.find('.modal-footer').show();
 	         authuserdg.datagrids({querydata:idObj});
 	         authuserdg.datagrids('reload');
-	         modalRoleAuth.find('.modal-footer').show();
 	         return;
 	      }
 	  }
@@ -127,8 +127,6 @@ $(function () {
           lion.util.postjson('addgrouptorole.json',param,authgroupSuccess,errorRequest,authgroupdg);
       }else if(selectTabId==='tab_3_3'){
           param=authSelected(roleId,authuserdg);
-          console.dir(JSON.stringify(param));           
-          console.dir('关联用户');
           lion.util.postjson('addusertorole.json',param,authgroupSuccess,errorRequest,authuserdg);
       }
   }); 
