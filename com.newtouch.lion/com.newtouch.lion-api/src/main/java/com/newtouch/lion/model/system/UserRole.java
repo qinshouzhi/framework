@@ -8,7 +8,7 @@ package com.newtouch.lion.model.system;
 
 import com.newtouch.lion.model.BaseEntity;
 
-/**
+/** 
  * <p>
  * Title: 用户与角色查询类
  * </p>
