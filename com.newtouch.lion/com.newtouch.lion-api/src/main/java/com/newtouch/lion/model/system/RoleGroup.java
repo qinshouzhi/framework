@@ -43,6 +43,8 @@ public class RoleGroup extends BaseEntity<Long>{
 	private String description;
 	/**用户组ID*/
 	private Long groupId;
+	/**用户ID*/
+	private Long userId;
 	/**默认实体类*/
 	public RoleGroup() {
 		super();
@@ -122,6 +124,22 @@ public class RoleGroup extends BaseEntity<Long>{
 	 */
 	public void setGroupId(Long groupId) {
 		this.groupId = groupId;
+	}
+
+
+	/**
+	 * @return the userId 用户ID
+	 */
+	public Long getUserId() {
+		return userId;
+	}
+
+
+	/**
+	 * @param userId the userId 用户ID
+	 */
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	

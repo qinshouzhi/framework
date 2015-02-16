@@ -19,35 +19,15 @@ $(function () {
   //授权用户列表
   var authuserdg=$('#authuser_list');
   //授权角色列表
-  var authroledg=$('#authrole_list');
-  
+  var authroledg=$('#authrole_list');  
   //默认隐藏第一个tab的modal-footer
   modalGroupAuth.find('.modal-footer').hide();
 	//绑定tab事件
   modalGroupAuth.find('.nav-tabs a').click(function(){
       var row=groupdg.datagrids('getSelected');
       var idObj={'id':row.id};
-      var tabHref=$(this).attr('href');
-      if(tabHref==='#tab_3_1'){
-         //重新加载 用户组角色数据
-         grouproledg.datagrids({querydata:idObj});
-         grouproledg.datagrids('reload');
-         //重新加载 用户组所关联用户数据 
-         groupuserdg.datagrids({querydata:idObj});
-         groupuserdg.datagrids('reload');
-         modalGroupAuth.find('.modal-footer').hide();
-         return;
-      }else if(tabHref==='#tab_3_2'){
-         authroledg.datagrids({querydata:idObj});
-         authroledg.datagrids('reload');
-         modalGroupAuth.find('.modal-footer').show();
-         return;
-      }else if(tabHref==='#tab_3_3'){
-         authuserdg.datagrids({querydata:idObj});
-         authuserdg.datagrids('reload');
-         modalGroupAuth.find('.modal-footer').show();
-         return;
-      }
+      var selectTabId=$(this).attr('href').substring(1);
+      switchTab(selectTabId,idObj);
   });
   
   //角色授权列表创建行调用
@@ -61,7 +41,6 @@ $(function () {
       grouproledg.datagrids('checkselected');
       //groupuserdg.datagrids('checkboxdisabled');
   });
-
   //用户授权列表创建行调用
   authuserdg.on('datagrids.createdrow',function(row,data,index){
       if(index.hasOwnProperty('groupId')){
@@ -80,7 +59,15 @@ $(function () {
   grouproledg.on('datagrids.createdrow',function(row,data,index){
       selectedChecked(row,data,index);
   });
-
+  //重新加载数据完成
+  groupuserdg.on('datagrids.reload',function(){
+      groupuserdg.datagrids('checkselected');
+  });
+  //重新加载数据完成
+  grouproledg.on('datagrids.reload',function(){
+      grouproledg.datagrids('checkselected');
+  });
+  //选中事件
   function selectedChecked(row,data,index){
      var $checkbox=$(data).find("td input[type=checkbox]");
      $checkbox.attr('checked',true);
@@ -102,7 +89,11 @@ $(function () {
       $('#groupId').val(row.id);
       //显示对话框
       modalGroupAuth.modal('toggle');
-      if(selectTabId==='tab_3_1'){
+      switchTab(selectTabId,idObj);
+	});
+
+ function switchTab(selectTabId,idObj){
+     if(selectTabId==='tab_3_1'){
          //重新加载 用户组角色数据
          grouproledg.datagrids({querydata:idObj});
          grouproledg.datagrids('reload');
@@ -122,15 +113,8 @@ $(function () {
          modalGroupAuth.find('.modal-footer').show();
          return;
       }
-	});
-  //重新加载数据完成
-  groupuserdg.on('datagrids.reload',function(){
-      groupuserdg.datagrids('checkselected');
-  });
-  //重新加载数据完成
-  grouproledg.on('datagrids.reload',function(){
-      grouproledg.datagrids('checkselected');
-  });
+  }
+  
 
   //用户组授权保存
   $('#btnAuthSave').click(function(){
@@ -142,8 +126,6 @@ $(function () {
           lion.util.postjson('addroletogroup.json',param,authRoleSuccess,errorRequest,authroledg);
       }else if(selectTabId==='tab_3_3'){
           param=authSelected(groupId,authuserdg);
-          console.dir(JSON.stringify(param));           
-          console.dir('关联用户');
           lion.util.postjson('addusertogroup.json',param,authRoleSuccess,errorRequest,authuserdg);
       }
   }); 
@@ -231,7 +213,7 @@ $(function () {
         if(lion.util.isNotEmpty(params)){
           url+='&'+params;
         }
-      	 window.open(url,'_blank');
+      	window.open(url,'_blank');
 	 });
 	 //保存
 	 $('#btnSave').click(function(){
@@ -387,10 +369,6 @@ handleVForm=function(vForm,submitCallBackfn){
 
 //测试选择中checkbox
 function formatterCheckBox(data,type,full){
-  //console.dir(this);
-  //console.dir(data);
- // console.dir(type);
-  //console.dir(full);
   return data;
 }
 //判断是否编辑

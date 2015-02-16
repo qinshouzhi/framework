@@ -24,24 +24,29 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.newtouch.lion.admin.web.model.system.auth.AuthModel;
 import com.newtouch.lion.admin.web.model.system.user.PasswordVo;
 import com.newtouch.lion.admin.web.model.system.user.UserVo;
 import com.newtouch.lion.common.date.DateUtil;
 import com.newtouch.lion.common.file.FileUtil;
-import com.newtouch.lion.common.lang.LongUtils;
 import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.datagrid.DataGrid;
 import com.newtouch.lion.model.system.Group;
+import com.newtouch.lion.model.system.GroupRole;
 import com.newtouch.lion.model.system.Resource;
 import com.newtouch.lion.model.system.Role;
+import com.newtouch.lion.model.system.RoleGroup;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
@@ -102,13 +107,6 @@ public class UserController extends AbstractController {
 	private static final String INDEX_TB = "userlist_dt";
 	/** 已授权组 */
 	private static final String AUTH_USER_GROUPS_TB = "usergroup_tb";
-	/** 已关联用色 */
-	private static final String AUTH_USER_ROLES_LISTS = "userrole_tb";
-	/** 所有关联角色 */
-	private static final String AUTH_ROLES_TB = "authrole_tb";
-
-	/** 所有关联角色 */
-	private static final String AUTH_GROUPS_TB = "authgroup_tb";
 	/** 默认密码 */
 	private static final String DEFAULT_PASSWORD = "111aaa";
 	@Autowired
@@ -150,8 +148,7 @@ public class UserController extends AbstractController {
 	/** 添加提交 */
 	@RequestMapping(value = "add")
 	@ResponseBody
-	public ModelAndView add(@Valid @ModelAttribute("userVo") UserVo userVo,
-			Errors errors, ModelAndView modelAndView) {
+	public ModelAndView add(@Valid @ModelAttribute("userVo") UserVo userVo,Errors errors, ModelAndView modelAndView) {
 		//检查基于Model的验证框架
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
@@ -235,52 +232,116 @@ public class UserController extends AbstractController {
 		 
 		// 设置排序字段及排序方向
 		if (StringUtils.isNotEmpty(query.getSort()) && StringUtils.isNotEmpty(query.getOrder())) {
-			queryCriteria.setOrderField(query.getSort());
+			queryCriteria.setOrderField("groups."+query.getSort());
 			queryCriteria.setOrderDirection(query.getOrder());
 		} else {
-			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+			queryCriteria.setOrderField("groups."+DEFAULT_ORDER_FILED_NAME);
 		}
-		PageResult<Group>  pageResult=groupService.doFindByCriteria(queryCriteria);
+		// 查询条件 参数类型 用户名
+		if (id!=null&&id>0) {
+			queryCriteria.addQueryCondition("userId",id);
+		}
+		PageResult<Group>  pageResult=groupService.doFindByCriteriaAndUser(queryCriteria);
+		
 		return  pageResult.getDataTable(query.getRequestId());
 	}
 
 	/** 显示已关联的角色 */
 	@RequestMapping(value = "authroles")
 	@ResponseBody
-	public String authRoles(@RequestParam(required = false) Long id) {
-		return this.userService.doFindAllAuthRole(id, AUTH_USER_ROLES_LISTS);
+	public DataTable<Role> authRoles(QueryDt query,@RequestParam(required = false) Long id,ModelAndView modelAndView) {
+		QueryCriteria queryCriteria = new QueryCriteria();
+		// 设置分页 启始页
+		queryCriteria.setStartIndex(query.getPage());
+		// 每页大小
+		queryCriteria.setPageSize(query.getRows());
+		 
+		// 设置排序字段及排序方向
+		if (StringUtils.isNotEmpty(query.getSort()) && StringUtils.isNotEmpty(query.getOrder())) {
+			queryCriteria.setOrderField("role."+query.getSort());
+			queryCriteria.setOrderDirection(query.getOrder());
+		} else {
+			queryCriteria.setOrderField("role."+DEFAULT_ORDER_FILED_NAME);
+		}
+		// 查询条件 参数类型 用户名
+		if (id!=null&&id>0) {
+			queryCriteria.addQueryCondition("userId",id);
+		}
+		//查询用户所关联角色
+		PageResult<Role>  pageResult=this.roleService.doFindByCriteriaAndUser(queryCriteria);
+		
+		return  pageResult.getDataTable(query.getRequestId());
 	}
 
 	/** 显示所有的角色 */
 	@RequestMapping(value = "roles")
 	@ResponseBody
-	public String roles() {
+	public DataTable<RoleGroup> roles(QueryDt query,@RequestParam(required = false) Long id) {
 		QueryCriteria queryCriteria = new QueryCriteria();
-		queryCriteria.setPageSize(99999999);
-		return this.roleService.doFindByCriteria(queryCriteria, AUTH_ROLES_TB);
+		// 设置分页 启始页
+		queryCriteria.setStartIndex(query.getPage());
+		// 每页大小
+		queryCriteria.setPageSize(query.getRows());
+		 
+		// 设置排序字段及排序方向
+		if (StringUtils.isNotEmpty(query.getSort()) && StringUtils.isNotEmpty(query.getOrder())) {
+			queryCriteria.setOrderField(query.getSort());
+			queryCriteria.setOrderDirection(query.getOrder());
+		} else {
+			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+		} 
+		
+		PageResult<RoleGroup> pageResult = this.roleService.doFindRoleUserByCriteria(queryCriteria,id);		
+		 
+		return pageResult.getDataTable(query.getRequestId());
 	}
 
 	/** 显示所有的角色 */
 	@RequestMapping(value = "groups")
 	@ResponseBody
-	public String groups() {
+	public DataTable<GroupRole> groups(QueryDt query,@RequestParam(required = false) Long id) {
 		QueryCriteria queryCriteria = new QueryCriteria();
-		queryCriteria.setPageSize(99999999);
-		return this.groupService
-				.doFindAuthGroups(queryCriteria, AUTH_GROUPS_TB);
+		// 设置分页 启始页
+		queryCriteria.setStartIndex(query.getPage());
+		// 每页大小
+		queryCriteria.setPageSize(query.getRows());
+		 
+		// 设置排序字段及排序方向
+		if (StringUtils.isNotEmpty(query.getSort()) && StringUtils.isNotEmpty(query.getOrder())) {
+			queryCriteria.setOrderField(query.getSort());
+			queryCriteria.setOrderDirection(query.getOrder());
+		} else {
+			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
+		} 
+		
+		PageResult<GroupRole> pageResult = this.groupService.doFindGroupUserByCriteria(queryCriteria,id);		
+		 
+		return pageResult.getDataTable(query.getRequestId());
 	}
 
 	/** 为用户添加用户组集合 */
-	@RequestMapping(value = "addgroups")
+	@RequestMapping(value = "addgroups",method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView addGroups(@RequestParam(required = false) Long userId,
-			@RequestParam(required = false) String groupId,
-			ModelAndView modelAndView) {
-		// TODO 验证输入
-		User user = this.userService.doFindById(userId);
-		List<Long> targetGroupIds = LongUtils.parserStringToLong(groupId,LongUtils.SPARATOR_COMMA);
+	public ModelAndView addGroups(@RequestBody(required=false)AuthModel authModel,ModelAndView modelAndView) {
+		//验证输入
+		Long userId=authModel.getId();		
+		//查询角色列表
+		QueryCriteria queryCriteria = new QueryCriteria(0,9999);
+		// 查询条件用户组ID
+		if (authModel.getId()>0) {
+			queryCriteria.addQueryCondition("userId",userId);
+		}
+		//查询条件不能为空
+		if(!CollectionUtils.isEmpty(authModel.getAuths())){
+			queryCriteria.addQueryCondition("groupIds",authModel.getAuths());
+		}
+		PageResult<Group> pageResult=this.groupService.doFindByCriteriaAndUser(queryCriteria);
+		
+		List<Long> targetGroupIds =authModel.getSelecteds();
+		
 		List<Long> deleteGroupIds = new ArrayList<Long>();
-		for (Group group : user.getGroups()) {
+		
+		for (Group group : pageResult.getContent()) {
 			if (targetGroupIds.contains(group.getId())) {
 				targetGroupIds.remove(group.getId());
 			} else {
@@ -289,27 +350,37 @@ public class UserController extends AbstractController {
 		}
 		logger.info("targetGroupIds:{}", targetGroupIds);
 		logger.info("deleteGroupIds:{}", deleteGroupIds);
-
-		this.userService
-				.doAuthGroupToUser(targetGroupIds, deleteGroupIds, user);
+		
+		User user = this.userService.doFindById(userId);
+		
+		this.userService.doAuthGroupToUser(targetGroupIds, deleteGroupIds, user);
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		return this.getJsonView(modelAndView);
 	}
 
 	/** 为用户添加用户组集合 */
-	@RequestMapping(value = "addroles")
+	@RequestMapping(value = "addroles",method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView addRoles(@RequestParam(required = false) Long userId,
-			@RequestParam(required = false) String roleId,
-			ModelAndView modelAndView) {
-		// TODO 验证输入
+	public ModelAndView addRoles(@RequestBody(required=false)AuthModel authModel,ModelAndView modelAndView) {
+		//验证输入
+		Long userId=authModel.getId();
+		//查询角色列表
+		QueryCriteria queryCriteria = new QueryCriteria(0,9999);
+		// 查询条件用户组ID
+		if (authModel.getId()>0) {
+			queryCriteria.addQueryCondition("userId",authModel.getId());
+		}
+		//查询所有空的
+		if(!CollectionUtils.isEmpty(authModel.getAuths())){
+			queryCriteria.addQueryCondition("roleIds",authModel.getAuths());
+		}
+		PageResult<Role> pageResult=this.roleService.doFindByCriteriaAndUser(queryCriteria);
 		User user = this.userService.doFindById(userId);
-		List<Long> targetRoleIds = LongUtils.parserStringToLong(roleId,
-				LongUtils.SPARATOR_COMMA);
+		List<Long> targetRoleIds =authModel.getSelecteds();
 		List<Long> deleteRoleIds = new ArrayList<Long>();
-		for (Role role : user.getRoles()) {
+		for (Role role : pageResult.getContent()) {
 			if (targetRoleIds.contains(role.getId())) {
 				targetRoleIds.remove(role.getId());
 			} else {
@@ -322,7 +393,7 @@ public class UserController extends AbstractController {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		return this.getJsonView(modelAndView);
 	}
 	/***
 	 * 根据ID删除用户数据，超级用户不能删除
@@ -419,16 +490,16 @@ public class UserController extends AbstractController {
 	/** 列表显示 */
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public DataTable<User> lists(@ModelAttribute("queryVo")QueryVo queryVo,@ModelAttribute("user") UserVo userVo) {
+	public DataTable<User> lists(@ModelAttribute("queryDt")QueryDt queryDt,@ModelAttribute("user") UserVo userVo) {
 		QueryCriteria queryCriteria = new QueryCriteria();
 		// 设置分页 启始页
-		queryCriteria.setStartIndex(queryVo.getRows() * (queryVo.getPage() - 1));
+		queryCriteria.setStartIndex(queryDt.getPage());
 		// 每页大小
-		queryCriteria.setPageSize(queryVo.getRows());
+		queryCriteria.setPageSize(queryDt.getRows());
 		// 设置排序字段及排序方向
-		if (StringUtils.isNotEmpty(queryVo.getSort()) && StringUtils.isNotEmpty(queryVo.getOrder())) {
-			queryCriteria.setOrderField(queryVo.getOrder());
-			queryCriteria.setOrderDirection(queryVo.getOrder());
+		if (StringUtils.isNotEmpty(queryDt.getSort()) && StringUtils.isNotEmpty(queryDt.getOrder())) {
+			queryCriteria.setOrderField(queryDt.getSort());
+			queryCriteria.setOrderDirection(queryDt.getOrder());
 		} else {
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
 		}
@@ -450,7 +521,7 @@ public class UserController extends AbstractController {
 		for(User user:pageResult.getContent()){
 				user.getDepartment().getNameZh();
 		}
-		return pageResult.getDataTable();
+		return pageResult.getDataTable(queryDt.getRequestId());
 	}
 
 	
@@ -505,7 +576,7 @@ public class UserController extends AbstractController {
 		//创建.xls的文件名
 		String fileName=this.createFileName(FileUtil.EXCEL_EXTENSION);
 		
-		modelAndView.addObject("title", dataGrid.getTitle());
+		modelAndView.addObject("title",dataGrid.getTitle());
 		
 		Long startTime=System.currentTimeMillis();
 		

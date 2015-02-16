@@ -3,48 +3,18 @@
 <html lang="en" class="no-js">
 <head>
 <title>用户管理</title>
-<!--EasyUI css Start-->
-<link href="${base}/resources/global/plugins/easyui/themes/metro/panel.css" rel="stylesheet" type="text/css"/>
-<link href="${base}/resources/global/plugins/easyui/themes/metro/linkbutton.css" rel="stylesheet" type="text/css"/>
-<link href="${base}/resources/global/plugins/easyui/themes/metro/datagrid.css" rel="stylesheet" type="text/css"/>
-<link href="${base}/resources/global/plugins/easyui/themes/metro/window.css" rel="stylesheet" type="text/css"/>
-<link href="${base}/resources/global/plugins/easyui/themes/metro/pagination.css" rel="stylesheet" type="text/css"/>
-<link href="${base}/resources/global/plugins/easyui/themes/metro/combo.css" rel="stylesheet" type="text/css"/>
-<link href="${base}/resources/global/plugins/easyui/themes/metro/combobox.css" rel="stylesheet" type="text/css"/>
-<link href="${base}/resources/global/plugins/easyui/themes/icon.css" rel="stylesheet" type="text/css"/>
-<!--EasyUI css End-->
-<!--bootstrap css Start-->
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" type="text/css">
-<!--bootstrap css End-->
+<link href="${base}/resources/global/plugins/ztree/css/metro.css" rel="stylesheet" type="text/css"/>
 <!--DataTable css Start-->
 <link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/select2/select2.css"/>
 <link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css"/>
 <link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css"/>
 <link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
-<!-- END PAGE LEVEL STYLES -->
-<!--zTree css Start-->
-<link href="${base}/resources/global/plugins/ztree/css/metro.css" rel="stylesheet" type="text/css"/>
-<!--lion UI css Start-->
-<link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css">
-<link href="${base}/resources/global/css/dialog/lion.dialog.css" rel="stylesheet" type="text/css">
-<link href="${base}/resources/global/css/combo/lion.combo.css" rel="stylesheet" type="text/css">
+<!--DataTable css End-->
+<link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+<link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/css/combotree/combotree.css" rel="stylesheet" type="text/css" />
-<!--lion UI css End-->
-
-<script src="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript" ></script>
-<script src="${base}/resources/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
-<script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js"></script>
-<script src="${base}/resources/admin/pages/scripts/ui-toastr.js"></script>
-<script src="${base}/resources/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
-
-
-<!--EasyUI JavaScript Start-->
-<script src="${base}/resources/global/plugins/easyui/jquery.easyui.min.js" type="text/javascript"></script>
-<script src="${base}/resources/global/plugins/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
-<!--EasyUI JavaScript End-->
-<!--ztree js-->
-<script src="${base}/resources/global/plugins/ztree/js/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
 <!-- DataTables js Start -->
 <script type="text/javascript" src="${base}/resources/global/plugins/select2/select2.min.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/media/js/jquery.dataTables.js"></script>
@@ -53,6 +23,13 @@
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/Scroller/js/dataTables.scroller.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
 <!-- DataTables js End -->
+<script src="${base}/resources/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+<script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js"></script>
+<script src="${base}/resources/admin/pages/scripts/ui-toastr.js"></script>
+<script src="${base}/resources/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<!--EasyUI JavaScript End-->
+<!--ztree js-->
+<script src="${base}/resources/global/plugins/ztree/js/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
 <!--lion UI JS Start-->
 <script src="${base}/resources/global/js/lion.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/form/form.fill.js" type="text/javascript"></script>
@@ -123,7 +100,44 @@
 				</a> 
 			</div>
 			<div class="col-md-12">
-				  <@lion.datagrids name="userlist_dt" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/user/list.json" dataOptions="" style="height:400px;width:auto"/>
+				<table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_user_list_tb" data-singleselect="true",   data-loadUrl="/admin/system/user/list.json" data-checkbox="true" data-pageSize="10">
+					<thead>
+						<tr>
+						  <th class="table-checkbox" data-field='id' data-checkbox="true">
+						 		<input type="checkbox" class="group-checkable" data-set="#sys_user_list_tb.checkboxes"  data-sortable="false" />
+						 	</th>
+							<th data-field='username' data-sortDir="asc"    style="width:100px;">
+								用户名
+							</th>
+							<th data-field="realnameZh" style="width:100px;">
+							 	姓名(中文)
+							</th>
+							<th data-field="realnameEn" style="width:100px;">
+								姓名(英文)
+							</th>
+							<th data-field="employeeCode" style="width:30px;" align="center">
+								员工号
+							</th>
+							<th data-field="department" style="width:100px;" data-formatter="formatterDepartment">
+								所属部门
+							</th>						
+							<th data-field="telephone" style="width:150px;">
+								联系电话
+							</th>
+
+							<th data-field="accountLocked" style="width:100px;"  data-formatter="formatterAccountLocked">
+								锁定状态
+							</th>
+							<th data-field="accountExpired" style="width:100px;" data-formatter="formatterEidtable">
+								账户状态
+							</th>
+							<th data-field="accountExpiredDate" style="width:100px;" data-formatter="formatterDate">
+								账户有效日期
+							</th>
+							
+						</tr>
+					</thead>
+				</table>
 			</div>
 		</div>
 	</div>
@@ -186,19 +200,19 @@
 											<div class="caption">
 												<i class="fa"></i><strong>已关联用户组</strong>
 											</div>									 
-												<table  id="usergroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",    data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="10" cellspacing="0"   width="853px" data-scrollY="100px" >
+												<table  id="usergroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",    data-loadUrl="${base}/system/user/authgroup.json"  data-checkbox="true" data-pageSize="3" cellspacing="0" data-loading="false">
 												<thead>
 													<tr>
 														<th class="table-checkbox" data-field='id' data-checkbox="true" >
 													 		<input type="checkbox" class="group-checkable" data-set="#usergroup_list.checkboxes"  data-sortable="false"  />
 													 	</th>
-														<th data-field='nameEn' data-sortDir="asc"    style="width:100px;">
+														<th data-field='nameEn' data-sortDir="asc"    style="width:200px;">
 															用户组名称(英文)
 														</th>
-														<th data-field="nameZh" style="width:100px;">
+														<th data-field="nameZh" style="width:200px;">
 														 	用户组名称(中文)
 														</th>
-														<th data-field="description" style="width:100px;">
+														<th data-field="description" style="width:200px;">
 															描述
 														</th>
 													</tr>
@@ -209,19 +223,19 @@
 										<div class="caption">
 											<i class="fa"></i><strong>已关联角色</strong>
 										</div>
-										 <table  id="userrole_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   d  data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="10"   width="853px" data-scrollY="100px" cellspacing="0"  >
+										 <table  id="userrole_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   d  data-loadUrl="${base}/system/user/authroles.json"   data-checkbox="true" data-pageSize="3"     cellspacing="0"   data-loading="false" >
 												<thead>
 													<tr>
 														<th class="table-checkbox" data-field='id' data-checkbox="true" >
 													 		<input type="checkbox" class="group-checkable" data-set="#userrole_list.checkboxes"  data-sortable="false"  />
 													 	</th>
-														<th data-field='nameEn' data-sortDir="asc"    style="width:100px;">
+														<th data-field='nameEn' data-sortDir="asc"    style="width:200px;">
 															角色名称(英文)
 														</th>
-														<th data-field="nameZh" style="width:100px;">
+														<th data-field="nameZh" style="width:200px;">
 														 	角色组名称(中文)
 														</th>
-														<th data-field="description" style="width:100px;">
+														<th data-field="description" style="width:200px;">
 															描述
 														</th>
 													</tr>
@@ -230,19 +244,19 @@
 									</div>
 								</div>
 								<div  role="tabpanel" class="tab-pane fade" id="tab_3_2">
-									 <table  id="authgroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",     data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="10" width="853px"  >
+									 <table  id="authgroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",     data-loadUrl="${base}/system/user/groups.json"   data-checkbox="true" data-pageSize="5"  data-loading="false" >
 												<thead>
 													<tr>
 														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
 													 		<input type="checkbox" class="group-checkable" data-set="#authgroup_list.checkboxes"  data-sortable="false"  />
 													 	</th>
-														<th data-field='nameEn' data-sortDir="asc"    style="width:100px;">
+														<th data-field='nameEn' data-sortDir="asc"    style="width:200px;">
 															用户组名称(英文)
 														</th>
-														<th data-field="nameZh" style="width:100px;">
+														<th data-field="nameZh" style="width:200px;">
 														 	用户组名称(中文)
 														</th>
-														<th data-field="description" style="width:100px;">
+														<th data-field="description" style="width:200px;">
 															描述
 														</th>
 													</tr>
@@ -250,19 +264,19 @@
 											</table>
 								</div>
 								<div role="tabpanel" class="tab-pane fade" id="tab_3_3">
-									<table  id="authrole_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   data-loadUrl="${base}/system/user/authgroup.json"   data-checkbox="true" data-pageSize="10"   width="853px"   >
+									<table  id="authrole_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   data-loadUrl="${base}/system/user/roles.json"   data-checkbox="true" data-pageSize="5"   data-loading="false">
 												<thead>
 													<tr>
 														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
 													 		<input type="checkbox" class="group-checkable" data-set="#authrole_list.checkboxes"  data-sortable="false"  />
 													 	</th>
-														<th data-field='nameEn' data-sortDir="asc"    style="width:100px;">
-															用户组名称(英文)
+														<th data-field='nameEn' data-sortDir="asc"    style="width:200px;">
+															角色名称(英文)
 														</th>
-														<th data-field="nameZh" style="width:100px;">
-														 	用户组名称(中文)
+														<th data-field="nameZh" style="width:200px;">
+														 	角色组名称(中文)
 														</th>
-														<th data-field="description" style="width:100px;">
+														<th data-field="description" style="width:200px;">
 															描述
 														</th>
 													</tr>
@@ -276,7 +290,7 @@
 			<div class="modal-footer">
 				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal">
 					<i class="fa  fa-arrow-left"></i> 取 消 </button>
-				<button type="button" id="btnSave" class="btn blue">
+				<button type="button" id="btnAuthSave" class="btn blue">
 					<i class="fa fa-save"></i> 保 存</button>
 			</div>
 		</div>
@@ -394,7 +408,7 @@
 				 	<div class="row">
 					 	<div class="col-md-12 portlet-body form">
 					 		<!-- BEGIN FORM-->
-									<form action="#" id="addform" class="form-horizontal">
+									<form action="#" id="addForm" class="form-horizontal">
 									    <input type="hidden" id='id' name='id' value="">
 										<div class="form-body">
 											<div class="form-group">
@@ -478,7 +492,7 @@
 												<label class="col-md-2 control-label">账户有效期</label>
 												<div class="col-md-2">
 													<div class="input-group">
-														<input id="credentialExpiredDate"  name="credentialExpiredDate" type="text" class="form-control"  placeholder="请选择账户有效期"  maxlength="25" size="20"  readonly="true"  value="${accountExpiredDate!}" />
+														<input id="accountExpiredDate"  name="accountExpiredDate" type="text" class="form-control"  placeholder="请选择账户有效期"  maxlength="25" size="20"  readonly="true"  value="${accountExpiredDate!}" />
 													</div>
 												</div>
 												<label class="col-md-2 control-label">

@@ -7,11 +7,11 @@
 */
 package com.newtouch.lion.model.system; 
 
-import com.newtouch.lion.model.VersionEntity;
+import com.newtouch.lion.model.BaseEntity;
 
 /**
  * <p>
- * Title: 
+ * Title: 用户组与角色查询类
  * </p>
  * <p>
  * Description: 
@@ -26,7 +26,7 @@ import com.newtouch.lion.model.VersionEntity;
  * @author MaoJiaWei
  * @version 1.0
  */
-public class GroupRole extends VersionEntity<Long> {
+public class GroupRole extends BaseEntity<Long> {
 	/**
 	 * 
 	 */
@@ -41,7 +41,8 @@ public class GroupRole extends VersionEntity<Long> {
 	private String description;
 	/** 角色描述Id*/
 	private Long roleId;
-	
+	/**用户ID*/
+	private Long userId;
 	/**
 	 * 默认构造器
 	 */
@@ -53,24 +54,20 @@ public class GroupRole extends VersionEntity<Long> {
 	 * @param nameZh
 	 * @param nameEn
 	 * @param description
-	 * @param roleId
 	 */
-	public GroupRole(Long id, String nameZh, String nameEn, String description,
-			Long roleId) {
+	public GroupRole(Long id, String nameZh, String nameEn, String description) {
 		super();
 		this.id = id;
 		this.nameZh = nameZh;
 		this.nameEn = nameEn;
 		this.description = description;
-		this.roleId = roleId;
 	}
 	/* (non-Javadoc)
 	 * @see com.newtouch.lion.model.BaseEntity#getId()
 	 */
 	@Override
 	public Long getId() {
-		// TODO Auto-generated method stub
-		return id;
+		return this.id;
 	}
 	/**
 	 * @return the nameZh
@@ -126,6 +123,20 @@ public class GroupRole extends VersionEntity<Long> {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	/**
+	 * @return the userId 用户ID
+	 */
+	public Long getUserId() {
+		return userId;
+	}
+	/**
+	 * @param userId the 用户ID
+	 */
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	
+	
 	
 }
 

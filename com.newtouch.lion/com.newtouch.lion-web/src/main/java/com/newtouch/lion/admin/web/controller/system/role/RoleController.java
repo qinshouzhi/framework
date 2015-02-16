@@ -24,11 +24,14 @@ import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.newtouch.lion.admin.web.model.system.auth.AuthModel;
 import com.newtouch.lion.admin.web.model.system.role.RoleVo;
 import com.newtouch.lion.common.date.DateUtil;
 import com.newtouch.lion.common.file.FileUtil;
@@ -573,49 +576,8 @@ public class RoleController extends AbstractController{
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
 		} 
 		
-		PageResult<UserRole> pageResult = this.userService.doFindUserRoleByCriteria(queryCriteria);
-		
-		
-		if(CollectionUtils.isEmpty(pageResult.getContent())){
-			return pageResult.getDataTable(query.getRequestId());
-		}
-		List<UserRole> userRoles=pageResult.getContent();
-		List<Long> userIds=new ArrayList<Long>();
-		for(UserRole userRole:userRoles){
-			userIds.add(userRole.getId());
-		}
-		queryCriteria = new QueryCriteria();
-		// 设置分页 启始页
-		queryCriteria.setStartIndex(1);
-		// 每页大小
-		queryCriteria.setPageSize(query.getRows());
-		// 查询条件 参数类型 用户名
-		if (id!=null&&id>0) {
-			queryCriteria.addQueryCondition("roleId",id);
-		}
-		//查询所有空的
-		if(!CollectionUtils.isEmpty(userIds)){
-			queryCriteria.addQueryCondition("userIds", userIds);
-		}
-		PageResult<User> userPageResult=this.userService.doFindByCriteriaAndGroup(queryCriteria);
-		
-		Map<Long,Long> userIdsMap=new HashMap<Long,Long>();
-		
-		for(User user:userPageResult.getContent()){
-			userIdsMap.put(user.getId(), user.getId());
-		}
-		
-		List<UserRole> contents=new ArrayList<UserRole>();
-		
-		for(UserRole userRole:userRoles){
-			if(userIdsMap.containsKey(userRole.getId())){
-				userRole.setRoleId(id);
-			}
-			contents.add(userRole);
-		}
-		
-		pageResult.setContent(contents);
-		
+		PageResult<UserRole> pageResult = this.userService.doFindUserRoleByCriteria(queryCriteria,id);		
+		 
 		return pageResult.getDataTable(query.getRequestId());
 	 
 	}
@@ -638,51 +600,88 @@ public class RoleController extends AbstractController{
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
 		} 
 		
-		PageResult<GroupRole> pageResult = this.groupService.doFindGroupRoleByCriteria(queryCriteria);
-		
-		
-		if(CollectionUtils.isEmpty(pageResult.getContent())){
-			return pageResult.getDataTable(query.getRequestId());
-		}
-		List<GroupRole> groupRoles=pageResult.getContent();
-		List<Long> groupIds=new ArrayList<Long>();
-		for(GroupRole groupRole:groupRoles){
-			groupIds.add(groupRole.getId());
-		}
-		queryCriteria = new QueryCriteria();
-		// 设置分页 启始页
-		queryCriteria.setStartIndex(1);
-		// 每页大小
-		queryCriteria.setPageSize(query.getRows());
+		PageResult<GroupRole> pageResult = this.groupService.doFindGroupRoleByCriteria(queryCriteria,id);
+
+		return pageResult.getDataTable(query.getRequestId());
+	}
+	
+	/** 授权到用户 */
+	@RequestMapping(value = "addusertorole",method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView addUsers(@RequestBody(required=false)AuthModel authModel,ModelAndView modelAndView) {
+		//查询用户列表
+		QueryCriteria queryCriteria = new QueryCriteria(0,9999);
 		// 查询条件 参数类型 用户名
-		if (id!=null&&id>0) {
-			queryCriteria.addQueryCondition("roleId",id);
+		if (authModel.getId()>0) {
+			queryCriteria.addQueryCondition("roleId",authModel.getId());
 		}
 		//查询所有空的
-		if(!CollectionUtils.isEmpty(groupIds)){
-			queryCriteria.addQueryCondition("groupIds", groupIds);
+		if(!CollectionUtils.isEmpty(authModel.getAuths())){
+			queryCriteria.addQueryCondition("userIds",authModel.getAuths());
 		}
-		PageResult<Group> groupPageResult=this.groupService.doFindByCriteriaAndRole(queryCriteria);
+		PageResult<User> userPageResult=this.userService.doFindByCriteriaAndRole(queryCriteria);
 		
-		Map<Long,Long> groupIdsMap=new HashMap<Long,Long>();
 		
-		for(Group group:groupPageResult.getContent()){
-			groupIdsMap.put(group.getId(), group.getId());
-		}
-		
-		List<GroupRole> contents=new ArrayList<GroupRole>();
-		
-		for(GroupRole groupRole:groupRoles){
-			if(groupIdsMap.containsKey(groupRole.getId())){
-				groupRole.setRoleId(id);
+		Role role = this.roleService.doFindById(authModel.getId());
+		List<Long> targetUserIds =authModel.getSelecteds();
+		List<Long> deleteUserIds = new ArrayList<Long>();
+		for (User user :userPageResult.getContent()) {
+			if (targetUserIds.contains(user.getId())) {
+				targetUserIds.remove(user.getId());
+			} else {
+				deleteUserIds.add(user.getId());
 			}
-			contents.add(groupRole);
 		}
+
+		if (logger.isInfoEnabled()) {
+			logger.info("targetUserIds[]：" + targetUserIds.toString());
+			logger.info("deleteUserIds[]:" + deleteUserIds.toString());
+		}
+		this.roleService.idoAuthUserToRole(targetUserIds, deleteUserIds,role);
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
+		modelAndView.addObject(BindMessage.SUCCESS, params);
+		return this.getJsonView(modelAndView);
+	}
+
+	/** 授权到角色 */
+	@RequestMapping(value = "addgrouptorole",method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView addRoles(@RequestBody(required=false)AuthModel authModel,ModelAndView modelAndView) {
+		//查询角色列表
+		QueryCriteria queryCriteria = new QueryCriteria(0,9999);
+		// 查询条件用户组ID
+		if (authModel.getId()>0) {
+			queryCriteria.addQueryCondition("roleId",authModel.getId());
+		}
+		//查询所有空的
+		if(!CollectionUtils.isEmpty(authModel.getAuths())){
+			queryCriteria.addQueryCondition("groupIds",authModel.getAuths());
+		}
+		PageResult<Group> pageResult=this.groupService.doFindByCriteriaAndRole(queryCriteria);
+		//验证输入
 		
-		pageResult.setContent(contents);
-		
-		return pageResult.getDataTable(query.getRequestId());
-	 
+		List<Long> targetGroupIds=authModel.getSelecteds();
+		List<Long> deleteGroupIds=new ArrayList<Long>();
+		for (Group group : pageResult.getContent()) {
+			//过滤已授权的列表
+			if (targetGroupIds.contains(group.getId())) {
+				targetGroupIds.remove(group.getId());
+			} else {
+				//删除未授权
+				deleteGroupIds.add(group.getId());
+			}
+		}
+		if (logger.isInfoEnabled()) {
+			logger.info("targetUserIds[]：" + targetGroupIds.toString());
+			logger.info("deleteUserIds[]:" + deleteGroupIds.toString());
+		}
+		Role role = this.roleService.doFindById(authModel.getId());
+		this.roleService.idoAuthGroupToRole(targetGroupIds, deleteGroupIds, role);
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
+		modelAndView.addObject(BindMessage.SUCCESS, params);
+		return   this.getJsonView(modelAndView);
 	}
 }
 

@@ -222,6 +222,76 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 	
 	
 	
+	
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.RoleService#doFindRoleUserByCriteria(com.newtouch.lion.query.QueryCriteria, java.lang.Long)
+	 */
+	@Override
+	public PageResult<RoleGroup> doFindRoleUserByCriteria(QueryCriteria queryCriteria, Long userId) {
+		String queryEntry = "select new com.newtouch.lion.model.system.RoleGroup(id,nameZh,nameEn,description) from Role ";
+
+		String[] whereBodies = { "nameZh like :nameZh"};
+
+		String fromJoinSubClause = "";
+
+		Map<String, Object> params = queryCriteria.getQueryCondition();
+
+		String orderField = queryCriteria.getOrderField();
+
+		String orderDirection = queryCriteria.getOrderDirection();
+
+		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
+				whereBodies, orderField, orderDirection, params);
+
+		int pageSize = queryCriteria.getPageSize();
+
+		int startIndex = queryCriteria.getStartIndex();
+
+		PageResult<RoleGroup> pageResult = this.roleGroupDao.query(hql,HqlUtils.generateCountHql(hql, null), params, startIndex,pageSize);
+		
+		//如果查询为空，则直接返回数据
+		if(CollectionUtils.isEmpty(pageResult.getContent())){
+			return pageResult;
+		}
+		//以下代码检查是否已授权到用户组的角色
+		queryCriteria=new QueryCriteria();
+		queryCriteria.setStartIndex(0);
+		queryCriteria.setPageSize(pageResult.getPageSize());
+		//当前ID集合
+		List<RoleGroup> roleGroups=pageResult.getContent();
+		List<Long> roleIds=new ArrayList<Long>();
+		for(RoleGroup roleGroup:roleGroups){
+			roleIds.add(roleGroup.getId());
+		}
+		// 查询条件 参数类型 用户名
+		if (userId!=null&&userId>0) {
+			queryCriteria.addQueryCondition("userId",userId);
+		}
+		//查询所有空的
+		if(!CollectionUtils.isEmpty(roleIds)){
+			queryCriteria.addQueryCondition("roleIds",roleIds);
+		}
+		
+		PageResult<Role> result=this.doFindByCriteriaAndUser(queryCriteria);
+		
+		Map<Long,Long> userIdsMap=new HashMap<Long,Long>();
+		
+		for(Role role:result.getContent()){
+			userIdsMap.put(role.getId(), role.getId());
+		}
+		
+		List<RoleGroup> contents=new ArrayList<RoleGroup>();
+		
+		for(RoleGroup roleGroup:roleGroups){
+			if(userIdsMap.containsKey(roleGroup.getId())){
+				roleGroup.setUserId(userId);
+			}
+			contents.add(roleGroup);
+		}
+		pageResult.setContent(contents);
+		return pageResult;
+	}
 
 	/* (non-Javadoc)
 	 * @see com.newtouch.lion.service.system.RoleService#doFindRoleGroupByCriteria(com.newtouch.lion.query.QueryCriteria, java.lang.Long)
@@ -314,15 +384,45 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
 				whereBodies, orderField, orderDirection, params);
 		
-		String countHql=HqlUtils.generateCountHql(hql,"role.id ");
+		String countHql=HqlUtils.generateCountHql(hql," role.id ");
 
 		int pageSize = criteria.getPageSize();
 
 		int startIndex = criteria.getStartIndex();
 
-		PageResult<Role> pageResult = this.roleDao.query(hql,
-				countHql, params, startIndex,
-				pageSize);
+		PageResult<Role> pageResult = this.roleDao.query(hql,countHql, params, startIndex,pageSize);
+		return pageResult;
+	}
+
+	
+	
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.RoleService#doFindByCriteriaAndUser(com.newtouch.lion.query.QueryCriteria)
+	 */
+	@Override
+	public PageResult<Role> doFindByCriteriaAndUser(QueryCriteria queryCriteria) {
+		String queryEntry = " select role from Role as  role inner join fetch role.users u ";
+
+		String[] whereBodies = { "role.nameZh like :nameZh","u.id =:userId","role.id in(:roleIds)"};
+
+		String fromJoinSubClause = "";
+
+		Map<String, Object> params = queryCriteria.getQueryCondition();
+
+		String orderField = queryCriteria.getOrderField();
+
+		String orderDirection = queryCriteria.getOrderDirection();
+
+		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
+				whereBodies, orderField, orderDirection, params);
+		
+		String countHql=HqlUtils.generateCountHql(hql," role.id ");
+
+		int pageSize = queryCriteria.getPageSize();
+
+		int startIndex = queryCriteria.getStartIndex();
+
+		PageResult<Role> pageResult = this.roleDao.query(hql,countHql, params, startIndex,pageSize);
 		return pageResult;
 	}
 
@@ -524,7 +624,7 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 				role.getResources().remove(resource);
 			}
 		}
-
+		
 		// 将资源集合授权给角色中
 		if (targetResourceIds != null && targetResourceIds.size() > 0) {
 			for (Long resourceId : targetResourceIds) {
@@ -609,6 +709,28 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 		// TODO Auto-generated method stub
 		Assert.notNull(role);
 		roleDao.save(role);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.RoleService#idoAuthUserToRole(java.util.List, java.util.List, com.newtouch.lion.model.system.Role)
+	 */
+	@Override
+	public void idoAuthUserToRole(List<Long> targetUserIds,
+			List<Long> deleteUserIds, Role role) {
+		// TODO Auto-generated method stub
+		this.doDeleteUsersFromRole(deleteUserIds, role);
+		this.doAddUsersToRole(targetUserIds, role);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.RoleService#idoAuthUserToRole(java.util.List, java.util.List, com.newtouch.lion.model.system.Role)
+	 */
+	@Override
+	public void idoAuthGroupToRole(List<Long> targetGroupIds,
+			List<Long> deleteGroupIds, Role role) {
+		// TODO Auto-generated method stub
+		this.doDeleteGroupsFromRole(deleteGroupIds, role);
+		this.doAddGroupsToRole(targetGroupIds, role);
 	}
 	
 }

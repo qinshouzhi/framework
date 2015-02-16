@@ -68,11 +68,11 @@ public class AbstractController {
 		 */
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(
 				new SimpleDateFormat(DateUtil.FORMAT_DATETIME_YYYY_MM_DD_HH_MM_SS), true));
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat(DateUtil.FORMAT_DATE_YYYY_MM_DD), true));
 		/**
 		 * 防止XSS攻击
 		 */
-		binder.registerCustomEditor(String.class, new StringEscapeEditor(true,
-				false));
+		binder.registerCustomEditor(String.class, new StringEscapeEditor(true,false));
 	}
 
 	/**

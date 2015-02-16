@@ -125,8 +125,18 @@ public interface GroupService {
 	public Group doUpdate(Group group);
 
 	public Group doGetById(Long id);
-
-	public PageResult<Group> doFindByCriteria(QueryCriteria criteria);
+	/***
+	 * 关联用户查询，并返回Group分页对象
+	 * @param queryCriteria
+	 * @return  PageResult<Group>
+	 */
+	public PageResult<Group> doFindByCriteriaAndUser(QueryCriteria queryCriteria);
+	/***
+	 * Group 多项条件查询，并返回Group分页对象
+	 * @param queryCriteria 查询条件
+	 * @return   PageResult<Group>
+	 */
+	public PageResult<Group> doFindByCriteria(QueryCriteria queryCriteria);
 
 	public List<DataColumn> doFindByTableId(String tableId);
 	/**
@@ -151,8 +161,15 @@ public interface GroupService {
 	 */
 	public void doCreate(Group group);
 	
-	/** 用户组与角色查询查询，并返回分页对象 */
-	public PageResult<GroupRole> doFindGroupRoleByCriteria(QueryCriteria criteria);
+	/** 用户组与角色查询，并返回分页对象 */
+	public PageResult<GroupRole> doFindGroupRoleByCriteria(QueryCriteria criteria,Long roleId);
 	
 	public PageResult<Group> doFindByCriteriaAndRole(QueryCriteria criteria);
+	/***
+	 * 用户组与用户查询，并返回分页对象
+	 * @param queryCriteria
+	 * @param id 用户ID
+	 * @return 
+	 */
+	public PageResult<GroupRole> doFindGroupUserByCriteria(QueryCriteria queryCriteria, Long id);
 }

@@ -6,6 +6,7 @@
  */
 package com.newtouch.lion.service.system.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.newtouch.lion.common.Assert;
 import com.newtouch.lion.common.sql.HqlUtils;
@@ -345,6 +347,38 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 		return groupDao.getById(id);
 	}
 
+	
+	
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.GroupService#doFindByCriteriaAndUser(com.newtouch.lion.query.QueryCriteria)
+	 */
+	@Override
+	public PageResult<Group> doFindByCriteriaAndUser(QueryCriteria queryCriteria) {
+		String queryEntry = " select groups from Group as  groups inner join fetch groups.users u ";
+
+		String[] whereBodies = { "groups.nameZh like :nameZh","u.id =:userId","groups.id in(:groupIds)"};
+
+		String fromJoinSubClause = "";
+
+		Map<String, Object> params = queryCriteria.getQueryCondition();
+
+		String orderField = queryCriteria.getOrderField();
+
+		String orderDirection = queryCriteria.getOrderDirection();
+
+		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
+				whereBodies, orderField, orderDirection, params);
+		
+		String countHql=HqlUtils.generateCountHql(hql," groups.id ");
+
+		int pageSize = queryCriteria.getPageSize();
+
+		int startIndex = queryCriteria.getStartIndex();
+
+		PageResult<Group> pageResult = this.groupDao.query(hql,countHql, params, startIndex,pageSize);
+		return pageResult;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -356,7 +390,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 	public PageResult<Group> doFindByCriteria(QueryCriteria criteria) {
 		String queryEntry = " from Group ";
 
-		String[] whereBodies = { "nameZh like :nameZh","Group.users.id=:userid"};
+		String[] whereBodies = {"nameZh like :nameZh"};
 
 		String fromJoinSubClause = "";
 
@@ -482,8 +516,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 	 */
 	@Override
 	public PageResult<GroupRole> doFindGroupRoleByCriteria(
-			QueryCriteria criteria) {
-		// TODO Auto-generated method stub
+			QueryCriteria criteria,Long roleId) {
 		String queryEntry = "select new com.newtouch.lion.model.system.GroupRole(id,nameZh,nameEn,description) from Group ";
 
 		String[] whereBodies = { "nameZh like :nameZh", "nameEn like :nameEn","description like :description" };
@@ -502,10 +535,118 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 		int pageSize = criteria.getPageSize();
 
 		int startIndex = criteria.getStartIndex();
+		
+		PageResult<GroupRole> pageResult = this.groupRoleDao.query(hql,HqlUtils.generateCountHql(hql, null),params,startIndex,pageSize);
+		
+		//如果查询为空，则直接返回数据
+		if(CollectionUtils.isEmpty(pageResult.getContent())){
+			return pageResult;
+		}
+		//以下代码检查是否已授权到用户组的角色
+		criteria=new QueryCriteria();
+		criteria.setStartIndex(0);
+		criteria.setPageSize(pageResult.getPageSize());
+		//当前ID集合
+		List<GroupRole> groupRoles=pageResult.getContent();
+		List<Long> groupIds=new ArrayList<Long>();
+		for(GroupRole groupRole:groupRoles){
+			groupIds.add(groupRole.getId());
+		}
+		// 查询条件 参数类型 用户名
+		if (roleId!=null&&roleId>0) {
+			criteria.addQueryCondition("roleId",roleId);
+		}
+		//查询所有空的
+		if(!CollectionUtils.isEmpty(groupIds)){
+			criteria.addQueryCondition("groupIds",groupIds);
+		}
+		
+		PageResult<Group> result=this.doFindByCriteriaAndRole(criteria);
+		
+		Map<Long,Long> userIdsMap=new HashMap<Long,Long>();
+		
+		for(Group user:result.getContent()){
+			userIdsMap.put(user.getId(), user.getId());
+		}
+		
+		List<GroupRole> contents=new ArrayList<GroupRole>();
+		
+		for(GroupRole groupRole:groupRoles){
+			if(userIdsMap.containsKey(groupRole.getId())){
+				groupRole.setRoleId(roleId);
+			}
+			contents.add(groupRole);
+		}
+		pageResult.setContent(contents);
+		return pageResult;
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.GroupService#doFindGroupRoleByCriteria(com.newtouch.lion.query.QueryCriteria)
+	 */
+	@Override
+	public PageResult<GroupRole> doFindGroupUserByCriteria(QueryCriteria queryCriteria,Long userId) {
+		String queryEntry = "select new com.newtouch.lion.model.system.GroupRole(id,nameZh,nameEn,description) from Group ";
 
-		PageResult<GroupRole> pageResult = this.groupRoleDao.query(hql,
-				HqlUtils.generateCountHql(hql, null), params, startIndex,
-				pageSize);
+		String[] whereBodies = { "nameZh like :nameZh", "nameEn like :nameEn","description like :description" };
+
+		String fromJoinSubClause = "";
+
+		Map<String, Object> params = queryCriteria.getQueryCondition();
+
+		String orderField = queryCriteria.getOrderField();
+
+		String orderDirection = queryCriteria.getOrderDirection();
+
+		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,whereBodies, orderField, orderDirection, params);
+
+		int pageSize = queryCriteria.getPageSize();
+
+		int startIndex = queryCriteria.getStartIndex();
+
+		PageResult<GroupRole> pageResult = this.groupRoleDao.query(hql,HqlUtils.generateCountHql(hql, null), params, startIndex,pageSize);
+		
+		//如果查询为空，则直接返回数据
+		if(CollectionUtils.isEmpty(pageResult.getContent())){
+			return pageResult;
+		}
+		//以下代码检查是否已授权到用户组的角色
+		queryCriteria=new QueryCriteria();
+		queryCriteria.setStartIndex(0);
+		queryCriteria.setPageSize(pageResult.getPageSize());
+		//当前ID集合
+		List<GroupRole> groupRoles=pageResult.getContent();
+		List<Long> roleIds=new ArrayList<Long>();
+		for(GroupRole groupRole:groupRoles){
+			roleIds.add(groupRole.getId());
+		}
+		// 查询条件 参数类型 用户名
+		if (userId!=null&&userId>0) {
+			queryCriteria.addQueryCondition("userId",userId);
+		}
+		//查询所有空的
+		if(!CollectionUtils.isEmpty(roleIds)){
+			queryCriteria.addQueryCondition("groupIds",roleIds);
+		}
+		
+		PageResult<Group> result=this.doFindByCriteriaAndUser(queryCriteria);
+		
+		Map<Long,Long> userIdsMap=new HashMap<Long,Long>();
+		
+		for(Group group:result.getContent()){
+			userIdsMap.put(group.getId(), group.getId());
+		}
+		
+		List<GroupRole> contents=new ArrayList<GroupRole>();
+		
+		for(GroupRole roleGroup:groupRoles){
+			if(userIdsMap.containsKey(roleGroup.getId())){
+				roleGroup.setUserId(userId);
+			}
+			contents.add(roleGroup);
+		}
+		pageResult.setContent(contents);
+		
 		return pageResult;
 	}
 

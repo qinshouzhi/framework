@@ -180,11 +180,25 @@ public interface RoleService {
 	public PageResult<RoleGroup> doFindRoleGroupByCriteria(QueryCriteria queryCriteria,Long groupId);
 	
 	/***
+	 * 查询角色列表，并关联userId
+	 * @param queryCriteria
+	 * @return PageResult<RoleGroup>
+	 */
+	public PageResult<RoleGroup> doFindRoleUserByCriteria(QueryCriteria queryCriteria,Long userId);
+	
+	/***
 	 * 多条件组合查询，并返回分页对象,关联Group对象
 	 * @param queryCriteria 查询条件
 	 * @return  PageResult<Role>
 	 */
 	public PageResult<Role> doFindByCriteriaAndGroup(QueryCriteria queryCriteria);
+	
+	/***
+	 * 多条件组合查询，并返回分页对象,关联User对象
+	 * @param queryCriteria 查询条件
+	 * @return  PageResult<Role>
+	 */
+	public PageResult<Role> doFindByCriteriaAndUser(QueryCriteria queryCriteria);
 	
 
 	public String doFindByCriteria(QueryCriteria criteria, String tableId);
@@ -209,4 +223,12 @@ public interface RoleService {
 	 * @param role
 	 */
 	public void doCreate(Role role);
+	/** 将角色授权给用户 */
+	public void idoAuthUserToRole(List<Long> targetUserIds,
+			List<Long> deleteUserIds, Role role);
+	
+	/** 将角色授权给用户组 */
+	public void idoAuthGroupToRole(List<Long> targetGroupIds,
+			List<Long> deleteGroupIds, Role role); 
+	
 }
