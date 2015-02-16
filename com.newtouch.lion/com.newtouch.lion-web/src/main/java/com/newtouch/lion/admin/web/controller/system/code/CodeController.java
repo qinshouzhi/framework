@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.system.CodeList;
+import com.newtouch.lion.model.system.CodeType;
 import com.newtouch.lion.service.system.CodeListService;
 import com.newtouch.lion.service.system.CodeTypeService;
 
@@ -52,6 +53,13 @@ public class CodeController {
 	public List<CodeList> combox(@RequestParam String nameEn) {
 		List<CodeList> codeLists = codeListService.doFindCodeListByCodeTypeNameEn(nameEn);
 		return codeLists;
+	}
+	
+	@RequestMapping("typecombox")
+	@ResponseBody
+	public List<CodeType> typecombox() {
+		List<CodeType> codeTypes = codeTypeService.doFindAll();
+		return codeTypes;
 	}
 
 	@RequestMapping("comboxselected")

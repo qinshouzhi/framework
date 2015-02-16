@@ -108,10 +108,9 @@ function successForDelete(data,arg){
 /**新增或编辑的提交代码*/
 function submitForm(frm){
 	var param=frm.serialize(),id=($('#id').val());
-	console.dir(param);
   //ID为空时，为添加动作
   if(lion.util.isEmpty(id)){
- 	    lion.util.post('add.json',param,successAddFrm,errorRequest);
+	  lion.util.post('add.json',param,successAddFrm,errorRequest);
   }else{
       lion.util.post('edit.json',param,successAddFrm,errorRequest,param.id);
   }
@@ -130,11 +129,11 @@ function successAddFrm(data,arg,id){
   		gmsg+=data.errorMessage[msg];
   	}
   	if(lion.util.isEmpty(gmsg)){
-  		gmsg='添加角色出错';
+  		gmsg='添加DataGrid出错';
   	}
   	lion.util.error('提示',gmsg);
   }else{
-  	lion.util.error('提示','添加角色失败');
+  	lion.util.error('提示','添加DataGrid失败');
   }
 }
 //请求失败后信息
@@ -164,10 +163,6 @@ handleVForm=function(vForm,submitCallBackfn){
             title:{
               required: '请输入title',
               rangelength: jQuery.validator.format('title长度为{0}和{1}字符之间')
-            },
-            method:{
-              required: '请输入method',
-              rangelength: jQuery.validator.format('method长度为{0}和{1}字符之间')
             },
             url:{
               required: '请输入url',
@@ -251,10 +246,6 @@ handleVForm=function(vForm,submitCallBackfn){
             title:{
             	required: true,
             	rangelength: [4,128]
-            },
-            method:{
-            	required: true,
-            	rangelength: [0,15]
             },
             url:{
             	required: true,

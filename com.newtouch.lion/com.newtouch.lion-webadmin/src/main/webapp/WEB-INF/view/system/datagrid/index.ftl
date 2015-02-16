@@ -228,33 +228,43 @@
 													<@spring.message "sys.datagrid.form.showFooter.text"/>
 													<input type="checkbox" class="form-control "  name="showFooter" />
 												</div>
-											</div>		
+											</div>	
+											
 											<div class="form-group">
-												<label class="col-md-1 control-label"><@spring.message "sys.datagrid.form.loader.text"/></label>
+												<label class="col-md-1 control-label">
+													<@spring.message "sys.datagrid.form.loader.text"/>
+												</label>
 												<div class="col-md-2">
-													<div class="input-group">
+													<div class="input-group radio-list">	
 														<input type="text"  name="loader"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.loader.missing.message"/>" size="30"/>
 													</div>
 												</div>
-												<label class="col-md-1 control-label"><@spring.message "sys.datagrid.form.loadFilter.text"/></label>
+												<label class="col-md-1 control-label">
+													<@spring.message "sys.datagrid.form.loadFilter.text"/>
+												</label>
 												<div class="col-md-2">
 													<div class="input-group radio-list">	
 														<input type="text"  name="loadFilter"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.loadFilter.missing.message"/>" size="30"/>
 													</div>
 												</div>
-												<label class="col-md-1 control-label"><@spring.message "sys.datagrid.form.editors.text"/></label>
+												<label class="col-md-1 control-label">
+													<@spring.message "sys.datagrid.form.editors.text"/>
+												</label>
 												<div class="col-md-2">
 													<div class="input-group radio-list">	
 														<input type="text"  name="editors"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.editors.missing.message"/>" size="30"/>
 													</div>
 												</div>
-												<label class="col-md-1 control-label"><@spring.message "sys.datagrid.form.view.text"/></label>
+												<label class="col-md-1 control-label">
+													<@spring.message "sys.datagrid.form.view.text"/>
+												</label>
 												<div class="col-md-2">
 													<div class="input-group radio-list">	
-														<input type="text"  name="view"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.view.missing.message"/>" size="30"/>
+														<input type="text"  name="view222"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.view.missing.message"/>" size="30"/>
 													</div>
 												</div>
 											</div>	
+											
 											<div class="form-group">
 												<div class="col-md-2">
 													<@spring.message "sys.datagrid.form.fit.text"/>
