@@ -139,4 +139,4 @@ public class GroupRole extends BaseEntity<Long> {
 	
 }
 
-	
+

@@ -61,7 +61,6 @@ $(function () {
    //角色加载数据完成
   authgroupdg.on('datagrids.reload',function(){
       authgroupdg.datagrids('checkselected');
-      //roleuserdg.datagrids('checkboxdisabled');
   });
 
   //用户授权列表创建行调用
