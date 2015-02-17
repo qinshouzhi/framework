@@ -203,7 +203,7 @@ handleVForm=function(vForm,submitCallBackfn){
             },
             codeValue: {
                 required:true,
-                rangelength:[4,128]
+                rangelength:[1,128]
             },
             sortNo:{
             	required: true,
