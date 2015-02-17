@@ -9,7 +9,6 @@ $(function() {
     var queryForm=$('#queryform');
 	var addDialog=$('#basic');
 	
-	
 	handleVForm(addForm,submitForm);
 	//选择DataGrid单行
 	function getSelectedRow(){return $(datagridId).datagrid('getSelected');}
@@ -177,11 +176,11 @@ handleVForm=function(vForm,submitCallBackfn){
             },
             nameZh: {
                 required:true,
-                rangelength:[4,128]
+                rangelength:[1,128]
             },
             nameEn:{
             	required: true,
-              	rangelength:[4,128],
+              	rangelength:[1,128],
               	remote:{
               			url:'checkisexitnameen.htm', //后台处理程序
       					    type: 'post',               //数据发送方式
