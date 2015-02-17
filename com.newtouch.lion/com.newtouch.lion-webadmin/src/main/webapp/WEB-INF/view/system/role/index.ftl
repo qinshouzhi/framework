@@ -238,7 +238,7 @@
 								</div>
 								<div  role="tabpanel" class="tab-pane fade" id="tab_3_4">
 									 <div class="row">
-										<div class="col-md-12" style="width:868px;height:350px;overflow-y:auto;">
+										<div class="col-md-12" style="width:868px;height:350px;overflow-y:auto;margin-top:0;">
 											<ul id="resourcetree" class="ztree" style="width:848px; overflow-y:auto;height:340px;margin-top:0;border:solid 1px #cccccc;"></ul>
 										</div>
 									</div>

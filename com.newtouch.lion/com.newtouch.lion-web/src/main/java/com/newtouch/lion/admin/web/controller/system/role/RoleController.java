@@ -234,9 +234,9 @@ public class RoleController extends AbstractController{
 	/**所有资源列表*/
 	@RequestMapping(value = "resources")
 	@ResponseBody
-	public  String  resources(@RequestParam(required=false) Long roleId){
+	public  ModelAndView  resources(@RequestParam(required=false) Long id,ModelAndView modelAndView){
 		List<Resource>  resources=this.resourceService.doFindFirstLevel();
-		
+		Long roleId=id;
 		Set<String>  properties=new HashSet<String>();		
 		properties.add("id");		
 		properties.add("text");		
@@ -245,28 +245,31 @@ public class RoleController extends AbstractController{
 		properties.add("path");		
 		properties.add("attributes");		
 		properties.add("children");
+		properties.add("parentResourceId");
 		List<TreeNode> treeNodes=new ArrayList<TreeNode>();
 		for(Resource resource:resources){
 			Boolean checked=Boolean.FALSE;
 			Attributes attributes=new Attributes();			
 			attributes.setPath(resource.getPath());			
-			attributes.setTarget(resource.getTarget());
+			//attributes.setTarget(resource.getTarget());
 			for(Role role:resource.getRoles()){
-				if(roleId==role.getId()){
+				if(roleId.equals(role.getId())){
 					checked=Boolean.TRUE;
 					continue;
 				}
 			}
 			List<TreeNode> children=this.resourceAttr(resource.getResources(),roleId);
-			Long id=resource.getId();
+			Long resourceId=resource.getId();
 			String text=resource.getNameZh();
 			int  orderId=resource.getSeqNum();
 			boolean isLeaf=false;
 			logger.info("children.size()"+children.size());
-			TreeNode  treeNode=new TreeNode(id,text,State.open,checked,"",orderId,isLeaf,attributes,children);
+			TreeNode  treeNode=new TreeNode(resourceId,text,State.open,checked,"",orderId,isLeaf,attributes.getPath(),attributes,children);
 			treeNodes.add(treeNode);
 		}
-		return JSONParser.toJSONString(treeNodes,properties);
+		String str=JSONParser.toJSONString(treeNodes,properties).replace("text","name").replace("\"state\":\"open\"","\"open\":true");
+		logger.info("json:{}",str);
+		return this.getStrJsonView(str, modelAndView);
 	}
 	
 	/**为角色添加用户集合*/
@@ -326,10 +329,10 @@ public class RoleController extends AbstractController{
 	/**为角色添加资源集合*/
 	@RequestMapping(value="addresources")
 	@ResponseBody
-	public ModelAndView addresources(@RequestParam(required=false) Long roleId,@RequestParam(required=false) String resourceId,ModelAndView modelAndView){
-		//TODO 验证输入
-		Role role=this.roleService.doGetById(roleId);
-		List<Long> targetResourceIds=LongUtils.parserStringToLong(resourceId, LongUtils.SPARATOR_COMMA);
+	public ModelAndView addresources(@RequestBody(required=false)AuthModel authModel,ModelAndView modelAndView){
+		//验证输入
+		Role role=this.roleService.doGetById(authModel.getId());
+		List<Long> targetResourceIds=authModel.getSelecteds();
 		List<Long> deleteResourceIds = new ArrayList<Long>();
 		for(Resource resource:role.getResources()){
 			
@@ -347,7 +350,7 @@ public class RoleController extends AbstractController{
 		Map<String,String> params=new  HashMap<String,String>();
     	params.put(BindResult.SUCCESS,ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
     	modelAndView.addObject(BindMessage.SUCCESS,params);
-		return modelAndView;
+		return this.getJsonView(modelAndView);
 	}
 	
 	
@@ -356,14 +359,11 @@ public class RoleController extends AbstractController{
 		List<TreeNode>  children=new ArrayList<TreeNode>();
 		for(Resource resource:resources){
 			Boolean checked=Boolean.FALSE;
-			Attributes attributes=new Attributes();
-			
+			Attributes attributes=new Attributes();			
 			attributes.setPath(resource.getPath());
 			
-			attributes.setTarget(resource.getTarget());
-			
 			for(Role role:resource.getRoles()){
-				if(roleId==role.getId()){
+				if(roleId.equals(role.getId())){
 					checked=Boolean.TRUE;
 					continue;
 				}
@@ -379,7 +379,7 @@ public class RoleController extends AbstractController{
 			int  orderId=resource.getSeqNum();
 			boolean isLeaf=false;
 			logger.info("childrenNext.size()"+childrenNext.size());
-			TreeNode  treeNode=new TreeNode(id,text,State.open,checked,"",orderId,isLeaf,attributes,childrenNext);
+			TreeNode  treeNode=new TreeNode(id,text,State.open,checked,"",orderId,isLeaf,attributes.getPath(),attributes,childrenNext);
 			children.add(treeNode);
 		}
 		return children;

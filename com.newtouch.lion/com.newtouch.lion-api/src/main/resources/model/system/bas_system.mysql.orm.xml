@@ -337,7 +337,7 @@
 				</cascade>
 			</one-to-many>
 			<many-to-many name="roles" fetch="LAZY">
-				<join-table>
+				<join-table name="BAS_ROLE_RESOURCE">
 					<join-column name="BAS_RESOURCE_ID" insertable="false" updatable="false"/>
 					<inverse-join-column  name="BAS_ROLE_ID" insertable="false" updatable="false"/>
 				</join-table>
