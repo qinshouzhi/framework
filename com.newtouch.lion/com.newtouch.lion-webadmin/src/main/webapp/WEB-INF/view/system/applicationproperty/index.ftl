@@ -64,7 +64,33 @@
 				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> <@spring.message "common.toolbar.btn.export.text"/> </a>
 			</div>
 			<div class="col-md-12">
-				 <@lion.datagrids name="sys_app_property_list_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/applicationproperty/list.htm" dataOptions="" style="height:400px;"/>	
+				<table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_app_property_list_tb" data-singleselect="true",   data-loadUrl="/admin/system/applicationproperty/list.json" data-checkbox="true" data-pageSize="10">
+					<thead>
+						<tr>
+							<th class="table-checkbox" data-field='id' data-checkbox="true">
+						 		<input type="checkbox" class="group-checkable" data-set="#sys_app_property_list_tb.checkboxes"  data-sortable="false" />
+						 	</th>
+							<th data-field='appId' data-sortDir="asc" style="width:100px;">
+								AppId
+							</th>
+							<th data-field="key" style="width:100px;">
+							 	Key
+							</th>
+							<th data-field="value" style="width:100px;">
+								Value
+							</th>
+							<th data-field="description" style="width:30px;" align="center"  data-formatter="formatterEidtable">
+								Desctiption
+							</th>							
+							<th data-field="createdDate" style="width:100px;">
+								创建时间
+							</th>
+							<th data-field="updatedDate" style="width:100px;">
+								更新时间
+							</th>
+						</tr>
+					</thead>
+				</table>
 			</div>
 		</div>
 	</div>

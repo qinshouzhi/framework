@@ -60,43 +60,57 @@ Author: wanglijun
 		<h3 class="form-title"><@spring.message "login.dialog.title.welcome"/></h3>
 		<div class="alert alert-danger display-hide">
 			<button class="close" data-close="alert"></button>
-			<span>Enter any username and password. </span>
+			<span><@spring.message "login.form.error"/>. </span>
 		</div>
 		<div class="form-group">
 			<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-			<label class="control-label visible-ie8 visible-ie9">用户名</label>
-			<input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" name="username"/>
+			<label class="control-label visible-ie8 visible-ie9">				
+				<@spring.message "login.form.username.label.text"/>
+			</label>
+			<input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder='<@spring.message "login.form.username.label.text"/>' name="username"/>
 		</div>
 		<div class="form-group">
-			<label class="control-label visible-ie8 visible-ie9">密码</label>	 
-			<input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" name="password"/>
+			<label class="control-label visible-ie8 visible-ie9">
+				<@spring.message "login.form.password.label.text"/>
+			</label>	 
+			<input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder='<@spring.message "login.form.password.label.text"/>' name="password"/>
 		</div>
 		<div class="form-actions">
-			<button type="submit" class="btn btn-success uppercase">登录</button>
+			<button type="submit" class="btn btn-success uppercase">
+				<@spring.message "login.form.button.submit"/>
+			</button>
 			<label class="rememberme check">
-			<input type="checkbox" name="remember" value="1"/>自动登录</label>
-			<a href="javascript:;" id="forget-password" class="forget-password">忘记密码?</a>
+			<input type="checkbox" name="remember" value="1"/>
+				<@spring.message "login.form.checkbox.rememberme"/>
+			</label>
+			<a href="javascript:;" id="forget-password" class="forget-password">
+				 <@spring.message "login.form.forget.password"/>
+			</a>
 		</div>
 	</form>
 	<!-- END LOGIN FORM -->
 	<!-- BEGIN FORGOT PASSWORD FORM -->
 	<form class="forget-form" action="index.html" method="post">
-		<h3>Forget Password ?</h3>
+		<h3><@spring.message "login.form.forget.password"/></h3>
 		<p>
-			 Enter your e-mail address below to reset your password.
+		 	 <@spring.message "login.form.forget.tip.text"/>
 		</p>
 		<div class="form-group">
-			<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email"/>
+			<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder='<@spring.message "login.form.forget.email"/>' name="email"/>
 		</div>
 		<div class="form-actions">
-			<button type="button" id="back-btn" class="btn btn-default">Back</button>
-			<button type="submit" class="btn btn-success uppercase pull-right">Submit</button>
+			<button type="button" id="back-btn" class="btn btn-default">
+				<@spring.message "login.form.forget.backbtn"/>
+			</button>
+			<button type="submit" class="btn btn-success uppercase pull-right">
+				 <@spring.message "login.form.forget.submit"/>
+			</button>
 		</div>
 	</form>
 	<!-- END FORGOT PASSWORD FORM -->
 </div>
 <div class="copyright">
-	 2014 © Newtouch Web Admin.
+	 <@spring.message "login.footer.copyright"/>
 </div>
 <!-- END LOGIN -->
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
