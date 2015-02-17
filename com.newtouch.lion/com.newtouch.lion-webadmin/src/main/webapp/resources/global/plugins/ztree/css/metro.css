@@ -30,27 +30,27 @@ website:    http://code.google.com/p/jquerytree/
     background-color:transparent; background-repeat:no-repeat; background-attachment: scroll;
     background-image:url("./img/metro.png"); *background-image:url("./img/metro.gif")}
 
-.ztree li span.button.chk {width:13px; height:13px; margin:0 2px; cursor: auto}
-.ztree li span.button.chk.checkbox_false_full {background-position: -5px -5px;}
-.ztree li span.button.chk.checkbox_false_full_focus {background-position: -5px -26px;}
-.ztree li span.button.chk.checkbox_false_part {background-position: -5px -48px;}
-.ztree li span.button.chk.checkbox_false_part_focus {background-position: -5px -68px;}
-.ztree li span.button.chk.checkbox_false_disable {background-position: -5px -89px;}
-.ztree li span.button.chk.checkbox_true_full {background-position: -26px -5px;}
-.ztree li span.button.chk.checkbox_true_full_focus {background-position: -26px -26px;}
-.ztree li span.button.chk.checkbox_true_part {background-position: -26px -48px;}
-.ztree li span.button.chk.checkbox_true_part_focus {background-position: -26px -68px;}
-.ztree li span.button.chk.checkbox_true_disable {background-position: -26px -89px;}
-.ztree li span.button.chk.radio_false_full {background-position: -47px -5px;}
-.ztree li span.button.chk.radio_false_full_focus {background-position: -47px -26px;}
-.ztree li span.button.chk.radio_false_part {background-position: -47px -47px;}
-.ztree li span.button.chk.radio_false_part_focus {background-position: -47px -68px;}
-.ztree li span.button.chk.radio_false_disable {background-position: -47px -89px;}
-.ztree li span.button.chk.radio_true_full {background-position: -68px -5px;}
-.ztree li span.button.chk.radio_true_full_focus {background-position: -68px -26px;}
-.ztree li span.button.chk.radio_true_part {background-position: -68px -47px;}
-.ztree li span.button.chk.radio_true_part_focus {background-position: -68px -68px;}
-.ztree li span.button.chk.radio_true_disable {background-position: -68px -89px;}
+.ztree li span.button.chk {background-color:transparent; background-repeat:no-repeat; background-attachment: scroll;width:19px; height:19px; margin:0 2px; cursor: auto; background-image:url("./img/sprite.png");background-position: 0 -260px; }
+.ztree li span.button.chk.checkbox_false_full { background-position: -0px -260px;}
+.ztree li span.button.chk.checkbox_false_full_focus {background-position: -38px -260px;}
+.ztree li span.button.chk.checkbox_false_part {background-position: -19px -260px;}
+.ztree li span.button.chk.checkbox_false_part_focus {background-position: -57px -260px;}
+.ztree li span.button.chk.checkbox_false_disable {background-position: -152px -260px;}
+.ztree li span.button.chk.checkbox_true_full {background-position: -76px -260px;}
+.ztree li span.button.chk.checkbox_true_full_focus {background-position: -114px -260px;}
+.ztree li span.button.chk.checkbox_true_part {background-position: -95px -260px;}
+.ztree li span.button.chk.checkbox_true_part_focus {background-position: -133px -260px;}
+.ztree li span.button.chk.checkbox_true_disable {background-position: -152px -260px;}
+.ztree li span.button.chk.radio_false_full {background-position:-0px -279px;}
+.ztree li span.button.chk.radio_false_full_focus {background-position:-36px -279px;}
+.ztree li span.button.chk.radio_false_part {background-position: -18px -279px;}
+.ztree li span.button.chk.radio_false_part_focus {background-position: -54px -279px;}
+.ztree li span.button.chk.radio_false_disable {background-position: -144px -279px;}
+.ztree li span.button.chk.radio_true_full {background-position: -72px -279px;}
+.ztree li span.button.chk.radio_true_full_focus {background-position: -108px -279px;}
+.ztree li span.button.chk.radio_true_part {background-position:-90px -279px;}
+.ztree li span.button.chk.radio_true_part_focus {background-position:-126px -279px;}
+.ztree li span.button.chk.radio_true_disable {background-position:-162px -279px;}
 
 .ztree li span.button.switch {width:21px; height:21px}
 .ztree li span.button.root_open{background-position:-105px -21px}

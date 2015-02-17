@@ -3,6 +3,7 @@
 <html lang="en" class="no-js">
 <head>
 <title> <@spring.message "sys.role.html.title"/></title>
+<link href="${base}/resources/global/plugins/ztree/css/metro.css" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" type="text/css">
 <!--DataTable css Start-->
@@ -32,6 +33,8 @@
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
+<!--ztree js-->
+<script src="${base}/resources/global/plugins/ztree/js/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
 <!--role-->
 <script src="${base}/resources/admin/scripts/system/role.js" type="text/javascript"></script>
 </head>
@@ -129,16 +132,19 @@
 							<ul class="nav nav-tabs">
 								<li class="active">
 									<a href="#tab_3_1"  data-toggle="tab">已授权信息 </a>
-								</li>
+								</li>								
 								<li>
 									<a href="#tab_3_2"  data-toggle="tab">关联用户组</a>
 								</li>
 								<li>
 									<a href="#tab_3_3"  data-toggle="tab">关联用户</a>
 								</li>
+								<li>
+									<a href="#tab_3_4"  data-toggle="tab">关联资源</a>
+								</li>
 							</ul>
 							<div class="tab-content">
-								<div role="tabpanel" class="tab-pane active" id="tab_3_1">
+								<div role="tabpanel" class="tab-pane active" id="tab_3_1" style="height:450px;width:868px;">
 								 
 										<div class="col-md-12">	
 												<i class="fa"></i><strong>已关联用户组</strong>
@@ -181,6 +187,7 @@
 												</table>
 										</div>				 
 								</div>
+								
 								<div  role="tabpanel" class="tab-pane fade" id="tab_3_2">
 									 <div class="row">
 										<div class="col-md-12">
@@ -226,6 +233,13 @@
 													</tr>
 												</thead>
 											</table>
+										</div>
+									</div>
+								</div>
+								<div  role="tabpanel" class="tab-pane fade" id="tab_3_4">
+									 <div class="row">
+										<div class="col-md-12" style="width:868px;height:350px;overflow-y:auto;">
+											<ul id="resourcetree" class="ztree" style="width:848px; overflow-y:auto;height:340px;margin-top:0;border:solid 1px #cccccc;"></ul>
 										</div>
 									</div>
 								</div>

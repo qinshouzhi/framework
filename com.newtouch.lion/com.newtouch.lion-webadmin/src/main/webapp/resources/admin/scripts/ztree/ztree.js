@@ -32,7 +32,9 @@ function removeHoverDom(treeId, treeNode) {
 
 var setting = {
     check: {
-        enable: true
+        enable: true,
+        //chkStyle: "radio",
+        //radioType: "level"
     },
     view: {
         addHoverDom: addHoverDom,

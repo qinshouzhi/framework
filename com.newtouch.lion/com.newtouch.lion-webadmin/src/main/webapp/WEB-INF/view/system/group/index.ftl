@@ -67,7 +67,7 @@
 				<table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_group_list_tb" data-singleselect="true",   data-loadUrl="/admin/system/group/list.json" data-checkbox="true" data-pageSize="10">
 					<thead>
 						<tr>
-							<th class="table-checkbox" data-field='id' data-checkbox="true">
+							<th class="table-checkbox" data-field='id' data-checkbox="true" width="36px">
 						 		<input type="checkbox" class="group-checkable" data-set="#sys_group_list_tb.checkboxes"  data-sortable="false" />
 						 	</th>
 							<th data-field='nameEn' data-sortDir="asc"    style="width:100px;">
@@ -128,7 +128,7 @@
 												<table  id="grouprole_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",    data-loadUrl="${base}/system/group/authroles.json"   data-checkbox="true" data-pageSize="3" cellspacing="0"   data-loading="false">
 													<thead>
 														<tr>
-															<th class="table-checkbox" data-field='id' data-checkbox="true" width="19px">
+															<th class="table-checkbox" data-field='id' data-checkbox="true" width="36px">
 														 		<input type="checkbox" class="group-checkable" data-set="#grouprole_list.checkboxes"  data-sortable="false"  />
 														 	</th>
 															<th data-field='nameEn' width="200px;" data-sortDir="asc" data-formatter="formatterCheckBox">
@@ -147,7 +147,7 @@
 												<table  id="groupuser_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",    data-loadUrl="${base}/system/group/authusers.json"   data-checkbox="true" data-pageSize="3" cellspacing="0"   data-loading="false" >
 													<thead>
 														<tr>
-															<th class="table-checkbox" data-field='id' data-checkbox="true" width="19px">
+															<th class="table-checkbox" data-field='id' data-checkbox="true" width="36px">
 														 		<input type="checkbox" class="group-checkable" data-set="#groupuser_list.checkboxes"  data-sortable="false"  />
 														 	</th>
 															<th data-field='username' width="200px;" data-sortDir="asc" >
@@ -170,7 +170,7 @@
 									 <table  id="authrole_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",     data-loadUrl="${base}/system/group/roles.json"   data-checkbox="true" data-pageSize="5" data-loading="false">
 												<thead>
 													<tr>
-														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
+														<th class="table-checkbox" data-field='id' data-checkbox="true"   width="36px">
 													 		<input type="checkbox" class="group-checkable" data-set="#authrole_list.checkboxes"  data-sortable="false"  />
 													 	</th>
 														<th data-field='nameEn' width="200px;"  data-sortDir="asc">
@@ -194,7 +194,7 @@
 												<table  id="authuser_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   data-loadUrl="${base}/system/group/users.json"  data-loading="false"  data-checkbox="true" data-pageSize="5">
 												<thead>
 													<tr>
-														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
+														<th class="table-checkbox" data-field='id' data-checkbox="true"  width="36px" >
 													 		<input type="checkbox" class="group-checkable" data-set="#authuser_list.checkboxes"  data-sortable="false"  />
 													 	</th>
 														<th data-field='username' width="200px;" data-sortDir="asc" >
