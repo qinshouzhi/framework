@@ -111,7 +111,7 @@ public class DataColumnController extends AbstractController{
 			Errors errors, ModelAndView modelAndView) {
 		if (!errors.hasErrors()&& this.isExistByName(dataColumnVo.getName())) {
 			errors.rejectValue(DataColumnVo.NAME,
-					"sys.dataColumn.form.nameen.existed.message",
+					"sys.dataColumn.form.name.existed.message",
 					new Object[] { dataColumnVo.getName() }, null);
 		}
 		//是否错误消息
