@@ -2,6 +2,9 @@
 Login page
 ***/
 /* bg color */
+body{
+   font-family:'Microsoft YaHeis';
+}
 .login {
   background-color: #364150 !important;
   font-family:'Microsoft YaHeis';
