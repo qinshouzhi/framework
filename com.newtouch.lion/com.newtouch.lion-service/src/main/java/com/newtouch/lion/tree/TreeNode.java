@@ -52,6 +52,10 @@ public class TreeNode implements Serializable {
 	private boolean isLeaf;
 	/** 扩展属性，如果不满足要求再进行扩展 */
 	private Attributes attributes;
+	
+	/** URL路径 */
+	private String path;
+	
 	/** 子节点集合 */
 	private List<TreeNode> children = new ArrayList<TreeNode>();
 
@@ -72,7 +76,7 @@ public class TreeNode implements Serializable {
 	 * @param children
 	 */
 	public TreeNode(Long id, String text, String state, boolean checked,
-			String iconCls, int seqNum, boolean isLeaf, Attributes attributes,
+			String iconCls, int seqNum, boolean isLeaf,String path,Attributes attributes,
 			List<TreeNode> children) {
 		super();
 		this.id = id;
@@ -82,6 +86,7 @@ public class TreeNode implements Serializable {
 		this.iconCls = iconCls;
 		this.seqNum = seqNum;
 		this.isLeaf = isLeaf;
+		this.path=path;
 		this.attributes = attributes;
 		this.children = children;
 	}
@@ -190,6 +195,22 @@ public class TreeNode implements Serializable {
 	 */
 	public void setLeaf(boolean isLeaf) {
 		this.isLeaf = isLeaf;
+	}
+	
+	
+
+	/**
+	 * @return the path
+	 */
+	public String getPath() {
+		return path;
+	}
+
+	/**
+	 * @param path the path to set
+	 */
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 	/**

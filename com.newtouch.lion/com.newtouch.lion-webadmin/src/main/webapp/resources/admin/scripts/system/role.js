@@ -22,36 +22,29 @@ $(function () {
 	var authgroupdg=$('#authgroup_list');
   //授权资源列表
   var resourcetree=$('#resourcetree');
+  /**资源树型结构设置*/
   var settingrt= {
       check: {enable: true},
       view: {dblClickExpand: false},
-      data: {simpleData: {enable: true}},
-      //callback: {beforeClick:beforeClick,onClick:onClick}
+      callback: {beforeClick:beforeClick,onClick:onClick}
   };
+  function beforeClick(treeId, treeNode){
 
-  var zNodesresourcetree=[
-            {id:1, pId:0, name:"北京"},
-            {id:2, pId:0, name:"天津"},
-            {id:3, pId:0, name:"上海"},
-            {id:6, pId:0, name:"重庆"},
-            {id:4, pId:0, name:"河北省", open:true},
-            {id:41, pId:4, name:"石家庄"},
-            {id:42, pId:4, name:"保定"},
-            {id:43, pId:4, name:"邯郸"},
-            {id:44, pId:4, name:"承德"},
-            {id:5, pId:0, name:"广东省", open:true},
-            {id:51, pId:5, name:"广州"},
-            {id:52, pId:5, name:"深圳"},
-            {id:53, pId:5, name:"东莞"},
-            {id:54, pId:5, name:"佛山"},
-            {id:6, pId:0, name:"福建省", open:true},
-            {id:61, pId:6, name:"福州"},
-            {id:62, pId:6, name:"厦门"},
-            {id:63, pId:6, name:"泉州"},
-            {id:64, pId:6, name:"三明"}
-         ];
-  
-    //默认隐藏第一个tab的modal-footer
+  }
+  /**资源树型结构-单点事件*/
+  function onClick(e, treeId, treeNode) {
+          var zTree = $.fn.zTree.getZTreeObj("resourcetree"),
+          nodes = zTree.getSelectedNodes(),v = "";
+          
+          nodes.sort(function compare(a,b){return a.id-b.id;});
+          for (var i=0, l=nodes.length; i<l; i++) {
+              v += nodes[i].name + ",";
+          }
+          if (v.length > 0 ) v = v.substring(0, v.length-1);
+          console.dir(treeId);
+          console.dir(treeNode);
+   }
+  //默认隐藏第一个tab的modal-footer
     modalRoleAuth.find('.modal-footer').hide();
 	//绑定tab事件
     modalRoleAuth.find('.nav-tabs a').click(function(){
@@ -115,8 +108,8 @@ $(function () {
       modalRoleAuth.modal('toggle');
       switchTab(selectTabId,idObj);
 	});
-	 //切换Tab加载不同dataGrids的数据
-	  function switchTab(selectTabId,idObj){
+	//切换Tab加载不同dataGrids的数据
+	function switchTab(selectTabId,idObj){
 		  if(selectTabId==='tab_3_1'){
 	         //重新加载 用户组角色数据
 	         rolegroupdg.datagrids({querydata:idObj});
@@ -138,10 +131,20 @@ $(function () {
 	         return;
 	      }else if(selectTabId==='tab_3_4'){
           modalRoleAuth.find('.modal-footer').show();
-          $.fn.zTree.init(resourcetree,settingrt,zNodesresourcetree);
+          initZTree(idObj);
           return;
         }
-	  }
+	}
+
+  function initZTree(idObj){
+     var nodes={},context=lion.util.context,url=context+'/system/role/resources.json?';
+     lion.util.post(url,idObj,successTree,errorRequest);
+    
+     function successTree(data){
+          nodes=data;
+     }
+     $.fn.zTree.init(resourcetree,settingrt,nodes);  
+  }
   //重新加载数据完成
   roleuserdg.on('datagrids.reload',function(){
       roleuserdg.datagrids('checkselected');
@@ -162,13 +165,21 @@ $(function () {
       }else if(selectTabId==='tab_3_3'){
           param=authSelected(roleId,authuserdg);
           lion.util.postjson('addusertorole.json',param,authgroupSuccess,errorRequest,authuserdg);
+      }else if(selectTabId==='tab_3_4'){
+          //保存数据已选中树型结构
+          var zTree = $.fn.zTree.getZTreeObj("resourcetree"),
+          checkedNodes = zTree.getCheckedNodes(true),v = "";
+          param=authResourceTree(roleId,checkedNodes);
+          lion.util.postjson('addresources.json',param,authgroupSuccess,errorRequest,authuserdg);
       }
   }); 
 
   function authgroupSuccess(data,authdg){
       if(data!==null&&!(data.hasError)){
         lion.util.success('提示',data.message);
-        authdg.datagrids('reload');
+        if(authdg!==null){
+            authdg.datagrids('reload');
+        }
       }else if(data!==null&&data.hasError){
         var gmsg='';
         for(var msg in data.errorMessage){
@@ -181,6 +192,15 @@ $(function () {
       }else{
          lion.util.error('提示','授权出错');
       }
+  }
+  /**树授权参数组合*/
+  function authResourceTree(roleId,checkedNodes){
+      var selectedRoledIds=[];
+      $.each(checkedNodes,function(key,item){
+          selectedRoledIds.push(item.id);
+      });
+      var param={'id':roleId,'selecteds':selectedRoledIds};
+      return param;
   }
   //将授权信息组合成一个请求对象
   function authSelected(roleId,authdg){

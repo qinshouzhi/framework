@@ -75,7 +75,7 @@ public class MenuTreeUtil {
 			Boolean checked = Boolean.TRUE;
 			Attributes attributes = new Attributes();
 			attributes.setPath(resource.getPath());
-			attributes.setTarget(resource.getTarget());
+			//attributes.setTarget(resource.getTarget());
 			if (CodeListConstant.RESTYPE_MODULE_CATEGORY_ITEM.equals(resource
 					.getType())){
 				if(menuResourcesMap.containsKey(resource.getId())){
@@ -139,7 +139,7 @@ public class MenuTreeUtil {
 			Boolean selected=Boolean.FALSE;
 			Attributes attributes = new Attributes();
 			attributes.setPath(resource.getPath());
-			attributes.setTarget(resource.getTarget());
+			//attributes.setTarget(resource.getTarget());
 			if (CodeListConstant.RESTYPE_MODULE_CATEGORY_ITEM.equals(resource.getType())){
 				if(menuResourcesMap.containsKey(resource.getId())){
 					checked=Boolean.FALSE;

@@ -1,3 +1,4 @@
+<#import "/WEB-INF/tags/spring.ftl" as spring>
 <#assign base = request.contextPath/>
 <!DOCTYPE html>
 <!-- 

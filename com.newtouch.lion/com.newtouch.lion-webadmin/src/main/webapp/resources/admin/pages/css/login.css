@@ -4,6 +4,7 @@ Login page
 /* bg color */
 .login {
   background-color: #364150 !important;
+  font-family:'Microsoft YaHeis';
 }
 
 .login .logo {
@@ -88,6 +89,7 @@ Login page
 .login .content .form-title {
   font-weight: 300;
   margin-bottom: 25px;
+  font-family:'Microsoft YaHeis';
 }
 
 .login .content .form-actions {

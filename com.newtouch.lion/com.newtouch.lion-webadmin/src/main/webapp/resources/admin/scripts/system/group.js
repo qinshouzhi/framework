@@ -29,6 +29,9 @@ $(function () {
       var selectTabId=$(this).attr('href').substring(1);
       switchTab(selectTabId,idObj);
   });
+
+  //验证表单
+  handleVForm(addForm,submitForm);
   
   //角色授权列表创建行调用
   authroledg.on('datagrids.createdrow',function(row,data,index){
@@ -74,8 +77,7 @@ $(function () {
      $checkbox.parent('span').addClass('checked');
   }
 
-	//验证表单
-	handleVForm(addForm,submitForm);
+	
 	//用户组授权
 	$('#btnAuth').click(function(){
       var selectTabId=modalGroupAuth.find('.tab-pane.active').attr('id');
@@ -217,7 +219,7 @@ $(function () {
 	 });
 	 //保存
 	 $('#btnSave').click(function(){
-	 		addForm.submit();
+	 		  addForm.submit();
 	 });
 
 	 //删除成功
@@ -335,7 +337,7 @@ handleVForm=function(vForm,submitCallBackfn){
             	maxlength:512
             }
         },
-        invalidHandler: function (event, validator) {             
+        invalidHandler: function (event,validator) {             
             addSuccess.hide();
             addError.show();
             Metronic.scrollTo(addError, -200);

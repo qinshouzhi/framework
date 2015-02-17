@@ -91,7 +91,7 @@ public class ResourceTreeUtil {
 				Boolean checked=Boolean.TRUE;
 				Attributes attributes=new Attributes();			
 				attributes.setPath(resource.getPath());
-				attributes.setTarget(resource.getTarget());
+				//attributes.setTarget(resource.getTarget());
 				if(resource.getType().equals(CodeListConstant.RESTYPE_MODULE_CATEGORY_ITEM)){
 					if(menuResourcesMap.containsKey(resource.getId())){
 						checked=Boolean.FALSE;
@@ -114,7 +114,7 @@ public class ResourceTreeUtil {
 				String text=resource.getNameZh();
 				int  orderId=resource.getSeqNum();
 				boolean isLeaf=false;			 
-				TreeNode  treeNode=new TreeNode(id,text,State.open,checked,"",orderId,isLeaf,attributes,childrenNext);
+				TreeNode  treeNode=new TreeNode(id,text,State.open,checked,"",orderId,isLeaf,attributes.getPath(),attributes,childrenNext);
 				children.add(treeNode);
 		
 		}
@@ -139,7 +139,7 @@ public class ResourceTreeUtil {
 				Boolean checked=Boolean.TRUE;
 				Attributes attributes=new Attributes();			
 				attributes.setPath(resource.getPath());
-				attributes.setTarget(resource.getTarget());
+				//attributes.setTarget(resource.getTarget());
 				if(CodeListConstant.RESTYPE_MODULE_CATEGORY_ITEM.equals(resource.getType())){
 					if(menuResourcesMap.containsKey(resource.getId())){
 						checked=Boolean.FALSE;
@@ -169,11 +169,11 @@ public class ResourceTreeUtil {
 				 
 				if(containsKey(resource.getType())&&resource.getResources().size()>0){
 					boolean isLeaf=false;			 
-					TreeNode  treeNode=new TreeNode(id,text,State.open,checked,"",orderId,isLeaf,attributes,childrenNext);
+					TreeNode  treeNode=new TreeNode(id,text,State.open,checked,"",orderId,isLeaf,attributes.getPath(),attributes,childrenNext);
 					children.add(treeNode);
 				}else if(resource.getType().equals(CodeListConstant.RESTYPE_MODULE_CATEGORY_ITEM)){
 					boolean isLeaf=false;			 
-					TreeNode  treeNode=new TreeNode(id,text,State.open,checked,"",orderId,isLeaf,attributes,childrenNext);
+					TreeNode  treeNode=new TreeNode(id,text,State.open,checked,"",orderId,isLeaf,attributes.getPath(),attributes,childrenNext);
 					children.add(treeNode);
 				}
 						

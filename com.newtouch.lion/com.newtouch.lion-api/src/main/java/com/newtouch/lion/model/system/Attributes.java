@@ -41,8 +41,4 @@ public class Attributes {
 	public void setPath(String path) {
 		this.path = path;
 	}
-
-	public void setTarget(String target) {
-
-	}
 }
