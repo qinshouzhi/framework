@@ -9,7 +9,6 @@ $(function() {
     var queryForm=$('#queryform');
 	var addDialog=$('#basic');
 	
-	
 	handleVForm(addForm,submitForm);
 	//选择DataGrid单行
 	function getSelectedRow(){return $(datagridId).datagrid('getSelected');}
