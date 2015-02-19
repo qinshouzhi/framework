@@ -42,26 +42,48 @@
 		<div class="row">
 			<div class="col-md-12 margin-bottom-10">
 				<form id="queryform" class="form-horizontal">
-					<label class="control-label col-md-2" for="appId" ><@spring.message "sys.applicationProperty.query.appId.text"/></label>
+					<label class="control-label col-md-2" for="appId" >
+						<@spring.message "sys.applicationProperty.query.appId.text"/>
+					</label>
 					<div class="col-md-3">
 						<input class="form-control input-small" type="text" size="30" name="appId" id="appId"  placeholder="<@spring.message "sys.applicationProperty.query.appId.missing.message"/>"/>					
 					</div>
-					<label class="control-label col-md-2" for="value" ><@spring.message "sys.applicationProperty.query.value.text"/></label>
+					<label class="control-label col-md-2" for="value" >
+						<@spring.message "sys.applicationProperty.query.value.text"/>
+					</label>
 					<div class="col-md-3">
 						<input class="form-control input-small" type="text" size="30" name="value" id="value"  placeholder="<@spring.message "sys.applicationProperty.query.value.missing.message"/>"/>					
 					</div>
 					<div class="col-md-2">
-						<a href="javascript:void(0)" id="btnQuery" class="btn blue"><i class="fa fa-search"></i> <@spring.message "common.query.btn.text"/> </a>
+						<a href="javascript:void(0)" id="btnQuery" class="btn blue">
+							<i class="fa fa-search"></i> 
+							<@spring.message "common.query.btn.text"/> 
+						</a>
 					</div>
 				</form>
 			</div>
 		
 			<div class="col-md-12 margin-bottom-10" id="toolbar">
-				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic"><i class="fa fa-plus"></i> <@spring.message "common.toolbar.btn.add.text"/>  </a>
-				<a id="btnEdit" class="btn btn-sm red"><i class="fa fa-edit"></i> <@spring.message "common.toolbar.btn.edit.text"/></a>
-				<a href="javascript:void(0)" id="btnDelete" class="btn btn-sm purple"><i class="fa fa-times"></i> <@spring.message "common.toolbar.btn.delete.text"/> </a>
-				<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue"><i class="fa fa-refresh"></i> <@spring.message "common.toolbar.btn.reload.text"/>   </a>
-				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> <@spring.message "common.toolbar.btn.export.text"/> </a>
+				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic">
+					<i class="fa fa-plus"></i> 
+					<@spring.message "common.toolbar.btn.add.text"/>  
+				</a>
+				<a id="btnEdit" class="btn btn-sm red">
+					<i class="fa fa-edit"></i> 
+					<@spring.message "common.toolbar.btn.edit.text"/>
+				</a>
+				<a id="btnDelete" class="btn btn-sm purple">
+					<i class="fa fa-times"></i> 
+					<@spring.message "common.toolbar.btn.delete.text"/> 
+				</a>
+				<a id="btnRefresh" class="btn btn-sm blue">
+					<i class="fa fa-refresh"></i> 
+					<@spring.message "common.toolbar.btn.reload.text"/>   
+				</a>
+				<a id="btnExport"  class="btn btn-sm green">
+					<i class="fa  fa-file-excel-o"></i> 
+					<@spring.message "common.toolbar.btn.export.text"/> 
+				</a>
 			</div>
 			<div class="col-md-12">
 				<table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_app_property_list_tb" data-singleselect="true",   data-loadUrl="/admin/system/applicationproperty/list.json" data-checkbox="true" data-pageSize="10">
@@ -70,22 +92,22 @@
 							<th class="table-checkbox" data-field='id' data-checkbox="true">
 						 		<input type="checkbox" class="group-checkable" data-set="#sys_app_property_list_tb.checkboxes"  data-sortable="false" />
 						 	</th>
-							<th data-field='appId' data-sortDir="asc" style="width:100px;">
+							<th data-field='appId' data-sortDir="asc" style="width:60px;">
 								AppId
 							</th>
-							<th data-field="key" style="width:100px;">
+							<th data-field="key" style="width:60px;">
 							 	Key
 							</th>
-							<th data-field="value" style="width:100px;">
+							<th data-field="value" style="width:60px;">
 								Value
 							</th>
-							<th data-field="description" style="width:30px;" align="center"  data-formatter="formatterEidtable">
+							<th data-field="description" style="width:60px;">
 								Desctiption
 							</th>							
-							<th data-field="createdDate" style="width:100px;">
+							<th data-field="createdDate" style="width:60px;">
 								创建时间
 							</th>
-							<th data-field="updatedDate" style="width:100px;">
+							<th data-field="updatedDate" style="width:60px;">
 								更新时间
 							</th>
 						</tr>
@@ -156,7 +178,7 @@
 									</div>
 								</div>
 							</form>
-						<!-- END FORM-->
+							<!-- END FORM-->
 							</div>
 				 	</div>
 			</div>
@@ -174,7 +196,7 @@
 		<!-- /.modal-content -->
 	</div>
 </div>
-	<!-- /.modal-dialog -->
+<!-- /.modal-dialog -->
 <!--Edit Dialog End -->
 </body>
 </html>
