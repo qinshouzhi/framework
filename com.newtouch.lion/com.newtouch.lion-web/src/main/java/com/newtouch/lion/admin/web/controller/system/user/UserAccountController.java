@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.newtouch.lion.service.system.UserService;
+import com.newtouch.lion.web.controller.AbstractController;
 
 /**
  * <p>s
@@ -34,7 +35,7 @@ import com.newtouch.lion.service.system.UserService;
  */
 @Controller(value = "sysUserAccount")
 @RequestMapping("/system/useraccount/")
-public class UserAccountController {
+public class UserAccountController extends AbstractController{
 
 	private String ACTIVEUSERS_RETURN = "/system/user/activeusers";
 	/**用户服务类*/
