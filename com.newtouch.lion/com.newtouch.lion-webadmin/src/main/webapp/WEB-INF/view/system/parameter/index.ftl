@@ -3,37 +3,35 @@
 <html lang="en" class="no-js">
 <head>
 <title>系统参数管理</title>
-<!--EasyUI css Start-->
-<link href="${base}/resources/global/plugins/easyui/themes/metro/panel.css" rel="stylesheet" type="text/css"/>
-<link href="${base}/resources/global/plugins/easyui/themes/metro/linkbutton.css" rel="stylesheet" type="text/css"/>
-<link href="${base}/resources/global/plugins/easyui/themes/metro/datagrid.css" rel="stylesheet" type="text/css"/>
-<link href="${base}/resources/global/plugins/easyui/themes/metro/window.css" rel="stylesheet" type="text/css"/>
-<link href="${base}/resources/global/plugins/easyui/themes/metro/pagination.css" rel="stylesheet" type="text/css"/>
-<link href="${base}/resources/global/plugins/easyui/themes/metro/combo.css" rel="stylesheet" type="text/css"/>
-<link href="${base}/resources/global/plugins/easyui/themes/metro/combobox.css" rel="stylesheet" type="text/css"/>
-<link href="${base}/resources/global/plugins/easyui/themes/icon.css" rel="stylesheet" type="text/css"/>
-<link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" type="text/css">
-<!--EasyUI css End-->
-
-<!--lion UI css Start-->
-<link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css">
-<link href="${base}/resources/global/css/dialog/lion.dialog.css" rel="stylesheet" type="text/css">
-<link href="${base}/resources/global/css/combo/lion.combo.css" rel="stylesheet" type="text/css">
-<!--lion UI css End-->
+<!--DataTable css Start-->
+<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/select2/select2.css"/>
+<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css"/>
+<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css"/>
+<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+<!--DataTable css End-->
+<link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+<link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css" />
+<link href="${base}/resources/global/css/combotree/combotree.css" rel="stylesheet" type="text/css" />
+<!-- DataTables js Start -->
+<script type="text/javascript" src="${base}/resources/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/datatables/media/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/Scroller/js/dataTables.scroller.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+<!-- DataTables js End -->
 <script src="${base}/resources/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
-<script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript" ></script>
+<script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js"></script>
+<script src="${base}/resources/admin/pages/scripts/ui-toastr.js"></script>
 <script src="${base}/resources/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
-
-<!--EasyUI JavaScript Start-->
-<script src="${base}/resources/global/plugins/easyui/jquery.easyui.min.js" type="text/javascript"></script>
-<script src="${base}/resources/global/plugins/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
-<!--EasyUI JavaScript End-->
 <!--lion UI JS Start-->
 <script src="${base}/resources/global/js/lion.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/form/form.fill.js" type="text/javascript"></script>
-<script src="${base}/resources/global/js/dialog/dialog.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <!--lion UI JS End-->
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/scripts/system/parameter.js" type="text/javascript"></script>
@@ -71,7 +69,40 @@
 				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> Excel </a>
 			</div>
 			<div class="col-md-12">
-				  <@lion.datagrids name="sys_parameter_lists_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/parameter/list.json" dataOptions="" style="height:400px;"/>
+				  <!---<@lion.datagrids name="sys_parameter_lists_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/parameter/list.json" dataOptions="" style="height:400px;"/>-->
+				  <table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_parameter_lists_tb" data-singleselect="true",   data-loadUrl="/admin/system/parameter/list.json" data-checkbox="true" data-pageSize="10" width="100%">
+					<thead>
+						<tr>
+						  <th class="table-checkbox" data-field='id' data-checkbox="true">
+						 		<input type="checkbox" class="group-checkable" data-set="#sys_user_list_tb.checkboxes"  data-sortable="false" />
+						 	</th>
+							<th data-field='type' data-sortDir="asc"    style="width:80px;" data-formatter="formatterCodeList">
+								参数类型
+							</th>
+							<th data-field="nameZh" style="width:80x;">
+							 	参数名称(中文)
+							</th>
+							<th data-field="nameEn" style="width:80px;">
+								参数名称(英文)
+							</th>
+							<th data-field="value" style="width:150px;" align="center">
+								参数值
+							</th>
+							<th data-field="description" style="width:100px;">
+								参数描述
+							</th>						
+							<th data-field="editable" style="width:30px;" data-formatter="formatterEidtable">
+								可编辑
+							</th>
+							<th data-field="createdDate" style="width:160px;">
+								创建时间
+							</th>
+							<th data-field="updatedDate" style="width:160px;" >
+								更新时间
+							</th>						
+						</tr>
+					</thead>
+				</table>
 			</div>
 		</div>
 	</div>

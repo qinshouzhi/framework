@@ -41,6 +41,7 @@ import com.newtouch.lion.service.system.CodeService;
 import com.newtouch.lion.service.system.ParameterService;
 import com.newtouch.lion.web.constant.ConstantMessage;
 import com.newtouch.lion.web.controller.AbstractController;
+import com.newtouch.lion.web.model.QueryDt;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
 
@@ -210,22 +211,17 @@ public class ParameterController extends AbstractController{
 
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public DataTable<Parameter> list(HttpServletRequest servletRequest,
-			Model model, @RequestParam(defaultValue = "1") int page,
-			@RequestParam(defaultValue = "15") int rows,
-			@RequestParam(required = false) String sort,
-			@RequestParam(required = false) String order,
-			@ModelAttribute("parameter") ParameterVo parameterVo) {
+	public DataTable<Parameter> list(QueryDt query,@ModelAttribute("parameter") ParameterVo parameterVo) {
 		QueryCriteria queryCriteria = new QueryCriteria();
 
 		// 设置分页 启始页
-		queryCriteria.setStartIndex(rows * (page - 1));
+		queryCriteria.setStartIndex(query.getPage());
 		// 每页大小
-		queryCriteria.setPageSize(rows);
+		queryCriteria.setPageSize(query.getRows());
 		// 设置排序字段及排序方向
-		if (StringUtils.isNotEmpty(sort) && StringUtils.isNotEmpty(order)) {
-			queryCriteria.setOrderField(sort);
-			queryCriteria.setOrderDirection(order);
+		if (StringUtils.isNotEmpty(query.getSort()) && StringUtils.isNotEmpty(query.getOrder())) {
+			queryCriteria.setOrderField(query.getSort());
+			queryCriteria.setOrderDirection(query.getOrder());
 		} else {
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
 		}
@@ -238,9 +234,8 @@ public class ParameterController extends AbstractController{
 			queryCriteria.addQueryCondition("nameZh","%"+parameterVo.getNameZh()+"%");
 		}
 
-		PageResult<Parameter> pageResult = parameterService
-				.doFindByCriteria(queryCriteria);
-		return pageResult.getDataTable();
+		PageResult<Parameter> pageResult = parameterService.doFindByCriteria(queryCriteria);
+		return pageResult.getDataTable(query.getRequestId());
 	}
 	/****
 	 * 

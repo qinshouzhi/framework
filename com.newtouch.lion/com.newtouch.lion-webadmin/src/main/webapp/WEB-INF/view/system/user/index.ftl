@@ -133,8 +133,7 @@
 							</th>
 							<th data-field="accountExpiredDate" style="width:100px;" data-formatter="formatterDate">
 								账户有效日期
-							</th>
-							
+							</th>							
 						</tr>
 					</thead>
 				</table>

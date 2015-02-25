@@ -1,41 +1,35 @@
+var parameterdg=$('#sys_parameter_lists_tb'),addDialog=$('#basic');
 $(function() {
 	//加载bootstrap
 	Metronic.init(); // init metronic core componets
 	Layout.init(); // init layout
 	Tasks.initDashboardWidget(); // init tash dashboard widget
 	
-	var datagridId='#sys_parameter_lists_tb';
+	parameterdg=$('#sys_parameter_lists_tb');
 
 	var addForm=$('#sysParameterForm');
   var queryForm=$('#queryform');
-	var addDialog=$('#basic');
-	
+	addDialog=$('#basic');	
 	
 	handleVForm(addForm,submitForm);
 	//选择DataGrid单行
-	function getSelectedRow(){return $(datagridId).datagrid('getSelected');}
+	function getSelectedRow(){return parameterdg.datagrids('getSelected');}
 	 
-	$(datagridId).datagrid({
-		 onLoadSuccess : function(data) {
-		}
-	});
+	 
 	/**
 	 * [查询]
 	 */
 	 $('#btnQuery').click(function(){
-	      var params=queryForm.serializeObject();	      
-	      $(datagridId).datagrid({queryParams:params});
+	 
+	      parameterdg.datagrids({querydata:queryForm.serializeObject()});
 	      //重新加载数据
-	      dataGridReload(datagridId);
+	      parameterdg.datagrids('reload');
 	 });
 		
-		//重新加载DataGrid
-	  function dataGridReload(dataGridId){
-	     $(datagridId).datagrid('reload');
-	  }
+	 
 	 //刷新
 	 $('#btnRefresh').on('click',function(){
-		   dataGridReload(datagridId);
+		    parameterdg.datagrids('reload');
 	 });
 	 //新增
 	 $('#btnAdd').on('click',function(){
@@ -49,7 +43,7 @@ $(function() {
 	 }); 
 
 	 $('#btnSave').click(function(){
-	 		addForm.submit();
+	 		  addForm.submit();
 	 });
 
 	 //编辑
@@ -81,8 +75,8 @@ $(function() {
 	 });
 	 //导出Excel
 	 $('#btnExport').on('click',function(){
-		   var params=queryForm.serialize(),url='export.json?tableId='+$(datagridId).attr('id');
-       var options=$(datagridId).datagrid('options');       
+		   var params=queryForm.serialize(),url='export.json?tableId='+parameterdg.attr('id');
+       var options=parameterdg.datagrids('options');       
        if(options.hasOwnProperty('sortName')&&lion.util.isNotEmpty(options.sortName)){
            url+='&sort='+options.sortName;
        }
@@ -99,7 +93,7 @@ $(function() {
 function successForDelete(data,arg){
    if(data!==null&&!(data.hasError)){
       lion.util.success('提示',data.message);
-      $('#sys_parameter_lists_tb').datagrid('reload');
+      parameterdg.datagrids('reload');
    }else if(data!==null&&data.hasError){
       var gmsg='';
       for(var msg in data.errorMessage){
@@ -127,8 +121,8 @@ function successAddFrm(data,arg,id){
   //TODO
   if(data!==null&&!(data.hasError)){
   	lion.util.success('提示',data.message);
-  	$('#basic').modal('toggle');
-    $('#sys_parameter_lists_tb').datagrid('reload');
+  	 addDialog.modal('toggle');
+     parameterdg.datagrids('reload');
   }else if(data!==null&&data.hasError){
   	var gmsg='';
   	for(var msg in data.errorMessage){
