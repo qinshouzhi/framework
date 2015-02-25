@@ -100,10 +100,10 @@
 							<th data-field='type' data-sortDir="asc" style="width:100px;">
 								通用编码类型
 							</th>
-							<th data-field="nameZh" style="width:100px;">
+							<th data-field="nameEn" style="width:100px;">
 							 	通用编码类型名称（英文）
 							</th>
-							<th data-field="nameEn" style="width:100px;">
+							<th data-field="nameZh" style="width:100px;">
 								通用编码类型名称（中文）
 							</th>
 							<th data-field="codeLenLimit" style="width:50px;" >

@@ -60,7 +60,10 @@
 						 </select>
 					</div>
 					<div class="col-md-2">
-						<a href="javascript:void(0)" id="btnQuery" class="btn blue"><i class="fa fa-search"></i> <@spring.message "common.query.btn.text"/> </a>
+						<a href="javascript:void(0)" id="btnQuery" class="btn blue">
+							<i class="fa fa-search"></i>
+							<@spring.message "common.query.btn.text"/>
+						</a>
 					</div>
 				</form>
 			</div>
@@ -88,32 +91,32 @@
 				</a>
 			</div>
 			<div class="col-md-12">
-				<table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_codelist_tb" data-singleselect="true",   data-loadUrl="/admin/system/codetype/list.json" data-checkbox="true" data-pageSize="10">
+				<table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_codelist_tb" data-singleselect="true",   data-loadUrl="/admin/system/codelist/list.json" data-checkbox="true" data-pageSize="10">
 					<thead>
 						<tr>
 							<th class="table-checkbox" data-field='id' data-checkbox="true">
 						 		<input type="checkbox" class="group-checkable" data-set="#sys_codelist_tb.checkboxes"  data-sortable="false" />
 						 	</th>
-							<th data-field='type' data-sortDir="asc" style="width:100px;">
+							<th data-field='codeType.nameZh' data-sortDir="asc" style="width:80px;">
 								编码类型
 							</th>
-							<th data-field="nameZh" style="width:100px;">
+							<th data-field="codeValue" style="width:80px;">
+							 	编码值
+							</th>
+							<th data-field="nameEn" style="width:80px;">
 							 	编码名称（英文）
 							</th>
-							<th data-field="nameEn" style="width:100px;">
+							<th data-field="nameZh" style="width:80px;">
 								编码名称（中文）
 							</th>
-							<th data-field="codeLenLimit" style="width:100px;">
-								编码值
+							<th data-field="sortNo" style="width:30px;" align="center" >
+								排序
 							</th>
 							<th data-field="editable" style="width:30px;" align="center"  data-formatter="formatterEidtable">
 								可编辑
 							</th>								
 							<th data-field="editable" style="width:30px;" align="center"  data-formatter="formatterEidtable">
 								默认项
-							</th>								
-							<th data-field="editable" style="width:30px;" align="center" data-formatter="formatterEidtable">
-								排序
 							</th>								
 							<th data-field="createdDate" style="width:100px;">
 								创建时间
