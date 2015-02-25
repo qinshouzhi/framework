@@ -15,7 +15,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +34,7 @@ import com.newtouch.lion.service.application.ApplicationPropertyService;
 import com.newtouch.lion.service.datagrid.DataGridService;
 import com.newtouch.lion.service.excel.ExcelExportService;
 import com.newtouch.lion.web.controller.AbstractController;
+import com.newtouch.lion.web.model.QueryDt;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
 
@@ -85,29 +85,23 @@ public class ApplicationPropertyController extends AbstractController {
 	/** 列表显示 */
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public DataTable<ApplicationProperty> lists(Model model,
-			@RequestParam(defaultValue = "1") int page,
-			@RequestParam(defaultValue = "15") int rows,
-			@RequestParam(required = false) String sort,
-			@RequestParam(required = false) String order,
-			@RequestParam(required = false) String appId,
-			@RequestParam(required = false) String value,
-			@RequestParam(required = false) String tableId,
+	public DataTable<ApplicationProperty> lists(QueryDt query,
 			@ModelAttribute("applicationproperty") ApplicationPropertyVo applicationPropertyVo) {
 		QueryCriteria queryCriteria = new QueryCriteria();
 
 		// 设置分页 启始页
-		queryCriteria.setStartIndex(rows * (page - 1));
+		queryCriteria.setStartIndex(query.getPage());
 		// 每页大小
-		queryCriteria.setPageSize(rows);
+		queryCriteria.setPageSize(query.getRows());
 		// 设置排序字段及排序方向
-		if (StringUtils.isNotEmpty(sort) && StringUtils.isNotEmpty(order)) {
-			queryCriteria.setOrderField(sort);
-			queryCriteria.setOrderDirection(order);
+		if (StringUtils.isNotEmpty(query.getSort()) && StringUtils.isNotEmpty(query.getOrder())) {
+			queryCriteria.setOrderField(query.getSort());
+			queryCriteria.setOrderDirection(query.getOrder());
 		} else {
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
-			queryCriteria.setOrderDirection("ASC");
+			queryCriteria.setOrderDirection(QueryCriteria.ASC);
 		}
+		
 		// 查询条件 appId
 		if (StringUtils.isNotEmpty(applicationPropertyVo.getAppId())) {
 			queryCriteria.addQueryCondition("appId", "%"+applicationPropertyVo.getAppId()+"%");
@@ -119,7 +113,7 @@ public class ApplicationPropertyController extends AbstractController {
 
 		PageResult<ApplicationProperty> pageResult = applicationPropertyService
 				.doFindByCriteria(queryCriteria);
-		return pageResult.getDataTable();
+		return pageResult.getDataTable(query.getRequestId());
 	}
 	
 	/** 项目属性配置数据添加保存 */
