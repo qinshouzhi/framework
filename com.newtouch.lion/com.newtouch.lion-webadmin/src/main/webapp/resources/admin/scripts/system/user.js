@@ -294,7 +294,6 @@ function submitForm(frm){
 	var param=frm.serialize(),id=($('#id').val());
   //ID为空时，为添加动作
   if(lion.util.isEmpty(id)){
-      console.dir(frm.serializeObject());
  	    lion.util.post('add.json',frm.serializeObject(),successAddFrm,errorRequest);
   }else{
       lion.util.post('edit.json',param,successAddFrm,errorRequest,param.id);

@@ -10,10 +10,10 @@ import java.io.Serializable;
 
 /**
  * <p>
- * Title:
+ * Title:密码修改Vo
  * </p>
  * <p>
- * Description:
+ * Description:密码修改Vo
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -32,82 +32,53 @@ public class PasswordVo implements Serializable {
 		 */
 	private static final long serialVersionUID = 881413555539766568L;
 	/** 旧密码 */
-	private String oldPwd;
+	private String oldpassword;
 	/** 新密码 */
-	private String pwd;
+	private String password;
 	/** 确认密码 */
-	private String rePwd;
-
-	/*** default */
+	private String confirmpassword;
+	/***
+	 * 默认函数
+	 */
 	public PasswordVo() {
-		super();
-	};
-
+		 super();
+	}
 	/**
-	 * @param oldPwd
-	 * @param pwd
-	 * @param rePwd
+	 * @return the oldpassword 旧密码
 	 */
-	public PasswordVo(String oldPwd, String pwd, String rePwd) {
-		super();
-		this.oldPwd = oldPwd;
-		this.pwd = pwd;
-		this.rePwd = rePwd;
+	public String getOldpassword() {
+		return oldpassword;
 	}
-
 	/**
-	 * @return the oldPwd
+	 * @param oldpassword 旧密码
 	 */
-	public String getOldPwd() {
-		return oldPwd;
+	public void setOldpassword(String oldpassword) {
+		this.oldpassword = oldpassword;
 	}
-
 	/**
-	 * @param oldPwd
-	 *            the oldPwd to set
+	 * @return the password 密码
 	 */
-	public void setOldPwd(String oldPwd) {
-		this.oldPwd = oldPwd;
+	public String getPassword() {
+		return password;
 	}
-
 	/**
-	 * @return the pwd
+	 * @param password  密码
 	 */
-	public String getPwd() {
-		return pwd;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-
 	/**
-	 * @param pwd
-	 *            the pwd to set
+	 * @return the 确认密码
 	 */
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+	public String getConfirmpassword() {
+		return confirmpassword;
 	}
-
 	/**
-	 * @return the rePwd
+	 * @param confirmpassword 确认密码
 	 */
-	public String getRePwd() {
-		return rePwd;
+	public void setConfirmpassword(String confirmpassword) {
+		this.confirmpassword = confirmpassword;
 	}
-
-	/**
-	 * @param rePwd
-	 *            the rePwd to set
-	 */
-	public void setRePwd(String rePwd) {
-		this.rePwd = rePwd;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "PasswordVo [oldPwd=" + oldPwd + ", pwd=" + pwd + ", rePwd="
-				+ rePwd + "]";
-	}
+	
+	
 }

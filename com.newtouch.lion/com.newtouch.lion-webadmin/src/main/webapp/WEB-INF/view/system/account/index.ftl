@@ -39,7 +39,7 @@
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <!--lion UI JS End-->
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
-<script src="${base}/resources/admin/scripts/system/user.js" type="text/javascript"></script>
+<script src="${base}/resources/admin/scripts/system/account.js" type="text/javascript"></script>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed-hide-logo">
 <!-- BEGIN PAGE CONTENT INNER -->
@@ -76,64 +76,64 @@
 													<div class="form-group">
 														<label class="control-label col-md-3">真实姓名(中文)</label>
 														<div class="col-md-8 input-group">
-															<input type="text" class="form-control input-medium"  name="realnameZh" value="${user.realnameZh!}"/>
+															<input type="text" class="form-control input-medium"  name="realnameZh" value="${user.realnameZh!}"  maxlength="128" size="30"/>
 														</div>
 													</div>
 													<div class="form-group">
 														<label class="control-label  col-md-3">真实姓名(英文)</label>
 														<div class="col-md-8 input-group">
-															<input type="text" class="form-control input-medium" name="realnameEn" value="${user.realnameEn!}"/>
+															<input type="text" class="form-control input-medium" name="realnameEn" value="${user.realnameEn!}" maxlength="128" size="30"/>
 														</div>
 													</div>
 													<div class="form-group">
 														<label class="control-label col-md-3">手机号</label>
 														<div class="col-md-8 input-group">
-															<input type="text"  class="form-control input-medium" name="mobile" value="${user.mobile!}"/>
+															<input type="text"  class="form-control input-medium" name="mobile" value="${user.mobile!}"  maxlength="30" size="30"/>
 														</div>
 													</div>
 													<div class="form-group">
 														<label class="control-label col-md-3">联系电话</label>
 														<div class="col-md-8 input-group">
-															<input type="text"   class="form-control input-medium" name="telephone" value="${user.telephone!}"/>
+															<input type="text"   class="form-control input-medium" name="telephone" value="${user.telephone!}" maxlength="30" size="30"/>
 														</div>
 													</div>
 													<div class="form-group">
 														<label class="control-label col-md-3">办公室电话</label>
 														<div class="col-md-8 input-group">
-															<input type="text"   class="form-control input-medium" name="officePhone" value="${user.officePhone!}"/>
+															<input type="text"   class="form-control input-medium" name="officePhone" value="${user.officePhone!}" maxlength="30" size="30"/>
 														</div>
 													</div>
 													<div class="form-group">
 														<label class="control-label col-md-3">传真</label>
 														<div class="col-md-8 input-group">
-															<input type="text" class="form-control input-medium" name="fax" value="${user.fax!}"/>
+															<input type="text" class="form-control input-medium" name="fax" value="${user.fax!}" maxlength="30" size="30"/>
 														</div>
 													</div>
 													<div class="form-group">
 														<label class="control-label col-md-3">邮编</label>
 														<div class="col-md-8 input-group">
-															<input type="text"  class="form-control input-medium" name="postcode" value="${user.postcode!}"/>
+															<input type="text"  class="form-control input-medium" name="postcode" value="${user.postcode!}" maxlength="6" size="6"/>
 														</div>
 													</div>
 													<div class="form-group">
 														<label class="control-label col-md-3">办公位置</label>
 														<div class="col-md-8 input-group">
-															<input type="text"  class="form-control input-medium" name="location" value="${user.location!}"/>
+															<input type="text"  class="form-control input-medium" name="location" value="${user.location!}" maxlength="256" size="30"/>
 														</div>
 													</div>
 													<div class="form-group">
 														<label class="control-label col-md-3">描述</label>
 														<div class="col-md-8 input-group">
-															<input type="text"  class="form-control input-medium" name="description"  value="${user.description!}"/>
+															<input type="text"  class="form-control input-medium" name="description"  value="${user.description!}"  maxlength="256" size="30"/>
 														</div>
 													</div>
 													<div class=" form-group">
 															<label class="col-md-3 control-label"></label>
 															<div class="col-md-8 input-group">
-																<button type="button" id="btnChanagePwdSave" class="btn blue">
+																<button type="button" id="btnBaseInfoSave" class="btn blue">
 																	<i class="fa fa-save"></i> 保存基本信息
 																</button>&nbsp; &nbsp; 
-																<button type="button" id="btnCancel" class="btn default">
+																<button type="button" id="btnBaseInfoCancel" class="btn default">
 																	<i class="fa  fa-arrow-left"></i> 取 消 
 																</button>
 															</div>
@@ -181,29 +181,32 @@
 													<form action="#"  id="formpassword" class="form-horizontal">
 														<div class="form-group">
 															<label class="control-label  col-md-3">旧密码</label>
-															<div class="col-md-8 input-group">
-																<input type="password" class="form-control input-medium" name="oldpassword"/>
-															</div>															
+															<div class="col-md-4 input-group">
+																<input type="password" class="form-control" name="oldpassword" maxlength="30" size="30"/>
+															</div>
+															<div class="col-md-5"></div>		
 														</div>
 														<div class="form-group">
 															<label class="control-label col-md-3">新密码</label>
-															<div class="col-md-8 input-group">
-																<input type="password" class="form-control input-medium" name="password"/>
+															<div class="col-md-4 input-group">
+																<input type="password" class="form-control" id="password" name="password" maxlength="30" size="30"/>
 															</div>
+															<div class="col-md-5"></div>
 														</div>
 														<div class="form-group">												
 															<label class="col-md-3 control-label">确认新密码</label>
-															<div class="col-md-8 input-group">
-																<input type="password" class="form-control input-medium" name="confirmpassword"/>
-															</div>												 
+															<div class="col-md-4 input-group">
+																<input type="password" class="form-control" name="confirmpassword" maxlength="30" size="30"/>
+															</div>
+															<div class="col-md-5"></div>
 														</div>
 														<div class=" form-group">
 															<label class="col-md-3 control-label"></label>
-															<div class="col-md-8 input-group">
+															<div class="col-md-9 input-group">
 																<button type="button" id="btnChanagePwdSave" class="btn blue">
 																	<i class="fa fa-save"></i> 修改密码 
 																</button>&nbsp; &nbsp; 
-																<button type="button" id="btnCancel" class="btn default">
+																<button type="button" id="btnPasswordCancel" class="btn default">
 																	<i class="fa  fa-arrow-left"></i> 取 消 
 																</button>
 															</div>

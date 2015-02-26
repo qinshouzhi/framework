@@ -35,7 +35,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.auth.AuthModel;
-import com.newtouch.lion.admin.web.model.system.user.PasswordVo;
 import com.newtouch.lion.admin.web.model.system.user.UserVo;
 import com.newtouch.lion.common.date.DateUtil;
 import com.newtouch.lion.common.file.FileUtil;
@@ -602,64 +601,7 @@ public class UserController extends AbstractController {
 		return EDIT_USER_PASSWORD_RETURN;
 	}
 
-	@RequestMapping(value = "edituserpwd")
-	@ResponseBody
-	public ModelAndView editUserPassword(
-			@Valid @ModelAttribute("passwordVo") PasswordVo passwordVo,
-			Errors errors, ModelAndView modelAndView) {
-		if (StringUtils.isEmpty(passwordVo.getOldPwd())) {
-			errors.rejectValue("oldPwd", null, "请输入旧密码");
-		}
-
-		if (StringUtils.isEmpty(passwordVo.getPwd())) {
-			errors.rejectValue("pwd", null, "请输入新的密码");
-		}
-
-		if (StringUtils.isEmpty(passwordVo.getRePwd())) {
-			errors.rejectValue("pwd", null, "请输入新的确认密码");
-		}
-		/* 判断旧密码、新密码、确认新密码不能为空 */
-		if (errors.hasErrors()) {
-			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
-			return modelAndView;
-		}
-
-		// 判断旧密码不能新密码相同
-		if (passwordVo.getOldPwd().equals(passwordVo.getPwd())) {
-			errors.rejectValue("pwd", null, "新密码不能和旧密码相同，请重新输入");
-		}
-		// 判断两次输入的新密码是否一致
-		if (!passwordVo.getPwd().equals(passwordVo.getRePwd())) {
-			errors.rejectValue("pwd", null, "您输入的旧密码不正确，请重新输入");
-		}
-		/* 返回旧密码不能与新密码相同，及新密码和确认新密码是否一致 */
-		if (errors.hasErrors()) {
-			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
-			return modelAndView;
-		}
-
-		User user =LoginSecurityUtil.getUser();
-		// 获取用户登录的IP地址
-		user = this.userService.doFindById(user.getId());
-		String passwordEncoder = passwordEncoderService.encodePassword(passwordVo.getOldPwd(), null);
-		if (!passwordEncoder.equals(user.getPassword())) {
-			// ValidationUtils.rejectIfEmpty(errors,
-			// "oldPwd",null,"您输入的旧密码不正确，请重新输入");
-			errors.rejectValue("oldPwd", null, "您输入的旧密码不正确，请重新输入");
-			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
-			return modelAndView;
-		}
-		String newPasswordEncoder = this.passwordEncoderService.encodePassword(passwordVo.getPwd(), null);
-		user.setPassword(newPasswordEncoder);
-		this.userService.doUpdate(user);
-
-		Map<String, String> params = new HashMap<String, String>();
-		params.put(BindResult.SUCCESS,
-				ConstantMessage.EDIT_SUCCESS_MESSAGE_CODE);
-		modelAndView.addObject(BindMessage.SUCCESS, params);
-
-		return modelAndView;
-	}
+	 
 
 	/** 我的信息 */
 	@RequestMapping(value = "userinfo")
