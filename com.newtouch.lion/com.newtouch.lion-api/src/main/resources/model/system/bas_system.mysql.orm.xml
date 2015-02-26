@@ -15,7 +15,7 @@
 				<generated-value strategy="IDENTITY" />
 			</id>
 			<basic name="parentDepartmentId">
-				<column name="PARENT_BAS_DEPARTMENT_ID" precision="11" scale="0" insertable="false" updatable="false"/>
+				<column name="PARENT_BAS_DEPARTMENT_ID" precision="11" scale="0"/>
 			</basic>
 			<basic name="nameZh">
 				<column name="NAME_ZH" length="128" nullable="true" />
@@ -33,12 +33,11 @@
 				<column name="DESCRIPTION" length="256" nullable="true" />
 			</basic>
 			<many-to-one name="department" fetch="LAZY">
-				<join-column name="PARENT_BAS_DEPARTMENT_ID" insertable="true"
-					updatable="true" />
+				<join-column name="PARENT_BAS_DEPARTMENT_ID" insertable="false" updatable="false"/>
 			</many-to-one>
 			<one-to-many name="departments" fetch="LAZY" mapped-by="department">
 				<cascade>
-					<cascade-merge />
+					 <cascade-remove/>
 				</cascade>
 			</one-to-many>
 			<one-to-many name="users" fetch="LAZY" mapped-by="department">
@@ -333,7 +332,7 @@
 			</many-to-one>
 			<one-to-many name="resources" fetch="LAZY" mapped-by="resource">
 				<cascade>
-					<cascade-merge />
+					<cascade-remove/>
 				</cascade>
 			</one-to-many>
 			<many-to-many name="roles" fetch="LAZY">

@@ -12,7 +12,7 @@
 	<artifactId>com.newtouch.lion-webadmin</artifactId>
 	<version>${lion-webadmin.version}</version>
 	<packaging>war</packaging>
-	<name>com.newtouch.lion-webmain</name>
+	<name>admin</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
