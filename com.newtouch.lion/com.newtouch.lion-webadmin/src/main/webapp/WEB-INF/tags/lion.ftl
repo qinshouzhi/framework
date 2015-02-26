@@ -110,7 +110,7 @@ title="${datagrids.title}"
 				<li  <#if menu.selected>class="open active" </#if> >
 					<a href="${contextPath!}${menu.path!}">
 						<i class="${menu.icon!}"></i>
-						${menu.nameZh!}
+						<span class="title">${menu.nameZh!}</span>
 						<#if menu.menus?? && menu.menus?size gt 0>
 							<span class="arrow <#if menu.selected>open</#if>"></span>
 						</#if>
@@ -121,7 +121,7 @@ title="${datagrids.title}"
 					<li <#if menu.selected>class="active" </#if> >
 					<a href="${contextPath!}${menu.path!}">
 						<i class="${menu.icon!}"></i>
-						${menu.nameZh!}
+						<span class="title">${menu.nameZh!}</span>
 						<#if menu.menus?? && menu.menus?size gt 0>
 							<span class="arrow"></span>
 						</#if>

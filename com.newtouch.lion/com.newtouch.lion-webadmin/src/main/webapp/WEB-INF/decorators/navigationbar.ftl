@@ -98,8 +98,5 @@
 <!-- END PAGE HEAD -->
 <!-- BEGIN PAGE BREADCRUMB -->
 <ul class="page-breadcrumb breadcrumb">
-	<li><a href="${base}/index.htm">首页</a><i class="fa fa-circle"></i></li>
-	<li><a href="#">系统设置</a><i class="fa fa-circle"></i></li>
-	<li class="active">系统信息</li>
 </ul>
 <!-- END PAGE BREADCRUMB -->

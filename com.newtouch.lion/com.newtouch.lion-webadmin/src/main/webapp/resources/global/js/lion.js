@@ -68,6 +68,23 @@ lion.assemblyCache={};
 		 var indexNext= pathname.indexOf("/",1);
 		 return pathname.substr(0,indexNext);
    }();
+
+   exports.menu=function(){
+   		 var urlPathname = window.location.pathname, s='a[href="'+urlPathname+'"]', 
+   		 	 objs=$(s).parents('li'),
+   		 	 navbarhome='<li><a href="'+exports.context+'/index.htm">首页</a><i class="fa fa-circle"></i></li>',
+   		 	 navbar='';
+	  $.each(objs,function(key,item){
+		    var menuName=$(item).find('>a>span.title').text();
+		    if(key===0&&exports.isNotEmpty(menuName)){
+		        navbar+='<li class="active">'+menuName+'</li>';
+		    }else if(exports.isNotEmpty(menuName)){
+		        navbar='<li><a href="#">'+menuName+'</a><i class="fa fa-circle"></i></li>'+navbar;
+		    }
+	  });
+	  navbarhome+=navbar;
+	  $('.page-breadcrumb').html(navbarhome);
+   };
    /***
    	*提交成功的提示
    	*@param {[string]} [title] [提示标题]
