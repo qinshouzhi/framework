@@ -39,7 +39,7 @@
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <!--lion UI JS End-->
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
-<script src="${base}/resources/admin/scripts/system/user.js" type="text/javascript"></script>
+<script src="${base}/resources/admin/scripts/system/account.js" type="text/javascript"></script>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed-hide-logo">
 <!-- BEGIN PAGE CONTENT-->
@@ -48,7 +48,7 @@
 			<div class="portlet box green-meadow calendar">
 				<div class="portlet-title">
 					<div class="caption">
-						<i class="fa fa-gift"></i>Calendar
+						<i class="fa fa-gift"></i>待办事项日程
 					</div>
 				</div>
 				<div class="portlet-body">

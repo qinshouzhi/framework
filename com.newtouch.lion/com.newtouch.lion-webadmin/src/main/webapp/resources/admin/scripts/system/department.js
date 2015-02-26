@@ -3,6 +3,7 @@ $(function() {
 	Metronic.init(); // init metronic core componets
 	Layout.init(); // init layout
 	Tasks.initDashboardWidget(); // init tash dashboard widget
+  lion.util.menu();//加载导航栏
  	var treegridId='#sys_department_lists';
 	var addForm=$('#addform');
 	var queryForm=$('#queryform');

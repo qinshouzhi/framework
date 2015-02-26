@@ -91,7 +91,7 @@ public class ParameterController extends AbstractController{
 	private ExcelExportService excelExportService;
 
 	@RequestMapping(value = "index")
-	public String index(HttpServletRequest servletRequest, Model model) {
+	public String index(Model model) {
 		model.addAttribute("codeType", CODE_TYPE);
 		return INDEX_RETURN;
 	}

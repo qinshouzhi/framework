@@ -7,9 +7,12 @@
 package com.newtouch.lion.admin.web.controller.system.user; 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.web.controller.AbstractController;
+import com.newtouch.lion.web.shiro.session.LoginSecurityUtil;
 
 /**
  * <p>
@@ -40,12 +43,14 @@ public class AccountController extends AbstractController{
 	private static final String NOTIFICATIONS_RETURN="/system/account/notifications";
 	/**个人主页*/
 	@RequestMapping("index")
-	public String index(){
+	public String index(Model model){
+		User user = LoginSecurityUtil.getUser();
+		model.addAttribute("user", user);
 		return INDEX_RETURN;
 	}
 	/**日历*/
 	@RequestMapping("calendar")
-	public String calendar(){
+	public String calendar(Model model){
 		return  CALENDAR_RETURN;
 	}
 	/**消息*/

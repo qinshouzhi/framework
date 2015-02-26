@@ -81,7 +81,7 @@ public class LoginController extends AbstractController {
 			logger.error(e.getMessage(),e);
 		}
 		if(currentUser.isAuthenticated()){
-			logger.info("用户名:{}，ID：{} 已经登录，重定向到首页", user.getUsername(),user.getId());
+			logger.info("用户名:{}，ID：{} 已经登录，重定向到首页", loginUser.getUsername(),user.getId());
 			return this.redirect(LOGIN_SUCCESS);
 		}else{
 			 token.clear(); 

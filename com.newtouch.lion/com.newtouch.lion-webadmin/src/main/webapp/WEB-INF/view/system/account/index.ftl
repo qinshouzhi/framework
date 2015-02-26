@@ -72,49 +72,77 @@
 										<div class="tab-content">
 											<!-- PERSONAL INFO TAB -->
 											<div class="tab-pane active" id="tab_1_1">
-												<form role="form" action="#">
+												<form  action="#" class="form-horizontal" id="formuser">
 													<div class="form-group">
-														<label class="control-label">First Name</label>
-														<input type="text" placeholder="John" class="form-control"/>
+														<label class="control-label col-md-3">真实姓名(中文)</label>
+														<div class="col-md-8 input-group">
+															<input type="text" class="form-control input-medium"  name="realnameZh" value="${user.realnameZh!}"/>
+														</div>
 													</div>
 													<div class="form-group">
-														<label class="control-label">Last Name</label>
-														<input type="text" placeholder="Doe" class="form-control"/>
+														<label class="control-label  col-md-3">真实姓名(英文)</label>
+														<div class="col-md-8 input-group">
+															<input type="text" class="form-control input-medium" name="realnameEn" value="${user.realnameEn!}"/>
+														</div>
 													</div>
 													<div class="form-group">
-														<label class="control-label">Mobile Number</label>
-														<input type="text" placeholder="+1 646 580 DEMO (6284)" class="form-control"/>
+														<label class="control-label col-md-3">手机号</label>
+														<div class="col-md-8 input-group">
+															<input type="text"  class="form-control input-medium" name="mobile" value="${user.mobile!}"/>
+														</div>
 													</div>
 													<div class="form-group">
-														<label class="control-label">Interests</label>
-														<input type="text" placeholder="Design, Web etc." class="form-control"/>
+														<label class="control-label col-md-3">联系电话</label>
+														<div class="col-md-8 input-group">
+															<input type="text"   class="form-control input-medium" name="telephone" value="${user.telephone!}"/>
+														</div>
 													</div>
 													<div class="form-group">
-														<label class="control-label">Occupation</label>
-														<input type="text" placeholder="Web Developer" class="form-control"/>
+														<label class="control-label col-md-3">办公室电话</label>
+														<div class="col-md-8 input-group">
+															<input type="text"   class="form-control input-medium" name="officePhone" value="${user.officePhone!}"/>
+														</div>
 													</div>
 													<div class="form-group">
-														<label class="control-label">About</label>
-														<textarea class="form-control" rows="3" placeholder="We are KeenThemes!!!"></textarea>
+														<label class="control-label col-md-3">传真</label>
+														<div class="col-md-8 input-group">
+															<input type="text" class="form-control input-medium" name="fax" value="${user.fax!}"/>
+														</div>
 													</div>
 													<div class="form-group">
-														<label class="control-label">Website Url</label>
-														<input type="text" placeholder="http://www.mywebsite.com" class="form-control"/>
+														<label class="control-label col-md-3">邮编</label>
+														<div class="col-md-8 input-group">
+															<input type="text"  class="form-control input-medium" name="postcode" value="${user.postcode!}"/>
+														</div>
 													</div>
-													<div class="margiv-top-10">
-														<a href="#" class="btn green-haze">
-														保存基本信息 </a>
-														<a href="#" class="btn default">
-														 取 消 </a>
+													<div class="form-group">
+														<label class="control-label col-md-3">办公位置</label>
+														<div class="col-md-8 input-group">
+															<input type="text"  class="form-control input-medium" name="location" value="${user.location!}"/>
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="control-label col-md-3">描述</label>
+														<div class="col-md-8 input-group">
+															<input type="text"  class="form-control input-medium" name="description"  value="${user.description!}"/>
+														</div>
+													</div>
+													<div class=" form-group">
+															<label class="col-md-3 control-label"></label>
+															<div class="col-md-8 input-group">
+																<button type="button" id="btnChanagePwdSave" class="btn blue">
+																	<i class="fa fa-save"></i> 保存基本信息
+																</button>&nbsp; &nbsp; 
+																<button type="button" id="btnCancel" class="btn default">
+																	<i class="fa  fa-arrow-left"></i> 取 消 
+																</button>
+															</div>
 													</div>
 												</form>
 											</div>
 											<!-- END PERSONAL INFO TAB -->
 											<!-- CHANGE AVATAR TAB -->
 											<div class="tab-pane" id="tab_1_2">
-												<p>
-													 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-												</p>
 												<form action="#" role="form">
 													<div class="form-group">
 														<div class="fileinput fileinput-new" data-provides="fileinput">
@@ -126,23 +154,22 @@
 															<div>
 																<span class="btn default btn-file">
 																<span class="fileinput-new">
-																Select image </span>
+																选择图片 </span>
 																<span class="fileinput-exists">
-																Change </span>
+																修改 </span>
 																<input type="file" name="...">
 																</span>
 																<a href="#" class="btn default fileinput-exists" data-dismiss="fileinput">
-																Remove </a>
+																删除 </a>
 															</div>
 														</div>
 														<div class="clearfix margin-top-10">
-															<span class="label label-danger">NOTE! </span>
-															<span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only </span>
+															 
 														</div>
 													</div>
 													<div class="margin-top-10">
 														<a href="#" class="btn green-haze">
-														保存照片 </a>
+														保存头像 </a>
 														<a href="#" class="btn default">
 														取  消 </a>
 													</div>
@@ -150,82 +177,56 @@
 											</div>
 											<!-- END CHANGE AVATAR TAB -->
 											<!-- CHANGE PASSWORD TAB -->
-											<div class="tab-pane" id="tab_1_3">
-												<form action="#">
-													<div class="form-group">
-														<label class="control-label">旧密码</label>
-														<input type="password" class="form-control"/>
-													</div>
-													<div class="form-group">
-														<label class="control-label">新密码</label>
-														<input type="password" class="form-control"/>
-													</div>
-													<div class="form-group">
-														<label class="control-label">再输入一次新密码</label>
-														<input type="password" class="form-control"/>
-													</div>
-													<div class="margin-top-10">
-														<a href="#" class="btn green-haze">
-														保存修改密码 </a>
-														<a href="#" class="btn default">
-														取 消 </a>
-													</div>
-												</form>
+											<div class="tab-pane" id="tab_1_3">											  
+													<form action="#"  id="formpassword" class="form-horizontal">
+														<div class="form-group">
+															<label class="control-label  col-md-3">旧密码</label>
+															<div class="col-md-8 input-group">
+																<input type="password" class="form-control input-medium" name="oldpassword"/>
+															</div>															
+														</div>
+														<div class="form-group">
+															<label class="control-label col-md-3">新密码</label>
+															<div class="col-md-8 input-group">
+																<input type="password" class="form-control input-medium" name="password"/>
+															</div>
+														</div>
+														<div class="form-group">												
+															<label class="col-md-3 control-label">确认新密码</label>
+															<div class="col-md-8 input-group">
+																<input type="password" class="form-control input-medium" name="confirmpassword"/>
+															</div>												 
+														</div>
+														<div class=" form-group">
+															<label class="col-md-3 control-label"></label>
+															<div class="col-md-8 input-group">
+																<button type="button" id="btnChanagePwdSave" class="btn blue">
+																	<i class="fa fa-save"></i> 修改密码 
+																</button>&nbsp; &nbsp; 
+																<button type="button" id="btnCancel" class="btn default">
+																	<i class="fa  fa-arrow-left"></i> 取 消 
+																</button>
+															</div>
+														</div>
+													</form>
 											</div>
 											<!-- END CHANGE PASSWORD TAB -->
 											<!-- PRIVACY SETTINGS TAB -->
-											<div class="tab-pane" id="tab_1_4">
-												<form action="#">
-													<table class="table table-light table-hover">
-													<tr>
-														<td>
-															 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus..
-														</td>
-														<td>
-															<label class="uniform-inline">
-															<input type="radio" name="optionsRadios1" value="option1"/>
-															Yes </label>
-															<label class="uniform-inline">
-															<input type="radio" name="optionsRadios1" value="option2" checked/>
-															No </label>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															 Enim eiusmod high life accusamus terry richardson ad squid wolf moon
-														</td>
-														<td>
-															<label class="uniform-inline">
-															<input type="checkbox" value=""/> Yes </label>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															 Enim eiusmod high life accusamus terry richardson ad squid wolf moon
-														</td>
-														<td>
-															<label class="uniform-inline">
-															<input type="checkbox" value=""/> Yes </label>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															 Enim eiusmod high life accusamus terry richardson ad squid wolf moon
-														</td>
-														<td>
-															<label class="uniform-inline">
-															<input type="checkbox" value=""/> Yes </label>
-														</td>
-													</tr>
-													</table>
-													<!--end profile-settings-->
-													<div class="margin-top-10">
-														<a href="#" class="btn green-haze">
-														保存设置</a>
-														<a href="#" class="btn default">
-														取 消 </a>
-													</div>
-												</form>
+											<div class="tab-pane" id="tab_1_4">												 
+													<form action="#"  class="form-horizontal">
+														 <div class=" form-group">
+															<label class="col-md-3 control-label"></label>
+															<div class="col-md-8 input-group">
+																<button type="button" id="btnSaveSettings" class="btn blue">
+																	<i class="fa fa-save"></i> 保存设置
+																</button>&nbsp; &nbsp; 
+																<button type="button" id="btnCancel" class="btn default">
+																	<i class="fa  fa-arrow-left"></i> 取 消 
+																</button>
+															</div>
+														</div>
+													</form>
+												 
 											</div>
 											<!-- END PRIVACY SETTINGS TAB -->
 										</div>
