@@ -333,7 +333,7 @@
 			</many-to-one>
 			<one-to-many name="resources" fetch="LAZY" mapped-by="resource">
 				<cascade>
-					<cascade-merge />
+					<cascade-remove/>
 				</cascade>
 			</one-to-many>
 			<many-to-many name="roles" fetch="LAZY">
