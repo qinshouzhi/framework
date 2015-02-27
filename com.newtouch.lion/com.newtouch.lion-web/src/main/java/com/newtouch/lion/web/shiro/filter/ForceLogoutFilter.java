@@ -33,7 +33,10 @@ import com.newtouch.lion.service.session.SessionService;
  * @version 1.0
  */
 public class ForceLogoutFilter extends AccessControlFilter {
-
+	
+	/**后用户将强制退出的URL*/
+	private String forceLogoutUrl;
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -65,7 +68,7 @@ public class ForceLogoutFilter extends AccessControlFilter {
 		getSubject(request, response).logout();// 强制退出
 		 
 		StringBuilder sb=new StringBuilder();
-		sb.append(this.getLoginUrl());
+		sb.append(this.forceLogoutUrl);
 		sb.append(getLoginUrl().contains("?")?"&":"?");
 		sb.append("forcelogout=1");
 		
@@ -73,4 +76,20 @@ public class ForceLogoutFilter extends AccessControlFilter {
 		return false;
 	}
 
+	/**
+	 * @return 后用户将强制退出的URL
+	 */
+	public String getForceLogoutUrl() {
+		return forceLogoutUrl;
+	}
+
+	/**
+	 * @param forceLogoutUrl 后用户将强制退出的URL
+	 */
+	public void setForceLogoutUrl(String forceLogoutUrl) {
+		this.forceLogoutUrl = forceLogoutUrl;
+	}
+
+	
+	
 }

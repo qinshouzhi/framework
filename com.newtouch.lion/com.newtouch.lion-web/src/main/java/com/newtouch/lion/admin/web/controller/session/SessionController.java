@@ -84,7 +84,7 @@ public class SessionController extends AbstractController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value = "forceogout")
+	@RequestMapping(value = "forcelogout")
 	@ResponseBody
 	public ModelAndView forceLogout(@RequestParam String sessionId,Errors errors,ModelAndView modelAndView) {
 		Map<String, String> params = new HashMap<String, String>();

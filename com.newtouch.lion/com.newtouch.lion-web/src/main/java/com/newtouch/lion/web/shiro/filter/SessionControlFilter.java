@@ -204,7 +204,7 @@ public class SessionControlFilter extends AccessControlFilter{
             }
             saveRequest(request);
             StringBuilder sb=new StringBuilder();
-    		sb.append(this.getLoginUrl());
+    		sb.append(this.forceLogoutUrl);
     		sb.append(getLoginUrl().contains("?")?"&":"?");
     		sb.append("forcelogout=2");
             WebUtils.issueRedirect(request, response,sb.toString());

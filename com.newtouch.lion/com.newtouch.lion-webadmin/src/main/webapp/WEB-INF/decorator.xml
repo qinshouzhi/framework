@@ -14,6 +14,7 @@
 		<pattern>**/dialog*.htm*</pattern>
 		<pattern>**/export*.htm*</pattern>
 		<pattern>/logout.htm*</pattern>
+		<pattern>/loginerror.htm*</pattern>
 		<pattern>/login.htm*</pattern>
 		<!-- <pattern>/test.htm</pattern> -->
 	</excludes>

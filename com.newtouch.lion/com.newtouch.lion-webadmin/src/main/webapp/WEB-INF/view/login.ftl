@@ -60,7 +60,9 @@ Author: wanglijun
 		<h3 class="form-title"><@spring.message "login.dialog.title.welcome"/></h3>
 		<div class="alert alert-danger display-hide" <#if  login_error?length gt 0>style="display:block;"</#if> >
 			<button class="close" data-close="alert"></button>
-			<span>${login_error!}</span>
+			<span>
+				${login_error!}
+			</span>
 		</div>
 		<div class="form-group">
 			<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
