@@ -69,7 +69,7 @@ public class ForceLogoutFilter extends AccessControlFilter {
 		 
 		StringBuilder sb=new StringBuilder();
 		sb.append(this.forceLogoutUrl);
-		sb.append(getLoginUrl().contains("?")?"&":"?");
+		sb.append(this.forceLogoutUrl.contains("?")?"&":"?");
 		sb.append("forcelogout=1");
 		
 		WebUtils.issueRedirect(request, response, sb.toString());
