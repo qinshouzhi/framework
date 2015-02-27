@@ -70,11 +70,11 @@
 			</div>
 			<div class="col-md-12">
 				  <!---<@lion.datagrids name="sys_parameter_lists_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/parameter/list.json" dataOptions="" style="height:400px;"/>-->
-				  <table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_parameter_lists_tb" data-singleselect="true",   data-loadUrl="/admin/system/parameter/list.json" data-checkbox="true" data-pageSize="10" width="100%">
+				  <table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_parameter_lists_tb" data-singleselect="true",   data-loadUrl="${base}/system/parameter/list.json" data-checkbox="true" data-pageSize="10" width="100%">
 					<thead>
 						<tr>
 						  <th class="table-checkbox" data-field='id' data-checkbox="true">
-						 		<input type="checkbox" class="group-checkable" data-set="#sys_user_list_tb.checkboxes"  data-sortable="false" />
+						 		<input type="checkbox" class="group-checkable" data-set="#sys_parameter_lists_tb.checkboxes"  data-sortable="false" />
 						 	</th>
 							<th data-field='type' data-sortDir="asc"    style="width:80px;" data-formatter="formatterCodeList">
 								参数类型

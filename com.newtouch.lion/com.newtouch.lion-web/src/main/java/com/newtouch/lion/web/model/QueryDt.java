@@ -31,7 +31,7 @@ import java.util.List;
  */
 public class QueryDt extends QueryVo{
 	/**DataTables 请求ID*/
-	private  Integer requestId;
+	private  Integer requestId=0;
 	/**列数大小*/
 	private Integer columnSize;
 	/**列数名称，用','分割*/

@@ -44,6 +44,7 @@
         scrollx:false,//水平滚动条的区域大小
         jqueryui:false,//是否采用jqueryUI滚动条的样式
         scrollcollapse:false,//是否采用垂直滚动条
+        sort:true,//是否排序
         order:[], //默认排序
         deferRender: true,
         pagelist:[[5,10,15,20],[5,10,15,20]],//下拉菜单
@@ -52,6 +53,7 @@
         loadurl:'',//加载URL
         loading:true,//是否立即加载数据
         checkbox:false,//显示复选框
+        paginate:true,//是否显示分页
         language: {
                 'aria': {
                     'sortAscending': ':',
@@ -236,6 +238,7 @@
               lengthMenu:that.options.pagelist,
               pageLength:that.options.pagesize,
               bAutoWidth:false,
+              bPaginate:that.options.paginate,
               fnInitComplete:function(){
                 that.loadinitComplete();
                 that.initComplete();
@@ -250,7 +253,9 @@
                 that.createdRow(row, data, index);
               },//创建行调用回调
               };
-              //console.dir(that.options);
+              if(!that.options.sort){
+                 tableOptions['bSort']=that.options.sort;
+              }
               //垂直滚动条
               if(util.isNotEmpty(that.options.scrolly)){
                   tableOptions['scrollY']=that.options.scrolly;
