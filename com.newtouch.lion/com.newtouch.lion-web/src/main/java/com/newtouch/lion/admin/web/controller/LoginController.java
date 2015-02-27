@@ -90,13 +90,25 @@ public class LoginController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/login",method=RequestMethod.GET)
-	public String welcome() {
+	public String welcome(Model model) {
+		String forcelogout=this.getRequest().getParameter("forcelogout");
+		if("1".equals(forcelogout)){
+			model.addAttribute("login_error","您被系统管理员强制退出系统，请联系系统管理员.");
+		}else if("2".equals(forcelogout)){
+			model.addAttribute("login_error","您的用户名已登录系统正在使用中…如有疑问请联系系统管理员.");
+		}
 		User user = LoginSecurityUtil.getUser();
 		if (user != null) {
-			logger.info("用户名:{}，ID：{} 已经登录，重定向到首页", user.getUsername(),
-					user.getId());
+			logger.info("用户名:{}，ID：{} 已经登录，重定向到首页", user.getUsername(),user.getId());
 			return this.redirect(LOGIN_SUCCESS);
 		}
 		return LOGIN_RETURN;
+	}
+	
+	@RequestMapping(value="/loginerror.htm",method=RequestMethod.GET)
+	public String loginerror(Model model){
+		String forcelogout=this.getRequest().getParameter("forcelogout");
+		model.addAttribute("forcelogout", forcelogout);
+		return  this.redirect("/login.htm");
 	}
 }

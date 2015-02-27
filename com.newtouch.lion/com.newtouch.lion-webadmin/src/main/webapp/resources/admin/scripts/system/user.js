@@ -461,9 +461,9 @@ handleVForm=function(vForm,submitCallBackfn){
 };
 //判断是否编辑
 function formatterEidtable(data,type,full) {
-	var name ='有效';
+	var name ='失效';
 	if (data&&data===true) {
-		name ='失效';
+		name ='有效';
 	}
 	return name;
 }

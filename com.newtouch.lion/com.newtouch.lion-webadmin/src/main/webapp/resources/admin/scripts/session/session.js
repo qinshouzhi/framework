@@ -19,10 +19,10 @@ $(function () {
 			 return;
 		 }
 		 bootbox.confirm('确认要强制退出此用户？', function(result) {
-              if(result){            	 
+              if(result){
+              	  alert(row.id);           	 
             	  var param={'id':row.id};
-            	  console.dir(param);
-                  lion.util.post('delete.json',param,successUserExit,errorRequest);
+                  lion.util.post('forcelogout.json',param,successUserExit,errorRequest);
               }
       	}); 
 	 });
@@ -38,7 +38,7 @@ function successUserExit(data){
         gmsg+=data.errorMessage[msg];
       }
       if(lion.util.isEmpty(gmsg)){
-        gmsg='未删除成功';
+        gmsg='未强制退出成功';
       }
       lion.util.error('提示',gmsg);
   }

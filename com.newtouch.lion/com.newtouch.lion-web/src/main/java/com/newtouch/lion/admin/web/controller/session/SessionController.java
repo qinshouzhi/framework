@@ -16,17 +16,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.newtouch.lion.admin.web.model.session.SessionVo;
 import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.model.session.SessionModel;
 import com.newtouch.lion.service.session.SessionService;
 import com.newtouch.lion.service.system.UserService;
+import com.newtouch.lion.web.constant.ConstantMessage;
 import com.newtouch.lion.web.controller.AbstractController;
 import com.newtouch.lion.web.model.QueryDt;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
+import com.newtouch.lion.web.servlet.view.support.BindResult;
 
 /**
  * <p>
@@ -84,16 +87,16 @@ public class SessionController extends AbstractController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value = "forceogout")
+	@RequestMapping(value = "forcelogout",method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView forceLogout(@RequestParam String sessionId,Errors errors,ModelAndView modelAndView) {
+	public ModelAndView forceLogout(SessionVo sessionVo,Errors errors,ModelAndView modelAndView) {
 		Map<String, String> params = new HashMap<String, String>();
 		
 		Subject currentUser=SecurityUtils.getSubject();
 		//获取当前会话的
 	    String currentSessionId=(String) currentUser.getSession(false).getId();
 	    //判断是否是当前用户
-	    if(currentSessionId.equals(sessionId)){
+	    if(currentSessionId.equals(sessionVo.getId())){
 	    	errors.reject("","当前登录用户不能强制退出");
 	    }
 	    
@@ -102,7 +105,7 @@ public class SessionController extends AbstractController {
 			return  this.getJsonView(modelAndView);
 		}
 
-	    SessionModel sessionModel=sessionService.getSession(sessionId);
+	    SessionModel sessionModel=sessionService.getSession(sessionVo.getId());
 		//判断是否是超级用户
 	    if(userService.getSuperUsername().equals(sessionModel.getUsername())){
 	    	errors.reject("","超级管理用户不能强制退出");
@@ -112,12 +115,13 @@ public class SessionController extends AbstractController {
 			return  this.getJsonView(modelAndView);
 		}
 		//调用强制退出
-		boolean flag= sessionService.forceLogout(sessionId);
+		boolean flag= sessionService.forceLogout(sessionVo.getId());
 		if(flag){
+			params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
 			modelAndView.addObject(BindMessage.SUCCESS, params);
 		}else{
-			errors.reject("","强制退出用户未成功");
-			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
+			errors.reject("","强制退出用户未成功");			
+			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);			
 		}
 		return this.getJsonView(modelAndView);
 	}

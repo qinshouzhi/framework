@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.SimpleSession;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
@@ -60,7 +61,9 @@ public class SessionServiceImpl extends AbstractService implements
 		List<SessionModel> models = new ArrayList<SessionModel>();
 		for (Session session : sessions) {
 			SessionModel sessionModel = this.convertModel(session);
-			models.add(sessionModel);
+		    if(StringUtils.isNotEmpty(sessionModel.getUsername())){
+		    	models.add(sessionModel);
+		    }
 		}
 		return models;
 	}

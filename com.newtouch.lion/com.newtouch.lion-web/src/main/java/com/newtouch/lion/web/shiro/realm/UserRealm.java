@@ -88,11 +88,11 @@ public class UserRealm extends AuthorizingRealm {
             throw new LockedAccountException();
         }
         //账户有效期验证
-        if(Boolean.TRUE.equals(user.getAccountExpired())){
+        if(Boolean.FALSE.equals(user.getAccountExpired())){
         	throw new ExpiredAccountException();
         }
         //密码有效期验证
-        if(Boolean.TRUE.equals(user.getCredentialExpired())){
+        if(Boolean.FALSE.equals(user.getCredentialExpired())){
         	throw new CredentialExpiredException();
         }
         //交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以自定义实现
