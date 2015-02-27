@@ -13,6 +13,7 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.web.controller.AbstractController;
 import com.newtouch.lion.web.shiro.authc.CredentialExpiredException;
 import com.newtouch.lion.web.shiro.authc.ExpiredAccountException;
+import com.newtouch.lion.web.shiro.cache.SessionCacheManager;
 import com.newtouch.lion.web.shiro.constant.Constants;
 import com.newtouch.lion.web.shiro.model.LoginUser;
 import com.newtouch.lion.web.shiro.session.LoginSecurityUtil;
@@ -51,7 +53,9 @@ public class LoginController extends AbstractController {
 	private static final String LOGIN_SUCCESS = "/index.htm";
 	/**重定向到登录*/
 	private static final String REDIRECT_LOGIN="/login.htm";
-	
+	/** Shiro Session缓存管理*/
+	@Autowired
+	private SessionCacheManager sessionCacheManager;
 	/***
 	 * 接收登录请求
 	 * @param loginUser
@@ -123,8 +127,11 @@ public class LoginController extends AbstractController {
 		logger.info("退出系统");
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.isAuthenticated()) {
+			User user = LoginSecurityUtil.getUser();
 			// session 会销毁，在SessionListener监听session销毁，清理权限缓存
 			subject.logout(); 
+			//清除缓存
+			sessionCacheManager.removeSessionController(Constants.CACHE_SESSION_NAME,user.getUsername());
 		}
 		return this.redirect(REDIRECT_LOGIN);
 	}

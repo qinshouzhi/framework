@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.newtouch.lion.model.system.User;
+import com.newtouch.lion.web.shiro.constant.Constants;
 
 /**
  * <p>
@@ -43,13 +44,12 @@ import com.newtouch.lion.model.system.User;
  * @author WangLijun
  * @version 1.0
  */
-public class SessionControlFilter extends AccessControlFilter{
+public class SessionControllerFilter extends AccessControlFilter{
 	/**日志*/
-	private static final Logger logger=LoggerFactory.getLogger(SessionControlFilter.class);
+	private static final Logger logger=LoggerFactory.getLogger(SessionControllerFilter.class);
 	/**强制退出的KEY*/
-	private static final String FORCE_LOGOUT_KEY=SessionControlFilter.class.getName()+".killForceLogout";
-	/**缓存名称*/
-	private static final String CACHE_SESSION_NAME="shiroSessionController";
+	private static final String FORCE_LOGOUT_KEY=SessionControllerFilter.class.getName()+".killForceLogout";
+	
 	/**后用户将强制退出的URL*/
 	private String forceLogoutUrl;
 	/**强制退出之前或之后用户*/
@@ -67,7 +67,7 @@ public class SessionControlFilter extends AccessControlFilter{
     /***
      * 默认构造函数
      */
-    public SessionControlFilter() {
+    public SessionControllerFilter() {
 		 super();
 	}
     
@@ -75,9 +75,9 @@ public class SessionControlFilter extends AccessControlFilter{
     /***
      * 默认构造函数
      */
-    public SessionControlFilter(CacheManager cacheManager) {
+    public SessionControllerFilter(CacheManager cacheManager) {
 		 super();
-		 cache=cacheManager.getCache(CACHE_SESSION_NAME);
+		 cache=cacheManager.getCache(Constants.CACHE_SESSION_NAME);
 	}
     
 	/**
@@ -166,7 +166,6 @@ public class SessionControlFilter extends AccessControlFilter{
 	    Session session = subject.getSession();
         User user = (User) subject.getPrincipal();
         Serializable sessionId = session.getId();
-        cache.get(user.getUsername());
         //同步控制
         Deque<Serializable> deque = cache.get(user.getUsername());
         if(deque == null) {
@@ -206,7 +205,9 @@ public class SessionControlFilter extends AccessControlFilter{
             StringBuilder sb=new StringBuilder();
     		sb.append(this.forceLogoutUrl);
     		sb.append(this.forceLogoutUrl.contains("?")?"&":"?");
-    		sb.append("forcelogout=2");
+    		sb.append(Constants.FORCE_LOGOUT);
+    		sb.append("=");
+    		sb.append(Constants.LOGIN_MAXS_ERROR);
             WebUtils.issueRedirect(request, response,sb.toString());
             return false;
         }

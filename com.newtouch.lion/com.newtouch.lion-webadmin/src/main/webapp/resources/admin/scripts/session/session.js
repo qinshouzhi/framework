@@ -19,8 +19,7 @@ $(function () {
 			 return;
 		 }
 		 bootbox.confirm('确认要强制退出此用户？', function(result) {
-              if(result){
-              	  alert(row.id);           	 
+              if(result){          	 
             	  var param={'id':row.id};
                   lion.util.post('forcelogout.json',param,successUserExit,errorRequest);
               }
@@ -31,7 +30,7 @@ $(function () {
 function successUserExit(data){
    if(data!==null&&!(data.hasError)){
       lion.util.success('提示',data.message);
-       $sessiontb.datagrids('reload');
+      $sessiontb.datagrids('reload');
    }else if(data!==null&&data.hasError){
       var gmsg='';
       for(var msg in data.errorMessage){

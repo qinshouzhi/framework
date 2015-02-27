@@ -13,7 +13,11 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
 
+import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.service.session.SessionService;
+import com.newtouch.lion.web.shiro.cache.SessionCacheManager;
+import com.newtouch.lion.web.shiro.constant.Constants;
+import com.newtouch.lion.web.shiro.session.LoginSecurityUtil;
 
 /**
  * <p>
@@ -36,7 +40,8 @@ public class ForceLogoutFilter extends AccessControlFilter {
 	
 	/**后用户将强制退出的URL*/
 	private String forceLogoutUrl;
-	
+	/** Shiro Session缓存管理*/
+	private SessionCacheManager sessionCacheManager;
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -62,16 +67,21 @@ public class ForceLogoutFilter extends AccessControlFilter {
 	 * servlet.ServletRequest, javax.servlet.ServletResponse)
 	 */
 	@Override
-	protected boolean onAccessDenied(ServletRequest request,
-			ServletResponse response) throws Exception {
+	protected boolean onAccessDenied(ServletRequest request,ServletResponse response) throws Exception {
+		User user = LoginSecurityUtil.getUser();
+		//清除缓存
+		sessionCacheManager.removeSessionController(Constants.CACHE_SESSION_NAME,user.getUsername());
+		//强制退出	
+		getSubject(request, response).logout();
 		
-		getSubject(request, response).logout();// 强制退出
-		 
+		
+		
 		StringBuilder sb=new StringBuilder();
 		sb.append(this.forceLogoutUrl);
 		sb.append(this.forceLogoutUrl.contains("?")?"&":"?");
-		sb.append("forcelogout=1");
-		
+		sb.append(Constants.FORCE_LOGOUT);
+		sb.append("=");
+		sb.append(Constants.LOGIN_FORCE_ERROR);		
 		WebUtils.issueRedirect(request, response, sb.toString());
 		return false;
 	}
@@ -90,6 +100,19 @@ public class ForceLogoutFilter extends AccessControlFilter {
 		this.forceLogoutUrl = forceLogoutUrl;
 	}
 
+	/**
+	 * @return the sessionCacheManager Shiro Session缓存管理
+	 */
+	public SessionCacheManager getSessionCacheManager() {
+		return sessionCacheManager;
+	}
+
+	/**
+	 * @param sessionCacheManager Shiro Session缓存管理
+	 */
+	public void setSessionCacheManager(SessionCacheManager sessionCacheManager) {
+		this.sessionCacheManager = sessionCacheManager;
+	}
 	
 	
 }

@@ -269,7 +269,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	 */
 	@Override
 	public String getSuperUsername() {
-		return this.getSuperUsername();
+		return this.superUserName;
 	}
 
 	
