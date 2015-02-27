@@ -87,7 +87,15 @@
 		<property name="loginUrl" value="/login.htm" />
 		<property name="successUrl" value="/index.htm" />
 	</bean>
-
+	<!-- 强制用户退出 -->
+	<bean id="forceLogoutFilter" class="com.newtouch.lion.web.shiro.filter.ForceLogoutFilter"/>
+	<!-- 用户会话并发控制 -->
+	<bean id="sessionControlFilter" class="com.newtouch.lion.web.shiro.filter.SessionControlFilter">
+		<constructor-arg index="0" ref="cacheManagerShiro" />
+		<property name="sessionManager" ref="sessionManager"/>
+		<property name="maxSession" value="1"/>
+		<property name="forceLogoutUrl" value="/login.htm"/>
+	</bean>
 	<!-- Shiro的Web过滤器 -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
@@ -97,6 +105,8 @@
 		<property name="filters">
 			<util:map>
 				<entry key="authc" value-ref="formAuthenticationFilter" />
+				<entry key="forceLogoutFilter" value-ref="forceLogoutFilter"/>
+				<entry key="sessionControlFilter" value-ref="sessionControlFilter"/>
 			</util:map>
 		</property>
 		<property name="filterChainDefinitions">
@@ -105,7 +115,7 @@
 				/unauthorized.htm = anon
 				/login.htm = authc
 				/logout.htm= logout
-				/** = user
+				/** = user,forceLogoutFilter,sessionControlFilter
 				/index.htm = user
 			</value>
 		</property>

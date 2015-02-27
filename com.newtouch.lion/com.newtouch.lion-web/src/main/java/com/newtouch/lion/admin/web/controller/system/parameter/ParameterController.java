@@ -122,7 +122,7 @@ public class ParameterController extends AbstractController{
 
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
-			return modelAndView;
+			return  this.getJsonView(modelAndView);
 		}
 
 		BeanUtils.copyProperties(parameterVo, parameter);
@@ -131,7 +131,7 @@ public class ParameterController extends AbstractController{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS, "sys.parameter.edit.success");
 		modelAndView.addObject(BindMessage.SUCCESS, params);
-		return modelAndView;
+		return this.getJsonView(modelAndView);
 	}
 
 	@RequestMapping(value = "delete")

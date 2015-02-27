@@ -91,7 +91,6 @@ public class LoginController extends AbstractController {
 	
 	@RequestMapping(value = "/login",method=RequestMethod.GET)
 	public String welcome() {
-		logger.info("进入登录页面");
 		User user = LoginSecurityUtil.getUser();
 		if (user != null) {
 			logger.info("用户名:{}，ID：{} 已经登录，重定向到首页", user.getUsername(),

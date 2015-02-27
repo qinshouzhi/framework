@@ -28,12 +28,28 @@ import com.newtouch.lion.model.session.SessionModel;
  * @version 1.0
  */
 public interface SessionService {
+	/***
+	 * 强制退出的KEY
+	 */
+	public static final String SESSION_FORCE_LOGOUT_KEY=SessionService.class.getName()+".forceLogout";
 	
 	/***
 	 * 获取当前在线用户列表信息
 	 * @return  List<SessionModel>  用户会话列表
 	 */
 	public List<SessionModel> getActiveSessions();
+	/***
+	 * 强制结束用户会话
+	 * @param sessionId 会话ID
+	 * @return true ,强制退出成功，false  强制退出失败
+	 */
+	public boolean forceLogout(String sessionId);
+	/***
+	 * 根据会话ID读取用户会话
+	 * @param sessionId sessionId
+	 * @return SessionModel
+	 */
+	public SessionModel getSession(String sessionId);
 }
 
 	

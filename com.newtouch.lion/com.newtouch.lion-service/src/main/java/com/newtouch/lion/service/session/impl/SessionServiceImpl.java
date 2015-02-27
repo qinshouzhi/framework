@@ -43,6 +43,7 @@ import com.newtouch.lion.service.session.SessionService;
 @Service
 public class SessionServiceImpl extends AbstractService implements
 		SessionService {
+	
 
 	/** SessionDao */
 	@Autowired
@@ -63,7 +64,37 @@ public class SessionServiceImpl extends AbstractService implements
 		}
 		return models;
 	}
+	
+	
+	
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.session.SessionService#forceLogout(java.lang.String)
+	 */
+	@Override
+	public boolean forceLogout(String sessionId) {
+		 Session session = sessionDAO.readSession(sessionId);
+		 session.setAttribute(SESSION_FORCE_LOGOUT_KEY, Boolean.TRUE);
+		 return true;
+	}
 
+
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.session.SessionService#getSession(java.lang.String)
+	 */
+	@Override
+	public SessionModel getSession(String sessionId) {
+		 Session session = sessionDAO.readSession(sessionId);
+		 return this.convertModel(session);
+	}
+
+
+
+	/***
+	 * 会话转换服务
+	 * @param session
+	 * @return   SessionModel
+	 */
 	private SessionModel convertModel(Session session) {
 		SessionModel model = new SessionModel();
 		//会话ID

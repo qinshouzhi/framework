@@ -48,8 +48,9 @@
 				<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue">
 					<i class="fa fa-refresh"></i> <@spring.message "common.toolbar.btn.reload.text"/> 
 				</a>				
-				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> Excel </a>
-				<a id="btnAdd" class="btn btn-sm red" ><i class="fa fa-plus"></i> 强制退出 </a>
+				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green">
+					<i class="fa  fa-file-excel-o"></i> Excel </a>
+				<!--<a id="btnUserExit" class="btn btn-sm red" ><i class="fa fa-plus"></i> 强制退出 </a>-->
 			</div>
 			<div class="col-md-12">
 				  <!---<@lion.datagrids name="sys_parameter_lists_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/parameter/list.json" dataOptions="" style="height:400px;"/>-->
