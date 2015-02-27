@@ -31,7 +31,7 @@
 <script src="${base}/resources/global/js/form/form.fill.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
-<script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/datagrid/datagrids1.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
 <!-- codelist -->
 <script src="${base}/resources/admin/scripts/system/codelist.js" type="text/javascript"></script>
@@ -97,33 +97,27 @@
 							<th class="table-checkbox" data-field='id' data-checkbox="true">
 						 		<input type="checkbox" class="group-checkable" data-set="#sys_codelist_tb.checkboxes"  data-sortable="false" />
 						 	</th>
-							<th data-field='codeType.nameZh' data-sortDir="asc" style="width:80px;">
+							<th data-field='codeType.nameZh' data-sortDir="asc" style="width:150px;">
 								编码类型
 							</th>
-							<th data-field="codeValue" style="width:80px;">
+							<th data-field="codeValue" style="width:210px;">
 							 	编码值
 							</th>
-							<th data-field="nameEn" style="width:80px;">
+							<th data-field="nameEn" style="width:210px;">
 							 	编码名称（英文）
 							</th>
-							<th data-field="nameZh" style="width:80px;">
+							<th data-field="nameZh" style="width:210px;">
 								编码名称（中文）
 							</th>
-							<th data-field="sortNo" style="width:30px;" align="center" >
+							<th data-field="sortNo" style="width:55px;" align="center" >
 								排序
 							</th>
-							<th data-field="editable" style="width:30px;" align="center"  data-formatter="formatterEidtable">
+							<th data-field="editable" style="width:80px;" align="center"  data-formatter="formatterEidtable">
 								可编辑
 							</th>								
-							<th data-field="editable" style="width:30px;" align="center"  data-formatter="formatterEidtable">
+							<th data-field="editable" style="width:80px;" align="center"  data-formatter="formatterEidtable">
 								默认项
 							</th>								
-							<th data-field="createdDate" style="width:100px;">
-								创建时间
-							</th>
-							<th data-field="updatedDate" style="width:100px;">
-								更新时间
-							</th>
 						</tr>
 					</thead>
 				</table>

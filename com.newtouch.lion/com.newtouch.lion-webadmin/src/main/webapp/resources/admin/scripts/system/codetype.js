@@ -6,6 +6,7 @@ $(function () {
   Metronic.init(); // init metronic core componets
   Layout.init(); // init layout
   Tasks.initDashboardWidget(); // init tash dashboard widget
+  lion.util.menu();//加载导航栏
 
   codetypedg=$("#sys_codetype_lists_tb");
   addForm=$('#sysCodeTypeForm');
