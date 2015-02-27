@@ -22,6 +22,7 @@ import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.web.controller.AbstractController;
 import com.newtouch.lion.web.shiro.authc.CredentialExpiredException;
 import com.newtouch.lion.web.shiro.authc.ExpiredAccountException;
+import com.newtouch.lion.web.shiro.constant.Constants;
 import com.newtouch.lion.web.shiro.model.LoginUser;
 import com.newtouch.lion.web.shiro.session.LoginSecurityUtil;
 
@@ -48,7 +49,15 @@ public class LoginController extends AbstractController {
 	private static final String LOGIN_RETURN = "/login";
 	/** 登录成功 */
 	private static final String LOGIN_SUCCESS = "/index.htm";
-
+	/**重定向到登录*/
+	private static final String REDIRECT_LOGIN="/login.htm";
+	
+	/***
+	 * 接收登录请求
+	 * @param loginUser
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/login",method=RequestMethod.POST)
 	public String login(LoginUser loginUser,Model model) {
 		logger.info("进入登录页面");
@@ -62,22 +71,22 @@ public class LoginController extends AbstractController {
 			currentUser.login(token);
 			logger.info("验证用户和密码结束...");
 		}catch(UnknownAccountException e){
-			model.addAttribute("login_error","用户或密码不正确.");
+			model.addAttribute(Constants.LOGIN_ERROR_MSG,"用户或密码不正确.");
 			logger.error(e.getMessage(),e);
 		}catch(IncorrectCredentialsException e){
-			model.addAttribute("login_error","用户或密码不正确.");
+			model.addAttribute(Constants.LOGIN_ERROR_MSG,"用户或密码不正确.");
 			logger.error(e.getMessage(),e);
 		}catch(LockedAccountException e){
 			logger.error(e.getMessage(),e);
-			model.addAttribute("login_error","用户已锁定.");
+			model.addAttribute(Constants.LOGIN_ERROR_MSG,"用户已锁定.");
 		}catch(ExpiredAccountException e){
 			logger.error(e.getMessage(),e);
-			model.addAttribute("login_error","用户已过期，请联系管理员.");
+			model.addAttribute(Constants.LOGIN_ERROR_MSG,"用户已过期，请联系管理员.");
 		}catch(CredentialExpiredException e){
 			logger.error(e.getMessage(),e);
-			model.addAttribute("login_error","密码已过期，请联系管理员.");	
+			model.addAttribute(Constants.LOGIN_ERROR_MSG,"密码已过期，请联系管理员.");	
 		}catch(AuthenticationException e){
-			model.addAttribute("login_error","用户或密码不正确.");
+			model.addAttribute(Constants.LOGIN_ERROR_MSG,"用户或密码不正确.");
 			logger.error(e.getMessage(),e);
 		}
 		if(currentUser.isAuthenticated()){
@@ -88,14 +97,18 @@ public class LoginController extends AbstractController {
 		}
 		return LOGIN_RETURN;
 	}
-	
+	/****
+	 * 登录跳转
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/login",method=RequestMethod.GET)
 	public String welcome(Model model) {
-		String forcelogout=this.getRequest().getParameter("forcelogout");
-		if("1".equals(forcelogout)){
-			model.addAttribute("login_error","您被系统管理员强制退出系统，请联系系统管理员.");
-		}else if("2".equals(forcelogout)){
-			model.addAttribute("login_error","您的用户名已登录系统正在使用中…如有疑问请联系系统管理员.");
+		String forcelogout=this.getRequest().getParameter(Constants.FORCE_LOGOUT);
+		if(Constants.LOGIN_FORCE_ERROR.equals(forcelogout)){
+			model.addAttribute(Constants.LOGIN_ERROR_MSG,"您被系统管理员强制退出系统，请联系系统管理员.");
+		}else if(Constants.LOGIN_MAXS_ERROR.equals(forcelogout)){
+			model.addAttribute(Constants.LOGIN_ERROR_MSG,"您的用户名已登录系统正在使用中…如有疑问请联系系统管理员.");
 		}
 		User user = LoginSecurityUtil.getUser();
 		if (user != null) {
@@ -105,10 +118,26 @@ public class LoginController extends AbstractController {
 		return LOGIN_RETURN;
 	}
 	
-	@RequestMapping(value="/loginerror.htm",method=RequestMethod.GET)
+	@RequestMapping(value = "/logout",method=RequestMethod.GET)
+	public String logout(){
+		logger.info("退出系统");
+		Subject subject = SecurityUtils.getSubject();
+		if (subject.isAuthenticated()) {
+			// session 会销毁，在SessionListener监听session销毁，清理权限缓存
+			subject.logout(); 
+		}
+		return this.redirect(REDIRECT_LOGIN);
+	}
+	
+	/**
+	 * 登录错误处理
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/loginerror",method=RequestMethod.GET)
 	public String loginerror(Model model){
-		String forcelogout=this.getRequest().getParameter("forcelogout");
-		model.addAttribute("forcelogout", forcelogout);
-		return  this.redirect("/login.htm");
+		String forcelogout=this.getRequest().getParameter(Constants.FORCE_LOGOUT);
+		model.addAttribute(Constants.FORCE_LOGOUT, forcelogout);
+		return  this.redirect(REDIRECT_LOGIN);
 	}
 }
