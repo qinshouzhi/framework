@@ -203,8 +203,7 @@ public class CodeListController extends AbstractController{
 
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public DataTable<CodeList> list(QueryDt query,
-			@ModelAttribute("codelist") CodeListVo codeListVo){
+	public DataTable<CodeList> list(QueryDt query,@ModelAttribute("codelist") CodeListVo codeListVo){
 		QueryCriteria queryCriteria = new QueryCriteria();
 
 		// 设置分页 启始页
