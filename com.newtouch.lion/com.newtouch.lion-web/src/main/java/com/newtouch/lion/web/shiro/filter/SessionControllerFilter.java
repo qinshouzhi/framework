@@ -24,7 +24,7 @@ import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.newtouch.lion.model.system.User;
+import com.newtouch.lion.common.user.UserInfo;
 import com.newtouch.lion.web.shiro.constant.Constants;
 
 /**
@@ -164,7 +164,7 @@ public class SessionControllerFilter extends AccessControlFilter{
             return true;
         }
 	    Session session = subject.getSession();
-        User user = (User) subject.getPrincipal();
+        UserInfo user = (UserInfo) subject.getPrincipal();
         Serializable sessionId = session.getId();
         //同步控制
         Deque<Serializable> deque = cache.get(user.getUsername());

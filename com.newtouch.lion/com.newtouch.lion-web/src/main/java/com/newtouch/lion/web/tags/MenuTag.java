@@ -17,8 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.newtouch.lion.common.user.UserInfo;
 import com.newtouch.lion.model.menu.Menu;
-import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.service.menu.MenuService;
 import com.newtouch.lion.web.freemarker.DirectiveUtils;
 import com.newtouch.lion.web.shiro.session.LoginSecurityUtil;
@@ -60,7 +60,7 @@ public class MenuTag  extends AbstractTag{
 	public void execute(Environment env, Map params, TemplateModel[] loopVars,
 			TemplateDirectiveBody body) throws TemplateException, IOException {
 		// 获取登录信息
-		User user = LoginSecurityUtil.getUser();
+		UserInfo user = LoginSecurityUtil.getUser();
 		if (user == null) {
 			logger.error("用户未登录，无法获取用户菜单信息的");
 			return;

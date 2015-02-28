@@ -19,7 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.newtouch.lion.model.system.User;
+import com.newtouch.lion.common.user.UserInfo;
 import com.newtouch.lion.web.controller.AbstractController;
 import com.newtouch.lion.web.shiro.authc.CredentialExpiredException;
 import com.newtouch.lion.web.shiro.authc.ExpiredAccountException;
@@ -65,9 +65,10 @@ public class LoginController extends AbstractController {
 	@RequestMapping(value = "/login",method=RequestMethod.POST)
 	public String login(LoginUser loginUser,Model model) {
 		logger.info("进入登录页面");
-		User user = LoginSecurityUtil.getUser();
+		UserInfo userInfo = LoginSecurityUtil.getUser();
 		//获取当前的Subject
-		UsernamePasswordToken token=new UsernamePasswordToken(loginUser.getUsername(), loginUser.getPassword());
+		UsernamePasswordToken token=new UsernamePasswordToken(loginUser.getUsername(), loginUser.getPassword(),loginUser.getRememberMe());
+		//token.setRememberMe();
 		//获取当前的Subject
 		Subject currentUser=SecurityUtils.getSubject();
 		try{
@@ -94,7 +95,8 @@ public class LoginController extends AbstractController {
 			logger.error(e.getMessage(),e);
 		}
 		if(currentUser.isAuthenticated()){
-			logger.info("用户名:{}，ID：{} 已经登录，重定向到首页", loginUser.getUsername(),user.getId());
+			logger.info("用户名:{}，ID：{} 已经登录，重定向到首页", loginUser.getUsername(),userInfo.getId());
+			model.asMap().clear();
 			return this.redirect(LOGIN_SUCCESS);
 		}else{
 			 token.clear(); 
@@ -114,9 +116,9 @@ public class LoginController extends AbstractController {
 		}else if(Constants.LOGIN_MAXS_ERROR.equals(forcelogout)){
 			model.addAttribute(Constants.LOGIN_ERROR_MSG,"您的用户名已登录系统正在使用中…如有疑问请联系系统管理员.");
 		}
-		User user = LoginSecurityUtil.getUser();
-		if (user != null) {
-			logger.info("用户名:{}，ID：{} 已经登录，重定向到首页", user.getUsername(),user.getId());
+		UserInfo userInfo = LoginSecurityUtil.getUser();
+		if (userInfo != null) {
+			logger.info("用户名:{}，ID：{} 已经登录，重定向到首页", userInfo.getUsername(),userInfo.getId());
 			return this.redirect(LOGIN_SUCCESS);
 		}
 		return LOGIN_RETURN;
@@ -127,11 +129,11 @@ public class LoginController extends AbstractController {
 		logger.info("退出系统");
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.isAuthenticated()) {
-			User user = LoginSecurityUtil.getUser();
+			UserInfo userInfo = LoginSecurityUtil.getUser();
 			// session 会销毁，在SessionListener监听session销毁，清理权限缓存
 			subject.logout(); 
 			//清除缓存
-			sessionCacheManager.removeSessionController(Constants.CACHE_SESSION_NAME,user.getUsername());
+			sessionCacheManager.removeSessionController(Constants.CACHE_SESSION_NAME,userInfo.getUsername());
 		}
 		return this.redirect(REDIRECT_LOGIN);
 	}

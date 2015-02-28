@@ -9,7 +9,7 @@ package com.newtouch.lion.web.shiro.session;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
-import com.newtouch.lion.model.system.User;
+import com.newtouch.lion.common.user.UserInfo;
 
 /**
  * <p>
@@ -33,10 +33,10 @@ public class LoginSecurityUtil {
 	 * 获取用户信息
 	 * @return User;
 	 */
-	public static  User getUser(){
+	public static  UserInfo getUser(){
 		Subject  subject=SecurityUtils.getSubject();
-		if(subject!=null&&(subject.getPrincipal() instanceof User)){ 
-			return  (User)subject.getPrincipal();
+		if(subject!=null&&(subject.getPrincipal() instanceof UserInfo)){ 
+			return  (UserInfo)subject.getPrincipal();
 		}
 		return null;
 	}

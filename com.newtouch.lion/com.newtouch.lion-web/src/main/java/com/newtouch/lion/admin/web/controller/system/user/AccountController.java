@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.user.PasswordVo;
 import com.newtouch.lion.admin.web.model.system.user.UserInfoVo;
+import com.newtouch.lion.common.user.UserInfo;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.service.system.UserService;
 import com.newtouch.lion.web.constant.ConstantMessage;
@@ -68,8 +69,8 @@ public class AccountController extends AbstractController{
 	/**个人主页*/
 	@RequestMapping("index")
 	public String index(Model model){
-		User user = LoginSecurityUtil.getUser();
-		user = this.userService.doFindById(user.getId());
+		UserInfo userInfo = LoginSecurityUtil.getUser();
+		User user = this.userService.doFindById(userInfo.getId());
 		model.addAttribute("user", user);
 		return INDEX_RETURN;
 	}
@@ -88,9 +89,9 @@ public class AccountController extends AbstractController{
 	@RequestMapping("changeinfo")
 	@ResponseBody
 	public ModelAndView  changeInfo(@Valid @ModelAttribute("userInfoVo") UserInfoVo userInfoVo,Errors errors, ModelAndView modelAndView){
-		User user =LoginSecurityUtil.getUser();
+		UserInfo userInfo =LoginSecurityUtil.getUser();
 		// 获取用户登录的IP地址
-		user = this.userService.doFindById(user.getId());
+		User user = this.userService.doFindById(userInfo.getId());
 	
 		user.setRealnameEn(userInfoVo.getRealnameEn());
 		user.setRealnameZh(userInfoVo.getRealnameZh());		
@@ -142,9 +143,9 @@ public class AccountController extends AbstractController{
 			return this.getJsonView(modelAndView);
 		}
 
-		User user =LoginSecurityUtil.getUser();
+		UserInfo userInfo =LoginSecurityUtil.getUser();
 		// 获取用户登录的IP地址
-		user = this.userService.doFindById(user.getId());
+		User user = this.userService.doFindById(userInfo.getId());
 		String passwordEncoder = passwordEncoderService.encodePassword(passwordVo.getOldpassword(), user.getUsername());
 		if (!passwordEncoder.equals(user.getPassword())) {
 			// ValidationUtils.rejectIfEmpty(errors,

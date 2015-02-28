@@ -29,6 +29,8 @@ public class LoginUser {
 	private String password;
 	/**验证码*/
 	private String verifyCode;
+	/**是否记录登录状态*/
+	private Boolean rememberMe=Boolean.FALSE;
 	
 	public LoginUser() {
 		 super();
@@ -91,6 +93,24 @@ public class LoginUser {
 	 */
 	public void setVerifyCode(String verifyCode) {
 		this.verifyCode = verifyCode;
+	}
+
+
+
+	/**
+	 * @return 是否记录登录状态
+	 */
+	public Boolean getRememberMe() {
+		return rememberMe;
+	}
+
+
+
+	/**
+	 * @param rememberMe 是否记录登录状态
+	 */
+	public void setRememberMe(Boolean rememberMe) {
+		this.rememberMe = rememberMe;
 	}
 	
 	

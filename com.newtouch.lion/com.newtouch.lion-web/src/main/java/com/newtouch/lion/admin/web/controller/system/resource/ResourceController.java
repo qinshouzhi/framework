@@ -32,10 +32,10 @@ import com.newtouch.lion.admin.web.model.system.resource.ResourceVo;
 import com.newtouch.lion.common.codelist.CodeListConstant;
 import com.newtouch.lion.common.date.DateUtil;
 import com.newtouch.lion.common.file.FileUtil;
+import com.newtouch.lion.common.user.UserInfo;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.datagrid.DataGrid;
 import com.newtouch.lion.model.system.Resource;
-import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.datagrid.DataGridService;
 import com.newtouch.lion.service.excel.ExcelExportService;
@@ -150,10 +150,10 @@ public class ResourceController extends AbstractController{
 	@RequestMapping(value = "menutree")
 	@ResponseBody
 	public String menutree(HttpServletRequest request,@RequestParam Long resourceId, Model model) {
-		User user =LoginSecurityUtil.getUser();
+		UserInfo userInfo =LoginSecurityUtil.getUser();
 		List<Resource> resources=resourceService.doFindByParentId(resourceId);
 		String[]  menuResourceType={CodeListConstant.RESTYPE_MODULE_MENU_CATEGORY,CodeListConstant.RESTYPE_MODULE_CATEGORY_ITEM};
-		List<Resource>  userResources=resourceService.doFindByUserIdAndType(user.getId(), menuResourceType);
+		List<Resource>  userResources=resourceService.doFindByUserIdAndType(userInfo.getId(), menuResourceType);
 		Map<Long,Resource>  menuResourcesMap=ResourceConvertUtil.convertListToMap(userResources);
 		List<TreeNode> children=ResourceTreeUtil.resourceAttr(resources, menuResourcesMap,Boolean.TRUE);
 		Set<String>  properties=new HashSet<String>();		

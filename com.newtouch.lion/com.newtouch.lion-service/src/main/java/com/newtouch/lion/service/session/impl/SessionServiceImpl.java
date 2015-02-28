@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.SimpleSession;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
@@ -18,8 +19,8 @@ import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.newtouch.lion.common.user.UserInfo;
 import com.newtouch.lion.model.session.SessionModel;
-import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.service.AbstractService;
 import com.newtouch.lion.service.session.SessionService;
 
@@ -60,9 +61,9 @@ public class SessionServiceImpl extends AbstractService implements
 		List<SessionModel> models = new ArrayList<SessionModel>();
 		for (Session session : sessions) {
 			SessionModel sessionModel = this.convertModel(session);
-		    //if(StringUtils.isNotEmpty(sessionModel.getUsername())){
+		    if(StringUtils.isNotEmpty(sessionModel.getUsername())){
 		    	models.add(sessionModel);
-		    //}
+		    }
 		}
 		return models;
 	}
@@ -120,9 +121,9 @@ public class SessionServiceImpl extends AbstractService implements
 		//获取用户名及用户ID
 	    PrincipalCollection principalMap=(PrincipalCollection) session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
 	    if(principalMap!=null){
-	    	User user = (User)principalMap.getPrimaryPrincipal();
-	    	model.setUserId(user.getId());
-	    	model.setUsername(user.getUsername());
+	    	UserInfo userInfo = (UserInfo)principalMap.getPrimaryPrincipal();
+	    	model.setUserId(userInfo.getId());
+	    	model.setUsername(userInfo.getUsername());
 	    }
 		return model;
 	}

@@ -38,6 +38,7 @@ import com.newtouch.lion.admin.web.model.system.auth.AuthModel;
 import com.newtouch.lion.admin.web.model.system.user.UserVo;
 import com.newtouch.lion.common.date.DateUtil;
 import com.newtouch.lion.common.file.FileUtil;
+import com.newtouch.lion.common.user.UserInfo;
 import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.datagrid.DataGrid;
@@ -594,9 +595,9 @@ public class UserController extends AbstractController {
 	@RequestMapping(value = "pwdindex")
 	public String loadUserEditPasswordPage(HttpServletRequest request,
 			Model model) {
-		User user=LoginSecurityUtil.getUser();
+		UserInfo userInfo=LoginSecurityUtil.getUser();
 		// 获取用户登录的IP地址
-		//userDetails.setIpAddress(IPAddressUtil.getIPAddress(request));
+		User user = this.userService.doFindById(userInfo.getId());
 		model.addAttribute("userDetails", user);
 		return EDIT_USER_PASSWORD_RETURN;
 	}
@@ -615,11 +616,12 @@ public class UserController extends AbstractController {
 	@RequestMapping(value = "myresource")
 	@ResponseBody
 	public String myResource() {
-		User user =LoginSecurityUtil.getUser();
+		
+		UserInfo userInfo =LoginSecurityUtil.getUser();
 		
 		List<Resource> resources = resourceService.doFindFirstLevel();
 
-		List<Resource> userResources = this.resourceService.doFindByUserId(user.getId());
+		List<Resource> userResources = this.resourceService.doFindByUserId(userInfo.getId());
 
 		Map<Long, Resource> menuResourcesMap = ResourceConvertUtil.convertListToMap(userResources);
 		

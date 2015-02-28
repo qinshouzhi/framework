@@ -1,22 +1,42 @@
-/**
+/*
+ * Copyright (c)  2014, Newtouch
+ * All rights reserved. 
  * 
+ * $id: UserInfo.java 9552 2014年12月29日 下午5:30:07 WangLijun$
  */
 package com.newtouch.lion.common.user;
 
 import java.io.Serializable;
 
 /**
- * @author wanglijun
+ * <p>
+ * Title: 用户信息类
+ * </p>
+ * <p>
+ * Description: 用户信息类
+ * </p>
+ * <p>
+ * Copyright: Copyright (c) 2014
+ * </p>
+ * <p>
+ * Company: Newtouch
+ * </p>
  * 
+ * @author WangLijun
+ * @version 1.0
  */
 public class UserInfo implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 	
 	private String username;
-	
+	/**用户ID*/
 	private Long id;
 	
-	private String realName;
+	/** 用户真实姓名－中文 */
+	private String realnameZh;
+	/** 用户真实姓名－英文 */
+	private String realnameEn;
 	
 	private String password;
 	
@@ -39,13 +59,30 @@ public class UserInfo implements Serializable {
 		this.id = id;
 	}
 
+	
+	
+
+	/**
+	 * @param username
+	 * @param id
+	 * @param realName
+	 */
+	public UserInfo(String username, Long id, String realnameZh,String realnameEn) {
+		super();
+		this.username = username;
+		this.id = id;
+		this.realnameZh = realnameZh;
+		this.realnameEn=realnameEn;
+	}
 
 
-	public UserInfo(String username, Long id, String realName, String password,
+
+	public UserInfo(String username, Long id, String realnameZh,String realnameEn,String password,
 			String userIP) {
 		this.username = username;
 		this.id = id;
-		this.realName = realName;
+		this.realnameZh = realnameZh;
+		this.realnameEn=realnameEn;
 		this.password = password;
 		this.userIP = userIP;
 	}
@@ -57,11 +94,7 @@ public class UserInfo implements Serializable {
 	public String getLoginId() {
 		return this.username;
 	}
-
-	public String getName() {
-		return this.realName;
-	}
-
+ 
 	public String getPassword() {
 		return this.password;
 	}
@@ -74,9 +107,7 @@ public class UserInfo implements Serializable {
 		this.username = loginId;
 	}
 
-	public void setName(String name) {
-		this.realName = name;
-	}
+	 
 
 	public void setPassword(String password) {
 		this.password = password;
@@ -113,26 +144,6 @@ public class UserInfo implements Serializable {
 		this.username = username;
 	}
 
-
-
-	/**
-	 * @return the realName
-	 */
-	public String getRealName() {
-		return realName;
-	}
-
-
-
-	/**
-	 * @param realName the realName to set
-	 */
-	public void setRealName(String realName) {
-		this.realName = realName;
-	}
-
-
-
 	/**
 	 * @return the macAddress
 	 */
@@ -148,6 +159,43 @@ public class UserInfo implements Serializable {
 	public void setMacAddress(String macAddress) {
 		this.macAddress = macAddress;
 	}
+
+
+
+	/**
+	 * @return the realnameZh
+	 */
+	public String getRealnameZh() {
+		return realnameZh;
+	}
+
+
+
+	/**
+	 * @param realnameZh the realnameZh to set
+	 */
+	public void setRealnameZh(String realnameZh) {
+		this.realnameZh = realnameZh;
+	}
+
+
+
+	/**
+	 * @return the realnameEn
+	 */
+	public String getRealnameEn() {
+		return realnameEn;
+	}
+
+
+
+	/**
+	 * @param realnameEn the realnameEn to set
+	 */
+	public void setRealnameEn(String realnameEn) {
+		this.realnameEn = realnameEn;
+	}
+	
 	
 	
 }

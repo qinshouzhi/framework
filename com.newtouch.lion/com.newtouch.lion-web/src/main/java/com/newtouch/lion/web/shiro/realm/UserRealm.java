@@ -15,6 +15,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
@@ -27,6 +28,7 @@ import org.apache.shiro.util.ByteSource;
 import org.apache.shiro.util.SimpleByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.newtouch.lion.common.user.UserInfo;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.service.system.UserService;
 import com.newtouch.lion.web.shiro.authc.CredentialExpiredException;
@@ -59,7 +61,7 @@ public class UserRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			PrincipalCollection principals) {
 		/** 用户名 */
-		String userName = (String) principals.getPrimaryPrincipal();
+		//String userName = (String) principals.getPrimaryPrincipal();
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 		authorizationInfo.setRoles(this.getRoles());
 		authorizationInfo.setObjectPermissions(null);
@@ -75,9 +77,12 @@ public class UserRealm extends AuthorizingRealm {
 	}
 
 	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(
-			AuthenticationToken token) throws AuthenticationException {
-		String userName = (String)token.getPrincipal();
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+		
+		UsernamePasswordToken usernamePasswordToken=(UsernamePasswordToken) token;		
+		 
+		String userName =usernamePasswordToken.getUsername();
+		
 		User user = userService.doFindByUserName(userName);
 		//没找到帐号
         if(user == null) {
@@ -95,11 +100,13 @@ public class UserRealm extends AuthorizingRealm {
         if(Boolean.FALSE.equals(user.getCredentialExpired())){
         	throw new CredentialExpiredException();
         }
+        
+        UserInfo userInfo=new UserInfo(user.getUsername(), user.getId(),user.getRealnameZh(),user.getRealnameEn());
         //交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以自定义实现
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                user, //用户名
+        		userInfo, //用户名
                 user.getPassword(), //密码
-                ByteSource.Util.bytes(user.getUsername()),//salt=username+salt
+                ByteSource.Util.bytes(userInfo.getUsername()),//salt=username+salt
                 getName()  //realm name
         );
         return authenticationInfo;
