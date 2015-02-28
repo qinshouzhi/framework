@@ -108,7 +108,7 @@ title="${datagrids.title}"
 			<#list menus as menu>
 				<#if  menu.icon??&&menu.icon?length gt 0>
 				<li  <#if menu.selected>class="open active" </#if> >
-					<a href="${contextPath!}${menu.path!}">
+					<a href="${contextPath!}${menu.path!}" <#if menu.target?length gt 0>target=${menu.target!}</#if> >
 						<i class="${menu.icon!}"></i>
 						<span class="title">${menu.nameZh!}</span>
 						<#if menu.menus?? && menu.menus?size gt 0>
@@ -119,7 +119,7 @@ title="${datagrids.title}"
 				</li>
 				<#else>
 					<li <#if menu.selected>class="active" </#if> >
-					<a href="${contextPath!}${menu.path!}">
+					<a href="${contextPath!}${menu.path!}" <#if menu.target?length gt 0>target=${menu.target!}</#if>>
 						<i class="${menu.icon!}"></i>
 						<span class="title">${menu.nameZh!}</span>
 						<#if menu.menus?? && menu.menus?size gt 0>
@@ -141,7 +141,7 @@ title="${datagrids.title}"
 				<!--开始第一个菜单显示样式-->
 				<#if menu_index==0>
 				<li class="start <#if menu.selected>active</#if>">
-					<a href="${contextPath}${menu.path!}">
+					<a href="${contextPath}${menu.path!}" <#if menu.target?length gt 0>target=${menu.target!}</#if>>
 					<#if  menu.icon??&&menu.icon?length gt 0>
 						<i class="${menu.icon!}"></i>
 					</#if>

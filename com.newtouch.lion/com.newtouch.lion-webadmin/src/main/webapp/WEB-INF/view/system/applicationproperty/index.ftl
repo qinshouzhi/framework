@@ -31,7 +31,7 @@
 <script src="${base}/resources/global/js/form/form.fill.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
-<script src="${base}/resources/global/js/datagrid/datagrids1.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <!-- applicationproperty -->
 <script src="${base}/resources/admin/scripts/system/applicationproperty.js" type="text/javascript"></script>
 </head>
@@ -86,7 +86,7 @@
 				</a>
 			</div>
 			<div class="col-md-12">
-				<table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_app_property_list_tb" data-singleselect="true",   data-loadUrl="/admin/system/applicationproperty/list.json" data-checkbox="true" data-pageSize="10">
+				<table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_app_property_list_tb" data-singleselect="true",   data-loadUrl="${base}/system/applicationproperty/list.json" data-checkbox="true" data-pageSize="10">
 					<thead>
 						<tr>
 							<th class="table-checkbox" data-field='id' data-checkbox="true">

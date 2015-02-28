@@ -31,7 +31,7 @@
 <script src="${base}/resources/global/js/form/form.fill.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
-<script src="${base}/resources/global/js/datagrid/datagrids1.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
 <!-- codelist -->
 <script src="${base}/resources/admin/scripts/system/codelist.js" type="text/javascript"></script>
@@ -91,13 +91,13 @@
 				</a>
 			</div>
 			<div class="col-md-12">
-				<table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_codelist_tb" data-singleselect="true",   data-loadUrl="/admin/system/codelist/list.json" data-checkbox="true" data-pageSize="10">
+				<table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_codelist_tb" data-singleselect="true",   data-loadUrl="${base}/system/codelist/list.json" data-checkbox="true" data-pageSize="10">
 					<thead>
 						<tr>
 							<th class="table-checkbox" data-field='id' data-checkbox="true">
 						 		<input type="checkbox" class="group-checkable" data-set="#sys_codelist_tb.checkboxes"  data-sortable="false" />
 						 	</th>
-							<th data-field='codeType.nameZh' data-sortDir="asc" style="width:150px;">
+							<th data-field='codeType.nameZh' style="width:150px;">
 								编码类型
 							</th>
 							<th data-field="codeValue" style="width:210px;">

@@ -42,7 +42,7 @@
         <constructor-arg value="rememberMe"/>
         <property name="httpOnly" value="true"/>
         <property name="path" value="/admin"/>
-        <property name="maxAge" value="2592000"/><!-- 30天 -->
+        <property name="maxAge" value="604800"/><!-- 7天 -->
     </bean>
 
     <!-- rememberMe管理器 -->
@@ -111,6 +111,7 @@
 		<property name="sessionManager" ref="sessionManager"/>
 		<property name="maxSession" value="1"/>
 		<property name="forceLogoutUrl" value="/loginerror.htm"/>
+		<property name="forceLogoutAfter" value="true"/>
 	</bean>
 	<!-- Shiro Session Cache管理 -->
 	<bean id="sessionCacheManager" class="com.newtouch.lion.web.shiro.cache.SessionCacheManager">
@@ -143,7 +144,6 @@
 				/login.htm = authc
 				/logout.htm=logoutFilter
 				/** = user,forceLogoutFilter,sessionControlFilter
-				/index.htm = user
 			</value>
 		</property>
 	</bean>
