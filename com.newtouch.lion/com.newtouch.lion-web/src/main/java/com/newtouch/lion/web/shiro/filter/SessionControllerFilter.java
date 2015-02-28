@@ -176,6 +176,7 @@ public class SessionControllerFilter extends AccessControlFilter{
         //如果队列里没有此sessionId，且用户没有被强制退出；放入队列
         if(!deque.contains(sessionId) && session.getAttribute(FORCE_LOGOUT_KEY) == null) {
             deque.push(sessionId);
+            //cache.put(user.getUsername(), deque);
         }
 
         //如果队列里的sessionId数超出最大会话数，开始强制退用户
@@ -185,8 +186,8 @@ public class SessionControllerFilter extends AccessControlFilter{
             try {
                 Session killSession = sessionManager.getSession(new DefaultSessionKey(killSessionId));
                 if(killSession != null) {
-                    //设置会话的FORCE_LOGOUT_KEY属性表示踢出了
-                    killSession.setAttribute(FORCE_LOGOUT_KEY, true);
+                    //设置会话的FORCE_LOGOUT_KEY属性表示强制退出
+                    killSession.setAttribute(FORCE_LOGOUT_KEY,true);
                 }
             } catch (Exception e) {
             	logger.error("",e);

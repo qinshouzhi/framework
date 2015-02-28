@@ -38,6 +38,7 @@
 		<property name="httpOnly" value="true" />
 		<property name="maxAge" value="180000" />
 	</bean>
+	<!-- 记住登录状态 -->
 	<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
         <constructor-arg value="rememberMe"/>
         <property name="httpOnly" value="true"/>
@@ -132,7 +133,6 @@
 			<util:map>
 				<entry key="authc" value-ref="formAuthenticationFilter" />
 				<entry key="forceLogoutFilter" value-ref="forceLogoutFilter"/>
-				<entry key="sessionControlFilter" value-ref="sessionControlFilter"/>
 				<entry key="logoutFilter" value-ref="logoutFilter"/>
 			</util:map>
 		</property>
@@ -143,7 +143,7 @@
 				/loginerror.htm=anon
 				/login.htm = authc
 				/logout.htm=logoutFilter
-				/** = user,forceLogoutFilter,sessionControlFilter
+				/** = user,forceLogoutFilter
 			</value>
 		</property>
 	</bean>

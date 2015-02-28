@@ -31,8 +31,7 @@ public class BindMessage {
 
 	public static final String ERRORS_MODEL_KEY = BindMessage.class.getName()+ "." + "errors";
 
-	public static final String SUCCESS = BindMessage.class.getName() + "."
-			+ "success";
+	public static final String SUCCESS = BindMessage.class.getName() + "."+ "success";
 	/** 提示信息 */
 	private String message;
 	/** 验证对象名称 */

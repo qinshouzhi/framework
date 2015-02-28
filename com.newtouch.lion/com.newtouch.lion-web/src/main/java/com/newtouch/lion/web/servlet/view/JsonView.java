@@ -30,10 +30,10 @@ import com.newtouch.lion.web.servlet.view.support.RequestContext;
 
 /**
  * <p>
- * Title: GsonView
+ * Title: JsonView
  * </p>
  * <p>
- * Description: GsonView
+ * Description: JsonView
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
