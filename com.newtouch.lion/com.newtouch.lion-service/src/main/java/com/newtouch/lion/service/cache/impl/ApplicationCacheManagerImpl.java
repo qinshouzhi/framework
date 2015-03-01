@@ -41,7 +41,7 @@ import com.newtouch.lion.service.cache.ApplicationCacheManager;
  * @author WangLijun
  * @version 1.0
  */
-@Service("applicationCacheManager")
+@Service
 public class ApplicationCacheManagerImpl implements ApplicationCacheManager {
 
 	private final Logger logger = LoggerFactory.getLogger(super.getClass());
@@ -54,8 +54,10 @@ public class ApplicationCacheManagerImpl implements ApplicationCacheManager {
 	}
 
 	public CacheManagerModel getCacheManager() {
+	 
 		String[] cacheNames = cacheManager.getCacheNames();
 		CacheManagerModel cacheManagerModel = new CacheManagerModel();
+		cacheManagerModel.setName(cacheManager.getName());
 		cacheManagerModel.setSize(cacheNames.length);
 		cacheManagerModel.setStatusName(this.getCacheStatus().toString());
 		cacheManagerModel.setStatusIntValue(this.getCacheStatus().intValue());
@@ -67,19 +69,24 @@ public class ApplicationCacheManagerImpl implements ApplicationCacheManager {
 	public CacheManagerModel getCaches() {
 
 		String[] cacheNames = cacheManager.getCacheNames();
+		CacheManager  cacheManagerShiro=cacheManager.getCacheManager("shirocache");
+		String[] cacheShiroNames=cacheManagerShiro.getCacheNames();
+		
 		CacheManagerModel cacheManagerModel = new CacheManagerModel();
+		cacheManagerModel.setName(cacheManager.getName());
 		cacheManagerModel.setSize(cacheNames.length);
 		cacheManagerModel.setStatusName(this.getCacheStatus().toString());
 		cacheManagerModel.setStatusIntValue(this.getCacheStatus().intValue());
-
+		 
 		List<CacheModel> list = null;
 		CacheModel cacheModel = null;
+	
 		for (String cacheName : cacheNames) {
+		
 			Cache cache = this.cacheManager.getCache(cacheName);
 
 			if (cache == null) {
-				logger.warn(
-						"This cache '{}' is null,Please analysis of log  and query reason",
+				logger.warn("This cache '{}' is null,Please analysis of log  and query reason",
 						cacheName);
 				continue;
 			}
@@ -99,6 +106,37 @@ public class ApplicationCacheManagerImpl implements ApplicationCacheManager {
 			cacheModel.setInMemoryHits(statistics.localHeapHitCount());
 			cacheModel.setCacheHits(statistics.cacheHitCount());
 			cacheModel.setOnDiskHits(statistics.localDiskHitCount());
+		 
+			list.add(cacheModel);
+		}
+		
+		
+		for (String cacheName : cacheShiroNames) {
+			
+			Cache cache = cacheManagerShiro.getCache(cacheName);
+
+			if (cache == null) {
+				logger.warn("This cache '{}' is null,Please analysis of log  and query reason",
+						cacheName);
+				continue;
+			}
+
+			if (CollectionUtils.isEmpty(list)) {
+				list = new ArrayList<CacheModel>();
+			}
+			// 缓存对象
+			cacheModel = new CacheModel();
+			cacheModel.setName(cacheName);
+
+			cacheModel.setSize(cache.getSize());
+			cacheModel.setMemoryStoreSize(cache.calculateInMemorySize());
+			cacheModel.setMemoryStoreEvictionPolicy(cache.getMemoryStoreEvictionPolicy().getName());
+			cacheModel.setDiskStoreSize((long) cache.getDiskStoreSize());
+			StatisticsGateway statistics = cache.getStatistics();
+			cacheModel.setInMemoryHits(statistics.localHeapHitCount());
+			cacheModel.setCacheHits(statistics.cacheHitCount());
+			cacheModel.setOnDiskHits(statistics.localDiskHitCount());
+		 
 			list.add(cacheModel);
 		}
 		cacheManagerModel.setCacheModels(list);
