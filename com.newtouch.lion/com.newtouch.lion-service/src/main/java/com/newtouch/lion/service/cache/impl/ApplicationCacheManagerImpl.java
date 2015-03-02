@@ -65,9 +65,8 @@ public class ApplicationCacheManagerImpl implements ApplicationCacheManager {
 		return cacheManagerModel;
 	}
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation", "static-access" })
 	public CacheManagerModel getCaches() {
-
 		String[] cacheNames = cacheManager.getCacheNames();
 		CacheManager  cacheManagerShiro=cacheManager.getCacheManager("shirocache");
 		String[] cacheShiroNames=cacheManagerShiro.getCacheNames();
