@@ -30,6 +30,7 @@ import com.newtouch.lion.query.QueryCriteria;
  * @version 1.0
  */
 public interface ParameterCacheService extends AbstractInitializedCacheService {
+	
 
 	/***
 	 * 
@@ -46,5 +47,11 @@ public interface ParameterCacheService extends AbstractInitializedCacheService {
 	 * @return Parameter
 	 */
 	public Parameter doFindByNameEn(String nameEn);
+	/***
+	 * 根据key 获取缓存的的数据
+	 * @param key 缓存有KEY
+	 * @return
+	 */
+	public String getValue(String  key);
 
 }

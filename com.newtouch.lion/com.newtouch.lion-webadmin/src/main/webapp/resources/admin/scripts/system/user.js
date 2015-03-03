@@ -5,8 +5,11 @@ $(function() {
 	Layout.init(); // init layout
 	Tasks.initDashboardWidget(); // init tash dashboard widget
   lion.util.menu();//加载导航栏
- 
-
+   //初始化日期
+   $(".date-picker").datepicker({
+                autoclose: true,
+                language:'zh-CN'
+   });
   userdg=$('#sys_user_list_tb');
 
 	addForm=$('#addForm');
@@ -90,8 +93,8 @@ $(function() {
      $('#auth_username').text(row.username);
      $('#auth_employeeCode').text(row.employeeCode);
      $('#auth_accountLocked').text(row.accountLocked===true?'已锁定':'未锁定');
-     $('#auth_accountExpired').text(row.accountExpired===false?'有效':'无效');
-     $('#auth_credentialExpired').text(row.credentialExpired===false?'有效':'无效');
+     $('#auth_accountExpired').text(row.accountExpired===true?'有效':'无效');
+     $('#auth_credentialExpired').text(row.credentialExpired===true?'有效':'无效');
      $('#auth_accountExpiredDate').text(formatterDate(row.accountExpiredDate));
      $('#auth_credentialExpiredDate').text(formatterDate(row.credentialExpiredDate));
      $('#auth_department').text(formatterDepartment(row.department));
@@ -192,8 +195,8 @@ $(function() {
      $('#user_mobile').text(row.mobile);
      $('#user_email').text(row.email);
      $('#user_accountLocked').text(row.accountLocked===true?'已锁定':'未锁定');
-     $('#user_accountExpired').text(row.accountExpired===false?'有效':'无效');
-     $('#user_credentialExpired').text(row.credentialExpired===false?'有效':'无效');
+     $('#user_accountExpired').text(row.accountExpired===true?'有效':'无效');
+     $('#user_credentialExpired').text(row.credentialExpired===true?'有效':'无效');
      $('#user_accountExpiredDate').text(formatterDate(row.accountExpiredDate));
      $('#user_credentialExpiredDate').text(formatterDate(row.credentialExpiredDate));
      $('#user_department').text(formatterDepartment(row.department));
@@ -222,6 +225,8 @@ $(function() {
 	 //添加
 	 $('#btnAdd').on('click',function(){
 	 	 addForm.reset();
+     $('.date-picker[id=1]').datepicker('update',$('#credentialExpiredDate').val());
+     $('.date-picker[id=2]').datepicker('update',$('#accountExpiredDate').val());
 	 	 addDialog.find('.modal-header h4 span').text('添加用户');
 		 return;
 	 });
@@ -235,6 +240,8 @@ $(function() {
  		 addForm.reset();
      addDialog.find('.modal-header h4 span').text('编辑用户');
 		 addDialog.modal('toggle');
+     $('.date-picker[id=1]').datepicker('update',formatterDate(row.credentialExpiredDate));
+     $('.date-picker[id=2]').datepicker('update',formatterDate(row.accountExpiredDate));
 		 addForm.fill(row);
 		 $("#departmentId").combotree('val',$("#departmentId").val());
 	 });
@@ -256,6 +263,63 @@ $(function() {
 	 $('#btnSave').click(function(){
 	 	   addForm.submit();
 	 });
+   //重置密码
+   $('#btnResetPwd').click(function(){
+        var row=getSelectedRow();
+     if(!row){
+       lion.util.info('提示','请选择要重置密码的记录');
+       return;
+     }
+     bootbox.confirm('确认要重置密码？', function(result) {
+          if(result){              
+              var param={'id':row.id};
+              lion.util.post('resetpwd.json',param,successForResetPwd,errorRequest);
+          }
+      });
+   });
+    //重置密码
+   $('#btnResetPwd').click(function(){
+     var row=getSelectedRow();
+     if(!row){
+       lion.util.info('提示','请选择要重置密码的记录');
+       return;
+     }
+     bootbox.confirm('确认要重置密码？', function(result) {
+          if(result){              
+              var param={'id':row.id};
+              lion.util.post('resetpwd.json',param,successForResetPwd,errorRequest);
+          }
+      });
+   });
+
+   $("#btnLokced").click(function(){
+      var row=getSelectedRow();
+     if(!row){
+       lion.util.info('提示','请选择要锁定用户');
+       return;
+     }
+     bootbox.confirm('确认要锁定此用户，锁定后用户将不能登录？', function(result) {
+          if(result){              
+              var param={'id':row.id};
+              lion.util.post('lock.json',param,successForLock,errorRequest);
+          }
+      });
+   });
+
+   $("#btnUnlock").click(function(){
+      var row=getSelectedRow();
+     if(!row){
+       lion.util.info('提示','请选择要解锁用户');
+       return;
+     }
+     bootbox.confirm('确认要解锁此用户？', function(result) {
+          if(result){              
+              var param={'id':row.id};
+              lion.util.post('unlock.json',param,successForUnLock,errorRequest);
+          }
+      });
+   });
+
 	 //导出Excel
 	 $('#btnExport').on('click',function(){
 	   var params=queryForm.serialize(),url='export.json?tableId='+userdg.attr('id');
@@ -272,6 +336,52 @@ $(function() {
        window.open(url,'_blank');
 	 });	
 });
+
+function successForUnLock(data,arg){
+   if(data!==null&&!(data.hasError)){
+      lion.util.success('提示',data.message);
+      userdg.datagrids('reload'); 
+   }else if(data!==null&&data.hasError){
+      var gmsg='';
+      for(var msg in data.errorMessage){
+        gmsg+=data.errorMessage[msg];
+      }
+      if(lion.util.isEmpty(gmsg)){
+        gmsg='用户解锁未成功';
+      }
+      lion.util.error('提示',gmsg);
+  }
+}
+function successForLock(data,arg){
+   if(data!==null&&!(data.hasError)){
+      lion.util.success('提示',data.message);
+      userdg.datagrids('reload'); 
+   }else if(data!==null&&data.hasError){
+      var gmsg='';
+      for(var msg in data.errorMessage){
+        gmsg+=data.errorMessage[msg];
+      }
+      if(lion.util.isEmpty(gmsg)){
+        gmsg='用户锁定未成功';
+      }
+      lion.util.error('提示',gmsg);
+  }
+}
+function successForResetPwd(data,arg){
+   if(data!==null&&!(data.hasError)){
+      lion.util.success('提示',data.message);
+      userdg.datagrids('reload'); 
+   }else if(data!==null&&data.hasError){
+      var gmsg='';
+      for(var msg in data.errorMessage){
+        gmsg+=data.errorMessage[msg];
+      }
+      if(lion.util.isEmpty(gmsg)){
+        gmsg='用户重置密码未成功';
+      }
+      lion.util.error('提示',gmsg);
+  }
+}
 
 function successForDelete(data,arg){
    if(data!==null&&!(data.hasError)){
@@ -322,6 +432,7 @@ function successAddFrm(data,arg,id){
 }
 //请求失败后信息
 function errorRequest(data,arg){
+  console.dir(data);
 	lion.util.error('提示','网络连接异常');
 }
 

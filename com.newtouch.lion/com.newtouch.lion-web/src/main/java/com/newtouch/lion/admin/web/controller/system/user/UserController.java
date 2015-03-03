@@ -36,6 +36,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.auth.AuthModel;
 import com.newtouch.lion.admin.web.model.system.user.UserVo;
+import com.newtouch.lion.cache.system.ParameterUtil;
+import com.newtouch.lion.common.constant.Constants;
 import com.newtouch.lion.common.date.DateUtil;
 import com.newtouch.lion.common.file.FileUtil;
 import com.newtouch.lion.common.user.UserInfo;
@@ -108,7 +110,7 @@ public class UserController extends AbstractController {
 	/** 已授权组 */
 	private static final String AUTH_USER_GROUPS_TB = "usergroup_tb";
 	/** 默认密码 */
-	private static final String DEFAULT_PASSWORD = "111aaa";
+	private static final String DEFAULT_PASSWORD =ParameterUtil.getValue(Constants.DEFLAUT_PASSWORD_KEY);
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -186,7 +188,7 @@ public class UserController extends AbstractController {
 		calendar.add(Calendar.YEAR, 1);// TODO 默认账户有效期为一年；
 
 		Calendar credentialExpiredCalendar = Calendar.getInstance();
-		credentialExpiredCalendar.add(Calendar.MONTH, 3);// TODO 默认密码有效期为3个月；
+		credentialExpiredCalendar.add(Calendar.MONTH,3);// TODO 默认密码有效期为3个月；
 
 		user.setAccountExpiredDate(calendar.getTime());
 		user.setCredentialExpiredDate(credentialExpiredCalendar.getTime());
@@ -422,6 +424,112 @@ public class UserController extends AbstractController {
 		return this.getJsonView(modelAndView);
 	}
 	
+	/****
+	 * 重置密码功能
+	 * @param id 用户ID
+	 * @param modelAndView
+	 * @return 
+	 */
+	@RequestMapping(value="resetpwd",method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView resetPwd(UserVo userVo,Errors errors,ModelAndView modelAndView){
+		 
+		Map<String, String> params = new HashMap<String, String>();
+		User user = this.userService.doFindById(userVo.getId());
+		if(user==null){
+			errors.reject("sys.user.resetpwd.empty","");
+		}
+		if(!errors.hasErrors()&&this.userService.getSuperUsername().equals(user.getUsername())){
+			errors.reject("sys.user.super.resetpwd","");
+		}
+		//再次检查是否出错
+		if (errors.hasErrors()) {
+			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
+			return this.getJsonView(modelAndView);
+		}
+		String password=passwordEncoderService.encodePassword(DEFAULT_PASSWORD,user.getUsername());
+		user.setPassword(password);
+		user=this.userService.doUpdate(user);
+		if (user!=null) {
+			params.put(BindResult.SUCCESS,ConstantMessage.RESET_PASSWORD_SUCCESS_MESSAGE_CODE);
+		} else {
+			params.put(BindResult.SUCCESS,ConstantMessage.RESET_PASSWORD_FAIL_MESSAGE_CODE);
+		}
+		modelAndView.addObject(BindMessage.SUCCESS, params);
+		return this.getJsonView(modelAndView);
+	}
+	
+	/****
+	 * 重置密码功能
+	 * @param id 用户ID
+	 * @param modelAndView
+	 * @return 
+	 */
+	@RequestMapping(value="lock",method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView lock(UserVo userVo,Errors errors,ModelAndView modelAndView){
+		 
+		Map<String, String> params = new HashMap<String, String>();
+		User user = this.userService.doFindById(userVo.getId());
+		if(user==null){
+			errors.reject("sys.user.lock.empty","");
+		}
+		if(!errors.hasErrors()&&this.userService.getSuperUsername().equals(user.getUsername())){
+			errors.reject("sys.user.lock.superuser","");
+		}
+		//再次检查是否出错
+		if (errors.hasErrors()) {
+			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
+			return this.getJsonView(modelAndView);
+		}
+		if(!user.getAccountLocked()){
+			user.setAccountLocked(Boolean.TRUE);
+			user=this.userService.doUpdate(user);
+			if (user!=null) {
+				params.put(BindResult.SUCCESS,"sys.user.lock.success");
+			} else {
+				params.put(BindResult.SUCCESS,"sys.user.lock.fail");
+			}
+		}else{
+			 params.put(BindResult.SUCCESS,"sys.user.lock.already");
+		}
+		
+		modelAndView.addObject(BindMessage.SUCCESS, params);
+		return this.getJsonView(modelAndView);
+	}
+	
+	@RequestMapping(value="unlock",method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView unlock(UserVo userVo,Errors errors,ModelAndView modelAndView){
+		 
+		Map<String, String> params = new HashMap<String, String>();
+		User user = this.userService.doFindById(userVo.getId());
+		if(user==null){
+			errors.reject("sys.user.unlock.empty","");
+		}
+		if(!errors.hasErrors()&&this.userService.getSuperUsername().equals(user.getUsername())){
+			errors.reject("sys.user.lock.superuser","");
+		}
+		//再次检查是否出错
+		if (errors.hasErrors()) {
+			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
+			return this.getJsonView(modelAndView);
+		}
+		if(user.getAccountLocked()){
+			user.setAccountLocked(Boolean.FALSE);
+			user=this.userService.doUpdate(user);
+			if (user!=null) {
+				params.put(BindResult.SUCCESS,"sys.user.unlock.success");
+			} else {
+				params.put(BindResult.SUCCESS,"sys.user.unlock.fail");
+			}
+		}else{
+			 params.put(BindResult.SUCCESS,"sys.user.unlock.already");
+		}
+		modelAndView.addObject(BindMessage.SUCCESS, params);
+		return this.getJsonView(modelAndView);
+	}
+	 
 	/** 编辑对话框 */
 	@RequestMapping(value = "editdialog")
 	public String editDialog(@RequestParam(required = false) Long id,
@@ -469,8 +577,8 @@ public class UserController extends AbstractController {
 			return this.getJsonView(modelAndView);
 		}
 		
-		userVo.setAccountExpiredDate(user.getAccountExpiredDate());
-		userVo.setCredentialExpiredDate(user.getCredentialExpiredDate());
+		//userVo.setAccountExpiredDate(user.getAccountExpiredDate());
+		//userVo.setCredentialExpiredDate(user.getCredentialExpiredDate());
 		userVo.setPassword(user.getPassword());
 
 		BeanUtils.copyProperties(userVo, user);
@@ -592,6 +700,8 @@ public class UserController extends AbstractController {
 		logger.info("out Excel导出");
 		return this.getExcelView(modelAndView);
 	}
+	
+	
 	@RequestMapping(value = "pwdindex")
 	public String loadUserEditPasswordPage(HttpServletRequest request,
 			Model model) {
@@ -602,12 +712,10 @@ public class UserController extends AbstractController {
 		return EDIT_USER_PASSWORD_RETURN;
 	}
 
-	 
 
 	/** 我的信息 */
 	@RequestMapping(value = "userinfo")
-	public String userInfo(Model model) {
-	 
+	public String userInfo(Model model) {	 
 		model.addAttribute("user", LoginSecurityUtil.getUser());
 		return USERINFO_RETURN;
 	}

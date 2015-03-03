@@ -52,6 +52,17 @@ public class IndexController extends  AbstractController{
 		logger.info("进入测试页面");
 		return TEST_RETURN;
 	}
+	
+	@RequestMapping("/test2")
+	public String test2(){
+		
+		 
+        logger.info(" request.getRequestURL():{}",this.getRequest().getRequestURL());
+        logger.info(" request.getRequestURI():{}",this.getRequest().getRequestURI());
+        logger.info(":{}",this.getRequest().getContextPath());
+		logger.info("进入测试页面");
+		return TEST_RETURN;
+	}
 }
 
 	

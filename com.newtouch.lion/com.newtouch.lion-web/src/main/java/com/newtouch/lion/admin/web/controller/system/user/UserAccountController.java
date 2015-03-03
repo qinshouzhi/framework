@@ -8,7 +8,6 @@ package com.newtouch.lion.admin.web.controller.system.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,7 +16,7 @@ import com.newtouch.lion.service.system.UserService;
 import com.newtouch.lion.web.controller.AbstractController;
 
 /**
- * <p>s
+ * <p>
  * Title: 用户账户管理
  * </p>
  * <p>
@@ -36,8 +35,7 @@ import com.newtouch.lion.web.controller.AbstractController;
 @Controller(value = "sysUserAccount")
 @RequestMapping("/system/useraccount/")
 public class UserAccountController extends AbstractController{
-
-	private String ACTIVEUSERS_RETURN = "/system/user/activeusers";
+	
 	/**用户服务类*/
 	@Autowired
 	private UserService userService;
@@ -72,15 +70,5 @@ public class UserAccountController extends AbstractController{
 	@ResponseBody
 	public Boolean checkEmail(@RequestParam(required=false) String email,@RequestParam(required = false) Long id){
 		 return this.userService.checkEmail(email,id)?false:true;
-	}
-
-	 
-
-	/** 显示激活 */
-	@RequestMapping(value = "/activeusers")
-	public String activeUsers(Model model) {
-		//List<SessionUserInfo> sessionUserInfos = accountUserService.getActiveUsers();
-		//model.addAttribute("activeusers", sessionUserInfos);
-		return ACTIVEUSERS_RETURN;
 	}
 }

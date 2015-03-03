@@ -16,7 +16,7 @@
 		<pattern>/logout.htm*</pattern>
 		<pattern>/loginerror.htm*</pattern>
 		<pattern>/login.htm*</pattern>
-		<!-- <pattern>/test.htm</pattern> -->
+		<pattern>/test.htm</pattern>
 	</excludes>
 	
 	<!-- 主装饰器 -->

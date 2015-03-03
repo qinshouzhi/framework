@@ -36,4 +36,12 @@ public class ConstantMessage {
 	public static final String EXPORT_SUCCESS_MESSAGE_CODE = "common.export.success.message";
 	/** 修改的对象不能为空 */
 	public static final String EDIT_ISEMPTY_FAIL_MESSAGE_CODE = "common.edit.fail.isempty.message";
+	/**重置密码成功*/
+	public static final String RESET_PASSWORD_SUCCESS_MESSAGE_CODE="common.reset.password.success.message";
+	/**重置密码失败*/
+	public static final String RESET_PASSWORD_FAIL_MESSAGE_CODE="common.reset.password.fail.message";
+	/**授权成功*/
+	public static final String AUTH_SUCCESS_MESSAGE_CODE="common.auth.success.message";
+	/**授权失败*/
+	public static final String AUTH_FAIL_MESSAGE_CODE="common.auth.fail.message";
 }

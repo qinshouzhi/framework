@@ -55,6 +55,8 @@ public final class Constants {
 	public static final String WEB_CONTAINER_STARTDATE = "web.container.startdate";
 	/** 后台管理默认密码 */
 	public static final String DEFLAUT_PASSWORD = "111aaa";
+	/**后台管理用户默认密码KEY*/
+	public static final String DEFLAUT_PASSWORD_KEY="PwdInitialization";
 	/**密码错误最大重试次数，默认为：5*/
 	public static final Integer PASSWORD_RETYR_MAXCOUNT=5;
 }

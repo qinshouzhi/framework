@@ -15,6 +15,10 @@
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/css/combotree/combotree.css" rel="stylesheet" type="text/css" />
+<!--datepicker Csss Start-->
+<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/bootstrap-datepicker/css/datepicker3.css"/>
+<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"/>
+<!--datepicker Csss End-->
 <!-- DataTables js Start -->
 <script type="text/javascript" src="${base}/resources/global/plugins/select2/select2.min.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/media/js/jquery.dataTables.js"></script>
@@ -27,7 +31,8 @@
 <script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js"></script>
 <script src="${base}/resources/admin/pages/scripts/ui-toastr.js"></script>
 <script src="${base}/resources/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
-<!--EasyUI JavaScript End-->
+<script type="text/javascript" src="${base}/resources/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js"></script>
 <!--ztree js-->
 <script src="${base}/resources/global/plugins/ztree/js/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
 <!--lion UI JS Start-->
@@ -68,7 +73,7 @@
 				</form>
 			</div>
 		
-			<div class="col-md-12 margin-bottom-10" id="toolbar">
+			<div class="col-md-12" id="toolbar">
 				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic">
 					<i class="fa fa-plus"></i>  <@spring.message "common.toolbar.btn.add.text"/> </a>
 				<a id="btnEdit" class="btn btn-sm red" role="button">
@@ -93,7 +98,11 @@
 				<a href="javascript:void(0)" id="btnUnlock" class="btn btn-sm blue-hoki">
 					<i class="fa fa-unlock-alt"></i> 
 					<@spring.message "common.toolbar.btn.unlock.text"/>
-				</a> 
+				</a>
+				<a href="javascript:void(0)" id="btnResetPwd" class="btn btn-sm purple">
+					<i class="fa fa-unlock-alt"></i> 
+					<@spring.message "common.toolbar.btn.reset.pwd.text"/>
+				</a>
 				<a href="javascript:void(0)" id="btnDetails" class="btn btn-sm default">
 					<i class="fa  fa-th"></i> 
 					<@spring.message "common.toolbar.btn.details.text"/>
@@ -480,8 +489,12 @@
 											<div class="form-group">									
 												<label class="col-md-2 control-label">密码有效期</label>
 												<div class="col-md-2">
-													<div class="input-group">
+
+												 <div id="1"  class="input-group input-small date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
 														<input type="text"   id='credentialExpiredDate' name="credentialExpiredDate" class="form-control" placeholder="请选择密码有效期" maxlength="25" size="20" readonly="true" value="${credentialExpiredDate!}" />
+													<span class="input-group-btn">
+														<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+														</span>
 													</div>
 												</div>
 												<label class="col-md-2 control-label">
@@ -490,8 +503,12 @@
 												</label>
 												<label class="col-md-2 control-label">账户有效期</label>
 												<div class="col-md-2">
-													<div class="input-group">
+
+													 <div  id="2" class="input-group input-small date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
 														<input id="accountExpiredDate"  name="accountExpiredDate" type="text" class="form-control"  placeholder="请选择账户有效期"  maxlength="25" size="20"  readonly="true"  value="${accountExpiredDate!}" />
+														<span class="input-group-btn">
+														<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+														</span>
 													</div>
 												</div>
 												<label class="col-md-2 control-label">

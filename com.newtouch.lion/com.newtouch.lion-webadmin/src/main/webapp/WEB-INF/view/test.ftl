@@ -11,13 +11,20 @@
 <script src="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.js" type="text/javascript"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/select2/select2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/bootstrap-datepicker/css/datepicker3.css"/>
+<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css"/>
+<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/bootstrap-colorpicker/css/colorpicker.css"/>
+<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css"/>
+<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"/>
+
 <script type="text/javascript" src="${base}/resources/global/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
 <script type="text/javascript" src="${base}/resources/admin/pages/scripts/components-dropdowns.js"></script>
-
-
-<script src="${base}/resources/admin/scripts/system/codetype.js" type="text/javascript"></script>
-
+<script type="text/javascript" src="${base}/resources/admin/pages/scripts/components-dropdowns.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js"></script>
+<script src="${base}/resources/admin/scripts/test.js" type="text/javascript"></script>
 </head>
+
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed-hide-logo">
 <!-- BEGIN CONTAINER -->
  <!-- BEGIN PAGE CONTENT INNER -->
@@ -25,18 +32,13 @@
 	<div class="portlet-body">
 		<div class="row">
 			<div class="col-md-4">
-				<select class="bootstrap-select bs-select form-control input-small" title='请选择参数列表' data-size="8" multiple data-max-options="1">
-				  <option>1</option>
-				  <option>2</option>
-				  <option>3</option>
-				  <option>4</option>
-				  <option>5</option>
-				  <option>6</option>
-				  <option>7</option>
-				  <option>8</option>
-				  <option>9</option>
-				  <option>10</option>
-				</select>
+				 <div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+												<input type="text" class="form-control" readonly>
+												<span class="input-group-btn">
+												<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+												</span>
+											</div>
+
 			</div>
 			<div class="col-md-4">
 				<@lion.combobox id="sysCodeTypeList" codeName="codeType" dataClass="bootstrap-select bs-select form-control input-small" title="请选择通用编码列表" dataSize="8" multipleDataMaxOptions="1"/>
@@ -45,5 +47,6 @@
  	</div>
 </div>
 <!-- END JAVASCRIPTS -->
+<script  language="javascript"  src="${base}/resources/global/plugins/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 </body>
 </html>

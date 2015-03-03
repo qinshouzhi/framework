@@ -8,6 +8,7 @@ package com.newtouch.lion.cache.system.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -88,4 +89,15 @@ public class ParameterCacheServiceImpl implements ParameterCacheService {
 		return parameter;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.cache.system.ParameterCacheService#getValue(java.lang.String)
+	 */
+	@Override
+	public String getValue(String key) {
+		Parameter parameter=this.doFindByNameEn(key);
+		if(parameter!=null){
+			return parameter.getValue();
+		}
+		return StringUtils.EMPTY;
+	}
 }
