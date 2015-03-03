@@ -8,6 +8,7 @@ package com.newtouch.lion.admin.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.newtouch.lion.web.controller.AbstractController;
 
@@ -36,13 +37,13 @@ public class IndexController extends  AbstractController{
 	/**测试页面*/
 	private static final String TEST_RETURN="/test";
 	
-	@RequestMapping("/index")
+	@RequestMapping("index")
 	public String index(){
 		logger.info("进入首页.....");
 		return INDEX_RETURN;
 	}
 	
-	@RequestMapping("/test")
+	@RequestMapping("test")
 	public String test(){
 		
 		 
@@ -53,7 +54,7 @@ public class IndexController extends  AbstractController{
 		return TEST_RETURN;
 	}
 	
-	@RequestMapping("/test2")
+	@RequestMapping("test2")
 	public String test2(){
 		
 		 
@@ -63,6 +64,8 @@ public class IndexController extends  AbstractController{
 		logger.info("进入测试页面");
 		return TEST_RETURN;
 	}
+	
+	
 }
 
 	

@@ -90,7 +90,25 @@ public class UserServiceImpl extends AbstractService implements UserService {
 		return new ArrayList<Role>(userRoles);
 	}
 	
+	
+	
 
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.UserService#doFindRoles(java.lang.Long)
+	 */
+	@Override
+	public Set<Role> doFindRoles(Long id) {
+		User user=this.doFindById(id);
+		//将用户关联的用户组下的角色和用户联系的角色相合并
+		Set<Role> userRoles=user.getRoles();
+		Set<Group> groups=user.getGroups();
+		for(Group group:groups){
+			userRoles.addAll(group.getRoles());
+		}
+		return userRoles;
+	}
+	
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -368,7 +386,6 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	 */
 	@Override
 	public List<User> doFindByManageId(Long manageId) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

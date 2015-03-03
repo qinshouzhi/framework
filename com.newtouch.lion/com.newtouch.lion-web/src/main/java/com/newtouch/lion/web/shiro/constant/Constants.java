@@ -37,6 +37,10 @@ public class Constants {
 	public static final String LOGIN_FORCE_ERROR="1";
 	/**控制并发缓存名称*/
 	public static final String CACHE_SESSION_NAME="shiroSessionController";
+	/**角色*/
+	public static final String ROLES="roles";
+	/**权限管理*/
+	public static final String PERMS="perms";
 }
 
 	
