@@ -15,6 +15,12 @@
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/css/combotree/combotree.css" rel="stylesheet" type="text/css" />
+<!--fileupload css-->
+<link href="${base}/resources/global/css/uploadpicture/uploadpicture.css" rel="stylesheet" type="text/css" />
+<link href="${base}/resources/global/css/uploadpicture/main.css" rel="stylesheet" type="text/css" />
+<link href="${base}/resources/global/css/uploadpicture/demos.css" rel="stylesheet" type="text/css" />
+<!--Jcrop-->
+<link href="${base}/resources/global/plugins/jcrop/css/jquery.Jcrop.min.css" rel="stylesheet" type="text/css" />
 <!-- DataTables js Start -->
 <script type="text/javascript" src="${base}/resources/global/plugins/select2/select2.min.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/media/js/jquery.dataTables.js"></script>
@@ -30,6 +36,8 @@
 <!--EasyUI JavaScript End-->
 <!--ztree js-->
 <script src="${base}/resources/global/plugins/ztree/js/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
+<!--Jcrop js-->
+<script src="${base}/resources/global/plugins/jcrop/js/jquery.Jcrop.min.js" type="text/javascript"></script>
 <!--lion UI JS Start-->
 <script src="${base}/resources/global/js/lion.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/form/form.fill.js" type="text/javascript"></script>
@@ -37,6 +45,12 @@
 <script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
+<!--fileupload Js-->
+<script src="${base}/resources/global/js/uploadpicture/jquery.upload.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/uploadpicture/ajaxfileupload.js" type="text/javascript"></script>
+<script src="${base}/resources/global/plugins/jquery-file-upload/js/jquery.fileupload.js" type="text/javascript"></script>
+<script src="${base}/resources/global/plugins/jquery-file-upload/js/cors/jquery.xdr-transport.js" type="text/javascript"></script>
+<script src="${base}/resources/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js" type="text/javascript"></script>
 <!--lion UI JS End-->
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/scripts/system/account.js" type="text/javascript"></script>
@@ -143,35 +157,32 @@
 											<!-- END PERSONAL INFO TAB -->
 											<!-- CHANGE AVATAR TAB -->
 											<div class="tab-pane" id="tab_1_2">
-												<form action="#" role="form">
+												<form id="formImg" enctype="multipart/form-data" action="#" >
 													<div class="form-group">
-														<div class="fileinput fileinput-new" data-provides="fileinput">
-															<div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-																<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""/>
+														<div class="fileinput fileinput-new" >
+															<div id="imgdiv" class="fileinput-new thumbnail" style="width: 300px; height: 300px;">
+																<img id="imgShow" src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" style="width: 300px; height: 300px;"/>
 															</div>
-															<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
+															<div>
+												                <input type="hidden" id="x" name="x"/>
+												                <input type="hidden" id="y" name="y"/>
+												                <input type="hidden" id="w" name="w"/>
+												                <input type="hidden" id="h" name="h"/>
 															</div>
 															<div>
 																<span class="btn default btn-file">
 																<span class="fileinput-new">
-																选择图片 </span>
-																<span class="fileinput-exists">
-																修改 </span>
-																<input type="file" name="...">
+																Select image </span>
+																<input id="image" name="image" type="file" data-url="changeimg.json" multiple>
 																</span>
-																<a href="#" class="btn default fileinput-exists" data-dismiss="fileinput">
-																删除 </a>
 															</div>
-														</div>
-														<div class="clearfix margin-top-10">
-															 
 														</div>
 													</div>
 													<div class="margin-top-10">
-														<a href="#" class="btn green-haze">
-														保存头像 </a>
-														<a href="#" class="btn default">
-														取  消 </a>
+														<button id="btnImgUploadSave" class="btn green-haze">
+														Submit </button>
+														<button id="btnImgUploadCancel" class="btn default">
+														Cancel </button>
 													</div>
 												</form>
 											</div>

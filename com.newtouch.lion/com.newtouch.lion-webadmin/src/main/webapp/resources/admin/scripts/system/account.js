@@ -6,10 +6,15 @@ $(function () {
 	lion.util.menu();//加载导航栏
 
 	var $formuser=$('#formuser'),//基本信息
-		$formpassword=$('#formpassword');//修改密码
-
+		$formpassword=$('#formpassword'),//修改密码
+		$formimg=$('#formImg');//修改头像
+    
+	//上传图片预览与剪裁
+	$('#image').uploadPreview({ DivShow: "imgdiv", ImgShow: "imgShow"}); 
 	//基本信息验证表单
 	handleVForm($formuser,submitBaseInfoForm);
+	//修改头像验证表单
+	handleImageVForm($formimg,submitImageForm);
 	//修改密码验证表单
 	handlePasswordVForm($formpassword,submitPasswordForm);
 	//基本信息保存
@@ -28,11 +33,55 @@ $(function () {
 	$('#btnPasswordCancel').click(function(){
 		$formpassword.reset();
 	});
+	//修改头像
+	$('#btnImgUploadSave').click(function(){
+		$formimg.submit();
+	});
+	//修改头像取消
+	$('#btnImgUploadCancel').click(function(){
+		$formimg.reset();
+	});
 
 });
+//头像修改
+function submitImageForm(frm){
+	$.ajaxFileUpload({
+        url: 'changeimg.json', //用于文件上传的服务器端请求地址
+        secureuri: false, //是否需要安全协议，一般设置为false
+        fileElementId: 'image', //文件上传域的ID
+        dataType: 'json', //返回值类型 一般设置为json
+        data:frm.serializeObject(),//参数
+        success: function (data){  //服务器成功响应处理函数
+        	successChangeImgFrm.call(this,data);
+        },
+        error: function (xhr, textStatus, error){//服务器响应失败处理函数
+        	errorRequest.call(this,xhr,textStatus,error);
+        }
+    });
+    return false;
+}
+//修改头像成功回调函数
+function successChangeImgFrm(data){
+  if(data!==null&&!(data.hasError)){
+  	lion.util.success('提示',data.message);
+  	$('#formImg').reset();
+  }else if(data!==null&&data.hasError){
+  	var gmsg='';
+  	for(var msg in data.errorMessage){
+  		gmsg+=data.errorMessage[msg];
+  	}
+  	if(lion.util.isEmpty(gmsg)){
+  		gmsg='修改头像失败';
+  	}
+  	 lion.util.error('提示',gmsg);
+  }else{
+  	 lion.util.error('提示','修改头像失败');
+  }
+}
 //密码修改
 function submitPasswordForm(frm){
 	lion.util.post('changepwd.json',frm.serializeObject(),successChangePwdFrm,errorRequest);
+	
 }
 //修改密码成功回调函数
 function successChangePwdFrm(data){
@@ -83,7 +132,7 @@ function errorRequest(data,arg){
 }
 //修改密码验证表单
 handlePasswordVForm=function(vForm,submitCallBackfn){
-	var addError = $('.alert-danger', vForm), addSuccess = $('.alert-success',vForm)
+	var addError = $('.alert-danger', vForm), addSuccess = $('.alert-success',vForm);
 	vForm.validate({
         errorElement: 'span',
         errorClass: 'help-block help-block-error', 
@@ -173,6 +222,50 @@ handleVForm=function(vForm,submitCallBackfn){
         	}
         },
         submitHandler: function (form) {
+            submitCallBackfn(vForm);
+        }
+    });
+};
+//修改头像验证表单
+handleImageVForm=function(vForm,submitCallBackfn){
+	var addError = $('.alert-danger', vForm), addSuccess = $('.alert-success',vForm);
+  vForm.validate({
+        errorElement: 'span',
+        errorClass: 'help-block help-block-error', 
+        focusInvalid: false, 
+        onkeyup:false,
+        ignore: '', 
+      	messages: {
+      		image:{required:'请选择需要上传的头像'}
+        },
+        rules: {
+        	image:{required:true}
+        },
+        invalidHandler: function (event, validator) {             
+            addSuccess.hide();
+            addError.show();
+            Metronic.scrollTo(addError, -200);
+        },
+        highlight: function (element) {
+            $(element).closest('.form-group').addClass('has-error'); 
+        },
+
+        unhighlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-error'); 
+        },
+        success: function (label) {
+            label.closest('.form-group').removeClass('has-error'); 
+        },
+        errorPlacement:function(error,element){
+        	//当遇到combo的对话框架的时，修改它的显示位置
+        	if (element.hasClass('lion-combotree')){
+        		  error.insertAfter(element.parent().find('div.btn-group'));
+        	}else{
+        		error.insertAfter(element);
+        	}
+        },
+        submitHandler: function (form) {
+        	//console.log('eeeeeeeeeeeeee');
             submitCallBackfn(vForm);
         }
     });

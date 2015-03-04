@@ -111,6 +111,9 @@
 			<basic name="employeeCode">
 				<column name="EMPLOYEE_NO" length="30" nullable="true" />
 			</basic>
+			<basic name="image">
+				<column name="IMAGE" length="100" nullable="true" />
+			</basic>
 			<basic name="realnameZh">
 				<column name="REALNAME_ZH" length="128" nullable="true" />
 			</basic>
