@@ -53,6 +53,8 @@ public class LoginController extends AbstractController {
 	private static final String LOGIN_SUCCESS = "/index.htm";
 	/**重定向到登录*/
 	private static final String REDIRECT_LOGIN="/login.htm";
+	/**未授权页面*/
+	private static final String UNAUTHORIZED_RETURN="/unauthorized";
 	/** Shiro Session缓存管理*/
 	@Autowired
 	private SessionCacheManager sessionCacheManager;
@@ -136,6 +138,11 @@ public class LoginController extends AbstractController {
 			sessionCacheManager.removeSessionController(Constants.CACHE_SESSION_NAME,userInfo.getUsername());
 		}
 		return this.redirect(REDIRECT_LOGIN);
+	}
+	
+	@RequestMapping(value="unauthorized",method=RequestMethod.GET)
+	public String unauthorized(){
+		return UNAUTHORIZED_RETURN;
 	}
 	
 	/**

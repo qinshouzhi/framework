@@ -22,6 +22,7 @@ import com.newtouch.lion.common.codelist.CodeListConstant;
 import com.newtouch.lion.dao.system.ResourceDao;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.system.Resource;
+import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.service.AbstractService;
 import com.newtouch.lion.service.datagrid.DataColumnService;
 import com.newtouch.lion.service.system.ResourceService;
@@ -133,6 +134,23 @@ public class ResourceServiceImpl extends AbstractService implements
 	public List<Resource> doFindAll() {
 		String hql = "from Resource";
 		return this.resourceDao.query(hql, null);
+	}
+
+	
+	
+	
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.ResourceService#doFindAuthAll()
+	 */
+	@Override
+	public List<Resource> doFindAuthAll() {
+	    List<Resource> resources=this.doFindAll();
+	    for(Resource resource:resources){
+	    	for(Role role:resource.getRoles()){
+	    		role.getNameEn();
+	    	}
+	    }
+		return resources;
 	}
 
 	/*

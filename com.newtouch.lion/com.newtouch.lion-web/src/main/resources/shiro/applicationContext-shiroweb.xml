@@ -54,8 +54,7 @@
     </bean>
 
 	<!-- 会话DAO -->
-	<bean id="sessionDAO"
-		class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+	<bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
 		<property name="activeSessionsCacheName" value="shiro-activeSessionCache" />
 		<property name="sessionIdGenerator" ref="sessionIdGenerator" />
 	</bean>
@@ -67,8 +66,7 @@
 	</bean>
 
 	<!-- 会话管理器 -->
-	<bean id="sessionManager"
-		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
 		<property name="globalSessionTimeout" value="1800000" />
 		<property name="deleteInvalidSessions" value="true" />
 		<property name="sessionValidationSchedulerEnabled" value="true" />
@@ -123,7 +121,7 @@
 		<property name="redirectUrl"  value="/login.htm"/>
 		<property name="sessionCacheManager" ref="sessionCacheManager"/>
 	</bean>
-	<!-- Shiro的Web过滤器 -->
+	<!--  Shiro的Web过滤器-->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/login.htm" />
@@ -136,17 +134,27 @@
 				<entry key="logoutFilter" value-ref="logoutFilter"/>
 			</util:map>
 		</property>
+		<property name="filterChainDefinitionMap" ref="filterChainDefinitionManger"/>
+	</bean>
+    <!-- 动态加载数据配置权限及配置 -->
+	<bean  id="filterChainDefinitionManger" class="com.newtouch.lion.web.shiro.mgt.ShiroFilterChainDefinitionManger">
 		<property name="filterChainDefinitions">
 			<value>
 				/resources/** = anon
 				/unauthorized.htm =anon
 				/loginerror.htm=anon
 				/login.htm = authc
+				/unauthorized.htm = authc
 				/logout.htm=logoutFilter
-				/** = user,forceLogoutFilter
+				<!--  /** = authc,forceLogoutFilter-->
 			</value>
 		</property>
 	</bean>
 	<!-- Shiro生命周期处理器 -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+	
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor" />
+		<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
 </beans>

@@ -6,6 +6,8 @@
 */
 package com.newtouch.lion.admin.web.controller; 
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -36,13 +38,18 @@ public class IndexController extends  AbstractController{
 	/**测试页面*/
 	private static final String TEST_RETURN="/test";
 	
-	@RequestMapping("/index")
+	@RequestMapping("index")
 	public String index(){
+		//权限校验。判断是否包含权限。
+		Subject subject = SecurityUtils.getSubject();
+		//具体响应ShiroDbRealm。doGetAuthorizationInfo，判断是否包含此url的响应权限
+		boolean isPermitted = subject.isPermitted("/index.htm");
+		logger.info("isPermitted:{}",isPermitted);
 		logger.info("进入首页.....");
 		return INDEX_RETURN;
 	}
 	
-	@RequestMapping("/test")
+	@RequestMapping("test")
 	public String test(){
 		
 		 
@@ -53,7 +60,7 @@ public class IndexController extends  AbstractController{
 		return TEST_RETURN;
 	}
 	
-	@RequestMapping("/test2")
+	@RequestMapping("test2")
 	public String test2(){
 		
 		 
@@ -63,6 +70,8 @@ public class IndexController extends  AbstractController{
 		logger.info("进入测试页面");
 		return TEST_RETURN;
 	}
+	
+	
 }
 
 	

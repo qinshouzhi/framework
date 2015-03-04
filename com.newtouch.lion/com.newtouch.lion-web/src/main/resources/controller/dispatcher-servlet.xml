@@ -14,10 +14,12 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com.newtouch.lion.admin.web" />
 	<context:component-scan base-package="com.newtouch.lion.web" />
-	<aop:config proxy-target-class="true" />
+	<!-- Shiro MVC Start -->
+	<aop:config proxy-target-class="true"/>
 	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
 		<property name="securityManager" ref="securityManager" />
 	</bean>
+	<!-- Shiro MVC End -->
 	<!-- Spring MVC自动 -->
 	<mvc:annotation-driven validator="validator">
 		<mvc:message-converters>

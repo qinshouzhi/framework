@@ -7,6 +7,7 @@
 package com.newtouch.lion.service.system;
 
 import java.util.List;
+import java.util.Set;
 
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.model.system.User;
@@ -241,6 +242,9 @@ public interface UserService {
 	 * @return List<Role>  角色列表
 	 */
 	public List<Role> doFindRoles(String userName);
+	
+	/**根据用户ID查询所有的角色*/
+	public Set<Role> doFindRoles(Long id);
 	
 	
 }
