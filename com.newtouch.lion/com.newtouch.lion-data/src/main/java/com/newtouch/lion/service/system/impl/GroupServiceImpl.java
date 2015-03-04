@@ -22,6 +22,8 @@ import com.newtouch.lion.common.Assert;
 import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.system.GroupDao;
 import com.newtouch.lion.dao.system.GroupRoleDao;
+import com.newtouch.lion.dao.system.RoleDao;
+import com.newtouch.lion.dao.system.UserDao;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.datagrid.DataColumn;
 import com.newtouch.lion.model.system.Group;
@@ -33,8 +35,6 @@ import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.AbstractService;
 import com.newtouch.lion.service.datagrid.DataColumnService;
 import com.newtouch.lion.service.system.GroupService;
-import com.newtouch.lion.service.system.RoleService;
-import com.newtouch.lion.service.system.UserService;
 
 /**
  * <p>
@@ -53,7 +53,7 @@ import com.newtouch.lion.service.system.UserService;
  * @author WangLijun
  * @version 1.0
  */
-@Service("groupService")
+@Service
 public class GroupServiceImpl extends AbstractService implements GroupService {
 
 	@Autowired
@@ -63,10 +63,10 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 	private DataColumnService dataColumnService;
 
 	@Autowired
-	private UserService userService;
+	private UserDao userDao;
 
 	@Autowired
-	private RoleService roleService;
+	private RoleDao roleDao;
 	
 	@Autowired
 	private GroupRoleDao groupRoleDao;
@@ -137,7 +137,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 		}
 
 		for (Long userId : userIds) {
-			User user = this.userService.doFindById(userId);
+			User user = this.userDao.findById(userId);
 			group.getUsers().add(user);
 		}
 		this.doUpdate(group);
@@ -182,7 +182,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 			return;
 		}
 		for (Long roldeId : roleIds) {
-			Role role = this.roleService.doFindById(roldeId);
+			Role role = this.roleDao.findById(roldeId);
 			group.getRoles().add(role);
 		}
 		this.doUpdate(group);

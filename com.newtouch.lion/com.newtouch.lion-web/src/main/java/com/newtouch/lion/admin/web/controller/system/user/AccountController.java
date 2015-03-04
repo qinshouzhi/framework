@@ -6,6 +6,8 @@
 */
 package com.newtouch.lion.admin.web.controller.system.user; 
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +24,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.user.PasswordVo;
+import com.newtouch.lion.admin.web.model.system.user.UserImageVo;
 import com.newtouch.lion.admin.web.model.system.user.UserInfoVo;
+import com.newtouch.lion.admin.web.model.system.util.ImageCut;
+import com.newtouch.lion.admin.web.model.system.util.ImageUploadUtil;
 import com.newtouch.lion.common.user.UserInfo;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.service.system.UserService;
@@ -162,6 +167,48 @@ public class AccountController extends AbstractController{
 		params.put(BindResult.SUCCESS,ConstantMessage.EDIT_SUCCESS_MESSAGE_CODE);
 		modelAndView.addObject(BindMessage.SUCCESS, params);
 
+		return this.getJsonView(modelAndView);
+	}
+	
+	/**修改头像
+	 * @throws IOException 
+	 * @throws IllegalStateException */
+	@RequestMapping("changeimg")
+	@ResponseBody
+	public ModelAndView changeImg(@Valid @ModelAttribute("userImageVo") UserImageVo userImageVo,Errors errors, ModelAndView modelAndView) throws IllegalStateException, IOException{
+		
+		UserInfo userInfo =LoginSecurityUtil.getUser();
+        String resourcePath = ("../image/");
+        if(userImageVo.getImage()!=null){
+            if(ImageUploadUtil.isImage(userImageVo.getImage())){
+                String fileName = userImageVo.getImage().getOriginalFilename();
+                int end = fileName.lastIndexOf(".");
+                String saveName = fileName.substring(0,end);
+                File dir = new File(resourcePath);
+                if(!dir.exists()){
+                    dir.mkdirs();
+                }
+                File file = new File(dir,saveName+"_src.jpg");
+                userImageVo.getImage().transferTo(file);
+                String srcImagePath = resourcePath + saveName;
+                int imageX = Float.valueOf(userImageVo.getX()).intValue();
+                int imageY = Float.valueOf(userImageVo.getY()).intValue();
+                int imageH = Float.valueOf(userImageVo.getH()).intValue();
+                int imageW = Float.valueOf(userImageVo.getW()).intValue();
+                //这里开始截取操作
+                ImageCut.imgCut(srcImagePath,imageX,imageY,imageW,imageH);
+                // 获取用户登录的IP地址
+        		User user = this.userService.doFindById(userInfo.getId());
+        		user.setImage(srcImagePath+"_cut.jpg");
+        		this.userService.doUpdate(user);
+        		Map<String, String> params = new HashMap<String, String>();
+        		params.put(BindResult.SUCCESS,ConstantMessage.EDIT_SUCCESS_MESSAGE_CODE);
+        		modelAndView.addObject(BindMessage.SUCCESS, params);
+            }
+        }
+        
+        errors.reject("","图片格式不正确");
+		modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
 		return this.getJsonView(modelAndView);
 	}
 }

@@ -111,6 +111,9 @@
 			<basic name="employeeCode">
 				<column name="EMPLOYEE_NO" length="30" nullable="true" />
 			</basic>
+			<basic name="image">
+				<column name="IMAGE" length="100" nullable="true" />
+			</basic>
 			<basic name="realnameZh">
 				<column name="REALNAME_ZH" length="128" nullable="true" />
 			</basic>
@@ -326,6 +329,9 @@
 			</basic>
 			<basic name="target">
 				<column name="TARGET" length="16" nullable="false" />
+			</basic>
+			<basic name="permission">
+				<column name="PREMISSION" length="30" nullable="false" />
 			</basic>
 			<many-to-one name="resource" fetch="LAZY">
 				<join-column name="PARENT_BAS_RESOURCE_ID" insertable="false" updatable="false" />

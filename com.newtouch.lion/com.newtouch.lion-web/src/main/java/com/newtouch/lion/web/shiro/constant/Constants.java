@@ -37,6 +37,16 @@ public class Constants {
 	public static final String LOGIN_FORCE_ERROR="1";
 	/**控制并发缓存名称*/
 	public static final String CACHE_SESSION_NAME="shiroSessionController";
+	/**授权访问-authc*/
+	public static final String AUTHC="authc";
+	/**角色-roles*/
+	public static final String ROLES="roles";
+	/**权限管理-perms*/
+	public static final String PERMS="perms";
+	/**默认premission字符串-perms[\"{0}\"] */
+	public static final String PERMS_STRING="perms[\"{0}\"]";
+	/**角色结构格式-role[{0}] */
+	public static final String ROLE_STRING = "roles[{0}]";
 }
 
 	

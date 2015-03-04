@@ -19,8 +19,10 @@ import org.springframework.util.CollectionUtils;
 
 import com.newtouch.lion.common.Assert;
 import com.newtouch.lion.common.sql.HqlUtils;
+import com.newtouch.lion.dao.system.GroupDao;
 import com.newtouch.lion.dao.system.RoleDao;
 import com.newtouch.lion.dao.system.RoleGroupDao;
+import com.newtouch.lion.dao.system.UserDao;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.system.Group;
 import com.newtouch.lion.model.system.Resource;
@@ -31,10 +33,8 @@ import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.AbstractService;
 import com.newtouch.lion.service.datagrid.DataColumnService;
-import com.newtouch.lion.service.system.GroupService;
 import com.newtouch.lion.service.system.ResourceService;
 import com.newtouch.lion.service.system.RoleService;
-import com.newtouch.lion.service.system.UserService;
 
 /**
  * <p>
@@ -63,9 +63,9 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 	private RoleGroupDao  roleGroupDao;
 	
 	@Autowired
-	private UserService userService;
+	private UserDao userDao;
 	@Autowired
-	private GroupService groupService;
+	private GroupDao groupDao;
 	@Autowired
 	private ResourceService resourceService;
 	@Autowired
@@ -493,7 +493,7 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 			return;
 		}
 		for (Long userId : userIds) {
-			User user = userService.doGetById(userId);
+			User user = this.userDao.findById(userId);
 			Set<User> users = role.getUsers();
 			if (users == null) {
 				users = new HashSet<User>();
@@ -517,7 +517,7 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 			return;
 		}
 		for (Long groupId : groupIds) {
-			Group group = groupService.doGetById(groupId);
+			Group group = groupDao.findById(groupId);
 			Set<Group> groups = role.getGroups();
 			if (groups == null) {
 				groups = new HashSet<Group>();
@@ -541,7 +541,7 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 			return;
 		}
 		for (Long userId : userIds) {
-			User user = userService.doGetById(userId);
+			User user = this.userDao.findById(userId);
 			if (user == null)
 				continue;
 			role.getUsers().remove(user);
@@ -562,7 +562,7 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 			return;
 		}
 		for (Long groupId : groupIds) {
-			Group group = groupService.doGetById(groupId);
+			Group group = groupDao.findById(groupId);
 			if (group == null)
 				continue;
 			role.getGroups().remove(group);
