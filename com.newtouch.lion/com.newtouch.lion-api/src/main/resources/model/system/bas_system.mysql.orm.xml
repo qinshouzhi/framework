@@ -357,4 +357,24 @@
 			</embedded>
 		</attributes>
 	</entity>
+	<!-- 图标信息 -->
+	<entity class="Icon">
+		<table name="BAS_ICON" />
+		<attributes>
+			<id name="id">
+				<column name="BAS_ICON_ID" unique="true" nullable="false"
+					precision="11" scale="0" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+			<basic name="iconType">
+				<column name="ICON_TYPE" length="255" nullable="true" />
+			</basic>
+			<basic name="iconClass">
+				<column name="ICON_CLASS" length="255" nullable="true" />
+			</basic>
+			<basic name="iconImage">
+				<column name="ICON_IMAGE" length="255" nullable="true" />
+			</basic>
+		</attributes>
+	</entity>
 </entity-mappings>
