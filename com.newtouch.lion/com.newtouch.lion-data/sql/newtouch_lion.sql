@@ -842,7 +842,7 @@ CREATE TABLE `bas_resource` (
   `EDITABLE` tinyint(1) DEFAULT '1' COMMENT '记录是否可编辑  默认为true\r\n            ',
   `TARGET` varchar(16) DEFAULT NULL COMMENT '指HTML链接的target属性',
   `ICON` varchar(30) DEFAULT NULL COMMENT '资源图标',
-  `PREMISSION` varchar(128) DEFAULT NULL COMMENT '权限名称',
+  `PERMISSION` varchar(128) DEFAULT NULL COMMENT '权限名称',
   `CREATE_BY` int(11) NOT NULL COMMENT '系统默认字段.创建人ID',
   `CREATE_DATE` datetime NOT NULL COMMENT '系统默认字段.创建日期',
   `UPDATE_BY` int(11) NOT NULL COMMENT '系统默认字段.更新人ID',
