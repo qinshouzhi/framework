@@ -44,6 +44,8 @@ table.dataTable {
 	margin-top: 6px !important;
 	margin-bottom: 6px !important;
 	max-width: none !important;
+	table-layout: fixed;   
+    word-wrap:break-word;  
 }
 
 table.dataTable thead .sorting,
