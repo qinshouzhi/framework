@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.newtouch.lion.common.sql.HqlUtils;
+import com.newtouch.lion.dao.system.GroupDao;
+import com.newtouch.lion.dao.system.RoleDao;
 import com.newtouch.lion.dao.system.UserDao;
 import com.newtouch.lion.dao.system.UserGroupDao;
 import com.newtouch.lion.dao.system.UserRoleDao;
@@ -34,8 +36,6 @@ import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.AbstractService;
 import com.newtouch.lion.service.datagrid.DataColumnService;
-import com.newtouch.lion.service.system.GroupService;
-import com.newtouch.lion.service.system.RoleService;
 import com.newtouch.lion.service.system.UserService;
 
 /**
@@ -67,9 +67,9 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	@Autowired
 	private DataColumnService dataColumnService;
 	@Autowired
-	private GroupService groupService;
+	private GroupDao groupDao;
 	@Autowired
-	private RoleService roleService;
+	private RoleDao roleDao;
 	
 	@Value("${super.username}")
 	private String superUserName;
@@ -729,7 +729,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 
 		if (deleteGroupIds != null && deleteGroupIds.size() > 0) {
 			for (Long groupId : deleteGroupIds) {
-				Group group = groupService.doFindById(groupId);
+				Group group = groupDao.findById(groupId);
 				if (group != null) {
 					user.getGroups().remove(group);
 				}
@@ -738,7 +738,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 
 		if (targetGroupIds != null && targetGroupIds.size() > 0) {
 			for (Long groupId : targetGroupIds) {
-				Group group = groupService.doFindById(groupId);
+				Group group = groupDao.findById(groupId);
 				if (group == null) {
 					continue;
 				}
@@ -773,7 +773,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 
 		if (deleteRoleIds != null && deleteRoleIds.size() > 0) {
 			for (Long roleId : deleteRoleIds) {
-				Role role = this.roleService.doFindById(roleId);
+				Role role = this.roleDao.findById(roleId);
 				if (role != null) {
 					user.getRoles().remove(role);
 				}
@@ -782,7 +782,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 
 		if (targetRoleIds != null && targetRoleIds.size() > 0) {
 			for (Long roleId : targetRoleIds) {
-				Role role = this.roleService.doFindById(roleId);
+				Role role = this.roleDao.findById(roleId);
 				if (role == null) {
 					continue;
 				}

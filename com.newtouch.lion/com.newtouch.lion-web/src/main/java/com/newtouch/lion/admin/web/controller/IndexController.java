@@ -6,9 +6,10 @@
 */
 package com.newtouch.lion.admin.web.controller; 
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.newtouch.lion.web.controller.AbstractController;
 
@@ -39,6 +40,11 @@ public class IndexController extends  AbstractController{
 	
 	@RequestMapping("index")
 	public String index(){
+		//权限校验。判断是否包含权限。
+		Subject subject = SecurityUtils.getSubject();
+		//具体响应ShiroDbRealm。doGetAuthorizationInfo，判断是否包含此url的响应权限
+		boolean isPermitted = subject.isPermitted("/index.htm");
+		logger.info("isPermitted:{}",isPermitted);
 		logger.info("进入首页.....");
 		return INDEX_RETURN;
 	}

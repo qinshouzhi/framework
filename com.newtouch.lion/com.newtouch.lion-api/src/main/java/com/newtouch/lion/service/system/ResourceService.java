@@ -31,7 +31,6 @@ import com.newtouch.lion.tree.Tree;
  */
 public interface ResourceService {
 	
-	
 	/***
 	 * 保存资源对象
 	 * 
@@ -64,6 +63,10 @@ public interface ResourceService {
 	 * 
 	 */
 	public List<Resource> doFindAll();
+	
+	/**doFindAuthAll*/
+	public List<Resource> doFindAuthAll();
+
 	/***
 	 * 根据父资源Id查询资源列表
 	 * @param parentResourceId

@@ -72,7 +72,8 @@ public class Resource extends VersionEntity<Long> {
 	private Set<Resource> resources = new HashSet<Resource>(0);
 	/** 资源所关联的角色集合 */
 	private Set<Role> roles = new HashSet<Role>();
-
+	/**权限名称*/
+	private String permission;
 
 	/*
 	 * (non-Javadoc)
@@ -309,6 +310,22 @@ public class Resource extends VersionEntity<Long> {
 	 */
 	public void setResource(Resource resource) {
 		this.resource = resource;
+	}
+	
+	
+
+	/**
+	 * @return  权限名称
+	 */
+	public String getPermission() {
+		return permission;
+	}
+
+	/**
+	 * @param permission 权限名称
+	 */
+	public void setPermission(String permission) {
+		this.permission = permission;
 	}
 
 	/**

@@ -41,6 +41,8 @@ public class Constants {
 	public static final String ROLES="roles";
 	/**权限管理*/
 	public static final String PERMS="perms";
+	/**默认premission字符串 */
+	public static final String PERMS_STRING="perms[\"{0}\"]";
 }
 
 	
