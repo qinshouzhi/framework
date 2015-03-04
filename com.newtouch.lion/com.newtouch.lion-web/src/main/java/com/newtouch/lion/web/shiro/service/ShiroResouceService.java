@@ -32,7 +32,7 @@ public interface ShiroResouceService {
 	 * 根据资源查询所有权限信息
 	 * @return
 	 */
-	public List<AuthorityModel> findAll();
+	public List<AuthorityModel> doFindAll();
 }
 
 	

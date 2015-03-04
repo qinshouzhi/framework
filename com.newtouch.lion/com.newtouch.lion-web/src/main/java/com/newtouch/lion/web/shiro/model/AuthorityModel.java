@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.util.CollectionUtils;
 
 
 /**
@@ -88,10 +89,10 @@ public class AuthorityModel  implements Serializable{
 	/**
 	 * @return the roles
 	 */
-	public String getRoles() {
-		String role=this.roles.toString();
-		if(role.length()>2){
-			return role.substring(1,role.length()-2);
+	public String getRoles() {		
+		if(!CollectionUtils.isEmpty(this.roles)){
+			String role=this.roles.toString();
+			return role.substring(1,role.length()-1);
 		}
 		return StringUtils.EMPTY;
 	}
@@ -128,9 +129,10 @@ public class AuthorityModel  implements Serializable{
 	 * @return the permissions
 	 */
 	public String getPermissions() {
-		String permission=permissions.toString();
-		if(permission.length()>2){
-			return permission.substring(1,permission.length()-2);
+		
+		if(!CollectionUtils.isEmpty(this.permissions)){
+			String permission=permissions.toString();
+			return permission.substring(1,permission.length()-1);
 		}
 		return StringUtils.EMPTY;
 	}

@@ -95,14 +95,13 @@ public class UserRealm extends AuthorizingRealm {
 		for (Role role : userRoles) {
 			roleNames.add(role.getNameEn());
 			for (Resource resource : role.getResources()) {
-				String path = resource.getPath();
-				if (StringUtils.isNotEmpty(path) && !permissions.contains(path)) {
-					permissions.add(path);
+				String permission = resource.getPermission();
+				if (StringUtils.isNotEmpty(permission) && !permissions.contains(permission)) {
+					permissions.add(permission);
 				}
 			}
 		}
-		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo(
-				roleNames);
+		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo(roleNames);
 		authorizationInfo.setStringPermissions(permissions);
 		return authorizationInfo;
 	}

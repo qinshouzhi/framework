@@ -44,8 +44,8 @@ import org.apache.shiro.web.filter.mgt.SimpleNamedFilterList;
  * @version 1.0
  */
 public class CustomDefaultFilterChainManager extends DefaultFilterChainManager {
-
-	private Map<String, String> filterChainDefinitionMap = null;
+	/***URL过滤器*/
+	private Map<String, String> filterChainDefinition = null;
 	/**登录入口URL*/
 	private String loginUrl;
 	/**登录成功URL*/
@@ -59,14 +59,28 @@ public class CustomDefaultFilterChainManager extends DefaultFilterChainManager {
 		addDefaultFilters(false);
 	}
 
-	public Map<String, String> getFilterChainDefinitionMap() {
-		return filterChainDefinitionMap;
+	
+	
+
+	/**
+	 * @return the filterChainDefinition
+	 */
+	public Map<String, String> getFilterChainDefinition() {
+		return filterChainDefinition;
 	}
 
-	public void setFilterChainDefinitionMap(
-			Map<String, String> filterChainDefinitionMap) {
-		this.filterChainDefinitionMap = filterChainDefinitionMap;
+
+
+
+	/**
+	 * @param filterChainDefinition the filterChainDefinition to set
+	 */
+	public void setFilterChainDefinition(Map<String, String> filterChainDefinition) {
+		this.filterChainDefinition = filterChainDefinition;
 	}
+
+
+
 
 	public void setCustomFilters(Map<String, Filter> customFilters) {
 		for (Map.Entry<String, Filter> entry : customFilters.entrySet()) {
@@ -79,15 +93,14 @@ public class CustomDefaultFilterChainManager extends DefaultFilterChainManager {
 		ini.load(definitions);
 		// did they explicitly state a 'urls' section? Not necessary, but just
 		// in case:
-		Ini.Section section = ini
-				.getSection(IniFilterChainResolverFactory.URLS);
+		Ini.Section section = ini.getSection(IniFilterChainResolverFactory.URLS);
 		if (CollectionUtils.isEmpty(section)) {
 			// no urls section. Since this _is_ a urls chain definition
 			// property, just assume the
 			// default section contains only the definitions:
 			section = ini.getSection(Ini.DEFAULT_SECTION_NAME);
 		}
-		setFilterChainDefinitionMap(section);
+		this.setFilterChainDefinition(section);
 	}
 
 	public String getLoginUrl() {
@@ -130,7 +143,7 @@ public class CustomDefaultFilterChainManager extends DefaultFilterChainManager {
 		}
 
 		// build up the chains:
-		Map<String, String> chains = getFilterChainDefinitionMap();
+		Map<String, String> chains =this.getFilterChainDefinition();
 		if (!CollectionUtils.isEmpty(chains)) {
 			for (Map.Entry<String, String> entry : chains.entrySet()) {
 				String url = entry.getKey();

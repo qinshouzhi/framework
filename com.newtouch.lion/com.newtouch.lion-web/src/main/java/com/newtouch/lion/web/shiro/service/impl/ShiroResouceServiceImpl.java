@@ -9,15 +9,14 @@ package com.newtouch.lion.web.shiro.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.newtouch.lion.model.system.Resource;
 import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.service.AbstractService;
 import com.newtouch.lion.service.system.ResourceService;
-import com.newtouch.lion.web.shiro.mgt.ShiroFilterChainManager;
 import com.newtouch.lion.web.shiro.model.AuthorityModel;
 import com.newtouch.lion.web.shiro.service.ShiroResouceService;
 
@@ -38,25 +37,26 @@ import com.newtouch.lion.web.shiro.service.ShiroResouceService;
  * @author WangLijun
  * @version 1.0
  */
+@Service
 public class ShiroResouceServiceImpl extends AbstractService implements
 		ShiroResouceService {
 	/** 资源读取类 */
 	@Autowired
-	private ResourceService resourceService;
-
-	@Autowired
-	private ShiroFilterChainManager shiroFilerChainManager;
-
+	private ResourceService resourceService; 
+	
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see com.newtouch.lion.web.shiro.service.ShiroResouceService#findAll()
 	 */
 	@Override
-	public List<AuthorityModel> findAll() {
-		List<Resource> resources = resourceService.doFindAll();
+	public List<AuthorityModel> doFindAll() {
+		List<Resource> resources = resourceService.doFindAuthAll();
 		List<AuthorityModel> authorityModels = new ArrayList<AuthorityModel>();
 		for (Resource resource : resources) {
+			if(StringUtils.isEmpty(resource.getPath())){
+				continue;
+			}
 			AuthorityModel authorityModel = new AuthorityModel();
 			authorityModel.setId(resource.getId());
 			authorityModel.setUrl(resource.getPath());
@@ -65,15 +65,11 @@ public class ShiroResouceServiceImpl extends AbstractService implements
 				authorityModel.addRole(role.getNameEn());
 			}
 			// 添加权限模型
-
+			if(!StringUtils.isEmpty(resource.getPermission())){
+				authorityModel.addPermission(resource.getPermission());
+			}
 			authorityModels.add(authorityModel);
 		}
 		return authorityModels;
 	}
-
-	@PostConstruct
-	public void initFilterChain() {
-		shiroFilerChainManager.initFilterChains(findAll());
-	}
-
 }

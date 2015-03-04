@@ -10,13 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.web.filter.mgt.DefaultFilterChainManager;
 import org.apache.shiro.web.filter.mgt.NamedFilterList;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.newtouch.lion.web.shiro.constant.Constants;
 import com.newtouch.lion.web.shiro.model.AuthorityModel;
@@ -38,14 +34,14 @@ import com.newtouch.lion.web.shiro.model.AuthorityModel;
  * @author WangLijun
  * @version 1.0
  */
-@Service
+ 
 public class ShiroFilterChainManager {
-	@Autowired 
+ 
 	private DefaultFilterChainManager filterChainManager;
 	
 	private Map<String, NamedFilterList> defaultFilterChains;
 	
-	@PostConstruct 
+ 
 	public void init(){
 		defaultFilterChains=new HashMap<String, NamedFilterList>(filterChainManager.getFilterChains());
 	}

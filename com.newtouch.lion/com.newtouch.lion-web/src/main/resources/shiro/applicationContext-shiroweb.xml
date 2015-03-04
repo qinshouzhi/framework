@@ -121,7 +121,7 @@
 		<property name="redirectUrl"  value="/login.htm"/>
 		<property name="sessionCacheManager" ref="sessionCacheManager"/>
 	</bean>
-	<!-- Shiro的Web过滤器
+	<!--  Shiro的Web过滤器-->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/login.htm" />
@@ -134,56 +134,27 @@
 				<entry key="logoutFilter" value-ref="logoutFilter"/>
 			</util:map>
 		</property>
+		<property name="filterChainDefinitionMap" ref="filterChainDefinitionManger"/>
+	</bean>
+    <!-- 动态加载数据配置权限及配置 -->
+	<bean  id="filterChainDefinitionManger" class="com.newtouch.lion.web.shiro.mgt.ShiroFilterChainDefinitionManger">
 		<property name="filterChainDefinitions">
 			<value>
 				/resources/** = anon
 				/unauthorized.htm =anon
 				/loginerror.htm=anon
 				/login.htm = authc
+				/unauthorized.htm = authc
 				/logout.htm=logoutFilter
-				/** = user,forceLogoutFilter
+				<!--  /** = authc,forceLogoutFilter-->
 			</value>
 		</property>
-	</bean> -->
-     <!-- 过滤器 -->
-	 <bean id="filterChainManager" class="com.newtouch.lion.web.shiro.mgt.CustomDefaultFilterChainManager">
-       <property name="loginUrl" value="/login.htm" />
-		<property name="unauthorizedUrl" value="/unauthorized.htm" />
-		<property name="successUrl" value="/index.htm"/>
-        <property name="customFilters">
-            <util:map>
-                <entry key="authc" value-ref="formAuthenticationFilter" />
-				<entry key="forceLogoutFilter" value-ref="forceLogoutFilter"/>
-				<entry key="logoutFilter" value-ref="logoutFilter"/>
-            </util:map>
-        </property>
-        <property name="defaultFilterChainDefinitions">
-            <value>
-                /resources/** = anon
-				/unauthorized.htm =anon
-				/loginerror.htm=anon
-				/login.htm = authc
-				/logout.htm=logoutFilter
-				/**=authc,forceLogoutFilter
-				<!--/** = user,forceLogoutFilter  -->
-            </value>
-        </property>
-    </bean>
-	 
-	<!-- URL过滤匹配 -->
-	<bean id="filterChainResolver" class="com.newtouch.lion.web.shiro.filter.CustomPathMatchingFilterChainResolver">
-        <property name="customDefaultFilterChainManager" ref="filterChainManager"/>
-    </bean>
-    <!-- Shiro的Web过滤器 -->
-    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-        <property name="securityManager" ref="securityManager"/>
-    </bean>
-	<!-- 调用 setFilterChainResolver -->
-    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject" ref="shiroFilter"/>
-        <property name="targetMethod" value="setFilterChainResolver"/>
-        <property name="arguments" ref="filterChainResolver"/>
-    </bean>
+	</bean>
 	<!-- Shiro生命周期处理器 -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+	
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor" />
+		<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
 </beans>
