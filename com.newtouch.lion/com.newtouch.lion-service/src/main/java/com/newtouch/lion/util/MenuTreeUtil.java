@@ -44,14 +44,11 @@ public class MenuTreeUtil {
 	/** 日志 */
 	private final static Logger logger = LoggerFactory.getLogger(ResourceTreeUtil.class);
 	/** 菜单列表 */
-	private static Map<String, String> menusMap = new HashMap<String, String>();
+	private static Map<String, String> menus = new HashMap<String, String>();
 	/** 菜单列表 */
 	static {
-		menusMap.put(CodeListConstant.RESTYPE_MENU,CodeListConstant.RESTYPE_MENU);
-		menusMap.put(CodeListConstant.RESTYPE_MODULE,CodeListConstant.RESTYPE_MODULE);
-		menusMap.put(CodeListConstant.RESTYPE_MODULE_MENU_CATEGORY,CodeListConstant.RESTYPE_MODULE_MENU_CATEGORY);
-		menusMap.put(CodeListConstant.RESTYPE_APPLICATION,CodeListConstant.RESTYPE_APPLICATION);
-		menusMap.put(CodeListConstant.RESTYPE_MODULE_CATEGORY_ITEM,CodeListConstant.RESTYPE_MODULE_CATEGORY_ITEM);
+		menus.put(CodeListConstant.RESTYPE_MODULE_MENU_CATEGORY,CodeListConstant.RESTYPE_MODULE_MENU_CATEGORY);
+		menus.put(CodeListConstant.RESTYPE_MODULE_CATEGORY_ITEM,CodeListConstant.RESTYPE_MODULE_CATEGORY_ITEM);
 	}
 
 	/***
@@ -75,7 +72,8 @@ public class MenuTreeUtil {
 			Boolean checked = Boolean.TRUE;
 			Attributes attributes = new Attributes();
 			attributes.setPath(resource.getPath());
-			//attributes.setTarget(resource.getTarget());
+ 
+		 
 			if (CodeListConstant.RESTYPE_MODULE_CATEGORY_ITEM.equals(resource
 					.getType())){
 				if(menuResourcesMap.containsKey(resource.getId())){
@@ -140,6 +138,7 @@ public class MenuTreeUtil {
 			Attributes attributes = new Attributes();
 			attributes.setPath(resource.getPath());
 			//attributes.setTarget(resource.getTarget());
+		 
 			if (CodeListConstant.RESTYPE_MODULE_CATEGORY_ITEM.equals(resource.getType())){
 				if(menuResourcesMap.containsKey(resource.getId())){
 					checked=Boolean.FALSE;
@@ -156,11 +155,10 @@ public class MenuTreeUtil {
 			logger.debug("count:{}",count);
 			List<Menu> childrenNext = new ArrayList<Menu>();
 			// 当资源子集大于1时，进入递归调用；
-			if (resource.getResources().size() > 0) {
+			if (resource.getResources().size() > 0&&!CodeListConstant.RESTYPE_MODULE_CATEGORY_ITEM.equals(resource.getType())) {
 				List<Resource> resourcesList = new ArrayList<Resource>(
 						resource.getResources());
-				childrenNext = treeResource(resourcesList, menuResourcesMap,
-						isSort, count,requestURL,contextPath);
+				childrenNext = treeResource(resourcesList, menuResourcesMap,isSort, count,requestURL,contextPath);
 				if (childrenNext.size() == 0) {
 					continue;
 				}
@@ -231,7 +229,7 @@ public class MenuTreeUtil {
 	 * @return 包括
 	 */
 	private static boolean containsKey(String key) {
-		return menusMap.containsKey(key);
+		return menus.containsKey(key);
 	}
 	
 	public static void main(String[] args) {

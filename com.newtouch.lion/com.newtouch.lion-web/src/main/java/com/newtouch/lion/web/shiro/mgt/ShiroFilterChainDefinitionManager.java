@@ -25,10 +25,10 @@ import com.newtouch.lion.web.shiro.service.ShiroResouceService;
 
 /**
  * <p>
- * Title:
+ * Title:扩展Shiro过滤器
  * </p>
  * <p>
- * Description:
+ * Description:扩展Shiro过滤器
  * </p>
  * <p>
  * Copyright: Copyright (c) 2015

@@ -32,6 +32,8 @@ public class CodeListConstant {
 	public static final String RESTYPE_MENU = "menu";
 	/** 应用资源明细 */
 	public static final String RESTYPE_ITME = "item";
+	/**应用资源按钮*/
+	public static final String RESTYPE_BUTTON="button";
 	/** 应用资源类型 */
 	public static final String RESTYPE_APPLICATION = "application";
 	/** 应用模块资源类型 */
@@ -43,4 +45,7 @@ public class CodeListConstant {
 	/** 应用模块资源类型-菜单明细 */
 	public static final String RESTYPE_MODULE_CATEGORY_ITEM = RESTYPE_MODULE_MENU_CATEGORY
 			+ RESTYPE_LEVEL_SEPARATOR + RESTYPE_ITME;
+	/** 应用模块资源类型-菜单明细 */
+	public static final String RESTYPE_MODULE_CATEGORY_ITEM_BUTTOM= RESTYPE_MODULE_MENU_CATEGORY
+			+ RESTYPE_LEVEL_SEPARATOR + RESTYPE_ITME+RESTYPE_LEVEL_SEPARATOR+RESTYPE_BUTTON;
 }

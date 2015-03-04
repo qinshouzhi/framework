@@ -12,11 +12,15 @@ import javax.servlet.ServletResponse;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.newtouch.lion.common.SpringContextUtil;
 import com.newtouch.lion.common.user.UserInfo;
 import com.newtouch.lion.service.session.SessionService;
 import com.newtouch.lion.web.shiro.cache.SessionCacheManager;
 import com.newtouch.lion.web.shiro.constant.Constants;
+import com.newtouch.lion.web.shiro.realm.UserRealm;
 import com.newtouch.lion.web.shiro.session.LoginSecurityUtil;
 
 /**
@@ -37,6 +41,10 @@ import com.newtouch.lion.web.shiro.session.LoginSecurityUtil;
  * @version 1.0
  */
 public class ForceLogoutFilter extends AccessControlFilter {
+	
+	/**日志*/
+	public static final Logger logger=LoggerFactory.getLogger(ForceLogoutFilter.class);
+	
 	
 	/**后用户将强制退出的URL*/
 	private String forceLogoutUrl;
@@ -73,8 +81,11 @@ public class ForceLogoutFilter extends AccessControlFilter {
 		this.sessionCacheManager.removeSessionController(Constants.CACHE_SESSION_NAME,user.getUsername());
 		//强制退出	
 		getSubject(request, response).logout();
-		
-		
+		UserRealm  userRealm=(UserRealm) SpringContextUtil.getBean(Constants.USER_REALM_BEAN,UserRealm.class);
+		//清除缓存用户验证和授权信息的缓存
+		if(userRealm!=null){
+			userRealm.clearAllCached();
+		}
 		
 		StringBuilder sb=new StringBuilder();
 		sb.append(this.forceLogoutUrl);

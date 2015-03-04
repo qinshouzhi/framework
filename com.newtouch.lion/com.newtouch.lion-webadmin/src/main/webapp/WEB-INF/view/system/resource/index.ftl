@@ -42,7 +42,7 @@
 <div class="portlet light">
 	<div class="portlet-body">
 		<div class="row">
-			<div class="col-md-12 margin-bottom-10">
+			<!--<div class="col-md-12 margin-bottom-10">
 				<form id="queryform" class="form-horizontal">
 					<label class="control-label col-md-2" for="nameZh" >资源名称</label>
 					<div class="col-md-3">
@@ -54,7 +54,7 @@
 						<a href="javascript:void(0)" class="btn blue"><i class="fa fa-search"></i> 查 询 </a>
 					</div>
 				</form>
-			</div>
+			</div>-->
 			<div class="col-md-12 margin-bottom-10" id="toolbar">
 				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic">
 					<i class="fa fa-plus"></i>  <@spring.message "common.toolbar.btn.add.text"/> </a>
@@ -87,8 +87,8 @@
 				 		<th field="nameZh" width="80" align="left" halign="left"sortable="true"order="asc">资源名称(中文)</th>
 				 		<th field="type" width="40" align="left" halign="left"sortable="true"order="asc" formatter="formatterCodeResource">资源类型</th>
 				 		<th field="path"   width="200" align=""left"" halign="left"sortable="true"order="asc">路径</th>
-				 		<th field="seqNum"  width="20" align="left" halign="left"sortable="true"order="asc">排序</th>
-				 		<th field="editable"  width="20" align="center" halign="center"sortable="true"order="asc"formatter="formatterEidtable">可编辑</th>
+				 		<th field="permission"  width="80" align="left" halign="center"sortable="true"order="asc" >权限</th>
+				 		<th field="seqNum"  width="20" align="left" halign="center"sortable="true"order="asc">排序</th>
 					</tr>
 				</thead>
 			</table>
@@ -171,6 +171,18 @@
 														<div class="col-md-5">
 															<div class="input-group">
 																<input type="text"  id="target" name="target" maxlength="16" class="form-control" placeholder="请输入Target" size="30"/>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="form-filed">
+														<label class="col-md-3 control-label">
+															权限配置
+														</label>
+														<div class="col-md-5">
+															<div class="input-group">
+																<input type="text"  id="permission" name="permission" maxlength="128" class="form-control" placeholder="请输入权限配置" size="30"/>
 															</div>
 														</div>
 													</div>

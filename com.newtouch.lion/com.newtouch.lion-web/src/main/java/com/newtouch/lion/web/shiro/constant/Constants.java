@@ -24,7 +24,11 @@ package com.newtouch.lion.web.shiro.constant;
  */
 public class Constants {
 	/**登录错误代码*/
-	public static final String LOGIN_ERROR_MSG="login_error"; 
+	public static final String LOGIN_ERROR_MSG="login_error";
+	/***
+	 * Spring UserRealm的实例名称
+	 */
+	public static final String USER_REALM_BEAN="userRealm";
 	/***
 	 * 登录错误参数
 	 */

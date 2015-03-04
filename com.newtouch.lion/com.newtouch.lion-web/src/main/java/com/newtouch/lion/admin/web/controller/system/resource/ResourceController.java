@@ -161,7 +161,8 @@ public class ResourceController extends AbstractController{
 		properties.add("text");		
 		properties.add("checked");	
 		properties.add("state");		
-		properties.add("path");		
+		properties.add("path");
+		properties.add("permission");	
 		properties.add("attributes");		
 		properties.add("children");
 		String result=JSONParser.toJSONString(children,properties);

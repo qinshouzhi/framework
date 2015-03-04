@@ -71,8 +71,7 @@ public class MenuServiceImpl   implements MenuService{
 	 * @see com.newtouch.lion.service.menu.MenuService#doFindByUserId(java.lang.Long, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public List<Menu> doFindByUserId(Long userId, String requestURL,
-			String contextPath) {
+	public List<Menu> doFindByUserId(Long userId, String requestURL,String contextPath) {
 		List<Resource> resources=resourceService.doFindByParentId(1L);
 		String[]  menuResourceType={CodeListConstant.RESTYPE_MODULE,CodeListConstant.RESTYPE_MODULE_MENU_CATEGORY,CodeListConstant.RESTYPE_MODULE_CATEGORY_ITEM};
 		List<Resource>  userResources=resourceService.doFindByUserIdAndType(userId, menuResourceType);

@@ -252,6 +252,7 @@ public class ResourceServiceImpl extends AbstractService implements
 		for(Resource resource:resources){
 			resource.getResources();
 		}
+		properties.add("permission");
 		String jsonStr=JSONParser.toJSONString(resources, properties);
 		return jsonStr.replace("parentResourceId", "_parentId");
 	}

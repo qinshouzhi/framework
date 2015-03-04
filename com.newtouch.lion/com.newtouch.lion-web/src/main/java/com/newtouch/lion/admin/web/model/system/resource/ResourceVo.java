@@ -44,11 +44,11 @@ public class ResourceVo {
 	private String path;
 	/** 资源名称－中文 */
 	@NotEmpty(message="{sys.resource.namezh.missing}")
-	@Length(max=128,min=4,message="{sys.resource.namezh.length}")
+	@Length(max=128,min=1,message="{sys.resource.namezh.length}")
 	private String nameZh;
 	/** 资源名称－英文 */
 	@NotEmpty(message="{sys.resource.namezh.missing}")
-	@Length(max=128,min=4,message="{sys.resource.namezh.length}")
+	@Length(max=128,min=1,message="{sys.resource.namezh.length}")
 	private String nameEn;
 	/** 资源描述 */
 	private String description;
@@ -64,6 +64,8 @@ public class ResourceVo {
 	private String target;
 	/** 资源性 */
 	private Attributes attributes;
+	/**权限名称*/
+	private String permission;
 
 	public ResourceVo() {
 		super();
@@ -249,4 +251,17 @@ public class ResourceVo {
 		this.attributes = attributes;
 	}
 
+	/**
+	 * @return the permission
+	 */
+	public String getPermission() {
+		return permission;
+	}
+
+	/**
+	 * @param permission the permission to set
+	 */
+	public void setPermission(String permission) {
+		this.permission = permission;
+	}
 }

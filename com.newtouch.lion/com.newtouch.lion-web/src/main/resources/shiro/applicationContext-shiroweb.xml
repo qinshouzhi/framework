@@ -121,6 +121,8 @@
 		<property name="redirectUrl"  value="/login.htm"/>
 		<property name="sessionCacheManager" ref="sessionCacheManager"/>
 	</bean>
+	<!-- Ajax登录及权限过滤 -->
+	<bean id="ajax" class="com.newtouch.lion.web.shiro.filter.AjaxAccessAuthorizationFilter"/>
 	<!--  Shiro的Web过滤器-->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
@@ -132,10 +134,12 @@
 				<entry key="authc" value-ref="formAuthenticationFilter" />
 				<entry key="forceLogoutFilter" value-ref="forceLogoutFilter"/>
 				<entry key="logoutFilter" value-ref="logoutFilter"/>
+				<entry key="perms" value-ref="ajax"/>
 			</util:map>
 		</property>
 		<property name="filterChainDefinitionMap" ref="filterChainDefinitionManager"/>
 	</bean>
+
     <!-- 动态加载数据配置权限及配置 -->
 	<bean  id="filterChainDefinitionManager" class="com.newtouch.lion.web.shiro.mgt.ShiroFilterChainDefinitionManager">
 		<property name="filterChainDefinitions">
