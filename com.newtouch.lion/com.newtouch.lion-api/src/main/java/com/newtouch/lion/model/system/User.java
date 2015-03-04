@@ -85,6 +85,8 @@ public class User extends VersionEntity<Long> {
 	private String description;
 	/** 该用户部门 */
 	private Department department;
+	/**用户头像*/
+	private String image;
 	/** 该用户所有权限列表 */
 	private Set<Role> roles = new HashSet<Role>(0);
 	/** 该用户所有用户组 */
@@ -523,4 +525,19 @@ public class User extends VersionEntity<Long> {
 	public void setGroups(Set<Group> groups) {
 		this.groups = groups;
 	}
+
+	/**
+	 * @return the image
+	 */
+	public String getImage() {
+		return image;
+	}
+
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
 }

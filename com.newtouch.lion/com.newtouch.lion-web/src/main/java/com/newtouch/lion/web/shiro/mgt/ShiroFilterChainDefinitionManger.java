@@ -6,9 +6,8 @@
  */
 package com.newtouch.lion.web.shiro.mgt;
 
-import java.util.HashSet;
+import java.text.MessageFormat;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.config.Ini;
@@ -20,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.newtouch.lion.web.shiro.constant.Constants;
 import com.newtouch.lion.web.shiro.model.AuthorityModel;
 import com.newtouch.lion.web.shiro.service.ShiroResouceService;
 
@@ -50,7 +50,7 @@ public class ShiroFilterChainDefinitionManger implements FactoryBean<Section> {
 	@Autowired
 	private ShiroResouceService shiroResouceService;
 
-	// shiro默认的链接定义
+	/** shiro默认的链接定义***/
 	private String filterChainDefinitions;
 
 	/**
@@ -75,15 +75,38 @@ public class ShiroFilterChainDefinitionManger implements FactoryBean<Section> {
 		 List<AuthorityModel> resources =shiroResouceService.doFindAll();
 		// 循环数据库资源的url
 		for (AuthorityModel authorityModel:resources) {
-			if(StringUtils.isNotEmpty(authorityModel.getPermissions())){
-				section.put(authorityModel.getUrl(),"authc,perms[\""+authorityModel.getPermissions()+"\"]");
-				logger.info("url{} = {}",authorityModel.getUrl(),"authc,perms[\""+authorityModel.getPermissions()+"\"]");
+			 StringBuffer sb=new StringBuffer();
+			sb.append(Constants.AUTHC);
+			/***
+			 * 角色
+			 * */
+			if(StringUtils.isNotEmpty(authorityModel.getRoles())){
+				sb.append(",");
+				sb.append(this.format(Constants.ROLE_STRING,authorityModel.getRoles()));
 			}
+			/****
+			 *权限
+			 */
+			if(StringUtils.isNotEmpty(authorityModel.getPermissions())){
+				sb.append(",");
+				sb.append(this.format(Constants.PERMS_STRING,authorityModel.getPermissions()));
+			}
+			logger.info("{} = {}",authorityModel.getUrl(),sb.toString());
+			section.put(authorityModel.getUrl(),sb.toString());
 			
 		}
 		return section;
 	}
-
+	/***
+	 * 格式化URL
+	 * @param pattern 格式
+	 * @param arg 参数
+	 * @return 格式化后字符串
+	 */
+	private String  format(String pattern,String arg){
+		return MessageFormat.format(pattern,arg);
+	}
+	
 	@Override
 	public Class<?> getObjectType() {
 		// TODO Auto-generated method stub
@@ -94,10 +117,4 @@ public class ShiroFilterChainDefinitionManger implements FactoryBean<Section> {
 	public boolean isSingleton() {
 		return true;
 	}
-	
-	public static void main(String[] args) {
-		Set<String> perms=new HashSet<String>();
-	    System.out.println(perms.toString());
-	}
-
 }
