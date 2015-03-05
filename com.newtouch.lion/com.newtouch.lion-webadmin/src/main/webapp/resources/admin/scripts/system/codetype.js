@@ -1,6 +1,7 @@
 var codetypedg=$('#sys_codetype_lists_tb'); //datagrids
 var addForm=$('#sysCodeTypeForm');  //编辑或添加表单
 var addDialog=$('#basic'); //编辑或添加对话框
+var user_perms={unlogin_code:'998',unauth_code:'999',loginurl:'/login.htm'};
 $(function () {
   //加载bootstrap
   Metronic.init(); // init metronic core componets
@@ -125,14 +126,23 @@ function successAddFrm(data,arg,id){
   }
 }
 //请求失败后信息
-function errorRequest(xhr,textStatus,error){
-  lion.util.error('提示','网络连接异常');
+function errorRequest(xhr,status,error){  
+  //未登录成功处理方法
+  if(error===user_perms.unlogin_code){
+      bootbox.alert("您未登录到信息，点击“确定”后，将进入用户登录页面", function() {
+          lion.util.reload();
+      });
+  }else if(error===user_perms.unauth_code){
+      lion.util.warning('提示','你的访问功能未授权');
+  }else{
+      lion.util.error('提示','网络连接异常');
+  }
 }
 
 //验证表单
 handleVForm=function(vForm,submitCallBackfn){
   var addError = $('.alert-danger', vForm);
-    var addSuccess = $('.alert-success',vForm);
+  var addSuccess = $('.alert-success',vForm);
   vForm.validate({
         errorElement: 'span',
         errorClass: 'help-block help-block-error', 
@@ -244,9 +254,9 @@ function formatterCodeList(val,row) {
 }
 //判断是否编辑
 function formatterEidtable(data,type,full) {
-  var name =$.loin.lang.editable.n;
+  var name =$.lion.lang.editable.n;
   if (data) {
-    name = $.loin.lang.editable.y;
+    name = $.lion.lang.editable.y;
   }
   return name;
 }
@@ -254,7 +264,7 @@ function formatterEidtable(data,type,full) {
 //将JSON复杂对象显示到DataGird中
 function formatterName(val, row) {
 	var name = "";
-	if (val != null) {
+	if (val !==null) {
 		name = val.nameZh;
 	}
 	return name;

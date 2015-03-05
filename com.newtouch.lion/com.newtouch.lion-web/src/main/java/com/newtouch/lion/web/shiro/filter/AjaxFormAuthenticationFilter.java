@@ -14,6 +14,7 @@ import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.newtouch.lion.web.shiro.constant.Constants;
 import com.newtouch.lion.web.util.LionWebUtils;
 
 /**
@@ -48,8 +49,8 @@ public class AjaxFormAuthenticationFilter extends FormAuthenticationFilter{
             } else {
             	if(LionWebUtils.isAjax(request)){
     				logger.trace("Ajax登录请求未登录,拦截{}",this.getPathWithinApplication(request));
-    				WebUtils.toHttp(response).setHeader("logined","false");
-    				WebUtils.toHttp(response).setStatus(998);
+    				WebUtils.toHttp(response).setHeader(Constants.AJAX_UNLOGIN,"true");
+    				WebUtils.toHttp(response).setStatus(Constants.AJAX_UNLOGIN_STATUS);
             	}
             	logger.trace("Login page view.");
                 return true;
@@ -57,8 +58,8 @@ public class AjaxFormAuthenticationFilter extends FormAuthenticationFilter{
         } else { 
         	if(LionWebUtils.isAjax(request)){
 				logger.info("Ajax 请求未登录{}",this.getPathWithinApplication(request));
-				WebUtils.toHttp(response).setHeader("logined","false");
-				WebUtils.toHttp(response).setStatus(998);
+				WebUtils.toHttp(response).setHeader(Constants.AJAX_UNLOGIN,"true");
+				WebUtils.toHttp(response).setStatus(Constants.AJAX_UNLOGIN_STATUS);
         	}else{
         		logger.trace("Attempting to access a path which requires authentication.  Forwarding to the " + "Authentication url [" + getLoginUrl() + "]");
                 saveRequestAndRedirectToLogin(request, response);
