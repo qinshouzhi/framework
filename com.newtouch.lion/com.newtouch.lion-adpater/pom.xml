@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.newtouch.lion-adpater</groupId>
 	<artifactId>com.newtouch.lion-adpater</artifactId>
-	<version>${lion-adapter.version}</version>
+	<version>${lion-adpater.version}</version>
 	<name>com.newtouch.lion-adpater</name>
 	<url>http://maven.apache.org</url>
 	<properties>
