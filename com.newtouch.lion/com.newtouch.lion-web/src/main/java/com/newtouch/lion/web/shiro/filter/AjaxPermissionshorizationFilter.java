@@ -17,6 +17,7 @@ import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.newtouch.lion.web.shiro.constant.Constants;
 import com.newtouch.lion.web.util.LionWebUtils;
 
 /**
@@ -53,8 +54,8 @@ public class AjaxPermissionshorizationFilter extends PermissionsAuthorizationFil
 		if(subject.getPrincipal()==null){
 			if(LionWebUtils.isAjax(request)){
 				logger.info("Ajax 请求未登录{}",mappedValue);
-				WebUtils.toHttp(response).setHeader("logined","false");
-				WebUtils.toHttp(response).setStatus(998);
+				WebUtils.toHttp(response).setHeader(Constants.AJAX_UNLOGIN,"true");
+				WebUtils.toHttp(response).setStatus(Constants.AJAX_UNLOGIN_STATUS);
 			}else{
 			  this.saveRequestAndRedirectToLogin(request, response);
 			}
@@ -62,8 +63,8 @@ public class AjaxPermissionshorizationFilter extends PermissionsAuthorizationFil
 			if(LionWebUtils.isAjax(request)){
 			 
 				logger.info("Ajax 请求未授权:{},url:{}",mappedValue,this.getPathWithinApplication(request));
-			     WebUtils.toHttp(response).setHeader("authorized","false");
-			     WebUtils.toHttp(response).setStatus(999);
+			     WebUtils.toHttp(response).setHeader(Constants.AJAX_UNAUTH,"true");
+			     WebUtils.toHttp(response).setStatus(Constants.AJAX_UNAUTH_STATUS);
 			}else{
 				
 	            String unauthorizedUrl = getUnauthorizedUrl();

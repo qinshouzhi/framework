@@ -51,6 +51,15 @@ public class Constants {
 	public static final String PERMS_STRING="perms[\"{0}\"]";
 	/**角色结构格式-role[{0}] */
 	public static final String ROLE_STRING = "roles[{0}]";
+	/**Ajax  未登录的情况*/
+	public static final String AJAX_UNLOGIN="user-unlogin";
+	/**Ajax AJAX_UNLOGIN_STATUS  未登录状态*/
+	public static final int AJAX_UNLOGIN_STATUS=998;
+	
+	/**Ajax  未登录的情况*/
+	public static final String AJAX_UNAUTH="user-unauth";
+	/**Ajax AJAX_UNLOGIN_STATUS  未登录状态*/
+	public static final int AJAX_UNAUTH_STATUS=999;
 }
 
 	

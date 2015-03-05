@@ -28,7 +28,6 @@ lion.constant={
 	fail: 'fail',
 	dataPrefix:'data-' //ui组件自定义属性前缀
 };
-
 /**
   * 组件缓存,以"模块-组件名-id"格式作为key存储.
   * 例如:ui-button-id
@@ -68,6 +67,24 @@ lion.assemblyCache={};
 		 var indexNext= pathname.indexOf("/",1);
 		 return pathname.substr(0,indexNext);
    }();
+   /**域名*/
+   exports.hostname=function(){
+   		return window.location.hostname;
+   }();
+   //端口号
+   exports.port=function(){
+   		return window.location.port;
+   }();
+   //协议
+   exports.protocol=function(){
+   		return window.location.protocol;
+   }();
+   /**
+    * protocol+"//"+hostname+exports.context
+    */
+   exports.httpurl=function(){
+   		 return exports.protocol+"//"+exports.hostname+exports.context;	
+   }();
 
    exports.menu=function(){
    		 var urlPathname = window.location.pathname, s='a[href="'+urlPathname+'"]', 
@@ -84,6 +101,9 @@ lion.assemblyCache={};
 	  });
 	  navbarhome+=navbar;
 	  $('.page-breadcrumb').html(navbarhome);
+   };
+   exports.reload=function(){
+   		 window.location.reload();
    };
    /***
    	*提交成功的提示
