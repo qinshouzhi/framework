@@ -13,7 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.7</jdk.version>
 		<lion-parent.version>0.0.1-SNAPSHOT</lion-parent.version>
-		<lion-adapater.version>0.0.1-SNAPSHOT</lion-adapater.version>
+		<lion-adpater.version>0.0.1-SNAPSHOT</lion-adpater.version>
 		<lion-im.version>0.0.1-SNAPSHOT</lion-im.version>
 		<lion-web.version>0.0.1-SNAPSHOT</lion-web.version>
 		<lion-webadmin.version>0.0.1-SNAPSHOT</lion-webadmin.version>
