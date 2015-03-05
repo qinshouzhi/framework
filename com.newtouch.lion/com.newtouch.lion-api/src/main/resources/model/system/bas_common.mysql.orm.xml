@@ -70,7 +70,7 @@
 				<column name="NAME_EN" length="128" nullable="true" />
 			</basic>
 			<basic name="value">
-				<column name="VALUE" length="256" nullable="true" />
+				<column name="PARAMETER_VALUE" length="256" nullable="true" />
 			</basic>
 			<basic name="editable">
 				<column name="EDITABLE" />
