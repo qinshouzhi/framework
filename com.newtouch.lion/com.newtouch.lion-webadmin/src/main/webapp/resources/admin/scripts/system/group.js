@@ -376,9 +376,9 @@ function formatterCheckBox(data,type,full){
 }
 //判断是否编辑
 function formatterEidtable(data,type,full) {
-	var name =$.loin.lang.editable.n;
+	var name =$.lion.lang.editable.n;
 	if (data) {
-		name = $.loin.lang.editable.y;
+		name = $.lion.lang.editable.y;
 	}
 	return name;
 }
