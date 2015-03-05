@@ -102,8 +102,6 @@ public class RoleController extends AbstractController{
 	private static final String INDEX_RETURN="/system/role/index";
 	/**系统角色添加*/
 	private static final String ADD_DIALOG_RETURN="/system/role/adddialog";
-	/**系统角色编辑*/
-	private static final String EDIT_DIALOG_RETURN="/system/role/editdialog";
 	/**系角色授权*/
 	private static final String AUTH_DIALOG_RETURN="/system/role/authdialog";
 	
@@ -243,15 +241,14 @@ public class RoleController extends AbstractController{
 		properties.add("checked");	
 		properties.add("state");		
 		properties.add("path");		
-		properties.add("attributes");		
+		//properties.add("attributes");		
 		properties.add("children");
 		properties.add("parentResourceId");
 		List<TreeNode> treeNodes=new ArrayList<TreeNode>();
 		for(Resource resource:resources){
 			Boolean checked=Boolean.FALSE;
 			Attributes attributes=new Attributes();			
-			attributes.setPath(resource.getPath());			
-			//attributes.setTarget(resource.getTarget());
+			attributes.setPath(resource.getPath());
 			for(Role role:resource.getRoles()){
 				if(roleId.equals(role.getId())){
 					checked=Boolean.TRUE;
@@ -276,7 +273,6 @@ public class RoleController extends AbstractController{
 	@RequestMapping(value="addusers")
 	@ResponseBody
 	public ModelAndView addusers(@RequestParam(required=false) Long roleId,@RequestParam(required=false) String userId,ModelAndView modelAndView){
-		//TODO 验证输入
 		Role role=this.roleService.doGetById(roleId);
 		List<Long> targetUserIds =LongUtils.parserStringToLong(userId,LongUtils.SPARATOR_COMMA);
 		List<Long> deleteUserIds = new ArrayList<Long>();
@@ -399,16 +395,7 @@ public class RoleController extends AbstractController{
 		return this.getJsonView(modelAndView);
     }
 	
-	@RequestMapping(value = "editdialog")
-	public String editDialog(@RequestParam(required=false) Long id,Model model){
-		if(id!=null){
-			Role role=roleService.doFindById(id);
-			model.addAttribute("role",role);		
-		}else{
-			logger.error("Eidt Object id is not null!");
-		}
-		return EDIT_DIALOG_RETURN;
-	}
+	 
 	
 	@RequestMapping(value = "edit")
 	@ResponseBody

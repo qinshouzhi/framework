@@ -186,6 +186,32 @@ lion.assemblyCache={};
    		errorfn=errorfn||$.noop;
    		$.ajax({
             url : url,               
+            async : true,
+            type : 'post',              
+            data : data,
+            dataType:"json",
+        	timeout:5000,
+        	error :function(xhr, textStatus, error) {
+				errorfn.call(this,xhr,textStatus,error);
+			},
+            success:function(data) {
+            	successfn.call(this,data,arg);
+            }
+        });
+   };
+   /**
+    * [postasync  同步请求]
+    * @param  {[type]} url       [URL]
+    * @param  {[type]} data      [JSON对象]
+    * @param  {[type]} successfn [请求成功回调函数]
+    * @param  {[type]} errorfn   [失败回调函数]
+    * @param  {[type]} arg       [参数]
+    */
+    exports.postasync=function(url,data,successfn,errorfn,arg){
+   		successfn=successfn||$.noop;
+   		errorfn=errorfn||$.noop;
+   		$.ajax({
+            url : url,               
             async : false,
             type : 'post',              
             data : data,
@@ -208,16 +234,18 @@ lion.assemblyCache={};
     * @param  {[type]} arg       [参数]
     */
    exports.postjson=function(url,data,successfn,errorfn,arg){
+   		successfn=successfn||$.noop;
+   		errorfn=errorfn||$.noop;
    		 $.ajax({
 				dataType:'json',
 				contentType:'application/json',
 				type :'POST',
 				url:url,
-				async : false,
+				async : true,
 				data:JSON.stringify(data),
 				success : function(data) {
             		successfn.call(this,data,arg);
-            	},				
+            	},			
 				timeout : 5000, // 连接超时时间
 				error:function(xhr, textStatus, error) {
 					errorfn.call(this,xhr,textStatus,error);

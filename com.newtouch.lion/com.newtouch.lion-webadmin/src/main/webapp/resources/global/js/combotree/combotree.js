@@ -214,7 +214,7 @@
 	        	if(util.isEmpty(loadurl)){
 	        		return;
 	        	}
-	        	util.post(loadurl,'',success,error);
+	        	util.postasync(loadurl,'',success,error);
 	        	//数据加载成功
 	       		function success(data){	       		 
 	       			that.$treeNodes=data;

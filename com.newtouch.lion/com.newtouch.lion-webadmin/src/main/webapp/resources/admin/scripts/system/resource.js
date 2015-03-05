@@ -138,7 +138,6 @@ function formatterEidtable(val,row) {
 /**sys_code_type 加载列表*/
 function formatterCodeResource(val, row) {
   var data =$("#sysresourcetype").combo('getData');
-  console.dir(data);
   var nameZh = "";
   for ( var obj in data) {
     if (data[obj].codeValue == val) {

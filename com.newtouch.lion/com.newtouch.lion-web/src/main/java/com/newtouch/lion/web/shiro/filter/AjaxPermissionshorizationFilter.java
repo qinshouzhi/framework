@@ -24,7 +24,8 @@ import com.newtouch.lion.web.util.LionWebUtils;
  * Title: 自定义权限拦截器
  * </p>
  * <p>
- * Description: 自定义权限拦截器，估计Ajax请求和无权限，则返回JSON字符串
+ * Description: 自定义权限拦截器，估计Ajax请求和无权限，则返回JSON字符串,
+ * 未登录返回-998 未授权返回-999
  * </p>
  * <p>
  * Copyright: Copyright (c) 2015
@@ -36,10 +37,10 @@ import com.newtouch.lion.web.util.LionWebUtils;
  * @author WangLijun
  * @version 1.0
  */
-public class AjaxAccessAuthorizationFilter extends PermissionsAuthorizationFilter{
+public class AjaxPermissionshorizationFilter extends PermissionsAuthorizationFilter{
 
 	/** 日志信息 */
-	private static final Logger logger = LoggerFactory.getLogger(AjaxAccessAuthorizationFilter.class);
+	private static final Logger logger = LoggerFactory.getLogger(AjaxPermissionshorizationFilter.class);
 
  
 
@@ -52,7 +53,7 @@ public class AjaxAccessAuthorizationFilter extends PermissionsAuthorizationFilte
 		if(subject.getPrincipal()==null){
 			if(LionWebUtils.isAjax(request)){
 				logger.info("Ajax 请求未登录{}",mappedValue);
-				WebUtils.toHttp(response).setHeader("islogined","false");
+				WebUtils.toHttp(response).setHeader("logined","false");
 				WebUtils.toHttp(response).setStatus(998);
 			}else{
 			  this.saveRequestAndRedirectToLogin(request, response);
@@ -60,8 +61,8 @@ public class AjaxAccessAuthorizationFilter extends PermissionsAuthorizationFilte
 		}else{
 			if(LionWebUtils.isAjax(request)){
 			 
-				logger.info("Ajax 请求未登录:{},url:{}",mappedValue,this.getPathWithinApplication(request));
-			     WebUtils.toHttp(response).setHeader("authorized","true");
+				logger.info("Ajax 请求未授权:{},url:{}",mappedValue,this.getPathWithinApplication(request));
+			     WebUtils.toHttp(response).setHeader("authorized","false");
 			     WebUtils.toHttp(response).setStatus(999);
 			}else{
 				
@@ -75,8 +76,6 @@ public class AjaxAccessAuthorizationFilter extends PermissionsAuthorizationFilte
 	            }
 			}
 		}
-		
-		
 		return false;
 	}
 }

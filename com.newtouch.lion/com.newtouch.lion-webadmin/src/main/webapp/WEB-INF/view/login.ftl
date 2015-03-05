@@ -85,8 +85,8 @@ Author: wanglijun
 			<input type="checkbox" name="rememberMe" value="true"/>
 				<@spring.message "login.form.checkbox.rememberme"/>
 			</label>
-			<a href="javascript:;" id="forget-password" class="forget-password">
-				 <@spring.message "login.form.forget.password"/>
+			<!--<a href="javascript:;" id="forget-password" class="forget-password">
+				 <@spring.message "login.form.forget.password"/>-->
 			</a>
 		</div>
 	</form>

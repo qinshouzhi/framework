@@ -139,8 +139,7 @@ $(function () {
 
   function initZTree(idObj){
      var nodes={},context=lion.util.context,url=context+'/system/role/resources.json?';
-     lion.util.post(url,idObj,successTree,errorRequest);
-    
+     lion.util.postasync(url,idObj,successTree,errorRequest);    
      function successTree(data){
           nodes=data;
      }
