@@ -33,6 +33,8 @@
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
+<!--lang-->
+<script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
 <!-- codetype -->
 <script src="${base}/resources/admin/scripts/system/codetype.js" type="text/javascript"></script>
 </head>

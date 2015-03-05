@@ -32,6 +32,8 @@
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
+<!--lang-->
+<script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
 <!--demo-->
 <script src="${base}/resources/admin/scripts/system/group.js" type="text/javascript"></script>
 </head>

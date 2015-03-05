@@ -35,6 +35,8 @@
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <!--ztree js-->
 <script src="${base}/resources/global/plugins/ztree/js/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
+<!--lang-->
+<script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
 <!--role-->
 <script src="${base}/resources/admin/scripts/system/role.js" type="text/javascript"></script>
 </head>
