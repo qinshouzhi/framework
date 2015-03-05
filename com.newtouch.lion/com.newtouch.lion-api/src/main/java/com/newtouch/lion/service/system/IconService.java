@@ -7,7 +7,6 @@
 */
 package com.newtouch.lion.service.system; 
 
-import com.newtouch.lion.model.system.Group;
 import com.newtouch.lion.model.system.Icon;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
@@ -65,13 +64,19 @@ public interface IconService {
 	 */
 	public Icon doUpdate(Icon icon);
 	/***
-	 * 根据角色组英文名称获取用户角色列表
-	 * @param type
-	 * @param nameEn
+	 * 根据图标类名获取图标
+	 * @param iconClass
 	 * @author maojiawei
 	 * @return {@link Icon}
 	 */
-	public Icon doFindTypeByNameEn(String nameEn);
+	public Icon doFindTypeByIconClass(String iconClass);
+	/**
+	 * 判断图标的类名是否已存在，
+	 * @param iconClass
+	 * @return  boolean
+	 * @author maojiawei
+	 * */
+	public boolean doIsExistByIconClass(String iconClass); 
 }
 
 	

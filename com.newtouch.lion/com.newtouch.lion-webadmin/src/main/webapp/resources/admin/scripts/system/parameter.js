@@ -4,12 +4,12 @@ $(function() {
 	Metronic.init(); // init metronic core componets
 	Layout.init(); // init layout
 	Tasks.initDashboardWidget(); // init tash dashboard widget
-  lion.util.menu();//加载导航栏
+	lion.util.menu();//加载导航栏
 	
 	parameterdg=$('#sys_parameter_lists_tb');
 
 	var addForm=$('#sysParameterForm');
-  var queryForm=$('#queryform');
+	var queryForm=$('#queryform');
 	addDialog=$('#basic');	
 	
 	handleVForm(addForm,submitForm);
@@ -54,8 +54,8 @@ $(function() {
 			 lion.util.info('提示','请选择要编辑记录');
 			 return;
 		 }
-     addForm.reset();
-     addDialog.find('.modal-header h4 span').text('编辑系统参数');
+	     addForm.reset();
+	     addDialog.find('.modal-header h4 span').text('编辑系统参数');
 		 addDialog.modal('toggle');
 		 addForm.fill(row);
 	 });
@@ -258,9 +258,9 @@ function formatterCodeList(val,row) {
 }
 //判断是否编辑
 function formatterEidtable(val,row) {
-	var name =$.loin.lang.editable.n;
+	var name =$.lion.lang.editable.n;
 	if (val) {
-		name = $.loin.lang.editable.y;
+		name = $.lion.lang.editable.y;
 	}
 	return name;
 }

@@ -18,8 +18,9 @@ $(function () {
   
   //查询
   $('#btnQuery').click(function(){
-	  icondg.datagrids({querydata:queryForm.serializeObject()});
+	icondg.datagrids({querydata:queryForm.serializeObject()});
     var queryparam=icondg.datagrids('queryparams'); 
+    console.dir(queryparam);
     icondg.datagrids('reload');
   });
   //刷新
@@ -36,14 +37,14 @@ $(function () {
     //编辑
     $('#btnEdit').click(function(){
         var row=icondg.datagrids('getSelected');
-        if(!row){
-       lion.util.info('提示','请选择要编辑记录');
-       return;
-    }
-    addForm.reset();
-    addDialog.find('.modal-header h4 span').text('编辑图标');
-    addDialog.modal('toggle');
-    addForm.fill(row);
+	    if(!row){
+	       lion.util.info('提示','请选择要编辑记录');
+	       return;
+	    }
+	    addForm.reset();
+	    addDialog.find('.modal-header h4 span').text('编辑图标');
+	    addDialog.modal('toggle');
+	    addForm.fill(row);
     });
 
      //删除
@@ -59,14 +60,6 @@ $(function () {
                   lion.util.post('delete.json',param,successForDelete,errorRequest);
               }
           }); 
-   });
-   //导出Excel
-   $('#btnExport').on('click',function(){
-     var params=queryForm.serialize(),url='export.json?tableId='+icondg.attr('id');
-        if(lion.util.isNotEmpty(params)){
-          url+='&'+params;
-        }
-        window.open(url,'_blank');
    });
    
    //保存
@@ -230,4 +223,10 @@ function formatterEidtable(data,type,full) {
     name = $.lion.lang.editable.y;
   }
   return name;
+}
+
+//添加
+function formatterImage(data,type,full) {
+  var image = '<img src="'+data+'" style="width:20px; height:14px;">'
+  return image;
 }
