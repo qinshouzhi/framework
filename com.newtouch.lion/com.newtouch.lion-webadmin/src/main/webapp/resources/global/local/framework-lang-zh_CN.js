@@ -3,8 +3,8 @@ var Eidtable_N="否";
 var gender_male="男";
 var gender_female="女";
 (function($){
-	$.loin={lang:"lang",common:"common"};
-	$.loin.lang={
+	$.lion={lang:"lang",common:"common"};
+	$.lion.lang={
 		editable:{ y:"是",n:"否"},
 		gender:{m:"男",f:"女"},
 		common:{
