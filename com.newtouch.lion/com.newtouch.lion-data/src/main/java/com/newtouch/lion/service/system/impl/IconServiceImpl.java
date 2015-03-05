@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import com.newtouch.lion.common.Assert;
 import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.system.IconDao;
-import com.newtouch.lion.model.system.Group;
 import com.newtouch.lion.model.system.Icon;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
@@ -80,27 +79,28 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	 * @see com.newtouch.lion.service.system.IconService#doFindByCriteria(com.newtouch.lion.query.QueryCriteria)
 	 */
 	@Override
-	public PageResult<Icon> doFindByCriteria(QueryCriteria queryCriteria) {
+	public PageResult<Icon> doFindByCriteria(QueryCriteria criteria) {
 		// TODO Auto-generated method stub
-		String queryEntry = " from Icon";
-
-		String[] whereBodies = { "iconClass like :iconClass","iconType =:iconType"};
-
+		String queryEntry = "from Icon";
+		
+		String[] whereBodies = {"iconType =:iconType"," iconClass like:iconClass " };
+		
 		String fromJoinSubClause = "";
 		
-		Map<String, Object> params = queryCriteria.getQueryCondition();
+		Map<String, Object> params = criteria.getQueryCondition();
 		
-		String orderField = queryCriteria.getOrderField();
+		String orderField = criteria.getOrderField();
 		
-		String orderDirection = queryCriteria.getOrderDirection();
+		String orderDirection = criteria.getOrderDirection();
 		
 		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause, whereBodies, orderField, orderDirection, params);
 		
-		int pageSize = queryCriteria.getPageSize();
+		int pageSize = criteria.getPageSize();
 		
-		int startIndex = queryCriteria.getStartIndex();
-
+		int startIndex = criteria.getStartIndex();
+		
 		PageResult<Icon> pageResult = this.iconDao.query(hql, HqlUtils.generateCountHql(hql, null), params, startIndex, pageSize);
+		
 		return pageResult;
 	}
 
@@ -126,14 +126,37 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.newtouch.lion.service.system.IconService#doFindTypeByNameEn(java.lang.String)
+	 * @see com.newtouch.lion.service.system.IconService#doFindTypeByIconClass(java.lang.String)
 	 */
 	@Override
-	public Icon doFindTypeByNameEn(String nameEn) {
+	public Icon doFindTypeByIconClass(String iconClass) {
 		// TODO Auto-generated method stub
+		Assert.notNull(iconClass);
+		String hql = "from Icon where iconClass=:iconClass";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("iconClass", iconClass);
+		java.util.List<Icon> icons = iconDao.query(hql, params);
+		if (icons != null && icons.size() > 0) {
+			return icons.get(0);
+		}
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.IconService#doIsExistByIconClass(java.lang.String)
+	 */
+	@Override
+	public boolean doIsExistByIconClass(String iconClass) {
+		// TODO Auto-generated method stub
+		Assert.notNull(iconClass);
+		Icon icon = this.doFindTypeByIconClass(iconClass);
+		if (icon != null)
+			return true;
+		return false;
+	}
+	
+	
+	
 }
 
 	

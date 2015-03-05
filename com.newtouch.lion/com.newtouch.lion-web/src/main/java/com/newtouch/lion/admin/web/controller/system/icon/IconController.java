@@ -29,7 +29,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.icon.IconVo;
 import com.newtouch.lion.data.DataTable;
-import com.newtouch.lion.model.system.Group;
 import com.newtouch.lion.model.system.Icon;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
@@ -91,18 +90,18 @@ public class IconController extends AbstractController{
 		return ADD_DIALOG_RETURN;
 	}
 	/*add by maojiawei*/
-	private Boolean isExistByNameEn(String nameEn) {
+	private Boolean isExistByIconClass(String iconClass) {
 		Boolean flag = false;
-		if (StringUtils.isNotEmpty(nameEn)) {
-			//flag = iconService.doIsExistByNameEn(nameEn.trim());
+		if (StringUtils.isNotEmpty(iconClass)) {
+			flag = iconService.doIsExistByIconClass(iconClass.trim());
 		}
 		return flag;
 	}
 	/*add by maojiawei*/
-	private Boolean isExistByNameEn(String nameEn, String oldNameEn) {
+	private Boolean isExistByIconClass(String iconClass, String oldClass) {
 		Boolean flag = false;
-		if (StringUtils.isNotEmpty(nameEn) && !nameEn.equals(oldNameEn)) {
-			//flag = iconService.doIsExistByNameEn(nameEn.trim());
+		if (StringUtils.isNotEmpty(iconClass) && !iconClass.equals(oldClass)) {
+			flag = iconService.doIsExistByIconClass(iconClass.trim());
 		}
 		return flag;
 	}
@@ -114,13 +113,13 @@ public class IconController extends AbstractController{
 		Boolean flag=Boolean.FALSE;
 		
 		if(id==null){
-			flag = this.isExistByNameEn(iconClass)? false : true;
+			flag = this.isExistByIconClass(iconClass)? false : true;
 		}else{
 			Icon icon = iconService.doFindById(id);
 			if(icon==null){
-				flag = this.isExistByNameEn(iconClass)? false : true;
+				flag = this.isExistByIconClass(iconClass)? false : true;
 			}else{
-				flag=this.isExistByNameEn(iconClass, icon.getIconClass())?false:true;
+				flag=this.isExistByIconClass(iconClass, icon.getIconClass())?false:true;
 			}
 		}
 		return flag.toString();
@@ -132,11 +131,11 @@ public class IconController extends AbstractController{
 	public ModelAndView add(@Valid @ModelAttribute("icon") IconVo iconVo,
 			Errors errors, ModelAndView modelAndView) {
 
-//		if (!errors.hasErrors()&& this.isExistByNameEn(iconVo.getNameEn())) {
-//			errors.rejectValue(GroupVo.NAMEEN,
-//					"sys.group.form.nameen.existed.message",
-//					new Object[] { iconVo.getNameEn() }, null);
-//		}
+		if (!errors.hasErrors()&& this.isExistByIconClass(iconVo.getIconClass())) {
+			errors.rejectValue(IconVo.ICON_CLASS,
+					"sys.icon.form.nameen.existed.message",
+					new Object[] { iconVo.getIconClass() }, null);
+		}
 		//是否错误消息
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
@@ -147,7 +146,7 @@ public class IconController extends AbstractController{
 		BeanUtils.copyProperties(iconVo, icon);
 		iconService.doCreate(icon);
 		Map<String, String> params = new HashMap<String, String>();
-		params.put(BindResult.SUCCESS, "sys.group.add.success");
+		params.put(BindResult.SUCCESS, "sys.icon.add.success");
 		modelAndView.addObject(BindMessage.SUCCESS, params);
 		return this.getJsonView(modelAndView);
 	}
@@ -172,20 +171,20 @@ public class IconController extends AbstractController{
 
 		modelAndView=this.getJsonView(modelAndView);
 		if (!errors.hasErrors() && iconVo.getId() == null) {
-			errors.reject("sys.group.form.id.empty");
+			errors.reject("sys.icon.form.id.empty");
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
 			return modelAndView; 
 		} 
 		Icon icon = iconService.doFindById(iconVo.getId());
 		if (icon == null) {
-			errors.reject("sys.group.form.id.empty");
+			errors.reject("sys.icon.form.id.empty");
 			return modelAndView;
 		}
 		
-//		if (!errors.hasErrors()
-//			&& this.isExistByNameEn(groupVo.getNameEn(),group.getNameEn())) {errors.rejectValue(GroupVo.NAMEEN,	"sys.group.form.nameen.existed.message",new Object[] { groupVo.getNameEn() }, null);
-//
-//		}
+		if (!errors.hasErrors()
+			&& this.isExistByIconClass(iconVo.getIconClass(),icon.getIconClass())) {errors.rejectValue(IconVo.ICON_CLASS,	"sys.icon.form.nameen.existed.message",new Object[] { iconVo.getIconClass() }, null);
+
+		}
 
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
@@ -196,7 +195,7 @@ public class IconController extends AbstractController{
 		iconService.doUpdate(icon);
 
 		Map<String, String> params = new HashMap<String, String>();
-		params.put(BindResult.SUCCESS, "sys.group.edit.success");
+		params.put(BindResult.SUCCESS, "sys.icon.edit.success");
 		modelAndView.addObject(BindMessage.SUCCESS, params);
 		return modelAndView;
 	}
@@ -208,9 +207,9 @@ public class IconController extends AbstractController{
 		Map<String, String> params = new HashMap<String, String>();
 		int updateRow = this.iconService.doDeleteById(id);
 		if (updateRow > 0) {
-			params.put(BindResult.SUCCESS,"sys.group.delete.success");
+			params.put(BindResult.SUCCESS,"sys.icon.delete.success");
 		} else {
-			params.put(BindResult.SUCCESS,"sys.group.delete.fail");
+			params.put(BindResult.SUCCESS,"sys.icon.delete.fail");
 		}
 		modelAndView.addObject(BindMessage.SUCCESS, params);
 		return this.getJsonView(modelAndView);
@@ -233,14 +232,21 @@ public class IconController extends AbstractController{
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
 			queryCriteria.setOrderDirection(QueryCriteria.ASC);
 		}
-//		//查询条件 中文参数名称按模糊查询
-//		if(StringUtils.isNotEmpty(groupVo.getNameZh())){
-//			queryCriteria.addQueryCondition("nameZh","%"+groupVo.getNameZh()+"%");
-//		}
+		
+		//查询条件 图标类名按模糊查询
+		if(StringUtils.isNotEmpty(iconVo.getIconClass())){
+			queryCriteria.addQueryCondition("iconClass","%"+iconVo.getIconClass()+"%");
+		}
+		
+		//查询条件 图标类型
+		if(StringUtils.isNotEmpty(iconVo.getIconType())){
+			queryCriteria.addQueryCondition("iconType",iconVo.getIconType());
+		}
 
 		PageResult<Icon> pageResult = iconService.doFindByCriteria(queryCriteria);
 		return pageResult.getDataTable(query.getRequestId());
 	}
+	
 }
 
 	

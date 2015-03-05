@@ -53,7 +53,11 @@
 						<@spring.message "sys.icon.form.type.text"/>
 					</label>
 					<div class="col-md-3">
-						<input class="form-control input-small" type="text" size="30" name="iconType" id="iconType"  placeholder="<@spring.message "sys.icon.form.class.missing.message"/>"/>					
+						<select  id="iconTypeList"  name="iconType" data-size="8" 
+						 	data-maxoptions="1"   multiple placeholder="<@spring.message "sys.icon.form.class.missing.message"/>..."  
+						 	class="lion-combo bootstrap-select form-control input-small" data-valueField='codeValue' 
+						 	data-textField='nameZh' data-loadURL="${base}/system/code/combox.htm?nameEn=IconType">
+						 </select>
 					</div>
 					<div class="col-md-2">
 						<a href="javascript:void(0)" id="btnQuery" class="btn blue">
@@ -81,10 +85,6 @@
 					<i class="fa fa-refresh"></i> 
 					<@spring.message "common.toolbar.btn.reload.text"/>   
 				</a>
-				<a id="btnExport"  class="btn btn-sm green">
-					<i class="fa  fa-file-excel-o"></i> 
-					<@spring.message "common.toolbar.btn.export.text"/> 
-				</a>
 			</div>
 			<div class="col-md-12">
 				  <table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_icon_tb" data-singleselect="true",   data-loadUrl="/admin/system/icon/list.json" data-checkbox="true" data-pageSize="10">
@@ -99,7 +99,7 @@
 							<th data-field="iconClass" style="width:100px;">
 							 	图标类名
 							</th>
-							<th data-field="iconImage" style="width:100px;">
+							<th data-field="iconImage" style="width:100px;" data-formatter="formatterImage">
 								图标图片
 							</th>
 							<th data-field="createdDate" style="width:100px;">
@@ -133,7 +133,7 @@
 				 	<div class="row">
 				 	<div class="col-md-12 portlet-body form">
 				 		<!-- BEGIN FORM-->
-						<form action="#" class="form-horizontal" name="sysCodeTypeForm" id="sysCodeTypeForm" method="post">
+						<form action="#" class="form-horizontal" name="sysIconForm" id="sysIconForm" method="post">
 							<input type="hidden" id='id' name='id' value="">
 							<div class="form-body">
 								<div class="form-group">
@@ -141,9 +141,11 @@
 										<@spring.message "sys.icon.form.type.text"/>
 									</label>
 									<div class="col-md-5">
-										<div class="input-group">
-											<input type="text"  name="iconType"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.icon.form.type.missing.message"/>" maxlength="255" size="30"/>
-										</div>
+										<select  id="iconType"  name="iconType" data-size="8" 
+										 	data-maxoptions="1"   multiple placeholder="<@spring.message "sys.icon.form.type.missing.message"/>..."  
+										 	class="lion-combo bootstrap-select form-control input-small" data-valueField='codeValue' 
+										 	data-textField='nameZh' data-loadURL="${base}/system/code/combox.htm?nameEn=IconType">
+										 </select>
 									</div>
 								</div>
 								<div class="form-group">
@@ -162,7 +164,7 @@
 									</label>
 									<div class="col-md-5">
 										<div class="input-group">
-											<input type="text" name="iconImage" class="form-control" placeholder="<@spring.message "sys.icon.form.image.missing.message"/>" maxlength="255" size="30"/>
+											<input type="text" id="iconImage" name="iconImage" class="form-control" placeholder="<@spring.message "sys.icon.form.image.missing.message"/>" maxlength="255" size="30"/>
 										</div>
 									</div>
 								</div>
