@@ -26,8 +26,8 @@ var gender_female="女";
             }
   	};
 
-	$.loin={lang:'lang',common:'common',datatables:'datatables'};
-	$.loin.lang={
+	$.lion={lang:'lang',common:'common',datatables:'datatables'};
+	$.lion.lang={
 		editable:{ y:"是",n:"否"},
 		gender:{m:"男",f:"女"},
 		common:{

@@ -186,10 +186,10 @@ handleVForm=function(vForm,submitCallBackfn){
 
 
 //判断是否编辑
-function formatterEidtable(val,row) {
-	var name =$.lion.lang.editable.n;
-	if (val) {
-		name = $.lion.lang.editable.y;
-	}
-	return name;
+//判断是否编辑
+function formatterEidtable(data,type,full) { 
+  if (data) {
+  return $.lion.lang.editable.y;
+  }
+  return $.lion.lang.editable.n;
 }
