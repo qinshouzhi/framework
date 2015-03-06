@@ -189,7 +189,7 @@ handleVForm=function(vForm,submitCallBackfn){
 //判断是否编辑
 function formatterEidtable(data,type,full) { 
   if (data) {
-  return $.lion.lang.editable.y;
+    return lion.lang.editable.y;
   }
-  return $.lion.lang.editable.n;
+  return lion.lang.editable.n;
 }
