@@ -49,7 +49,7 @@
 		<jstl.version>1.2</jstl.version>
 		<servlet-api.version>2.5</servlet-api.version>
 		<sitemesh.version>2.5-atlassian-9</sitemesh.version>
-		<ehcache.version>2.7.0</ehcache.version>
+		<ehcache.version>2.7.1</ehcache.version>
 		<ehcache-spring-annotations.version>1.2.0</ehcache-spring-annotations.version>
 		<httpclient.version>4.3.5</httpclient.version>
 		<httpcore.version>4.3.2</httpcore.version>
@@ -720,44 +720,16 @@
 			<organization>newtouch</organization>
 		</developer>
 	</developers>
-	<repositories>
-		<repository>
-			<id>nexus-public</id>
-			<name>Nexus Group Repository</name>
-			<url>http://192.168.202.146/nexus/content/groups/public/</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>nexus-public</id>
-			<name>Nexus Group Repository</name>
-			<url>http://192.168.202.146/nexus/content/groups/public/</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
 	<distributionManagement>
 		<repository>
-			<id>newtouch</id>
+			<id>nexus-releases</id>
 			<name>Nexus Release Repository</name>
-			<url>http://192.168.202.146/nexus/content/repositories/newtouch</url>
+			<url>http://58.247.8.186:10011/nexus/content/repositories/newtouch/</url>
 		</repository>
 		<snapshotRepository>
-			<id>newtouch-snapshot</id>
+			<id>nexus-snapshots</id>
 			<name>Nexus Snapshot Repository</name>
-			<url>http://192.168.202.146/nexus/content/repositories/newtouch-snapshot</url>
+			<url>http://192.168.1.133:8080/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>
