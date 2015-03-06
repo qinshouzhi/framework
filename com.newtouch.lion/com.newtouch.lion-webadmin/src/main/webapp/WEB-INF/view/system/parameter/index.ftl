@@ -34,7 +34,6 @@
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <!--lion UI JS End-->
 <!--lang-->
-<script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
 <!--parameter-->
 <script src="${base}/resources/admin/scripts/system/parameter.js" type="text/javascript"></script>
 </head>
@@ -75,33 +74,28 @@
 				  <table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_parameter_lists_tb" data-singleselect="true",   data-loadUrl="${base}/system/parameter/list.json" data-checkbox="true" data-pageSize="10" width="100%">
 					<thead>
 						<tr>
-						  <th class="table-checkbox" data-field='id' data-checkbox="true">
+						  <th class="table-checkbox"  style="width:30px;" data-field='id' data-checkbox="true">
 						 		<input type="checkbox" class="group-checkable" data-set="#sys_parameter_lists_tb.checkboxes"  data-sortable="false" />
 						 	</th>
-							<th data-field='type' data-sortDir="asc"    style="width:80px;" data-formatter="formatterCodeList">
+							<th data-field='type'  style="width:80px;" data-formatter="formatterCodeList">
 								参数类型
 							</th>
-							<th data-field="nameZh" style="width:80x;">
-							 	参数名称(中文)
+							<th data-field="nameZh" style="width:80px;">
+							 	名称(中文)
 							</th>
 							<th data-field="nameEn" style="width:80px;">
-								参数名称(英文)
+								名称(英文)
 							</th>
 							<th data-field="value" style="width:150px;" align="center">
-								参数值
+								值
 							</th>
 							<th data-field="description" style="width:100px;">
-								参数描述
+								描述
 							</th>						
 							<th data-field="editable" style="width:30px;" data-formatter="formatterEidtable">
 								可编辑
 							</th>
-							<th data-field="createdDate" style="width:160px;">
-								创建时间
-							</th>
-							<th data-field="updatedDate" style="width:160px;" >
-								更新时间
-							</th>						
+							 					
 						</tr>
 					</thead>
 				</table>

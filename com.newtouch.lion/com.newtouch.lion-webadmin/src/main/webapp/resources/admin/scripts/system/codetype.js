@@ -59,11 +59,10 @@ $(function () {
    });
    //导出Excel
    $('#btnExport').on('click',function(){
-      var params=queryForm.serialize(),url='export.json?tableId='+codetypedg.attr('id');
-      if(lion.util.isNotEmpty(params)){
-           url+='&'+params;
-      }
-      window.open(url,'_blank');
+      var params=queryForm.serialize(),
+          dgtableId=codetypedg.attr('id');
+      lion.web.exportfn({url:'export.json',data:params,tableId:dgtableId});
+      return;
    });
    //保存
    $('#btnSave').click(function(){
@@ -213,7 +212,7 @@ handleVForm=function(vForm,submitCallBackfn){
 
 //测试选择中checkbox
 function formatterCheckBox(data,type,full){
-return data;
+  return data;
 }
 
 //获取下拉列表数据
@@ -231,7 +230,7 @@ function formatterCodeList(val,row) {
 //判断是否编辑
 function formatterEidtable(data,type,full) { 
   if (data) {
-	return lion.lang.editable.y;
+	   return lion.lang.editable.y;
   }
   return lion.lang.editable.n;
 }

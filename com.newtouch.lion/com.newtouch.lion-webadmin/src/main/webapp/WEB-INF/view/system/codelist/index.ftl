@@ -34,7 +34,6 @@
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
 <!--lang-->
-<script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
 <!-- codelist -->
 <script src="${base}/resources/admin/scripts/system/codelist.js" type="text/javascript"></script>
 </head>

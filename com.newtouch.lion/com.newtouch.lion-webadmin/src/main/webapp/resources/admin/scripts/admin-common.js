@@ -190,15 +190,22 @@
         tableId:''
      };
      //通用导出函数
-     exports.exportfn=function(optons){
+     exports.exportfn=function(options){
          options = $.extend(true,btnDeleteOptions,options);
          var url=options.url;
-         if(util.isNotEmpty(optins.tableId)){
-            if (url.indexOf("?") != -1) {
-                
-            }else{
-                
-            }
+         //检查是否带参数
+         if (url.indexOf('?')===-1) {
+                url+='?';
          }
+         //检查tableId是否空
+         if(util.isNotEmpty(options.tableId)){
+            url+='tableId='+options.tableId;
+         }
+         //检查是否有参数
+         if(util.isNotEmpty(options.data)){
+            url+='&'+options.data;
+         }
+         //从新的窗口
+         window.open(url,'_blank');
      };
 }).call(lion,jQuery);

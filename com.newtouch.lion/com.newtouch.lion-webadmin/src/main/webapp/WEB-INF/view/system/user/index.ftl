@@ -43,7 +43,6 @@
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <!--lang-->
-<script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
 <!--lion UI JS End-->
 <script src="${base}/resources/admin/scripts/system/user.js" type="text/javascript"></script>
 </head>
@@ -113,7 +112,7 @@
 				<table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_user_list_tb" data-singleselect="true",   data-loadUrl="${base}/system/user/list.json" data-checkbox="true" data-pageSize="10">
 					<thead>
 						<tr>
-						  <th class="table-checkbox" data-field='id' data-checkbox="true">
+						  <th class="table-checkbox" data-field='id' data-checkbox="true"  style="width:30px;">
 						 		<input type="checkbox" class="group-checkable" data-set="#sys_user_list_tb.checkboxes"  data-sortable="false" />
 						 	</th>
 							<th data-field='username' data-sortDir="asc"    style="width:100px;">
@@ -125,20 +124,16 @@
 							<th data-field="realnameEn" style="width:100px;">
 								姓名(英文)
 							</th>
-							<th data-field="employeeCode" style="width:30px;" align="center">
+							<th data-field="employeeCode" style="width:100px;" align="center">
 								员工号
 							</th>
 							<th data-field="department" style="width:100px;" data-formatter="formatterDepartment">
 								所属部门
-							</th>						
-							<th data-field="telephone" style="width:150px;">
-								联系电话
 							</th>
-
-							<th data-field="accountLocked" style="width:100px;"  data-formatter="formatterAccountLocked">
+							<th data-field="accountLocked" style="width:50px;"  data-formatter="formatterAccountLocked">
 								锁定状态
 							</th>
-							<th data-field="accountExpired" style="width:100px;" data-formatter="formatterEidtable">
+							<th data-field="accountExpired" style="width:50px;" data-formatter="formatterEidtable">
 								账户状态
 							</th>
 							<th data-field="accountExpiredDate" style="width:100px;" data-formatter="formatterDate">
