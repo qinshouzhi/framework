@@ -35,6 +35,7 @@
 <script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
 <!--lang-->
 <script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
+<script src="${base}/resources/admin/scripts/admin-common.js" type="text/javascript"></script>
 <!-- codetype -->
 <script src="${base}/resources/admin/scripts/system/codetype.js" type="text/javascript"></script>
 </head>
@@ -99,17 +100,17 @@
 							<th class="table-checkbox" data-field='id' data-checkbox="true">
 						 		<input type="checkbox" class="group-checkable" data-set="#sys_codetype_lists_tb.checkboxes"  data-sortable="false" />
 						 	</th>
-							<th data-field='type' data-sortDir="asc" style="width:100px;">
-								通用编码类型
+							<th data-field='type' style="width:100px;">
+								类型
 							</th>
 							<th data-field="nameEn" style="width:100px;">
-							 	通用编码类型名称（英文）
+							 	名称（英文）
 							</th>
 							<th data-field="nameZh" style="width:100px;">
-								通用编码类型名称（中文）
+								名称（中文）
 							</th>
 							<th data-field="codeLenLimit" style="width:50px;" >
-								编码参数值长度
+								参数长度
 							</th>
 							<th data-field="editable" style="width:30px;" align="center"  data-formatter="formatterEidtable">
 								可编辑

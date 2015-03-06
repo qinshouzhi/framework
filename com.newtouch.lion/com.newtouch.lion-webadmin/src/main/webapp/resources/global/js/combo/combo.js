@@ -674,6 +674,7 @@
             // console.dir(error);
           }
           //Ajax请求
+
           util.get(this.options.loadurl,buildOptions,reqError);
         },
         //设置Li的高度

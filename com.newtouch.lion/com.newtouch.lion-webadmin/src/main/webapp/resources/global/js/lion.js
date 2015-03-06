@@ -205,12 +205,11 @@ lion.assemblyCache={};
    		successfn=successfn||$.noop;
    		errorfn=errorfn||$.noop;
    		$.ajax({
-            url : url,               
-            async : true,
+            url : url,
             type : 'post',              
             data : data,
-            dataType:"json",
-        	timeout:5000,
+            dataType:'json',
+        	timeout:exports.timeout,
         	error :function(xhr, textStatus, error) {
 				errorfn.call(this,xhr,textStatus,error);
 			},
@@ -219,25 +218,18 @@ lion.assemblyCache={};
             }
         });
    };
-   /**
-    * [postasync  同步请求]
-    * @param  {[type]} url       [URL]
-    * @param  {[type]} data      [JSON对象]
-    * @param  {[type]} successfn [请求成功回调函数]
-    * @param  {[type]} errorfn   [失败回调函数]
-    * @param  {[type]} arg       [参数]
-    */
-    exports.postasync=function(url,data,successfn,errorfn,arg){
+
+   exports.postasync=function(url,data,successfn,errorfn,arg){
    		successfn=successfn||$.noop;
    		errorfn=errorfn||$.noop;
    		$.ajax({
-            url : url,               
-            async : false,
-            type : 'post',              
-            data : data,
-            dataType:"json",
-        	timeout:5000,
-        	error :function(xhr, textStatus, error) {
+            url:url,
+            type:'post',              
+            data:data,
+            async:false,
+            dataType:'json',
+        	timeout:exports.timeout,
+        	error:function(xhr, textStatus, error) {
 				errorfn.call(this,xhr,textStatus,error);
 			},
             success:function(data) {
@@ -245,6 +237,7 @@ lion.assemblyCache={};
             }
         });
    };
+
    /**
     * [postjson JSON字符串请求]
     * @param  {[type]} url       [URL]
@@ -261,16 +254,16 @@ lion.assemblyCache={};
 				contentType:'application/json',
 				type :'POST',
 				url:url,
-				async : true,
+				async:true,
 				data:JSON.stringify(data),
 				success : function(data) {
             		successfn.call(this,data,arg);
             	},			
-				timeout : 5000, // 连接超时时间
+				timeout:exports.timeout,
 				error:function(xhr, textStatus, error) {
 					errorfn.call(this,xhr,textStatus,error);
 				},
-			});
+	    });
    };
      /**Ajax POST请求
    	 * @param url 请求URL
@@ -284,7 +277,7 @@ lion.assemblyCache={};
             url : url,      
             async : false,
             type : 'get',
-            dataType:"json",
+            dataType:'json',
          	timeout:exports.timeout,
          	error : function(xhr,textStatus,error) {
  				errorfn.call(this,xhr,textStatus,error);

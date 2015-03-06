@@ -60,15 +60,12 @@ public class AjaxPermissionshorizationFilter extends PermissionsAuthorizationFil
 			  this.saveRequestAndRedirectToLogin(request, response);
 			}
 		}else{
-			if(LionWebUtils.isAjax(request)){
-			 
+			if(LionWebUtils.isAjax(request)){			 
 				logger.info("Ajax 请求未授权:{},url:{}",mappedValue,this.getPathWithinApplication(request));
-			     WebUtils.toHttp(response).setHeader(Constants.AJAX_UNAUTH,"true");
-			     WebUtils.toHttp(response).setStatus(Constants.AJAX_UNAUTH_STATUS);
+			    WebUtils.toHttp(response).setHeader(Constants.AJAX_UNAUTH,"true");
+			    WebUtils.toHttp(response).setStatus(Constants.AJAX_UNAUTH_STATUS);
 			}else{
-				
 	            String unauthorizedUrl = getUnauthorizedUrl();
-	            //SHIRO-142 - ensure that redirect _or_ error code occurs - both cannot happen due to response commit:
 	            if (StringUtils.hasText(unauthorizedUrl)) {
 	            	
 	                WebUtils.issueRedirect(request, response, unauthorizedUrl);
