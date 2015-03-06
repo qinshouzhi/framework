@@ -194,7 +194,11 @@
          options = $.extend(true,btnDeleteOptions,options);
          var url=options.url;
          if(util.isNotEmpty(optins.tableId)){
-
+            if (url.indexOf("?") != -1) {
+                
+            }else{
+                
+            }
          }
      };
 }).call(lion,jQuery);

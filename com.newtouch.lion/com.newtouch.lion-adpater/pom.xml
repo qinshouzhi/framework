@@ -9,9 +9,9 @@
 		<version>${lion-parent.version}</version>
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
-	<groupId>com.newtouch.lion-adpater</groupId>
+	<groupId>com.newtouch.lion</groupId>
 	<artifactId>com.newtouch.lion-adpater</artifactId>
-	<version>$lion-adpater.version}</version>
+	<version>${lion-adpater.version}</version>
 	<name>com.newtouch.lion-adpater</name>
 	<url>http://maven.apache.org</url>
 	<properties>
