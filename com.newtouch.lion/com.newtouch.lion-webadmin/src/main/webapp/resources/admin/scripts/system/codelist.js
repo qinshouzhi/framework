@@ -249,9 +249,9 @@ function formatterCodeList(val,row) {
 }
 //判断是否编辑
 function formatterEidtable(data,type,full) {
-  var name =$.lion.lang.editable.n;
+  var name =lion.lang.editable.n;
   if (data) {
-    name = $.lion.lang.editable.y;
+    name = lion.lang.editable.y;
   }
   return name;
 }

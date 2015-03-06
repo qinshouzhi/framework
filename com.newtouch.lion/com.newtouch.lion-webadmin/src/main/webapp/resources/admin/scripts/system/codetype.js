@@ -231,9 +231,9 @@ function formatterCodeList(val,row) {
 //判断是否编辑
 function formatterEidtable(data,type,full) { 
   if (data) {
-	return $.lion.lang.editable.y;
+	return lion.lang.editable.y;
   }
-  return $.lion.lang.editable.n;
+  return lion.lang.editable.n;
 }
 
 //将JSON复杂对象显示到DataGird中
