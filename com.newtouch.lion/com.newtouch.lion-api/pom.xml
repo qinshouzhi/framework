@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.newtouch.lion</groupId>
 		<artifactId>com.newtouch.lion-parent</artifactId>
-		<version>${lion-parent.version}</version>
+		<version>0.0.2-SNAPSHOT</version>
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>com.newtouch.lion-api</artifactId>
@@ -15,6 +15,7 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<com.newtouch.lion-parent.version>0.0.2-SNAPSHOT</com.newtouch.lion-parent.version>
 	</properties>
 	<dependencies>
 		<dependency>

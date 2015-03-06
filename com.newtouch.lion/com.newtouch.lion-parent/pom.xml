@@ -720,27 +720,35 @@
 			<organization>newtouch</organization>
 		</developer>
 	</developers>
-	<!-- <repositories>
-	
-		<repository>
-			<id>repo1</id>
-			<name>maven</name>
-			<url>http://repo1.maven.org/maven2/</url>
-		</repository>
-		<repository>
-			<id>nexus</id>
-			<name>local private nexus</name>
-			<url>http://maven.oschina.net/content/groups/public/</url>
-		</repository>
-	</repositories>-->
-	<repositories>		
+	<repositories>
 		<repository>
 			<id>nexus-public</id>
 			<name>Nexus Group Repository</name>
 			<url>http://192.168.202.146/nexus/content/groups/public/</url>
-		</repository>		
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
-	<distributionManagement>	 
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nexus-public</id>
+			<name>Nexus Group Repository</name>
+			<url>http://192.168.202.146/nexus/content/groups/public/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	<distributionManagement>
 		<repository>
 			<id>newtouch</id>
 			<name>Nexus Release Repository</name>
