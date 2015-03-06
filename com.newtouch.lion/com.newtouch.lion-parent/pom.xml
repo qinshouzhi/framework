@@ -12,15 +12,15 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.7</jdk.version>
-		<lion-parent.version>0.0.1-SNAPSHOT</lion-parent.version>
-		<lion-adpater.version>0.0.1-SNAPSHOT</lion-adpater.version>
-		<lion-im.version>0.0.1-SNAPSHOT</lion-im.version>
-		<lion-web.version>0.0.1-SNAPSHOT</lion-web.version>
-		<lion-webadmin.version>0.0.1-SNAPSHOT</lion-webadmin.version>
-		<lion-api.version>0.0.1-SNAPSHOT</lion-api.version>
-		<lion-service.version>0.0.1-SNAPSHOT</lion-service.version>
-		<lion-data.version>0.0.1-SNAPSHOT</lion-data.version>
-		<lion-common.version>0.0.1-SNAPSHOT</lion-common.version>
+		<lion-parent.version>0.0.2-SNAPSHOT</lion-parent.version>
+		<lion-adpater.version>0.0.2-SNAPSHOT</lion-adpater.version>
+		<lion-im.version>0.0.2-SNAPSHOT</lion-im.version>
+		<lion-web.version>0.0.2-SNAPSHOT</lion-web.version>
+		<lion-webadmin.version>0.0.2-SNAPSHOT</lion-webadmin.version>
+		<lion-api.version>0.0.2-SNAPSHOT</lion-api.version>
+		<lion-service.version>0.0.2-SNAPSHOT</lion-service.version>
+		<lion-data.version>0.0.2-SNAPSHOT</lion-data.version>
+		<lion-common.version>0.0.2-SNAPSHOT</lion-common.version>
 		<junit.version>4.8.2</junit.version>
 		<slf4j.version>1.7.1</slf4j.version>
 		<poi.version>3.9</poi.version>
