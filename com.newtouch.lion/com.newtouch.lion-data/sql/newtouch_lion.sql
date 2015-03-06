@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2015-03-04 16:25:54
+Date: 2015-03-06 11:43:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -81,7 +81,7 @@ CREATE TABLE `bas_code_list` (
   UNIQUE KEY `UK_BAS_CODE_LIST_NAME_EN` (`NAME_EN`),
   KEY `FK_BAS_CODE_TYPE_ID_001` (`BAS_CODE_TYPE_ID`),
   CONSTRAINT `FK_BAS_CODE_TYPE_ID_001` FOREIGN KEY (`BAS_CODE_TYPE_ID`) REFERENCES `bas_code_type` (`BAS_CODE_TYPE_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COMMENT='通用编码表';
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8 COMMENT='通用编码表';
 
 -- ----------------------------
 -- Records of bas_code_list
@@ -115,15 +115,13 @@ INSERT INTO `bas_code_list` VALUES ('35', '36', '[10,20,30,40,50]', '[10,20,30,4
 INSERT INTO `bas_code_list` VALUES ('36', '36', '[5,10,15,20,25,30,40,50]', '[5,10,15,20,25,30,40,50]', '[5,10,15,20,25,30,40,50]', '2', '1', '2013-03-28 22:35:28', '1', '2013-03-28 22:35:28', '0', '0', null, '1', null);
 INSERT INTO `bas_code_list` VALUES ('37', '36', '[10,15,20,25,30,40,50,100]', '[10,15,20,25,30,40,50,100]', '[10,15,20,25,30,40,50,100]', '0', '1', '2013-03-28 22:36:24', '1', '2013-03-29 22:28:31', '0', '3', null, '1', '1');
 INSERT INTO `bas_code_list` VALUES ('40', '33', 'module_menu_category_item', '菜单子项', 'module_menu_category_item', '4', '1', '2014-04-08 14:09:11', '1', '2014-04-08 14:10:11', '0', '1', null, '1', '0');
-INSERT INTO `bas_code_list` VALUES ('41', '33', 'mobile_mdule', '移动应用', 'mobile_mdule', '1', '1', '2014-04-08 21:14:06', '1', '2014-04-08 21:14:06', '0', '0', null, '1', '0');
-INSERT INTO `bas_code_list` VALUES ('42', '33', 'mobile_mdule_menu', ' 移动应用菜单项', 'mobile_mdule_menu', '5', '1', '2014-04-08 21:15:06', '1', '2014-04-08 21:15:06', '0', '0', null, '1', '0');
-INSERT INTO `bas_code_list` VALUES ('43', '33', 'mobile_mdule_menu_item', '移动应用菜单子项', 'mobile_mdule_menu_item', '0', '1', '2014-04-08 21:15:44', '1', '2014-04-08 21:20:00', '0', '2', null, '1', '0');
 INSERT INTO `bas_code_list` VALUES ('44', '37', 'users_datagrid', '用户管理', 'users_datagrid', '0', '1', '2014-04-08 23:09:47', '1', '2014-04-08 23:11:08', '0', '1', null, '1', '0');
 INSERT INTO `bas_code_list` VALUES ('45', '37', 'code_datagrid', '编码管理', 'code_datagrid', '1', '1', '2014-04-08 23:10:22', '1', '2014-04-08 23:11:03', '0', '1', null, '1', '0');
 INSERT INTO `bas_code_list` VALUES ('46', '37', 'system_datagrid', '系统管理', 'system_datagrid', '2', '1', '2014-04-08 23:11:52', '1', '2014-04-08 23:11:52', '0', '0', null, '1', '0');
 INSERT INTO `bas_code_list` VALUES ('47', '37', 'datagrid_datagrid ', 'DataGrid管理', 'datagrid_datagrid ', '3', '1', '2014-04-08 23:12:43', '1', '2014-04-08 23:26:15', '0', '1', null, '1', '0');
 INSERT INTO `bas_code_list` VALUES ('48', '37', 'SYSTEM_MINITOR', '系统监控管理', 'SYSTEM_MINITOR', '4', '1', '2014-04-08 23:13:18', '1', '2014-04-08 23:13:18', '0', '0', null, '1', '0');
 INSERT INTO `bas_code_list` VALUES ('49', '19', 'sysInterface', '接口管理', 'sysInterface', '3', '1', '2014-06-01 21:48:36', '1', '2014-06-01 21:48:36', '0', '0', null, '1', '1');
+INSERT INTO `bas_code_list` VALUES ('52', '33', 'module_menu_category_item_button', '按钮项', 'item_button', '5', '1', '2015-03-04 21:11:44', '1', '2015-03-04 21:11:44', '0', '0', null, '1', '1');
 
 -- ----------------------------
 -- Table structure for `bas_code_type`
@@ -146,23 +144,23 @@ CREATE TABLE `bas_code_type` (
   PRIMARY KEY (`BAS_CODE_TYPE_ID`),
   UNIQUE KEY `UK_BAS_CODE_TYPE_NAME_ZH` (`NAME_ZH`),
   UNIQUE KEY `UK_BAS_CODE_TYPE_NAME_EN` (`NAME_EN`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COMMENT='通用编码类型定义表';
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 COMMENT='通用编码类型定义表';
 
 -- ----------------------------
 -- Records of bas_code_type
 -- ----------------------------
-INSERT INTO `bas_code_type` VALUES ('16', 'Customers', '客户管理', 'CustomerManage', '1', '1000', '1', '2013-03-19 09:37:06', '1', '2014-04-08 13:33:26', '0', '5', null);
+INSERT INTO `bas_code_type` VALUES ('16', 'Customers', '客户管理', 'CustomerManage', null, '1000', '1', '2013-03-19 09:37:06', '1', '2015-03-06 11:17:59', '0', '6', null);
 INSERT INTO `bas_code_type` VALUES ('19', 'system', '系统参数', 'SystemParamter', '1', '999999999', '1', '2013-03-19 09:41:17', '1', '2014-03-24 17:04:53', '0', '52', null);
 INSERT INTO `bas_code_type` VALUES ('21', 'Customers', '通用编码类型', 'codeTypes', '1', '10000', '1', '2013-03-19 10:42:58', '1', '2013-04-13 21:55:52', '0', '4', null);
 INSERT INTO `bas_code_type` VALUES ('23', 'system', '参数类型', 'paramterType', '1', '11111', '1', '2013-03-19 13:24:26', '1', '2013-03-24 21:38:51', '0', '3', null);
 INSERT INTO `bas_code_type` VALUES ('24', 'Products', '产品管理', 'ProductsManage', '1', '1000', '1', '2013-03-19 14:33:58', '1', '2013-03-24 21:38:27', '0', '2', null);
 INSERT INTO `bas_code_type` VALUES ('28', 'Reports Center', '报表中心', 'ReportCenter', '1', '11113', '1', '2013-03-19 14:35:25', '1', '2015-02-12 19:37:53', '0', '3', null);
 INSERT INTO `bas_code_type` VALUES ('32', 'system', 'Target', 'Target', '1', '100', '1', '2013-03-24 16:53:50', '1', '2013-03-24 17:17:07', '0', '1', null);
-INSERT INTO `bas_code_type` VALUES ('33', 'system', '资源类型', 'ResourceType', '1', '1000', '1', '2013-03-24 21:46:03', '1', '2013-03-24 21:46:03', '0', '0', null);
+INSERT INTO `bas_code_type` VALUES ('33', 'system', '资源类型', 'ResourceType', null, '1000', '1', '2013-03-24 21:46:03', '1', '2015-03-05 23:43:47', '0', '10', null);
 INSERT INTO `bas_code_type` VALUES ('34', 'system', 'DataGrid_Editors', 'DataGrid_Editors', '1', '100', '1', '2013-03-27 22:45:16', '1', '2013-03-27 22:45:16', '0', '0', null);
 INSERT INTO `bas_code_type` VALUES ('35', 'system', 'PagePosition', 'PagePosition', '1', '1000', '1', '2013-03-28 22:31:02', '1', '2013-03-28 22:31:02', '0', '0', null);
 INSERT INTO `bas_code_type` VALUES ('36', 'system', 'PageList', 'PageList', '1', '1000', '1', '2013-03-28 22:33:45', '1', '2013-03-28 22:33:45', '0', '0', null);
-INSERT INTO `bas_code_type` VALUES ('37', 'system', 'Datagrid类型', 'datagrid_type', '1', '1000', '1', '2014-04-08 23:08:45', '1', '2014-04-08 23:08:45', '0', '0', null);
+INSERT INTO `bas_code_type` VALUES ('37', 'system', 'Datagrid类型', 'datagrid_type', null, '1000', '1', '2014-04-08 23:08:45', '1', '2015-03-06 09:39:36', '0', '1', null);
 INSERT INTO `bas_code_type` VALUES ('38', 'system', '接口管理', 'sysInterface', '1', '1111', '1', '2014-06-01 21:47:51', '1', '2014-06-01 21:47:51', '0', '0', null);
 INSERT INTO `bas_code_type` VALUES ('39', 'paramter', 'nameZh1', 'nameEn1', '1', '11', '1', '2014-11-07 15:26:53', '1', '2014-11-07 15:26:53', '0', '0', null);
 
@@ -680,7 +678,7 @@ CREATE TABLE `bas_parameter` (
   `CATEGORY` varchar(30) NOT NULL COMMENT '系统参数类型',
   `NAME_EN` varchar(128) NOT NULL COMMENT '系统参数英文名称，最小为：6，最大为非作歹0100',
   `NAME_ZH` varchar(128) NOT NULL COMMENT '系统参数中文名称',
-  `VALUE` varchar(256) NOT NULL COMMENT '系统参数值',
+  `PARAMETER_VALUE` varchar(256) NOT NULL COMMENT '系统参数值',
   `EDITABLE` tinyint(1) DEFAULT '1' COMMENT '是否可编辑',
   `DESCRIPTION` varchar(512) DEFAULT NULL COMMENT '系统参数描述',
   `CREATE_BY` int(11) NOT NULL COMMENT '创建人ID',
@@ -852,7 +850,7 @@ CREATE TABLE `bas_resource` (
   `DELETE_DATE` datetime DEFAULT NULL COMMENT '系统默认字段.删除日期',
   PRIMARY KEY (`BAS_RESOURCE_ID`),
   KEY `FK_BAS_PARENT_BAS_RESOURCE_ID` (`PARENT_BAS_RESOURCE_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8 COMMENT='系统资源表';
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 COMMENT='系统资源表';
 
 -- ----------------------------
 -- Records of bas_resource
@@ -860,14 +858,14 @@ CREATE TABLE `bas_resource` (
 INSERT INTO `bas_resource` VALUES ('1', null, 'application', 'Application', '应用资源', 'application', 'Application', '0', '0', '1', '_self', 'icon-star', null, '1', '2013-03-25 15:56:44', '1', '2015-02-26 17:52:14', '0', '7', null);
 INSERT INTO `bas_resource` VALUES ('2', '1', 'module_menu_category', 'SystemConfig', '系统设置', 'SystemConfig', '系统设置', '1', '0', '1', '_self', 'icon-settings', null, '1', '2013-03-25 17:16:05', '1', '2013-03-25 17:16:05', '0', '1', null);
 INSERT INTO `bas_resource` VALUES ('9', '2', 'module_menu_category', 'usermanage', '用户管理', 'usermanage', '用户管理', '0', null, '1', '_self', 'icon-star', null, '1', '2013-03-25 19:26:09', '1', '2013-03-25 19:26:09', '0', '5', null);
-INSERT INTO `bas_resource` VALUES ('10', '2', 'module_menu_category', 'CodeManage', '编码管理', 'CodeManage', '编码管理', '1', '0', '1', '_self', 'icon-star', null, '1', '2013-03-25 19:28:08', '1', '2014-04-05 11:39:39', '0', '4', null);
+INSERT INTO `bas_resource` VALUES ('10', '2', 'module_menu_category', '', '编码管理', 'CodeManage', null, '1', '0', '1', '_self', 'icon-star', '', '1', '2013-03-25 19:28:08', '1', '2015-03-05 13:37:28', '0', '5', null);
 INSERT INTO `bas_resource` VALUES ('11', '2', 'module_menu_category_item', '/system/resource/index.htm', '资源管理', 'ResourceManage', '', '2', null, '1', '_self', 'icon-star', '', '1', '2013-03-25 19:30:56', '1', '2013-03-26 22:51:30', '0', '1', null);
 INSERT INTO `bas_resource` VALUES ('12', '2', 'module_menu_category_item', '/system/parameter/index.htm', '系统参数', 'ParameterManage', '系统参数', '3', null, '1', '_self', 'icon-star', null, '1', '2013-03-25 19:36:46', '1', '2013-03-26 22:53:21', '0', '2', null);
-INSERT INTO `bas_resource` VALUES ('13', '1', 'module_menu_category_item', '/index.htm', '控制面板', 'MyMenu', '控制面板', '0', null, '1', '_self', 'icon-home', 'board:index', '1', '2013-03-25 19:43:04', '1', '2013-03-25 19:43:04', '0', '0', null);
+INSERT INTO `bas_resource` VALUES ('13', '1', 'module_menu_category_item', '/index.htm', '控制面板', 'MyMenu', null, '0', '0', '1', '_self', 'icon-home', 'dashboard:index', '1', '2013-03-25 19:43:04', '1', '2015-03-05 16:52:04', '0', '3', null);
 INSERT INTO `bas_resource` VALUES ('14', '9', 'module_menu_category_item', '/system/role/index.htm', '角色管理', 'RoleManage', '角色管理', '0', null, '1', '_self', 'icon-star', null, '1', '2013-03-25 19:59:34', '1', '2013-03-26 22:46:59', '0', '2', null);
 INSERT INTO `bas_resource` VALUES ('15', '9', 'module_menu_category_item', '/system/group/index.htm', '用户组管理', 'RoleManage', '用户组管理', '1', null, '1', '_self', 'icon-star', null, '1', '2013-03-25 20:10:13', '1', '2013-03-26 22:47:25', '0', '2', null);
 INSERT INTO `bas_resource` VALUES ('16', '10', 'module_menu_category_item', '/system/codetype/index.htm', '通用编码类型', 'codeType', '通用编码类型', '0', null, '1', '_self', 'icon-star', null, '1', '2013-03-26 22:49:20', '1', '2013-03-26 22:49:20', '0', '0', null);
-INSERT INTO `bas_resource` VALUES ('17', '10', 'module_menu_category_item', '/system/codelist/index.htm', '编码列表', 'codelist', '编码列表', '1', null, '1', '_self', 'icon-star', null, '1', '2013-03-26 22:51:12', '1', '2013-03-27 21:00:16', '0', '1', null);
+INSERT INTO `bas_resource` VALUES ('17', '10', 'module_menu_category_item', '/system/codelist/index.htm', '编码列表', 'codelist', null, '1', '0', '1', '_self', 'icon-star', 'system.codelist.index', '1', '2013-03-26 22:51:12', '1', '2015-03-04 20:59:00', '0', '4', null);
 INSERT INTO `bas_resource` VALUES ('18', '9', 'module_menu_category_item', '/system/user/index.htm', '用户管理', 'userManage', '用户管理', '2', null, '1', '_self', 'icon-star', null, '1', '2013-03-27 14:13:53', '1', '2013-03-27 14:13:53', '0', '0', null);
 INSERT INTO `bas_resource` VALUES ('19', '2', 'module_menu_category_item', '/system/department/index.htm', '部门管理', 'DepartmentManage', '部门管理', '1', '0', '1', '_self', 'icon-star', null, '1', '2013-03-27 14:17:33', '1', '2014-05-22 10:24:05', '0', '1', null);
 INSERT INTO `bas_resource` VALUES ('20', '2', 'module_menu_category', 'DataGridManage', 'DataGrid管理', 'DataGrid', 'DataGrid管理', '5', '0', '1', '_self', 'icon-star', null, '1', '2013-03-27 20:59:31', '1', '2013-03-30 10:59:06', '0', '11', null);
@@ -884,7 +882,7 @@ INSERT INTO `bas_resource` VALUES ('38', '36', 'module_menu_category_item', '/mo
 INSERT INTO `bas_resource` VALUES ('39', '36', 'module_menu_category_item', '/montior/jvm/index.htm', 'JVM监控', 'JVM监控', null, '3', '0', '1', '_self', 'icon-star', null, '1', '2014-04-08 15:09:17', '1', '2015-02-28 15:55:25', '0', '1', null);
 INSERT INTO `bas_resource` VALUES ('41', '40', 'mobile_mdule_menu', 'app_store', '应用大厅', 'app_store', '手机财务应用大厅', '0', '0', '1', '_self', 'icon-star', null, '1', '2014-04-08 21:21:26', '1', '2014-04-08 21:21:26', '0', '0', null);
 INSERT INTO `bas_resource` VALUES ('43', '2', 'module_menu_category_item', '/system/applicationproperty/index.htm', '项目属性配置', 'PROJECT_PRO_CONF', '项目属性配置', '6', '0', '1', '_self', 'icon-star', null, '1', '2015-02-17 14:56:18', '1', '2015-02-17 14:56:18', '0', '0', null);
-INSERT INTO `bas_resource` VALUES ('44', '1', 'module_menu_category_item', '', '账户管理', '账户管理', null, '8', '0', '1', '_self', 'icon-user', null, '1', '2015-02-25 10:53:33', '1', '2015-02-25 14:59:57', '0', '5', null);
+INSERT INTO `bas_resource` VALUES ('44', '1', 'module_menu_category', '', '账户管理', '账户管理', null, '8', '0', '1', '_self', 'icon-user', '', '1', '2015-02-25 10:53:33', '1', '2015-03-05 11:15:21', '0', '6', null);
 INSERT INTO `bas_resource` VALUES ('45', '44', 'module_menu_category_item', '/system/account/index.htm', '个人资料', '个人资料', null, '0', '0', '1', '_self', 'icon-user', null, '1', '2015-02-25 10:57:12', '1', '2015-02-25 13:51:59', '0', '5', null);
 INSERT INTO `bas_resource` VALUES ('47', '44', 'module_menu_category_item', '/system/account/notifications.htm', '通知消息', '通知消息', null, '3', '0', '1', '_self', 'icon-bell', null, '1', '2015-02-25 14:38:22', '1', '2015-02-25 14:38:22', '0', '0', null);
 INSERT INTO `bas_resource` VALUES ('48', '44', 'module_menu_category_item', '/system/account/calendar.htm', '待办事项', '待办事项', null, '1', '0', '1', '_self', 'icon-calendar', null, '1', '2015-02-25 14:46:23', '1', '2015-02-25 14:46:23', '0', '0', null);
@@ -892,6 +890,12 @@ INSERT INTO `bas_resource` VALUES ('49', '36', 'module_menu_category_item', '/dr
 INSERT INTO `bas_resource` VALUES ('50', '36', 'module_menu_category_item', '/montior/hibernate/index.htm', 'Hibernate监控', 'Hibernate监控', null, '5', '0', '1', '_self', 'icon-star', null, '1', '2015-03-01 02:15:07', '1', '2015-03-01 23:31:48', '0', '1', null);
 INSERT INTO `bas_resource` VALUES ('51', '36', 'module_menu_category_item', '/montior/cache/index.htm', '缓存监控', '缓存监控', null, '8', '0', '1', '_self', 'icon-star', null, '1', '2015-03-01 23:28:04', '1', '2015-03-01 23:29:52', '0', '1', null);
 INSERT INTO `bas_resource` VALUES ('52', '36', 'module_menu_category_item', '/montior/jvm/thread.htm', 'JVM线程监控', 'JVM线程监控', null, '4', '0', '1', '_self', 'icon-star', null, '1', '2015-03-01 23:29:13', '1', '2015-03-01 23:32:59', '0', '3', null);
+INSERT INTO `bas_resource` VALUES ('53', '16', 'module_menu_category_item_button', '/system/codetype/add.json', '添加', 'ADD', null, '6', '0', '1', '_self', null, 'system.codetype.add', '1', '2015-03-04 21:17:01', '1', '2015-03-04 21:17:01', '0', '0', null);
+INSERT INTO `bas_resource` VALUES ('54', '16', 'module_menu_category_item_button', '/system/codetype/edit.json', '编辑', 'EDIT', null, '7', '0', '1', '_selft', null, 'sytem.codetype.edit', '1', '2015-03-04 21:19:56', '1', '2015-03-04 21:19:56', '0', '0', null);
+INSERT INTO `bas_resource` VALUES ('55', '16', 'module_menu_category_item_button', '/system/codetype/list.json', '刷新', 'Refresh', null, '8', '0', '1', '_self', null, 'system.codetype.list', '1', '2015-03-04 21:21:24', '1', '2015-03-04 21:21:24', '0', '0', null);
+INSERT INTO `bas_resource` VALUES ('56', '16', 'module_menu_category_item_button', '/system/codetype/export.json', 'Excel', 'Excel', null, '9', '0', '1', '_self', null, 'system.codetype.export', '1', '2015-03-05 10:37:11', '1', '2015-03-05 10:37:11', '0', '0', null);
+INSERT INTO `bas_resource` VALUES ('57', '16', 'module_menu_category_item_button', '/sytsem/codetype/delete.json', '删除', 'Delete', null, '10', '0', '1', '_self', null, 'system.codetype.delete', '1', '2015-03-05 10:38:22', '1', '2015-03-05 13:37:10', '0', '1', null);
+INSERT INTO `bas_resource` VALUES ('59', '2', 'module_menu_category_item', '/system/icon/index.htm', '图标管理', 'Icon', null, '7', '0', '1', '_self', null, '', '1', '2015-03-05 16:27:06', '1', '2015-03-05 16:52:31', '0', '4', null);
 
 -- ----------------------------
 -- Table structure for `bas_role`
@@ -918,12 +922,12 @@ CREATE TABLE `bas_role` (
 -- ----------------------------
 -- Records of bas_role
 -- ----------------------------
-INSERT INTO `bas_role` VALUES ('1', '系统管理角色', 'SYSADMIN_ROLE', '系统管理角色', '1', '1', '2013-03-24 11:34:17', '1', '2015-03-01 23:30:00', '0', '58', null);
+INSERT INTO `bas_role` VALUES ('1', '系统管理角色', 'SYSADMIN_ROLE', '系统管理角色', '1', '1', '2013-03-24 11:34:17', '1', '2015-03-06 09:46:16', '0', '62', null);
 INSERT INTO `bas_role` VALUES ('2', '销售总经理', 'SALES_MGR', '销售总经理', '1', '1', '2013-03-24 11:34:58', '1', '2014-05-21 17:29:27', '0', '22', null);
 INSERT INTO `bas_role` VALUES ('4', '邮件角色', 'EMAIL_ROLES', '邮件角色', '1', '1', '2013-04-10 20:26:40', '1', '2015-02-16 18:03:32', '0', '13', null);
 INSERT INTO `bas_role` VALUES ('6', '报表管理角色', 'ReportRoles', '报表管理角色', '1', '1', '2013-04-10 20:28:57', '1', '2014-05-22 14:24:11', '0', '11', null);
-INSERT INTO `bas_role` VALUES ('8', 'SUPER_ADMIN', 'SUPER_ADMIN1', 'SUPER_ADMIN', '0', '1', '2014-03-28 22:35:19', '1', '2015-03-04 01:25:29', '0', '13', null);
-INSERT INTO `bas_role` VALUES ('10', 'demo', 'demo', 'demo', '1', '1', '2014-05-22 17:51:18', '1', '2014-05-22 17:51:36', '0', '1', null);
+INSERT INTO `bas_role` VALUES ('8', 'SUPER_ADMIN', 'SUPER_ADMIN1', 'SUPER_ADMIN', '0', '1', '2014-03-28 22:35:19', '1', '2015-03-04 21:47:15', '0', '16', null);
+INSERT INTO `bas_role` VALUES ('10', 'demo', 'demo', 'demo', '1', '1', '2014-05-22 17:51:18', '1', '2015-03-04 21:01:15', '0', '3', null);
 
 -- ----------------------------
 -- Table structure for `bas_role_resource`
@@ -1021,6 +1025,11 @@ INSERT INTO `bas_role_resource` VALUES ('51', '1');
 INSERT INTO `bas_role_resource` VALUES ('51', '8');
 INSERT INTO `bas_role_resource` VALUES ('52', '1');
 INSERT INTO `bas_role_resource` VALUES ('52', '8');
+INSERT INTO `bas_role_resource` VALUES ('53', '1');
+INSERT INTO `bas_role_resource` VALUES ('54', '1');
+INSERT INTO `bas_role_resource` VALUES ('55', '1');
+INSERT INTO `bas_role_resource` VALUES ('57', '1');
+INSERT INTO `bas_role_resource` VALUES ('59', '1');
 
 -- ----------------------------
 -- Table structure for `bas_tiptext`
@@ -1105,7 +1114,7 @@ INSERT INTO `bas_user` VALUES ('6', '9', null, null, '000000007', '6ba7d63913342
 INSERT INTO `bas_user` VALUES ('7', '8', null, null, 'admin', 'c150916baa97eeccd1d99541aad26170761b41a9', null, '00000001', '超级系统管理员', 'sysadmin', '1', null, null, '', '', '', '', '', '', '', '1', '0', '1', '2014-07-08 21:03:36', '2015-04-08 21:03:36', '1', null, null, '1', '2014-04-08 21:03:36', '7', '2014-05-22 10:44:27', '10', null, '0');
 INSERT INTO `bas_user` VALUES ('8', '20', null, null, 'demo', '7d67e4df76211d82086965b536ceebdab48a2933', null, 'demo11', 'demo', 'demo', '1', null, null, '', '', '', '', '', '', '', '1', '0', '1', '2014-08-22 11:05:28', '2015-05-22 11:05:28', '1', null, null, '1', '2014-05-22 11:05:28', '1', '2015-03-02 15:25:58', '3', null, '0');
 INSERT INTO `bas_user` VALUES ('14', '3', null, null, 'dddddd', '11ab9e5b844792968c48b64a8da1c1dc654f1cac', null, 'dddddd', 'ddddd', 'ddddd', '0', null, null, null, null, 'dddddd@126.com', null, null, null, null, '1', '0', '1', '2015-05-04 14:49:29', '2016-02-04 14:49:29', '1', null, null, '1', '2015-02-04 14:49:29', '1', '2015-02-04 14:49:29', '0', null, '0');
-INSERT INTO `bas_user` VALUES ('15', '11', null, null, 'wanglijun11', '4bd8e01746d825fc1ae538971b0bc750c857151d', null, 'dddd', 'dddd', 'dddd', '0', null, null, 'dddd', '15502152629', 'wanglijun11@126.com', '15502152629', '15502152629', '123333', 'china', '1', '0', '1', '2015-05-04 14:51:14', '2016-02-04 14:51:14', '1', '2222', null, '1', '2015-02-04 14:51:14', '1', '2015-02-15 22:43:41', '6', null, '0');
+INSERT INTO `bas_user` VALUES ('15', '11', null, null, 'wanglijun11', '4bd8e01746d825fc1ae538971b0bc750c857151d', null, 'dddd', 'dddd', 'dddd', '0', null, null, 'dddd', '15502152629', 'wanglijun11@126.com', '15502152629', '15502152629', '123333', 'china', '1', '0', '1', '2015-05-04 14:51:14', '2016-02-04 14:51:14', '1', '2222', null, '1', '2015-02-04 14:51:14', '1', '2015-03-04 21:33:37', '12', null, '0');
 INSERT INTO `bas_user` VALUES ('16', '11', null, null, 'wanglijun1111', '307fdb5468d2c4abc2b1bb272b0cea12c371c35e', null, '111111', '', '', '0', null, null, '', '', 'scwanglijun@gmail.com', '', '', '', '', '1', '0', '1', '2015-05-15 22:54:52', '2016-02-15 22:54:52', '1', '', null, '1', '2015-02-15 22:54:52', '1', '2015-02-16 15:32:20', '4', null, '0');
 INSERT INTO `bas_user` VALUES ('17', '20', null, null, 'wangkexin', '4393bb1f4a1896957e5559e6a929e6c835017013', null, '00001', 'wangkexin', 'wangkexin', '0', null, null, '', '', 'wangkexin@gmail.com', '', '', '', '', '1', '0', '1', '2015-05-27 00:00:00', '2016-07-15 00:00:00', '1', '', null, '1', '2015-02-27 17:22:57', '1', '2015-03-04 01:24:14', '9', null, '0');
 
@@ -1182,7 +1191,10 @@ INSERT INTO `bas_user_role` VALUES ('4', '8');
 INSERT INTO `bas_user_role` VALUES ('6', '2');
 INSERT INTO `bas_user_role` VALUES ('8', '10');
 INSERT INTO `bas_user_role` VALUES ('15', '1');
+INSERT INTO `bas_user_role` VALUES ('15', '2');
 INSERT INTO `bas_user_role` VALUES ('15', '4');
+INSERT INTO `bas_user_role` VALUES ('15', '6');
+INSERT INTO `bas_user_role` VALUES ('15', '8');
 INSERT INTO `bas_user_role` VALUES ('16', '1');
 INSERT INTO `bas_user_role` VALUES ('16', '2');
 INSERT INTO `bas_user_role` VALUES ('16', '4');

@@ -186,15 +186,15 @@
      //通用导出函数默认参数
      var  btnExportOptions={
         url:'export.json',
-        dataType:null,
+        data:null,
         tableId:''
      };
      //通用导出函数
      exports.exportfn=function(optons){
          options = $.extend(true,btnDeleteOptions,options);
-         var utl=options.url;
+         var url=options.url;
          if(util.isNotEmpty(optins.tableId)){
-             
+
          }
      };
 }).call(lion,jQuery);
