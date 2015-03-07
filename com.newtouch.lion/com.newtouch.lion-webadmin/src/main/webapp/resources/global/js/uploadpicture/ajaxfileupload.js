@@ -175,5 +175,5 @@ jQuery.extend({
             jQuery("<div>").html(data).evalScripts();
         return data;
     }
-})
+});
 

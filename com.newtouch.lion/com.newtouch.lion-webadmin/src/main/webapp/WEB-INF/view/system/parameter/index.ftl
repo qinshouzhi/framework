@@ -11,10 +11,12 @@
 <link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
 <!--DataTable css End-->
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/select2/select2.css"/>
 <link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/css/combotree/combotree.css" rel="stylesheet" type="text/css" />
 <!-- DataTables js Start -->
 <script type="text/javascript" src="${base}/resources/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/select2/select2_locale_zh-CN.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/media/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.js"></script>
@@ -29,7 +31,7 @@
 <script src="${base}/resources/global/js/lion.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/form/form.fill.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
-<script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/combo/combonew.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <!--lion UI JS End-->
@@ -50,10 +52,9 @@
 					</div>
 					<label class="control-label col-md-2" for="sys_parameter_type" >参数类型</label>
 					<div class="col-md-3">
-					      <select  id="parameterCodeList"  name="type" data-size="8" 
-						 	data-maxoptions="1"   multiple placeholder="请选择参数列表..."  
-						 	class="lion-combo bootstrap-select form-control input-small" data-valueField='codeValue' 
-						 	data-textField='nameZh' data-loadURL="${base}/system/code/combox.htm?nameEn=SystemParamter">
+					      <select  id="parameterCodeList" name="type"  placeholder="请选择参数列表..."  
+						 	class="lion-combo form-control select2 input-small" data-valueField='codeValue' 
+						 	data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=SystemParamter">
 						 </select>
 					</div>
 					<div class="col-md-3 ">
@@ -71,11 +72,11 @@
 			</div>
 			<div class="col-md-12">
 				  <!---<@lion.datagrids name="sys_parameter_lists_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/parameter/list.json" dataOptions="" style="height:400px;"/>-->
-				  <table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_parameter_lists_tb" data-singleselect="true",   data-loadUrl="${base}/system/parameter/list.json" data-checkbox="true" data-pageSize="10" width="100%">
+				  <table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_parameter_lists_tb" data-singleselect="true",   data-loadurl="${base}/system/parameter/list.json" data-checkbox="true" data-pageSize="10" width="100%">
 					<thead>
 						<tr>
 						  <th class="table-checkbox"  style="width:30px;" data-field='id' data-checkbox="true">
-						 		<input type="checkbox" class="group-checkable" data-set="#sys_parameter_lists_tb.checkboxes"  data-sortable="false" />
+						 		<input type="checkbox"  class="group-checkable" data-set="#sys_parameter_lists_tb.checkboxes"  data-sortable="false" />
 						 	</th>
 							<th data-field='type'  style="width:80px;" data-formatter="formatterCodeList">
 								参数类型
@@ -122,11 +123,7 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label">参数类型</label>
 													<div class="col-md-5">
-														<select  id="addParameterCodeList"  name="type" data-size="8" 
-														 	data-maxoptions="1"   multiple placeholder="请选择参数列表..."  
-														 	class="lion-combo bootstrap-select form-control" data-valueField='codeValue'   value=""
-														 	data-textField='nameZh' data-loadURL="${base}/system/code/combox.htm?nameEn=SystemParamter">
-														 </select>											 
+									<select  id="addParameterCodeList"  name="type" placeholder="请选择参数列表..."   class="lion-combo form-control select2  " data-valueField='codeValue'  data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=SystemParamter"></select>
 													</div>
 												</div>
 												<div class="form-group">

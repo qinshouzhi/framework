@@ -10,9 +10,9 @@
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>com.newtouch.lion-webadmin</artifactId>
+	<name>com.newtouch.lion-webadmin</name>
 	<version>${lion-webadmin.version}</version>
 	<packaging>war</packaging>
-	<name>admin</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>

@@ -10,7 +10,7 @@
  * @author wanglijun
  * @date 2015-01-19
  * lion combo lib - jQuery Lion UI
- * 对话框
+ * 下拉框
  * Dependencies js:
  * jQuery.js bootstrap.js lion.js 
  * Depedencies css
@@ -985,7 +985,7 @@
     // SELECTPICKER NO CONFLICT
     // ========================
     $.fn.combo.noConflict = function () {
-       $.fn.selectpicker = old;
+       $.fn.combo = old;
        return this;
     }; 
 
