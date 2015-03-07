@@ -35,11 +35,11 @@
             *work:判断为null或者空值
             */
             _self.IsNull = function(value) {
-                if (value == undefined || value == null || value == '' || value.length == 0) {
+                if (value === undefined || value === null || value === '' || value.length === 0) {
                     return true;
                 }
                 return false;
-            }
+            };
             /*
             *work:默认配置
             */

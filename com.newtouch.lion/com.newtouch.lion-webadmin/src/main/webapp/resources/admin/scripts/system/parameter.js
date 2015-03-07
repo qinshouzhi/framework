@@ -54,10 +54,11 @@ $(function() {
 			 lion.util.info('提示','请选择要编辑记录');
 			 return;
 		 }
-	     addForm.reset();
-	     addDialog.find('.modal-header h4 span').text('编辑系统参数');
+	   addForm.reset();
+	   addDialog.find('.modal-header h4 span').text('编辑系统参数');
 		 addDialog.modal('toggle');
 		 addForm.fill(row);
+     $('#addParameterCodeList').combo('val',[row.type]);  
 	 });
 	 //删除
 	 $('#btnDelete').on('click',function(){

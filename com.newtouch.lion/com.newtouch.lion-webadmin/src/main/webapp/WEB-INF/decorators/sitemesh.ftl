@@ -33,9 +33,11 @@ Author: wanglijun
 <link href="${base}/resources/global/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/global/plugins/morris/morris.css" rel="stylesheet" type="text/css">
 <!-- END PAGE LEVEL PLUGIN STYLES -->
+
 <!-- BEGIN PAGE STYLES -->
 <link href="${base}/resources/admin/pages/css/tasks.css" rel="stylesheet" type="text/css"/>
 <!-- END PAGE STYLES -->
+${head}
 <!-- BEGIN THEME STYLES -->
 <!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
 <link href="${base}/resources/global/css/components-rounded.css" id="style_components" rel="stylesheet" type="text/css"/>
@@ -43,7 +45,6 @@ Author: wanglijun
 <link href="${base}/resources/admin/layout4/css/layout.css" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/admin/layout4/css/themes/light.css" rel="stylesheet" type="text/css" id="style_color"/>
 <link href="${base}/resources/admin/layout4/css/custom.css" rel="stylesheet" type="text/css"/>
-${head}
 <!-- END THEME STYLES -->
 </head>
 <!-- END HEAD -->

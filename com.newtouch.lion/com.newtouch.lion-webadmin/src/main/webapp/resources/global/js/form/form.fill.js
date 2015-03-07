@@ -208,15 +208,19 @@
        });
        return oparams;
     };
-
-
+    
     $.fn.reset=function(){
         var $this=this;
         $this[0].reset();
         $this.find('.form-group').removeClass('has-error');
         $this.find('.form-filed').removeClass('has-error');
         $this.find('.help-block').remove();
-        $this.find('.lion-combotree').combotree('refresh');
+        if(!$.isEmptyObject($this.find('.lion-combo'))){
+            $this.find('.lion-combo').combo('clear');
+        }
+        if(!$.isEmptyObject($this.find('.lion-combotree'))){
+            $this.find('.lion-combotree').combotree('refresh');
+        }
         $this.find(':input').val('');
     };
 	

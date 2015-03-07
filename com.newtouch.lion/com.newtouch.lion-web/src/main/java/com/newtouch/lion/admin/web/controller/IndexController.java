@@ -37,6 +37,8 @@ public class IndexController extends  AbstractController{
 	private static final String INDEX_RETURN="/index";
 	/**测试页面*/
 	private static final String TEST_RETURN="/test";
+	/**选择页面*/
+	private static final String COMBO_RETURN="/combo";
 	
 	@RequestMapping("index")
 	public String index(){
@@ -69,6 +71,11 @@ public class IndexController extends  AbstractController{
         logger.info(":{}",this.getRequest().getContextPath());
 		logger.info("进入测试页面");
 		return TEST_RETURN;
+	}
+	
+	@RequestMapping("combo")
+	public String combo(){
+		return COMBO_RETURN;
 	}
 	
 	
