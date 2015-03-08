@@ -16,9 +16,9 @@
 <link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/css/combotree/combotree.css" rel="stylesheet" type="text/css" />
 <!--fileupload css-->
-<link href="${base}/resources/global/css/uploadpicture/uploadpicture.css" rel="stylesheet" type="text/css" />
-<link href="${base}/resources/global/css/uploadpicture/main.css" rel="stylesheet" type="text/css" />
-<link href="${base}/resources/global/css/uploadpicture/demos.css" rel="stylesheet" type="text/css" />
+<link href="${base}/resources/global/css/upload/uploadpicture.css" rel="stylesheet" type="text/css" />
+<link href="${base}/resources/global/css/upload/main.css" rel="stylesheet" type="text/css" />
+<link href="${base}/resources/global/css/upload/demos.css" rel="stylesheet" type="text/css" />
 <!--Jcrop-->
 <link href="${base}/resources/global/plugins/jcrop/css/jquery.Jcrop.min.css" rel="stylesheet" type="text/css" />
 <!-- DataTables js Start -->
@@ -46,11 +46,8 @@
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <!--fileupload Js-->
-<script src="${base}/resources/global/js/uploadpicture/jquery.upload.js" type="text/javascript"></script>
-<script src="${base}/resources/global/js/uploadpicture/ajaxfileupload.js" type="text/javascript"></script>
-<script src="${base}/resources/global/plugins/jquery-file-upload/js/jquery.fileupload.js" type="text/javascript"></script>
-<script src="${base}/resources/global/plugins/jquery-file-upload/js/cors/jquery.xdr-transport.js" type="text/javascript"></script>
-<script src="${base}/resources/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/upload/lion.upload.js" type="text/javascript"></script>
+<script src="${base}/resources/global/plugins/ajaxfileupload/ajaxfileupload.js" type="text/javascript"></script>
 <!--lion UI JS End-->
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/scripts/system/account.js" type="text/javascript"></script>
