@@ -178,48 +178,48 @@
 													<div class="margin-top-10">
 														<button id="btnImgUploadSave" class="btn green-haze">
 														Submit </button>
-														<button id="btnImgUploadCancel" class="btn default">
+														<button class="btn default">
 														Cancel </button>
 													</div>
 												</form>
 											</div>
 											<!-- END CHANGE AVATAR TAB -->
 											<!-- CHANGE PASSWORD TAB -->
-											<div class="tab-pane" id="tab_1_3">											  
-													<form action="#"  id="formpassword" class="form-horizontal">
-														<div class="form-group">
-															<label class="control-label  col-md-3">旧密码</label>
-															<div class="col-md-4 input-group">
-																<input type="password" class="form-control" name="oldpassword" maxlength="30" size="30"/>
-															</div>
-															<div class="col-md-5"></div>		
+											<div class="tab-pane" id="tab_1_3">	
+												<form action="#"  id="formpassword" class="form-horizontal">
+													<div class="form-group">
+														<label class="control-label  col-md-3">旧密码</label>
+														<div class="col-md-4 input-group">
+															<input type="password" class="form-control" name="oldpassword" maxlength="30" size="30"/>
 														</div>
-														<div class="form-group">
-															<label class="control-label col-md-3">新密码</label>
-															<div class="col-md-4 input-group">
-																<input type="password" class="form-control" id="password" name="password" maxlength="30" size="30"/>
-															</div>
-															<div class="col-md-5"></div>
+														<div class="col-md-5"></div>		
+													</div>
+													<div class="form-group">
+														<label class="control-label col-md-3">新密码</label>
+														<div class="col-md-4 input-group">
+															<input type="password" class="form-control" id="password" name="password" maxlength="30" size="30"/>
 														</div>
-														<div class="form-group">												
-															<label class="col-md-3 control-label">确认新密码</label>
-															<div class="col-md-4 input-group">
-																<input type="password" class="form-control" name="confirmpassword" maxlength="30" size="30"/>
-															</div>
-															<div class="col-md-5"></div>
+														<div class="col-md-5"></div>
+													</div>
+													<div class="form-group">												
+														<label class="col-md-3 control-label">确认新密码</label>
+														<div class="col-md-4 input-group">
+															<input type="password" class="form-control" name="confirmpassword" maxlength="30" size="30"/>
 														</div>
-														<div class=" form-group">
-															<label class="col-md-3 control-label"></label>
-															<div class="col-md-9 input-group">
-																<button type="button" id="btnChanagePwdSave" class="btn blue">
-																	<i class="fa fa-save"></i> 修改密码 
-																</button>&nbsp; &nbsp; 
-																<button type="button" id="btnPasswordCancel" class="btn default">
-																	<i class="fa  fa-arrow-left"></i> 取 消 
-																</button>
-															</div>
+														<div class="col-md-5"></div>
+													</div>
+													<div class=" form-group">
+														<label class="col-md-3 control-label"></label>
+														<div class="col-md-9 input-group">
+															<button type="button" id="btnChanagePwdSave" class="btn blue">
+																<i class="fa fa-save"></i> 修改密码 
+															</button>&nbsp; &nbsp; 
+															<button type="button" id="btnPasswordCancel" class="btn default">
+																<i class="fa  fa-arrow-left"></i> 取 消 
+															</button>
 														</div>
-													</form>
+													</div>
+												</form>
 											</div>
 											<!-- END CHANGE PASSWORD TAB -->
 											<!-- PRIVACY SETTINGS TAB -->

@@ -79,6 +79,55 @@
                 return url;
             }
             /*
+            *work:对预览图片进行截图
+            */
+            _self.paint = function() {
+                var jcrop_api,
+                    boundx,
+                    boundy,
+
+                // Grab some information about the preview pane
+                $preview = $('#preview-pane'),
+                $pcnt = $('#preview-pane .preview-container'),
+                $pimg = $('#preview-pane .preview-container img'),
+                xsize = $pcnt.width(),
+                ysize = $pcnt.height();
+                $pimg.attr('src',$('#'+_self.Setting.ImgShow).attr('src'));
+                $('#'+_self.Setting.ImgShow).Jcrop({
+                    onChange: updatePreview,
+                    onSelect: updatePreview,
+                    aspectRatio: 1
+                },function(){
+                    // Use the API to get the real image size
+                    var bounds = this.getBounds();
+                    boundx = bounds[0];
+                    boundy = bounds[1];
+                    // Store the API in the jcrop_api variable
+                    jcrop_api = this;
+                    // Move the preview into the jcrop container for css positioning
+                    $preview.appendTo(jcrop_api.ui.holder);
+                });
+
+                function updatePreview(c){
+                    $("#w").attr("value",Math.round(c.w));
+                    $("#h").attr("value",Math.round(c.h));
+                    $("#x").attr("value",Math.round(c.x));
+                    $("#y").attr("value",Math.round(c.y));
+                    if (parseInt(c.w) > 0){
+                        var rx = xsize / c.w;
+                        var ry = ysize / c.h;
+
+                        $pimg.css({
+                            width: Math.round(rx * boundx) + 'px',
+                            height: Math.round(ry * boundy) + 'px',
+                            marginLeft: '-' + Math.round(rx * c.x) + 'px',
+                            marginTop: '-' + Math.round(ry * c.y) + 'px'
+                        });
+                            
+                    }
+                };
+            }
+            /*
             *work:绑定事件
             */
             _self.change(function() {
@@ -114,53 +163,10 @@
                     _self.Setting.callback();
 
                   //对上传图片进行截图
-                    var jcrop_api,
-                    boundx,
-                    boundy,
-
-                    // Grab some information about the preview pane
-                    $preview = $('#preview-pane'),
-                    $pcnt = $('#preview-pane .preview-container'),
-                    $pimg = $('#preview-pane .preview-container img'),
-                    xsize = $pcnt.width(),
-                    ysize = $pcnt.height();
-                    $pimg.attr('src',$('#'+_self.Setting.ImgShow).attr('src'));
-                    $('#'+_self.Setting.ImgShow).Jcrop({
-                      onChange: updatePreview,
-                      onSelect: updatePreview,
-                      aspectRatio: 1
-                    },function(){
-                      // Use the API to get the real image size
-                      var bounds = this.getBounds();
-                      boundx = bounds[0];
-                      boundy = bounds[1];
-                      // Store the API in the jcrop_api variable
-                      jcrop_api = this;
-
-                      // Move the preview into the jcrop container for css positioning
-                      $preview.appendTo(jcrop_api.ui.holder);
-                    });
-
-                    function updatePreview(c){
-                    	$("#w").attr("value",Math.round(c.w));
-                        $("#h").attr("value",Math.round(c.h));
-                        $("#x").attr("value",Math.round(c.x));
-                        $("#y").attr("value",Math.round(c.y));
-                        if (parseInt(c.w) > 0){
-                            var rx = xsize / c.w;
-                            var ry = ysize / c.h;
-
-                            $pimg.css({
-                              width: Math.round(rx * boundx) + 'px',
-                              height: Math.round(ry * boundy) + 'px',
-                              marginLeft: '-' + Math.round(rx * c.x) + 'px',
-                              marginTop: '-' + Math.round(ry * c.y) + 'px'
-                            });
-                            
-                        }
-                    };
-                }  
+                  _self.paint();
+                } 
             });
+            
         }
     });
 })(jQuery);

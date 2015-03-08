@@ -14,7 +14,7 @@ $(function () {
 	//基本信息验证表单
 	handleVForm($formuser,submitBaseInfoForm);
 	//修改头像验证表单
-	handleImageVForm($formimg,submitImageForm);
+//	handleImageVForm($formimg,submitImageForm);
 	//修改密码验证表单
 	handlePasswordVForm($formpassword,submitPasswordForm);
 	//基本信息保存
@@ -37,10 +37,7 @@ $(function () {
 	$('#btnImgUploadSave').click(function(){
 		$formimg.submit();
 	});
-	//修改头像取消
-	$('#btnImgUploadCancel').click(function(){
-		$formimg.reset();
-	});
+	
 
 });
 //头像修改
@@ -227,46 +224,46 @@ handleVForm=function(vForm,submitCallBackfn){
     });
 };
 //修改头像验证表单
-handleImageVForm=function(vForm,submitCallBackfn){
-	var addError = $('.alert-danger', vForm), addSuccess = $('.alert-success',vForm);
-  vForm.validate({
-        errorElement: 'span',
-        errorClass: 'help-block help-block-error', 
-        focusInvalid: false, 
-        onkeyup:false,
-        ignore: '', 
-      	messages: {
-      		image:{required:'请选择需要上传的头像'}
-        },
-        rules: {
-        	image:{required:true}
-        },
-        invalidHandler: function (event, validator) {             
-            addSuccess.hide();
-            addError.show();
-            Metronic.scrollTo(addError, -200);
-        },
-        highlight: function (element) {
-            $(element).closest('.form-group').addClass('has-error'); 
-        },
-
-        unhighlight: function (element) {
-            $(element).closest('.form-group').removeClass('has-error'); 
-        },
-        success: function (label) {
-            label.closest('.form-group').removeClass('has-error'); 
-        },
-        errorPlacement:function(error,element){
-        	//当遇到combo的对话框架的时，修改它的显示位置
-        	if (element.hasClass('lion-combotree')){
-        		  error.insertAfter(element.parent().find('div.btn-group'));
-        	}else{
-        		error.insertAfter(element);
-        	}
-        },
-        submitHandler: function (form) {
-        	//console.log('eeeeeeeeeeeeee');
-            submitCallBackfn(vForm);
-        }
-    });
-};
+//handleImageVForm=function(vForm,submitCallBackfn){
+//	var addError = $('.alert-danger', vForm), addSuccess = $('.alert-success',vForm);
+//  vForm.validate({
+//        errorElement: 'span',
+//        errorClass: 'help-block help-block-error', 
+//        focusInvalid: false, 
+//        onkeyup:false,
+//        ignore: '', 
+//      	messages: {
+//      		image:{required:'请选择需要上传的头像'}
+//        },
+//        rules: {
+//        	image:{required:true}
+//        },
+//        invalidHandler: function (event, validator) {             
+//            addSuccess.hide();
+//            addError.show();
+//            Metronic.scrollTo(addError, -200);
+//        },
+//        highlight: function (element) {
+//            $(element).closest('.form-group').addClass('has-error'); 
+//        },
+//
+//        unhighlight: function (element) {
+//            $(element).closest('.form-group').removeClass('has-error'); 
+//        },
+//        success: function (label) {
+//            label.closest('.form-group').removeClass('has-error'); 
+//        },
+//        errorPlacement:function(error,element){
+//        	//当遇到combo的对话框架的时，修改它的显示位置
+//        	if (element.hasClass('lion-combotree')){
+//        		  error.insertAfter(element.parent().find('div.btn-group'));
+//        	}else{
+//        		error.insertAfter(element);
+//        	}
+//        },
+//        submitHandler: function (form) {
+//        	//console.log('eeeeeeeeeeeeee');
+//            submitCallBackfn(vForm);
+//        }
+//    });
+//};
