@@ -35,7 +35,7 @@ public interface CodeService {
 	 * @param codeTypeNameEn 参数类型英文名称
 	 * @return Map<String,CodeList> key-codeValue Value-CodeList
 	 */
-	public Map<String, Object> doFindMap(String codeTypeNameEn);
+	public Map<Object, Object> doFindMap(String codeTypeNameEn);
 	
 	/***
 	 * 根据参数类型英文名称查找数据列表，返回Map<String,CodeList>
