@@ -44,6 +44,7 @@ $(function () {
     addDialog.find('.modal-header h4 span').text('编辑编码列表');
     addDialog.modal('toggle');
     addForm.fill(row);
+    $('#addCodeTypeList').combo('val',[row.codeTypeId]);  
     });
 
      //删除
