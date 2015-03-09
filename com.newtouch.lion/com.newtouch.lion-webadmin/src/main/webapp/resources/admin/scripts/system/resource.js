@@ -50,6 +50,7 @@ $(function() {
 		 addDialog.find('.modal-header h4 span').text('编辑资源');
      addDialog.modal('toggle');
 		 addForm.fill(row);
+     $('#sysresourcetype').combo('val',[row.type]); 
       $("#parentResourceId").combotree('val',row._parentId);
 	 });
 	 //删除

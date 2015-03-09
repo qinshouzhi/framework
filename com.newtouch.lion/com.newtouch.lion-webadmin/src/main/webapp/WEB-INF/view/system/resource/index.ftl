@@ -11,6 +11,7 @@
 <!--EasyUI css End-->
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/select2/select2.css"/>
 <!--lion UI css Start-->
 <link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css">
 <link href="${base}/resources/global/css/dialog/lion.dialog.css" rel="stylesheet" type="text/css">
@@ -18,6 +19,8 @@
 <link href="${base}/resources/global/css/combotree/combotree.css" rel="stylesheet" type="text/css" />
 <!--lion UI css End-->
 <script src="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript" ></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/select2/select2_locale_zh-CN.js"></script>
 <script src="${base}/resources/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js"></script>
 <script src="${base}/resources/admin/pages/scripts/ui-toastr.js"></script>
@@ -31,7 +34,7 @@
 <script src="${base}/resources/global/js/lion.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/form/form.fill.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/dialog/dialog.js" type="text/javascript"></script>
-<script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/combo/combonew.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>>
 <!--lion UI JS End-->
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>script>
@@ -117,9 +120,9 @@
 													<div class="form-filed">
 														<label class="col-md-3 control-label">父级资源</label>
 														<div class="col-md-5">
-															 <input  id="parentResourceId"  name="parentResourceId"  
+															<input  id="parentResourceId"  name="parentResourceId"  
 						 	  	  placeholder="请选择父级资源…"  type="text" 
-						 		  class="lion-combotree form-control"   data-loadURL="${base}/system/resource/combotree.json" data-width="225px" data-height="300px"/>										 
+						 		  class="lion-combotree form-control"   data-loadURL="${base}/system/resource/combotree.json" data-width="230px" data-height="300px"/>		 
 														</div>
 													</div>
 												</div>
@@ -127,11 +130,8 @@
 													<div class="form-filed">
 														<label class="col-md-3 control-label">资源类型</label>
 														<div class="col-md-5">
-															<select  id="sysresourcetype"  name="type" data-size="8" 
-															 	data-maxoptions="1"   multiple placeholder="请选择资源类型..."  
-															 	class="lion-combo bootstrap-select form-control" data-valueField='codeValue'   value=""
-															 	data-textField='nameZh' data-loadURL="${base}/system/code/combox.htm?nameEn=ResourceType">
-															 </select>								 
+															<select  id="sysresourcetype"  name="type" placeholder="请选择参数列表..."   class="lion-combo form-control select2  " data-valueField='codeValue'  data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=ResourceType">
+															</select>							 
 														</div>
 													</div>
 												</div>
