@@ -16,6 +16,7 @@
 <link href="${base}/resources/global/css/combotree/combotree.css" rel="stylesheet" type="text/css" />
 <!-- DataTables js Start -->
 <script type="text/javascript" src="${base}/resources/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/select2/select2_locale_zh-CN.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/media/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.js"></script>
@@ -32,7 +33,7 @@
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
-<script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/combo/combonew.js" type="text/javascript"></script>
 <!--lang-->
 <!-- codelist -->
 <script src="${base}/resources/admin/scripts/system/codelist.js" type="text/javascript"></script>
@@ -54,11 +55,7 @@
 						<@spring.message "sys.codeList.query.type.text"/>
 					</label>
 					<div class="col-md-3">
-						<select  id="CodeList"  name="codeTypeId" data-size="8" 
-						 	data-maxoptions="1"   multiple placeholder="<@spring.message "sys.codeList.query.type.missing.message"/>..."  
-						 	class="lion-combo bootstrap-select form-control input-small" data-valueField='id' 
-						 	data-textField='nameZh' data-loadURL="${base}/system/code/typecombox.json">
-						 </select>
+					  <select  id="CodeList"  name="type" placeholder="<@spring.message "sys.codeList.query.type.missing.message"/>..."  class="lion-combo form-control select2  " data-valueField="id"  data-textField="nameZh" data-URL="${base}/system/code/typecombox.json"></select>
 					</div>
 					<div class="col-md-2">
 						<a href="javascript:void(0)" id="btnQuery" class="btn blue">
@@ -95,28 +92,28 @@
 				<table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_codelist_tb" data-singleselect="true",   data-loadUrl="${base}/system/codelist/list.json" data-checkbox="true" data-pageSize="10">
 					<thead>
 						<tr>
-							<th class="table-checkbox" data-field='id' data-checkbox="true">
+							<th class="table-checkbox" style="width:30px;" data-field="id" data-checkbox="true">
 						 		<input type="checkbox" class="group-checkable" data-set="#sys_codelist_tb.checkboxes"  data-sortable="false" />
 						 	</th>
-							<th data-field='codeType.nameZh' style="width:150px;">
+							<th data-field='codeType.nameZh' style="width:100px;">
 								编码类型
 							</th>
-							<th data-field="codeValue" style="width:210px;">
+							<th data-field="codeValue" style="width:100px;">
 							 	编码值
 							</th>
-							<th data-field="nameEn" style="width:210px;">
+							<th data-field="nameEn" style="width:100px;">
 							 	编码名称（英文）
 							</th>
-							<th data-field="nameZh" style="width:210px;">
+							<th data-field="nameZh" style="width:100px;">
 								编码名称（中文）
 							</th>
-							<th data-field="sortNo" style="width:55px;" align="center" >
+							<th data-field="sortNo" style="width:30px;" align="center" >
 								排序
 							</th>
-							<th data-field="editable" style="width:80px;" align="center"  data-formatter="formatterEidtable">
+							<th data-field="editable" style="width:30px;" align="center"  data-formatter="formatterEidtable">
 								可编辑
 							</th>								
-							<th data-field="editable" style="width:80px;" align="center"  data-formatter="formatterEidtable">
+							<th data-field="editable" style="width:30px;" align="center"  data-formatter="formatterEidtable">
 								默认项
 							</th>								
 						</tr>
@@ -144,12 +141,8 @@
 											<div class="form-body">
 												<div class="form-group">
 													<label class="col-md-3 control-label"><@spring.message "sys.codeList.form.type.text"/></label>
-													<div class="col-md-5">
-														 <select  id="addCodeTypeList"  name="codeTypeId" data-size="8" 
-														 	data-maxoptions="1"   multiple placeholder="<@spring.message "sys.codeList.form.type.missing.message"/>..."  
-														 	class="lion-combo bootstrap-select form-control" data-valueField='id'   value=""
-														 	data-textField='nameZh' data-loadURL="${base}/system/codetype/combox.json">
-														 </select>												 
+													<div class="col-md-5">										 
+														<select  id="addCodeTypeList"  name="type" placeholder="<@spring.message "sys.codeList.query.type.missing.message"/>..."  class="lion-combo form-control select2  " data-valueField="id"  data-textField="nameZh" data-URL="${base}/system/code/typecombox.json"></select>
 													</div>
 												</div>
 												<div class="form-group">

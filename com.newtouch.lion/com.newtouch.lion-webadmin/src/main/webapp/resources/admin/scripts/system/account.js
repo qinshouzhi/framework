@@ -6,8 +6,8 @@ $(function () {
 	lion.util.menu();//加载导航栏
 
 	var $formuser=$('#formuser'),//基本信息
-		$formpassword=$('#formpassword'),//修改密码
-		$formimg=$('#formImg');//修改头像
+		  $formpassword=$('#formpassword'),//修改密码
+		  $formimg=$('#formImg');//修改头像
     
 	//上传图片预览与剪裁
 	$('#image').uploadPreview({ DivShow: "imgdiv", ImgShow: "imgShow"}); 

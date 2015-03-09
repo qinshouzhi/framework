@@ -15,24 +15,26 @@
 <link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/css/combotree/combotree.css" rel="stylesheet" type="text/css" />
 <!-- DataTables js Start -->
-<script type="text/javascript" src="${base}/resources/global/plugins/select2/select2.min.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/media/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/Scroller/js/dataTables.scroller.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/select2/select2.css"/>
 <!-- DataTables js End -->
 <script src="${base}/resources/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js"></script>
 <script src="${base}/resources/admin/pages/scripts/ui-toastr.js"></script>
 <script src="${base}/resources/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/select2/select2_locale_zh-CN.js"></script>
 <!--lion UI JS Start-->
 <script src="${base}/resources/global/js/lion.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/form/form.fill.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
-<script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/combo/combonew.js" type="text/javascript"></script>
 <!--lang-->
 <script src="${base}/resources/admin/scripts/admin-common.js" type="text/javascript"></script>
 <!-- codetype -->
@@ -54,12 +56,9 @@
 					<label class="control-label col-md-2" for="type" >
 						<@spring.message "sys.codeType.query.type.text"/>
 					</label>
-					<div class="col-md-3">
-						<select  id="CodeTypeList"  name="type" data-size="8" 
-						 	data-maxoptions="1"   multiple placeholder="<@spring.message "sys.codeType.form.type.missing.message"/>..."  
-						 	class="lion-combo bootstrap-select form-control input-small" data-valueField='codeValue' 
-						 	data-textField='nameZh' data-loadURL="${base}/system/code/combox.htm?nameEn=codeTypes">
-						 </select>
+					<div class="col-md-3">					  
+						 <select  id="idCodeTypeList"  name="type" placeholder="<@spring.message "sys.codeType.form.type.missing.message"/>..."  class="lion-combo form-control select2  " data-valueField='codeValue'  data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=codeTypes">
+						</select>	
 					</div>
 					<div class="col-md-2">
 						<a href="javascript:void(0)" id="btnQuery" class="btn blue">
@@ -99,7 +98,7 @@
 							<th class="table-checkbox" data-field='id' data-checkbox="true">
 						 		<input type="checkbox" class="group-checkable" data-set="#sys_codetype_lists_tb.checkboxes"  data-sortable="false" />
 						 	</th>
-							<th data-field='type' style="width:100px;">
+							<th data-field='type' style="width:100px;" data-formatter="formatterCodeList">
 								类型
 							</th>
 							<th data-field="nameEn" style="width:100px;">
@@ -152,10 +151,9 @@
 													<label class="col-md-3 control-label">
 														<@spring.message "sys.codeType.form.type.text"/>
 													</label>
-													<div class="col-md-5">
-														<div class="input-group">
-															<input type="text"  id="type" name="type" maxlength="100" class="form-control" placeholder="<@spring.message "sys.codeType.form.type.missing.message"/>" size="30"/>
-														</div>										 
+													<div class="col-md-5">										 
+															 <select  id="codeTypeList"  name="type" placeholder="<@spring.message "sys.codeType.form.type.missing.message"/>..."  class="lion-combo form-control select2  " data-valueField='codeValue'  data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=codeTypes">
+															 </select>						 
 													</div>
 												</div>
 												<div class="form-group">

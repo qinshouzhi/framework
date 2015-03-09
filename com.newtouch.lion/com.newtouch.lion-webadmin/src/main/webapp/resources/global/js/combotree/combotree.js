@@ -194,7 +194,7 @@
 				return;
 			}
 			if (util.isEmpty(id)) {
-				var valueId = '',
+				var valueId = '',v='',
 					nodes = this.$treeObj.getSelectedNodes();
 				for (var i = 0, l = nodes.length; i < l; i++) {
 					v += nodes[i].name + ',';

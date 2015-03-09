@@ -61,6 +61,27 @@ public class CodeServiceImpl implements CodeService {
 		
 		return codeMap;
 	}
+	
+	
+	
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.CodeService#doFindToMap(java.lang.String)
+	 */
+	@Override
+	public Map<String, String> doFindToMap(String codeTypeNameEn) {
+		List<CodeList> codeLists=codeListService.doFindCodeListByCodeTypeNameEn(codeTypeNameEn);
+		Map<String,String>  params=new HashMap<String,String>();
+		if(!CollectionUtils.isEmpty(codeLists)){
+			for(CodeList codeList:codeLists){
+				params.put(codeList.getCodeValue(),codeList.getNameZh());
+			}
+		}
+		return params;
+	}
+
+
+
 
 	/* (non-Javadoc)
 	 * @see com.newtouch.lion.service.system.CodeService#doFindByList(java.lang.String)

@@ -11,6 +11,7 @@ import java.util.List;
 import com.newtouch.lion.model.system.CodeType;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
+import com.newtouch.lion.vo.CodeTypeView;
 
 /**
  * <p>
@@ -71,6 +72,9 @@ public interface CodeTypeService {
 
 	/** 通用类型编码查询，并返回分页对象 */
 	public PageResult<CodeType> doFindByCriteria(QueryCriteria criteria);
+	
+	/** 通用类型编码查询，并返回分页对象 */
+	public PageResult<CodeTypeView> doFindVoByCriteria(QueryCriteria criteria);
 
 	/**
 	 * 通用类型编码查询，并返回分页对象的JSON字符串
