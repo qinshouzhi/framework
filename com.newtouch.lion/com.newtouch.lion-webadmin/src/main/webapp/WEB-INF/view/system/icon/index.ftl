@@ -5,11 +5,6 @@
 <title><@spring.message "sys.icon.html.title"/></title>
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" type="text/css">
-<!--DataTable css Start-->
-<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/select2/select2.css"/>
-<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css"/>
-<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css"/>
-<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
 <!--DataTable css End-->
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css" />
@@ -30,9 +25,12 @@
 <script src="${base}/resources/global/js/lion.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/form/form.fill.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
-<script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
+<!--lion UI JS End-->
+<!--lang-->
+<script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
 <!-- icon -->
 <script src="${base}/resources/admin/scripts/system/icon.js" type="text/javascript"></script>
 </head>

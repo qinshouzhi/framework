@@ -227,6 +227,12 @@ function formatterEidtable(data,type,full) {
 
 //添加
 function formatterImage(data,type,full) {
-  var image = '<img src="'+data+'" style="width:20px; height:14px;">'
-  return image;
+	var imgReg = /[^\s]+\.(jpg|gif|png|bmp)/i;
+	var iconImage = null;
+	if(imgReg.exec(data)){
+		iconImage = '<img src="'+data+'" style="width:20px; height:14px;">';
+	}else{
+		iconImage = data;
+	}
+	return  iconImage;
 }

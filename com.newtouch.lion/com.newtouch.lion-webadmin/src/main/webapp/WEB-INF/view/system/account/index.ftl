@@ -16,9 +16,9 @@
 <link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/css/combotree/combotree.css" rel="stylesheet" type="text/css" />
 <!--fileupload css-->
-<link href="${base}/resources/global/css/uploadpicture/uploadpicture.css" rel="stylesheet" type="text/css" />
-<link href="${base}/resources/global/css/uploadpicture/main.css" rel="stylesheet" type="text/css" />
-<link href="${base}/resources/global/css/uploadpicture/demos.css" rel="stylesheet" type="text/css" />
+<link href="${base}/resources/global/css/upload/uploadpicture.css" rel="stylesheet" type="text/css" />
+<link href="${base}/resources/global/css/upload/main.css" rel="stylesheet" type="text/css" />
+<link href="${base}/resources/global/css/upload/demos.css" rel="stylesheet" type="text/css" />
 <!--Jcrop-->
 <link href="${base}/resources/global/plugins/jcrop/css/jquery.Jcrop.min.css" rel="stylesheet" type="text/css" />
 <!-- DataTables js Start -->
@@ -46,11 +46,8 @@
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <!--fileupload Js-->
-<script src="${base}/resources/global/js/uploadpicture/jquery.upload.js" type="text/javascript"></script>
-<script src="${base}/resources/global/js/uploadpicture/ajaxfileupload.js" type="text/javascript"></script>
-<script src="${base}/resources/global/plugins/jquery-file-upload/js/jquery.fileupload.js" type="text/javascript"></script>
-<script src="${base}/resources/global/plugins/jquery-file-upload/js/cors/jquery.xdr-transport.js" type="text/javascript"></script>
-<script src="${base}/resources/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/upload/lion.upload.js" type="text/javascript"></script>
+<script src="${base}/resources/global/plugins/ajaxfileupload/ajaxfileupload.js" type="text/javascript"></script>
 <!--lion UI JS End-->
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/scripts/system/account.js" type="text/javascript"></script>
@@ -181,48 +178,48 @@
 													<div class="margin-top-10">
 														<button id="btnImgUploadSave" class="btn green-haze">
 														Submit </button>
-														<button id="btnImgUploadCancel" class="btn default">
+														<button class="btn default">
 														Cancel </button>
 													</div>
 												</form>
 											</div>
 											<!-- END CHANGE AVATAR TAB -->
 											<!-- CHANGE PASSWORD TAB -->
-											<div class="tab-pane" id="tab_1_3">											  
-													<form action="#"  id="formpassword" class="form-horizontal">
-														<div class="form-group">
-															<label class="control-label  col-md-3">旧密码</label>
-															<div class="col-md-4 input-group">
-																<input type="password" class="form-control" name="oldpassword" maxlength="30" size="30"/>
-															</div>
-															<div class="col-md-5"></div>		
+											<div class="tab-pane" id="tab_1_3">	
+												<form action="#"  id="formpassword" class="form-horizontal">
+													<div class="form-group">
+														<label class="control-label  col-md-3">旧密码</label>
+														<div class="col-md-4 input-group">
+															<input type="password" class="form-control" name="oldpassword" maxlength="30" size="30"/>
 														</div>
-														<div class="form-group">
-															<label class="control-label col-md-3">新密码</label>
-															<div class="col-md-4 input-group">
-																<input type="password" class="form-control" id="password" name="password" maxlength="30" size="30"/>
-															</div>
-															<div class="col-md-5"></div>
+														<div class="col-md-5"></div>		
+													</div>
+													<div class="form-group">
+														<label class="control-label col-md-3">新密码</label>
+														<div class="col-md-4 input-group">
+															<input type="password" class="form-control" id="password" name="password" maxlength="30" size="30"/>
 														</div>
-														<div class="form-group">												
-															<label class="col-md-3 control-label">确认新密码</label>
-															<div class="col-md-4 input-group">
-																<input type="password" class="form-control" name="confirmpassword" maxlength="30" size="30"/>
-															</div>
-															<div class="col-md-5"></div>
+														<div class="col-md-5"></div>
+													</div>
+													<div class="form-group">												
+														<label class="col-md-3 control-label">确认新密码</label>
+														<div class="col-md-4 input-group">
+															<input type="password" class="form-control" name="confirmpassword" maxlength="30" size="30"/>
 														</div>
-														<div class=" form-group">
-															<label class="col-md-3 control-label"></label>
-															<div class="col-md-9 input-group">
-																<button type="button" id="btnChanagePwdSave" class="btn blue">
-																	<i class="fa fa-save"></i> 修改密码 
-																</button>&nbsp; &nbsp; 
-																<button type="button" id="btnPasswordCancel" class="btn default">
-																	<i class="fa  fa-arrow-left"></i> 取 消 
-																</button>
-															</div>
+														<div class="col-md-5"></div>
+													</div>
+													<div class=" form-group">
+														<label class="col-md-3 control-label"></label>
+														<div class="col-md-9 input-group">
+															<button type="button" id="btnChanagePwdSave" class="btn blue">
+																<i class="fa fa-save"></i> 修改密码 
+															</button>&nbsp; &nbsp; 
+															<button type="button" id="btnPasswordCancel" class="btn default">
+																<i class="fa  fa-arrow-left"></i> 取 消 
+															</button>
 														</div>
-													</form>
+													</div>
+												</form>
 											</div>
 											<!-- END CHANGE PASSWORD TAB -->
 											<!-- PRIVACY SETTINGS TAB -->
