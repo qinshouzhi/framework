@@ -43,6 +43,7 @@ $(function () {
       addForm.reset();
       addDialog.find('.modal-header h4 span').text('编辑编码类型');
       addDialog.modal('toggle');
+      $('#codeTypeList').combo('val',[row.type]);
       addForm.fill(row);
     });
 
@@ -218,11 +219,11 @@ function formatterCheckBox(data,type,full){
 //获取下拉列表数据
 /**sys_code_type 加载列表*/
 function formatterCodeList(val,row) {
-  var codeText='',data=$('#CodeTypeList').combo('getData');
+  var codeText='',data=$('#idCodeTypeList').combo('getData');
   for (var i in data) {
-    if (data[i].id ==val) {
-      codeText = data[i].nameZh;
-      break;
+    if (data[i].codeValue===val) {
+       codeText = data[i].nameZh;
+       break;
     }
   }
   return codeText;

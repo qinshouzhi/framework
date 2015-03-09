@@ -168,10 +168,10 @@
 												<div class="form-group">
 													<div class="form-filed">
 														<label class="col-md-3 control-label">Target</label>
-														<div class="col-md-5">
-															<div class="input-group">
-																<input type="text"  id="target" name="target" maxlength="16" class="form-control" placeholder="请输入Target" size="30"/>
-															</div>
+														<div class="col-md-5">														 
+																<select  id="sysresourcetarget"  name="target" placeholder="请选择参数列表..."   class="lion-combo form-control select2  " data-valueField='codeValue'  data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=Target">
+																</select>	
+															 
 														</div>
 													</div>
 												</div>
