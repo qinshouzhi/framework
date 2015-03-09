@@ -218,15 +218,8 @@ function formatterCheckBox(data,type,full){
 
 //获取下拉列表数据
 /**sys_code_type 加载列表*/
-function formatterCodeList(val,row) {
-  var codeText='',data=$('#idCodeTypeList').combo('getData');
-  for (var i in data) {
-    if (data[i].codeValue===val) {
-       codeText = data[i].nameZh;
-       break;
-    }
-  }
-  return codeText;
+function formatterCodeList(data,type,full) {
+   return full.codeName;
 }
 //判断是否编辑
 function formatterEidtable(data,type,full) { 

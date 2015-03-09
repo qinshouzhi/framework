@@ -38,6 +38,7 @@ import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.datagrid.DataGridService;
 import com.newtouch.lion.service.excel.ExcelExportService;
 import com.newtouch.lion.service.system.CodeTypeService;
+import com.newtouch.lion.vo.CodeTypeView;
 import com.newtouch.lion.web.controller.AbstractController;
 import com.newtouch.lion.web.model.QueryDt;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
@@ -184,8 +185,7 @@ public class CodeTypeController extends AbstractController{
 
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public DataTable<CodeType> list(QueryDt query,
-			@ModelAttribute("codetype") CodeTypeVo codeTypeVo){
+	public DataTable<CodeTypeView> list(QueryDt query,@ModelAttribute("codetype") CodeTypeVo codeTypeVo){
 		QueryCriteria queryCriteria = new QueryCriteria();
 
 		// 设置分页 启始页
@@ -209,8 +209,8 @@ public class CodeTypeController extends AbstractController{
 			queryCriteria.addQueryCondition("nameZh","%"+codeTypeVo.getNameZh()+"%");
 		}
 
-		PageResult<CodeType> pageResult = codeTypeService
-				.doFindByCriteria(queryCriteria);
+		PageResult<CodeTypeView> pageResult = codeTypeService.doFindVoByCriteria(queryCriteria);
+		
 		return pageResult.getDataTable(query.getRequestId());
 	}
 	

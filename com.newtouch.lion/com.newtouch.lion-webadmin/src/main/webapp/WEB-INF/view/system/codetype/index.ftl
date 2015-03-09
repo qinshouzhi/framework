@@ -99,7 +99,7 @@
 							<th class="table-checkbox" data-field='id' data-checkbox="true">
 						 		<input type="checkbox" class="group-checkable" data-set="#sys_codetype_lists_tb.checkboxes"  data-sortable="false" />
 						 	</th>
-							<th data-field='type' style="width:100px;"  data-formatter="formatterCodeList">
+							<th data-field='type' style="width:100px;" data-formatter="formatterCodeList">
 								类型
 							</th>
 							<th data-field="nameEn" style="width:100px;">

@@ -6,12 +6,14 @@
  */
 package com.newtouch.lion.service.system.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,9 @@ import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.AbstractService;
 import com.newtouch.lion.service.datagrid.DataColumnService;
+import com.newtouch.lion.service.system.CodeService;
 import com.newtouch.lion.service.system.CodeTypeService;
+import com.newtouch.lion.vo.CodeTypeView;
 
 /**
  * <p>
@@ -51,6 +55,8 @@ public class CodeTypeServiceImpl extends AbstractService implements  CodeTypeSer
 	
 	@Autowired
 	private  DataColumnService dataColumnService;
+	@Autowired
+	private CodeService codeService;
 
 	/*
 	 * (non-Javadoc)
@@ -125,6 +131,33 @@ public class CodeTypeServiceImpl extends AbstractService implements  CodeTypeSer
 
 	}
 
+	
+	
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.CodeTypeService#doFindVoByCriteria(com.newtouch.lion.query.QueryCriteria)
+	 */
+	@Override
+	public PageResult<CodeTypeView> doFindVoByCriteria(QueryCriteria criteria) {
+		PageResult<CodeType> pageResult=this.doFindByCriteria(criteria);
+		PageResult<CodeTypeView> result=new PageResult<CodeTypeView>();
+		result.setCurrentIndex(pageResult.getCurrentIndex());
+		result.setCurrentPage(pageResult.getCurrentPage());
+		result.setPageSize(pageResult.getPageSize());
+		result.setTotalCount(pageResult.getTotalCount());
+		result.setTotalPage(pageResult.getTotalPage());
+		
+		Map<String,String> codes=codeService.doFindToMap("codeTypes");
+		List<CodeTypeView> content=new ArrayList<CodeTypeView>();
+		for(CodeType codeType:pageResult.getContent()){
+			CodeTypeView  codeTypVo=new CodeTypeView();
+			BeanUtils.copyProperties(codeType,codeTypVo);
+			codeTypVo.setCodeName(codes.get(codeTypVo.getType()));
+			content.add(codeTypVo);
+		}
+		result.setContent(content);
+		return result;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -153,6 +186,8 @@ public class CodeTypeServiceImpl extends AbstractService implements  CodeTypeSer
 		int startIndex = criteria.getStartIndex();
 		
 		PageResult<CodeType> pageResult = this.codeTypeDao.query(hql, HqlUtils.generateCountHql(hql, null), params, startIndex, pageSize);
+		
+	 
 		
 		return pageResult;
 	}

@@ -237,7 +237,7 @@ return data;
 
 //获取下拉列表数据
 /**sys_code_type 加载列表*/
-function formatterCodeList(val,row) {
+function formatterCodeList(dval, row) {
   var codeText='',data=$('#CodeList').combo('getData');
   for (var i in data) {
     if (data[i].id ==val) {
@@ -259,7 +259,7 @@ function formatterEidtable(data,type,full) {
 //将JSON复杂对象显示到DataGird中
 function formatterName(val, row) {
 	var name = "";
-	if (val != null) {
+	if (val !== null) {
 		name = val.nameZh;
 	}
 	return name;
