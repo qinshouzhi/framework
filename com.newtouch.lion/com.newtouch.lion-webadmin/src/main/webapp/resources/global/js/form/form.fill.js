@@ -221,7 +221,7 @@
         if($this.find('.lion-combotree').size()>0){
             $this.find('.lion-combotree').combotree('refresh');
         }
-        $this.find(':input').val('');
+        $this.find(':input[type=hidden]').val('');
     };
 	
 	$.fill = new Fill();
