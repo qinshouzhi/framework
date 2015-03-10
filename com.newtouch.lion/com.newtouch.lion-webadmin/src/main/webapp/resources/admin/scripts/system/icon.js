@@ -49,17 +49,14 @@ $(function () {
 
      //删除
    $('#btnDelete').on('click',function(){
-     var row=icondg.datagrids('getSelected');
-     if(!row){
-       lion.util.info('提示','请选择要删除记录');
-       return;
-     }
-     bootbox.confirm('确认要删除此记录？', function(result) {
-              if(result){              
-                var param={'id':row.id};
-                  lion.util.post('delete.json',param,successForDelete,errorRequest);
-              }
-          }); 
+    var row=icondg.datagrids('getSelected');
+    lion.web.deletefn({
+      url:'delete.json',
+      data:row,
+      unselectedmsg:'请选择要删除记录',
+      confirmmsg:'确认要删除此记录？',
+      success:successForDelete,
+    });
    });
    
    //保存
@@ -92,35 +89,34 @@ function submitForm(frm){
   var param=frm.serialize(),id=($('#id').val());
   //ID为空时，为添加动作
   if(lion.util.isEmpty(id)){
-      lion.util.post('add.json',param,successAddFrm,errorRequest);
+      lion.web.post({url:'add.json',data:param,success:successAddFrm});
   }else{
-      lion.util.post('edit.json',param,successAddFrm,errorRequest,param.id);
+      lion.web.post({url:'edit.json',data:param,success:successEditFrm});
   }
 }
 
-//添加后&编辑后提交
-function successAddFrm(data,arg,id){
-  //TODO
-  if(data!==null&&!(data.hasError)){
-    lion.util.success('提示',data.message);
-    addDialog.modal('toggle');
-    icondg.datagrids('reload');
-  }else if(data!==null&&data.hasError){
-    var gmsg='';
-    for(var msg in data.errorMessage){
-      gmsg+=data.errorMessage[msg];
-    }
-    if(lion.util.isEmpty(gmsg)){
-      gmsg='添加图标出错';
-    }
-    lion.util.error('提示',gmsg);
-  }else{
-    lion.util.error('提示','添加图标失败');
-  }
+//添加成功的函数
+function successAddFrm(result,args){
+  lion.web.parsedata({
+    data:result,
+    success:function(){
+      addDialog.modal('toggle');
+      icondg.datagrids('reload');
+    },
+    msg:'添加图标未成功'
+  });
 }
-//请求失败后信息
-function errorRequest(xhr,textStatus,error){
-  lion.util.error('提示','网络连接异常');
+
+//编辑成功的函数
+function successEditFrm(result,args){
+  lion.web.parsedata({
+    data:result,
+    success:function(){
+        addDialog.modal('toggle');
+        icondg.datagrids('reload');
+    },
+    msg:'编辑图标未成功'
+  });
 }
 
 //验证表单
@@ -210,6 +206,18 @@ handleVForm=function(vForm,submitCallBackfn){
         }
     });
 };
+//获取下拉列表数据
+/**sys_code_type 加载列表*/
+function formatterCodeList(val,row) {
+	var codeText='',data=$('#iconTypeList').combo('getData');
+	for (var i in data) {
+		if (data[i].codeValue == val) {
+			codeText = data[i].nameZh;
+			break;
+		}
+	}
+	return codeText;
+}
 
 //测试选择中checkbox
 function formatterCheckBox(data,type,full){
@@ -225,12 +233,12 @@ function formatterEidtable(data,type,full) {
   return name;
 }
 
-//添加
+//判断图片或样式
 function formatterImage(data,type,full) {
-	var imgReg = /[^\s]+\.(jpg|gif|png|bmp)/i;
+	var imgReg = /[^\s]+\.(jpg|jpeg|gif|png|bmp)/i;
 	var iconImage = null;
 	if(imgReg.exec(data)){
-		iconImage = '<img src="'+data+'" style="width:20px; height:14px;">';
+		iconImage = '<img src="'+lion.util.context+data+'" style="width:20px; height:14px;">';
 	}else{
 		iconImage = data;
 	}

@@ -131,7 +131,7 @@ public class RoleController extends AbstractController{
 		return ADD_DIALOG_RETURN;
 	}
 	
-	@RequestMapping(value="add")
+	@RequestMapping(value = "add")
     @ResponseBody
 	public ModelAndView add(@Valid @ModelAttribute("role") RoleVo  roleVo,Errors  errors,ModelAndView modelAndView){    	
      
@@ -140,6 +140,7 @@ public class RoleController extends AbstractController{
 					"sys.role.form.nameen.existed.message",
 					new Object[] { roleVo.getNameEn() }, null);
 		}
+		System.out.println(roleVo.getEditable()+"==========================================");
 		//是否错误消息
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);

@@ -33,7 +33,7 @@
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <!--lang-->
-<script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
+<script src="${base}/resources/admin/scripts/admin-common.js" type="text/javascript"></script>
 <!--demo-->
 <script src="${base}/resources/admin/scripts/system/group.js" type="text/javascript"></script>
 </head>
@@ -55,11 +55,26 @@
 			</div>
 			<!--DataGrid start-->
 			<div class="col-md-12">
-				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic"><i class="fa fa-plus"></i> <@spring.message "common.toolbar.btn.add.text"/>  </a>
-				<a id="btnEdit" class="btn btn-sm red"><i class="fa fa-edit"></i> <@spring.message "common.toolbar.btn.edit.text"/></a>
-				<a href="javascript:void(0)" id="btnDelete" class="btn btn-sm purple"><i class="fa fa-times"></i> <@spring.message "common.toolbar.btn.delete.text"/> </a>
-				<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue"><i class="fa fa-refresh"></i> <@spring.message "common.toolbar.btn.reload.text"/>   </a>
-				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> <@spring.message "common.toolbar.btn.export.text"/> </a>
+				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic">
+					<i class="fa fa-plus"></i> 
+					<@spring.message "common.toolbar.btn.add.text"/>  
+				</a>
+				<a id="btnEdit" class="btn btn-sm red">
+					<i class="fa fa-edit"></i> 
+					<@spring.message "common.toolbar.btn.edit.text"/>
+				</a>
+				<a href="javascript:void(0)" id="btnDelete" class="btn btn-sm purple">
+					<i class="fa fa-times"></i> 
+					<@spring.message "common.toolbar.btn.delete.text"/> 
+				</a>
+				<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue">
+					<i class="fa fa-refresh"></i>
+					<@spring.message "common.toolbar.btn.reload.text"/>
+				</a>
+				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green">
+					<i class="fa  fa-file-excel-o"></i>
+					<@spring.message "common.toolbar.btn.export.text"/>
+				</a>
 				<a href="javascript:void(0)" id="btnAuth"  class="btn btn-sm  btn-primary">
 					<i class="fa  fa-gear"></i> 
 					<@spring.message "common.toolbar.btn.auth.text"/>  

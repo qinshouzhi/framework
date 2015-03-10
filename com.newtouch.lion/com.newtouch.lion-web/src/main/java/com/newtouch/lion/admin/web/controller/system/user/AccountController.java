@@ -178,7 +178,7 @@ public class AccountController extends AbstractController{
 	public ModelAndView changeImg(@Valid @ModelAttribute("userImageVo") UserImageVo userImageVo,Errors errors, ModelAndView modelAndView) throws IllegalStateException, IOException{
 		
 		UserInfo userInfo =LoginSecurityUtil.getUser();
-        String resourcePath = ("../image/");
+        String resourcePath = ("d://");
         if(userImageVo.getImage()!=null){
             if(ImageUploadUtil.isImage(userImageVo.getImage())){
                 String fileName = userImageVo.getImage().getOriginalFilename();

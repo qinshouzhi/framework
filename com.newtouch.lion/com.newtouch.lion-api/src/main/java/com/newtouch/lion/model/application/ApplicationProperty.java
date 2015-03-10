@@ -6,7 +6,7 @@
  */
 package com.newtouch.lion.model.application;
 
-import com.newtouch.lion.model.BaseEntity;
+import com.newtouch.lion.model.VersionEntity;
 
 /**
  * <p>
@@ -25,7 +25,7 @@ import com.newtouch.lion.model.BaseEntity;
  * @author WangLijun
  * @version 1.0
  */
-public class ApplicationProperty extends BaseEntity<Long> {
+public class ApplicationProperty extends VersionEntity<Long> {
 
 	/**
 	 * 序列化
