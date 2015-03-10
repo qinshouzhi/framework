@@ -82,15 +82,16 @@ function successForDelete(result,arg){
 /**新增或编辑的提交代码*/
 function submitForm(frm){
   var param=frm.serialize(),id=($('#id').val());
+  console.dir(param);
   //ID为空时，为添加动作
   if(lion.util.isEmpty(id)){
-      lion.web.post({url:'add.json',data:param,success:addSuccessFrm});
+      lion.web.post({url:'add.json',data:param,success:successAddFrm});
   }else{
-      lion.web.post({url:'edit.json',data:param,success:succesEidtFrm});
+      lion.web.post({url:'edit.json',data:param,success:successEditFrm});
   }
 }
 //添加成功的函数
-function addSuccessFrm(result,args){
+function successAddFrm(result,args){
       lion.web.parsedata({
                       data:result,
                       success:function(){
@@ -100,14 +101,14 @@ function addSuccessFrm(result,args){
                       msg:'添加编码类型未成功'});
 }
 //编辑成功的函数
-function succesEidtFrm(result,args){
+function successEditFrm(result,args){
    lion.web.parsedata({
                       data:result,
                       success:function(){
                           addDialog.modal('toggle');
                           codetypedg.datagrids('reload');
                       },
-                      msg:'添加编码类型未成功'});
+                      msg:'编辑编码类型未成功'});
 }
 //请求失败后信息
 function errorRequest(xhr,status,error){    

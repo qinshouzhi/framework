@@ -36,7 +36,7 @@
 <!--ztree js-->
 <script src="${base}/resources/global/plugins/ztree/js/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
 <!--lang-->
-<script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
+<script src="${base}/resources/admin/scripts/admin-common.js" type="text/javascript"></script>
 <!--role-->
 <script src="${base}/resources/admin/scripts/system/role.js" type="text/javascript"></script>
 </head>
@@ -316,7 +316,7 @@
 										</label>
 										<div class="col-md-9 control-label">
 											<div class="input-group">
-												<input type="checkbox" class="form-control" name="editable" checked="true" />
+												<input type="checkbox" class="form-control" name="editable" checked="true" value="1"/>
 											</div>
 										</div>
 									</div>

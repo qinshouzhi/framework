@@ -62,7 +62,7 @@ $(function () {
            selectedChecked(row,data,index);
       }
   });
-   //角色加载数据完成
+  //角色加载数据完成
   authgroupdg.on('datagrids.reload',function(){
       authgroupdg.datagrids('checkselected');
   });
@@ -237,43 +237,39 @@ $(function () {
 
     //编辑
     $('#btnEdit').click(function(){
-        var row=roledg.datagrids('getSelected');
-        if(!row){
-			 lion.util.info('提示','请选择要编辑记录');
-			 return;
-		}
-		addForm.reset();
-		addDialog.find('.modal-header h4 span').text('编辑角色');
-		addDialog.modal('toggle');
-		addForm.fill(row);
+      var row=roledg.datagrids('getSelected');
+      if(!row){
+        lion.util.info('提示','请选择要编辑记录');
+        return;
+      }
+      addForm.reset();
+      addDialog.find('.modal-header h4 span').text('编辑角色');
+      addDialog.modal('toggle');
+      addForm.fill(row);
     });
 
-     //删除
-	 $('#btnDelete').on('click',function(){
-		 var row=roledg.datagrids('getSelected');
-		 if(!row){
-			 lion.util.info('提示','请选择要删除记录');
-			 return;
-		 }
-		 bootbox.confirm('确认要删除此记录？', function(result) {
-              if(result){            	 
-            	  var param={'id':row.id};
-                  lion.util.post('delete.json',param,successForDelete,errorRequest);
-              }
-          }); 
-	 });
-	 //导出Excel
-	 $('#btnExport').on('click',function(){
-		 var params=queryForm.serialize(),url='export.json?tableId='+roledg.attr('id');
-        if(lion.util.isNotEmpty(params)){
-          url+='&'+params;
-        }
-      	 window.open(url,'_blank');
-	 });
-	 //保存
-	 $('#btnSave').click(function(){
-	 		addForm.submit();
-	 });
+  //删除
+	$('#btnDelete').on('click',function(){
+		var row=roledg.datagrids('getSelected');
+    lion.web.deletefn({
+        url:'delete.json',
+        data:row,
+        unselectedmsg:'请选择要删除记录',
+        confirmmsg:'确认要删除此记录？',
+        success:successForDelete,
+    });
+	});
+	//导出Excel
+	$('#btnExport').on('click',function(){
+		var params=queryForm.serialize(),
+        dgtableId=roledg.attr('id');
+    lion.web.exportfn({url:'export.json',data:params,tableId:dgtableId});
+    return;
+	});
+	//保存
+	$('#btnSave').click(function(){
+	 	addForm.submit();
+	});
 
 	 //删除成功
 	function successForDelete(data,arg){
@@ -298,40 +294,37 @@ $(function () {
 /**新增或编辑的提交代码*/
 function submitForm(frm){
 	var param=frm.serialize(),id=($('#id').val());
+	console.dir(frm.serialize());
   //ID为空时，为添加动作
   if(lion.util.isEmpty(id)){
- 	    lion.util.post('add.json',param,successAddFrm,errorRequest);
+      lion.web.post({url:'add.json',data:param,success:successAddFrm});
   }else{
-      lion.util.post('edit.json',param,successAddFrm,errorRequest,param.id);
+      lion.web.post({url:'edit.json',data:param,success:successEditFrm});
   }
 }
 
-//添加后&编辑后提交
-function successAddFrm(data,arg,id){
-  //TODO
-  if(data!==null&&!(data.hasError)){
-  	lion.util.success('提示',data.message);
-  	addDialog.modal('toggle');
-  	roledg.datagrids('reload');
-  }else if(data!==null&&data.hasError){
-  	var gmsg='';
-  	for(var msg in data.errorMessage){
-  		gmsg+=data.errorMessage[msg];
-  	}
-  	if(lion.util.isEmpty(gmsg)){
-  		gmsg='添加角色出错';
-  	}
-  	lion.util.error('提示',gmsg);
-  }else{
-  	lion.util.error('提示','添加角色失败');
-  }
+//添加成功的函数
+function successAddFrm(result,args){
+      lion.web.parsedata({
+        data:result,
+        success:function(){
+            addDialog.modal('toggle');
+            roledg.datagrids('reload');
+        },
+        msg:'添加角色未成功'
+      });
 }
-//请求失败后信息
-function errorRequest(xhr,textStatus,error){
-  console.dir(xhr);
-  console.dir(textStatus);
-  console.dir(error);
-	lion.util.error('提示','网络连接异常');
+
+//编辑成功的函数
+function successEditFrm(result,args){
+  lion.web.parsedata({
+    data:result,
+    success:function(){
+        addDialog.modal('toggle');
+        roledg.datagrids('reload');
+    },
+    msg:'添加角色未成功'
+  });
 }
 
 //验证表单
@@ -424,10 +417,6 @@ handleVForm=function(vForm,submitCallBackfn){
 
 //测试选择中checkbox
 function formatterCheckBox(data,type,full){
-  //console.dir(this);
-  //console.dir(data);
- // console.dir(type);
-  //console.dir(full);
   return data;
 }
 //判断是否编辑

@@ -27,52 +27,49 @@ $(function () {
     });
 	//添加
     $('#btnAdd').click(function(){
-      	addForm.reset();
+      addForm.reset();
  	    addDialog.find('.modal-header h4 span').text('添加项目属性配置');
 	    return;
     });
 
     //编辑
     $('#btnEdit').click(function(){
-        var row=appdg.datagrids('getSelected');
-        if(!row){
-			 lion.util.info('提示','请选择要编辑记录');
-			 return;
-		}
-		addForm.reset();
-		addDialog.find('.modal-header h4 span').text('编辑项目属性配置');
-		addDialog.modal('toggle');
-		addForm.fill(row);
+      var row=appdg.datagrids('getSelected');
+      if(!row){
+        lion.util.info('提示','请选择要编辑记录');
+        return;
+      }
+      addForm.reset();
+      addDialog.find('.modal-header h4 span').text('编辑项目属性配置');
+      addDialog.modal('toggle');
+      addForm.fill(row);
     });
 
-     //删除
-	 $('#btnDelete').on('click',function(){
-		 var row=appdg.datagrids('getSelected');
-		 if(!row){
-			 lion.util.info('提示','请选择要删除记录');
-			 return;
-		 }
-		 bootbox.confirm('确认要删除此记录？', function(result) {
-              if(result){            	 
-            	  var param={'id':row.id};
-                  lion.util.post('delete.json',param,successForDelete,errorRequest);
-              }
-          }); 
+    //删除
+	  $('#btnDelete').on('click',function(){
+		  var row=appdg.datagrids('getSelected');
+      lion.web.deletefn({
+        url:'delete.json',
+        data:row,
+        unselectedmsg:'请选择要删除记录',
+        confirmmsg:'确认要删除此记录？',
+        success:successForDelete,
+      }); 
 	 });
-	 //导出Excel
-	 $('#btnExport').on('click',function(){
-		 var params=queryForm.serialize(),url='export.json?tableId='+appdg.attr('id');
-        if(lion.util.isNotEmpty(params)){
-          url+='&'+params;
-        }
-      	window.open(url,'_blank');
-	 });
-	 //保存
-	 $('#btnSave').click(function(){
-	 	addForm.submit();
-	 });
+  //导出Excel
+  $('#btnExport').on('click',function(){
+	  var params=queryForm.serialize(),
+        dgtableId=appdg.attr('id');
+    lion.web.exportfn({url:'export.json',data:params,tableId:dgtableId});
+    return;
+  });
 
-	 //删除成功
+  //保存
+  $('#btnSave').click(function(){
+ 	  addForm.submit();
+  });
+
+	//删除成功
 	function successForDelete(data,arg){
 	   if(data!==null&&!(data.hasError)){
 	      lion.util.success('提示',data.message);
@@ -97,35 +94,34 @@ function submitForm(frm){
 	var param=frm.serialize(),id=($('#id').val());
   //ID为空时，为添加动作
   if(lion.util.isEmpty(id)){
- 	    lion.util.post('add.json',param,successAddFrm,errorRequest);
+      lion.web.post({url:'add.json',data:param,success:successAddFrm});
   }else{
-      lion.util.post('edit.json',param,successAddFrm,errorRequest,param.id);
+      lion.web.post({url:'edit.json',data:param,success:successEditFrm});
   }
 }
 
-//添加后&编辑后提交
-function successAddFrm(data,arg,id){
-  //TODO
-  if(data!==null&&!(data.hasError)){
-  	lion.util.success('提示',data.message);
-  	addDialog.modal('toggle');
-  	appdg.datagrids('reload');
-  }else if(data!==null&&data.hasError){
-  	var gmsg='';
-  	for(var msg in data.errorMessage){
-  		gmsg+=data.errorMessage[msg];
-  	}
-  	if(lion.util.isEmpty(gmsg)){
-  		gmsg='添加项目属性配置出错';
-  	}
-  	lion.util.error('提示',gmsg);
-  }else{
-  	lion.util.error('提示','添加项目属性配置失败');
-  }
+//添加成功的函数
+function successAddFrm(result,args){
+  lion.web.parsedata({
+    data:result,
+    success:function(){
+      addDialog.modal('toggle');
+      appdg.datagrids('reload');
+    },
+    msg:'添加项目属性配置未成功'
+  });
 }
-//请求失败后信息
-function errorRequest(xhr,textStatus,error){
-	lion.util.error('提示','网络连接异常');
+
+//编辑成功的函数
+function successEditFrm(result,args){
+  lion.web.parsedata({
+    data:result,
+    success:function(){
+        addDialog.modal('toggle');
+        appdg.datagrids('reload');
+    },
+    msg:'编辑项目属性配置未成功'
+  });
 }
 
 //验证表单

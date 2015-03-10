@@ -7,8 +7,8 @@ $(function() {
   lion.util.menu();//加载导航栏
    //初始化日期
    $(".date-picker").datepicker({
-                autoclose: true,
-                language:'zh-CN'
+      autoclose: true,
+      language:'zh-CN'
    });
   userdg=$('#sys_user_list_tb');
 
@@ -40,7 +40,6 @@ $(function() {
   //用户组加载数据完成
   $authgroupdg.on('datagrids.reload',function(){
       $authroledg.datagrids('checkselected');
-      //groupuserdg.datagrids('checkboxdisabled');
   });
    //角色组加载数据完成
   $authgroupdg.on('datagrids.reload',function(){

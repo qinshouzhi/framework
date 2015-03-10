@@ -9,8 +9,11 @@
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/css/combotree/combotree.css" rel="stylesheet" type="text/css" />
-<!-- DataTables js Start -->
+<link href="${base}/resources/global/plugins/select2/select2.css" rel="stylesheet" type="text/css" />
+<!-- select js -->
 <script type="text/javascript" src="${base}/resources/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/select2/select2_locale_zh-CN.js"></script>
+<!-- DataTables js Start -->
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/media/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.js"></script>
@@ -25,12 +28,12 @@
 <script src="${base}/resources/global/js/lion.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/form/form.fill.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
-<script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/combo/combonew.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <!--lion UI JS End-->
 <!--lang-->
-<script src="${base}/resources/global/local/framework-lang-zh_CN.js" type="text/javascript"></script>
+<script src="${base}/resources/admin/scripts/admin-common.js" type="text/javascript"></script>
 <!-- icon -->
 <script src="${base}/resources/admin/scripts/system/icon.js" type="text/javascript"></script>
 </head>
@@ -51,11 +54,10 @@
 						<@spring.message "sys.icon.form.type.text"/>
 					</label>
 					<div class="col-md-3">
-						<select  id="iconTypeList"  name="iconType" data-size="8" 
-						 	data-maxoptions="1"   multiple placeholder="<@spring.message "sys.icon.form.class.missing.message"/>..."  
-						 	class="lion-combo bootstrap-select form-control input-small" data-valueField='codeValue' 
-						 	data-textField='nameZh' data-loadURL="${base}/system/code/combox.htm?nameEn=IconType">
-						 </select>
+						<select  id="iconTypeList" name="iconType"  placeholder="<@spring.message "sys.icon.form.class.missing.message"/>..."  
+						 	class="lion-combo form-control select2" data-valueField='codeValue' 
+						 	data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=IconType">
+						</select>
 					</div>
 					<div class="col-md-2">
 						<a href="javascript:void(0)" id="btnQuery" class="btn blue">
@@ -91,7 +93,7 @@
 							<th class="table-checkbox" data-field='id' data-checkbox="true">
 						 		<input type="checkbox" class="group-checkable" data-set="#sys_icon_tb.checkboxes"  data-sortable="false" />
 						 	</th>
-							<th data-field='iconType' data-sortDir="asc" style="width:100px;">
+							<th data-field='iconType' data-sortDir="asc" style="width:100px;" data-formatter="formatterCodeList">
 								图标类型
 							</th>
 							<th data-field="iconClass" style="width:100px;">
@@ -139,11 +141,10 @@
 										<@spring.message "sys.icon.form.type.text"/>
 									</label>
 									<div class="col-md-5">
-										<select  id="iconType"  name="iconType" data-size="8" 
-										 	data-maxoptions="1"   multiple placeholder="<@spring.message "sys.icon.form.type.missing.message"/>..."  
-										 	class="lion-combo bootstrap-select form-control input-small" data-valueField='codeValue' 
-										 	data-textField='nameZh' data-loadURL="${base}/system/code/combox.htm?nameEn=IconType">
-										 </select>
+										 <select  id="iconType" name="iconType"  placeholder="<@spring.message "sys.icon.form.class.missing.message"/>..."  
+										 	class="lion-combo form-control select2" data-valueField='codeValue' 
+										 	data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=IconType">
+										</select>
 									</div>
 								</div>
 								<div class="form-group">

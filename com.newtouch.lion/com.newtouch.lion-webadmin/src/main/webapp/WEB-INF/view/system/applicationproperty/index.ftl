@@ -32,6 +32,8 @@
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
+<!--lang-->
+<script src="${base}/resources/admin/scripts/admin-common.js" type="text/javascript"></script>
 <!-- applicationproperty -->
 <script src="${base}/resources/admin/scripts/system/applicationproperty.js" type="text/javascript"></script>
 </head>
@@ -103,7 +105,13 @@
 							</th>
 							<th data-field="description" style="width:60px;">
 								Desctiption
-							</th>							
+							</th>		
+							<th data-field="createdDate" style="width:100px;">
+								创建时间
+							</th>
+							<th data-field="updatedDate" style="width:100px;">
+								更新时间
+							</th>					
 						</tr>
 					</thead>
 				</table>

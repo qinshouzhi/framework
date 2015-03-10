@@ -57,28 +57,28 @@
 				  <table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_session_tb" data-singleselect="true" data-sort="false" data-loadUrl="${base}/sessions/actives.json" data-checkbox="true"  data-paginate="false" width="100%">
 					<thead>
 						<tr>
-						  <th class="table-checkbox" data-field='id' data-checkbox="true">
+						  <th class="table-checkbox" data-field='id'style="width:30px;"  data-checkbox="true">
 						 		<input type="checkbox" class="group-checkable" data-set="#sys_session_tb.checkboxes"  data-sortable="false" />
 						 	</th>
 								<th data-field='id'  style="width:220px;" >
 								会话ID
 							</th>
-							<th data-field="username" style="width:20x;">
+							<th data-field="username" style="width:80px;">
 							 	用户名
 							</th>
-							<th data-field="host" style="width:20x;">
+							<th data-field="host" style="width:50px;">
 							 	登录IP
 							</th>
 							<th data-field="valid" style="width:30px;" data-formatter="formatterEidtable">
-								是否有效
+								状态
 							</th>
-							<th data-field="timeout" style="width:30px;" align="center" data-formatter="formatterTimeout">
-								TimeOut(分钟)
+							<th data-field="timeout" style="width:50px;" align="center" data-formatter="formatterTimeout">
+								TimeOut
 							</th>
-							<th data-field="lastAccessTime" style="width:150px;">
+							<th data-field="lastAccessTime" style="width:110px;">
 								最后访问时间
 							</th>						
-							<th data-field="startTimestamp" style="width:150px;">
+							<th data-field="startTimestamp" style="width:110px;">
 								开始时间
 							</th>
 							<th data-field="expired" style="width:50px;" data-formatter="formatterEidtable">
