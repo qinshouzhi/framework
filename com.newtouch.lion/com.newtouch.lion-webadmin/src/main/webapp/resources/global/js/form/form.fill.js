@@ -215,10 +215,10 @@
         $this.find('.form-group').removeClass('has-error');
         $this.find('.form-filed').removeClass('has-error');
         $this.find('.help-block').remove();
-        if(!$.isEmptyObject($this.find('.lion-combo'))){
+        if($this.find('.lion-combo').size()>0){
             $this.find('.lion-combo').combo('clear');
         }
-        if(!$.isEmptyObject($this.find('.lion-combotree'))){
+        if($this.find('.lion-combotree').size()>0){
             $this.find('.lion-combotree').combotree('refresh');
         }
         $this.find(':input').val('');
