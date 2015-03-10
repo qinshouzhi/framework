@@ -60,8 +60,7 @@ $(function () {
    });
    //导出Excel
    $('#btnExport').on('click',function(){
-      var params=queryForm.serialize(),
-          dgtableId=codetypedg.attr('id');
+      var params=queryForm.serialize(), dgtableId=codetypedg.attr('id');
       lion.web.exportfn({url:'export.json',data:params,tableId:dgtableId});
       return;
    });

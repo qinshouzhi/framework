@@ -44,7 +44,7 @@
     	selected:false,//是否根据后台数据默认选择中相应参数
     };
 
-    var Combo=function combox(element,options,e){
+    var Combo=function combo(element,options,e){
     	if (e) {
             e.stopPropagation();
             e.preventDefault();

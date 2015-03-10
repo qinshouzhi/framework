@@ -68,7 +68,7 @@
      exports.post=function(options){
         options = $.extend(true,ajaxoptions,options);
         var beforefn=ajaxBefore||$.noop,
-            completefn=ajaxComplete||$.noop,
+            completefn=ajaxComplete||$.noop, 
             ajaxErrorfn=ajaxError||$.noop,
             successfn=options.success||$.noop,
             errorfn=options.error||$.noop;
@@ -123,12 +123,11 @@
      function ajaxError(errorfn,xhr,status,error){
         //请求未登录和未授权的情况
         //Metronic.unblockUI();
-        console.dir(error);
-        console.dir(status);
         if(error===perms.unlogin){
               //未登录情况，点击确定新登录
-              bootbox.alert('<span class="red">您未登录到信息，点击“确定”后，将进入用户登录页面.</span>',function() {
-                  lion.util.reload();
+            bootbox.alert('<span class="red">您未登录到信息，点击“确定”后，将进入用户登录页面.</span>',
+              function() {
+                     lion.util.reload();
               });
         }else if(error===perms.unauth){
               //提示没有权限访问该资源

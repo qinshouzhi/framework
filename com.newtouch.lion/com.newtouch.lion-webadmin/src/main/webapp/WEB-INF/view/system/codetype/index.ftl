@@ -20,7 +20,6 @@
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/Scroller/js/dataTables.scroller.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
-<link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/select2/select2.css"/>
 <!-- DataTables js End -->
 <script src="${base}/resources/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js"></script>
