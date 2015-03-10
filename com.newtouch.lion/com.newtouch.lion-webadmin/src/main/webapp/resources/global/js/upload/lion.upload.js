@@ -25,6 +25,7 @@
 *work:图片预览插件
 */
 ;(function($) {
+
     jQuery.fn.extend({
         uploadPreview: function(setting) {
             /*
@@ -166,7 +167,35 @@
                   _self.paint();
                 } 
             });
-            
+           
         }
+
+        
     });
+    // /**连接超时时间*/
+    // var timeout=5000;
+    // /**Ajax POST请求
+    //  * @param url 请求URL
+    //  * @param fileId 上传图片的Id
+    //  * @param data 请求数据
+    //  * @param successfn 成功回调函数
+    //  * @param {[type]} [arg] [回调的参数]
+    //  */
+    // lion.upload.post=function(url,fileId,data,successfn,errorfn,arg){
+    //     successfn=successfn||$.noop;
+    //     errorfn=errorfn||$.noop;
+    //     $.ajaxFileUpload({
+    //         url: url, //用于文件上传的服务器端请求地址
+    //         secureuri: false, //是否需要安全协议，一般设置为false
+    //         fileElementId: fileId, //文件上传域的ID
+    //         dataType: 'json', //返回值类型 一般设置为json
+    //         data: data,//参数
+    //         success: function (data){  //服务器成功响应处理函数
+    //             successfn.call(this,data,arg);
+    //         },
+    //         error: function (data){//服务器响应失败处理函数
+    //             errorfn.call(this,xhr,textStatus,error);
+    //         }
+    //     });
+    // };
 })(jQuery);
