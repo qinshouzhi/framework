@@ -43,6 +43,7 @@
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <!--lang-->
+<script src="${base}/resources/admin/scripts/admin-common.js" type="text/javascript"></script>
 <!--lion UI JS End-->
 <script src="${base}/resources/admin/scripts/system/user.js" type="text/javascript"></script>
 </head>

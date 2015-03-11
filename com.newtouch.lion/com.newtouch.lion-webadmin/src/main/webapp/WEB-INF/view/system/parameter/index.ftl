@@ -35,6 +35,7 @@
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <!--lion UI JS End-->
 <!--lang-->
+<script src="${base}/resources/admin/scripts/admin-common.js" type="text/javascript"></script>
 <!--parameter-->
 <script src="${base}/resources/admin/scripts/system/parameter.js" type="text/javascript"></script>
 </head>
