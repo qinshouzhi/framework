@@ -36,7 +36,7 @@ Author: wanglijun
 						<div class="display">
 							<div class="number">
 								<h3 class="font-green-sharp">7800<small class="font-green-sharp">$</small></h3>
-								<small>TOTAL PROFIT</small>
+								<small>利润总额</small>
 							</div>
 							<div class="icon">
 								<i class="icon-pie-chart"></i>
@@ -45,12 +45,12 @@ Author: wanglijun
 						<div class="progress-info">
 							<div class="progress">
 								<span style="width: 76%;" class="progress-bar progress-bar-success green-sharp">
-								<span class="sr-only">76% progress</span>
+								<span class="sr-only">76% 进度</span>
 								</span>
 							</div>
 							<div class="status">
 								<div class="status-title">
-									 progress
+									 进度
 								</div>
 								<div class="status-number">
 									 76%
@@ -64,7 +64,7 @@ Author: wanglijun
 						<div class="display">
 							<div class="number">
 								<h3 class="font-red-haze">1349</h3>
-								<small>NEW FEEDBACKS</small>
+								<small>新反馈</small>
 							</div>
 							<div class="icon">
 								<i class="icon-like"></i>
@@ -73,12 +73,12 @@ Author: wanglijun
 						<div class="progress-info">
 							<div class="progress">
 								<span style="width: 85%;" class="progress-bar progress-bar-success red-haze">
-								<span class="sr-only">85% change</span>
+								<span class="sr-only">85% 变更</span>
 								</span>
 							</div>
 							<div class="status">
 								<div class="status-title">
-									 change
+									 更变
 								</div>
 								<div class="status-number">
 									 85%
@@ -92,7 +92,7 @@ Author: wanglijun
 						<div class="display">
 							<div class="number">
 								<h3 class="font-blue-sharp">567</h3>
-								<small>NEW ORDERS</small>
+								<small>新需求</small>
 							</div>
 							<div class="icon">
 								<i class="icon-basket"></i>
@@ -101,12 +101,12 @@ Author: wanglijun
 						<div class="progress-info">
 							<div class="progress">
 								<span style="width: 45%;" class="progress-bar progress-bar-success blue-sharp">
-								<span class="sr-only">45% grow</span>
+								<span class="sr-only">45% 扩展</span>
 								</span>
 							</div>
 							<div class="status">
 								<div class="status-title">
-									 grow
+									 扩展
 								</div>
 								<div class="status-number">
 									 45%
@@ -120,7 +120,7 @@ Author: wanglijun
 						<div class="display">
 							<div class="number">
 								<h3 class="font-purple-soft">276</h3>
-								<small>NEW USERS</small>
+								<small>新用户</small>
 							</div>
 							<div class="icon">
 								<i class="icon-user"></i>
@@ -129,12 +129,12 @@ Author: wanglijun
 						<div class="progress-info">
 							<div class="progress">
 								<span style="width: 57%;" class="progress-bar progress-bar-success purple-soft">
-								<span class="sr-only">56% change</span>
+								<span class="sr-only">56% 加入</span>
 								</span>
 							</div>
 							<div class="status">
 								<div class="status-title">
-									 change
+									 加入
 								</div>
 								<div class="status-number">
 									 57%
@@ -151,17 +151,17 @@ Author: wanglijun
 						<div class="portlet-title">
 							<div class="caption caption-md">
 								<i class="icon-bar-chart theme-font-color hide"></i>
-								<span class="caption-subject theme-font-color bold uppercase">Sales Summary</span>
-								<span class="caption-helper hide">weekly stats...</span>
+								<span class="caption-subject theme-font-color bold uppercase">销售汇总</span>
+								<span class="caption-helper hide">每周统计数据...</span>
 							</div>
 							<div class="actions">
 								<div class="btn-group btn-group-devided" data-toggle="buttons">
 									<label class="btn btn-transparent grey-salsa btn-circle btn-sm active">
-									<input type="radio" name="options" class="toggle" id="option1">Today</label>
+									<input type="radio" name="options" class="toggle" id="option1">今天</label>
 									<label class="btn btn-transparent grey-salsa btn-circle btn-sm">
-									<input type="radio" name="options" class="toggle" id="option2">Week</label>
+									<input type="radio" name="options" class="toggle" id="option2">周</label>
 									<label class="btn btn-transparent grey-salsa btn-circle btn-sm">
-									<input type="radio" name="options" class="toggle" id="option2">Month</label>
+									<input type="radio" name="options" class="toggle" id="option2">月</label>
 								</div>
 							</div>
 						</div>
@@ -169,7 +169,7 @@ Author: wanglijun
 							<div class="row list-separated">
 								<div class="col-md-3 col-sm-3 col-xs-6">
 									<div class="font-grey-mint font-sm">
-										 Total Sales
+										 总销售额
 									</div>
 									<div class="uppercase font-hg font-red-flamingo">
 										 13,760 <span class="font-lg font-grey-mint">$</span>
@@ -177,7 +177,7 @@ Author: wanglijun
 								</div>
 								<div class="col-md-3 col-sm-3 col-xs-6">
 									<div class="font-grey-mint font-sm">
-										 Revenue
+										 收益
 									</div>
 									<div class="uppercase font-hg theme-font-color">
 										 4,760 <span class="font-lg font-grey-mint">$</span>
@@ -185,7 +185,7 @@ Author: wanglijun
 								</div>
 								<div class="col-md-3 col-sm-3 col-xs-6">
 									<div class="font-grey-mint font-sm">
-										 Expenses
+										 成本
 									</div>
 									<div class="uppercase font-hg font-purple">
 										 11,760 <span class="font-lg font-grey-mint">$</span>
@@ -193,7 +193,7 @@ Author: wanglijun
 								</div>
 								<div class="col-md-3 col-sm-3 col-xs-6">
 									<div class="font-grey-mint font-sm">
-										 Growth
+										 增长
 									</div>
 									<div class="uppercase font-hg font-blue-sharp">
 										 9,760 <span class="font-lg font-grey-mint">$</span>
@@ -203,7 +203,7 @@ Author: wanglijun
 							<ul class="list-separated list-inline-xs hide">
 								<li>
 									<div class="font-grey-mint font-sm">
-										 Total Sales
+										 总销售额
 									</div>
 									<div class="uppercase font-hg font-red-flamingo">
 										 13,760 <span class="font-lg font-grey-mint">$</span>
@@ -213,7 +213,7 @@ Author: wanglijun
 								</li>
 								<li class="border">
 									<div class="font-grey-mint font-sm">
-										 Revenue
+										 收益
 									</div>
 									<div class="uppercase font-hg theme-font-color">
 										 4,760 <span class="font-lg font-grey-mint">$</span>
@@ -223,7 +223,7 @@ Author: wanglijun
 								</li>
 								<li>
 									<div class="font-grey-mint font-sm">
-										 Expenses
+										 成本
 									</div>
 									<div class="uppercase font-hg font-purple">
 										 11,760 <span class="font-lg font-grey-mint">$</span>
@@ -233,7 +233,7 @@ Author: wanglijun
 								</li>
 								<li>
 									<div class="font-grey-mint font-sm">
-										 Growth
+										 增长
 									</div>
 									<div class="uppercase font-hg font-blue-sharp">
 										 9,760 <span class="font-lg font-grey-mint">$</span>
@@ -252,17 +252,17 @@ Author: wanglijun
 						<div class="portlet-title">
 							<div class="caption caption-md">
 								<i class="icon-bar-chart theme-font-color hide"></i>
-								<span class="caption-subject theme-font-color bold uppercase">Member Activity</span>
-								<span class="caption-helper hide">weekly stats...</span>
+								<span class="caption-subject theme-font-color bold uppercase">用户活跃度</span>
+								<span class="caption-helper hide">每周统计数据...</span>
 							</div>
 							<div class="actions">
 								<div class="btn-group btn-group-devided" data-toggle="buttons">
 									<label class="btn btn-transparent grey-salsa btn-circle btn-sm active">
-									<input type="radio" name="options" class="toggle" id="option1">Today</label>
+									<input type="radio" name="options" class="toggle" id="option1">今天</label>
 									<label class="btn btn-transparent grey-salsa btn-circle btn-sm">
-									<input type="radio" name="options" class="toggle" id="option2">Week</label>
+									<input type="radio" name="options" class="toggle" id="option2">周</label>
 									<label class="btn btn-transparent grey-salsa btn-circle btn-sm">
-									<input type="radio" name="options" class="toggle" id="option2">Month</label>
+									<input type="radio" name="options" class="toggle" id="option2">月</label>
 								</div>
 							</div>
 						</div>
@@ -276,7 +276,7 @@ Author: wanglijun
 										</div>
 										<div class="stat-number">
 											<div class="title">
-												 Total
+												 总共
 											</div>
 											<div class="number">
 												 2460
@@ -292,7 +292,7 @@ Author: wanglijun
 										</div>
 										<div class="stat-number">
 											<div class="title">
-												 New
+												 新用户
 											</div>
 											<div class="number">
 												 719
@@ -306,19 +306,19 @@ Author: wanglijun
 								<thead>
 								<tr class="uppercase">
 									<th colspan="2">
-										 MEMBER
+										 用户
 									</th>
 									<th>
-										 Earnings
+										 收入
 									</th>
 									<th>
-										 CASES
+										 案例
 									</th>
 									<th>
-										 CLOSED
+										 已结束
 									</th>
 									<th>
-										 RATE
+										 比例
 									</th>
 								</tr>
 								</thead>
@@ -416,8 +416,8 @@ Author: wanglijun
 						<div class="portlet-title">
 							<div class="caption caption-md">
 								<i class="icon-bar-chart theme-font-color hide"></i>
-								<span class="caption-subject theme-font-color bold uppercase">TASKS</span>
-								<span class="caption-helper">16 pending</span>
+								<span class="caption-subject theme-font-color bold uppercase">任务</span>
+								<span class="caption-helper">16 待定</span>
 							</div>
 							<div class="inputs">
 								<div class="portlet-input input-small input-inline">
@@ -440,8 +440,8 @@ Author: wanglijun
 											</div>
 											<div class="task-title">
 												<span class="task-title-sp">
-												Present 2013 Year IPO Statistics at Board Meeting </span>
-												<span class="label label-sm label-success">Company</span>
+												在董事会上提交2013年IPO数据 </span>
+												<span class="label label-sm label-success">公司</span>
 												<span class="task-bell">
 												<i class="fa fa-bell-o"></i>
 												</span>
@@ -454,15 +454,15 @@ Author: wanglijun
 													<ul class="dropdown-menu pull-right">
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-check"></i> Complete </a>
+															<i class="fa fa-check"></i> 完成 </a>
 														</li>
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-pencil"></i> Edit </a>
+															<i class="fa fa-pencil"></i> 编辑 </a>
 														</li>
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-trash-o"></i> Cancel </a>
+															<i class="fa fa-trash-o"></i> 取消 </a>
 														</li>
 													</ul>
 												</div>
@@ -474,8 +474,8 @@ Author: wanglijun
 											</div>
 											<div class="task-title">
 												<span class="task-title-sp">
-												Hold An Interview for Marketing Manager Position </span>
-												<span class="label label-sm label-danger">Marketing</span>
+												营销经理职位的面试 </span>
+												<span class="label label-sm label-danger">市场</span>
 											</div>
 											<div class="task-config">
 												<div class="task-config-btn btn-group">
@@ -485,15 +485,15 @@ Author: wanglijun
 													<ul class="dropdown-menu pull-right">
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-check"></i> Complete </a>
+															<i class="fa fa-check"></i> 完成 </a>
 														</li>
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-pencil"></i> Edit </a>
+															<i class="fa fa-pencil"></i> 编辑 </a>
 														</li>
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-trash-o"></i> Cancel </a>
+															<i class="fa fa-trash-o"></i> 取消 </a>
 														</li>
 													</ul>
 												</div>
@@ -505,8 +505,8 @@ Author: wanglijun
 											</div>
 											<div class="task-title">
 												<span class="task-title-sp">
-												AirAsia Intranet System Project Internal Meeting </span>
-												<span class="label label-sm label-success">AirAsia</span>
+												亚航内部网系统项目内部会议 </span>
+												<span class="label label-sm label-success">亚航</span>
 												<span class="task-bell">
 												<i class="fa fa-bell-o"></i>
 												</span>
@@ -519,15 +519,15 @@ Author: wanglijun
 													<ul class="dropdown-menu pull-right">
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-check"></i> Complete </a>
+															<i class="fa fa-check"></i> 完成 </a>
 														</li>
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-pencil"></i> Edit </a>
+															<i class="fa fa-pencil"></i> 编辑 </a>
 														</li>
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-trash-o"></i> Cancel </a>
+															<i class="fa fa-trash-o"></i> 取消 </a>
 														</li>
 													</ul>
 												</div>
@@ -539,8 +539,8 @@ Author: wanglijun
 											</div>
 											<div class="task-title">
 												<span class="task-title-sp">
-												Technical Management Meeting </span>
-												<span class="label label-sm label-warning">Company</span>
+												技术管理会议 </span>
+												<span class="label label-sm label-warning">公司</span>
 											</div>
 											<div class="task-config">
 												<div class="task-config-btn btn-group">
@@ -550,15 +550,15 @@ Author: wanglijun
 													<ul class="dropdown-menu pull-right">
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-check"></i> Complete </a>
+															<i class="fa fa-check"></i> 完成 </a>
 														</li>
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-pencil"></i> Edit </a>
+															<i class="fa fa-pencil"></i> 编辑 </a>
 														</li>
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-trash-o"></i> Cancel </a>
+															<i class="fa fa-trash-o"></i> 取消 </a>
 														</li>
 													</ul>
 												</div>
@@ -570,8 +570,8 @@ Author: wanglijun
 											</div>
 											<div class="task-title">
 												<span class="task-title-sp">
-												Kick-off Company CRM Mobile App Development </span>
-												<span class="label label-sm label-info">Internal Products</span>
+												Kick-off 公司 CRM 手机应用开发 </span>
+												<span class="label label-sm label-info">互联网产品</span>
 											</div>
 											<div class="task-config">
 												<div class="task-config-btn btn-group">
@@ -581,15 +581,15 @@ Author: wanglijun
 													<ul class="dropdown-menu pull-right">
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-check"></i> Complete </a>
+															<i class="fa fa-check"></i> 完成 </a>
 														</li>
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-pencil"></i> Edit </a>
+															<i class="fa fa-pencil"></i> 编辑 </a>
 														</li>
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-trash-o"></i> Cancel </a>
+															<i class="fa fa-trash-o"></i> 取消 </a>
 														</li>
 													</ul>
 												</div>
@@ -601,8 +601,8 @@ Author: wanglijun
 											</div>
 											<div class="task-title">
 												<span class="task-title-sp">
-												Prepare Commercial Offer For SmartVision Website Rewamp </span>
-												<span class="label label-sm label-danger">SmartVision</span>
+												向慧视提供报价单 </span>
+												<span class="label label-sm label-danger">慧视</span>
 											</div>
 											<div class="task-config">
 												<div class="task-config-btn btn-group">
@@ -612,15 +612,15 @@ Author: wanglijun
 													<ul class="dropdown-menu pull-right">
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-check"></i> Complete </a>
+															<i class="fa fa-check"></i> 完成 </a>
 														</li>
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-pencil"></i> Edit </a>
+															<i class="fa fa-pencil"></i> 编辑 </a>
 														</li>
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-trash-o"></i> Cancel </a>
+															<i class="fa fa-trash-o"></i> 取消 </a>
 														</li>
 													</ul>
 												</div>
@@ -632,7 +632,7 @@ Author: wanglijun
 											</div>
 											<div class="task-title">
 												<span class="task-title-sp">
-												Sign-Off The Comercial Agreement With AutoSmart </span>
+												与AutoSmart签署商业协议 </span>
 												<span class="label label-sm label-default">AutoSmart</span>
 												<span class="task-bell">
 												<i class="fa fa-bell-o"></i>
@@ -646,15 +646,15 @@ Author: wanglijun
 													<ul class="dropdown-menu pull-right">
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-check"></i> Complete </a>
+															<i class="fa fa-check"></i> 完成 </a>
 														</li>
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-pencil"></i> Edit </a>
+															<i class="fa fa-pencil"></i> 编辑 </a>
 														</li>
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-trash-o"></i> Cancel </a>
+															<i class="fa fa-trash-o"></i> 取消 </a>
 														</li>
 													</ul>
 												</div>
@@ -666,8 +666,8 @@ Author: wanglijun
 											</div>
 											<div class="task-title">
 												<span class="task-title-sp">
-												Company Staff Meeting </span>
-												<span class="label label-sm label-success">Cruise</span>
+												公司全员会议 </span>
+												<span class="label label-sm label-success">巡讲</span>
 												<span class="task-bell">
 												<i class="fa fa-bell-o"></i>
 												</span>
@@ -680,15 +680,15 @@ Author: wanglijun
 													<ul class="dropdown-menu pull-right">
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-check"></i> Complete </a>
+															<i class="fa fa-check"></i> 完成 </a>
 														</li>
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-pencil"></i> Edit </a>
+															<i class="fa fa-pencil"></i> 编辑 </a>
 														</li>
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-trash-o"></i> Cancel </a>
+															<i class="fa fa-trash-o"></i> 取消 </a>
 														</li>
 													</ul>
 												</div>
@@ -700,7 +700,7 @@ Author: wanglijun
 											</div>
 											<div class="task-title">
 												<span class="task-title-sp">
-												KeenThemes Investment Discussion </span>
+												KeenThemes 投资讨论 </span>
 												<span class="label label-sm label-warning">KeenThemes </span>
 											</div>
 											<div class="task-config">
@@ -711,15 +711,15 @@ Author: wanglijun
 													<ul class="dropdown-menu pull-right">
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-check"></i> Complete </a>
+															<i class="fa fa-check"></i> 完成 </a>
 														</li>
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-pencil"></i> Edit </a>
+															<i class="fa fa-pencil"></i> 编辑 </a>
 														</li>
 														<li>
 															<a href="javascript:;">
-															<i class="fa fa-trash-o"></i> Cancel </a>
+															<i class="fa fa-trash-o"></i> 取消 </a>
 														</li>
 													</ul>
 												</div>
@@ -731,7 +731,7 @@ Author: wanglijun
 							</div>
 							<div class="task-footer">
 								<div class="btn-arrow-link pull-right">
-									<a href="javascript:;">See All Tasks</a>
+									<a href="javascript:;">查看所有任务</a>
 								</div>
 							</div>
 						</div>
@@ -744,16 +744,16 @@ Author: wanglijun
 						<div class="portlet-title tabbable-line">
 							<div class="caption caption-md">
 								<i class="icon-globe theme-font-color hide"></i>
-								<span class="caption-subject theme-font-color bold uppercase">Feeds</span>
+								<span class="caption-subject theme-font-color bold uppercase">提醒</span>
 							</div>
 							<ul class="nav nav-tabs">
 								<li class="active">
 									<a href="#tab_1_1" data-toggle="tab">
-									System </a>
+									系统 </a>
 								</li>
 								<li>
 									<a href="#tab_1_2" data-toggle="tab">
-									Activities </a>
+									活跃 </a>
 								</li>
 							</ul>
 						</div>
@@ -773,8 +773,8 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 You have 4 pending tasks. <span class="label label-sm label-info">
-																Take action <i class="fa fa-share"></i>
+																 你有4个待处理任务.<span class="label label-sm label-info">
+																采取行动 <i class="fa fa-share"></i>
 																</span>
 															</div>
 														</div>
@@ -782,7 +782,7 @@ Author: wanglijun
 												</div>
 												<div class="col2">
 													<div class="date">
-														 Just now
+														 刚刚
 													</div>
 												</div>
 											</li>
@@ -797,14 +797,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 New version v1.4 just lunched!
+																 新版本v1.4一开展!
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 20 mins
+														 20 分钟
 													</div>
 												</div>
 												</a>
@@ -819,14 +819,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 Database server #12 overloaded. Please fix the issue.
+																 数据库服务 #12 超负荷运行.请修复该问题.
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 24 mins
+														 24 分钟
 													</div>
 												</div>
 											</li>
@@ -840,14 +840,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 New order received and pending for process.
+																 新订单收到,请等待审批.
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 30 mins
+														 30 分钟
 													</div>
 												</div>
 											</li>
@@ -861,14 +861,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 New payment refund and pending approval.
+																 退款等待审批.
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 40 mins
+														 40 分钟
 													</div>
 												</div>
 											</li>
@@ -882,14 +882,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 New member registered. Pending approval.
+																 新用户注册等待审批.
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 1.5 hours
+														 1.5 小时
 													</div>
 												</div>
 											</li>
@@ -903,15 +903,15 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 Web server hardware needs to be upgraded. <span class="label label-sm label-default ">
-																Overdue </span>
+																 Web 服务器的硬件需要升级 .<span class="label label-sm label-default ">
+																过期 </span>
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 2 hours
+														 2 小时
 													</div>
 												</div>
 											</li>
@@ -925,7 +925,7 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 Prod01 database server is overloaded 90%.
+																 Prod01 数据库服务超负荷90%.
 															</div>
 														</div>
 													</div>
@@ -946,14 +946,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 New group created. Pending manager review.
+																新组被创建等待经理审批. 
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 5 hours
+														 5 小时
 													</div>
 												</div>
 											</li>
@@ -967,14 +967,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 Order payment failed.
+																 订单付款失败. 
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 18 hours
+														 18 小时
 													</div>
 												</div>
 											</li>
@@ -988,14 +988,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 New application received.
+																 接收新的应用程序. 
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 21 hours
+														 21 小时
 													</div>
 												</div>
 											</li>
@@ -1009,14 +1009,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 Dev90 web server restarted. Pending overall system check.
+																Dev90 web 服务器重启. 等待整个系统检查.
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 22 hours
+														 22 小时
 													</div>
 												</div>
 											</li>
@@ -1030,14 +1030,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 New member registered. Pending approval
+																 新用户注册等待审批. 
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 21 hours
+														 21 小时
 													</div>
 												</div>
 											</li>
@@ -1051,14 +1051,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 L45 Network failure. Schedule maintenance.
+																 L45 网路连接失败.计划检修. 
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 22 hours
+														 22 小时
 													</div>
 												</div>
 											</li>
@@ -1072,14 +1072,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 Order canceled with failed payment.
+																 订单取消没有付款. 
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 21 hours
+														 21 小时
 													</div>
 												</div>
 											</li>
@@ -1093,14 +1093,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 Web-A2 clound instance created. Schedule full scan.
+																 创建Web-A2 云实例. 计划全扫描. 
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 22 hours
+														 22 小时
 													</div>
 												</div>
 											</li>
@@ -1114,14 +1114,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 Member canceled. Schedule account review.
+																成员取消.账户审查. 
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 21 hours
+														 21 小时
 													</div>
 												</div>
 											</li>
@@ -1135,14 +1135,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 New order received. Please take care of it.
+																 接到新订单. 请注意. 
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 22 hours
+														 22 小时
 													</div>
 												</div>
 											</li>
@@ -1163,14 +1163,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 New user registered
+																 新用户注册
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 Just now
+														 刚刚
 													</div>
 												</div>
 												</a>
@@ -1186,14 +1186,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 New order received
+																收到新订单
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 10 mins
+														 10 分钟
 													</div>
 												</div>
 												</a>
@@ -1208,8 +1208,8 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 Order #24DOP4 has been rejected. <span class="label label-sm label-danger ">
-																Take action <i class="fa fa-share"></i>
+																 订单 #24DOP4 被拒绝. <span class="label label-sm label-danger ">
+																采取行动 <i class="fa fa-share"></i>
 																</span>
 															</div>
 														</div>
@@ -1217,7 +1217,7 @@ Author: wanglijun
 												</div>
 												<div class="col2">
 													<div class="date">
-														 24 mins
+														 24 分钟
 													</div>
 												</div>
 											</li>
@@ -1232,14 +1232,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 New user registered
+																  新用户注册
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 Just now
+														 刚刚
 													</div>
 												</div>
 												</a>
@@ -1255,14 +1255,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 New user registered
+																  新用户注册
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 Just now
+														 刚刚
 													</div>
 												</div>
 												</a>
@@ -1278,14 +1278,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 New user registered
+																  新用户注册
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 Just now
+														 刚刚
 													</div>
 												</div>
 												</a>
@@ -1301,14 +1301,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 New user registered
+																  新用户注册
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 Just now
+														 刚刚
 													</div>
 												</div>
 												</a>
@@ -1324,14 +1324,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 New user registered
+																  新用户注册
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 Just now
+														 刚刚
 													</div>
 												</div>
 												</a>
@@ -1347,14 +1347,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 New user registered
+																  新用户注册
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 Just now
+														 刚刚
 													</div>
 												</div>
 												</a>
@@ -1370,14 +1370,14 @@ Author: wanglijun
 														</div>
 														<div class="cont-col2">
 															<div class="desc">
-																 New user registered
+																 新用户注册
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="col2">
 													<div class="date">
-														 Just now
+														 刚刚
 													</div>
 												</div>
 												</a>
