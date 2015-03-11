@@ -46,10 +46,10 @@
 		
 			<div class="col-md-12 margin-bottom-5" id="toolbar">
 				<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue">
-					<i class="fa fa-refresh"></i> <@spring.message "common.toolbar.btn.reload.text"/> 
+				<i class="fa fa-refresh"></i><@spring.message "common.toolbar.btn.reload.text"/> 
 				</a>				
 				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green">
-					<i class="fa  fa-file-excel-o"></i> Excel </a>
+				<i class="fa  fa-file-excel-o"></i> Excel </a>
 				<a id="btnUserExit" class="btn btn-sm red" ><i class="fa fa-plus"></i> 强制退出 </a>
 			</div>
 			<div class="col-md-12">
@@ -57,28 +57,28 @@
 				  <table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_session_tb" data-singleselect="true" data-sort="false" data-loadUrl="${base}/sessions/actives.json" data-checkbox="true"  data-paginate="false" width="100%">
 					<thead>
 						<tr>
-						  <th class="table-checkbox" data-field='id' data-checkbox="true">
+						  <th class="table-checkbox" data-field='id'style="width:30px;"  data-checkbox="true">
 						 		<input type="checkbox" class="group-checkable" data-set="#sys_session_tb.checkboxes"  data-sortable="false" />
 						 	</th>
 								<th data-field='id'  style="width:220px;" >
 								会话ID
 							</th>
-							<th data-field="username" style="width:20x;">
+							<th data-field="username" style="width:80px;">
 							 	用户名
 							</th>
-							<th data-field="host" style="width:20x;">
+							<th data-field="host" style="width:50px;">
 							 	登录IP
 							</th>
 							<th data-field="valid" style="width:30px;" data-formatter="formatterEidtable">
-								是否有效
+								状态
 							</th>
-							<th data-field="timeout" style="width:30px;" align="center" data-formatter="formatterTimeout">
-								TimeOut(分钟)
+							<th data-field="timeout" style="width:50px;" align="center" data-formatter="formatterTimeout">
+								TimeOut
 							</th>
-							<th data-field="lastAccessTime" style="width:150px;">
+							<th data-field="lastAccessTime" style="width:110px;">
 								最后访问时间
 							</th>						
-							<th data-field="startTimestamp" style="width:150px;">
+							<th data-field="startTimestamp" style="width:110px;">
 								开始时间
 							</th>
 							<th data-field="expired" style="width:50px;" data-formatter="formatterEidtable">

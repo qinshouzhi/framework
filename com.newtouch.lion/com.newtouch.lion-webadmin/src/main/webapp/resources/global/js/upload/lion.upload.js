@@ -78,7 +78,7 @@
                     url = window.webkitURL.createObjectURL(file);
                 }
                 return url;
-            }
+            };
             /*
             *work:对预览图片进行截图
             */
