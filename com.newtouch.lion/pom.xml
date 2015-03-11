@@ -21,8 +21,9 @@
 		<module>com.newtouch.lion-common</module>
 		<module>com.newtouch.lion-web</module>
 		<module>com.newtouch.lion-webadmin</module>
-    <module>com.newtouch.lion-mgt</module>
-  </modules>
+    	<module>com.newtouch.lion-mgt</module>
+    	<module>com.newtouch.lion-webframework</module>
+	</modules>
 	<distributionManagement>
 		<repository>
 			<id>releases</id>
