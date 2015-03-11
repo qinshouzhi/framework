@@ -151,7 +151,7 @@
             valueName:'id'//参数的Value的名称；
         },
         success:$.noop, //成功函数
-        error:$.noop, //失败函数
+        error:$.noop, //失败函数 
         msg:defaultmsgs.msgfail,
      };
      //通用删除函数默认参数 

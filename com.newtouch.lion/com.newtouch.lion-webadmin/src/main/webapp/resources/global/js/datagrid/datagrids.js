@@ -37,7 +37,7 @@
     		lengthchange:false,//不显示下拉页面选择器
     		searching:false,//不显示搜索框
         querydata:{},//查询参数
-    		processing:true,//服务器
+    	processing:true,//服务器
         serverside:true, //服务器处理
         statesave:true,//保存当前状态
         scrolly:'',//垂直滚动条的区域大小

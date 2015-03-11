@@ -82,7 +82,6 @@ function successForDelete(result,arg){
 /**新增或编辑的提交代码*/
 function submitForm(frm){
   var param=frm.serialize(),id=($('#id').val());
-  console.dir(param);
   //ID为空时，为添加动作
   if(lion.util.isEmpty(id)){
       lion.web.post({url:'add.json',data:param,success:successAddFrm});
@@ -218,8 +217,8 @@ function formatterCheckBox(data,type,full){
 
 //获取下拉列表数据
 /**sys_code_type 加载列表*/
-function formatterCodeList(data,type,full) {
-   return full.codeName;
+function formatterCodeList(data,type,row) {
+   return row.codeName;
 }
 //判断是否编辑
 function formatterEidtable(data,type,full) { 

@@ -71,6 +71,10 @@
 			<artifactId>commons-beanutils</artifactId>
 		</dependency>
 		<dependency>
+          <artifactId>commons-collections</artifactId>
+          <groupId>commons-collections</groupId>
+       </dependency>
+		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 		</dependency>

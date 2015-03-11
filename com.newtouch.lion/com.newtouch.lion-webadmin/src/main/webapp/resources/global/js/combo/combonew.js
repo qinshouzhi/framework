@@ -35,7 +35,7 @@
     	allowClear:true,//是否清除按钮
     	templateResult:'',//用户格式显示内容;
     	data:null,//显示内容
-    	multiple:true,
+    	multiple:false,
     	url:'',//
     	minimumResultsForSearch:-1,//默认不显示搜索框
     	textfield:'text',//后台获取下拉文件key
