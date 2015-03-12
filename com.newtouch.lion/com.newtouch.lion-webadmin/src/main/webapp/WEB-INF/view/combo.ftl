@@ -59,7 +59,7 @@
 			 		<div class="form-group">
 						<label class="control-label col-md-3">Extra Large</label>
 						<div class="col-md-4">
-							<select id="select2_sample2" class="lion-combo form-control input-medium select2"   placeholder="请选择参数列表..." data-valueField='codeValue'   value=""
+							<select id="select2_sample2" class="lion-combo form-control input-medium select2"   placeholder="请选择参数列表..."  data-valueField='codeValue'   value=""
 														 	data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=SystemParamter">
 								<option value=""></option>
 								<option value="AL">Alabama</option>
