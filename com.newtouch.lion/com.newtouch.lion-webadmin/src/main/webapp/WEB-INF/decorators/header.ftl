@@ -374,7 +374,7 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 						<span class="username username-hide-on-mobile"><@shiro.principal property="username"/></span>
 						<!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
-						<img alt="" class="img-circle" src="${base}/resources/admin/layout4/img/avatar9.jpg"/>
+						<img alt="" class="img-circle" src="${base}/<@shiro.principal property="image"/>"/>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-default">
 							<li>

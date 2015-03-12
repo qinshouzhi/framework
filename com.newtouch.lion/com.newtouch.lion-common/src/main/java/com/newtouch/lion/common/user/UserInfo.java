@@ -42,6 +42,8 @@ public class UserInfo implements Serializable {
 	
 	private String userIP;
 	
+	private String image;
+	
 	private String macAddress;
 
 	public UserInfo() {
@@ -59,8 +61,6 @@ public class UserInfo implements Serializable {
 		this.id = id;
 	}
 
-	
-	
 
 	/**
 	 * @param username
@@ -74,6 +74,21 @@ public class UserInfo implements Serializable {
 		this.realnameZh = realnameZh;
 		this.realnameEn=realnameEn;
 	}
+	
+	/**
+	 * @param username
+	 * @param id
+	 * @param realName
+	 * @param image
+	 */
+	public UserInfo(String username, Long id, String realnameZh,String realnameEn,String image) {
+		super();
+		this.username = username;
+		this.id = id;
+		this.realnameZh = realnameZh;
+		this.realnameEn=realnameEn;
+		this.image = image;
+	}
 
 
 
@@ -85,6 +100,17 @@ public class UserInfo implements Serializable {
 		this.realnameEn=realnameEn;
 		this.password = password;
 		this.userIP = userIP;
+	}
+	
+	public UserInfo(String username, Long id, String realnameZh,String realnameEn,String password,
+			String userIP,String image) {
+		this.username = username;
+		this.id = id;
+		this.realnameZh = realnameZh;
+		this.realnameEn=realnameEn;
+		this.password = password;
+		this.userIP = userIP;
+		this.image = image;
 	}
 
 	public Long getId() {
@@ -149,6 +175,22 @@ public class UserInfo implements Serializable {
 	 */
 	public String getMacAddress() {
 		return macAddress;
+	}
+
+	/**
+	 * @return the image
+	 */
+	public String getImage() {
+		return image;
+	}
+
+
+
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 

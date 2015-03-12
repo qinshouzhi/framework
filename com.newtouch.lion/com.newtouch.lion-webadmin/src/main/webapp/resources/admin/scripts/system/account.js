@@ -10,7 +10,7 @@ $(function () {
 		  $formimg=$('#formImg');//修改头像
     
 	//上传图片预览与剪裁
-	$('#image').uploadPreview({ DivShow: "imgdiv", ImgShow: "imgShow"}); 
+	$('#image').uploadPreview({ ImgShow: "imgShow"}); 
 	//基本信息验证表单
 	handleVForm($formuser,submitBaseInfoForm);
 	//修改头像验证表单
@@ -42,6 +42,7 @@ $(function () {
 });
 //头像修改
 function submitImageForm(frm){
+	console.dir($('#image').val());
 	$.ajaxFileUpload({
       url: 'changeimg.json', //用于文件上传的服务器端请求地址
       secureuri: false, //是否需要安全协议，一般设置为false

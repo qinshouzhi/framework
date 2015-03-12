@@ -31,10 +31,10 @@ import org.springframework.web.multipart.MultipartFile;
  * @version 1.0
  */
 public class ImageUploadUtil {
-	private static String IMAGE_JPEG = "jpeg";
-	private static String IMAGE_JPG = "jpg";
-	private static String IMAGE_PNG = "png";
-	private static String IMAGE_GIF = "gif";
+	private static String IMAGE_JPEG = "FFD8FF";
+	private static String IMAGE_JPG = "FFD8FF";
+	private static String IMAGE_PNG = "89504E47";
+	private static String IMAGE_GIF = "47494638";
 	
 	public static boolean isImage(MultipartFile image) throws IOException{
 		
@@ -46,12 +46,13 @@ public class ImageUploadUtil {
         for (int i = 0; i < b.length; i++) {
             b[i] = imgBuffer[i];
         }
-        // 获取上传文件的文件头判断是否是jpg格式的图片
+        // 获取上传文件的文件头判断是否是图片
         String imgHead = bytesToHexString(b);
+        System.out.println(imgHead+"========================");
         if (IMAGE_JPEG.equalsIgnoreCase(imgHead)) {
             flag = true;
         }else if(IMAGE_JPG.equalsIgnoreCase(imgHead)){
-        	
+        	flag = true;
         } else if (IMAGE_PNG.equalsIgnoreCase(imgHead)) {
             flag = true;
         } else if (IMAGE_GIF.equalsIgnoreCase(imgHead)) {
@@ -87,7 +88,7 @@ public class ImageUploadUtil {
            if (hv.length() < 2) {
                stringBuilder.append(0);
            }
-           stringBuilder.append(hv+" ");
+           stringBuilder.append(hv);
        }
        return stringBuilder.toString();
    }

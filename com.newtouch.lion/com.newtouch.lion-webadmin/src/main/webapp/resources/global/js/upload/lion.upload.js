@@ -15,10 +15,6 @@
 *Height:预览高度;
 *ImgType:支持文件类型 格式:['jpg','png'];
 *callback:选择文件后回调方法;
-*版本:v1.3
-更新内容如下:
-1.修复多层级框架获取路径BUG.
-2.去除对jquery插件的依赖.
 */
 
 /*
@@ -47,8 +43,8 @@
             _self.DefautlSetting = {
                 DivShow: '',
                 ImgShow: '',
-                Width: 100,
-                Height: 100,
+                Width: 300,
+                Height: 300,
                 ImgType: ['gif', 'jpeg', 'jpg','bmp', 'png'],
                 ErrMsg: '选择文件错误,图片类型必须是(gif,jpeg,jpg,bmp,png)中的一种',
                 callback: function() { }
@@ -140,31 +136,33 @@
                     }
                     var imgDiv = $('#'+_self.Setting.ImgShow).parent();
                     imgDiv.empty();
-                    imgDiv.html('<img id=\''+_self.Setting.ImgShow+'\' style=\"width: 300px; height: 300px;\"/><div id=\'preview-pane\'><div class=\'preview-container\'><img /></div></div>');
-                    
+                    imgDiv.html('<img id="'+_self.Setting.ImgShow+'" /><div id="preview-pane"><div class="preview-container"><img /></div></div>');
+                    var imgShow = $('#'+_self.Setting.ImgShow);
                     if (navigator.userAgent.indexOf('MSIE') > -1) {
                         try {
-                            $('#'+_self.Setting.ImgShow).attr('src',_self.getObjectURL(this.files[0]));
+                        	imgShow.width(_self.Setting.Width + 'px');
+                            imgShow.height(_self.Setting.Height + 'px');
+                            imgShow.attr('src',_self.getObjectURL(this.files[0]));
                         } catch (e) {
-                            var div = document.getElementById(_self.Setting.DivShow);
                             this.select();
                             top.parent.document.body.focus();
                             var src = document.selection.createRange().text;
                             document.selection.empty();
-                            document.getElementById(_self.Setting.ImgShow).style.display = 'none';
-                            div.style.filter = 'progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)';
-                            div.style.width = _self.Setting.Width + 'px';
-                            div.style.height = _self.Setting.Height + 'px';
-                            div.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+                            imgShow.css('display','none');
+                            imgDiv.width(_self.Setting.Width + 'px');
+                            imgDiv.height(_self.Setting.Height + 'px');
                         }
                     } else {
-                        $('#'+_self.Setting.ImgShow).attr('src',_self.getObjectURL(this.files[0]));
+                    	imgShow.width(_self.Setting.Width + 'px');
+                        imgShow.height(_self.Setting.Height + 'px');
+                    	imgShow.attr('src',_self.getObjectURL(this.files[0]));
                     }
-                    
+                    //对上传图片进行截图
+                    _self.paint();
+                    //回调方法
                     _self.Setting.callback();
 
-                  //对上传图片进行截图
-                  _self.paint();
+                    
                 } 
             });
            
