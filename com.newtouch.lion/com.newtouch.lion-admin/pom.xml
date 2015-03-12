@@ -6,8 +6,8 @@
 		<version>0.0.2-SNAPSHOT</version>
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>com.newtouch.lion-webadmin</artifactId>
-	<name>com.newtouch.lion-admin</name>
+	<artifactId>com.newtouch.lion-webadminapp</artifactId>
+	<name>com.newtouch.lion-webadminapp</name>
 	<version>${lion-webadmin.version}</version>
 	<packaging>war</packaging>
 	<url>http://maven.apache.org</url>
