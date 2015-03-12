@@ -8,11 +8,12 @@
 	<!-- DataGrid -->
 	<entity class="DataGrid">
 		<table name="bas_datagrid" />
+		<sequence-generator name="SEQ_BAS_DATAGRID_ID" 	sequence-name="SEQ_BAS_DATAGRID_ID"  allocation-size="1"/>
 		<attributes>
 			<id name="id">
 				<column name="BAS_DATAGRID_ID" unique="true" nullable="false"
 					precision="11" scale="0" />
-				<generated-value strategy="IDENTITY" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_DATAGRID_ID" />
 			</id>
 			<basic name="type">
 				<column name="TYPE" length="30" nullable="true" />
@@ -135,12 +136,13 @@
 	</entity>
 	<!-- DataCloumn -->
 	<entity class="DataColumn">
-		<table name="BAS_COLUMN" />
+		<table name="BAS_COLUMN"/>
+		<sequence-generator name="SEQ_BAS_COLUMN_ID" 	sequence-name="SEQ_BAS_COLUMN_ID"  allocation-size="1"/>
 		<attributes>
 			<id name="id">
 				<column name="BAS_COLUMN_ID" unique="true" nullable="false"
 					precision="11" scale="0" />
-				<generated-value strategy="IDENTITY" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_COLUMN_ID"/>
 			</id>
 			<basic name="dataGridId">
 				<column name="BAS_DATAGRID_ID" precision="11" scale="0"
