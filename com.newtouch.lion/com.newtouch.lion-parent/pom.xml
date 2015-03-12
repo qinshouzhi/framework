@@ -33,6 +33,7 @@
 		<springframework.version>3.2.12.RELEASE</springframework.version>
 		<hibernate-validator.version>4.3.0.Final</hibernate-validator.version>
 		<mysql.version>5.1.32</mysql.version>
+		<ojdbc14.version>10.2.0.4.0</ojdbc14.version>
 		<druid.version>1.0.10</druid.version>
 		<commons-configuration.version>1.8</commons-configuration.version>
 		<commons-beanutils.version>1.8.0</commons-beanutils.version>
@@ -225,6 +226,11 @@
 			<!-- JPA&ORM End -->
 
 			<!-- JDBC 数据库连接池 -->
+			<dependency>
+				<groupId>com.oracle</groupId>
+				<artifactId>ojdbc14</artifactId>
+				<version>${ojdbc14.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>druid</artifactId>
@@ -721,7 +727,7 @@
 			<organization>newtouch</organization>
 		</developer>
 	</developers>
-   <distributionManagement>
+	<distributionManagement>
 		<repository>
 			<id>releases</id>
 			<name>Nexus Release Repository</name>

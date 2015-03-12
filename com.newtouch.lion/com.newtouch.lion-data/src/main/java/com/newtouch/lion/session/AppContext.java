@@ -3,8 +3,6 @@
  */
 package com.newtouch.lion.session;
 
-import java.util.Locale;
-
 import com.newtouch.lion.common.message.AppMessage;
 import com.newtouch.lion.common.user.UserInfo;
 
