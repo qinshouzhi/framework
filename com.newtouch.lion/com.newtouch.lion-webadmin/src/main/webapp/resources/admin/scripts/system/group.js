@@ -179,8 +179,8 @@ $(function () {
 	//添加
     $('#btnAdd').click(function(){
       	addForm.reset();
-	 	    addDialog.find('.modal-header h4 span').text('添加用户组');
-		    return;
+ 	    addDialog.find('.modal-header h4 span').text('添加用户组');
+	    return;
     });
 
     //编辑

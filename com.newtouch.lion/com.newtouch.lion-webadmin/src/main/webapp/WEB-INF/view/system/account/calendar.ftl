@@ -12,6 +12,9 @@
 <link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css"/>
 <link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
 <!--DataTable css End-->
+<!--calendar css start-->
+<link rel="stylesheet" type="text/css" src="${base}/resources/global/plugins/fullcalendar/fullcalendar.min.css"></script>
+<!--calendar css end-->
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/css/combotree/combotree.css" rel="stylesheet" type="text/css" />
@@ -39,7 +42,13 @@
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <!--lion UI JS End-->
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
-<script src="${base}/resources/admin/scripts/system/account.js" type="text/javascript"></script>
+<!--calendar Js start-->
+<script src="${base}/resources/global/plugins/moment.min.js" type="text/javascript"></script>
+<script src="${base}/resources/global/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
+<script src="${base}/resources/admin/pages/scripts/calendar.js" type="text/javascript"></script>
+<!--calendar Js end-->
+<script src="${base}/resources/admin/scripts/system/calendar.js" type="text/javascript"></script>
+
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed-hide-logo">
 <!-- BEGIN PAGE CONTENT-->
@@ -53,25 +62,7 @@
 				</div>
 				<div class="portlet-body">
 					<div class="row">
-						<div class="col-md-3 col-sm-12">
-							<!-- BEGIN DRAGGABLE EVENTS PORTLET-->
-							<h3 class="event-form-title">Draggable Events</h3>
-							<div id="external-events">
-								<form class="inline-form">
-									<input type="text" value="" class="form-control" placeholder="Event Title..." id="event_title"/><br/>
-									<a href="javascript:;" id="event_add" class="btn default">
-									Add Event </a>
-								</form>
-								<hr/>
-								<div id="event_box">
-								</div>
-								<label for="drop-remove">
-								<input type="checkbox" id="drop-remove"/>remove after drop </label>
-								<hr class="visible-xs"/>
-							</div>
-							<!-- END DRAGGABLE EVENTS PORTLET-->
-						</div>
-						<div class="col-md-9 col-sm-12">
+						<div class="col-md-12 col-sm-12">
 							<div id="calendar" class="has-toolbar">
 							</div>
 						</div>
@@ -82,5 +73,82 @@
 		</div>
 	</div>
 <!-- END PAGE CONTENT-->
+<!--Edit Dialog Start -->
+<div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<h4 class="modal-title"><i class="fa fa-plus"></i> <span><@spring.message "sys.codeList.form.adddialog.text"/> </span></h4>
+			</div>
+			<div class="modal-body">
+				 	<div class="row">
+				 	<div class="col-md-12 portlet-body form">
+				 		<!-- BEGIN FORM-->
+						<form action="#" class="form-horizontal" name="sysCodeListForm" id="sysCodeListForm" method="post">
+							<input type="hidden" id='id' name='id' value="">
+							<div class="form-body">
+								<div class="form-group">
+									<label class="col-md-3 control-label"><@spring.message "sys.codeList.form.namezh.text"/></label>
+									<div class="col-md-5">
+										<div class="input-group">
+											<input type="text"  name="nameZh"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.codeList.form.namezh.missing.message"/>" size="30"/>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label"><@spring.message "sys.codeList.form.nameen.text"/></label>
+									<div class="col-md-5">
+										<div class="input-group">
+											<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="<@spring.message "sys.codeList.form.nameen.missing.message"/>" size="30"/>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label"><@spring.message "sys.codeList.form.value.text"/></label>
+									<div class="col-md-5">
+										<div class="input-group">
+											<input type="text" name="codeValue" class="form-control" placeholder="<@spring.message "sys.codeList.form.value.missing.message"/>" maxlength="255" size="30"/>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label"><@spring.message "sys.codeList.form.sort.text"/></label>
+									<div class="col-md-5">
+										<div class="input-group ">
+											<input type="text" name="sortNo" class="form-control" placeholder="<@spring.message "sys.codeList.form.sort.missing.message"/>" maxlength="255" size="30"/>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label"><@spring.message "sys.codeList.form.editable.text"/></label>
+									<div class="col-md-5 control-label">
+										<div class="input-group">
+											<input type="checkbox" class="form-control "  name="editable" checked="true" />
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label"><@spring.message "sys.codeList.form.selected.text"/></label>
+									<div class="col-md-5 control-label">
+										<div class="input-group">
+											<input type="checkbox" class="form-control "  name="selected" checked="true" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						<!-- END FORM-->
+					</div>
+				 	</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal"><i class="fa  fa-arrow-left"></i> <@spring.message "common.diaglog.btn.cancel"/> </button>
+				<button type="button" id="btnSave" class="btn blue"><i class="fa fa-save"></i> <@spring.message "common.diaglog.btn.save"/></button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
 </body>
 </html>

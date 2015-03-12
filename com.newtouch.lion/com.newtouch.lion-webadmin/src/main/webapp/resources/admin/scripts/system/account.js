@@ -42,7 +42,6 @@ $(function () {
 });
 //头像修改
 function submitImageForm(frm){
-	console.dir($('#image').val());
 	$.ajaxFileUpload({
       url: 'changeimg.json', //用于文件上传的服务器端请求地址
       secureuri: false, //是否需要安全协议，一般设置为false

@@ -187,7 +187,6 @@ public class AccountController extends AbstractController{
 		String totalPath = realPath+"/"+resourcePath;
         if(userImageVo.getImage() != null){
             if(ImageUploadUtil.isImage(userImageVo.getImage())){
-//        	if(true){
                 String fileName = userImageVo.getImage().getOriginalFilename();
                 int end = fileName.lastIndexOf(".");
                 String saveName = fileName.substring(0,end);
