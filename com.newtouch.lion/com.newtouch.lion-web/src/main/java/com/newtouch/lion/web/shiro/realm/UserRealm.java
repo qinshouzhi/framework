@@ -133,7 +133,7 @@ public class UserRealm extends AuthorizingRealm {
 		}
 
 		UserInfo userInfo = new UserInfo(user.getUsername(), user.getId(),
-				user.getRealnameZh(), user.getRealnameEn());
+				user.getRealnameZh(), user.getRealnameEn(),user.getImage());
 		// 交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以自定义实现
 		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
 				userInfo, // 用户名

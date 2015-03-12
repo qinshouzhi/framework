@@ -56,7 +56,7 @@
 						<@spring.message "sys.codeList.query.type.text"/>
 					</label>
 					<div class="col-md-3">
-					  <select  id="CodeList"  name="type" placeholder="<@spring.message "sys.codeList.query.type.missing.message"/>..."  class="lion-combo form-control select2  " data-valueField="id"  data-textField="nameZh" data-URL="${base}/system/code/typecombox.json"></select>
+					  <select  id="CodeList"  name="codeTypeId" placeholder="<@spring.message "sys.codeList.query.type.missing.message"/>..."  class="lion-combo form-control select2  " data-valueField="id"  data-textField="nameZh" data-URL="${base}/system/code/typecombox.json"></select>
 					</div>
 					<div class="col-md-2">
 						<a href="javascript:void(0)" id="btnQuery" class="btn blue">
@@ -143,7 +143,7 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label"><@spring.message "sys.codeList.form.type.text"/></label>
 													<div class="col-md-5">										 
-														<select  id="addCodeTypeList"  name="type" placeholder="<@spring.message "sys.codeList.query.type.missing.message"/>..."  class="lion-combo form-control select2  " data-valueField="id"  data-textField="nameZh" data-URL="${base}/system/code/typecombox.json"></select>
+														<select  id="addCodeTypeList"  name="codeTypeId" placeholder="<@spring.message "sys.codeList.query.type.missing.message"/>..."  class="lion-combo form-control select2  " data-valueField="id"  data-textField="nameZh" data-URL="${base}/system/code/typecombox.json"></select>
 													</div>
 												</div>
 												<div class="form-group">

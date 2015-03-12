@@ -170,7 +170,7 @@
 																<span class="btn default btn-file">
 																<span class="fileinput-new">
 																Select image </span>
-																<input id="image" name="image" type="file" data-url="changeimg.json" multiple>
+																<input id="image" name="image" type="file"/>
 																</span>
 															</div>
 														</div>

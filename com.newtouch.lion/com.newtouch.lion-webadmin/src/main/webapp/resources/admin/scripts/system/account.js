@@ -10,7 +10,7 @@ $(function () {
 		  $formimg=$('#formImg');//修改头像
     
 	//上传图片预览与剪裁
-	$('#image').uploadPreview({ DivShow: "imgdiv", ImgShow: "imgShow"}); 
+	$('#image').uploadPreview({ ImgShow: "imgShow"}); 
 	//基本信息验证表单
 	handleVForm($formuser,submitBaseInfoForm);
 	//修改头像验证表单

@@ -107,7 +107,7 @@ function successAddFrm(result,args){
     data:result,
     success:function(){
       addDialog.modal('toggle');
-      groupdg.datagrids('reload');
+      codelistdg.datagrids('reload');
     },
     msg:'添加编码列表未成功'
   });
@@ -119,7 +119,7 @@ function successEditFrm(result,args){
     data:result,
     success:function(){
         addDialog.modal('toggle');
-        groupdg.datagrids('reload');
+        codelistdg.datagrids('reload');
     },
     msg:'编辑编码列表未成功'
   });
