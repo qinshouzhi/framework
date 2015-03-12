@@ -17,7 +17,6 @@
 <link href="${base}/resources/global/css/combotree/combotree.css" rel="stylesheet" type="text/css" />
 <!--fileupload css-->
 <link href="${base}/resources/global/css/upload/uploadpicture.css" rel="stylesheet" type="text/css" />
-<link href="${base}/resources/global/css/upload/main.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/css/upload/demos.css" rel="stylesheet" type="text/css" />
 <!--Jcrop-->
 <link href="${base}/resources/global/plugins/jcrop/css/jquery.Jcrop.min.css" rel="stylesheet" type="text/css" />
