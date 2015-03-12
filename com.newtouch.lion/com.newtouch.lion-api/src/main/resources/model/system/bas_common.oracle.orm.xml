@@ -55,10 +55,11 @@
 	<!-- 系统参数 -->
 	<entity class="Parameter">
 		<table name="BAS_PARAMETER" />
+		<sequence-generator name="SEQ_BAS_PARAMETER_ID" 	sequence-name="SEQ_BAS_PARAMETER_ID"  allocation-size="1"/>
 		<attributes>
 			<id name="id">
 				<column name="BAS_PARAMETER_ID" unique="true" nullable="false" precision="11" scale="0" />
-				<generated-value strategy="IDENTITY" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_PARAMETER_ID" />
 			</id>
 			<basic name="type">
 				<column name="CATEGORY" length="30" nullable="true" />
@@ -83,11 +84,12 @@
 	<!-- 提示信息 -->
 	<entity class="TipText">
 		<table name="BAS_TIPTEXT" />
+		<sequence-generator name="SEQ_BAS_TIPTEXT_ID" 	sequence-name="SEQ_BAS_TIPTEXT_ID"  allocation-size="1"/>
 		<attributes>
 			<id name="id">
 				<column name="BAS_TIPTEXT_ID" unique="true" nullable="false"
 					precision="11" scale="0" />
-				<generated-value strategy="IDENTITY" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_TIPTEXT_ID" />
 			</id>
 			<basic name="tipTextKey">
 				<column name="TIP_TEXT_KEY" length="50" nullable="true" />
@@ -104,11 +106,12 @@
 	<!-- 通用编码类型 -->
 	<entity class="CodeType">
 		<table name="BAS_CODE_TYPE" />
+		<sequence-generator name="SEQ_BAS_CODE_TYPE_ID" 	sequence-name="SEQ_BAS_CODE_TYPE_ID"  allocation-size="1"/>
 		<attributes>
 			<id name="id">
 				<column name="BAS_CODE_TYPE_ID" unique="true" nullable="false"
 					precision="11" scale="0" />
-				<generated-value strategy="IDENTITY" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_CODE_TYPE_ID" />
 			</id>
 			<basic name="type">
 				<column name="CODE_TYPE" length="20" nullable="true" />
@@ -137,11 +140,12 @@
 	<!-- 通用编码列表 -->
 	<entity class="CodeList">
 		<table name="BAS_CODE_LIST" />
+		<sequence-generator name="SEQ_BAS_CODE_LIST_ID" 	sequence-name="SEQ_BAS_CODE_LIST_ID"  allocation-size="1"/>
 		<attributes>
 			<id name="id">
 				<column name="BAS_CODE_LIST_ID" unique="true" nullable="false"
 					precision="11" scale="0" />
-				<generated-value strategy="IDENTITY" />
+					<generated-value strategy="SEQUENCE" generator="SEQ_BAS_CODE_LIST_ID" />
 			</id>
 			<basic name="codeValue">
 				<column name="CODE_VALUE" length="256" nullable="true" />

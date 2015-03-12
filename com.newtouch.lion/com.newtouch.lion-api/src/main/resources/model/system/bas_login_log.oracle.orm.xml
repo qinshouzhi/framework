@@ -7,11 +7,12 @@
 	<access>PROPERTY</access>
 	<entity class="LoginLog">
 		<table name="bas_login_log" />
+		<sequence-generator name="SEQ_BAS_LOGIN_LOG_ID" 	sequence-name="SEQ_BAS_LOGIN_LOG_ID"  allocation-size="1"/>
 		<attributes>
 			<id name="id" >
 				<column name="BAS_LOGIN_LOG_ID" unique="true" nullable="false"
 					precision="11" scale="0" />
-				<generated-value strategy="IDENTITY" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_LOGIN_LOG_ID" />
 			</id>
 			<basic name="userId" >
 				<column name="BAS_USER_ID"  nullable="false" precision="11" scale="0"/>

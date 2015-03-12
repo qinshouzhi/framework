@@ -4,15 +4,15 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
 	version="2.0">
 	<package>com.newtouch.lion.model.system</package>
-	<access>PROPERTY</access>
-	
+	<access>PROPERTY</access>	
 	<entity class="DemoModel">
 		<table name="bas_demo" />
+		<sequence-generator name="SEQ_BAS_DEMO_ID" 	sequence-name="SEQ_BAS_DEMO_ID"  allocation-size="1"/>
 		<attributes>
 			<id name="id">
 				<column name="BAS_DEMO_ID" unique="true" nullable="false"
 					precision="11" scale="0" />
-				<generated-value strategy="IDENTITY" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_DEMO_ID" />
 			</id>
 			<basic name="nameZh">
 				<column name="NAME_ZH" length="30" nullable="true" />
