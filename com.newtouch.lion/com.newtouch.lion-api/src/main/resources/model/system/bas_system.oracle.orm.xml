@@ -8,11 +8,12 @@
 	<!-- 部门信息 -->
 	<entity class="Department">
 		<table name="BAS_DEPARTMENT" />
+		<sequence-generator name="SEQ_BAS_DEPARTMENT_ID" 	sequence-name="SEQ_BAS_DEPARTMENT_ID"  allocation-size="1"/>
 		<attributes>
 			<id name="id">
 				<column name="BAS_DEPARTMENT_ID" unique="true" nullable="false"
 					precision="11" scale="0" />
-				<generated-value strategy="IDENTITY" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_DEPARTMENT_ID" />
 			</id>
 			<basic name="parentDepartmentId">
 				<column name="PARENT_BAS_DEPARTMENT_ID" precision="11" scale="0"/>
@@ -51,11 +52,12 @@
 	<!-- 岗位信息 -->
 	<entity class="Position">
 		<table name="BAS_POSITION" />
+		<sequence-generator name="SEQ_BAS_POSITION_ID" 	sequence-name="SEQ_BAS_POSITION_ID"  allocation-size="1"/>
 		<attributes>
 			<id name="id">
 				<column name="BAS_POSITION_ID" unique="true" nullable="false"
 					precision="11" scale="0" />
-				<generated-value strategy="IDENTITY" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_POSITION_ID" />
 			</id>
 			<basic name="nameZh">
 				<column name="NAME_ZH" length="128" nullable="true" />
@@ -89,11 +91,12 @@
 	<!-- 系统用户登录 -->
 	<entity class="User">
 		<table name="BAS_USER" />
+		<sequence-generator name="SEQ_BAS_USER_ID" 	sequence-name="SEQ_BAS_USER_ID"  allocation-size="1"/>
 		<attributes>
 			<id name="id">
 				<column name="BAS_USER_ID" unique="true" nullable="false"
 					precision="11" scale="0" />
-				<generated-value strategy="IDENTITY" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_USER_ID" />
 			</id>
 			<basic name="departmentId">
 				<column name="BAS_DEPARTMENT_ID" precision="11" scale="0"
@@ -203,11 +206,12 @@
 	<!-- 用户组 -->
 	<entity class="Group">
 		<table name="BAS_GROUP" />
+		<sequence-generator name="SEQ_BAS_GROUP_ID" 	sequence-name="SEQ_BAS_GROUP_ID"  allocation-size="1"/>
 		<attributes>
 			<id name="id">
 				<column name="BAS_GROUP_ID" unique="true" nullable="false"
 					precision="11" scale="0" />
-				<generated-value strategy="IDENTITY" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_GROUP_ID" />
 			</id>
 			<basic name="nameZh">
 				<column name="NAME_ZH" length="128" nullable="true" />
@@ -244,11 +248,12 @@
 	<!-- 用户角色 -->
 	<entity class="Role">
 		<table name="BAS_ROLE" />
+		<sequence-generator name="SEQ_BAS_ROLE_ID" 	sequence-name="SEQ_BAS_ROLE_ID"  allocation-size="1"/>
 		<attributes>
 			<id name="id">
 				<column name="BAS_ROLE_ID" unique="true" nullable="false"
 					precision="11" scale="0" />
-				<generated-value strategy="IDENTITY" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_ROLE_ID" />
 			</id>
 			<basic name="nameZh">
 				<column name="NAME_ZH" length="128" nullable="true" />
@@ -294,11 +299,12 @@
 	<!-- 资源 -->
 	<entity class="Resource">
 		<table name="BAS_RESOURCE" />
+		<sequence-generator name="SEQ_BAS_RESOURCE_ID" 	sequence-name="SEQ_BAS_RESOURCE_ID"  allocation-size="1"/>
 		<attributes>
 			<id name="id">
 				<column name="BAS_RESOURCE_ID" unique="true" nullable="false"
 					precision="11" scale="0" />
-				<generated-value strategy="IDENTITY" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_RESOURCE_ID" />
 			</id>
 			<basic name="parentResourceId">
 				<column name="PARENT_BAS_RESOURCE_ID" precision="11" scale="0" />
@@ -360,11 +366,12 @@
 	<!-- 图标信息 -->
 	<entity class="Icon">
 		<table name="BAS_ICON" />
+		<sequence-generator name="SEQ_BAS_ICON_ID" 	sequence-name="SEQ_BAS_ICON_ID"  allocation-size="1"/>
 		<attributes>
 			<id name="id">
 				<column name="BAS_ICON_ID" unique="true" nullable="false"
 					precision="11" scale="0" />
-				<generated-value strategy="IDENTITY" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_ICON_ID" />
 			</id>
 			<basic name="iconType">
 				<column name="ICON_TYPE" length="255" nullable="true" />

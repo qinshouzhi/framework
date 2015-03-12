@@ -7,10 +7,11 @@
 	<access>PROPERTY</access>
 	<entity class="ApplicationProperty">
 		<table name="bas_app_properties" />
+		<sequence-generator name="SEQ_APP_PROPERTIES_ID" 	sequence-name="SEQ_APP_PROPERTIES_ID"  allocation-size="1"/>
 		<attributes>
 			<id name="id" access="PROPERTY">
 				<column name="APP_PROPERTIES_ID" unique="true" nullable="false" precision="11" scale="0" />
-				<generated-value strategy="IDENTITY" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_APP_PROPERTIES_ID" />
 			</id>
 			<basic name="appId" access="PROPERTY">
 				<column name="APP_ID" length="20" nullable="true" />
