@@ -23,7 +23,8 @@
 		<module>com.newtouch.lion-webadmin</module>
     	<module>com.newtouch.lion-mgt</module>
     	<module>com.newtouch.lion-webframework</module>
-	</modules>
+    <module>com.newtouch.lion-shiro</module>
+  </modules>
 	<distributionManagement>
 		<repository>
 			<id>releases</id>
