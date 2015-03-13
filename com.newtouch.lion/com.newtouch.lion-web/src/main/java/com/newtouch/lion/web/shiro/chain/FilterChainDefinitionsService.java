@@ -6,7 +6,9 @@
 */
 package com.newtouch.lion.web.shiro.chain; 
 
-import java.util.Map;
+import java.util.List;
+
+import com.newtouch.lion.web.shiro.model.AuthorityModel;
 
 /**
  * <p>
@@ -26,14 +28,15 @@ import java.util.Map;
  * @version 1.0
  */
 public interface FilterChainDefinitionsService {
-	 /** 初始化框架权限资源配置 */  
-    public abstract void intiPermission();
+	 /** 初始化框架权限资源配置 
+	 * @throws Exception */  
+    public abstract void initPermission() throws Exception;
     
     /** 重新加载框架权限资源配置 (强制线程同步) */  
     public abstract void updatePermission();
     
     /**始化第三方权限资源配置 */  
-    public abstract Map<String, String> initOtherPermission();
+    public abstract  List<AuthorityModel> initOtherPermission();
 }
 
 	

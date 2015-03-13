@@ -208,3 +208,8 @@
          window.open(url,'_blank');
      };
 }).call(lion,jQuery);
+
+/**全局请求错误*/
+function errorRequest(xhr,status,error){
+    util.error(defaultmsgs.title,'网络连接异常');
+}

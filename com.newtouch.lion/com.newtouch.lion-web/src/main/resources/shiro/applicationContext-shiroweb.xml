@@ -140,7 +140,7 @@
 	</bean>
 
     <!-- 动态加载数据配置权限及配置 -->
-	<bean  id="filterChainDefinitionManager" class="com.newtouch.lion.web.shiro.mgt.ShiroFilterChainDefinitionManager">
+	<bean  id="filterChainDefinitionManager" class="com.newtouch.lion.web.shiro.chain.ShiroFilterChainDefinitionManager">
 		<property name="filterChainDefinitions">
 			<value>
 				/resources/** = anon

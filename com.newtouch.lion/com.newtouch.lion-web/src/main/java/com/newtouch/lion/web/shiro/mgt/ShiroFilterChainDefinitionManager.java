@@ -6,7 +6,6 @@
  */
 package com.newtouch.lion.web.shiro.mgt;
 
-import java.text.MessageFormat;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -19,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.newtouch.lion.common.lang.StringFormatter;
 import com.newtouch.lion.web.shiro.constant.Constants;
 import com.newtouch.lion.web.shiro.model.AuthorityModel;
 import com.newtouch.lion.web.shiro.service.ShiroResouceService;
@@ -40,7 +40,7 @@ import com.newtouch.lion.web.shiro.service.ShiroResouceService;
  * @author WangLijun
  * @version 1.0
  */
-public class ShiroFilterChainDefinitionManager implements FactoryBean<Section> {
+public class ShiroFilterChainDefinitionManager  implements FactoryBean<Section> {
 	
 	/**日志*/
 	private static final Logger logger=LoggerFactory.getLogger(ShiroFilterChainDefinitionManager.class);
@@ -76,7 +76,7 @@ public class ShiroFilterChainDefinitionManager implements FactoryBean<Section> {
 		// 循环数据库资源的url
 		for (AuthorityModel authorityModel:resources) {
 			 StringBuffer sb=new StringBuffer();
-			sb.append(Constants.AUTHC);
+			 sb.append(Constants.AUTHC);
 			/***
 			 * 角色
 			 * */
@@ -89,7 +89,7 @@ public class ShiroFilterChainDefinitionManager implements FactoryBean<Section> {
 			 */
 			if(StringUtils.isNotEmpty(authorityModel.getPermissions())){
 				sb.append(",");
-				sb.append(this.format(Constants.PERMS_STRING,authorityModel.getPermissions()));
+				sb.append(StringFormatter.format(Constants.PERMS_STRING,authorityModel.getPermissions()));
 			}
 			logger.info("{} = {}",authorityModel.getUrl(),sb.toString());
 			section.put(authorityModel.getUrl(),sb.toString());
@@ -97,19 +97,9 @@ public class ShiroFilterChainDefinitionManager implements FactoryBean<Section> {
 		}
 		return section;
 	}
-	/***
-	 * 格式化URL
-	 * @param pattern 格式
-	 * @param arg 参数
-	 * @return 格式化后字符串
-	 */
-	private String  format(String pattern,String arg){
-		return MessageFormat.format(pattern,arg);
-	}
 	
 	@Override
 	public Class<?> getObjectType() {
-		// TODO Auto-generated method stub
 		return Section.class;
 	}
 

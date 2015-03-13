@@ -48,6 +48,7 @@ import com.newtouch.lion.web.controller.AbstractController;
 import com.newtouch.lion.web.model.QueryVo;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
+import com.newtouch.lion.web.shiro.chain.FilterChainDefinitionsService;
 import com.newtouch.lion.web.shiro.session.LoginSecurityUtil;
 
 /**
@@ -74,19 +75,22 @@ public class ResourceController extends AbstractController{
 	private final Logger logger = LoggerFactory.getLogger(super.getClass());
 	/**首页*/
 	private static final String INDEX_RETURN = "/system/resource/index";
-	
+	/**Excel导出表*/
 	private static final String INDEX_TREE_TB = "sys_resource_lists_tb";
  
 	/**资源Service*/
 	@Autowired
 	private TreeResourceService resourceService;
-
 	/**Excel通用导出*/
 	@Autowired
 	private ExcelExportService excelExportService;
 	/**DataGrid表格*/
 	@Autowired
 	private DataGridService dataGridService;
+	/***权限拦截更新*/
+	@Autowired
+	private FilterChainDefinitionsService filterChainDefinitionsService; 
+	
 
 	@RequestMapping(value = "add")
 	@ResponseBody
@@ -103,9 +107,17 @@ public class ResourceController extends AbstractController{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
 		modelAndView.addObject(BindMessage.SUCCESS, params);
+		this.updatePermission();
 		return this.getJsonView(modelAndView);
 	}
-
+	/***
+	 * 更新资源拦截器
+	 */
+	private void updatePermission(){
+		//TODO 集群更新 (单台更新)
+		filterChainDefinitionsService.updatePermission();
+	}
+	
 	@RequestMapping(value = "edit")
 	@ResponseBody
 	public ModelAndView edit(
@@ -130,6 +142,7 @@ public class ResourceController extends AbstractController{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS,ConstantMessage.EDIT_SUCCESS_MESSAGE_CODE);
 		modelAndView.addObject(BindMessage.SUCCESS, params);
+		this.updatePermission();
 		return this.getJsonView(modelAndView);
 	}
 
@@ -147,6 +160,7 @@ public class ResourceController extends AbstractController{
 		return this.getJsonView(modelAndView);
 	}
 
+	
 	@RequestMapping(value = "menutree")
 	@ResponseBody
 	public String menutree(HttpServletRequest request,@RequestParam Long resourceId, Model model) {
