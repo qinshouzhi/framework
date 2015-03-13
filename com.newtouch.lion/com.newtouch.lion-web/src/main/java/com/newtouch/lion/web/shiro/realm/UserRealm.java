@@ -32,6 +32,7 @@ import org.apache.shiro.util.SimpleByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.support.SimpleCacheManager;
 
 import com.newtouch.lion.common.user.UserInfo;
 import com.newtouch.lion.model.system.Resource;
@@ -67,6 +68,7 @@ public class UserRealm extends AuthorizingRealm {
 	/** 用户Service */
 	@Autowired
 	private UserService userService;
+ 
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(
@@ -179,9 +181,15 @@ public class UserRealm extends AuthorizingRealm {
 		this.getAuthenticationCache().clear();
 	} 
 	
+	/**清除所有缓存信息*/
 	public void clearAllCached(){
 		this.clearCachedAuthenticationInfo();
 		this.clearAllCachedAuthorizationInfo();
+	}
+	
+	@Override
+	protected void doClearCache(PrincipalCollection principals) {
+		 this.clearAllCached();
 	}
 
 	public static void main(String[] args) {
