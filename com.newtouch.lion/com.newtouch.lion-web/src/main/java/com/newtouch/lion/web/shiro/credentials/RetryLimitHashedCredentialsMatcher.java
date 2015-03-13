@@ -17,6 +17,7 @@ import org.apache.shiro.cache.CacheManager;
 
 import com.newtouch.lion.common.constant.Constants;
 
+
 /**
  * <p>
  * Title:用户登录密码校验
@@ -41,7 +42,7 @@ public class   RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatch
     private Integer retryMaxCount=Constants.PASSWORD_RETYR_MAXCOUNT;
     /**密码重试缓存*/
     public RetryLimitHashedCredentialsMatcher(CacheManager cacheManager) {
-        passwordRetryCache = cacheManager.getCache("passwordRetryCache");
+        passwordRetryCache = cacheManager.getCache(com.newtouch.lion.web.shiro.constant.Constants.PASSWORD_RERTY_CACHE);
     }
 
     @Override
