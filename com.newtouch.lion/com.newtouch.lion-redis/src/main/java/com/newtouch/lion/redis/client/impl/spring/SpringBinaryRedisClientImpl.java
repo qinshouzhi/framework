@@ -42,7 +42,7 @@ public class SpringBinaryRedisClientImpl<T> extends SpringRedisClientImpl implem
      * @param type 集合类型
      * @param <T> 泛型对象
      * @return 集合类型
-     * @see [相关类/方法](可选)
+
      * @since [产品/模块版本](可选)
      */
     @SuppressWarnings("hiding")

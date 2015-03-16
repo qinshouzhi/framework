@@ -13,14 +13,10 @@ import com.newtouch.lion.adpater.exception.AdapterException;
  * 〈功能详细描述〉
  *
  * @author wanglijun
- * @see [相关类/方法]（可选）
- * @since [产品/模块版本] （可选）
  */
 public abstract class Formatter {
-    /**
-     * 日志
-     * */
-    protected final Logger  logger=LoggerFactory.getLogger(super.getClass());
+	
+    protected  final Logger logger=LoggerFactory.getLogger(super.getClass());
     /**返回对象*/
     protected AdapterCommand  adapterCommand;
     /***
@@ -36,10 +32,8 @@ public abstract class Formatter {
      * 〈功能详细描述〉
      *
      * @param command
-     * @return
+     * @return Object
      * @throws AdapterException
-     * @see [相关类/方法](可选)
-     * @since [产品/模块版本](可选)
      */
     public abstract Object formateRequest(AdCommand command) throws AdapterException;
     /***
@@ -48,10 +42,8 @@ public abstract class Formatter {
      * 〈功能详细描述〉
      *
      * @param receiveObj
-     * @return
+     * @return AdapterCommand
      * @throws AdapterException
-     * @see [相关类/方法](可选)
-     * @since [产品/模块版本](可选)
      */
     public abstract AdapterCommand formateResponse(Object receiveObj) throws AdapterException;
 

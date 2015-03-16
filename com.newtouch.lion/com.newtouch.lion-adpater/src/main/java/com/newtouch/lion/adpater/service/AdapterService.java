@@ -12,7 +12,7 @@ import com.newtouch.lion.adpater.exception.AdapterException;
  * 〈功能详细描述〉
  *
  * @author wanglijun
- * @see [相关类/方法]（可选）
+
  * @since 接口/模块版本] （可选）
  */
 public interface AdapterService {
@@ -25,7 +25,7 @@ public interface AdapterService {
      * @param params  请求参数
      * @return AdapterBaseCommand 响应对象
      * @throws AdapterException 适配器异常 
-     * @see [相关类/方法](可选)
+
      * @since [产品/模块版本](可选)
      */
     public AdapterCommand sendCommand(String stransno,
@@ -40,7 +40,7 @@ public interface AdapterService {
      * @param command
      * @return
      * @throws AdapterException
-     * @see [相关类/方法](可选)
+
      * @since [产品/模块版本](可选)
      */
     public AdapterCommand sendCommand(String stransno, AdCommand command)

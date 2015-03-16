@@ -16,10 +16,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 /**
  * XML工具 <br> 
  * 〈功能详细描述〉
- *
  * @author wanglijun
- * @see [相关类/方法]（可选）
- * @since [产品/模块版本] （可选）
  */
 public final class XMLUtil {
     /***
@@ -29,7 +26,7 @@ public final class XMLUtil {
      *
      * @param obj
      * @return
-     * @see [相关类/方法](可选)
+
      * @since [产品/模块版本](可选)
      */
     public static Document getDocument(Object obj){
@@ -47,7 +44,6 @@ public final class XMLUtil {
     /**
      *  将传入xml文本转换成Java对象
      * @Title: toBean 
-     * @Description: TODO 
      * @param xmlStr
      * @param cls  xml对应的class类
      * @return T   xml对应的class类的实例对象
@@ -69,8 +65,6 @@ public final class XMLUtil {
      * 〈功能详细描述〉
      * @param obj
      * @return
-     * @see [相关类/方法](可选)
-     * @since [产品/模块版本](可选)
      */
     public static String toXml(Object obj){
         XStream xstream=new XStream(new DomDriver(Charset.UFT8.code()));

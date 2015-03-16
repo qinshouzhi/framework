@@ -19,7 +19,7 @@ import com.newtouch.lion.adpater.util.JSONParser;
 
  
 public abstract class AbstractAdapterService implements  AdapterService{
-    /**日志类*/
+	
     protected final Logger logger=LoggerFactory.getLogger(super.getClass());
     /**连接器*/
     private Connector connector;
@@ -32,10 +32,8 @@ public abstract class AbstractAdapterService implements  AdapterService{
      *
      * @param stransno 交易号
      * @param params 参数
-     * @return
+     * @return  AdCommand
      * @throws AdapterException
-     * @see [相关类/方法](可选)
-     * @since [产品/模块版本](可选)
      */
     protected abstract AdCommand normalize(String stransno,LinkedHashMap<Object, Object> params) throws AdapterException;
     /***
@@ -44,9 +42,9 @@ public abstract class AbstractAdapterService implements  AdapterService{
      * 〈功能详细描述〉
      *
      * @param stransno
-     * @return
+     * @return AdCommand
      * @throws AdapterException
-     * @see [相关类/方法](可选)
+
      * @since [产品/模块版本](可选)
      */
     protected abstract AdCommand normalize(String stransno) throws AdapterException;
@@ -55,24 +53,19 @@ public abstract class AbstractAdapterService implements  AdapterService{
      * 功能描述: <br>
      * 〈功能详细描述〉
      *
-     * @param adCommand
-     * @return
+     * @param command
+     * @return AdCommand
      * @throws AdapterException
-     * @see [相关类/方法](可选)
-     * @since [产品/模块版本](可选)
      */
     protected abstract AdCommand normalize(AdCommand command) throws AdapterException;
     /***
      * 
      * 功能描述:构建解析类 <br>
      * 〈功能详细描述〉
-     *
      * @param className 构建类
      * @param args 参数
-     * @return
+     * @return AdCommand
      * @throws AdapterException
-     * @see [相关类/方法](可选)
-     * @since [产品/模块版本](可选)
      */
     protected abstract Formatter getFormatter(String className, Object[] args) throws AdapterException;
     /**

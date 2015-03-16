@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
  * 接口抽像连接类
  * 
  * @author wanglijun
- * @see [相关类/方法]（可选）
+
  * @since [产品/模块版本] （可选）
  */
 public abstract class AbstractConnector implements Connector {

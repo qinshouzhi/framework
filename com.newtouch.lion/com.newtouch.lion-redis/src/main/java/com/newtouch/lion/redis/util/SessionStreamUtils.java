@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
  * 〈功能详细描述〉
  * 
  * @author v_leihong
- * @see [相关类/方法]（可选）
+
  * @since [产品/模块版本] （可选）
  */
 public class SessionStreamUtils {
@@ -43,7 +43,7 @@ public class SessionStreamUtils {
      * @param obj obj
      * @return byte
      * @throws IOException io exception
-     * @see [相关类/方法](可选)
+
      * @since [产品/模块版本](可选)
      */
     public static byte[] objectToByteArray(Object obj) throws IOException {
@@ -76,7 +76,7 @@ public class SessionStreamUtils {
      * @param bytes bytes
      * @return object
      * @throws IOException ioexception
-     * @see [相关类/方法](可选)
+
      * @since [产品/模块版本](可选)
      */
     public static Object byteArrayToObject(byte[] bytes) throws IOException {
