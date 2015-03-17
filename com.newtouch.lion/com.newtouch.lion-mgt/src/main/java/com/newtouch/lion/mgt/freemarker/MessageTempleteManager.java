@@ -6,8 +6,8 @@
  */
 package com.newtouch.lion.mgt.freemarker;
 
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringWriter;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -60,12 +60,11 @@ public class MessageTempleteManager {
 		return tplm.cfg.getTemplate(name);
 	}
 
-	public static void process(String templateName, Object dataModel,String outPath)
+	public static String process(String templateName, Object dataModel)
 			throws IOException, TemplateException {
 		Template template = MessageTempleteManager.getTemplate(templateName);
-		FileWriter sw = new FileWriter(outPath+"/pom.xml");
+		StringWriter sw =new StringWriter();
 		template.process(dataModel, sw);
-		sw.flush();
-		sw.close();
+		return sw.toString();
 	}
 }

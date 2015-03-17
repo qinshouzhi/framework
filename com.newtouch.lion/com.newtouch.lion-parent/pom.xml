@@ -67,6 +67,11 @@
 			<!-- lion Start -->
 			<dependency>
 				<groupId>com.newtouch.lion</groupId>
+				<artifactId>com.newtouch.lion-adpater</artifactId>
+				<version>${lion-adpater.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.newtouch.lion</groupId>
 				<artifactId>com.newtouch.lion-api</artifactId>
 				<version>${lion-api.version}</version>
 			</dependency>

@@ -1,26 +1,29 @@
 /*
- * Copyright (c)  2015, Newtouch
- * All rights reserved. 
- *
- * $id: Test.java 9552 2015年3月11日 上午11:10:11 WangLijun$
- */
-package com.newtouch.lion.mgt.freemarker;
+* Copyright (c)  2015, Newtouch
+* All rights reserved. 
+*
+* $id: GitLabServiceTest.java 9552 2015年3月17日 下午3:20:57 WangLijun$
+*/
+package com.newtouch.lion.mgt; 
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.newtouch.lion.mgt.gitlab.GitLabService;
 import com.newtouch.lion.mgt.model.Dependency;
 import com.newtouch.lion.mgt.model.PomModel;
 
-import freemarker.template.TemplateException;
-
 /**
  * <p>
- * Title:
+ * Title: 
  * </p>
  * <p>
- * Description:
+ * Description: 
  * </p>
  * <p>
  * Copyright: Copyright (c) 2015
@@ -32,17 +35,21 @@ import freemarker.template.TemplateException;
  * @author WangLijun
  * @version 1.0
  */
-public class Test {
-	public static void main(String[] args) throws IOException, TemplateException {
-		
-		String outPath="D:/applog/lion/test_demo";
-		String pomTemplate="pom_template.xml";
-		PomModel pomModel = new PomModel();
-		pomModel.setArtifactId("com.newtouch.lion-demo");
+public class GitLabServiceTest extends AllTests{
+	String pomTemplate="pom_template.xml";
+	PomModel pomModel;
+	@Autowired
+	private GitLabService gitLabService;
+	
+	@Before
+	public void initPom(){
+	
+		pomModel = new PomModel();
+		pomModel.setArtifactId("com.newtouch.lion-demo1");
 		pomModel.setGroupId("com.newtouch.lion");
 		pomModel.setVersion("0.0.1-SNAPSHOT");
 		pomModel.setUrl("http:/www.newtouchone.com/");
-		pomModel.setName("com.newtouch.lion-demo");
+		pomModel.setName("com.newtouch.lion-demo1");
 	 
 		//Pom继承
 		Dependency parent=new Dependency();
@@ -88,9 +95,18 @@ public class Test {
 		dependencies.add(web);
 		//显示依赖
 		pomModel.setDependencies(dependencies);
-		
-		String pomStr=MessageTempleteManager.process(pomTemplate, pomModel);
-		System.out.println(pomStr);
-
+	}
+	
+	@Test
+	public void createProject() throws IOException{
+		String xml=gitLabService.createPomXML(pomModel);
+		Integer  userId=gitLabService.currentUserId();
+		Integer  projectId=gitLabService.createProject(userId, pomModel.getArtifactId());
+		if(projectId!=null){
+			System.out.println(projectId);
+			gitLabService.addPomFile(projectId,xml);
+		}
 	}
 }
+
+	

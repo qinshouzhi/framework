@@ -34,8 +34,7 @@ public interface ApplicationInfoService {
 	/***
 	 * 获取应用基本信息
 	 * 
-	 * @param Map
-	 *            <String,String> params
+	 * @param Map   <String,String> params
 	 * @return {@link ApplicationInfo}
 	 */
 	public ApplicationInfo getApplicationInfo(Map<String, String> params);
