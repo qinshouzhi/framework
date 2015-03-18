@@ -34,14 +34,15 @@ import freemarker.template.TemplateException;
  */
 public class Test {
 	public static void main(String[] args) throws IOException, TemplateException {
+		
 		String outPath="D:/applog/lion/test_demo";
 		String pomTemplate="pom_template.xml";
 		PomModel pomModel = new PomModel();
 		pomModel.setArtifactId("com.newtouch.lion-demo");
 		pomModel.setGroupId("com.newtouch.lion");
-		pomModel.setVersion("0.0.1");
-		pomModel.setUrl("http:/www.newtouch.one/");
-		pomModel.setName("com.newtouch.lion-mgt");
+		pomModel.setVersion("0.0.1-SNAPSHOT");
+		pomModel.setUrl("http:/www.newtouchone.com/");
+		pomModel.setName("com.newtouch.lion-demo");
 	 
 		//Pom继承
 		Dependency parent=new Dependency();
@@ -88,7 +89,8 @@ public class Test {
 		//显示依赖
 		pomModel.setDependencies(dependencies);
 		
-		MessageTempleteManager.process(pomTemplate, pomModel,outPath);
+		String pomStr=MessageTempleteManager.process(pomTemplate, pomModel);
+		System.out.println(pomStr);
 
 	}
 }

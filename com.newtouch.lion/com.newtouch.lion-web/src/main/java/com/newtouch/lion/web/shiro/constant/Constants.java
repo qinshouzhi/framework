@@ -41,6 +41,8 @@ public class Constants {
 	public static final String LOGIN_FORCE_ERROR="1";
 	/**控制并发缓存名称*/
 	public static final String CACHE_SESSION_NAME="shiroSessionController";
+	/**密码重试次数缓存*/
+	public static final String PASSWORD_RERTY_CACHE="passwordRetryCache";
 	/**授权访问-authc*/
 	public static final String AUTHC="authc";
 	/**角色-roles*/

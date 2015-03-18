@@ -12,7 +12,7 @@ import com.newtouch.lion.adpater.http.ContentType;
  * A车站网站-服务接口连接类 <br> 
  *
  * @author yzq
- * @see [相关类/方法]（可选）
+
  * @since [产品/模块版本] （可选）
  */
 public class ACZWebConnector extends AbstractConnector {

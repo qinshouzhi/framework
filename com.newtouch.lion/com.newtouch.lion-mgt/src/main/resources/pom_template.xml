@@ -7,7 +7,6 @@
 		<groupId>${parent.groupId}</groupId>
 		<artifactId>${parent.artifactId}</artifactId>
 		<version>${parent.version}</version>
-		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
 	<groupId>${groupId}</groupId>
 	<artifactId>${artifactId}</artifactId>

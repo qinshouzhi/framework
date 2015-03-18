@@ -6,7 +6,7 @@ package com.newtouch.lion.adpater.exception;
  * 定义接口连接错误、连接成功、
  *
  * @author wanglijun
- * @see [相关类/方法]（可选）
+
  * @since [产品/模块版本] （可选）
  */
 public enum ErrorCode implements Code<String, String>{

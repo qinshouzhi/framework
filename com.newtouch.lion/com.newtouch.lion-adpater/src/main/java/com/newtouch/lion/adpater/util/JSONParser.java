@@ -101,13 +101,10 @@ public class JSONParser implements Serializable {
 	/***
 	 * 
 	 * 功能描述:将jsonString字符串转换为对象 <br>
-	 * 〈功能详细描述〉
-	 *
+	 * 〈功能详细描述〉	 *
 	 * @param jsonStr
 	 * @param clazz
-	 * @return
-	 * @see [相关类/方法](可选)
-	 * @since [产品/模块版本](可选)
+	 * @return T 
 	 */
 	public static <T> T  toStringObject(String jsonStr,Class<T> clazz){
 	     return JSON.parseObject(jsonStr, clazz);

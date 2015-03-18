@@ -23,7 +23,6 @@ import com.newtouch.lion.adpater.util.XMLUtil;
  * 〈功能详细描述〉
  * 
  * @author wanglijun
- * @see [相关类/方法]（可选）
  * @since [产品/模块版本] （可选）
  */
 public abstract class FormatterBaseXML extends Formatter {
@@ -62,8 +61,7 @@ public abstract class FormatterBaseXML extends Formatter {
      *
      * @param classSimpleName
      * @param strXML
-     * @return
-     * @see [相关类/方法](可选)
+     * @return String
      * @since [产品/模块版本](可选)
      */
     protected String loadXMLForClass(String classSimpleName,String strXML){
@@ -113,8 +111,7 @@ public abstract class FormatterBaseXML extends Formatter {
      * 〈功能详细描述〉
      * 
      * @param strXML
-     * @return
-     * @see [相关类/方法](可选)
+     * @return String
      * @since [产品/模块版本](可选)
      */
     protected String parseReturnContent(String strXML) {
@@ -135,8 +132,7 @@ public abstract class FormatterBaseXML extends Formatter {
      * 功能描述:用于解析报文返回成功或失败的标识值 〈功能详细描述〉
      * 
      * @param strXML
-     * @return
-     * @see [相关类/方法](可选)
+     * @return String
      * @since [产品/模块版本](可选)
      */
     protected String parseReturnValue(String strXML) {
@@ -153,9 +149,8 @@ public abstract class FormatterBaseXML extends Formatter {
      * 功能描述: 用于解析<result>的XML文件</result><br>
      * 〈功能详细描述〉
      *
-     * @param xml
-     * @return
-     * @see [相关类/方法](可选)
+     * @param strXML
+     * @return  String
      * @since [产品/模块版本](可选)
      */
     protected String parseResultValue(String strXML) {

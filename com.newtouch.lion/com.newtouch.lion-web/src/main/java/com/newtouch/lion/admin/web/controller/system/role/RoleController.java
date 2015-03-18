@@ -140,7 +140,7 @@ public class RoleController extends AbstractController{
 					"sys.role.form.nameen.existed.message",
 					new Object[] { roleVo.getNameEn() }, null);
 		}
-		System.out.println(roleVo.getEditable()+"==========================================");
+
 		//是否错误消息
 		if (errors.hasErrors()) {
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);

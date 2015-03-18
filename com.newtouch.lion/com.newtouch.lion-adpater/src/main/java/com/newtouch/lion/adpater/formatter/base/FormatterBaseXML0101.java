@@ -21,8 +21,6 @@ import com.newtouch.lion.adpater.util.XMLUtil;
  * 用户注册请求KEY
  *
  * @author wanglijun
- * @see [相关类/方法]（可选）
- * @since [产品/模块版本] （可选）
  */
 public class FormatterBaseXML0101  extends  FormatterBaseXML{
 	

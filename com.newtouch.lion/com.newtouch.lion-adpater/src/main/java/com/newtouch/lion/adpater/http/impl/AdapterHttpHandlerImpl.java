@@ -30,7 +30,7 @@ import com.newtouch.lion.adpater.http.ResultType;
  * Http Client连接实类
  * 
  * @author wanglijun
- * @see [相关类/方法]（可选）
+
  * @since [产品/模块版本] （可选）
  */
 public class AdapterHttpHandlerImpl implements AdapterHttpHandler {
@@ -103,7 +103,7 @@ public class AdapterHttpHandlerImpl implements AdapterHttpHandler {
      * 〈功能详细描述〉
      *
      * @return
-     * @see [相关类/方法](可选)
+
      * @since [产品/模块版本](可选)
      */
     protected RequestConfig requestConfig() {
