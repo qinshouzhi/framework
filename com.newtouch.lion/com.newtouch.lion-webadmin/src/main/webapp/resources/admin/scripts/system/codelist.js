@@ -37,14 +37,14 @@ $(function () {
     $('#btnEdit').click(function(){
         var row=codelistdg.datagrids('getSelected');
         if(!row){
-       lion.util.info('提示','请选择要编辑记录');
-       return;
-    }
-    addForm.reset();
-    addDialog.find('.modal-header h4 span').text('编辑编码列表');
-    addDialog.modal('toggle');
-    addForm.fill(row);
-    $('#addCodeTypeList').combo('val',[row.codeTypeId]);  
+	       lion.util.info('提示','请选择要编辑记录');
+	       return;
+	    }
+	    addForm.reset();
+	    addDialog.find('.modal-header h4 span').text('编辑编码列表');
+	    addDialog.modal('toggle');
+	    addForm.fill(row);
+	    $('#addCodeTypeList').combo('val',[row.codeTypeId]);  
     });
 
      //删除

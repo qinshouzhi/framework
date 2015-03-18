@@ -6,7 +6,7 @@ $(function () {
 	Metronic.init(); // init metronic core componets
 	Layout.init(); // init layout
 	Tasks.initDashboardWidget(); // init tash dashboard widget
-  lion.util.menu();//加载导航栏
+	lion.util.menu();//加载导航栏
 
 	roledg=$("#sys_rolelist_tb");
 	addForm=$('#sysRoleForm');
@@ -231,8 +231,8 @@ $(function () {
 	//添加
     $('#btnAdd').click(function(){
       	addForm.reset();
-	 	    addDialog.find('.modal-header h4 span').text('添加角色');
-		    return;
+	 	addDialog.find('.modal-header h4 span').text('添加角色');
+		return;
     });
 
     //编辑
@@ -251,13 +251,13 @@ $(function () {
   //删除
 	$('#btnDelete').on('click',function(){
 		var row=roledg.datagrids('getSelected');
-    lion.web.deletefn({
-        url:'delete.json',
-        data:row,
-        unselectedmsg:'请选择要删除记录',
-        confirmmsg:'确认要删除此记录？',
-        success:successForDelete,
-    });
+	    lion.web.deletefn({
+	        url:'delete.json',
+	        data:row,
+	        unselectedmsg:'请选择要删除记录',
+	        confirmmsg:'确认要删除此记录？',
+	        success:successForDelete,
+	    });
 	});
 	//导出Excel
 	$('#btnExport').on('click',function(){

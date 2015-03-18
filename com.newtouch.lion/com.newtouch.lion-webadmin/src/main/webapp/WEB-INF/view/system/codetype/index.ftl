@@ -23,7 +23,6 @@
 <!-- DataTables js End -->
 <script src="${base}/resources/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/bootstrap-toastr/toastr.min.js"></script>
-<script src="${base}/resources/admin/pages/scripts/ui-toastr.js"></script>
 <script src="${base}/resources/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/select2/select2.min.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/select2/select2_locale_zh-CN.js"></script>
