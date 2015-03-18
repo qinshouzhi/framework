@@ -384,4 +384,37 @@
 			</basic>
 		</attributes>
 	</entity>
+	<!-- 日历信息 -->
+	<entity class="Calendar">
+		<table name="BAS_CALENDAR" />
+		<sequence-generator name="SEQ_BAS_CALENDAR_ID" 	sequence-name="SEQ_BAS_CALENDAR_ID"  allocation-size="1"/
+		<attributes>
+			<id name="id">
+				<column name="BAS_CALENDAR_ID" unique="true" nullable="false"
+					precision="11" scale="0" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_BAS_CALENDAR_ID" />
+			</id>
+			<basic name="event">
+				<column name="EVENT" length="255" nullable="false" />
+			</basic>
+			<basic name="startdate">
+				<column name="STARTDATE" precision="1" scale="0" nullable="false" />
+			</basic>
+			<basic name="starttime">
+				<column name="STARTTIME" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="enddate">
+				<column name="ENDDATE" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="endtime">
+				<column name="ENDTIME" precision="1" scale="0" nullable="true" />
+			</basic>
+			<basic name="allday">
+				<column name="ALLDAY" length="1" nullable="false" />
+			</basic>
+			<many-to-one name="user" fetch="LAZY">
+				<join-column name="BAS_USER_ID" nullable="false" />
+			</many-to-one>	
+		</attributes>
+	</entity>
 </entity-mappings>
