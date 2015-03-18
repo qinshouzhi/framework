@@ -7,7 +7,7 @@
     <artifactId>com.newtouch.lion</artifactId>
     <version>0.0.2-SNAPSHOT</version>
   </parent>
-  <groupId>com.newtouch.lion-shiro</groupId>
+  <groupId>com.newtouch.lion</groupId>
   <artifactId>com.newtouch.lion-shiro</artifactId>
   <version>0.0.2-SNAPSHOT</version>
   <name>com.newtouch.lion-shiro</name>
