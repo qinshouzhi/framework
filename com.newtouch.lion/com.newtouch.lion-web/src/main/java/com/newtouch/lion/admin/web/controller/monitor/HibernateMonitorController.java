@@ -44,8 +44,8 @@ import com.newtouch.lion.web.controller.AbstractController;
  * @version 1.0
  */
 @Controller
-@RequestMapping("/montior/hibernate")
-public class HibernateMontiorController extends AbstractController{
+@RequestMapping("/monitor/hibernate")
+public class HibernateMonitorController extends AbstractController{
 	
 	/***
 	 * Hibernate 监控服务类
@@ -58,7 +58,7 @@ public class HibernateMontiorController extends AbstractController{
 	/***
 	 * Hibernate监控首页
 	 */
-	private static final String INDEX_RETRUN="/montior/hibernate/index";
+	private static final String INDEX_RETRUN="/monitor/hibernate/index";
 	
 	@RequestMapping(value="/index",method=RequestMethod.GET)
 	public String index(Model model){

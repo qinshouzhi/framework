@@ -37,19 +37,19 @@ import com.newtouch.lion.web.controller.AbstractController;
  * @version 1.0
  */
 @Controller
-@RequestMapping("/montior/jvm")
-public class JvmMontiorController extends AbstractController{
+@RequestMapping("/monitor/jvm")
+public class JvmMonitorController extends AbstractController{
 	
 	@Autowired
 	private JvmMontiorService jvmMontiorService;	
 	/****
 	 * JVM监控
 	 */
-	private static final String INDEX_RETURN="/montior/jvm/index";
+	private static final String INDEX_RETURN="/monitor/jvm/index";
 	/**内存监控*/
-	private static final String MEMORY_RETURN="/montior/jvm/memory";
+	private static final String MEMORY_RETURN="/monitor/jvm/memory";
 	/**JVM线程监控*/
-	private static final String THREAD_RETURN="/montior/jvm/thread";
+	private static final String THREAD_RETURN="/monitor/jvm/thread";
 	/***
 	 * JVM Runtime监控信息及操作信息
 	 * @param model

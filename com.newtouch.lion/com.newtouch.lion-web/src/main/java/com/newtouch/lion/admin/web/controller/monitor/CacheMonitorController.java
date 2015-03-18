@@ -34,15 +34,15 @@ import com.newtouch.lion.web.controller.AbstractController;
  * @version 1.0
  */
 @Controller
-@RequestMapping("/montior/cache")
-public class CacheMontiorController extends AbstractController{
+@RequestMapping("/monitor/cache")
+public class CacheMonitorController extends AbstractController{
 	
 	@Autowired
 	private ApplicationCacheManager applicationCacheManager;
 	/***
 	 *缓存监控首页
 	 */
-	private static final String INDEX_RETRUN="/montior/cache/index";
+	private static final String INDEX_RETRUN="/monitor/cache/index";
 	
 	@RequestMapping(value="/index",method=RequestMethod.GET)
 	public String index(Model model){
