@@ -9,7 +9,6 @@
 		<version>0.0.2-SNAPSHOT</version>
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
-	<groupId>com.newtouch.lion-redis</groupId>
 	<artifactId>com.newtouch.lion-redis</artifactId>
 	<version>${lion-redis.version}</version>
 	<name>com.newtouch.lion-redis</name>
