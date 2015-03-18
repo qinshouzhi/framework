@@ -392,7 +392,7 @@
 				<generated-value strategy="IDENTITY" />
 			</id>
 			<basic name="event">
-				<column name="EVENT" length="255" nullable="false" />
+				<column name="EVENT_NAME" length="255" nullable="false" />
 			</basic>
 			<basic name="startdate">
 				<column name="STARTDATE" precision="1" scale="0" nullable="false" />
