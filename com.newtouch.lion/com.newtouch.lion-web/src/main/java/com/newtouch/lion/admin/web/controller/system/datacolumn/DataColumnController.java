@@ -18,7 +18,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +37,7 @@ import com.newtouch.lion.service.datagrid.DataColumnService;
 import com.newtouch.lion.service.datagrid.DataGridService;
 import com.newtouch.lion.service.excel.ExcelExportService;
 import com.newtouch.lion.web.controller.AbstractController;
+import com.newtouch.lion.web.model.QueryDt;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
 
@@ -66,10 +66,6 @@ public class DataColumnController extends AbstractController{
 	private static final String DEFAULT_ORDER_FILED_NAME = "id";
 	/** 首页返回路径 */
 	private static final String INDEX_RETURN = "system/datacolumn/index";
-	/** 新增对话返回路径 */
-	private static final String ADD_DIALOG_RETURN = "system/datacolumn/adddialog";
-	/** 修改对话返回路径 */
-	private static final String EDIT_DIALOG_RETURN = "system/datacolumn/editdialog";
 	/** 首页显示列表名称 */
 	@SuppressWarnings("unused")
 	private static final String INDEX_TB = "datacolumn_tb";
@@ -82,11 +78,7 @@ public class DataColumnController extends AbstractController{
 	@Autowired
 	private ExcelExportService excelExportService;
 	
-	/** 新增的对话框 */
-	@RequestMapping(value = "adddialog")
-	public String addDialog() {
-		return ADD_DIALOG_RETURN;
-	}
+ 
 
 	/** 删除 */
 	@RequestMapping(value = "delete")
@@ -130,17 +122,7 @@ public class DataColumnController extends AbstractController{
 		return this.getJsonView(modelAndView);
 	}
 
-	/** 编辑对话框 */
-	@RequestMapping(value = "editdialog")
-	public String editDialog(@RequestParam Long id, Model model) {
-		if (id != null) {
-			DataColumn dataColumn = this.dataColumnService.doGetById(id);
-			model.addAttribute("dataColumn", dataColumn);
-		} else {
-			logger.error("Eidt Object id is not null!");
-		}
-		return EDIT_DIALOG_RETURN;
-	}
+ 
 
 	/** 编辑 */
 	@RequestMapping(value = "edit")
@@ -189,27 +171,19 @@ public class DataColumnController extends AbstractController{
 	/** 列表显示 */
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public DataTable<DataColumn> lists(HttpServletRequest servletRequest, Model model,
-			@RequestParam(defaultValue = "1") int page,
-			@RequestParam(defaultValue = "15") int rows,
-			@RequestParam(required = false) String sort,
-			@RequestParam(required = false) String order,
-			@RequestParam(required = false) String name,
-			@RequestParam(required = false) Long dataGridId,
-			@ModelAttribute("dataColumn") DataColumnVo dataColumnVo) {
+	public DataTable<DataColumn> lists(QueryDt query,@ModelAttribute("dataColumn") DataColumnVo dataColumnVo) {
 		QueryCriteria queryCriteria = new QueryCriteria();
-
 		// 设置分页 启始页
-		queryCriteria.setStartIndex(rows * (page - 1));
+		queryCriteria.setStartIndex(query.getPage());
 		// 每页大小
-		queryCriteria.setPageSize(rows);
+		queryCriteria.setPageSize(query.getRows());
 		// 设置排序字段及排序方向
-		if (StringUtils.isNotEmpty(sort) && StringUtils.isNotEmpty(order)) {
-			queryCriteria.setOrderField(sort);
-			queryCriteria.setOrderDirection(order);
+		if (StringUtils.isNotEmpty(query.getSort()) && StringUtils.isNotEmpty(query.getOrder())) {
+			queryCriteria.setOrderField(query.getSort());
+			queryCriteria.setOrderDirection(query.getOrder());
 		} else {
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
-			queryCriteria.setOrderDirection("ASC");
+			queryCriteria.setOrderDirection(QueryCriteria.ASC);
 		}
 		//查询条件 dataGirdId按模糊查询
 		if(dataColumnVo.getDataGridId() != null){
@@ -220,9 +194,9 @@ public class DataColumnController extends AbstractController{
 			queryCriteria.addQueryCondition("name", "%"+dataColumnVo.getName()+"%");
 		}
 
-		PageResult<DataColumn> pageResult = dataColumnService
-				.doFindByCriteria(queryCriteria);
-		return pageResult.getDataTable();
+		PageResult<DataColumn> pageResult = dataColumnService.doFindByCriteria(queryCriteria);
+		
+		return pageResult.getDataTable(query.getRequestId());
 	}
 	
 	/*add by maojiawei*/

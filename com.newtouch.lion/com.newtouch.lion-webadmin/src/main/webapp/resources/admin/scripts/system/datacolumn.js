@@ -3,6 +3,7 @@ $(function() {
 	Metronic.init(); // init metronic core componets
 	Layout.init(); // init layout
 	Tasks.initDashboardWidget(); // init tash dashboard widget
+  lion.util.menu();//加载导航栏
 	
 	var datagridId='#datacolumn_tb';
 	var addForm=$('#sysDataColumnForm');
@@ -11,12 +12,8 @@ $(function() {
 	
 	handleVForm(addForm,submitForm);
 	//选择DataGrid单行
-	function getSelectedRow(){return $(datagridId).datagrid('getSelected');}
+	function getSelectedRow(){return $(datagridId).datagrids('getSelected');}
 	 
-	$(datagridId).datagrid({
-		 onLoadSuccess : function(data) {
-		}
-	});
 	
 	/**
 	 * [查询]
@@ -284,21 +281,22 @@ handleVForm=function(vForm,submitCallBackfn){
 };
 //获取下拉列表数据
 /**sys_code_type 加载列表*/
-function formatterCodeList(val,row) {
-	var codeText='',data=$('#dataGridList').combo('getData');
-	for (var i in data) {
-		if (data[i].codeValue ==val) {
-			codeText = data[i].nameZh;
-			break;
-		}
-	}
-	return codeText;
+function formatterDataGridTitle(val,type,row) {
+	return row.dataGrid.title;
+}
+
+function formatterSortable(val,type,row){
+  var name =lion.lang.editable.n;
+  if (val) {
+    name = lion.lang.editable.y;
+  }
+  return name; 
 }
 //判断是否编辑
 function formatterEidtable(val,row) {
-	var name =$.lion.lang.editable.n;
+	var name =lion.lang.editable.n;
 	if (val) {
-		name = $.lion.lang.editable.y;
+		name = lion.lang.editable.y;
 	}
 	return name;
 }

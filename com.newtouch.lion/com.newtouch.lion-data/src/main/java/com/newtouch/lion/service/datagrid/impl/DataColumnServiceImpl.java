@@ -194,7 +194,9 @@ public class DataColumnServiceImpl extends AbstractService implements
 		PageResult<DataColumn> pageResult = this.dataColumnDao.query(hql,
 				HqlUtils.generateCountHql(hql, null), params, startIndex,
 				pageSize);
-
+		for(DataColumn  dataColumn:pageResult.getContent()){
+			 dataColumn.getDataGrid().getTitle();
+		}
 		return pageResult;
 	}
 
