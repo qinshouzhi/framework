@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.newtouch.lion.hibernate.HibernateUtils;
 import com.newtouch.lion.model.montior.jvm.MemoryUsage;
-import com.newtouch.lion.service.montior.HibernateMontiorService;
-import com.newtouch.lion.service.montior.JvmMontiorService;
+import com.newtouch.lion.service.monitor.HibernateMonitorService;
+import com.newtouch.lion.service.monitor.JvmMonitorService;
 import com.newtouch.lion.web.controller.AbstractController;
 
 /**
@@ -51,10 +51,10 @@ public class HibernateMonitorController extends AbstractController{
 	 * Hibernate 监控服务类
 	 */
 	@Autowired
-	private HibernateMontiorService hibernateMontiorService;
+	private HibernateMonitorService hibernateMontiorService;
 	/**JVM监控服务*/
 	@Autowired 
-	private JvmMontiorService jvmMontiorService;
+	private JvmMonitorService jvmMontiorService;
 	/***
 	 * Hibernate监控首页
 	 */

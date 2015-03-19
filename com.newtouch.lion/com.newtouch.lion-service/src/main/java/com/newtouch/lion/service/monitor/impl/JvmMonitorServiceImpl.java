@@ -4,7 +4,7 @@
 *
 * $id: JvmMontiorServiceImpl.java 9552 2015年2月28日 下午3:05:15 WangLijun$
 */
-package com.newtouch.lion.service.montior.impl; 
+package com.newtouch.lion.service.monitor.impl; 
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
 import java.lang.management.RuntimeMXBean;
@@ -21,7 +21,7 @@ import com.newtouch.lion.model.montior.jvm.RuntimeInfo;
 import com.newtouch.lion.model.montior.jvm.ThreadDetail;
 import com.newtouch.lion.model.montior.jvm.ThreadSummary;
 import com.newtouch.lion.service.AbstractService;
-import com.newtouch.lion.service.montior.JvmMontiorService;
+import com.newtouch.lion.service.monitor.JvmMonitorService;
 import com.sun.management.OperatingSystemMXBean;
 
 /**
@@ -43,8 +43,8 @@ import com.sun.management.OperatingSystemMXBean;
  */
 @SuppressWarnings("restriction")
 @Service
-public class JvmMontiorServiceImpl extends AbstractService implements
-		JvmMontiorService { 
+public class JvmMonitorServiceImpl extends AbstractService implements
+		JvmMonitorService { 
 	
 	
 	

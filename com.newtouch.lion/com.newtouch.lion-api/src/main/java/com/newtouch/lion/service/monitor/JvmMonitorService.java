@@ -4,7 +4,7 @@
 *
 * $id: JvmMontiorService.java 9552 2015年2月28日 下午2:51:31 WangLijun$
 */
-package com.newtouch.lion.service.montior; 
+package com.newtouch.lion.service.monitor; 
 
 import com.newtouch.lion.model.montior.jvm.MemoryUsage;
 import com.newtouch.lion.model.montior.jvm.OperatingSystemInfo;
@@ -28,7 +28,7 @@ import com.newtouch.lion.model.montior.jvm.ThreadSummary;
  * @author WangLijun
  * @version 1.0
  */
-public interface JvmMontiorService {
+public interface JvmMonitorService {
 	/***
 	 * 获取JVM运行时信息
 	 * @return RuntimeInfo 

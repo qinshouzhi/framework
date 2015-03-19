@@ -16,7 +16,7 @@ import com.newtouch.lion.model.montior.jvm.MemoryUsage;
 import com.newtouch.lion.model.montior.jvm.OperatingSystemInfo;
 import com.newtouch.lion.model.montior.jvm.RuntimeInfo;
 import com.newtouch.lion.model.montior.jvm.ThreadSummary;
-import com.newtouch.lion.service.montior.JvmMontiorService;
+import com.newtouch.lion.service.monitor.JvmMonitorService;
 import com.newtouch.lion.web.controller.AbstractController;
 
 /**
@@ -41,7 +41,7 @@ import com.newtouch.lion.web.controller.AbstractController;
 public class JvmMonitorController extends AbstractController{
 	
 	@Autowired
-	private JvmMontiorService jvmMontiorService;	
+	private JvmMonitorService jvmMontiorService;	
 	/****
 	 * JVM监控
 	 */

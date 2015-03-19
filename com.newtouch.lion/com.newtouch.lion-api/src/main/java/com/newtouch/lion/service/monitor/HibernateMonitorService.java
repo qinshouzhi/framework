@@ -4,7 +4,7 @@
 *
 * $id: HibernateMontiorService.java 9552 2015年3月1日 上午12:18:13 WangLijun$
 */
-package com.newtouch.lion.service.montior; 
+package com.newtouch.lion.service.monitor; 
 
 import javax.persistence.EntityManager;
 
@@ -25,7 +25,7 @@ import javax.persistence.EntityManager;
  * @author WangLijun
  * @version 1.0
  */
-public  interface HibernateMontiorService {
+public  interface HibernateMonitorService {
 	/***
 	 * 获取JPA的EntityManager
 	 * @return  EntityManager

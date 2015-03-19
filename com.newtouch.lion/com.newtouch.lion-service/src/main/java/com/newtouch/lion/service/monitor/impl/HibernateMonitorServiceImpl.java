@@ -4,7 +4,7 @@
 *
 * $id: HibernateMontiorServiceImpl.java 9552 2015年3月1日 上午12:22:32 WangLijun$
 */
-package com.newtouch.lion.service.montior.impl; 
+package com.newtouch.lion.service.monitor.impl; 
 
 import javax.persistence.EntityManager;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.newtouch.lion.dao.system.UserDao;
 import com.newtouch.lion.service.AbstractService;
-import com.newtouch.lion.service.montior.HibernateMontiorService;
+import com.newtouch.lion.service.monitor.HibernateMonitorService;
 
 /**
  * <p>
@@ -33,8 +33,8 @@ import com.newtouch.lion.service.montior.HibernateMontiorService;
  * @version 1.0
  */
 @Service
-public class HibernateMontiorServiceImpl extends AbstractService implements
-		HibernateMontiorService {
+public class HibernateMonitorServiceImpl extends AbstractService implements
+		HibernateMonitorService {
 	
 	@Autowired
 	private UserDao userDao;
