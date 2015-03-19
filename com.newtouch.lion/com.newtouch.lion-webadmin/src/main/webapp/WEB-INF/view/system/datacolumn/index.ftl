@@ -3,7 +3,6 @@
 <html lang="en" class="no-js">
 <head> 
 <title><@spring.message "sys.datacolumn.html.title"/></title>
-<!--EasyUI css Start-->
 <!--DataTable css Start-->
 <link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/select2/select2.css"/>
 <link rel="stylesheet" type="text/css" href="${base}/resources/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css"/>

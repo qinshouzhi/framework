@@ -12,13 +12,8 @@ $(function() {
 	
 	handleVForm(addForm,submitForm);
 	//选择DataGrid单行
-	function getSelectedRow(){return $(datagridId).datagrid('getSelected');}
+	function getSelectedRow(){return $(datagridId).datagrids('getSelected');}
 	 
-	$(datagridId).datagrid({
-		 onLoadSuccess : function(data) {
-		}
-	});
-	
 	/**
 	 * [查询]
 	 */
