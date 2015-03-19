@@ -199,87 +199,98 @@
 														<input type="text"  id="name" name="name" maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.name.missing.message"/>" size="30"/>
 													</div>
 												</div>									
-											</div>
+											</div>								 
 											<div class="form-group">
-												<label class="col-md-2 control-label">
-													显示顺序
-												</label>
+												<label class="col-md-2 control-label">								显示顺序</label>
 												<div class="col-md-1">
 													<div class="input-group">
 														<input type="text"  id="showOrder" name="showOrder" maxlength="100" class="form-control input-xsmall" placeholder="顺序" size="30"/>
 													</div>
 												</div>
-												<label class="col-md-1 control-label">
-													<@spring.message "sys.datacolumn.form.width.text"/>
-												</label>
+												<label class="col-md-1 control-label"><@spring.message "sys.datacolumn.form.width.text"/></label>
 												<div class="col-md-2">
 													<div class="input-group">
 														<input type="text"  name="width"  maxlength="100" class="form-control input-xsmall" placeholder="<@spring.message "sys.datacolumn.form.width.missing.message"/>" size="30"/>
 													</div>
 												</div>
-												
-												<label class="col-md-2 control-label">
-													<@spring.message "sys.datacolumn.form.align.text"/>
-												</label>
-												<div class="col-md-4">
-													<div class="input-group radio-list">
-														<label class="radio-inline">
-															<input type="radio" name="align" id="align0" value="left" checked>
-															Left
-														</label>
-														<label class="radio-inline">
-															<input type="radio" name="align" id="align1" value="center">
-															 Center
-													    </label>
-														<label class="radio-inline">
-															<input type="radio" name="align" id="align2" value="right">
-															 Right
-													    </label>
-													</div>
-												</div>
-											</div>										 
-											<div class="form-group">
-												<label class="col-md-2 control-label">
-													<@spring.message "sys.datacolumn.form.headerAlign.text"/>
-												</label>
-												<div class="col-md-4">
-													<div class="input-group radio-list">
-														<label class="radio-inline">
-															<input type="radio" name="headerAlign" id="headerAlign0" value="left" checked>
-															Left
-														</label>
-														<label class="radio-inline">
-															<input type="radio" name="headerAlign" id="headerAlign1" value="center">
-															 Center
-													    </label>
-														<label class="radio-inline">
-															<input type="radio" name="headerAlign" id="headerAlign2" value="right">
-															 Right
-													    </label>
-													</div>
-												</div>
-												<label class="col-md-1 control-label">
-													<@spring.message "sys.datacolumn.form.rowspan.text"/>
-												</label>
+												<label class="col-md-1 control-label"><@spring.message "sys.datacolumn.form.rowspan.text"/></label>
 												<div class="col-md-2">
 													<div class="input-group">
 														<input type="text"  id="rowspan" name="rowspan" maxlength="100" class="form-control input-xsmall" placeholder="<@spring.message "sys.datacolumn.form.rowspan.missing.message"/>" size="30"/>
 													</div>
 												</div>
-												<label class="col-md-1 control-label">
-													<@spring.message "sys.datacolumn.form.colspan.text"/></label>
+												<label class="col-md-1 control-label"><@spring.message "sys.datacolumn.form.colspan.text"/></label>
 												<div class="col-md-2">
 													<div class="input-group">
 														<input type="text"  name="colspan"  maxlength="100" class="form-control input-xsmall" placeholder="<@spring.message "sys.datacolumn.form.colspan.missing.message"/>" size="30"/>
 													</div>
 												</div>			
-											</div>								 
+											</div>
 											<div class="form-group">
-												<div class="col-md-2 control-label">
+
+												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.formatter.text"/></label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<input type="text" name="formatter" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.formatter.missing.message"/>" maxlength="255" size="30"/>
+													</div>
+												</div>	
+											</div>	
+											<div class="form-group">										
+												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.styler.text"/></label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<input type="text"  name="styler"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.styler.missing.message"/>" size="30"/>
+													</div>
+												</div>
+												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.editor.text"/></label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<input type="text" name="editor" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.editor.missing.message"/>" maxlength="255" size="30"/>
+													</div>
+												</div>
+											</div>		
+											<div class="form-group">
+												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.headerAlign.text"/></label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<label class="radio-inline">
+															<input type="radio" name="headerAlign" id="headerAlign0" value="left" checked>
+															left
+														</label>
+														<label class="radio-inline">
+															<input type="radio" name="headerAlign" id="headerAlign1" value="center">
+															 center
+													    </label>
+														<label class="radio-inline">
+															<input type="radio" name="headerAlign" id="headerAlign2" value="right">
+															 right
+													    </label>
+													</div>
+												</div>
+												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.align.text"/></label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<label class="radio-inline">
+															<input type="radio" name="align" id="align0" value="left" checked>
+															left
+														</label>
+														<label class="radio-inline">
+															<input type="radio" name="align" id="align1" value="center">
+															 center
+													    </label>
+														<label class="radio-inline">
+															<input type="radio" name="align" id="align2" value="right">
+															 right
+													    </label>
+													</div>
+												</div>
+											</div>										 
+											<div class="form-group">
+												<div class="col-md-3 control-label">
 													<@spring.message "sys.datacolumn.form.hidden.text"/>
 													<input type="checkbox" class="form-control"  name="hidden" checked="true" />						 
 												</div>
-												<div class="col-md-2 control-label">
+												<div class="col-md-3 control-label">
 													<div class="input-group">
 														<@spring.message "sys.datacolumn.form.checkbox.text"/>
 														<input type="checkbox" class="form-control"  name="checkbox" checked="true" />						 
@@ -289,43 +300,17 @@
 													<@spring.message "sys.datacolumn.form.sortable.text"/>
 													<input type="checkbox" class="form-control"  name="sortable" checked="true" />
 												</div>
-												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.order.text"/></label>
+												<label class="col-md-1 control-label"><@spring.message "sys.datacolumn.form.order.text"/></label>
 												<div class="col-md-3">
-													<div class="input-group radio-list">
+													<div class="input-group">
 														<label class="radio-inline">
 															<input type="radio" name="order" id="order0" value="asc" checked>
-															Asc
+															asc
 														</label>
 														<label class="radio-inline">
 															<input type="radio" name="order" id="order1" value="desc">
-															Desc
+															 desc
 													    </label>
-													</div>
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.formatter.text"/></label>
-												<div class="col-md-4">
-													<div class="input-group">
-														<input type="text" name="formatter" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.formatter.missing.message"/>" maxlength="255" size="30"/>
-													</div>
-												</div>
-												<label class="col-md-2 control-label">
-													<@spring.message "sys.datacolumn.form.styler.text"/>
-												</label>
-												<div class="col-md-4">
-													<div class="input-group">
-														<input type="text"  name="styler"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.styler.missing.message"/>" size="30"/>
-													</div>
-												</div>
-											</div>	
-											<div class="form-group">
-												<label class="col-md-2 control-label">
-												<@spring.message "sys.datacolumn.form.editor.text"/>
-												</label>
-												<div class="col-md-4">
-													<div class="input-group">
-														<input type="text" name="editor" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.editor.missing.message"/>" maxlength="255" size="30"/>
 													</div>
 												</div>
 											</div>
