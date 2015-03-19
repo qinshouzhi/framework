@@ -48,7 +48,7 @@ public class Calendar extends BaseEntity<Long>{
 	/**是否为整天*/
 	private Boolean allday;
 	/**用户*/
-	private User user;
+	private Long userId;
 	/***/
 	@Override
 	public Long getId() {
@@ -104,16 +104,16 @@ public class Calendar extends BaseEntity<Long>{
 		this.allday = allday;
 	}
 	/**
-	 * @return the user
+	 * @return the userId
 	 */
-	public User getUser() {
-		return user;
+	public Long getUserId() {
+		return userId;
 	}
 	/**
-	 * @param user the user to set
+	 * @param userId the userId to set
 	 */
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 	/**
 	 * @param id the id to set

@@ -180,11 +180,6 @@
 				<join-column name="BAS_DEPARTMENT_ID" insertable="false"
 					updatable="false" />
 			</many-to-one>
-			<one-to-many name="calendars" fetch="LAZY" mapped-by="user">
-				<cascade>
-					<cascade-all />
-				</cascade>
-			</one-to-many>
 			<many-to-many name="roles" fetch="LAZY">
 				<join-table name="BAS_USER_ROLE">
 					<join-column name="BAS_USER_ID"   insertable="false" updatable="false"/>
@@ -395,23 +390,23 @@
 				<column name="EVENT_NAME" length="255" nullable="false" />
 			</basic>
 			<basic name="startdate">
-				<column name="STARTDATE" precision="1" scale="0" nullable="false" />
+				<column name="START_DATE" precision="1" scale="0" nullable="false" />
 			</basic>
 			<basic name="starttime">
-				<column name="STARTTIME" precision="1" scale="0" nullable="true" />
+				<column name="START_TIME" precision="1" scale="0" nullable="true" />
 			</basic>
 			<basic name="enddate">
-				<column name="ENDDATE" precision="1" scale="0" nullable="true" />
+				<column name="END_DATE" precision="1" scale="0" nullable="true" />
 			</basic>
 			<basic name="endtime">
-				<column name="ENDTIME" precision="1" scale="0" nullable="true" />
+				<column name="END_TIME" precision="1" scale="0" nullable="true" />
 			</basic>
 			<basic name="allday">
 				<column name="ALLDAY" length="1" nullable="false" />
 			</basic>
-			<many-to-one name="user" fetch="LAZY">
-				<join-column name="BAS_USER_ID" nullable="false" />
-			</many-to-one>	
+			<basic name="userId">
+				<column name="BAS_USER_ID" length="11" nullable="false" />
+			</basic>	
 		</attributes>
 	</entity>
 </entity-mappings>

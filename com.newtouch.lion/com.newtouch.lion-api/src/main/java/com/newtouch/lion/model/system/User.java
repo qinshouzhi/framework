@@ -91,8 +91,6 @@ public class User extends VersionEntity<Long> {
 	private Set<Role> roles = new HashSet<Role>(0);
 	/** 该用户所有用户组 */
 	private Set<Group> groups = new HashSet<Group>(0);
-	/** 该用户所有的日历 */
-	private Set<Calendar> calendars = new HashSet<Calendar>(0);
 	@Override
 	public Long getId() {
 		return this.id;
@@ -541,18 +539,4 @@ public class User extends VersionEntity<Long> {
 		this.image = image;
 	}
 
-	/**
-	 * @return the calendars
-	 */
-	public Set<Calendar> getCalendars() {
-		return calendars;
-	}
-
-	/**
-	 * @param calendars the calendars to set
-	 */
-	public void setCalendars(Set<Calendar> calendars) {
-		this.calendars = calendars;
-	}
-	
 }
