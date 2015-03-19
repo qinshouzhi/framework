@@ -1,52 +1,3 @@
-﻿prompt PL/SQL Developer import file
-prompt Created on 2015年3月12日 by wanglijun
-set feedback off
-set define off
-prompt Dropping BAS_APP_PROPERTIES...
-drop table BAS_APP_PROPERTIES cascade constraints;
-prompt Dropping BAS_CODE_LIST...
-drop table BAS_CODE_LIST cascade constraints;
-prompt Dropping BAS_CODE_TYPE...
-drop table BAS_CODE_TYPE cascade constraints;
-prompt Dropping BAS_COLUMN...
-drop table BAS_COLUMN cascade constraints;
-prompt Dropping BAS_DATAGRID...
-drop table BAS_DATAGRID cascade constraints;
-prompt Dropping BAS_DEMO...
-drop table BAS_DEMO cascade constraints;
-prompt Dropping BAS_DEPARTMENT...
-drop table BAS_DEPARTMENT cascade constraints;
-prompt Dropping BAS_GROUP...
-drop table BAS_GROUP cascade constraints;
-prompt Dropping BAS_GROUP_ROLE...
-drop table BAS_GROUP_ROLE cascade constraints;
-prompt Dropping BAS_ICON...
-drop table BAS_ICON cascade constraints;
-prompt Dropping BAS_LOGIN_LOG...
-drop table BAS_LOGIN_LOG cascade constraints;
-prompt Dropping BAS_PARAMETER...
-drop table BAS_PARAMETER cascade constraints;
-prompt Dropping BAS_POSITION...
-drop table BAS_POSITION cascade constraints;
-prompt Dropping BAS_REMINDER_BODY...
-drop table BAS_REMINDER_BODY cascade constraints;
-prompt Dropping BAS_REMINDER_READER...
-drop table BAS_REMINDER_READER cascade constraints;
-prompt Dropping BAS_RESOURCE...
-drop table BAS_RESOURCE cascade constraints;
-prompt Dropping BAS_ROLE...
-drop table BAS_ROLE cascade constraints;
-prompt Dropping BAS_ROLE_RESOURCE...
-drop table BAS_ROLE_RESOURCE cascade constraints;
-prompt Dropping BAS_TIPTEXT...
-drop table BAS_TIPTEXT cascade constraints;
-prompt Dropping BAS_USER...
-drop table BAS_USER cascade constraints;
-prompt Dropping BAS_USER_GROUP...
-drop table BAS_USER_GROUP cascade constraints;
-prompt Dropping BAS_USER_ROLE...
-drop table BAS_USER_ROLE cascade constraints;
-prompt Creating BAS_APP_PROPERTIES...
 create table BAS_APP_PROPERTIES
 (
   app_properties_id NUMBER(11),
@@ -89,7 +40,6 @@ comment on column BAS_APP_PROPERTIES.delete_date
 comment on column BAS_APP_PROPERTIES.description
   is '参数描述';
 
-prompt Creating BAS_CODE_LIST...
 create table BAS_CODE_LIST
 (
   bas_code_list_id NUMBER(11) not null,
@@ -113,7 +63,6 @@ create unique index BAS_CODE_LIST_NAME_EN on BAS_CODE_LIST (NAME_EN);
 create unique index BAS_CODE_LIST_NAME_ZH on BAS_CODE_LIST (NAME_ZH);
 alter table BAS_CODE_LIST  add constraint BAS_CODE_LIST_PRIMARYKEY primary key (BAS_CODE_LIST_ID) using index ;
 
-prompt Creating BAS_CODE_TYPE...
 create table BAS_CODE_TYPE
 (
   bas_code_type_id NUMBER(11) not null,
@@ -136,7 +85,6 @@ alter table BAS_CODE_TYPE
   add constraint BAS_CODE_TYPE_PRIMARYKEY primary key (BAS_CODE_TYPE_ID)
   using index ;
 
-prompt Creating BAS_COLUMN...
 create table BAS_COLUMN
 (
   bas_column_id   NUMBER(11) not null,
@@ -170,7 +118,6 @@ alter table BAS_COLUMN
   add constraint BAS_COLUMN_PRIMARYKEY primary key (BAS_COLUMN_ID)
   using index ;
 
-prompt Creating BAS_DATAGRID...
 create table BAS_DATAGRID
 (
   bas_datagrid_id NUMBER(11) not null,
@@ -221,7 +168,6 @@ alter table BAS_DATAGRID
   add constraint BAS_DATAGRID_PRIMARYKEY primary key (BAS_DATAGRID_ID)
   using index ;
 
-prompt Creating BAS_DEMO...
 create table BAS_DEMO
 (
   bas_demo_id NUMBER(19) not null,
@@ -239,7 +185,6 @@ alter table BAS_DEMO
   add constraint FK_MGIHAFSPYQV9K6B08L0JKFGEU foreign key (PARENT_ID)
   references BAS_DEMO (BAS_DEMO_ID);
 
-prompt Creating BAS_DEPARTMENT...
 create table BAS_DEPARTMENT
 (
   bas_department_id        NUMBER(11) not null,
@@ -261,8 +206,6 @@ create index BAS_DEPARTMENT_PARENT_BAS_DEPA on BAS_DEPARTMENT (PARENT_BAS_DEPART
 alter table BAS_DEPARTMENT
   add constraint BAS_DEPARTMENT_PRIMARYKEY primary key (BAS_DEPARTMENT_ID)
   using index ;
-
-prompt Creating BAS_GROUP...
 create table BAS_GROUP
 (
   bas_group_id    NUMBER(11) not null,
@@ -282,7 +225,6 @@ alter table BAS_GROUP
   add constraint BAS_GROUP_PRIMARYKEY primary key (BAS_GROUP_ID)
   using index ;
 
-prompt Creating BAS_GROUP_ROLE...
 create table BAS_GROUP_ROLE
 (
   bas_role_id  NUMBER(19) not null,
@@ -291,8 +233,6 @@ create table BAS_GROUP_ROLE
 alter table BAS_GROUP_ROLE
   add primary key (BAS_GROUP_ID, BAS_ROLE_ID)
   using index ;
-
-prompt Creating BAS_ICON...
 create table BAS_ICON
 (
   bas_icon_id     NUMBER(11) not null,
@@ -311,7 +251,6 @@ alter table BAS_ICON
   add constraint BAS_ICON_PRIMARYKEY primary key (BAS_ICON_ID)
   using index ;
 
-prompt Creating BAS_LOGIN_LOG...
 create table BAS_LOGIN_LOG
 (
   bas_login_log_id NUMBER(11) not null,
@@ -332,20 +271,8 @@ create table BAS_LOGIN_LOG
   mark_for_delete  NUMBER(1),
   opt_counter      NUMBER(6),
   delete_date      DATE
-)
-tablespace TBS_PT_08
-  pctfree 10
-  initrans 1
-  maxtrans 255;
-alter table BAS_LOGIN_LOG
-  add constraint BAS_LOGIN_LOG_PRIMARYKEY primary key (BAS_LOGIN_LOG_ID)
-  using index 
-  tablespace TBS_PT_08
-  pctfree 10
-  initrans 2
-  maxtrans 255;
+);
 
-prompt Creating BAS_PARAMETER...
 create table BAS_PARAMETER
 (
   bas_parameter_id NUMBER(11) not null,
@@ -368,7 +295,6 @@ alter table BAS_PARAMETER
   add constraint BAS_PARAMETER_PRIMARYKEY primary key (BAS_PARAMETER_ID)
   using index ;
 
-prompt Creating BAS_POSITION...
 create table BAS_POSITION
 (
   bas_position_id        NUMBER(11) not null,
@@ -384,25 +310,10 @@ create table BAS_POSITION
   mark_for_delete        NUMBER(1),
   opt_counter            NUMBER(6),
   delete_date            DATE
-)
-tablespace TBS_PT_08
-  pctfree 10
-  initrans 1
-  maxtrans 255;
-create unique index BAS_POSITION_NAME_ZH on BAS_POSITION (NAME_ZH)
-  tablespace TBS_PT_08
-  pctfree 10
-  initrans 2
-  maxtrans 255;
-alter table BAS_POSITION
-  add constraint BAS_POSITION_PRIMARYKEY primary key (BAS_POSITION_ID)
-  using index 
-  tablespace TBS_PT_08
-  pctfree 10
-  initrans 2
-  maxtrans 255;
+);
+create unique index BAS_POSITION_NAME_ZH on BAS_POSITION (NAME_ZH);
+alter table BAS_POSITION   add constraint BAS_POSITION_PRIMARYKEY primary key (BAS_POSITION_ID);
 
-prompt Creating BAS_REMINDER_BODY...
 create table BAS_REMINDER_BODY
 (
   bas_reminder_body_id NUMBER(11) not null,
@@ -419,18 +330,8 @@ create table BAS_REMINDER_BODY
   mark_for_delete      NUMBER(1),
   opt_counter          NUMBER(6),
   delete_date          DATE
-)
-tablespace TBS_PT_08
-  pctfree 10
-  initrans 1
-  maxtrans 255;
-alter table BAS_REMINDER_BODY
-  add constraint BAS_REMINDER_BODY_PRIMARYKEY primary key (BAS_REMINDER_BODY_ID)
-  using index 
-  tablespace TBS_PT_08
-  pctfree 10
-  initrans 2
-  maxtrans 255;
+);
+alter table BAS_REMINDER_BODY  add constraint BAS_REMINDER_BODY_PRIMARYKEY primary key (BAS_REMINDER_BODY_ID);
 
 prompt Creating BAS_REMINDER_READER...
 create table BAS_REMINDER_READER
@@ -446,23 +347,10 @@ create table BAS_REMINDER_READER
   mark_for_delete        NUMBER(1),
   opt_counter            NUMBER(6),
   delete_date            DATE
-)
-tablespace TBS_PT_08
-  pctfree 10
-  initrans 1
-  maxtrans 255;
-create index BAS_REMINDER_READER_BAS_REMIND on BAS_REMINDER_READER (BAS_REMINDER_BODY_ID)
-  tablespace TBS_PT_08
-  pctfree 10
-  initrans 2
-  maxtrans 255;
+);
+create index BAS_REMINDER_READER_BAS_REMIND on BAS_REMINDER_READER (BAS_REMINDER_BODY_ID);
 alter table BAS_REMINDER_READER
-  add constraint BAS_REMINDER_READER_PRIMARYKEY primary key (BAS_REMINDER_READER_ID)
-  using index 
-  tablespace TBS_PT_08
-  pctfree 10
-  initrans 2
-  maxtrans 255;
+  add constraint BAS_REMINDER_READER_PRIMARYKEY primary key (BAS_REMINDER_READER_ID);
 
 prompt Creating BAS_RESOURCE...
 create table BAS_RESOURCE
@@ -524,8 +412,6 @@ create table BAS_ROLE_RESOURCE
 alter table BAS_ROLE_RESOURCE
   add primary key (BAS_ROLE_ID, BAS_RESOURCE_ID)
   using index ;
-
-prompt Creating BAS_TIPTEXT...
 create table BAS_TIPTEXT
 (
   bas_tiptext_id  NUMBER(11) not null,
@@ -539,16 +425,8 @@ create table BAS_TIPTEXT
   mark_for_delete NUMBER(1),
   opt_counter     NUMBER(6),
   delete_date     DATE
-)
-tablespace TBS_PT_08
-  pctfree 10
-  initrans 1
-  maxtrans 255;
-create unique index BAS_TIPTEXT_TIP_TEXT_KEY on BAS_TIPTEXT (TIP_TEXT_KEY)
-  tablespace TBS_PT_08
-  pctfree 10
-  initrans 2
-  maxtrans 255;
+);
+create unique index BAS_TIPTEXT_TIP_TEXT_KEY on BAS_TIPTEXT (TIP_TEXT_KEY);
 
 prompt Creating BAS_USER...
 create table BAS_USER
@@ -612,9 +490,7 @@ create table BAS_USER_ROLE
   bas_role_id NUMBER(19) not null,
   bas_user_id NUMBER(19) not null
 );
-alter table BAS_USER_ROLE
-  add primary key (BAS_USER_ID, BAS_ROLE_ID)
-  using index ;
+alter table BAS_USER_ROLE add primary key (BAS_USER_ID, BAS_ROLE_ID) using index ;
 
 prompt Disabling triggers for BAS_APP_PROPERTIES...
 alter table BAS_APP_PROPERTIES disable all triggers;
@@ -624,7 +500,6 @@ prompt Disabling triggers for BAS_CODE_TYPE...
 alter table BAS_CODE_TYPE disable all triggers;
 prompt Disabling triggers for BAS_COLUMN...
 alter table BAS_COLUMN disable all triggers;
-prompt Disabling triggers for BAS_DATAGRID...
 alter table BAS_DATAGRID disable all triggers;
 prompt Disabling triggers for BAS_DEMO...
 alter table BAS_DEMO disable all triggers;
@@ -1204,8 +1079,6 @@ values (32, 'datagrid_datagrid ', 'sys_datagrid_tb1', 'DataGrid表格测试 ', 0
 insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (33, 'system_datagrid', 'sys_cachelist_tb', '缓存管理', 0, 0, 1, 0, 0, 1, 1, 'post', 1, 'sys_cachelist_tb', null, null, 1, 1, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 0, 1, 0, 18, null, null, null, null, null, 1, to_date('21-04-2014 15:13:40', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('22-04-2014 10:30:01', 'dd-mm-yyyy hh24:mi:ss'), 0, 1, null);
 commit;
-prompt 26 records loaded
-prompt Loading BAS_DEMO...
 insert into BAS_DEMO (bas_demo_id, create_by, create_date, update_by, update_date, name_zh, parent_id)
 values (1, 1, null, null, null, '总公司', null);
 insert into BAS_DEMO (bas_demo_id, create_by, create_date, update_by, update_date, name_zh, parent_id)
@@ -1277,8 +1150,6 @@ values (49, null, null, null, null, 'HP2', 48);
 insert into BAS_DEMO (bas_demo_id, create_by, create_date, update_by, update_date, name_zh, parent_id)
 values (50, null, null, null, null, 'HP3', 48);
 commit;
-prompt 35 records loaded
-prompt Loading BAS_DEPARTMENT...
 insert into BAS_DEPARTMENT (bas_department_id, parent_bas_department_id, name_zh, name_en, departmentno, description, editable, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (3, null, '新致软件', 'NewTouch', '000001', 'NewTouch', 1, 1, to_date('31-12-2012 21:30:01', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('06-02-2015 10:56:11', 'dd-mm-yyyy hh24:mi:ss'), 0, 1, null);
 insert into BAS_DEPARTMENT (bas_department_id, parent_bas_department_id, name_zh, name_en, departmentno, description, editable, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
@@ -1298,8 +1169,6 @@ values (21, 10, '开发二部二处', '开发二部二处', '开发二部二处'
 insert into BAS_DEPARTMENT (bas_department_id, parent_bas_department_id, name_zh, name_en, departmentno, description, editable, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (25, 21, 'DDC221', 'DDC221', 'DDC221', 'DDC221', 1, 1, to_date('14-04-2013 16:32:52', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('14-04-2013 16:32:52', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null);
 commit;
-prompt 9 records loaded
-prompt Loading BAS_GROUP...
 insert into BAS_GROUP (bas_group_id, name_zh, name_en, description, editable, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (1, '系统管理员', 'SysAdmin', '描述', 1, 1, to_date('23-03-2013 22:40:16', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('15-02-2015 21:15:03', 'dd-mm-yyyy hh24:mi:ss'), 0, 105, null);
 insert into BAS_GROUP (bas_group_id, name_zh, name_en, description, editable, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
@@ -1325,8 +1194,6 @@ values (14, 'name7', 'name7', 'name7', 1, 1, to_date('13-02-2015 10:34:40', 'dd-
 insert into BAS_GROUP (bas_group_id, name_zh, name_en, description, editable, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (16, 'name9', 'name9', 'name9', 1, 1, to_date('13-02-2015 10:53:02', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('13-02-2015 10:53:02', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null);
 commit;
-prompt 12 records loaded
-prompt Loading BAS_GROUP_ROLE...
 insert into BAS_GROUP_ROLE (bas_role_id, bas_group_id)
 values (1, 1);
 insert into BAS_GROUP_ROLE (bas_role_id, bas_group_id)
@@ -1360,15 +1227,10 @@ values (1, 16);
 insert into BAS_GROUP_ROLE (bas_role_id, bas_group_id)
 values (4, 16);
 commit;
-prompt 16 records loaded
-prompt Loading BAS_ICON...
 insert into BAS_ICON (bas_icon_id, icon_type, icon_class, icon_image, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (1, 'tubiao', '111', 'image.jpg', 1, to_date('04-03-2015 14:35:57', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('04-03-2015 14:35:59', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null);
 commit;
-prompt 1 records loaded
-prompt Loading BAS_LOGIN_LOG...
-prompt Table is empty
-prompt Loading BAS_PARAMETER...
+
 insert into BAS_PARAMETER (bas_parameter_id, category, name_en, name_zh, parameter_value, editable, description, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (1, 'Files', 'uploadFilePath12', '上传文件路径11', 'c:/temp/', 1, '文件上传路径', 1, to_date('16-12-2012 20:31:11', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('26-01-2015 15:34:52', 'dd-mm-yyyy hh24:mi:ss'), 0, 14, null);
 insert into BAS_PARAMETER (bas_parameter_id, category, name_en, name_zh, parameter_value, editable, description, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
@@ -1470,14 +1332,6 @@ values (199, 'Users', 'dddd4444', 'dddd', 'dddd2', 0, 'dddd', 1, to_date('25-01-
 insert into BAS_PARAMETER (bas_parameter_id, category, name_en, name_zh, parameter_value, editable, description, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (200, 'Users', 'dddd4444e', 'dddd', 'dddd', 1, 'dddd', 1, to_date('25-01-2015 12:16:16', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('26-01-2015 15:46:00', 'dd-mm-yyyy hh24:mi:ss'), 0, 1, null);
 commit;
-prompt 50 records loaded
-prompt Loading BAS_POSITION...
-prompt Table is empty
-prompt Loading BAS_REMINDER_BODY...
-prompt Table is empty
-prompt Loading BAS_REMINDER_READER...
-prompt Table is empty
-prompt Loading BAS_RESOURCE...
 insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (1, null, 'application', 'Application', '应用资源', 'application', 'Application', 0, 0, 1, '_self', 'icon-star', null, 1, to_date('25-03-2013 15:56:44', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('26-02-2015 17:52:14', 'dd-mm-yyyy hh24:mi:ss'), 0, 7, null);
 insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
@@ -1933,32 +1787,17 @@ prompt Enabling triggers for BAS_GROUP...
 alter table BAS_GROUP enable all triggers;
 prompt Enabling triggers for BAS_GROUP_ROLE...
 alter table BAS_GROUP_ROLE enable all triggers;
-prompt Enabling triggers for BAS_ICON...
 alter table BAS_ICON enable all triggers;
-prompt Enabling triggers for BAS_LOGIN_LOG...
 alter table BAS_LOGIN_LOG enable all triggers;
-prompt Enabling triggers for BAS_PARAMETER...
 alter table BAS_PARAMETER enable all triggers;
-prompt Enabling triggers for BAS_POSITION...
 alter table BAS_POSITION enable all triggers;
-prompt Enabling triggers for BAS_REMINDER_BODY...
 alter table BAS_REMINDER_BODY enable all triggers;
-prompt Enabling triggers for BAS_REMINDER_READER...
 alter table BAS_REMINDER_READER enable all triggers;
-prompt Enabling triggers for BAS_RESOURCE...
 alter table BAS_RESOURCE enable all triggers;
-prompt Enabling triggers for BAS_ROLE...
 alter table BAS_ROLE enable all triggers;
-prompt Enabling triggers for BAS_ROLE_RESOURCE...
 alter table BAS_ROLE_RESOURCE enable all triggers;
-prompt Enabling triggers for BAS_TIPTEXT...
 alter table BAS_TIPTEXT enable all triggers;
-prompt Enabling triggers for BAS_USER...
 alter table BAS_USER enable all triggers;
-prompt Enabling triggers for BAS_USER_GROUP...
 alter table BAS_USER_GROUP enable all triggers;
-prompt Enabling triggers for BAS_USER_ROLE...
 alter table BAS_USER_ROLE enable all triggers;
-set feedback on
-set define on
-prompt Done.
+

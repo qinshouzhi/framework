@@ -83,7 +83,9 @@
 						</select>	
 					</div>
 					<div class="col-md-1">
-						<a href="javascript:void(0)" id="btnQuery" class="btn blue"><i class="fa fa-search"></i> <@spring.message "common.query.btn.text"/> </a>
+						<a href="javascript:void(0)" id="btnQuery" class="btn blue"><i class="fa fa-search"></i>
+							<@spring.message "common.query.btn.text"/>
+						</a>
 					</div>
 				</form>
 			</div>
