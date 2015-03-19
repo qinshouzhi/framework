@@ -7,6 +7,7 @@
 */
 package com.newtouch.lion.service.system; 
 
+import java.util.Date;
 import java.util.List;
 
 import com.newtouch.lion.model.system.Calendar;
@@ -65,6 +66,15 @@ public interface CalendarService {
 	 * @param user
 	 * */
 	public List<Calendar> doFindCalendarByuser(User user);
+	
+	/**
+	 * 根据用户和时间段搜索日历对象
+	 * @author maojiawei
+	 * @param userId
+	 * @param start
+	 * @param end
+	 * */
+	public List<Calendar> doFindCalendarByuser(Long userId,Date start,Date end);
 }
 
 	

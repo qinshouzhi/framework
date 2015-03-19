@@ -9,6 +9,8 @@ package com.newtouch.lion.admin.web.model.system.user;
 
 import java.io.Serializable;
 
+import com.newtouch.lion.model.system.Calendar;
+
 /**
  * <p>
  * Title: 
@@ -140,6 +142,7 @@ public class CalendarVo implements Serializable  {
 				+ endDate + ", endTime=" + endTime + ", isallday=" + isallday
 				+ "]";
 	}
+	
 	
 }
 

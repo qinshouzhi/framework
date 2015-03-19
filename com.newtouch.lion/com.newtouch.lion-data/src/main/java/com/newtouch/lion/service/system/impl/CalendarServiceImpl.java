@@ -7,6 +7,7 @@
 */
 package com.newtouch.lion.service.system.impl; 
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,6 +100,20 @@ public class CalendarServiceImpl implements CalendarService {
 		String hql = "from Calendar where user.id=:id";
 		Map<String,Object>  params=new HashMap<String, Object>();
 		params.put("id",user.getId());
+		return calendarDao.query(hql, params);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.system.CalendarService#doFindCalendarByuser(com.newtouch.lion.model.system.User, java.util.Date, java.util.Date)
+	 */
+	@Override
+	public List<Calendar> doFindCalendarByuser(Long userId, Date start, Date end) {
+		// TODO Auto-generated method stub
+		String hql = "from Calendar where userId=:userId and startdate between :start and :end";
+		Map<String,Object>  params=new HashMap<String, Object>();
+		params.put("userId",userId);
+		params.put("start", start);
+		params.put("end", end);
 		return calendarDao.query(hql, params);
 	}
 	

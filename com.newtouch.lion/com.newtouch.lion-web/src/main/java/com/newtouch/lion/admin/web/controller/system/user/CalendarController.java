@@ -30,7 +30,6 @@ import com.newtouch.lion.admin.web.model.system.user.CalendarVo;
 import com.newtouch.lion.common.user.UserInfo;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.system.Calendar;
-import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.service.system.CalendarService;
 import com.newtouch.lion.service.system.UserService;
 import com.newtouch.lion.web.controller.AbstractController;
@@ -69,7 +68,6 @@ public class CalendarController extends AbstractController {
 	@ResponseBody
 	public ModelAndView add(@Valid @ModelAttribute("calendarVo") CalendarVo calendarVo,Errors errors, ModelAndView modelAndView) throws ParseException {
 		UserInfo userInfo =LoginSecurityUtil.getUser();
-		User user = userService.doFindById(userInfo.getId());
 		Calendar calendar = new Calendar();
 		calendar.setEvent(calendarVo.getEvent());
 		SimpleDateFormat dateformatter = new SimpleDateFormat ("yyyy-MM-dd");
@@ -83,9 +81,14 @@ public class CalendarController extends AbstractController {
 			calendar.setStarttime(starttime);
 			Date endtime = timeformatter.parse(calendarVo.getEndTime());
 			calendar.setEndtime(endtime);
+		}else{
+			Date starttime = timeformatter.parse("00:00");
+			calendar.setStarttime(starttime);
+			Date endtime = timeformatter.parse("23:59");
+			calendar.setEndtime(endtime);
 		}
 		calendar.setAllday(calendarVo.getIsallday());
-		calendar.setUser(user);
+		calendar.setUserId(userInfo.getId());
 		calendarService.doCreateObj(calendar);
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS, "sys.codeType.add.success");
@@ -96,30 +99,12 @@ public class CalendarController extends AbstractController {
 	//获取所有的数据
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public ModelAndView list() throws IOException, ParseException {
+	public ModelAndView list(Date start,Date end) throws IOException, ParseException {
 		UserInfo userInfo =LoginSecurityUtil.getUser();
-		User user = userService.doFindById(userInfo.getId());
-		List<Calendar> list = this.calendarService.doFindCalendarByuser(user);
-		List<CalendarDTO> l = new ArrayList<CalendarDTO>();
-		for(Calendar calendar:list){
-			CalendarDTO calendarDTO = new CalendarDTO();
-			calendarDTO.setId(calendar.getId().intValue());
-			calendarDTO.setTitle(calendar.getEvent());
-			if(calendar.getAllday()){
-				calendarDTO.setStart(calendar.getStartdate().toString());
-				calendarDTO.setEnd(calendar.getEnddate().toString());
-			}else{
-				calendarDTO.setStart(calendar.getStartdate().toString().split(" ")[0]+" "+calendar.getStarttime().toString().split(" ")[1]);
-				calendarDTO.setEnd(calendar.getEnddate().toString().split(" ")[0]+" "+calendar.getEndtime().toString().split(" ")[1]);
-			}
-			calendarDTO.setAllday(calendar.getAllday());
-			l.add(calendarDTO);
-		}
-		
-		String str=JSONParser.toJSONString(l);
-		System.out.println(str);
+		List<Calendar> list = this.calendarService.doFindCalendarByuser(userInfo.getId(),start,end);
+		List<CalendarDTO> DTOlist = CalendarDTO.tranProperties(list);
+		String str=JSONParser.toJSONString(DTOlist);
 		ModelAndView modelAndView=new ModelAndView();
-		
 		return this.getStrJsonView(str, modelAndView);
     }
 	
@@ -153,7 +138,6 @@ public class CalendarController extends AbstractController {
 	@RequestMapping(value = "delete")
 	@ResponseBody
 	public ModelAndView delete(@Valid @ModelAttribute("calendarVo") CalendarVo calendarVo,Errors errors, ModelAndView modelAndView){
-		System.out.println(calendarVo.toString()+"================");
 		Calendar calendar = calendarService.doFindById(calendarVo.getId());
 		calendarService.doDeleteByObj(calendar);
 		Map<String, String> params = new HashMap<String, String>();

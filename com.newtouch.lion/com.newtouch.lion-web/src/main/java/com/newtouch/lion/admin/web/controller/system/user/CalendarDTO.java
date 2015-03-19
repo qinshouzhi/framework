@@ -6,6 +6,12 @@
 * $id: CalendarDTO.java 9552 Mar 16, 2015 4:37:33 PM MaoJiaWei$
 */
 package com.newtouch.lion.admin.web.controller.system.user; 
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.newtouch.lion.model.system.Calendar;
+
 /**
  * <p>
  * Title: 
@@ -90,6 +96,24 @@ public class CalendarDTO {
 		this.allday = allday;
 	}
 	
+	public static List<CalendarDTO> tranProperties(List<Calendar> list){
+		List<CalendarDTO> DTOlist = new ArrayList<CalendarDTO>();
+		for(Calendar calendar:list){
+			CalendarDTO calendarDTO = new CalendarDTO();
+			calendarDTO.setId(calendar.getId().intValue());
+			calendarDTO.setTitle(calendar.getEvent());
+			if(calendar.getAllday()){
+				calendarDTO.setStart(calendar.getStartdate().toString());
+				calendarDTO.setEnd(calendar.getEnddate().toString());
+			}else{
+				calendarDTO.setStart(calendar.getStartdate().toString().split(" ")[0]+" "+calendar.getStarttime().toString().split(" ")[1]);
+				calendarDTO.setEnd(calendar.getEnddate().toString().split(" ")[0]+" "+calendar.getEndtime().toString().split(" ")[1]);
+			}
+			calendarDTO.setAllday(calendar.getAllday());
+			DTOlist.add(calendarDTO);
+		}
+		return DTOlist;
+	}
 }
 
 	
