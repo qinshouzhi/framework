@@ -143,15 +143,15 @@ public class CodeListServiceImpl extends AbstractService implements
 	 */
 	@Override
 	public PageResult<CodeList> doFindByCriteria(QueryCriteria criteria) {
-		String queryEntry = " select cl from CodeList as cl left join cl.codeType as ct ";
+		String queryEntry = " select cl from CodeList cl ";
 
-		String[] whereBodies = {"ct.id =:codeTypeId"," cl.nameZh  like :nameZh " };
+		String[] whereBodies = {"cl.codeType.id=:codeTypeId"," cl.nameZh like :nameZh " };
 
 		String fromJoinSubClause = "";
 
 		Map<String, Object> params = criteria.getQueryCondition();
 
-		String orderField ="cl."+criteria.getOrderField();
+		String orderField =criteria.getOrderField();
 
 		String orderDirection = criteria.getOrderDirection();
 
@@ -171,7 +171,7 @@ public class CodeListServiceImpl extends AbstractService implements
 	 */
 	@Override
 	public List<CodeList> doFindCodeListByCodeTypeNameEn(String codeTypeNameEn) {
-		String hql="select cl from CodeList as cl left join cl.codeType as ct where ct.nameEn=:nameEn order by cl.sortNo ASC";
+		String hql="select cl from CodeList cl left join cl.codeType ct where ct.nameEn=:nameEn order by cl.sortNo ASC";
 		Map<String,Object>  params=new HashMap<String, Object>();
 		params.put("nameEn",codeTypeNameEn);
 		return codeListDao.query(hql, params);
