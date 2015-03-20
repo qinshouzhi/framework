@@ -37,6 +37,7 @@ import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.datagrid.DataGridService;
 import com.newtouch.lion.service.excel.ExcelExportService;
 import com.newtouch.lion.web.controller.AbstractController;
+import com.newtouch.lion.web.model.QueryDt;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
 
@@ -214,27 +215,19 @@ public class DataGridController extends AbstractController {
 	/** 列表显示 */
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public DataTable<DataGrid> lists(Model model,
-			@RequestParam(defaultValue = "1") int page,
-			@RequestParam(defaultValue = "15") int rows,
-			@RequestParam(required = false) String sort,
-			@RequestParam(required = false) String order,
-			@RequestParam(required = false) String type,
-			@RequestParam(required = false) String tableId,
-			@ModelAttribute("dataGrid") DataGridVo dataGridVo) {
+	public DataTable<DataGrid> lists(QueryDt query,@ModelAttribute("dataGrid") DataGridVo dataGridVo) {
 		QueryCriteria queryCriteria = new QueryCriteria();
-
 		// 设置分页 启始页
-		queryCriteria.setStartIndex(rows * (page - 1));
+		queryCriteria.setStartIndex(query.getPage());
 		// 每页大小
-		queryCriteria.setPageSize(rows);
+		queryCriteria.setPageSize(query.getRows());
 		// 设置排序字段及排序方向
-		if (StringUtils.isNotEmpty(sort) && StringUtils.isNotEmpty(order)) {
-			queryCriteria.setOrderField(sort);
-			queryCriteria.setOrderDirection(order);
+		if (StringUtils.isNotEmpty(query.getSort()) && StringUtils.isNotEmpty(query.getOrder())) {
+			queryCriteria.setOrderField(query.getSort());
+			queryCriteria.setOrderDirection(query.getOrder());
 		} else {
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
-			queryCriteria.setOrderDirection("ASC");
+			queryCriteria.setOrderDirection(QueryCriteria.ASC);
 		}
 		// 查询条件 参数类型
 		if (StringUtils.isNotEmpty(dataGridVo.getType())) {
@@ -250,7 +243,7 @@ public class DataGridController extends AbstractController {
 		}
 		PageResult<DataGrid> pageResult = dataGridService
 				.doFindByCriteria(queryCriteria);
-		return pageResult.getDataTable();
+		return pageResult.getDataTable(query.getRequestId());
 	}
 	
 	/*add by maojiawei*/
