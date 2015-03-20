@@ -156,19 +156,13 @@
 												<form id="formImg" enctype="multipart/form-data" action="#" >
 													<div class="form-group">
 														<div class="fileinput fileinput-new" >
-															<div id="imgdiv" class="fileinput-new thumbnail" style="width: 300px; height: 300px;">
-																<img id="imgShow" src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" style="width: 300px; height: 300px;"/>
-															</div>
-															<div>
-												                <input type="hidden" id="x" name="x"/>
-												                <input type="hidden" id="y" name="y"/>
-												                <input type="hidden" id="w" name="w"/>
-												                <input type="hidden" id="h" name="h"/>
+															<div id="imgDiv" class="fileinput-new thumbnail" style="width: 300px; height: 300px;">
+																<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" style="width: 300px; height: 300px;"/>
 															</div>
 															<div>
 																<span class="btn default btn-file">
 																<span class="fileinput-new">
-																Select image </span>
+																选择图片 </span>
 																<input id="image" name="image" type="file"/>
 																</span>
 															</div>
@@ -176,9 +170,9 @@
 													</div>
 													<div class="margin-top-10">
 														<button id="btnImgUploadSave" class="btn green-haze">
-														Submit </button>
+														提交 </button>
 														<button class="btn default">
-														Cancel </button>
+														取消 </button>
 													</div>
 												</form>
 											</div>

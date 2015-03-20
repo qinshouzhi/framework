@@ -10,7 +10,7 @@ $(function () {
 		  $formimg=$('#formImg');//修改头像
     
 	//上传图片预览与剪裁
-	$('#image').uploadPreview({ ImgShow: "imgShow"}); 
+	$('#image').uploadPreview({DivShow:'imgDiv'}); 
 	//基本信息验证表单
 	handleVForm($formuser,submitBaseInfoForm);
 	//修改头像验证表单
@@ -55,7 +55,7 @@ function submitImageForm(frm){
       	errorRequest.call(this,xhr,textStatus,error);
       }
   });
-  // lion.upload.post('changeimg.json','image',frm.serializeObject(),successChangeImgFrm,errorRequest)
+ // lion.upload.post('changeimg.json','image',frm.serializeObject(),successChangeImgFrm,errorRequest);
   return false;
 }
 //修改头像成功回调函数

@@ -15,13 +15,14 @@
 *Height:预览高度;
 *ImgType:支持文件类型 格式:['jpg','png'];
 *callback:选择文件后回调方法;
+*依赖：jquery Jcrop 
 */
 
 /*
 *work:图片预览插件
 */
 ;(function($) {
-
+	'use strict';
     jQuery.fn.extend({
         uploadPreview: function(setting) {
             /*
@@ -42,24 +43,10 @@
             */
             _self.DefautlSetting = {
                 DivShow: '',
-                ImgShow: '',
-                Width: 300,
-                Height: 300,
+                ImgShow: 'imgShow',
                 ImgType: ['gif', 'jpeg', 'jpg','bmp', 'png'],
                 ErrMsg: '选择文件错误,图片类型必须是(gif,jpeg,jpg,bmp,png)中的一种',
                 callback: function() { }
-            };
-            /*
-            *work:读取配置
-            */
-            _self.Setting = {
-                DivShow: _self.IsNull(setting.DivShow) ? _self.DefautlSetting.DivShow : setting.DivShow,
-                ImgShow: _self.IsNull(setting.ImgShow) ? _self.DefautlSetting.ImgShow : setting.ImgShow,
-                Width: _self.IsNull(setting.Width) ? _self.DefautlSetting.Width : setting.Width,
-                Height: _self.IsNull(setting.Height) ? _self.DefautlSetting.Height : setting.Height,
-                ImgType: _self.IsNull(setting.ImgType) ? _self.DefautlSetting.ImgType : setting.ImgType,
-                ErrMsg: _self.IsNull(setting.ErrMsg) ? _self.DefautlSetting.ErrMsg : setting.ErrMsg,
-                callback: _self.IsNull(setting.callback) ? _self.DefautlSetting.callback : setting.callback
             };
             /*
             *work:获取文本控件URL
@@ -78,7 +65,7 @@
             /*
             *work:对预览图片进行截图
             */
-            _self.paint = function() {
+            _self.paint = function(imgShow) {
                 var jcrop_api,
                     boundx,
                     boundy,
@@ -89,8 +76,8 @@
                 $pimg = $('#preview-pane .preview-container img'),
                 xsize = $pcnt.width(),
                 ysize = $pcnt.height();
-                $pimg.attr('src',$('#'+_self.Setting.ImgShow).attr('src'));
-                $('#'+_self.Setting.ImgShow).Jcrop({
+                $pimg.attr('src',imgShow.attr('src'));
+                imgShow.Jcrop({
                     onChange: updatePreview,
                     onSelect: updatePreview,
                     aspectRatio: 1
@@ -128,72 +115,57 @@
             *work:绑定事件
             */
             _self.change(function() {
+            	var DivShow=$('#'+setting.DivShow),
+            	imgShow=_self.IsNull(DivShow.find('img').eq(0).attr('id')) ? _self.DefautlSetting.ImgShow : DivShow.find('img').eq(0).attr('id'),
+    			Width=_self.IsNull(setting.Width) ? DivShow.width() : setting.Width,
+            	Height=_self.IsNull(setting.Height) ? DivShow.height() : setting.Height,
+            	ImgType=_self.IsNull(setting.ImgType) ? _self.DefautlSetting.ImgType : setting.ImgType,
+            	ErrMsg=_self.IsNull(setting.ErrMsg) ? _self.DefautlSetting.ErrMsg : setting.ErrMsg,
+            	callback=_self.IsNull(setting.callback) ? _self.DefautlSetting.callback : setting.callback;
                 if (this.value) {
-                    if (!RegExp('\.(' + _self.Setting.ImgType.join('|') + ')$', 'i').test(this.value.toLowerCase())) {
+                    if (!RegExp('\.(' + ImgType.join('|') + ')$', 'i').test(this.value.toLowerCase())) {
                         alert(_self.Setting.ErrMsg);
                         this.value = '';
                         return false;
                     }
-                    var imgDiv = $('#'+_self.Setting.ImgShow).parent();
-                    imgDiv.empty();
-                    imgDiv.html('<img id="'+_self.Setting.ImgShow+'" /><div id="preview-pane"><div class="preview-container"><img /></div></div>');
-                    var imgShow = $('#'+_self.Setting.ImgShow);
-                    if (navigator.userAgent.indexOf('MSIE') > -1) {
-                        try {
-                        	imgShow.width(_self.Setting.Width + 'px');
-                            imgShow.height(_self.Setting.Height + 'px');
-                            imgShow.attr('src',_self.getObjectURL(this.files[0]));
-                        } catch (e) {
-                            this.select();
-                            top.parent.document.body.focus();
-                            var src = document.selection.createRange().text;
-                            document.selection.empty();
-                            imgShow.css('display','none');
-                            imgDiv.width(_self.Setting.Width + 'px');
-                            imgDiv.height(_self.Setting.Height + 'px');
-                        }
-                    } else {
-                    	imgShow.width(_self.Setting.Width + 'px');
-                        imgShow.height(_self.Setting.Height + 'px');
-                    	imgShow.attr('src',_self.getObjectURL(this.files[0]));
-                    }
+                    //清空数据
+                    DivShow.empty();
+                    var imgHtml = '<img id="'+imgShow+'" /><div id="preview-pane"><div class="preview-container"><img /></div></div>';
+                    imgHtml += '<input type="hidden" id="x" name="x"/>';
+                    imgHtml += '<input type="hidden" id="y" name="y"/>';
+                    imgHtml += '<input type="hidden" id="w" name="w"/>';
+                    imgHtml += '<input type="hidden" id="h" name="h"/>';
+                    DivShow.html(imgHtml);
+                    var ImgShow = $('#'+imgShow);
+                    //设置图片url
+                    ImgShow.width(Width + 'px');
+                    ImgShow.height(Height + 'px');
+                    ImgShow.attr('src',_self.getObjectURL(this.files[0]));
                     //对上传图片进行截图
-                    _self.paint();
+                    _self.paint(ImgShow);
                     //回调方法
-                    _self.Setting.callback();
-
+                    callback();
                     
                 } 
             });
            
         }
-
-        
     });
-    // /**连接超时时间*/
-    // var timeout=5000;
-    // /**Ajax POST请求
-    //  * @param url 请求URL
-    //  * @param fileId 上传图片的Id
-    //  * @param data 请求数据
-    //  * @param successfn 成功回调函数
-    //  * @param {[type]} [arg] [回调的参数]
-    //  */
-    // lion.upload.post=function(url,fileId,data,successfn,errorfn,arg){
-    //     successfn=successfn||$.noop;
-    //     errorfn=errorfn||$.noop;
-    //     $.ajaxFileUpload({
-    //         url: url, //用于文件上传的服务器端请求地址
-    //         secureuri: false, //是否需要安全协议，一般设置为false
-    //         fileElementId: fileId, //文件上传域的ID
-    //         dataType: 'json', //返回值类型 一般设置为json
-    //         data: data,//参数
-    //         success: function (data){  //服务器成功响应处理函数
-    //             successfn.call(this,data,arg);
-    //         },
-    //         error: function (data){//服务器响应失败处理函数
-    //             errorfn.call(this,xhr,textStatus,error);
-    //         }
-    //     });
-    // };
+//     lion.upload.post=function(url,fileId,data,successfn,errorfn,arg){
+//         successfn=successfn||$.noop;
+//         errorfn=errorfn||$.noop;
+//         $.ajaxFileUpload({
+//             url: url, //用于文件上传的服务器端请求地址
+//             secureuri: false, //是否需要安全协议，一般设置为false
+//             fileElementId: fileId, //文件上传域的ID
+//             dataType: 'json', //返回值类型 一般设置为json
+//             data: data,//参数
+//             success: function (data){  //服务器成功响应处理函数
+//                 successfn.call(this,data,arg);
+//             },
+//             error: function (data){//服务器响应失败处理函数
+//                 errorfn.call(this,xhr,textStatus,error);
+//             }
+//         });
+//     };
 })(jQuery);
