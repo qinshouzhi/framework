@@ -15,7 +15,7 @@
 				<generated-value strategy="IDENTITY" />
 			</id>
 			<basic name="type">
-				<column name="TYPE" length="30" nullable="true" />
+				<column name="TYPE_" length="30" nullable="true" />
 			</basic>
 			<basic name="tableId">
 				<column name="TABLE_ID" length="60" nullable="true" />
@@ -54,7 +54,7 @@
 				<column name="URL" length="256" nullable="true" />
 			</basic>
 			<basic name="data">
-				<column name="DATA" length="512" nullable="true" />
+				<column name="DATA_" length="512" nullable="true" />
 			</basic>
 			<basic name="loadMsg">
 				<column name="LOAD_MSG" length="100" nullable="true" />
@@ -121,7 +121,7 @@
 				<column name="LOADER" length="100" nullable="true" />
 			</basic>
 			<basic name="view">
-				<column name="VIEW" length="100" nullable="true" />
+				<column name="VIEW_" length="100" nullable="true" />
 			</basic>
 			<one-to-many name="columns" fetch="LAZY">
 				<join-column name="BAS_DATAGRID_ID" insertable="false"

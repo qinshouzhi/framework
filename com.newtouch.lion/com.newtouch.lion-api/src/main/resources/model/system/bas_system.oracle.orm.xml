@@ -310,7 +310,7 @@
 				<column name="PARENT_BAS_RESOURCE_ID" precision="11" scale="0" />
 			</basic>
 			<basic name="type">
-				<column name="s_TYPE" length="256" nullable="false" />
+				<column name="TYPE_" length="256" nullable="false" />
 			</basic>
 			<basic name="path">
 				<column name="PATH" unique="true" length="1024" nullable="false" />
