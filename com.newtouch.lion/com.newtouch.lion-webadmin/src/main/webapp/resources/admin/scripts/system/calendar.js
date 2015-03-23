@@ -34,7 +34,6 @@ $(function(){
 	});
    $('#btnSave').click(function(){
 	   var param=addform.serialize(),id=($('#id').val());
-	   console.dir(param);
 	   //ID为空时，为添加动作
 	   if(lion.util.isEmpty(id)){
 	       lion.web.post({url:'add.json',data:param,success:successAddFrm});
@@ -56,6 +55,7 @@ $(function(){
      lion.web.parsedata({
        data:result,
        success:function(){
+    	 $("#calendar").fullCalendar("refetchEvents");
          addDialog.modal('toggle');
        },
        msg:'添加待办事项未成功'
@@ -67,6 +67,7 @@ $(function(){
      lion.web.parsedata({
        data:result,
        success:function(){
+    	   $("#calendar").fullCalendar("refetchEvents");
            addDialog.modal('toggle');
        },
        msg:'编辑待办事项未成功'
@@ -75,8 +76,11 @@ $(function(){
    //删除成功
    function successForDelete(data,arg){
       if(data!==null&&!(data.hasError)){
+    	 $("#calendar").fullCalendar("refetchEvents");
          lion.util.success('提示',data.message);
+         addDialog.modal('toggle');
       }else if(data!==null&&data.hasError){
+    	 addDialog.modal('toggle');
          var gmsg='';
          for(var msg in data.errorMessage){
            gmsg+=data.errorMessage[msg];

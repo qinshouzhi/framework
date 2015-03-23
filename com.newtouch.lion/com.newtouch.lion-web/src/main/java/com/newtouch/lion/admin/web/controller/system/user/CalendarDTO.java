@@ -102,13 +102,8 @@ public class CalendarDTO {
 			CalendarDTO calendarDTO = new CalendarDTO();
 			calendarDTO.setId(calendar.getId().intValue());
 			calendarDTO.setTitle(calendar.getEvent());
-			if(calendar.getAllday()){
-				calendarDTO.setStart(calendar.getStartdate().toString());
-				calendarDTO.setEnd(calendar.getEnddate().toString());
-			}else{
-				calendarDTO.setStart(calendar.getStartdate().toString().split(" ")[0]+" "+calendar.getStarttime().toString().split(" ")[1]);
-				calendarDTO.setEnd(calendar.getEnddate().toString().split(" ")[0]+" "+calendar.getEndtime().toString().split(" ")[1]);
-			}
+			calendarDTO.setStart(calendar.getStartdate().toString().split(" ")[0]+" "+calendar.getStarttime().toString().split(" ")[1]);
+			calendarDTO.setEnd(calendar.getEnddate().toString().split(" ")[0]+" "+calendar.getEndtime().toString().split(" ")[1]);
 			calendarDTO.setAllday(calendar.getAllday());
 			DTOlist.add(calendarDTO);
 		}

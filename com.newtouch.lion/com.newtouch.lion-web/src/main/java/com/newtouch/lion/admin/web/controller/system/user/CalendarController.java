@@ -10,7 +10,6 @@ package com.newtouch.lion.admin.web.controller.system.user;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -124,6 +123,11 @@ public class CalendarController extends AbstractController {
 			Date starttime = timeformatter.parse(calendarVo.getStartTime());
 			calendar.setStarttime(starttime);
 			Date endtime = timeformatter.parse(calendarVo.getEndTime());
+			calendar.setEndtime(endtime);
+		}else{
+			Date starttime = timeformatter.parse("00:00");
+			calendar.setStarttime(starttime);
+			Date endtime = timeformatter.parse("23:59");
 			calendar.setEndtime(endtime);
 		}
 		calendar.setAllday(calendarVo.getIsallday());

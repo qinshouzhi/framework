@@ -139,7 +139,7 @@ var Calendar = function() {
              	   }else{
              		   $("div[name='timepicker']").css('display','block');
              	   }
-                    return;
+                   return;
                 }
             });
 
