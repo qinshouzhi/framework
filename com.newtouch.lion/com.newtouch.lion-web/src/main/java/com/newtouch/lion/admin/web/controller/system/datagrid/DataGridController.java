@@ -134,9 +134,7 @@ public class DataGridController extends AbstractController {
 
 	@RequestMapping(value = "add")
 	@ResponseBody
-	public ModelAndView add(
-			@Valid @ModelAttribute("dataGridVo") DataGridVo dataGridVo,
-			Errors errors, ModelAndView modelAndView) {
+	public ModelAndView add(@Valid @ModelAttribute("dataGridVo")DataGridVo dataGridVo,Errors errors, ModelAndView modelAndView){
 		
 		if (!errors.hasErrors()&& this.isExistByTableId(dataGridVo.getTableId())) {
 			errors.rejectValue(DataGridVo.TABLEID,
