@@ -121,7 +121,7 @@ alter table BAS_COLUMN
 create table BAS_DATAGRID
 (
   bas_datagrid_id NUMBER(11) not null,
-  type            VARCHAR2(30),
+  type_            VARCHAR2(30),
   table_id        VARCHAR2(60) not null,
   title           VARCHAR2(128),
   show_title      NUMBER(1),
@@ -134,7 +134,7 @@ create table BAS_DATAGRID
   method          VARCHAR2(15),
   nowrap          NUMBER(1),
   url             VARCHAR2(256),
-  data            VARCHAR2(512),
+  data_            VARCHAR2(512),
   load_msg        VARCHAR2(100),
   row_numbers     NUMBER(1),
   single_select   NUMBER(1),
@@ -155,7 +155,7 @@ create table BAS_DATAGRID
   load_filter     VARCHAR2(100),
   editers         VARCHAR2(100),
   loader          VARCHAR2(100),
-  view            VARCHAR2(100),
+  view_            VARCHAR2(100),
   create_by       NUMBER(11) not null,
   create_date     DATE not null,
   update_by       NUMBER(11) not null,
@@ -333,7 +333,6 @@ create table BAS_REMINDER_BODY
 );
 alter table BAS_REMINDER_BODY  add constraint BAS_REMINDER_BODY_PRIMARYKEY primary key (BAS_REMINDER_BODY_ID);
 
-prompt Creating BAS_REMINDER_READER...
 create table BAS_REMINDER_READER
 (
   bas_reminder_reader_id NUMBER(11) not null,
@@ -352,12 +351,11 @@ create index BAS_REMINDER_READER_BAS_REMIND on BAS_REMINDER_READER (BAS_REMINDER
 alter table BAS_REMINDER_READER
   add constraint BAS_REMINDER_READER_PRIMARYKEY primary key (BAS_REMINDER_READER_ID);
 
-prompt Creating BAS_RESOURCE...
 create table BAS_RESOURCE
 (
   bas_resource_id        NUMBER(11) not null,
   parent_bas_resource_id NUMBER(11),
-  type                   VARCHAR2(256),
+  type_                   VARCHAR2(256),
   path                   VARCHAR2(1024),
   name_zh                VARCHAR2(256),
   name_en                VARCHAR2(256),
@@ -381,7 +379,6 @@ alter table BAS_RESOURCE
   add constraint BAS_RESOURCE_PRIMARYKEY primary key (BAS_RESOURCE_ID)
   using index ;
 
-prompt Creating BAS_ROLE...
 create table BAS_ROLE
 (
   bas_role_id     NUMBER(11) not null,
@@ -403,7 +400,6 @@ alter table BAS_ROLE
   add constraint BAS_ROLE_PRIMARYKEY primary key (BAS_ROLE_ID)
   using index ;
 
-prompt Creating BAS_ROLE_RESOURCE...
 create table BAS_ROLE_RESOURCE
 (
   bas_resource_id NUMBER(19) not null,
@@ -427,8 +423,6 @@ create table BAS_TIPTEXT
   delete_date     DATE
 );
 create unique index BAS_TIPTEXT_TIP_TEXT_KEY on BAS_TIPTEXT (TIP_TEXT_KEY);
-
-prompt Creating BAS_USER...
 create table BAS_USER
 (
   bas_user_id             NUMBER(11) not null,
@@ -473,8 +467,6 @@ create unique index BAS_USER_USERNAME on BAS_USER (USERNAME);
 alter table BAS_USER
   add constraint BAS_USER_PRIMARYKEY primary key (BAS_USER_ID, ACCOUNT_LOCKED)
   using index ;
-
-prompt Creating BAS_USER_GROUP...
 create table BAS_USER_GROUP
 (
   bas_group_id NUMBER(19) not null,
@@ -484,7 +476,6 @@ alter table BAS_USER_GROUP
   add primary key (BAS_USER_ID, BAS_GROUP_ID)
   using index ;
 
-prompt Creating BAS_USER_ROLE...
 create table BAS_USER_ROLE
 (
   bas_role_id NUMBER(19) not null,
@@ -492,52 +483,46 @@ create table BAS_USER_ROLE
 );
 alter table BAS_USER_ROLE add primary key (BAS_USER_ID, BAS_ROLE_ID) using index ;
 
-prompt Disabling triggers for BAS_APP_PROPERTIES...
+
 alter table BAS_APP_PROPERTIES disable all triggers;
-prompt Disabling triggers for BAS_CODE_LIST...
+
 alter table BAS_CODE_LIST disable all triggers;
-prompt Disabling triggers for BAS_CODE_TYPE...
+
 alter table BAS_CODE_TYPE disable all triggers;
-prompt Disabling triggers for BAS_COLUMN...
+
 alter table BAS_COLUMN disable all triggers;
 alter table BAS_DATAGRID disable all triggers;
-prompt Disabling triggers for BAS_DEMO...
+
 alter table BAS_DEMO disable all triggers;
-prompt Disabling triggers for BAS_DEPARTMENT...
+
 alter table BAS_DEPARTMENT disable all triggers;
-prompt Disabling triggers for BAS_GROUP...
+
 alter table BAS_GROUP disable all triggers;
-prompt Disabling triggers for BAS_GROUP_ROLE...
+
 alter table BAS_GROUP_ROLE disable all triggers;
-prompt Disabling triggers for BAS_ICON...
 alter table BAS_ICON disable all triggers;
-prompt Disabling triggers for BAS_LOGIN_LOG...
 alter table BAS_LOGIN_LOG disable all triggers;
-prompt Disabling triggers for BAS_PARAMETER...
 alter table BAS_PARAMETER disable all triggers;
-prompt Disabling triggers for BAS_POSITION...
 alter table BAS_POSITION disable all triggers;
-prompt Disabling triggers for BAS_REMINDER_BODY...
 alter table BAS_REMINDER_BODY disable all triggers;
-prompt Disabling triggers for BAS_REMINDER_READER...
 alter table BAS_REMINDER_READER disable all triggers;
-prompt Disabling triggers for BAS_RESOURCE...
+
 alter table BAS_RESOURCE disable all triggers;
-prompt Disabling triggers for BAS_ROLE...
+
 alter table BAS_ROLE disable all triggers;
-prompt Disabling triggers for BAS_ROLE_RESOURCE...
+
 alter table BAS_ROLE_RESOURCE disable all triggers;
-prompt Disabling triggers for BAS_TIPTEXT...
+
 alter table BAS_TIPTEXT disable all triggers;
-prompt Disabling triggers for BAS_USER...
+
 alter table BAS_USER disable all triggers;
-prompt Disabling triggers for BAS_USER_GROUP...
+
 alter table BAS_USER_GROUP disable all triggers;
-prompt Disabling triggers for BAS_USER_ROLE...
+
 alter table BAS_USER_ROLE disable all triggers;
-prompt Disabling foreign key constraints for BAS_DEMO...
+
 alter table BAS_DEMO disable constraint FK_MGIHAFSPYQV9K6B08L0JKFGEU;
-prompt Loading BAS_APP_PROPERTIES...
+
 insert into BAS_APP_PROPERTIES (app_properties_id, app_id, key_, value_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date, description)
 values (1, 'lion', 'hibernate.cache.provider_class', 'net.sf.ehcache.hibernate.SingletonEhCacheProvider', null, to_date('13-03-2015 02:35:39', 'dd-mm-yyyy hh24:mi:ss'), null, to_date('13-03-2015 02:35:39', 'dd-mm-yyyy hh24:mi:ss'), null, null, null, null);
 insert into BAS_APP_PROPERTIES (app_properties_id, app_id, key_, value_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date, description)
@@ -575,8 +560,7 @@ values (17, 'lion', 'excel.temp.path', 'D:/app/excel/temp/', null, to_date('13-0
 insert into BAS_APP_PROPERTIES (app_properties_id, app_id, key_, value_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date, description)
 values (18, 'lion', 'super.username', 'wanglijun', null, to_date('13-03-2015 02:35:40', 'dd-mm-yyyy hh24:mi:ss'), null, to_date('13-03-2015 02:35:40', 'dd-mm-yyyy hh24:mi:ss'), null, null, null, null);
 commit;
-prompt 18 records loaded
-prompt Loading BAS_CODE_LIST...
+
 insert into BAS_CODE_LIST (bas_code_list_id, bas_code_type_id, code_value, name_zh, name_en, sort_no, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date, editable, selected)
 values (1, 19, 'Users', '用户', 'Users', 2, 1, to_date('19-03-2013 17:15:16', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 10:28:59', 'dd-mm-yyyy hh24:mi:ss'), 0, 3, null, 1, 0);
 insert into BAS_CODE_LIST (bas_code_list_id, bas_code_type_id, code_value, name_zh, name_en, sort_no, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date, editable, selected)
@@ -650,8 +634,7 @@ values (49, 19, 'sysInterface', '接口管理', 'sysInterface', 3, 1, to_date('0
 insert into BAS_CODE_LIST (bas_code_list_id, bas_code_type_id, code_value, name_zh, name_en, sort_no, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date, editable, selected)
 values (52, 33, 'module_menu_category_item_button', '按钮项', 'item_button', 5, 1, to_date('04-03-2015 21:11:44', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('04-03-2015 21:11:44', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null, 1, 0);
 commit;
-prompt 36 records loaded
-prompt Loading BAS_CODE_TYPE...
+
 insert into BAS_CODE_TYPE (bas_code_type_id, code_type, name_zh, name_en, editable, code_len_limit, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (16, 'Customers', '客户管理', 'CustomerManage', null, 1000, 1, to_date('19-03-2013 09:37:06', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('06-03-2015 11:17:59', 'dd-mm-yyyy hh24:mi:ss'), 0, 6, null);
 insert into BAS_CODE_TYPE (bas_code_type_id, code_type, name_zh, name_en, editable, code_len_limit, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
@@ -677,8 +660,6 @@ values (36, 'system', 'PageList', 'PageList', 1, 1000, 1, to_date('28-03-2013 22
 insert into BAS_CODE_TYPE (bas_code_type_id, code_type, name_zh, name_en, editable, code_len_limit, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (37, 'system', 'Datagrid类型', 'datagrid_type', null, 1000, 1, to_date('08-04-2014 23:08:45', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('06-03-2015 09:39:36', 'dd-mm-yyyy hh24:mi:ss'), 0, 1, null);
 commit;
-prompt 12 records loaded
-prompt Loading BAS_COLUMN...
 insert into BAS_COLUMN (bas_column_id, bas_datagrid_id, show_order, filed, name, width, rowspan, colspan, sortable, sort_order, header_align, align, hidden, check_box, formatter, styler, sorter, editor, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (159, 11, 0, 'id', 'id', 30, 0, 0, 1, 'asc', 'left', 'left', 0, 1, null, null, null, null, 1, to_date('03-04-2014 12:17:05', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('03-04-2014 12:57:33', 'dd-mm-yyyy hh24:mi:ss'), 0, 4, null);
 insert into BAS_COLUMN (bas_column_id, bas_datagrid_id, show_order, filed, name, width, rowspan, colspan, sortable, sort_order, header_align, align, hidden, check_box, formatter, styler, sorter, editor, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
@@ -880,7 +861,6 @@ values (81, 19, 0, 'id', 'id', 10, 0, 0, 0, 'asc', 'center', 'center', 0, 1, nul
 insert into BAS_COLUMN (bas_column_id, bas_datagrid_id, show_order, filed, name, width, rowspan, colspan, sortable, sort_order, header_align, align, hidden, check_box, formatter, styler, sorter, editor, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (82, 19, 1, 'nameEn', '角色名称(英文)', 80, 0, 0, 1, 'asc', 'center', 'left', 0, 0, null, null, null, null, 1, to_date('10-04-2013 20:41:33', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('10-04-2013 20:41:33', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null);
 commit;
-prompt 100 records committed...
 insert into BAS_COLUMN (bas_column_id, bas_datagrid_id, show_order, filed, name, width, rowspan, colspan, sortable, sort_order, header_align, align, hidden, check_box, formatter, styler, sorter, editor, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (83, 19, 2, 'nameZh', '角色名称(中文)', 80, 0, 0, 1, 'asc', 'center', 'left', 0, 0, null, null, null, null, 1, to_date('10-04-2013 20:42:34', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('10-04-2013 20:42:34', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null);
 insert into BAS_COLUMN (bas_column_id, bas_datagrid_id, show_order, filed, name, width, rowspan, colspan, sortable, sort_order, header_align, align, hidden, check_box, formatter, styler, sorter, editor, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
@@ -1024,59 +1004,57 @@ values (157, 29, 9, 'updatedDate', '更新时间', 80, 0, 0, 1, 'asc', 'center',
 insert into BAS_COLUMN (bas_column_id, bas_datagrid_id, show_order, filed, name, width, rowspan, colspan, sortable, sort_order, header_align, align, hidden, check_box, formatter, styler, sorter, editor, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (158, 29, 6, 'value', '参数值', 80, 0, 0, 1, 'asc', 'left', 'left', 0, 0, null, null, null, null, 1, to_date('14-04-2013 18:57:34', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('14-04-2013 18:57:34', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null);
 commit;
-prompt 171 records loaded
-prompt Loading BAS_DATAGRID...
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (6, 'datagrid_datagrid ', 'datacolumn_tb', 'DataGrid列管理列表', 0, 0, 1, 0, 1, 1, 1, 'post', 1, 'main/datacolumn_lists.action', null, null, 1, 1, 1, 1, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 1, 18, null, null, null, null, null, 1, to_date('01-04-2013 22:25:07', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 23:30:21', 'dd-mm-yyyy hh24:mi:ss'), 0, 12, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (7, 'users_datagrid', 'usergroup_tb', '已关联用户组 ', 1, 0, 0, 0, 0, 1, 1, 'post', 1, 'main/auth_usergrouplist.action', null, null, 1, 1, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('02-04-2013 11:10:42', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 23:29:14', 'dd-mm-yyyy hh24:mi:ss'), 0, 24, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (8, 'users_datagrid', 'userrole_tb', '已关联角色', 1, 0, 0, 0, 0, 1, 1, 'post', 1, 'main/role_lists.action', null, null, 1, 1, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('02-04-2013 13:23:51', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 23:47:06', 'dd-mm-yyyy hh24:mi:ss'), 0, 5, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (9, 'users_datagrid', 'authgroup_tb', null, 0, 0, 1, 0, 0, 1, 1, 'post', 1, 'main/auth_grouplist.action', null, null, 1, 0, 1, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('02-04-2013 14:41:23', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('07-04-2013 19:20:02', 'dd-mm-yyyy hh24:mi:ss'), 0, 4, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (10, 'datagrid_datagrid ', 'datagrid_dt', 'DataGrid表格', 0, 0, 1, 0, 1, 1, 1, 'post', 1, 'main/datagrid_lists.action', null, null, 1, 1, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('05-04-2013 17:41:16', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 23:45:56', 'dd-mm-yyyy hh24:mi:ss'), 0, 33, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (11, 'users_datagrid', 'sys_user_list_tb', '用户列表', 0, 0, 1, 0, 1, 1, 1, 'post', 1, 'main/userlists.action', null, null, 1, 1, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('05-04-2013 19:42:23', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 23:47:18', 'dd-mm-yyyy hh24:mi:ss'), 0, 1, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (12, 'users_datagrid', 'authrole_tb', null, 0, 0, 1, 0, 0, 1, 1, 'post', 1, 'main/auth_rolelist.action', null, null, 1, 0, 1, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('05-04-2013 20:59:17', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2013 15:06:57', 'dd-mm-yyyy hh24:mi:ss'), 0, 8, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (13, 'users_datagrid', 'sys_group_list_tb', '用户组管理', 0, 0, 0, 0, 1, 1, 1, 'post', 1, 'main/group_lists.action', null, null, 1, 1, 1, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('09-04-2013 17:11:43', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('09-04-2013 17:11:43', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (14, 'users_datagrid', 'sys_authuserlistforgroup_tb', '已关联用户', 1, 0, 1, 0, 0, 1, 1, 'post', 1, 'main/auth_serlistforgroup.action', null, null, 0, 1, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('09-04-2013 20:25:43', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 23:47:23', 'dd-mm-yyyy hh24:mi:ss'), 0, 2, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (16, 'users_datagrid', 'sys_authrolelistforgroup_tb', '已关联角色', 1, 0, 0, 0, 0, 1, 1, 'post', 1, 'main/authgroup_rolelistforgroup.action', null, null, 0, 1, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('09-04-2013 21:03:09', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('09-04-2013 23:21:55', 'dd-mm-yyyy hh24:mi:ss'), 0, 2, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (17, 'users_datagrid', 'sys_authuserforgroup_tb', '关联用户组', 0, 0, 1, 0, 0, 1, 1, 'post', 1, 'main/authgroup_userlist.action', null, null, 1, 0, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('09-04-2013 21:08:50', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 23:48:29', 'dd-mm-yyyy hh24:mi:ss'), 0, 3, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (18, 'users_datagrid', 'sys_authroleforgroup_tb', null, 0, 0, 1, 0, 0, 1, 1, 'post', 1, 'main/authgroup_rolelist.action', null, null, 1, 0, 1, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('09-04-2013 21:13:06', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('09-04-2013 22:01:22', 'dd-mm-yyyy hh24:mi:ss'), 0, 2, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (19, 'users_datagrid', 'sys_rolelist_tb', '角色列表', 0, 0, 1, 0, 1, 1, 1, 'post', 1, 'main/role_lists.action', null, null, 1, 1, 1, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('10-04-2013 20:37:53', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 23:30:51', 'dd-mm-yyyy hh24:mi:ss'), 0, 1, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (20, 'users_datagrid', 'sys_authrole_userlist_tb', '已关联用户组', 1, 0, 1, 0, 0, 1, 1, 'post', 1, 'main/authrole_userlist.action', null, null, 0, 1, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('10-04-2013 22:59:07', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 23:47:34', 'dd-mm-yyyy hh24:mi:ss'), 0, 1, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (21, 'users_datagrid', 'sys_authrole_grouplist_tb', null, 0, 0, 1, 0, 1, 1, 1, 'post', 1, 'main/authrole_grouplist.action', null, null, 1, 0, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('10-04-2013 23:04:55', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 17:30:07', 'dd-mm-yyyy hh24:mi:ss'), 0, 1, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (22, 'users_datagrid', 'sys_authrole_resources_tb', null, 0, 0, 0, 0, 0, 1, 1, 'post', 1, 'main/authrole_resources.action', null, null, 1, 0, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 0, 1, 0, 18, null, null, null, null, null, 1, to_date('11-04-2013 15:19:08', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('11-04-2013 16:16:02', 'dd-mm-yyyy hh24:mi:ss'), 0, 7, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (23, 'users_datagrid', 'sys_authrole_groups_tb', null, 0, 0, 1, 0, 1, 1, 1, 'post', 1, 'main/authrole_groups.action', null, null, 1, 0, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('11-04-2013 15:35:23', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('02-04-2014 17:23:29', 'dd-mm-yyyy hh24:mi:ss'), 0, 5, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (24, 'users_datagrid', 'sys_authrole_users_tb', '角色授权表格', 0, 0, 1, 0, 0, 1, 1, 'post', 1, 'main/authrole_users.action', null, null, 1, 0, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('11-04-2013 15:36:43', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 23:48:03', 'dd-mm-yyyy hh24:mi:ss'), 0, 7, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (25, 'code_datagrid', 'sys_codelist_tb', '编码列表', 0, 0, 1, 0, 1, 1, 1, 'post', 1, 'main/codelist_lists.action', null, null, 1, 1, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('14-04-2013 09:05:30', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 23:50:25', 'dd-mm-yyyy hh24:mi:ss'), 0, 3, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (26, 'code_datagrid', 'sys_codetype_lists_tb', '编码类型列表', 0, 0, 1, 0, 1, 1, 1, 'post', 1, 'main/codetype_lists.action', null, null, 1, 1, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('14-04-2013 09:47:00', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 23:50:30', 'dd-mm-yyyy hh24:mi:ss'), 0, 2, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (27, 'system_datagrid', 'sys_resource_lists_tb', '资源列表', 0, 0, 1, 0, 1, 1, 1, 'post', 1, 'main/resource_lists.action', null, null, 1, 1, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('14-04-2013 11:45:43', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 23:51:21', 'dd-mm-yyyy hh24:mi:ss'), 0, 7, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (28, 'system_datagrid', 'sys_department_lists', '部门列表', 0, 0, 0, 0, 1, 1, 0, null, 0, 'main/department_lists.action', null, null, 1, 0, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, null, 0, 1, 0, 18, null, null, null, null, null, 1, to_date('14-04-2013 16:35:22', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 23:51:11', 'dd-mm-yyyy hh24:mi:ss'), 0, 8, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (29, 'system_datagrid', 'sys_parameter_lists_tb', '系统参数列表', 0, 0, 1, 0, 1, 1, 1, 'post', 1, 'main/parameter_lists.action', null, null, 1, 1, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('14-04-2013 17:26:58', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 23:50:57', 'dd-mm-yyyy hh24:mi:ss'), 0, 2, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (30, 'system_datagrid', 'sys_department_lists2', null, 0, 0, 1, 0, 1, 1, 1, 'post', 1, '/main/system/department/lists.jhtml', null, null, 1, 1, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('04-04-2014 01:04:59', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('04-04-2014 01:10:43', 'dd-mm-yyyy hh24:mi:ss'), 0, 2, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (32, 'datagrid_datagrid ', 'sys_datagrid_tb1', 'DataGrid表格测试 ', 0, 0, 1, 0, 1, 1, 0, 'post', 1, 'sys_datagrid_tb1', null, null, 1, 0, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 1, 1, 0, 18, null, null, null, null, null, 1, to_date('08-04-2014 23:04:00', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 23:46:14', 'dd-mm-yyyy hh24:mi:ss'), 0, 2, null);
-insert into BAS_DATAGRID (bas_datagrid_id, type, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_DATAGRID (bas_datagrid_id, type_, table_id, title, show_title, fit, frozen, show_group, paginaction, fit_columns, striped, method, nowrap, url, data_, load_msg, row_numbers, single_select, check_on_select, select_on_check, page_position, page_number, page_size, page_list, queyr_params, sort_name, sort_order, remote_sort, show_header, show_footer, scrollber_size, row_styler, load_filter, editers, loader, view_, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (33, 'system_datagrid', 'sys_cachelist_tb', '缓存管理', 0, 0, 1, 0, 0, 1, 1, 'post', 1, 'sys_cachelist_tb', null, null, 1, 1, 0, 0, 'bottom', 1, 15, '[10,15,20,25,30,40,50,100]', null, null, 'asc', 0, 1, 0, 18, null, null, null, null, null, 1, to_date('21-04-2014 15:13:40', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('22-04-2014 10:30:01', 'dd-mm-yyyy hh24:mi:ss'), 0, 1, null);
 commit;
 insert into BAS_DEMO (bas_demo_id, create_by, create_date, update_by, update_date, name_zh, parent_id)
@@ -1332,91 +1310,90 @@ values (199, 'Users', 'dddd4444', 'dddd', 'dddd2', 0, 'dddd', 1, to_date('25-01-
 insert into BAS_PARAMETER (bas_parameter_id, category, name_en, name_zh, parameter_value, editable, description, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (200, 'Users', 'dddd4444e', 'dddd', 'dddd', 1, 'dddd', 1, to_date('25-01-2015 12:16:16', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('26-01-2015 15:46:00', 'dd-mm-yyyy hh24:mi:ss'), 0, 1, null);
 commit;
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (1, null, 'application', 'Application', '应用资源', 'application', 'Application', 0, 0, 1, '_self', 'icon-star', null, 1, to_date('25-03-2013 15:56:44', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('26-02-2015 17:52:14', 'dd-mm-yyyy hh24:mi:ss'), 0, 7, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (2, 1, 'module_menu_category', 'SystemConfig', '系统设置', 'SystemConfig', '系统设置', 1, 0, 1, '_self', 'icon-settings', null, 1, to_date('25-03-2013 17:16:05', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('25-03-2013 17:16:05', 'dd-mm-yyyy hh24:mi:ss'), 0, 1, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (9, 2, 'module_menu_category', null, '用户管理', 'usermanage', null, 0, 0, 1, '_self', 'icon-star', null, 1, to_date('25-03-2013 19:26:09', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('09-03-2015 16:09:26', 'dd-mm-yyyy hh24:mi:ss'), 0, 6, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (10, 2, 'module_menu_category', null, '编码管理', 'CodeManage', null, 1, 0, 1, '_self', 'icon-star', null, 1, to_date('25-03-2013 19:28:08', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('05-03-2015 13:37:28', 'dd-mm-yyyy hh24:mi:ss'), 0, 5, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (11, 2, 'module_menu_category_item', '/system/resource/index.htm', '资源管理', 'ResourceManage', null, 2, null, 1, '_self', 'icon-star', null, 1, to_date('25-03-2013 19:30:56', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('26-03-2013 22:51:30', 'dd-mm-yyyy hh24:mi:ss'), 0, 1, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (12, 2, 'module_menu_category_item', '/system/parameter/index.htm', '系统参数', 'ParameterManage', '系统参数', 3, null, 1, '_self', 'icon-star', null, 1, to_date('25-03-2013 19:36:46', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('26-03-2013 22:53:21', 'dd-mm-yyyy hh24:mi:ss'), 0, 2, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (13, 1, 'module_menu_category_item', '/index.htm', '控制面板', 'MyMenu', null, 0, 0, 1, '_self', 'icon-home', 'dashboard:index', 1, to_date('25-03-2013 19:43:04', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('05-03-2015 16:52:04', 'dd-mm-yyyy hh24:mi:ss'), 0, 3, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (14, 9, 'module_menu_category_item', '/system/role/index.htm', '角色管理', 'RoleManage', '角色管理', 0, null, 1, '_self', 'icon-star', null, 1, to_date('25-03-2013 19:59:34', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('26-03-2013 22:46:59', 'dd-mm-yyyy hh24:mi:ss'), 0, 2, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (15, 9, 'module_menu_category_item', '/system/group/index.htm', '用户组管理', 'RoleManage', '用户组管理', 1, null, 1, '_self', 'icon-star', null, 1, to_date('25-03-2013 20:10:13', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('26-03-2013 22:47:25', 'dd-mm-yyyy hh24:mi:ss'), 0, 2, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (16, 10, 'module_menu_category_item', '/system/codetype/index.htm', '通用编码类型', 'codeType', '通用编码类型', 0, null, 1, '_self', 'icon-star', null, 1, to_date('26-03-2013 22:49:20', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('26-03-2013 22:49:20', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (17, 10, 'module_menu_category_item', '/system/codelist/index.htm', '编码列表', 'codelist', null, 1, 0, 1, '_self', 'icon-star', 'system.codelist.index', 1, to_date('26-03-2013 22:51:12', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('04-03-2015 20:59:00', 'dd-mm-yyyy hh24:mi:ss'), 0, 4, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (18, 9, 'module_menu_category_item', '/system/user/index.htm', '用户管理', 'userManage', '用户管理', 2, null, 1, '_self', 'icon-star', null, 1, to_date('27-03-2013 14:13:53', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('27-03-2013 14:13:53', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (19, 2, 'module_menu_category_item', '/system/department/index.htm', '部门管理', 'DepartmentManage', '部门管理', 1, 0, 1, '_self', 'icon-star', null, 1, to_date('27-03-2013 14:17:33', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('22-05-2014 10:24:05', 'dd-mm-yyyy hh24:mi:ss'), 0, 1, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (20, 2, 'module_menu_category', 'DataGridManage', 'DataGrid管理', 'DataGrid', 'DataGrid管理', 5, 0, 1, '_self', 'icon-star', null, 1, to_date('27-03-2013 20:59:31', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('30-03-2013 10:59:06', 'dd-mm-yyyy hh24:mi:ss'), 0, 11, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (21, 20, 'module_menu_category_item', '/system/datagrid/index.htm', 'DataGrid', 'DataGrid', null, 0, 0, 1, '_self', 'icon-star', null, 1, to_date('27-03-2013 21:01:06', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('09-03-2015 16:09:54', 'dd-mm-yyyy hh24:mi:ss'), 0, 4, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (24, 20, 'module_menu_category_item', '/system/datacolumn/index.htm', 'DataColumn管理', 'DataColumn', null, 2, 0, 1, '_self', 'icon-star', null, 1, to_date('27-03-2013 21:47:09', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('09-03-2015 16:05:25', 'dd-mm-yyyy hh24:mi:ss'), 0, 2, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (25, 4, 'module_menu_category', '报表设计', '报表设计', '报表设计', null, 1, 1, 1, '_self', 'icon-bar-chart', null, 1, to_date('14-04-2013 11:20:30', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('14-04-2013 11:43:15', 'dd-mm-yyyy hh24:mi:ss'), 0, 2, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (26, 2, 'module_menu_category_item', '/system/application/index.htm', '系统信息', 'SystemInfo', '系统信息', 1, null, 1, '_self', 'icon-star', null, 1, to_date('14-04-2013 20:53:24', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('14-04-2013 20:55:42', 'dd-mm-yyyy hh24:mi:ss'), 0, 1, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (27, 5, 'module_menu_category_item', '菜单1', '菜单1', '菜单1', '菜单1', 0, 0, 1, '_self', 'icon-star', null, 2, to_date('06-04-2014 13:30:32', 'dd-mm-yyyy hh24:mi:ss'), 2, to_date('06-04-2014 13:30:32', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (32, 7, 'module_menu_category', '网页菜单1', '网页菜单1', 'WEB_MENU1', '网页菜单1', 1, 0, 1, '_self', 'icon-star', null, 1, to_date('08-04-2014 14:48:09', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 14:48:09', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (33, 32, 'module_menu_category_item', '菜单子项3', '菜单子项3', '菜单子项3', null, 2, 0, 1, '_self', 'icon-star', null, 1, to_date('08-04-2014 14:48:41', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('07-02-2015 14:18:10', 'dd-mm-yyyy hh24:mi:ss'), 0, 6, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (36, 2, 'module_menu_category', 'SYSTEM_MONITOR', '系统监控', 'SYSTEM_MONITOR', null, 5, 0, 1, '_self', 'icon-star', null, 1, to_date('08-04-2014 15:03:34', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('07-02-2015 13:34:57', 'dd-mm-yyyy hh24:mi:ss'), 0, 1, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (37, 36, 'module_menu_category_item', '/sessions/index.htm', '用户会话监控', '用户会话监控', null, 1, 0, 1, '_self', 'icon-star', null, 1, to_date('08-04-2014 15:06:21', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('27-02-2015 10:19:34', 'dd-mm-yyyy hh24:mi:ss'), 0, 1, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (38, 36, 'module_menu_category_item', '/montior/jvm/memory.htm', 'JVM内存监控', 'JVM内存监控', null, 2, 0, 1, '_self', 'icon-star', null, 1, to_date('08-04-2014 15:08:03', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('01-03-2015 23:32:43', 'dd-mm-yyyy hh24:mi:ss'), 0, 4, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (39, 36, 'module_menu_category_item', '/montior/jvm/index.htm', 'JVM监控', 'JVM监控', null, 3, 0, 1, '_self', 'icon-star', null, 1, to_date('08-04-2014 15:09:17', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('28-02-2015 15:55:25', 'dd-mm-yyyy hh24:mi:ss'), 0, 1, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (41, 40, 'mobile_mdule_menu', 'app_store', '应用大厅', 'app_store', '手机财务应用大厅', 0, 0, 1, '_self', 'icon-star', null, 1, to_date('08-04-2014 21:21:26', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('08-04-2014 21:21:26', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (43, 2, 'module_menu_category_item', '/system/applicationproperty/index.htm', '项目属性配置', 'PROJECT_PRO_CONF', '项目属性配置', 6, 0, 1, '_self', 'icon-star', null, 1, to_date('17-02-2015 14:56:18', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('17-02-2015 14:56:18', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (44, 1, 'module_menu_category', null, '账户管理', '账户管理', null, 8, 0, 1, '_self', 'icon-user', null, 1, to_date('25-02-2015 10:53:33', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('05-03-2015 11:15:21', 'dd-mm-yyyy hh24:mi:ss'), 0, 6, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (45, 44, 'module_menu_category_item', '/system/account/index.htm', '个人资料', '个人资料', null, 0, 0, 1, '_self', 'icon-user', null, 1, to_date('25-02-2015 10:57:12', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('25-02-2015 13:51:59', 'dd-mm-yyyy hh24:mi:ss'), 0, 5, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (47, 44, 'module_menu_category_item', '/system/account/notifications.htm', '通知消息', '通知消息', null, 3, 0, 1, '_self', 'icon-bell', null, 1, to_date('25-02-2015 14:38:22', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('25-02-2015 14:38:22', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (48, 44, 'module_menu_category_item', '/system/account/calendar.htm', '待办事项', '待办事项', null, 1, 0, 1, '_self', 'icon-calendar', null, 1, to_date('25-02-2015 14:46:23', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('25-02-2015 14:46:23', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (49, 36, 'module_menu_category_item', '/druid/index.html', '数据库连接池', '数据库连接池', null, 7, 0, 1, '_blank ', 'icon-star', null, 1, to_date('28-02-2015 09:59:01', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('01-03-2015 23:31:03', 'dd-mm-yyyy hh24:mi:ss'), 0, 5, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (50, 36, 'module_menu_category_item', '/montior/hibernate/index.htm', 'Hibernate监控', 'Hibernate监控', null, 5, 0, 1, '_self', 'icon-star', null, 1, to_date('01-03-2015 02:15:07', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('01-03-2015 23:31:48', 'dd-mm-yyyy hh24:mi:ss'), 0, 1, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (51, 36, 'module_menu_category_item', '/montior/cache/index.htm', '缓存监控', '缓存监控', null, 8, 0, 1, '_self', 'icon-star', null, 1, to_date('01-03-2015 23:28:04', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('01-03-2015 23:29:52', 'dd-mm-yyyy hh24:mi:ss'), 0, 1, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (52, 36, 'module_menu_category_item', '/montior/jvm/thread.htm', 'JVM线程监控', 'JVM线程监控', null, 4, 0, 1, '_self', 'icon-star', null, 1, to_date('01-03-2015 23:29:13', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('01-03-2015 23:32:59', 'dd-mm-yyyy hh24:mi:ss'), 0, 3, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (53, 16, 'module_menu_category_item_button', '/system/codetype/add.json', '添加', 'ADD', null, 6, 0, 1, '_self', null, 'system.codetype.add', 1, to_date('04-03-2015 21:17:01', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('04-03-2015 21:17:01', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (54, 16, 'module_menu_category_item_button', '/system/codetype/edit.json', '编辑', 'EDIT', null, 7, 0, 1, '_selft', null, 'sytem.codetype.edit', 1, to_date('04-03-2015 21:19:56', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('04-03-2015 21:19:56', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (55, 16, 'module_menu_category_item_button', '/system/codetype/list.json', '刷新', 'Refresh', null, 8, 0, 1, '_self', null, 'system.codetype.list', 1, to_date('04-03-2015 21:21:24', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('04-03-2015 21:21:24', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (56, 16, 'module_menu_category_item_button', '/system/codetype/export.json', 'Excel', 'Excel', null, 9, 0, 1, '_self', null, 'system.codetype.export', 1, to_date('05-03-2015 10:37:11', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('05-03-2015 10:37:11', 'dd-mm-yyyy hh24:mi:ss'), 0, 0, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (57, 16, 'module_menu_category_item_button', '/sytsem/codetype/delete.json', '删除', 'Delete', null, 10, 0, 1, '_self', null, 'system.codetype.delete', 1, to_date('05-03-2015 10:38:22', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('09-03-2015 16:05:34', 'dd-mm-yyyy hh24:mi:ss'), 0, 2, null);
-insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
+insert into BAS_RESOURCE (bas_resource_id, parent_bas_resource_id, type_, path, name_zh, name_en, description, seq_num, is_leaf, editable, target, icon, permission, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (59, 2, 'module_menu_category_item', '/system/icon/index.htm', '图标管理', 'Icon', null, 7, 0, 1, '_self', null, null, 1, to_date('05-03-2015 16:27:06', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('05-03-2015 16:52:31', 'dd-mm-yyyy hh24:mi:ss'), 0, 4, null);
 commit;
-prompt 41 records loaded
-prompt Loading BAS_ROLE...
+
 insert into BAS_ROLE (bas_role_id, name_zh, name_en, description, editable, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (1, '系统管理角色', 'SYSADMIN_ROLE', '系统管理角色', 1, 1, to_date('24-03-2013 11:34:17', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('06-03-2015 13:52:41', 'dd-mm-yyyy hh24:mi:ss'), 0, 63, null);
 insert into BAS_ROLE (bas_role_id, name_zh, name_en, description, editable, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
@@ -1430,8 +1407,7 @@ values (8, 'SUPER_ADMIN', 'SUPER_ADMIN1', 'SUPER_ADMIN', 0, 1, to_date('28-03-20
 insert into BAS_ROLE (bas_role_id, name_zh, name_en, description, editable, create_by, create_date, update_by, update_date, mark_for_delete, opt_counter, delete_date)
 values (10, 'demo', 'demo', 'demo', 1, 1, to_date('22-05-2014 17:51:18', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('04-03-2015 21:01:15', 'dd-mm-yyyy hh24:mi:ss'), 0, 3, null);
 commit;
-prompt 6 records loaded
-prompt Loading BAS_ROLE_RESOURCE...
+
 insert into BAS_ROLE_RESOURCE (bas_resource_id, bas_role_id)
 values (1, 1);
 insert into BAS_ROLE_RESOURCE (bas_resource_id, bas_role_id)
@@ -1625,10 +1601,6 @@ values (26, 10);
 insert into BAS_ROLE_RESOURCE (bas_resource_id, bas_role_id)
 values (38, 10);
 commit;
-prompt 96 records loaded
-prompt Loading BAS_TIPTEXT...
-prompt Table is empty
-prompt Loading BAS_USER...
 insert into BAS_USER (bas_user_id, bas_department_id, bas_position_id, manager_user_id, username, password, password_hint, employee_no, realname_zh, realname_en, gender, usertype, authtype, telephone, mobile, email, office_telephone, fax, postcode, location, account_expired, account_locked, credential_expired, credential_expired_date, account_expired_date, editable, description, image, create_by, create_date, update_by, update_date, opt_counter, delete_date, mark_for_delete)
 values (1, 9, null, null, 'wanglijun', 'c150916baa97eeccd1d99541aad26170761b41a9', null, '0000001', '王立君', 'wanglijun', 0, null, null, '021-234298379', '15821501966', 'wanglijun@126.com', '021-234298379', '021-234298379', '293482', 'eeeeewww', 1, 0, 1, to_date('03-04-2015 21:18:25', 'dd-mm-yyyy hh24:mi:ss'), to_date('03-04-2015 21:18:25', 'dd-mm-yyyy hh24:mi:ss'), 1, 'ee111', null, 1, to_date('23-03-2013 21:08:49', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('26-02-2015 15:45:21', 'dd-mm-yyyy hh24:mi:ss'), 117, null, 0);
 insert into BAS_USER (bas_user_id, bas_department_id, bas_position_id, manager_user_id, username, password, password_hint, employee_no, realname_zh, realname_en, gender, usertype, authtype, telephone, mobile, email, office_telephone, fax, postcode, location, account_expired, account_locked, credential_expired, credential_expired_date, account_expired_date, editable, description, image, create_by, create_date, update_by, update_date, opt_counter, delete_date, mark_for_delete)
@@ -1654,8 +1626,6 @@ values (16, 11, null, null, 'wanglijun1111', '307fdb5468d2c4abc2b1bb272b0cea12c3
 insert into BAS_USER (bas_user_id, bas_department_id, bas_position_id, manager_user_id, username, password, password_hint, employee_no, realname_zh, realname_en, gender, usertype, authtype, telephone, mobile, email, office_telephone, fax, postcode, location, account_expired, account_locked, credential_expired, credential_expired_date, account_expired_date, editable, description, image, create_by, create_date, update_by, update_date, opt_counter, delete_date, mark_for_delete)
 values (17, 20, null, null, 'wangkexin', '4393bb1f4a1896957e5559e6a929e6c835017013', null, '00001', 'wangkexin', 'wangkexin', 0, null, null, null, null, 'wangkexin@gmail.com', null, null, null, null, 1, 0, 1, to_date('27-05-2015', 'dd-mm-yyyy'), to_date('15-07-2016', 'dd-mm-yyyy'), 1, null, null, 1, to_date('27-02-2015 17:22:57', 'dd-mm-yyyy hh24:mi:ss'), 1, to_date('10-03-2015 16:58:19', 'dd-mm-yyyy hh24:mi:ss'), 10, null, 0);
 commit;
-prompt 12 records loaded
-prompt Loading BAS_USER_GROUP...
 insert into BAS_USER_GROUP (bas_group_id, bas_user_id)
 values (1, 1);
 insert into BAS_USER_GROUP (bas_group_id, bas_user_id)
@@ -1709,8 +1679,6 @@ values (6, 16);
 insert into BAS_USER_GROUP (bas_group_id, bas_user_id)
 values (16, 16);
 commit;
-prompt 26 records loaded
-prompt Loading BAS_USER_ROLE...
 insert into BAS_USER_ROLE (bas_role_id, bas_user_id)
 values (1, 1);
 insert into BAS_USER_ROLE (bas_role_id, bas_user_id)
@@ -1766,26 +1734,15 @@ values (8, 16);
 insert into BAS_USER_ROLE (bas_role_id, bas_user_id)
 values (8, 17);
 commit;
-prompt 27 records loaded
-prompt Enabling foreign key constraints for BAS_DEMO...
 alter table BAS_DEMO enable constraint FK_MGIHAFSPYQV9K6B08L0JKFGEU;
-prompt Enabling triggers for BAS_APP_PROPERTIES...
 alter table BAS_APP_PROPERTIES enable all triggers;
-prompt Enabling triggers for BAS_CODE_LIST...
 alter table BAS_CODE_LIST enable all triggers;
-prompt Enabling triggers for BAS_CODE_TYPE...
 alter table BAS_CODE_TYPE enable all triggers;
-prompt Enabling triggers for BAS_COLUMN...
 alter table BAS_COLUMN enable all triggers;
-prompt Enabling triggers for BAS_DATAGRID...
 alter table BAS_DATAGRID enable all triggers;
-prompt Enabling triggers for BAS_DEMO...
 alter table BAS_DEMO enable all triggers;
-prompt Enabling triggers for BAS_DEPARTMENT...
 alter table BAS_DEPARTMENT enable all triggers;
-prompt Enabling triggers for BAS_GROUP...
 alter table BAS_GROUP enable all triggers;
-prompt Enabling triggers for BAS_GROUP_ROLE...
 alter table BAS_GROUP_ROLE enable all triggers;
 alter table BAS_ICON enable all triggers;
 alter table BAS_LOGIN_LOG enable all triggers;

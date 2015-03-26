@@ -43,7 +43,7 @@ ${head}
 <link href="${base}/resources/global/css/components-rounded.css" id="style_components" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/global/css/plugins.css" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/admin/layout4/css/layout.css" rel="stylesheet" type="text/css"/>
-<link href="${base}/resources/admin/layout4/css/themes/light.css" rel="stylesheet" type="text/css" id="style_color"/>
+<link href="${base}/resources/admin/layout4/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
 <link href="${base}/resources/admin/layout4/css/custom.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 </head>

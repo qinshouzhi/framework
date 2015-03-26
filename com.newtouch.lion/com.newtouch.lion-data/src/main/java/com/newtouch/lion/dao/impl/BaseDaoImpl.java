@@ -165,10 +165,10 @@ public class BaseDaoImpl<T extends BaseEntity<PK>, PK> implements BaseDao<T, PK>
 	 * BaseEntity )
 	 */
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> find(T obj) {
-		 //TODO
-		return null;
+		return (List<T>) this.entityManager.find(this.entityClass,obj);
 	}
 
 	/*

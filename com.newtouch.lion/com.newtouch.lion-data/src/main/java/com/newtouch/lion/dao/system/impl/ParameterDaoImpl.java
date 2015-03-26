@@ -36,5 +36,6 @@ public class ParameterDaoImpl extends BaseDaoImpl<Parameter,Long> implements Par
 	 * 
 	 */
 	private static final long serialVersionUID = 1772480301507118710L;
-
+	
+	
 }
