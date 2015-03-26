@@ -201,8 +201,8 @@ public class LoginController extends AbstractController {
 		String requestHeader=request.getHeader("User-Agent");
 		LoginLog loginLog=new LoginLog();
 		loginLog.setUserId(userInfo.getId());
-		loginLog.setLoginIP(userInfo.getUserIP());
-		loginLog.setLoginMAC(IPAddressUtil.getIPAddress(request));
+		loginLog.setLoginIP(IPAddressUtil.getIPAddress(request));
+		loginLog.setLoginMAC(userInfo.getMacAddress());
 		loginLog.setBrowserName(requestHeader);
 		loginLog.setSessionId(request.getSession().getId());
 		loginLog.setLoginResult(loginResult);
