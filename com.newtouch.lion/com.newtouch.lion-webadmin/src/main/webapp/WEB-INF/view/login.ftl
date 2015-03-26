@@ -49,7 +49,7 @@ Author: wanglijun
 <!-- BEGIN LOGO -->
 <div class="logo">
 	<a href="index.htm">
-		<img src="${base}/resources/admin/layout4/img/logo-big.png" alt=""/>
+		<img src="${base}/resources/logo/logo-login.png" alt=""/>
 	</a>
 </div>
 <!-- END LOGO -->
