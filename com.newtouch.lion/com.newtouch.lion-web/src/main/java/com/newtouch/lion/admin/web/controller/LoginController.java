@@ -203,7 +203,7 @@ public class LoginController extends AbstractController {
 			LoginLog loginLog=new LoginLog();
 			loginLog.setUserId(userInfo.getId());
 			loginLog.setLoginIP(IPAddressUtil.getIPAddress(request));
-			loginLog.setLoginMAC("");
+			loginLog.setLoginMAC(userInfo.getMacAddress());
 			loginLog.setBrowserName(requestHeader);
 			loginLog.setSessionId(request.getSession().getId());
 			loginLog.setLoginResult(loginResult);
