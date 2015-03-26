@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
-<title>日志管理</title>
+<title>登陆日志</title>
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" type="text/css">
 <!--DataTable css Start-->
