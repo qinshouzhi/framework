@@ -35,16 +35,10 @@ $(function() {
 	 //新增
 	 $('#btnAdd').on('click',function(){
 		  addForm.reset();
-      addDialog.find('.modal-header h4 span').text('添加系统参数');
-		  $('.lion-combo').combo('reloadLi');
+		  addDialog.find('.modal-header h4 span').text('添加系统参数');
 	 });
-
-	 addForm.on('show.bs.modal',function(){
-	 	 addForm[0].reset(); 
-	 }); 
-
 	 $('#btnSave').click(function(){
-	 		  addForm.submit();
+	 	addForm.submit();
 	 });
 
 	 //编辑
@@ -134,7 +128,7 @@ function successEditFrm(result,args){
 handleVForm=function(vForm,submitCallBackfn){
 	var addError = $('.alert-danger', vForm);
     var addSuccess = $('.alert-success',vForm);
-	vForm.validate({
+	  vForm.validate({
         errorElement: 'span',
         errorClass: 'help-block help-block-error', 
         focusInvalid: false, 

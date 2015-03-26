@@ -153,6 +153,7 @@ public class ParameterController extends AbstractController{
 	public ModelAndView add(
 			@Valid @ModelAttribute("parameter") ParameterVo parameterVo,
 			Errors errors, ModelAndView modelAndView) {
+		
 		if (!errors.hasErrors()&& this.isExistByNameEn(parameterVo.getNameEn())) {
 			errors.rejectValue(ParameterVo.NAMEEN,
 					"sys.parameter.form.nameen.existed.message",

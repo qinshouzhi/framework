@@ -52,7 +52,7 @@
 					</div>
 					<label class="control-label col-md-2" for="sys_parameter_type" >参数类型</label>
 					<div class="col-md-3">
-					      <select  id="parameterCodeList" name="type"  placeholder="请选择参数列表..."  
+					     <select  id="parameterCodeList" name="type"  placeholder="请选择参数列表..."  
 						 	class="lion-combo form-control select2 input-small" data-valueField='codeValue' 
 						 	data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=SystemParamter">
 						 </select>
@@ -72,7 +72,11 @@
 			</div>
 			<div class="col-md-12">
 				  <!---<@lion.datagrids name="sys_parameter_lists_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/parameter/list.json" dataOptions="" style="height:400px;"/>-->
-				  <table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_parameter_lists_tb" data-singleselect="true",   data-loadurl="${base}/system/parameter/list.json" data-checkbox="true" data-pageSize="10" width="100%">
+				  <table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_parameter_lists_tb" 
+				  data-singleselect="true",   
+				  data-loadurl="${base}/system/parameter/list.json" 
+				  data-checkbox="true" 
+				  data-pageSize="10" width="100%">
 					<thead>
 						<tr>
 						  <th class="table-checkbox"  style="width:30px;" data-field='id' data-checkbox="true">
