@@ -91,7 +91,6 @@ public class LoginController extends AbstractController {
 			currentUser.login(token);
 			logger.info("验证用户和密码结束...");
 			//
-			saveLoginLog(userInfo,"error","login");
 		}catch(UnknownAccountException e){
 			model.addAttribute(Constants.LOGIN_ERROR_MSG,"用户或密码不正确.");
 			logger.error(e.getMessage(),e);
@@ -115,9 +114,10 @@ public class LoginController extends AbstractController {
 			logger.info("用户名:{}，ID：{} 已经登录，重定向到首页", loginUser.getUsername(),userInfo.getId());
 			model.asMap().clear();
 			//
-			saveLoginLog(userInfo,"success","login");
+			//saveLoginLog(userInfo,"success","login");
 			return this.redirect(LOGIN_SUCCESS);
 		}else{
+			 //saveLoginLog(userInfo,"error","login");
 			 token.clear(); 
 		}
 		return LOGIN_RETURN;
@@ -152,7 +152,7 @@ public class LoginController extends AbstractController {
 		if (subject.isAuthenticated()) {
 			UserInfo userInfo = LoginSecurityUtil.getUser();
 			//退出
-			saveLoginLog(userInfo,"success","logout");
+			//saveLoginLog(userInfo,"success","logout");
 			// session 会销毁，在SessionListener监听session销毁，清理权限缓存
 			subject.logout(); 
 			//清除缓存
@@ -197,24 +197,28 @@ public class LoginController extends AbstractController {
 	 * 
 	 * */
 	private void saveLoginLog(UserInfo userInfo,String loginResult,String loginType){
-		HttpServletRequest request=super.getRequest();
-		String requestHeader=request.getHeader("User-Agent");
-		LoginLog loginLog=new LoginLog();
-		loginLog.setUserId(userInfo.getId());
-		loginLog.setLoginIP(IPAddressUtil.getIPAddress(request));
-		loginLog.setLoginMAC(userInfo.getMacAddress());
-		loginLog.setBrowserName(requestHeader);
-		loginLog.setSessionId(request.getSession().getId());
-		loginLog.setLoginResult(loginResult);
-		loginLog.setLoginTime(new Date());
-		if(LoginController.isMobileDevice(requestHeader)){
-			loginLog.setOsInfo("PC");
-        }else{
-        	loginLog.setOsInfo("APP");
-        }
-		
-		loginLog.setLoginType(loginType);
-		loginLogService.save(loginLog);
+		try{
+			HttpServletRequest request=super.getRequest();
+			String requestHeader=request.getHeader("User-Agent");
+			LoginLog loginLog=new LoginLog();
+			loginLog.setUserId(userInfo.getId());
+			loginLog.setLoginIP(IPAddressUtil.getIPAddress(request));
+			loginLog.setLoginMAC("");
+			loginLog.setBrowserName(requestHeader);
+			loginLog.setSessionId(request.getSession().getId());
+			loginLog.setLoginResult(loginResult);
+			loginLog.setLoginTime(new Date());
+			if(!LoginController.isMobileDevice(requestHeader)){
+				loginLog.setOsInfo("PC");
+	        }else{
+	        	loginLog.setOsInfo("APP");
+	        }
+			
+			loginLog.setLoginType(loginType);
+			loginLogService.save(loginLog);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	 /**
      * android : 所有android设备
