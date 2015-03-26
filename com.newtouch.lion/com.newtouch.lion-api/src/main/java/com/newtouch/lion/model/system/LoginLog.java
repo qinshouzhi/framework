@@ -56,6 +56,10 @@ public class LoginLog extends AuditEntity<Long> {
 	private String osInfo;
 	/** 是否登录成功 */
 	private Boolean isSuccess;
+	/**登陆类型*/
+	private String loginType;
+	/**用户*/
+	private User user;
 
 	/*
 	 * (non-Javadoc)
@@ -235,5 +239,21 @@ public class LoginLog extends AuditEntity<Long> {
 	 */
 	public void setIsSuccess(Boolean isSuccess) {
 		this.isSuccess = isSuccess;
+	}
+
+	public String getLoginType() {
+		return loginType;
+	}
+
+	public void setLoginType(String loginType) {
+		this.loginType = loginType;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

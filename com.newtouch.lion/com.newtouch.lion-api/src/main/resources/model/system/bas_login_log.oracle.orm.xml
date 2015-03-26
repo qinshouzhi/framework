@@ -45,7 +45,13 @@
 			</basic>
 			<basic name="isSuccess" >
 				<column name="IS_SUCCESS"  precision="1" scale="0"/>
-			</basic>	 
+			</basic>
+			<basic name="loginType" >
+				<column name="LOGIN_TYPE" length="2" nullable="true" />
+			</basic>
+			<many-to-one name="user" fetch="LAZY">
+				<join-column name="BAS_USER_ID" insertable="false" updatable="false" nullable="false" />
+			</many-to-one>
 		</attributes>
 	</entity>
 </entity-mappings>

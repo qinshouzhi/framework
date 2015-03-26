@@ -6,6 +6,10 @@
  */
 package com.newtouch.lion.admin.web.controller;
 
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -20,7 +24,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.newtouch.lion.common.ip.IPAddressUtil;
 import com.newtouch.lion.common.user.UserInfo;
+import com.newtouch.lion.model.system.LoginLog;
+import com.newtouch.lion.service.system.LoginLogService;
 import com.newtouch.lion.web.controller.AbstractController;
 import com.newtouch.lion.web.shiro.authc.CredentialExpiredException;
 import com.newtouch.lion.web.shiro.authc.ExpiredAccountException;
@@ -60,6 +67,10 @@ public class LoginController extends AbstractController {
 	/** Shiro Session缓存管理*/
 	@Autowired
 	private SessionCacheManager sessionCacheManager;
+	
+	/**登陆日志*/
+	@Autowired
+	private LoginLogService loginLogService;
 	/***
 	 * 接收登录请求
 	 * @param loginUser
@@ -79,6 +90,8 @@ public class LoginController extends AbstractController {
 			logger.info("验证用户和密码开始...");
 			currentUser.login(token);
 			logger.info("验证用户和密码结束...");
+			//
+			saveLoginLog(userInfo,"error","login");
 		}catch(UnknownAccountException e){
 			model.addAttribute(Constants.LOGIN_ERROR_MSG,"用户或密码不正确.");
 			logger.error(e.getMessage(),e);
@@ -101,12 +114,16 @@ public class LoginController extends AbstractController {
 		if(currentUser.isAuthenticated()){
 			logger.info("用户名:{}，ID：{} 已经登录，重定向到首页", loginUser.getUsername(),userInfo.getId());
 			model.asMap().clear();
+			//
+			saveLoginLog(userInfo,"success","login");
 			return this.redirect(LOGIN_SUCCESS);
 		}else{
 			 token.clear(); 
 		}
 		return LOGIN_RETURN;
 	}
+	
+	
 	/****
 	 * 登录跳转
 	 * @param model
@@ -134,6 +151,8 @@ public class LoginController extends AbstractController {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.isAuthenticated()) {
 			UserInfo userInfo = LoginSecurityUtil.getUser();
+			//退出
+			saveLoginLog(userInfo,"success","logout");
 			// session 会销毁，在SessionListener监听session销毁，清理权限缓存
 			subject.logout(); 
 			//清除缓存
@@ -173,4 +192,46 @@ public class LoginController extends AbstractController {
 		model.addAttribute(Constants.FORCE_LOGOUT, forcelogout);
 		return  this.redirect(REDIRECT_LOGIN);
 	}
+	
+	/**
+	 * 
+	 * */
+	private void saveLoginLog(UserInfo userInfo,String loginResult,String loginType){
+		HttpServletRequest request=super.getRequest();
+		String requestHeader=request.getHeader("User-Agent");
+		LoginLog loginLog=new LoginLog();
+		loginLog.setUserId(userInfo.getId());
+		loginLog.setLoginIP(userInfo.getUserIP());
+		loginLog.setLoginMAC(IPAddressUtil.getIPAddress(request));
+		loginLog.setBrowserName(requestHeader);
+		loginLog.setSessionId(request.getSession().getId());
+		loginLog.setLoginResult(loginResult);
+		loginLog.setLoginTime(new Date());
+		if(LoginController.isMobileDevice(requestHeader)){
+			loginLog.setOsInfo("PC");
+        }else{
+        	loginLog.setOsInfo("APP");
+        }
+		
+		loginLog.setLoginType(loginType);
+		loginLogService.save(loginLog);
+	}
+	 /**
+     * android : 所有android设备
+     * mac os : iphone ipad
+     * windows phone:Nokia等windows系统的手机
+     */
+	public static boolean  isMobileDevice(String requestHeader){
+       
+		String[] deviceArray = new String[]{"android","mac os","windows phone"};
+        if(requestHeader == null)
+            return false;
+        requestHeader = requestHeader.toLowerCase();
+        for(int i=0;i<deviceArray.length;i++){
+            if(requestHeader.indexOf(deviceArray[i])>0){
+                return true;
+            }
+        }
+        return false;
+    }
 }

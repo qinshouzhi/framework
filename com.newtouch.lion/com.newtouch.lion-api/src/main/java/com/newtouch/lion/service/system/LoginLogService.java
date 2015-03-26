@@ -7,6 +7,7 @@
 package com.newtouch.lion.service.system; 
 
 import com.newtouch.lion.model.system.LoginLog;
+import com.newtouch.lion.model.system.LoginLogGroup;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 
@@ -30,7 +31,10 @@ import com.newtouch.lion.query.QueryCriteria;
  */
 public interface LoginLogService  {
 
-	PageResult<LoginLog> doFindByCriteria(QueryCriteria queryCriteria);
+	
+	PageResult<LoginLogGroup> doFindByCriteria(QueryCriteria queryCriteria);
+	
+	void save(LoginLog loginLog);
 
 }
 
