@@ -221,6 +221,7 @@ function formatterCodeList(val,row) {
 
 //测试选择中checkbox
 function formatterCheckBox(data,type,full){
+
 	return data;
 }
 

@@ -29,6 +29,7 @@
 				<value>model/system/bas_common.${database.prefix}.orm.xml</value>
 				<value>model/system/bas_login_log.${database.prefix}.orm.xml</value>
 				<value>model/system/bas_system.${database.prefix}.orm.xml</value>
+				<value>model/system/bas_tasks.${database.prefix}.orm.xml</value>
 			</list>
 		</property>
 		<property name="jpaProperties">
