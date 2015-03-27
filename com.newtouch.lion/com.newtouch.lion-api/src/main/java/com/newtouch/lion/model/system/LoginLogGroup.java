@@ -1,19 +1,20 @@
-package com.newtouch.lion.admin.web.model.system.loginlog;
+package com.newtouch.lion.model.system;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class LoginLogVo implements Serializable {
+import com.newtouch.lion.model.BaseEntity;
 
+public class LoginLogGroup extends BaseEntity<Long> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3974177953044281146L;
-
+	private static final long serialVersionUID = 9176092542944595229L;
 	/** 用户登录Id */
 	private Long id;
 	/** 用户登录Id */
 	private Long userId;
+	/** 用户登录名称 */
+	private String username;
 	/** 用户登录IP地址 */
 	private String loginIP;
 	/** 用户登录MAC地址 */
@@ -32,13 +33,23 @@ public class LoginLogVo implements Serializable {
 	private String osInfo;
 	/** 是否登录成功 */
 	private Boolean isSuccess;
-
-	public Long getId() {
-		return id;
+	/** 登陆类型 */
+	private String loginType;
+	/**默认构造函数*/
+	public LoginLogGroup(){super();}
+	/**无参*/
+	public LoginLogGroup(String loginType,Date loginTime,Date logoutTime,String username,String osInfo){
+		super();
+		this.loginType=loginType;
+		this.loginTime=loginTime;
+		this.logoutTime=logoutTime;
+		this.username=username;
+		this.osInfo=osInfo;
 	}
-
-	public void setId(Long id) {
-		this.id = id;
+	@Override
+	public Long getId() {
+		// TODO Auto-generated method stub
+		return this.id;
 	}
 
 	public Long getUserId() {
@@ -47,6 +58,14 @@ public class LoginLogVo implements Serializable {
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getLoginIP() {
@@ -119,6 +138,18 @@ public class LoginLogVo implements Serializable {
 
 	public void setIsSuccess(Boolean isSuccess) {
 		this.isSuccess = isSuccess;
+	}
+
+	public String getLoginType() {
+		return loginType;
+	}
+
+	public void setLoginType(String loginType) {
+		this.loginType = loginType;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

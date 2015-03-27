@@ -15,21 +15,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.newtouch.lion.admin.web.model.system.loginlog.LoginLogVo;
-import com.newtouch.lion.admin.web.model.system.role.RoleVo;
-import com.newtouch.lion.common.date.DateUtil;
+import com.newtouch.lion.admin.web.model.system.loginlog.LoginLogGroupVo;
 import com.newtouch.lion.common.file.FileUtil;
 import com.newtouch.lion.data.DataTable;
 import com.newtouch.lion.model.datagrid.DataGrid;
-import com.newtouch.lion.model.system.LoginLog;
-import com.newtouch.lion.model.system.Role;
+import com.newtouch.lion.model.system.LoginLogGroup;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.datagrid.DataGridService;
@@ -37,7 +33,6 @@ import com.newtouch.lion.service.excel.ExcelExportService;
 import com.newtouch.lion.service.system.LoginLogService;
 import com.newtouch.lion.web.controller.AbstractController;
 import com.newtouch.lion.web.model.QueryDt;
-import com.newtouch.lion.web.model.QueryVo;
 
 /**
  * <p>
@@ -84,7 +79,7 @@ public class LoginLogController extends AbstractController{
 
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public DataTable<LoginLog> list(QueryDt query,@ModelAttribute("loginLog") LoginLogVo loginLogVo) {
+	public DataTable<LoginLogGroup> list(QueryDt query,@ModelAttribute("loginLogGroupVo") LoginLogGroupVo loginLogGroupVo) {
 		QueryCriteria queryCriteria = new QueryCriteria();
 
 		// 设置分页 启始页
@@ -98,12 +93,12 @@ public class LoginLogController extends AbstractController{
 		} else {
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
 		}
-//		// 查询条件 参数类型
-//		if (StringUtils.isNotEmpty(parameterVo.getType())) {
-//			queryCriteria.addQueryCondition("type", parameterVo.getType());
-//		}
+		// 查询条件 参数类型
+		if (StringUtils.isNotEmpty(loginLogGroupVo.getUserName())) {
+			queryCriteria.addQueryCondition("username", loginLogGroupVo.getUserName());
+		}
 
-		PageResult<LoginLog> pageResult = loginLogService.doFindByCriteria(queryCriteria);
+		PageResult<LoginLogGroup> pageResult = loginLogService.doFindByCriteria(queryCriteria);
 		return pageResult.getDataTable(query.getRequestId());
 	}
 	/****
@@ -115,7 +110,7 @@ public class LoginLogController extends AbstractController{
 	 */
 	@RequestMapping(value = "export")
 	@ResponseBody
-	public ModelAndView exportExcel(@RequestParam(required=false) String tableId,@RequestParam(required = false) String sort,@RequestParam(required = false) String order,@ModelAttribute("loginLog") LoginLogVo loginLogVo,ModelAndView modelAndView){
+	public ModelAndView exportExcel(@RequestParam(required=false) String tableId,@RequestParam(required = false) String sort,@RequestParam(required = false) String order,@ModelAttribute("loginLogGroupVo") LoginLogGroupVo loginLogGroupVo,ModelAndView modelAndView){
 		
 		DataGrid dataGrid=dataGridService.doFindByTableIdAndSort(tableId);
 		QueryCriteria queryCriteria=new QueryCriteria();
@@ -128,16 +123,16 @@ public class LoginLogController extends AbstractController{
 			queryCriteria.setOrderField(DEFAULT_ORDER_FILED_NAME);
 			queryCriteria.setOrderDirection("ASC");
 		}
-		//查询条件 中文参数名称按模糊查询
-		//if(StringUtils.isNotEmpty(roleVo.getNameZh())){
-		//	queryCriteria.addQueryCondition("nameZh","%"+roleVo.getNameZh()+"%");
-		//}
+		// 查询条件 参数类型
+		if (StringUtils.isNotEmpty(loginLogGroupVo.getUserName())) {
+			queryCriteria.addQueryCondition("username", loginLogGroupVo.getUserName());
+		}
 
-		PageResult<LoginLog> result=loginLogService.doFindByCriteria(queryCriteria);
+		PageResult<LoginLogGroup> result=loginLogService.doFindByCriteria(queryCriteria);
+		
 		Map<String, Map<Object, Object>> fieldCodeTypes = new HashMap<String, Map<Object, Object>>();
 
 		Map<String, String> dataFormats = new HashMap<String, String>();		
-		//dataFormats.put("birthday", DateUtil.FORMAT_DATE_YYYY_MM_DD);
 		//创建.xls的文件名
 		String fileName=this.createFileName(FileUtil.EXCEL_EXTENSION);
 		

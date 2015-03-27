@@ -45,7 +45,34 @@
 			</basic>
 			<basic name="isSuccess" >
 				<column name="IS_SUCCESS"  precision="1" scale="0"/>
-			</basic>	 
+			</basic>
+			<basic name="loginType" >
+				<column name="LOGIN_TYPE" length="2" nullable="true" />
+			</basic>
+			<many-to-one name="user" fetch="LAZY">
+				<join-column name="BAS_USER_ID" insertable="false" updatable="false" nullable="false" />
+			</many-to-one>
+		</attributes>
+	</entity>
+	
+	<entity class="OperationLog">
+		<table name="T_OPTION_LOG" />
+		<sequence-generator name="SEQ_T_OPTION_LOG" 	sequence-name="SEQ_T_OPTION_LOG"  allocation-size="1"/>
+		<attributes>
+			<id name="id" >
+				<column name="id" unique="true" nullable="false"
+					precision="11" scale="0" />
+				<generated-value strategy="SEQUENCE" generator="SEQ_T_OPTION_LOG" />
+			</id>
+			<basic name="branch_company_code" >
+				<column name="branch_company_code"  nullable="false" precision="11" scale="0"/>
+			</basic>
+		 	<basic name="employee_id" >
+				<column name="employee_id" length="20" nullable="true" />
+			</basic>
+			<basic name="resource_id" >
+				<column name="resource_id" length="20" nullable="true" />
+			</basic>
 		</attributes>
 	</entity>
 </entity-mappings>

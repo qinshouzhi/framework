@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
-<title>日志管理</title>
+<title>登陆日志</title>
 <link href="${base}/resources/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="${base}/resources/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" type="text/css">
 <!--DataTable css Start-->
@@ -45,9 +45,9 @@
 		<div class="row">
 			<div class="col-md-12 margin-bottom-10">
 				<form id="queryform" class="form-horizontal">
-					<label class="col-md-1" for="userId" >用户名</label>
+					<label class="col-md-1" for="userName" >用户名</label>
 					<div class="col-md-2">
-						<input class="form-control input-small" type="text" size="30" name="username" id="username"  placeholder="请输入用户名称"/>					
+						<input class="form-control input-small" type="text" size="30" name="userName" id="userName"  placeholder="请输入用户名称"/>					
 					</div>
 					<div class="col-md-1">
 						<a href="javascript:void(0)" class="btn blue" id="btnQuery"><i class="fa fa-search"></i>
@@ -61,7 +61,7 @@
 					</div>
 				</form>
 			</div>
-		    <div class="col-md-12 margin-bottom-10" id="toolbar">
+		    <div class="col-md-12 col-md-offset-11 margin-bottom-10" id="toolbar">
 				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green">
 					<i class="fa  fa-file-excel-o"></i> <@spring.message "common.toolbar.btn.export.text"/> 
 				</a>
@@ -71,13 +71,13 @@
 				<table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_login_log_list_tb" data-singleselect="true",   data-loadUrl="${base}/system/loginlog/list.json" data-checkbox="true" data-pageSize="10">
 					<thead>
 						<tr>
-							<th data-field='userId' data-sortDir="asc"    style="width:100px;">
+							<th data-field='username' data-sortDir="asc"    style="width:100px;">
 								用户名
 							</th>
 							<th data-field="osInfo" style="width:100px;">
 							 	操作系统
 							</th>
-							<th data-field="userId" style="width:100px;">
+							<th data-field="loginType" style="width:100px;">
 								操作类型
 							</th>
 							<th data-field="loginTime" style="width:100px;" >
