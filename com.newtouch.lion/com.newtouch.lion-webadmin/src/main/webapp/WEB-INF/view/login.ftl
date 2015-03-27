@@ -56,8 +56,10 @@ Author: wanglijun
 <!-- BEGIN LOGIN -->
 <div class="content">
 	<!-- BEGIN LOGIN FORM -->
-	<form class="login-form"  method="post">
-		<h3 class="form-title"><@spring.message "login.dialog.title.welcome"/></h3>
+	<form class="login-form"  method="post"  action="${base}/login.htm">
+		<h3 class="form-title">
+			<@spring.message "login.dialog.title.welcome"/>
+		</h3>
 		<div class="alert alert-danger display-hide" <#if  login_error?length gt 0>style="display:block;"</#if> >
 			<button class="close" data-close="alert"></button>
 			<span>
