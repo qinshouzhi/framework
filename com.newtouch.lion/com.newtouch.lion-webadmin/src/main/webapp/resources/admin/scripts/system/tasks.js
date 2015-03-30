@@ -11,8 +11,6 @@ $(function(){
   
 //验证表单
   handleVForm(addForm,submitForm);
- 
-
 
 });
 
