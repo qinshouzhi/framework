@@ -45,19 +45,6 @@
 <div class="portlet light">
 	<div class="portlet-body">
 		<div class="row">
-			<!--<div class="col-md-12 margin-bottom-10">
-				<form id="queryform" class="form-horizontal">
-					<label class="control-label col-md-2" for="nameZh" >资源名称</label>
-					<div class="col-md-3">
-						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="请输入资源名称"/>					
-					</div>
-					<div class="col-md-2">
-					</div>
-					<div class="col-md-2">
-						<a href="javascript:void(0)" class="btn blue"><i class="fa fa-search"></i> 查 询 </a>
-					</div>
-				</form>
-			</div>-->
 			<div class="col-md-12 margin-bottom-10" id="toolbar">
 				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic">
 					<i class="fa fa-plus"></i>  <@spring.message "common.toolbar.btn.add.text"/> </a>
