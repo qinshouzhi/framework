@@ -22,13 +22,11 @@ public class TasksServiceImpl extends AbstractService implements TasksService {
 	TasksDao tasksDao;
 	@Override
 	public Tasks doFindById(long id) {
-		// TODO Auto-generated method stub
 		return this.tasksDao.findById(id);
 	}
 
 	@Override
 	public int doDeleteById(Long id) {
-		// TODO Auto-generated method stub
 		String hql = "delete from Tasks t where t.id=:id";
 		Map<String,Object> params = new HashMap<String, Object>();
 		params.put("id", id);
@@ -38,13 +36,11 @@ public class TasksServiceImpl extends AbstractService implements TasksService {
 
 	@Override
 	public void doDelete(Tasks tasks) {
-		// TODO Auto-generated method stub
 		this.tasksDao.remove(tasks);
 	}
 
 	@Override
 	public PageResult<Tasks> doFindByCriteria(QueryCriteria criteria) {
-		// TODO Auto-generated method stubs
 		String queryEntry = "from Tasks";
 		
 		String[] whereBodies = {"name like:name","beanClass =:beanClass"};
@@ -70,14 +66,12 @@ public class TasksServiceImpl extends AbstractService implements TasksService {
 
 	@Override
 	public void doCreate(Tasks tasks) {
-		// TODO Auto-generated method stub
 		Assert.notNull(tasks);
 		this.tasksDao.save(tasks);
 	}
 
 	@Override
 	public Tasks doUpdate(Tasks tasks) {
-		// TODO Auto-generated method stub
 		Assert.notNull(tasks);
 		this.tasksDao.update(tasks);
 		return tasks;
@@ -98,12 +92,11 @@ public class TasksServiceImpl extends AbstractService implements TasksService {
 
 	@Override
 	public boolean doIsExistByTasksBeanClass(String beanClass) {
-		// TODO Auto-generated method stub
-				Assert.notNull(beanClass);
-				Tasks tasks = this.doFindTypeByTasksBeanClass(beanClass);
-				if (tasks != null)
-					return true;
-				return false;
+		Assert.notNull(beanClass);
+		Tasks tasks = this.doFindTypeByTasksBeanClass(beanClass);
+		if (tasks != null)
+			return true;
+		return false;
 	}
 
 }

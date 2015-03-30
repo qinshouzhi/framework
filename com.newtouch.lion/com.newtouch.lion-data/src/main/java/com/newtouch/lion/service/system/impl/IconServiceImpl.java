@@ -70,7 +70,6 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	 */
 	@Override
 	public void doDelete(Icon icon) {
-	 
 		this.iconDao.remove(icon);
 	}
 
@@ -79,7 +78,6 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	 */
 	@Override
 	public PageResult<Icon> doFindByCriteria(QueryCriteria criteria) {
-	 
 		String queryEntry = "from Icon";
 		
 		String[] whereBodies = {"iconType =:iconType"," iconClass like:iconClass " };
@@ -117,7 +115,6 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	 */
 	@Override
 	public Icon doUpdate(Icon icon) {
-	 
 		Assert.notNull(icon);
 		iconDao.update(icon);
 		return icon;
@@ -128,7 +125,6 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	 */
 	@Override
 	public Icon doFindTypeByIconClass(String iconClass) {
-	 
 		Assert.notNull(iconClass);
 		String hql = "from Icon where iconClass=:iconClass";
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -145,7 +141,6 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	 */
 	@Override
 	public boolean doIsExistByIconClass(String iconClass) {
-		
 		Assert.notNull(iconClass);
 		Icon icon = this.doFindTypeByIconClass(iconClass);
 		if (icon != null)

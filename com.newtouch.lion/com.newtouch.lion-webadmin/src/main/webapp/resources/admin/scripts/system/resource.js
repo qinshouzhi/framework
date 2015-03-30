@@ -32,9 +32,6 @@ $(function() {
       return;
 	 });
 
-	 addForm.on('show.bs.modal',function(){
-	 	 addForm[0].reset(); 
-	 }); 
 
 	 $('#btnSave').click(function(){
 	 		addForm.submit();
@@ -50,11 +47,18 @@ $(function() {
 		 addDialog.find('.modal-header h4 span').text('编辑资源');
      addDialog.modal('toggle');
 		 addForm.fill(row);
+   
      $('#sysresourcetype').combo('val',[row.type]);
-     $('#sysresourcetarget').combo('val',[row.target]);  
+     $('#sysresourcetarget').combo('val',[row.target]); 
+     $('#sys_resource_icon').combo('val',[row.icon]);
      $("#parentResourceId").combotree('val',row._parentId);
       
 	 });
+   //监听change事件
+   $('#sys_resource_icon').on('combo.change',function(){
+        var icon=$(this).combo('val');
+        $('#span_resource_icon').html('<i class="'+icon+'"></>');
+   });
 	 //删除
 	 $('#btnDelete').on('click',function(){
 		 var row=getSelectedRow();

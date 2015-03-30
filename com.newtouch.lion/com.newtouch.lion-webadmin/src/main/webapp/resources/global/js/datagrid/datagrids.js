@@ -126,7 +126,6 @@
            if(util.isEmpty(data)){
               return this.options.querydata;
            }else{
-              console.dir(data);
               this.options.querydata=data;
            }
 

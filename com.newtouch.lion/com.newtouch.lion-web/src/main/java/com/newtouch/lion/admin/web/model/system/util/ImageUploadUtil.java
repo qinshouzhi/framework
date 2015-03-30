@@ -10,6 +10,8 @@ package com.newtouch.lion.admin.web.model.system.util;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,11 +33,28 @@ import org.springframework.web.multipart.MultipartFile;
  * @version 1.0
  */
 public class ImageUploadUtil {
+	
 	private static String IMAGE_JPEG = "FFD8FF";
 	private static String IMAGE_JPG = "FFD8FF";
 	private static String IMAGE_PNG = "89504E47";
 	private static String IMAGE_GIF = "47494638";
 	
+	private static  Map<String,String> IMAGE_MAP;
+	
+	static{
+		IMAGE_MAP=new HashMap<String, String>();
+		IMAGE_MAP.put("FFD8FF", "JPEG");
+		IMAGE_MAP.put("FFD8FF", "JPEG");
+		IMAGE_MAP.put("89504E47", "JPEG");
+		IMAGE_MAP.put("47494638", "JPEG");
+	}
+	
+	/***
+	 * 
+	 * @param image
+	 * @return
+	 * @throws IOException
+	 */
 	public static boolean isImage(MultipartFile image) throws IOException{
 		
 		boolean flag = false;
@@ -48,19 +67,20 @@ public class ImageUploadUtil {
         }
         // 获取上传文件的文件头判断是否是图片
         String imgHead = bytesToHexString(b);
-        System.out.println(imgHead+"========================");
-        if (IMAGE_JPEG.equalsIgnoreCase(imgHead)) {
-            flag = true;
-        }else if(IMAGE_JPG.equalsIgnoreCase(imgHead)){
-        	flag = true;
-        } else if (IMAGE_PNG.equalsIgnoreCase(imgHead)) {
-            flag = true;
-        } else if (IMAGE_GIF.equalsIgnoreCase(imgHead)) {
-            flag = true;
+      
+        
+        if(IMAGE_MAP.containsKey(imgHead.toUpperCase())){
+        	flag=true;
         }
 		return flag;
 	}
 	
+	/***
+	 * 
+	 * @param input
+	 * @return
+	 * @throws IOException
+	 */
 	private static byte[] readInputStream(InputStream input) throws IOException {
 	    ByteArrayOutputStream output = new ByteArrayOutputStream();
 	    byte[] buffer = new byte[4096];

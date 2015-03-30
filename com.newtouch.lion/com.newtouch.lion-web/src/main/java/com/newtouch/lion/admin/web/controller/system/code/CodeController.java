@@ -93,11 +93,11 @@ public class CodeController {
 	@RequestMapping("icon")
 	@ResponseBody
 	public List<Icon> comboxIcon(@RequestParam String iconType){
-		List<Icon> icons=null;
+		 
 		List<Icon> list=iconService.doFindByType(iconType);
 		if(CollectionUtils.isEmpty(list)){
-			return icons=new ArrayList<Icon>();
+			return list=new ArrayList<Icon>();
 		}
-		return  icons;
+		return  list;
 	}
 }

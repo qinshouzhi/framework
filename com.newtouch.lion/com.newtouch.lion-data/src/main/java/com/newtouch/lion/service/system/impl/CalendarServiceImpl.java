@@ -47,7 +47,6 @@ public class CalendarServiceImpl implements CalendarService {
 	 */
 	@Override
 	public Calendar doFindById(Long id) {
-		// TODO Auto-generated method stub
 		return this.calendarDao.findById(id);
 	}
 
@@ -56,7 +55,6 @@ public class CalendarServiceImpl implements CalendarService {
 	 */
 	@Override
 	public int doDeleteById(Long id) {
-		// TODO Auto-generated method stub
 		String hql="delete from Calendar c where c.id=:id";
 		Map<String,Object> params=new  HashMap<String, Object>();
 		params.put("id",id);
@@ -68,7 +66,6 @@ public class CalendarServiceImpl implements CalendarService {
 	 */
 	@Override
 	public void doDeleteByObj(Calendar calendar) {
-		// TODO Auto-generated method stub
 		this.calendarDao.remove(calendar);
 	}
 
@@ -77,7 +74,6 @@ public class CalendarServiceImpl implements CalendarService {
 	 */
 	@Override
 	public Calendar doUpdateObj(Calendar calendar) {
-		// TODO Auto-generated method stub
 		this.calendarDao.update(calendar);
 		return calendar;
 	}
@@ -87,7 +83,6 @@ public class CalendarServiceImpl implements CalendarService {
 	 */
 	@Override
 	public void doCreateObj(Calendar calendar) {
-		// TODO Auto-generated method stub
 		this.calendarDao.save(calendar);
 	}
 
@@ -96,7 +91,6 @@ public class CalendarServiceImpl implements CalendarService {
 	 */
 	@Override
 	public List<Calendar> doFindCalendarByuser(User user) {
-		// TODO Auto-generated method stub
 		String hql = "from Calendar where user.id=:id";
 		Map<String,Object>  params=new HashMap<String, Object>();
 		params.put("id",user.getId());
@@ -108,7 +102,6 @@ public class CalendarServiceImpl implements CalendarService {
 	 */
 	@Override
 	public List<Calendar> doFindCalendarByuser(Long userId, Date start, Date end) {
-		// TODO Auto-generated method stub
 		String hql = "from Calendar where userId=:userId and startdate between :start and :end";
 		Map<String,Object>  params=new HashMap<String, Object>();
 		params.put("userId",userId);

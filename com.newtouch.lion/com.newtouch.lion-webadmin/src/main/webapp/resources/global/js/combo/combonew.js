@@ -42,6 +42,7 @@
     	valuefield:'id',//Value的key
     	selectedField:'selected',//是否选中的key
     	selected:false,//是否根据后台数据默认选择中相应参数
+        icon:false,//是否显示图标
     };
 
     var Combo=function combo(element,options,e){
@@ -65,6 +66,8 @@
     	}
     	//数据列表
     	this.data={};
+        //添加事件监听
+        this.addLisenterEvent();
     };
     //创建对象
     Combo.prototype={
@@ -139,6 +142,7 @@
         	 	 idKey=this.options.valuefield||'id',
         	 	 textKey=this.options.textfield||'text',
         	 	 selectedKey=this.options.selectedField||'selected';
+
         	 function buildOptions(data){
         	 	 that.data=data;
         	     //判断数据是否空
@@ -165,7 +169,7 @@
         	     	  
         	     });
         	     //重新加载并选择；
-        	     delayfunc(selectedKeys);        	     
+        	     delayfunc(selectedKeys);      
          	 }
          	 
         	 function delayfunc(){
@@ -179,6 +183,16 @@
         //刷新数据
         refresh:function(){
         	this.loading();
+        },
+        //加载事件
+        addLisenterEvent:function(){
+            var change_event = $.Event('combo.change'),that=this;
+            this.init().on('change',function(e){
+                that.$element.trigger(change_event);
+                      //如已经事件阻止，则返回
+                if (change_event.isDefaultPrevented()) return;
+            });
+          
         }
     };
 

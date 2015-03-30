@@ -205,6 +205,7 @@
 				if (node) {
 					this.$treeObj.selectNode(node,true);
 					this.$newElement.find('.btn span').text(node.name);
+					this.$element.val(node.id);
 				}
 			}
 		},
