@@ -61,6 +61,7 @@
 		<dom4j.version>1.6.1</dom4j.version>
 		<xstream.version>1.4.6</xstream.version>
 		<jedis.version>2.2.1</jedis.version>
+		<spring-data-redis.version>1.5.0.RELEASE</spring-data-redis.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -714,7 +715,14 @@
 				<artifactId>httpcore</artifactId>
 				<version>${httpcore.version}</version>
 			</dependency>
-			<dependency>
+			<!-- org.springframework.data -->
+		    <dependency>
+		        <groupId>org.springframework.data</groupId>
+		        <artifactId>spring-data-redis</artifactId>
+		        <version>${spring-data-redis.version}</version>
+		    </dependency>
+		    
+		    <dependency>
 				<groupId>redis.clients</groupId>
 				<artifactId>jedis</artifactId>
 				<version>${jedis.version}</version>
