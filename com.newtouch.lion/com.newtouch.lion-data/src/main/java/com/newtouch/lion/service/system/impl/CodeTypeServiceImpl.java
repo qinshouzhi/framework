@@ -214,7 +214,6 @@ public class CodeTypeServiceImpl extends AbstractService implements  CodeTypeSer
 	@Override
 	public CodeType doUpdateByParams(Long id, String type, String nameEn,
 			String nameZh, Integer codeLenLimit, Boolean editable) {
-		// TODO Auto-generated method stub
 		CodeType codeType=this.codeTypeDao.findById(id);
 		codeType.setType(type);
 		codeType.setCodeLenLimit(codeLenLimit);
@@ -258,7 +257,6 @@ public class CodeTypeServiceImpl extends AbstractService implements  CodeTypeSer
 	 */
 	@Override
 	public boolean doIsExistByNameEn(String nameEn) {
-		// TODO Auto-generated method stub
 		Assert.notNull(nameEn);
 		CodeType codeType = this.doFindTypeByNameEn(nameEn);
 		if (codeType != null)
@@ -287,7 +285,6 @@ public class CodeTypeServiceImpl extends AbstractService implements  CodeTypeSer
 	 */
 	@Override
 	public void doCreate(CodeType codeType) {
-		// TODO Auto-generated method stub
 		Assert.notNull(codeType);
 		codeTypeDao.save(codeType);
 	}

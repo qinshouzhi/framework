@@ -50,7 +50,6 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	 */
 	@Override
 	public Icon doFindById(long id) {
-		// TODO Auto-generated method stub
 		return this.iconDao.findById(id);
 	}
 
@@ -59,7 +58,6 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	 */
 	@Override
 	public int doDeleteById(Long id) {
-		// TODO Auto-generated method stub
 		String hql="delete from Icon i where i.id=:id";
 		Map<String,Object> params=new  HashMap<String, Object>();
 		params.put("id",id);
@@ -71,7 +69,6 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	 */
 	@Override
 	public void doDelete(Icon icon) {
-		// TODO Auto-generated method stub
 		this.iconDao.remove(icon);
 	}
 
@@ -80,7 +77,6 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	 */
 	@Override
 	public PageResult<Icon> doFindByCriteria(QueryCriteria criteria) {
-		// TODO Auto-generated method stub
 		String queryEntry = "from Icon";
 		
 		String[] whereBodies = {"iconType =:iconType"," iconClass like:iconClass " };
@@ -109,7 +105,6 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	 */
 	@Override
 	public void doCreate(Icon icon) {
-		// TODO Auto-generated method stub
 		Assert.notNull(icon);
 		iconDao.save(icon);
 	}
@@ -119,7 +114,6 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	 */
 	@Override
 	public Icon doUpdate(Icon icon) {
-		// TODO Auto-generated method stub
 		Assert.notNull(icon);
 		iconDao.update(icon);
 		return icon;
@@ -130,7 +124,6 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	 */
 	@Override
 	public Icon doFindTypeByIconClass(String iconClass) {
-		// TODO Auto-generated method stub
 		Assert.notNull(iconClass);
 		String hql = "from Icon where iconClass=:iconClass";
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -147,7 +140,6 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	 */
 	@Override
 	public boolean doIsExistByIconClass(String iconClass) {
-		// TODO Auto-generated method stub
 		Assert.notNull(iconClass);
 		Icon icon = this.doFindTypeByIconClass(iconClass);
 		if (icon != null)
