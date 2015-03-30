@@ -47,7 +47,6 @@ $(function() {
 	 $('#btnSave').click(function(){
 	 		addForm.submit();
 	 });
-
 	 //编辑
 	 $('#btnEdit').on('click',function(){
 		 var row=getSelectedRow();
@@ -210,16 +209,24 @@ handleVForm=function(vForm,submitCallBackfn){
   					    type: 'post',               //数据发送方式
   					    dataType: 'json',           //接受数据格式   
   					    data: {                     //要传递的数据
-					           nameEn: function() {
+					          nameEn: function() {
 					            return $('#name').val();
-					           },
-	                       id:function(){
-	                         var id=($('#id').val());
-	                         if(lion.util.isNotEmpty(id)){
-	                           return id;
-	                         }
-	                         return '';
-	                       }
+					          },
+					          id:function(){
+                      var id=($('#id').val());
+                      if(lion.util.isNotEmpty(id)){
+                        return id;
+                      }
+                      return '';
+                    },
+                    dataGridId:function(){
+                      var dataGridId=$('#dataGridList').combo('val');
+                      console.dir(dataGridId);
+                      if(lion.util.isNotEmpty(dataGridId)){
+                        return dataGridId;
+                      }
+	                    return '';
+	                  }
 				          }
           			}
             },
