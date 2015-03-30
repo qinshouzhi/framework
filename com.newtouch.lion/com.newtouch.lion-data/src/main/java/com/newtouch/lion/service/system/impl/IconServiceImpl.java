@@ -8,6 +8,7 @@
 package com.newtouch.lion.service.system.impl; 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	 * @see com.newtouch.lion.service.system.IconService#doDeleteById(java.lang.Long)
 	 */
 	@Override
-	public int doDeleteById(Long id) {
+	public int doDeleteById(Long id) {	 
 		String hql="delete from Icon i where i.id=:id";
 		Map<String,Object> params=new  HashMap<String, Object>();
 		params.put("id",id);
@@ -148,7 +149,14 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	}
 	
 	
-	
+	@Override
+	public List<Icon> doFindByType(String iconType) {
+		Assert.notNull(iconType);		 
+		String queryHQL = "from Icon where iconType=:iconType";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("iconType", iconType);
+		return iconDao.query(queryHQL, params);
+	}
 }
 
 	

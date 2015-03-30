@@ -294,7 +294,7 @@ public class BaseDaoImpl<T extends BaseEntity<PK>, PK> implements BaseDao<T, PK>
 	public List<T> query(String hql, Map<String, ?> params) {
 
 		Query query = this.entityManager.createQuery(hql);
-		this.setParams(query, params);
+		this.setParams(query,params);
 		return query.getResultList();
 	}
 

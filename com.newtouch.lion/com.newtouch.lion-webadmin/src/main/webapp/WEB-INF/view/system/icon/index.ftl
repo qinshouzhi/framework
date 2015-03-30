@@ -16,6 +16,7 @@
 <link href="${base}/resources/global/css/combotree/combotree.css" rel="stylesheet" type="text/css" />
 <!-- DataTables js Start -->
 <script type="text/javascript" src="${base}/resources/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="${base}/resources/global/plugins/select2/select2_locale_zh-CN.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/media/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.js"></script>
@@ -57,7 +58,7 @@
 					<div class="col-md-3">
 						<select  id="iconTypeList" name="iconType"  placeholder="<@spring.message "sys.icon.form.class.missing.message"/>..."  
 						 	class="lion-combo form-control select2" data-valueField='codeValue' 
-						 	data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=IconType">
+						 	data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=ICON_TYPE">
 						</select>
 					</div>
 					<div class="col-md-2">
@@ -97,10 +98,10 @@
 							<th data-field='iconType' data-sortDir="asc" style="width:100px;" data-formatter="formatterCodeList">
 								图标类型
 							</th>
-							<th data-field="iconClass" style="width:100px;">
+							<th data-field="iconClass" style="width:100px;"  data-formatter="formatterIconI">
 							 	图标类名
 							</th>
-							<th data-field="iconImage" style="width:100px;" data-formatter="formatterImage">
+							<th data-field="iconImage" style="width:100px;"  data-formatter="formatterImage">
 								图标图片
 							</th>
 							<th data-field="createdDate" style="width:100px;">
@@ -144,7 +145,7 @@
 									<div class="col-md-5">
 										 <select  id="iconType" name="iconType"  placeholder="<@spring.message "sys.icon.form.class.missing.message"/>..."  
 										 	class="lion-combo form-control select2" data-valueField='codeValue' 
-										 	data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=IconType">
+										 	data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=ICON_TYPE">
 										</select>
 									</div>
 								</div>

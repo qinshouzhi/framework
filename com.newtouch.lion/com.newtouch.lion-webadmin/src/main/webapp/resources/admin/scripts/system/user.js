@@ -13,14 +13,14 @@ $(function() {
   userdg=$('#sys_user_list_tb');
 
 	addForm=$('#addForm');
-  var addDialog=$('#basic'),
-      queryForm=$('#queryform'),
-      userinfo=$('#modaluserinfo'),
-      modalUserAuth=$('#modalUserAuth'),
-      $usergroupdg=$('#usergroup_list'),
-      $userroledg=$('#userrole_list'),
-      $authgroupdg=$('#authgroup_list'),
-      $authroledg=$('#authrole_list');
+    var addDialog=$('#basic'),
+	  queryForm=$('#queryform'),
+	  userinfo=$('#modaluserinfo'),
+	  modalUserAuth=$('#modalUserAuth'),
+	  $usergroupdg=$('#usergroup_list'),
+	  $userroledg=$('#userrole_list'),
+	  $authgroupdg=$('#authgroup_list'),
+	  $authroledg=$('#authrole_list');
   //默认隐藏第一个tab的modal-footer
   modalUserAuth.find('.modal-footer').hide();
   //绑定tab事件
