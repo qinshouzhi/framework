@@ -212,23 +212,31 @@
 												</div>
 											</div>		
 											<div class="form-group">
-												<label class="col-md-2 control-label">
+												<label class="col-md-1 control-label">
 													<@spring.message "sys.datagrid.form.pagePosition.text"/>
 												</label>
 												<div class="col-md-2">
-													<select  id="pagePosition"  name="pagePosition" data-size="8" 
-													 	data-maxoptions="1"   multiple placeholder="<@spring.message "sys.datagrid.form.pagePosition.missing.message"/>..."  
-													 	class="lion-combo bootstrap-select form-control" data-valueField='codeValue'   value=""
-													 	data-textField='nameZh' data-loadURL="${base}/system/code/combox.json?nameEn=PagePosition">
+													 <select  id="pagePosition"   name="pagePosition" 
+													 	placeholder="<@spring.message "sys.datagrid.form.pagePosition.missing.message"/>..."  
+													 	class="lion-combo form-control select2" 
+													 	data-valueField='codeValue'  
+													 	data-textField='nameZh'  
+													 	data-URL="${base}/system/code/combox.json?nameEn=PagePosition">
 													 </select>
 												</div>
-												<label class="col-md-1 control-label"><@spring.message "sys.datagrid.form.pageList.text"/></label>
+												
+												
+												<label class="col-md-1 control-label">
+												      <@spring.message "sys.datagrid.form.pageList.text"/>
+												</label>
 												<div class="col-md-2">
-													<select  id="pageList"  name="pageList" data-size="8" 
-													 	data-maxoptions="1"   multiple placeholder="<@spring.message "sys.datagrid.form.pageList.missing.message"/>..."  
-													 	class="lion-combo bootstrap-select form-control" data-valueField='codeValue'   value=""
-													 	data-textField='nameZh' data-loadURL="${base}/system/code/combox.json?nameEn=PageList">
-													 </select>	
+												   <select  id="pageList"   name="pageList" 
+													 	placeholder="<@spring.message "sys.datagrid.form.pageList.missing.message"/>..."  
+													 	class="lion-combo form-control select2" 
+													 	data-valueField='codeValue'  
+													 	data-textField='nameZh'  
+													 	data-URL="${base}/system/code/combox.json?nameEn=PageList">
+													 </select>
 												</div>
 												<label class="col-md-2 control-label"><@spring.message "sys.datagrid.form.pageNumber.text"/></label>
 												<div class="col-md-1">

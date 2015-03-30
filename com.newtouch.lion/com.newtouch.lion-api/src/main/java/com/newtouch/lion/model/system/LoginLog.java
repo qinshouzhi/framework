@@ -55,7 +55,11 @@ public class LoginLog extends AuditEntity<Long> {
 	/** 用户操作系统INFO */
 	private String osInfo;
 	/** 是否登录成功 */
-	private Boolean isSuccess;
+	private Long isSuccess;
+	/**登陆类型*/
+	private String loginType;
+	/**用户*/
+	private User user;
 
 	/*
 	 * (non-Javadoc)
@@ -145,7 +149,7 @@ public class LoginLog extends AuditEntity<Long> {
 	 * @return the isSuccess
 	 */
 	@Column(name = "IS_SUCCESS")
-	public Boolean getIsSuccess() {
+	public Long getIsSuccess() {
 		return isSuccess;
 	}
 
@@ -233,7 +237,23 @@ public class LoginLog extends AuditEntity<Long> {
 	 * @param isSuccess
 	 *            the isSuccess to set
 	 */
-	public void setIsSuccess(Boolean isSuccess) {
+	public void setIsSuccess(Long isSuccess) {
 		this.isSuccess = isSuccess;
+	}
+
+	public String getLoginType() {
+		return loginType;
+	}
+
+	public void setLoginType(String loginType) {
+		this.loginType = loginType;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

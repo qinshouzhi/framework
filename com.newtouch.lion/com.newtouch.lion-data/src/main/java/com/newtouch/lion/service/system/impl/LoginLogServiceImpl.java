@@ -6,8 +6,18 @@
  */
 package com.newtouch.lion.service.system.impl;
 
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.newtouch.lion.common.sql.HqlUtils;
+import com.newtouch.lion.dao.system.LoginLogDao;
+import com.newtouch.lion.dao.system.LoginLogGroupDao;
+import com.newtouch.lion.model.system.LoginLog;
+import com.newtouch.lion.model.system.LoginLogGroup;
+import com.newtouch.lion.page.PageResult;
+import com.newtouch.lion.query.QueryCriteria;
 import com.newtouch.lion.service.AbstractService;
 import com.newtouch.lion.service.system.LoginLogService;
 
@@ -30,6 +40,53 @@ import com.newtouch.lion.service.system.LoginLogService;
  */
 @Service("loginLogService")
 public class LoginLogServiceImpl extends AbstractService implements
-		LoginLogService {
+		LoginLogService{
+	
+	@Autowired
+	private LoginLogDao loginLogDao;
+	
+	@Autowired
+	private LoginLogGroupDao loginLogGroupDao;
+	 
+	/**
+	 * 查询
+	  *
+	  * @param queryCriteria
+	  * 
+	  */
+	public PageResult<LoginLogGroup> doFindByCriteria(QueryCriteria queryCriteria) {
+		// TODO Auto-generated method stub
+		String queryEntry = "select  new com.newtouch.lion.model.system.LoginLogGroup(lg.loginType,lg.loginTime,lg.logoutTime,user1.username,lg.osInfo) "
+				+ " from LoginLog lg left join lg.user user1 ";
 
+		String[] whereBodies = { "user1.username like :username"};
+
+		String fromJoinSubClause = "";
+
+		Map<String, Object> params = queryCriteria.getQueryCondition();
+
+		String orderField ="";
+
+		String orderDirection = queryCriteria.getOrderDirection();
+
+		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
+				whereBodies, orderField, orderDirection, params);
+
+		int pageSize = queryCriteria.getPageSize();
+
+		int startIndex = queryCriteria.getStartIndex();
+
+		PageResult<LoginLogGroup> result = this.loginLogGroupDao.query(hql,
+				HqlUtils.generateCountHql(hql, null), params, startIndex,
+				pageSize);
+
+		return result;
+	}
+
+	@Override
+	public void save(LoginLog loginLog) {
+		// TODO Auto-generated method stub
+		this.loginLogDao.save(loginLog);
+	}
+	
 }

@@ -5,7 +5,7 @@
 		<!-- BEGIN LOGO -->
 		<div class="page-logo">
 			<a href="${base}/index.htm">
-			<img src="${base}/resources/admin/layout4/img/logo-light.png" alt="logo" class="logo-default"/>
+			<img src="${base}/resources/logo/logo.png" alt="logo" class="logo-default"/>
 			</a>
 			<div class="menu-toggler sidebar-toggler">
 				<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->

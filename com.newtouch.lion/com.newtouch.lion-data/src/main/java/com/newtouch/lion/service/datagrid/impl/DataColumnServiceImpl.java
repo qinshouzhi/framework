@@ -195,7 +195,7 @@ public class DataColumnServiceImpl extends AbstractService implements
 				HqlUtils.generateCountHql(hql, null), params, startIndex,
 				pageSize);
 		for(DataColumn  dataColumn:pageResult.getContent()){
-			 dataColumn.getDataGrid().getTitle();
+		    dataColumn.getDataGrid().getTitle();
 		}
 		return pageResult;
 	}
