@@ -68,9 +68,9 @@ $(function() {
 	 //导出Excel
 	 $('#btnExport').on('click',function(){
 		   var params=queryForm.serialize(),
-        dgtableId=parameterdg.attr('id');
-    lion.web.exportfn({url:'export.json',data:params,tableId:dgtableId});
-    return;
+		   dgtableId=parameterdg.attr('id');
+		   lion.web.exportfn({url:'export.json',data:params,tableId:dgtableId});
+           return;
    }); 
 });
 

@@ -84,8 +84,8 @@
 	            <value>classpath:i18n/system/datacolumn/datacolumn</value>
 	            <value>classpath:i18n/system/code/codeList</value>
 	            <value>classpath:i18n/system/code/codeType</value>
-	            <value>classpath:i18n/system/resource/resource</value>	
-	            <value>classpath:i18n/system/icon/icon</value>	
+	            <value>classpath:i18n/system/resource/resource</value>
+	            <value>classpath:i18n/system/tasks/taskslist</value>	
 			</list>
 		</property>
 		<property name="defaultEncoding" value="UTF-8" />

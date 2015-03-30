@@ -1,10 +1,7 @@
 var userdg='',addForm='',addDialog=$('#basic'); //编辑或添加对话框
 $(function() {
-	//加载bootstrap
-	Metronic.init(); // init metronic core componets
-	Layout.init(); // init layout
-	Tasks.initDashboardWidget(); // init tash dashboard widget
-  lion.util.menu();//加载导航栏
+	//默认加载函数
+	lion.web.AppInit();
    //初始化日期
    $(".date-picker").datepicker({
       autoclose: true,
@@ -13,14 +10,14 @@ $(function() {
   userdg=$('#sys_user_list_tb');
 
 	addForm=$('#addForm');
-  var addDialog=$('#basic'),
-      queryForm=$('#queryform'),
-      userinfo=$('#modaluserinfo'),
-      modalUserAuth=$('#modalUserAuth'),
-      $usergroupdg=$('#usergroup_list'),
-      $userroledg=$('#userrole_list'),
-      $authgroupdg=$('#authgroup_list'),
-      $authroledg=$('#authrole_list');
+    var addDialog=$('#basic'),
+	  queryForm=$('#queryform'),
+	  userinfo=$('#modaluserinfo'),
+	  modalUserAuth=$('#modalUserAuth'),
+	  $usergroupdg=$('#usergroup_list'),
+	  $userroledg=$('#userrole_list'),
+	  $authgroupdg=$('#authgroup_list'),
+	  $authroledg=$('#authrole_list');
   //默认隐藏第一个tab的modal-footer
   modalUserAuth.find('.modal-footer').hide();
   //绑定tab事件

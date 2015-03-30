@@ -207,6 +207,15 @@
          //从新的窗口
          window.open(url,'_blank');
      };
+     
+     //当前默认加载函数
+     exports.AppInit=function(){
+    	//加载bootstrap
+		Metronic.init(); // init metronic core componets
+		Layout.init(); // init layout
+		Tasks.initDashboardWidget(); // init tash dashboard widget
+		util.menu();//加载导航栏
+     }
 }).call(lion,jQuery);
 
 /**全局请求错误*/

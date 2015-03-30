@@ -665,7 +665,6 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 	 */
 	@Override
 	public List<Role> doFindByGroupId(Long groupId) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
@@ -675,7 +674,6 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 	 */
 	@Override
 	public Role doFindTypeByNameEn(String nameEn) {
-		// TODO Auto-generated method stub
 		Assert.notNull(nameEn);
 		String hql = "from Role  where nameEn=:nameEn";
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -693,7 +691,6 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 	 */
 	@Override
 	public boolean doIsExistByNameEn(String nameEn) {
-		// TODO Auto-generated method stub
 		Assert.notNull(nameEn);
 		Role role = this.doFindTypeByNameEn(nameEn);
 		if (role != null)
@@ -706,7 +703,6 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 	 */
 	@Override
 	public void doCreate(Role role) {
-		// TODO Auto-generated method stub
 		Assert.notNull(role);
 		roleDao.save(role);
 	}
@@ -717,7 +713,6 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 	@Override
 	public void idoAuthUserToRole(List<Long> targetUserIds,
 			List<Long> deleteUserIds, Role role) {
-		// TODO Auto-generated method stub
 		this.doDeleteUsersFromRole(deleteUserIds, role);
 		this.doAddUsersToRole(targetUserIds, role);
 	}
@@ -728,7 +723,6 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 	@Override
 	public void idoAuthGroupToRole(List<Long> targetGroupIds,
 			List<Long> deleteGroupIds, Role role) {
-		// TODO Auto-generated method stub
 		this.doDeleteGroupsFromRole(deleteGroupIds, role);
 		this.doAddGroupsToRole(targetGroupIds, role);
 	}

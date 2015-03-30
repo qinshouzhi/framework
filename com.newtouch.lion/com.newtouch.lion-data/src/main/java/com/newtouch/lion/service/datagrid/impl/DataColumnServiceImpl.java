@@ -255,5 +255,36 @@ public class DataColumnServiceImpl extends AbstractService implements
 		dataColumnDao.save(dataColumn);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.datagrid.DataColumnService#doFindTypeByName(java.lang.String)
+	 */
+	@Override
+	public DataColumn doFindTypeByNameandDatagridId(String name,Long datagridId) {
+		// TODO Auto-generated method stub
+		Assert.notNull(name);
+		String hql = "from DataColumn  where name=:name and dataGridId=:datagridId";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("name", name);
+		params.put("datagridId", datagridId);
+		java.util.List<DataColumn> dataColumns = dataColumnDao.query(hql, params);
+		if (dataColumns != null && dataColumns.size() > 0) {
+			return dataColumns.get(0);
+		}
+		return null;
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.datagrid.DataColumnService#doIsExistByNameandDataGridId(java.lang.String, java.lang.Long)
+	 */
+	@Override
+	public boolean doIsExistByNameandDataGridId(String name, Long dataGridId) {
+		// TODO Auto-generated method stub
+		DataColumn dataColumn = this.doFindTypeByNameandDatagridId(name,dataGridId);
+		System.out.println(name+"==============="+dataGridId+"=========="+dataColumn);
+		if (dataColumn != null)
+			return true;
+		return false;
+	}
+	
 	
 }

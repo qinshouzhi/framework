@@ -55,7 +55,6 @@ public class LoginLogServiceImpl extends AbstractService implements
 	  * 
 	  */
 	public PageResult<LoginLogGroup> doFindByCriteria(QueryCriteria queryCriteria) {
-		// TODO Auto-generated method stub
 		String queryEntry = "select  new com.newtouch.lion.model.system.LoginLogGroup(lg.loginType,lg.loginTime,lg.logoutTime,user1.username,lg.osInfo) "
 				+ " from LoginLog lg left join lg.user user1 ";
 
@@ -85,7 +84,6 @@ public class LoginLogServiceImpl extends AbstractService implements
 
 	@Override
 	public void save(LoginLog loginLog) {
-		// TODO Auto-generated method stub
 		this.loginLogDao.save(loginLog);
 	}
 	

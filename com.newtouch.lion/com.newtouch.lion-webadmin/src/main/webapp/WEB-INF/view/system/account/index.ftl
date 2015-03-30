@@ -157,7 +157,7 @@
 													<div class="form-group">
 														<div class="fileinput fileinput-new" >
 															<div id="imgDiv" class="fileinput-new thumbnail" style="width: 300px; height: 300px;">
-																<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" style="width: 300px; height: 300px;"/>
+																<img src="${base}/resources/admin/image/default.gif" style="width: 300px; height: 300px;"/>
 															</div>
 															<div>
 																<span class="btn default btn-file">

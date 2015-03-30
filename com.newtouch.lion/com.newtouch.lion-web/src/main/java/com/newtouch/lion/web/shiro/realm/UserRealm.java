@@ -32,7 +32,6 @@ import org.apache.shiro.util.SimpleByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.support.SimpleCacheManager;
 
 import com.newtouch.lion.common.user.UserInfo;
 import com.newtouch.lion.model.system.Resource;
@@ -63,16 +62,14 @@ public class UserRealm extends AuthorizingRealm {
 	/***
 	 * 日志
 	 */
-	private static final Logger logger = LoggerFactory
-			.getLogger(UserRealm.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserRealm.class);
 	/** 用户Service */
 	@Autowired
 	private UserService userService;
  
 
 	@Override
-	protected AuthorizationInfo doGetAuthorizationInfo(
-			PrincipalCollection principals) {
+	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		// null usernames are invalid
 		if (principals == null) {
 			throw new AuthorizationException(
@@ -109,8 +106,7 @@ public class UserRealm extends AuthorizingRealm {
 	}
 
 	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(
-			AuthenticationToken token) throws AuthenticationException {
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
 		UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
 
@@ -186,7 +182,10 @@ public class UserRealm extends AuthorizingRealm {
 		this.clearCachedAuthenticationInfo();
 		this.clearAllCachedAuthorizationInfo();
 	}
-	
+	/****
+	 * 退出的清除缓存
+	 * @param principals
+	 */
 	@Override
 	protected void doClearCache(PrincipalCollection principals) {
 		 this.clearAllCached();

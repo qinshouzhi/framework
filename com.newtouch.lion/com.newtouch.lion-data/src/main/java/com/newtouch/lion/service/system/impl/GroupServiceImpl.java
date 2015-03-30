@@ -293,7 +293,6 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 	 */
 	@Override
 	public Group doFindById(Long id) {
-		// TODO Auto-generated method stub
 		return this.groupDao.findById(id);
 	}
 
@@ -477,7 +476,6 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 	 */
 	@Override
 	public boolean doIsExistByNameEn(String nameEn) {
-		// TODO Auto-generated method stub
 		Assert.notNull(nameEn);
 		Group group = this.doFindTypeByNameEn(nameEn);
 		if (group != null)
@@ -490,7 +488,6 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 	 */
 	@Override
 	public Group doFindTypeByNameEn(String nameEn) {
-		// TODO Auto-generated method stub
 		Assert.notNull(nameEn);
 		String hql = "from Group  where nameEn=:nameEn";
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -507,7 +504,6 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 	 */
 	@Override
 	public void doCreate(Group group) {
-		// TODO Auto-generated method stub
 		Assert.notNull(group);
 		groupDao.save(group);
 	}
@@ -656,7 +652,6 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 	 */
 	@Override
 	public PageResult<Group> doFindByCriteriaAndRole(QueryCriteria criteria) {
-		// TODO Auto-generated method stub
 		String queryEntry = " select groups from Group groups inner join groups.roles r ";
 
 		String[] whereBodies = { "groups.nameZh like :nameZh","r.id =:roleId","groups.id in(:groupIds)"};

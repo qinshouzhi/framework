@@ -22,7 +22,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.common.ip.IPAddressUtil;
 import com.newtouch.lion.common.user.UserInfo;
@@ -35,7 +34,6 @@ import com.newtouch.lion.web.shiro.cache.SessionCacheManager;
 import com.newtouch.lion.web.shiro.constant.Constants;
 import com.newtouch.lion.web.shiro.model.LoginUser;
 import com.newtouch.lion.web.shiro.session.LoginSecurityUtil;
-import com.newtouch.lion.web.util.LionWebUtils;
 
 /**
  * <p>
@@ -161,23 +159,14 @@ public class LoginController extends AbstractController {
 		return this.redirect(REDIRECT_LOGIN);
 	}
 	
+	/***
+	 * 未授权的情况
+	 */
 	@RequestMapping(value="unauthorized",method=RequestMethod.GET)
 	public String unauthorized(){
 		return UNAUTHORIZED_RETURN;
 	}
 	
-	/****
-	 * 用来处理Ajax登录的POST请求
-	 * @param loginUser
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "/login",method={RequestMethod.GET,RequestMethod.POST},headers={LionWebUtils.AJAX_XHR})
-	public ModelAndView login1(LoginUser loginUser,Model model){
-		logger.info("Ajax登录的POST请求");
-		return null;
-		
-	}
 	
 	
 	
