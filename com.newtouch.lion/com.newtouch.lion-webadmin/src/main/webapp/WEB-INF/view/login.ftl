@@ -21,7 +21,7 @@ Author: wanglijun
 <meta content="" name="description"/>
 <meta content="" name="author"/>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
-<link href="${base}/resources/global/css/fonts.css" rel="stylesheet" type="text/css"/>
+<link href="${base}/resources/global/css/fonts.css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -114,10 +114,9 @@ Author: wanglijun
 	<!-- END FORGOT PASSWORD FORM -->
 </div>
 <div class="copyright">
-	 <@spring.message "login.footer.copyright"/>
+<@spring.message "login.footer.copyright"/>
 </div>
 <!-- END LOGIN -->
-<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
 <script src="${base}/resources/global/plugins/respond.min.js"></script>
@@ -135,16 +134,12 @@ Author: wanglijun
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="${base}/resources/global/scripts/metronic.js" type="text/javascript"></script>
-<script src="${base}/resources/admin/layout/scripts/layout.js" type="text/javascript"></script>
-<script src="${base}/resources/admin/layout/scripts/demo.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/pages/scripts/login.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
-jQuery(document).ready(function() {     
+$(function() {     
 Metronic.init(); // init metronic core components
-Layout.init(); // init current layout
-Login.init();
-Demo.init();
+Login.init();//登录验证框架
 });
 </script>
 <!-- END JAVASCRIPTS -->
