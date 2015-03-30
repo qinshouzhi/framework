@@ -6,12 +6,14 @@
  */
 package com.newtouch.lion.admin.web.controller.system.code;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,8 +21,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.newtouch.lion.json.JSONParser;
 import com.newtouch.lion.model.system.CodeList;
 import com.newtouch.lion.model.system.CodeType;
+import com.newtouch.lion.model.system.Icon;
 import com.newtouch.lion.service.system.CodeListService;
 import com.newtouch.lion.service.system.CodeTypeService;
+import com.newtouch.lion.service.system.IconService;
 
 /**
  * <p>
@@ -47,6 +51,8 @@ public class CodeController {
 	private CodeListService codeListService;
 	@Autowired
 	private CodeTypeService codeTypeService;
+	@Autowired
+	private IconService  iconService;
 
 	@RequestMapping("combox")
 	@ResponseBody
@@ -76,5 +82,22 @@ public class CodeController {
 		filterColumn.add("sortNo");
 		filterColumn.add("selected");
 		return JSONParser.toJSONString(codeLists, filterColumn, true);
+	}
+	
+	/***
+	 * 图标列表
+	 * @param iconType
+	 * @param selectedValue
+	 * @return
+	 */
+	@RequestMapping("icon")
+	@ResponseBody
+	public List<Icon> comboxIcon(@RequestParam String iconType){
+		List<Icon> icons=null;
+		List<Icon> list=iconService.doFindByType(iconType);
+		if(CollectionUtils.isEmpty(list)){
+			return icons=new ArrayList<Icon>();
+		}
+		return  icons;
 	}
 }

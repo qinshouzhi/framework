@@ -20,7 +20,7 @@ Author: wanglijun
 <meta content="" name="description"/>
 <meta content="" name="author"/>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
-<link href="${base}/resources/global/css/fonts.css" rel="stylesheet" type="text/css"/>
+<link href="${base}/resources/global/css/fonts.css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
 <link href="${base}/resources/global/plugins/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>

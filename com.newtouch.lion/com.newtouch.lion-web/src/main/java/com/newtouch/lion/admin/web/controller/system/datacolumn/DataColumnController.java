@@ -101,7 +101,7 @@ public class DataColumnController extends AbstractController{
 	public ModelAndView add(
 			@Valid @ModelAttribute("dataColumnVo") DataColumnVo dataColumnVo,
 			Errors errors, ModelAndView modelAndView) {
-		if (!errors.hasErrors()&& this.isExistByName(dataColumnVo.getName())) {
+		if (!errors.hasErrors()&& this.isExistByNameandDataGridId(dataColumnVo.getName(),dataColumnVo.getDataGridId())) {
 			errors.rejectValue(DataColumnVo.NAME,
 					"sys.dataColumn.form.name.existed.message",
 					new Object[] { dataColumnVo.getName() }, null);
@@ -200,10 +200,10 @@ public class DataColumnController extends AbstractController{
 	}
 	
 	/*add by maojiawei*/
-	private Boolean isExistByName(String name) {
+	private Boolean isExistByNameandDataGridId(String name,Long dataGridId) {
 		Boolean flag = false;
 		if (StringUtils.isNotEmpty(name)) {
-			flag = dataColumnService.doIsExistByName(name.trim());
+			flag = dataColumnService.doIsExistByNameandDataGridId(name.trim(),dataGridId);
 		}
 		return flag;
 	}
@@ -219,15 +219,15 @@ public class DataColumnController extends AbstractController{
 	@RequestMapping(value = "checkisexitnameen")
 	@ResponseBody
 	public String checkIsExistByNameEn(HttpServletRequest servletRequest,
-			@RequestParam(required = false) String name,@RequestParam(required=false) Long id) {
+			@RequestParam(required = false) String name,@RequestParam(required = false) Long dataGridId,@RequestParam(required=false) Long id) {
 		Boolean flag=Boolean.FALSE;
 		
 		if(id==null){
-			flag = this.isExistByName(name)? false : true;
+			flag = this.isExistByNameandDataGridId(name,dataGridId)? false : true;
 		}else{
 			DataColumn dataColumn = dataColumnService.doGetById(id);
 			if(dataColumn==null){
-				flag = this.isExistByName(name)? false : true;
+				flag = this.isExistByNameandDataGridId(name,dataGridId)? false : true;
 			}else{
 				flag=this.isExistByName(name, dataColumn.getName())?false:true;
 			}

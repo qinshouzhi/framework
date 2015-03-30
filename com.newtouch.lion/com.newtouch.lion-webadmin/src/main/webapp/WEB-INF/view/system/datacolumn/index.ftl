@@ -61,7 +61,7 @@
 						表格类型
 					</label>
 					<div class="col-md-2">
-						<select  id="dataGridList"   name="type" 
+						<select  id="dataGridListType1"   name="type" 
 							placeholder="<@spring.message "sys.datacolumn.query.datagrid.missing.message"/>..."  
 							class="lion-combo form-control select2" 
 							data-valueField='codeValue'  
@@ -73,7 +73,7 @@
 						 表格名称
 					</label>
 					<div class="col-md-2">
-						<select  id="dataGridList"   name="type" 
+						<select  id="dataGridListType2"   name="type" 
 							placeholder="<@spring.message "sys.datacolumn.query.datagrid.missing.message"/>..."  
 							class="lion-combo form-control select2" 
 							data-valueField='id'  
@@ -164,7 +164,7 @@
 													 表格类型
 												</label>
 												<div class="col-md-4">
-													 <select  id="dataGridList"   name="type" 
+													 <select  id="dataGridListType"   name="type" 
 													 	placeholder="<@spring.message "sys.datacolumn.query.datagrid.missing.message"/>..."  
 													 	class="lion-combo form-control input-medium select2" 
 													 	data-valueField='codeValue'  
@@ -176,7 +176,7 @@
 													 表格名称
 												</label>
 												<div class="col-md-4">
-													 <select  id="dataGridList"   name="type" 
+													 <select  id="dataGridList"   name="dataGridId" 
 														placeholder="<@spring.message "sys.datacolumn.query.datagrid.missing.message"/>..."  
 														class="lion-combo input-medium form-control select2" 
 														data-valueField='id'  

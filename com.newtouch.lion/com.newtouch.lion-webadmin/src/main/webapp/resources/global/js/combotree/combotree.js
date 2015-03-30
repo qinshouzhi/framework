@@ -16,8 +16,7 @@
  * Depedencies css
  * bootstrap.css bootstrap-select.css  lion.css,combotree.css (Bootstrap v3.3.1)
  */
-;
-(function($) {
+;(function($) {
 	'use strict'; // js hint ;_;
 	this.ui = this.ui || {}; //定义ui对象。为避免覆盖如果存在ui对象则使用，不存在则新建
 	var util = this.util, //用变量存储util.js中的方法，方便调用
@@ -202,10 +201,10 @@
 				}
 				return valueId;
 			} else {
-				var node = this.$treeObj.getNodeByParam('id', id);
+				var node = this.$treeObj.getNodeByParam('id',id);
 				if (node) {
-					this.$treeObj.selectNode(node, true);
-					$('#' + node.tId + '_a').click();
+					this.$treeObj.selectNode(node,true);
+					this.$newElement.find('.btn span').text(node.name);
 				}
 			}
 		},
@@ -222,16 +221,16 @@
 			if (util.isEmpty(loadurl)) {
 				return;
 			}
-			util.postasync(loadurl, '', success, error);
+			util.postasync(loadurl,'',success, error);
 			//数据加载成功
 			function success(data) {
 					that.$treeNodes = data;
 				}
 				//数据加载失败
 			function error(xhr, textStatus, error) {
-				console.dir(textStatus);
-				console.dir(error);
-				console.dir(xhr);
+				//console.dir(textStatus);
+				//console.dir(error);
+				//console.dir(xhr);
 			}
 		},
 		//设置数据结构
@@ -313,8 +312,6 @@
 			if (this.$content.outerWidth() > this.$button.outerWidth()) {
 				outerWidth = this.$content.outerWidth();
 			}
-
-
 			this.$content.css({
 				top: actualTop,
 				width: outerWidth,

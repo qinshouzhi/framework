@@ -19,8 +19,7 @@ $(function () {
   //查询
   $('#btnQuery').click(function(){
 	icondg.datagrids({querydata:queryForm.serializeObject()});
-    var queryparam=icondg.datagrids('queryparams'); 
-    console.dir(queryparam);
+    var queryparam=icondg.datagrids('queryparams');
     icondg.datagrids('reload');
   });
   //刷新
@@ -171,7 +170,6 @@ handleVForm=function(vForm,submitCallBackfn){
              }
             },
             iconImage: {
-                required:true,
                 rangelength:[1,128]
             }
         },
@@ -232,6 +230,11 @@ function formatterEidtable(data,type,full) {
     name = $.lion.lang.editable.y;
   }
   return name;
+}
+//显示class图标
+function formatterIconI(data,type,row){
+  console.dir(type);
+  return '<i class="'+data+'"></i>';
 }
 
 //判断图片或样式

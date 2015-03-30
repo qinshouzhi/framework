@@ -101,8 +101,8 @@
 </div>
 <!-- END PAGE CONTENT INNER -->
 <!--Edit Dialog Start -->
-<div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
-	<div class="modal-dialog">
+<div class="modal fade bs-modal-lg" id="basic" tabindex="-1" role="basic" aria-hidden="true">
+	<div class="modal-dialog  modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -118,18 +118,16 @@
 											
 												<div class="form-group">
 													<div class="form-filed">
-														<label class="col-md-3 control-label">父级资源</label>
-														<div class="col-md-5">
+														<label class="col-md-2 control-label">父级资源</label>
+														<div class="col-md-4">
 															<input  id="parentResourceId"  name="parentResourceId"  
 						 	  	  placeholder="请选择父级资源…"  type="text" 
 						 		  class="lion-combotree form-control"   data-loadURL="${base}/system/resource/combotree.json" data-width="230px" data-height="300px"/>		 
 														</div>
 													</div>
-												</div>
-												<div class="form-group">
 													<div class="form-filed">
-														<label class="col-md-3 control-label">资源类型</label>
-														<div class="col-md-5">
+														<label class="col-md-2 control-label">资源类型</label>
+														<div class="col-md-4">
 															<select  id="sysresourcetype"  name="type" placeholder="请选择参数列表..."   class="lion-combo form-control select2  " data-valueField='codeValue'  data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=ResourceType">
 															</select>							 
 														</div>
@@ -137,18 +135,16 @@
 												</div>
 												<div class="form-group">
 													<div class="form-filed">
-														<label class="col-md-3 control-label">资源名称(中文)</label>
-														<div class="col-md-5">
+														<label class="col-md-2 control-label">资源名称(中文)</label>
+														<div class="col-md-4">
 															<div class="input-group">
 																<input type="text"  id="nameZh" name="nameZh" maxlength="128" class="form-control" placeholder="请输入资源名称（中文）" size="30"/>
 															</div>
 														</div>
 													</div>
-												</div>
-												<div class="form-group">
 													<div class="form-filed">
-														<label class="col-md-3 control-label">资源名称(英文)</label>
-														<div class="col-md-5">
+														<label class="col-md-2 control-label">资源名称(英文)</label>
+														<div class="col-md-4">
 															<div class="input-group">
 																<input type="text"  id="nameEn" name="nameEn" maxlength="128" class="form-control" placeholder="请输入资源名称（英文）" size="30"/>
 															</div>
@@ -156,19 +152,20 @@
 													</div>
 												</div>
 												<div class="form-group">
+													
+												</div>
+												<div class="form-group">
 													<div class="form-filed">
-														<label class="col-md-3 control-label">路径</label>
-														<div class="col-md-5">
+														<label class="col-md-2 control-label">路径</label>
+														<div class="col-md-4">
 															<div class="input-group">
 																<input type="text"  id="path" name="path" maxlength="1024" class="form-control" placeholder="请输入资源路径" size="30"/>
 															</div>
 														</div>
 													</div>
-												</div>
-												<div class="form-group">
 													<div class="form-filed">
-														<label class="col-md-3 control-label">Target</label>
-														<div class="col-md-5">														 
+														<label class="col-md-2 control-label">Target</label>
+														<div class="col-md-4">														 
 																<select  id="sysresourcetarget"  name="target" placeholder="请选择参数列表..."   class="lion-combo form-control select2  " data-valueField='codeValue'  data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=Target">
 																</select>	
 															 
@@ -177,20 +174,18 @@
 												</div>
 												<div class="form-group">
 													<div class="form-filed">
-														<label class="col-md-3 control-label">
+														<label class="col-md-2 control-label">
 															权限配置
 														</label>
-														<div class="col-md-5">
+														<div class="col-md-4">
 															<div class="input-group">
 																<input type="text"  id="permission" name="permission" maxlength="128" class="form-control" placeholder="请输入权限配置" size="30"/>
 															</div>
 														</div>
 													</div>
-												</div>
-												<div class="form-group">
 													<div class="form-filed">
-														<label class="col-md-3 control-label">显示顺序</label>
-														<div class="col-md-5">
+														<label class="col-md-2 control-label">显示顺序</label>
+														<div class="col-md-4">
 															<div class="input-group">
 																<input type="text"  id="seqNum" name="seqNum" maxlength="11" class="form-control" placeholder="请输入示顺序" size="30"/>
 															</div>
@@ -199,21 +194,31 @@
 												</div>
 												<div class="form-group">
 													<div class="form-filed">
-														<label class="col-md-3 control-label">资源描述</label>
-														<div class="col-md-5">
+														<label class="col-md-2 control-label">资源描述</label>
+														<div class="col-md-4">
 															<div class="input-group">
 																<input type="text" name="value" class="form-control" placeholder="请输入资源描述" maxlength="255" size="30"/>
+															</div>
+														</div>
+													</div>
+													<div class="form-filed">
+														<label class="col-md-2 control-label">是否可编辑</label>
+														<div class="col-md-4 control-label">
+															<div class="input-group">
+																<input type="checkbox" class="form-control "  name="editable" checked="true" />
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="form-group">
 													<div class="form-filed">
-														<label class="col-md-3 control-label">是否可编辑</label>
-														<div class="col-md-5 control-label">
-															<div class="input-group">
-																<input type="checkbox" class="form-control "  name="editable" checked="true" />
-															</div>
+														<label class="col-md-2 control-label">资源图标</label>
+														<div class="col-md-6">
+																<select  id="sysresourcetarget"  name="target" placeholder="请选择资源图标..."   class="lion-combo form-control select2  " data-valueField='codeValue'  data-textField='nameZh' data-URL="${base}/system/code/icon.json?iconType=RESOURCE_ICON">
+																</select>
+														</div>
+														<div class="col-md-6">
+															
 														</div>
 													</div>
 												</div>
