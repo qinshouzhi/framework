@@ -7,6 +7,8 @@
 */
 package com.newtouch.lion.service.system; 
 
+import java.util.List;
+
 import com.newtouch.lion.model.system.Icon;
 import com.newtouch.lion.page.PageResult;
 import com.newtouch.lion.query.QueryCriteria;
@@ -70,6 +72,13 @@ public interface IconService {
 	 * @return {@link Icon}
 	 */
 	public Icon doFindTypeByIconClass(String iconClass);
+	/***
+	 * 根据类型查询ICON的
+	 * @param iconType ICON的图标的类型
+	 * @return   List<Icon> 列表图标
+	 */
+	public List<Icon> doFindByType(String iconType);
+	
 	/**
 	 * 判断图标的类名是否已存在，
 	 * @param iconClass
