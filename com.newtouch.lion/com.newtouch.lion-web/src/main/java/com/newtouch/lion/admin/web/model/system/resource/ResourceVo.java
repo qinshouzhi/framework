@@ -66,6 +66,8 @@ public class ResourceVo {
 	private Attributes attributes;
 	/**权限名称*/
 	private String permission;
+	/**ICON图标*/
+	private String icon;
 
 	public ResourceVo() {
 		super();
@@ -264,4 +266,21 @@ public class ResourceVo {
 	public void setPermission(String permission) {
 		this.permission = permission;
 	}
+
+	/**
+	 * @return  ICON图标
+	 */
+	public String getIcon() {
+		return icon;
+	}
+
+	/**
+	 * @param icon  ICON图标
+	 */
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+	
+	
+	
 }

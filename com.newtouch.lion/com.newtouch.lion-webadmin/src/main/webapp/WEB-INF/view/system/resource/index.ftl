@@ -45,19 +45,6 @@
 <div class="portlet light">
 	<div class="portlet-body">
 		<div class="row">
-			<!--<div class="col-md-12 margin-bottom-10">
-				<form id="queryform" class="form-horizontal">
-					<label class="control-label col-md-2" for="nameZh" >资源名称</label>
-					<div class="col-md-3">
-						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="请输入资源名称"/>					
-					</div>
-					<div class="col-md-2">
-					</div>
-					<div class="col-md-2">
-						<a href="javascript:void(0)" class="btn blue"><i class="fa fa-search"></i> 查 询 </a>
-					</div>
-				</form>
-			</div>-->
 			<div class="col-md-12 margin-bottom-10" id="toolbar">
 				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic">
 					<i class="fa fa-plus"></i>  <@spring.message "common.toolbar.btn.add.text"/> </a>
@@ -213,14 +200,15 @@
 												<div class="form-group">
 													<div class="form-filed">
 														<label class="col-md-2 control-label">资源图标</label>
-														<div class="col-md-6">
-																<select  id="sysresourcetarget"  name="target" placeholder="请选择资源图标..."   class="lion-combo form-control select2  " data-valueField='codeValue'  data-textField='nameZh' data-URL="${base}/system/code/icon.json?iconType=RESOURCE_ICON">
+														
+														<div class="col-md-3">
+
+																<select  id="sys_resource_icon"  name="icon" placeholder="请选择资源图标..."   class="lion-combo form-control select2 "   data-valueField='iconClass'  data-textField='iconClass' data-URL="${base}/system/code/icon.json?iconType=RESOURCE_ICON">
 																</select>
 														</div>
-														<div class="col-md-6">
-															
-														</div>
+														<label class="control-label"><span id="span_resource_icon"></span></label>
 													</div>
+
 												</div>
 											</div>
 										</form>

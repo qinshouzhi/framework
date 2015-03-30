@@ -22,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -108,7 +109,7 @@ public class CalendarController extends AbstractController {
     }
 	
 	//添加待办事项
-	@RequestMapping(value = "edit")
+	@RequestMapping(value = "edit",method=RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView edit(@Valid @ModelAttribute("calendarVo") CalendarVo calendarVo,Errors errors, ModelAndView modelAndView) throws ParseException {
 		Calendar calendar = calendarService.doFindById(calendarVo.getId());

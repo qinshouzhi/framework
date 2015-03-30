@@ -83,6 +83,16 @@
 			 		<div class="form-group">
 						<label class="control-label col-md-3">Extra Large</label>
 						<div class="col-md-4">
+				<select  id="sys_resource_icon"  name="icon" placeholder="请选择资源图标..."   class="lion-combo form-control select2 select2-offscreen " data-icon="true" data-valueField='iconClass'  data-textField='iconClass' data-URL="${base}/system/code/icon.json?iconType=RESOURCE_ICON">
+																</select>
+					</div>
+					</div>
+
+			</div>
+			<div class="col-md-12 margin-bottom-10">
+			 		<div class="form-group">
+						<label class="control-label col-md-3">Extra Large</label>
+						<div class="col-md-4">
 							<select id="select2_sample3" class="form-control input-medium select2" data-placeholder="请选择...">
 								<option value=""></option>
 								<option value="AL">Alabama</option>

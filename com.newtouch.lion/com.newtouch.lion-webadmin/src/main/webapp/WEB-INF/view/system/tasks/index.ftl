@@ -84,6 +84,14 @@
 					<i class="fa  fa-file-excel-o"></i>
 					<@spring.message "common.toolbar.btn.export.text"/>
 				</a>
+				<a id="btnStart" class="btn btn-sm blue">
+					<i class="fa fa-refresh"></i> 
+					<@spring.message "common.toolbar.btn.start.text"/>   
+				</a>
+				<a id="btnStop" class="btn btn-sm yellow" data-toggle="modal" href="#basic">
+					<i class="fa fa-stop"></i> 
+					<@spring.message "common.toolbar.btn.stop.text"/>  
+				</a>
 			</div>
 			<div class="col-md-12">
 				  <table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_tasks_tb" data-singleselect="true",   data-loadUrl="${base}/system/tasks/list.json" data-checkbox="true" data-pageSize="10">

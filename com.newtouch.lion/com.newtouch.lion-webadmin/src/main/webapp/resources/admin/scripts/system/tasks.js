@@ -8,37 +8,48 @@ $(function(){
   Layout.init(); // init layout
   Tasks.initDashboardWidget(); // init tash dashboard widget
   lion.util.menu();//加载导航栏
-
-  icondg=$("#sys_tasks_tb");
-  addForm=$('#sysCodeTypeForm');
-  addDialog=$('#basic');
-  var queryForm=$('#queryform');
-
-  //验证表单
-  handleVForm(addForm,submitForm);
   
-  //查询
-  $('#btnQuery').click(function(){
-	icondg.datagrids({querydata:queryForm.serializeObject()});
-    var queryparam=icondg.datagrids('queryparams'); 
-    console.dir(queryparam);
-    icondg.datagrids('reload');
-  });
-  //刷新
-  $('#btnRefresh').click(function(){     
-	  icondg.datagrids('reload');
-    });
-  //添加
-    $('#btnAdd').click(function(){
-      addForm.reset();
-     
-      addDialog.find('.modal-header h4 span').text('添加任务');
-      return;
-    });
+//验证表单
+  handleVForm(addForm,submitForm);
 
-    //编辑
-    $('#btnEdit').click(function(){
-        var row=icondg.datagrids('getSelected');
+});
+
+
+//删除
+$('#btnDelete').on('click',function(){
+var row=icondg.datagrids('getSelected');
+lion.web.deletefn({
+ url:'delete.json',
+ data:row,
+ unselectedmsg:'请选择要删除记录',
+ confirmmsg:'确认要删除此记录？',
+ success:successForDelete,
+});
+});
+
+
+//查询
+$('#btnQuery').click(function(){
+	icondg.datagrids({querydata:queryForm.serializeObject()});
+var queryparam=icondg.datagrids('queryparams'); 
+console.dir(queryparam);
+icondg.datagrids('reload');
+});
+//刷新
+$('#btnRefresh').click(function(){     
+	  icondg.datagrids('reload');
+});
+//添加
+$('#btnAdd').click(function(){
+  addForm.reset();
+ 
+  addDialog.find('.modal-header h4 span').text('添加任务');
+  return;
+});
+
+//编辑
+$('#btnEdit').click(function(){
+    var row=icondg.datagrids('getSelected');
 	    if(!row){
 	       lion.util.info('提示','请选择要编辑记录');
 	       return;
@@ -47,43 +58,32 @@ $(function(){
 	    addDialog.find('.modal-header h4 span').text('编辑任务');
 	    addDialog.modal('toggle');
 	    addForm.fill(row);
-    });
-
-     //删除
-   $('#btnDelete').on('click',function(){
-    var row=icondg.datagrids('getSelected');
-    lion.web.deletefn({
-      url:'delete.json',
-      data:row,
-      unselectedmsg:'请选择要删除记录',
-      confirmmsg:'确认要删除此记录？',
-      success:successForDelete,
-    });
-   });
-   
-   //保存
-   $('#btnSave').click(function(){
-    addForm.submit();
-   });
-
-   //删除成功
-  function successForDelete(data,arg){
-     if(data!==null&&!(data.hasError)){
-        lion.util.success('提示',data.message);
-        icondg.datagrids('reload');
-     }else if(data!==null&&data.hasError){
-        var gmsg='';
-        for(var msg in data.errorMessage){
-          gmsg+=data.errorMessage[msg];
-        }
-        if(lion.util.isEmpty(gmsg)){
-          gmsg='未删除成功';
-        }
-        lion.util.error('提示',gmsg);
-    }
-  }
-
 });
+
+
+//保存
+$('#btnSave').click(function(){
+addForm.submit();
+});
+
+//删除成功
+function successForDelete(data,arg){
+ if(data!==null&&!(data.hasError)){
+    lion.util.success('提示',data.message);
+    icondg.datagrids('reload');
+ }else if(data!==null&&data.hasError){
+    var gmsg='';
+    for(var msg in data.errorMessage){
+      gmsg+=data.errorMessage[msg];
+    }
+    if(lion.util.isEmpty(gmsg)){
+      gmsg='未删除成功';
+    }
+    lion.util.error('提示',gmsg);
+}
+}
+
+
 
 //导出Excel
 $('#btnExport').on('click',function(){

@@ -1,9 +1,8 @@
 var addform = $('#sysCalendarForm');
 var addDialog=$('#basic'); //编辑或添加对话框
 $(function(){
-	Metronic.init(); // init metronic core componets
-  	Layout.init(); // init layout
-  	Tasks.initDashboardWidget(); // init tash dashboard widget
+	//加载默认函数
+	lion.web.AppInit();
 	Calendar.init();
 	addform = $('#sysCalendarForm');
 	addDialog=$('#basic'); 
@@ -50,7 +49,7 @@ $(function(){
         success:successForDelete,
       });
    });
- //添加成功的函数
+   //添加成功的函数
    function successAddFrm(result,args){
      lion.web.parsedata({
        data:result,
