@@ -213,14 +213,15 @@
 												<div class="form-group">
 													<div class="form-filed">
 														<label class="col-md-2 control-label">资源图标</label>
-														<div class="col-md-6">
-																<select  id="sysresourcetarget"  name="target" placeholder="请选择资源图标..."   class="lion-combo form-control select2  " data-valueField='codeValue'  data-textField='nameZh' data-URL="${base}/system/code/icon.json?iconType=RESOURCE_ICON">
+														
+														<div class="col-md-3">
+
+																<select  id="sys_resource_icon"  name="icon" placeholder="请选择资源图标..."   class="lion-combo form-control select2 "   data-valueField='iconClass'  data-textField='iconClass' data-URL="${base}/system/code/icon.json?iconType=RESOURCE_ICON">
 																</select>
 														</div>
-														<div class="col-md-6">
-															
-														</div>
+														<label class="control-label"><span id="span_resource_icon"></span></label>
 													</div>
+
 												</div>
 											</div>
 										</form>
