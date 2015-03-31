@@ -23,6 +23,7 @@
 		<lion-data.version>0.0.2-SNAPSHOT</lion-data.version>
 		<lion-common.version>0.0.2-SNAPSHOT</lion-common.version>
 		<lion-redis.version>0.0.2-SNAPSHOT</lion-redis.version>
+		<lion-exception.version>0.0.2-SNAPSHOT</lion-exception.version>
 		<junit.version>4.8.2</junit.version>
 		<slf4j.version>1.7.1</slf4j.version>
 		<poi.version>3.9</poi.version>
@@ -66,6 +67,11 @@
 	<dependencyManagement>
 		<dependencies>
 			<!-- lion Start -->
+			<dependency>
+				<groupId>com.newtouch.lion</groupId>
+				<artifactId>com.newtouch.lion-exception</artifactId>
+				<version>${lion-exception.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.newtouch.lion</groupId>
 				<artifactId>com.newtouch.lion-adpater</artifactId>
