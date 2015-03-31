@@ -28,6 +28,7 @@
 		<module>com.newtouch.lion-dsession</module>
 		<module>com.newtouch.lion-monitor</module>
     <module>com.newtouch.lion-websocket</module>
+    <module>com.newtouch.lion-exception</module>
   </modules>
 	<distributionManagement>
 		<repository>

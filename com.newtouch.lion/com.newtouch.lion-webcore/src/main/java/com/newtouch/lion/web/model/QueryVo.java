@@ -6,7 +6,7 @@
 */
 package com.newtouch.lion.web.model; 
 
-import com.newtouch.lion.query.QueryCriteria;
+import com.newtouch.lion.common.sql.QueryOrder;
 
 /**
  * <p>
@@ -33,7 +33,7 @@ public class QueryVo{
 	/**排序字段*/
 	private String sort;
 	/**排序显示顺序：order 升序或降序*/
-	private String order=QueryCriteria.ASC;
+	private String order=QueryOrder.ASC;
 	/***表格ID*/
 	private String tableId;
 	
