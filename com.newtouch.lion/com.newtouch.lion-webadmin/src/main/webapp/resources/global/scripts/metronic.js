@@ -19,8 +19,6 @@ var Metronic = function() {
          return pathname.substr(0,indexNext);
    }();
 
-   console.dir(context);
-
     var assetsPath =context+'/resources/';
 
     var globalImgPath =context+ '/global/img/';
