@@ -29,7 +29,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.newtouch.lion</groupId>
-			<artifactId>com.newtouch.lion-data</artifactId>
+			<artifactId>com.newtouch.lion-exception</artifactId>
 		</dependency>
 		<!-- Spring framework Start -->
 		<dependency>
