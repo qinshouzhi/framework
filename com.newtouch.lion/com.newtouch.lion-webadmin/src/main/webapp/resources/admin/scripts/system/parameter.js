@@ -1,10 +1,7 @@
 var parameterdg=$('#sys_parameter_lists_tb'),addDialog=$('#basic');
 $(function() {
-	//加载bootstrap
-	Metronic.init(); // init metronic core componets
-	Layout.init(); // init layout
-	Tasks.initDashboardWidget(); // init tash dashboard widget
-	lion.util.menu();//加载导航栏
+	//默认加载函数
+	lion.web.AppInit();
 	
 	parameterdg=$('#sys_parameter_lists_tb');
 

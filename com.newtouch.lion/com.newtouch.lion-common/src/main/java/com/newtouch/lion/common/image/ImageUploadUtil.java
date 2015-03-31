@@ -5,7 +5,7 @@
 *
 * $id: ImageUploadUtil.java 9552 Mar 2, 2015 4:07:20 PM MaoJiaWei$
 */
-package com.newtouch.lion.admin.web.model.system.util; 
+package com.newtouch.lion.common.image; 
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -34,19 +34,14 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class ImageUploadUtil {
 	
-	private static String IMAGE_JPEG = "FFD8FF";
-	private static String IMAGE_JPG = "FFD8FF";
-	private static String IMAGE_PNG = "89504E47";
-	private static String IMAGE_GIF = "47494638";
-	
 	private static  Map<String,String> IMAGE_MAP;
 	
 	static{
 		IMAGE_MAP=new HashMap<String, String>();
 		IMAGE_MAP.put("FFD8FF", "JPEG");
-		IMAGE_MAP.put("FFD8FF", "JPEG");
-		IMAGE_MAP.put("89504E47", "JPEG");
-		IMAGE_MAP.put("47494638", "JPEG");
+		IMAGE_MAP.put("FFD8FF", "JPG");
+		IMAGE_MAP.put("89504E47", "PNG");
+		IMAGE_MAP.put("47494638", "GIF");
 	}
 	
 	/***

@@ -1,9 +1,6 @@
 $(function() {
-	//加载bootstrap
-	Metronic.init(); // init metronic core componets
-	Layout.init(); // init layout
-	Tasks.initDashboardWidget(); // init tash dashboard widget
-  lion.util.menu();//加载导航栏
+	//默认加载函数
+	lion.web.AppInit();
 	
 	var datagridId='#sys_resource_lists_tb';
 	var addForm=$('#addform');

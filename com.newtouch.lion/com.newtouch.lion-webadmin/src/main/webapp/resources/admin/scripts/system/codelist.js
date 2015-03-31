@@ -2,11 +2,8 @@ var codelistdg=$('#sys_codelist_tb'); //datagrids
 var addForm=$('#sysCodeListForm');  //编辑或添加表单
 var addDialog=$('#basic'); //编辑或添加对话框
 $(function () {
-  //加载bootstrap
-  Metronic.init(); // init metronic core componets
-  Layout.init(); // init layout
-  Tasks.initDashboardWidget(); // init tash dashboard widget
-  lion.util.menu();//加载导航栏
+	//默认加载函数
+	lion.web.AppInit();
 
   codelistdg=$("#sys_codelist_tb");
   addForm=$('#sysCodeListForm');

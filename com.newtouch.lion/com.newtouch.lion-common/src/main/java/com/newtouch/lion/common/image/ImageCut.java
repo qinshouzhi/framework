@@ -5,7 +5,7 @@
 *
 * $id: ImageCut.java 9552 Mar 2, 2015 3:58:45 PM MaoJiaWei$
 */
-package com.newtouch.lion.admin.web.model.system.util; 
+package com.newtouch.lion.common.image; 
 
 import java.awt.Graphics;
 import java.awt.Image;
