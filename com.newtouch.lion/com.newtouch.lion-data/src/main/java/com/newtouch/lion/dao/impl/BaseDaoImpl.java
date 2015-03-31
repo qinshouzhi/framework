@@ -381,7 +381,8 @@ public class BaseDaoImpl<T extends BaseEntity<PK>, PK> implements BaseDao<T, PK>
 
 	public void save(T obj) {
 		this.addAuditInfo(obj);
-		this.mergeObject(obj);
+	    this.entityManager.persist(obj);
+		obj.getId();
 	}
 
 	/**
