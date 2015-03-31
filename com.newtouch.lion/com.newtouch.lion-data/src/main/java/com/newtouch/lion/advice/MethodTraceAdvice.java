@@ -23,7 +23,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.TransactionException;
 
 import com.newtouch.lion.common.resource.MessageResource;
-import com.newtouch.lion.excpetion.SystemException;
+import com.newtouch.lion.exception.SystemException;
 
 
 

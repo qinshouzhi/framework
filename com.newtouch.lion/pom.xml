@@ -13,6 +13,7 @@
 	</properties>
 	<modules>
 		<module>com.newtouch.lion-parent</module>
+		<module>com.newtouch.lion-exception</module>
 		<module>com.newtouch.lion-adpater</module>
 		<module>com.newtouch.lion-api</module>
 		<module>com.newtouch.lion-data</module>
@@ -27,7 +28,7 @@
 		<module>com.newtouch.lion-redis</module>
 		<module>com.newtouch.lion-dsession</module>
 		<module>com.newtouch.lion-monitor</module>
-    <module>com.newtouch.lion-websocket</module>
+   		<module>com.newtouch.lion-websocket</module>
   </modules>
 	<distributionManagement>
 		<repository>
