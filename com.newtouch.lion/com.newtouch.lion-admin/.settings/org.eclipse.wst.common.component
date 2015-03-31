@@ -19,6 +19,12 @@
         <dependent-module archiveName="com.newtouch.lion-web-0.0.2-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.newtouch.lion-web/com.newtouch.lion-web">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="com.newtouch.lion-shiro-0.0.2-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.newtouch.lion-shiro/com.newtouch.lion-shiro">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="com.newtouch.lion-webcore-0.0.2-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.newtouch.lion-webcore/com.newtouch.lion-webcore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/com.newtouch.lion-admin/target/classes"/>
         <property name="context-root" value="com.newtouch.lion-webmain"/>
     </wb-module>

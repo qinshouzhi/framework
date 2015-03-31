@@ -98,6 +98,16 @@
 			</dependency>
 			<dependency>
 				<groupId>com.newtouch.lion</groupId>
+				<artifactId>com.newtouch.lion-shiro</artifactId>
+				<version>${lion-web.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.newtouch.lion</groupId>
+				<artifactId>com.newtouch.lion-webcore</artifactId>
+				<version>${lion-web.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.newtouch.lion</groupId>
 				<artifactId>com.newtouch.lion-web</artifactId>
 				<version>${lion-web.version}</version>
 			</dependency>
@@ -716,13 +726,13 @@
 				<version>${httpcore.version}</version>
 			</dependency>
 			<!-- org.springframework.data -->
-		    <dependency>
-		        <groupId>org.springframework.data</groupId>
-		        <artifactId>spring-data-redis</artifactId>
-		        <version>${spring-data-redis.version}</version>
-		    </dependency>
-		    
-		    <dependency>
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-redis</artifactId>
+				<version>${spring-data-redis.version}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>redis.clients</groupId>
 				<artifactId>jedis</artifactId>
 				<version>${jedis.version}</version>

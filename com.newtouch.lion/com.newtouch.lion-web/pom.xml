@@ -38,6 +38,14 @@
 			<groupId>com.newtouch.lion</groupId>
 			<artifactId>com.newtouch.lion-service</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.newtouch.lion</groupId>
+			<artifactId>com.newtouch.lion-shiro</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.newtouch.lion</groupId>
+			<artifactId>com.newtouch.lion-webcore</artifactId>
+		</dependency>
 		<!-- lion End -->
 		<dependency>
 			<groupId>junit</groupId>
