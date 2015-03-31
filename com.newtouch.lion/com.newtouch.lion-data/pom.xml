@@ -24,6 +24,10 @@
 			<groupId>com.newtouch.lion</groupId>
 			<artifactId>com.newtouch.lion-common</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.newtouch.lion</groupId>
+			<artifactId>com.newtouch.lion-exception</artifactId>
+		</dependency>
 		<!-- Test jar start -->
 		<dependency>
 			<groupId>junit</groupId>
