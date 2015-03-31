@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.newtouch.lion</groupId>
 	<artifactId>com.newtouch.lion-parent</artifactId>
-	<version>${lion-parent.version}</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>com.newtouch.lion-parent</name>
 	<packaging>pom</packaging>
 	<url>http://maven.apache.org</url>
@@ -15,7 +15,8 @@
 		<lion-parent.version>0.0.2-SNAPSHOT</lion-parent.version>
 		<lion-adpater.version>0.0.2-SNAPSHOT</lion-adpater.version>
 		<lion-im.version>0.0.2-SNAPSHOT</lion-im.version>
-		<lion-webframework.version>0.0.2-SNAPSHOT</lion-webframework.version>
+		<lion-webcore.version>0.0.2-SNAPSHOT</lion-webcore.version>
+		<lion-shiro.version>0.0.2-SNAPSHOT</lion-shiro.version>
 		<lion-web.version>0.0.2-SNAPSHOT</lion-web.version>
 		<lion-webadmin.version>0.0.2-SNAPSHOT</lion-webadmin.version>
 		<lion-api.version>0.0.2-SNAPSHOT</lion-api.version>
@@ -105,12 +106,12 @@
 			<dependency>
 				<groupId>com.newtouch.lion</groupId>
 				<artifactId>com.newtouch.lion-shiro</artifactId>
-				<version>${lion-web.version}</version>
+				<version>${lion-shiro.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.newtouch.lion</groupId>
 				<artifactId>com.newtouch.lion-webcore</artifactId>
-				<version>${lion-web.version}</version>
+				<version>${lion-webcore.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.newtouch.lion</groupId>

@@ -20,8 +20,7 @@
 		<module>com.newtouch.lion-service</module>
 		<module>com.newtouch.lion-im</module>
 		<module>com.newtouch.lion-common</module>
-		<module>com.newtouch.lion-web</module>
-		<module>com.newtouch.lion-webadmin</module>
+		<module>com.newtouch.lion-web</module>		
 		<module>com.newtouch.lion-mgt</module>
 		<module>com.newtouch.lion-webcore</module>
 		<module>com.newtouch.lion-shiro</module>
@@ -29,6 +28,7 @@
 		<module>com.newtouch.lion-dsession</module>
 		<module>com.newtouch.lion-monitor</module>
    		<module>com.newtouch.lion-websocket</module>
+   		<module>com.newtouch.lion-webadmin</module>
   </modules>
 	<distributionManagement>
 		<repository>

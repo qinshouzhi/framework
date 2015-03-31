@@ -10,7 +10,7 @@
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>com.newtouch.lion-service</artifactId>
-	<version>${lion-service.version}</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>com.newtouch.lion-service</name>
 	<url>http://maven.apache.org</url>
 	<properties>

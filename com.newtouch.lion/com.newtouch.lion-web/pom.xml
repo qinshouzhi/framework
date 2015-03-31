@@ -10,7 +10,7 @@
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>com.newtouch.lion-web</artifactId>
-	<version>${lion-web.version}</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>com.newtouch.lion-web</name>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -18,6 +18,10 @@
 	</properties>
 	<dependencies>
 		<!-- lion Start -->
+		<dependency>
+			<groupId>com.newtouch.lion</groupId>
+			<artifactId>com.newtouch.lion-exception</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.newtouch.lion</groupId>
 			<artifactId>com.newtouch.lion-api</artifactId>
