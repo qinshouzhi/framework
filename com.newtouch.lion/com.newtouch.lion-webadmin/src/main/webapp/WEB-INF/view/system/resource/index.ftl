@@ -37,6 +37,9 @@
 <script src="${base}/resources/global/js/combo/combonew.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>>
 <!--lion UI JS End-->
+
+<!--lang-->
+<script src="${base}/resources/admin/scripts/admin-common.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>script>
 <script src="${base}/resources/admin/scripts/system/resource.js" type="text/javascript"></script>
 </head>
