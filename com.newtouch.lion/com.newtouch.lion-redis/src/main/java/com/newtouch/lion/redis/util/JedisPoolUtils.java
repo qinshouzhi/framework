@@ -8,6 +8,8 @@ public class JedisPoolUtils{
 	
 	private static JedisPool pool;
 
+	private static String host="";
+	private static int port=6379;
     /**
      * 建立连接池 真实环境，一般把配置参数缺抽取出来。
      * 
@@ -27,7 +29,7 @@ public class JedisPoolUtils{
         config.setMaxIdle(10);
 
         // 创建连接池
-        pool = new JedisPool(config, "127.0.0.1", 6379);
+        pool = new JedisPool(config, host, port);
 
     }
 

@@ -2,8 +2,12 @@ package org.com.newtouch.lion.redis;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.newtouch.lion.redis.base.RedisClientTemplate;
 import com.newtouch.lion.redis.pubsub.Publisher;
+import com.newtouch.lion.redis.pubsub.RedisListener;
 import com.newtouch.lion.redis.pubsub.Subscriber;
 
 import redis.clients.jedis.Jedis;
@@ -11,52 +15,36 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 public class PubsubTest {
-	public static final String CHANNEL_NAME = "commonChannel";
+	public static final String CHANNEL_NAME = "news.share";
 
-    private static Logger logger = LoggerFactory.getLogger(PubsubTest.class);
+	private static Logger logger = LoggerFactory.getLogger(PubsubTest.class);
 
-    
-    /**
-     * 测试
-     * @param args
-     * @throws Exception
-     */
-    public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 
-        JedisPoolConfig poolConfig = new JedisPoolConfig();
-        
-        JedisPool jedisPool = new JedisPool(poolConfig, "192.168.202.120", 6379,0);
-        //发布
-        Jedis publisherJedis = jedisPool.getResource();
-        //发布消息
-        Publisher publisher= new Publisher(publisherJedis, CHANNEL_NAME);
-        publisher.lpublish("上海");
-        
-        //订阅
-        final Jedis subscriberJedis = jedisPool.getResource();
-        
-        final Subscriber subscriber = new Subscriber();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    logger.info("Subscribing to \"channel\". This thread will be blocked.");
-                    subscriberJedis.subscribe(subscriber,CHANNEL_NAME);
-                    logger.info("Subscription ended.");
-                } catch (Exception e) {
-                    logger.error("Subscribing failed.", e);
-                }
-            }
-        }).start();
-       
-        
-        //指退订给定的
-        jedisPool.returnResource(subscriberJedis);
-        
-        // 释放对象池 
-        jedisPool.returnResource(publisherJedis);
-        
-        
-        
-    }
-}
+//		 ApplicationContext ac =  new ClassPathXmlApplicationContext("classpath:/data-source.xml");
+//	     
+//		 RedisClientTemplate redisClient = (RedisClientTemplate)ac.getBean("redisClientTemplate");
+		
+		
+		JedisPoolConfig poolConfig = new JedisPoolConfig();
+
+		JedisPool jedisPool = new JedisPool(poolConfig, "192.168.202.120",6379, 0);
+
+		
+		Jedis subRedisClient = jedisPool.getResource();
+		Jedis pubRedisClient = jedisPool.getResource();
+		
+		RedisListener listener = new RedisListener();
+
+		Publisher pub = new Publisher(pubRedisClient,CHANNEL_NAME);
+
+		pub.publish("hello word"); // 发布一个频道
+		
+		pub.lpublish("hello1 word");//发布到server
+		
+		Subscriber sub = new Subscriber(subRedisClient,CHANNEL_NAME);
+		           sub.psub(listener); // 订阅一个频道
+		pubRedisClient.del(CHANNEL_NAME);//删除
+		
+	}
+	}

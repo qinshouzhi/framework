@@ -1,40 +1,26 @@
 package com.newtouch.lion.redis.pubsub;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import redis.clients.jedis.Jedis;
 
-import redis.clients.jedis.JedisPubSub;
+public class Subscriber {
+	private final Jedis publisherJedis;
 
-public class Subscriber extends JedisPubSub{
-	private static Logger logger = LoggerFactory.getLogger(Subscriber.class);
+	private final String channel;
 
-    @Override
-    public void onMessage(String channel, String message) {
-        logger.info("Message received. Channel: {}, Msg: {}", channel, message);
-    }
+	public Subscriber(Jedis publisherJedis, String channel) {
+		this.publisherJedis = publisherJedis;
+		this.channel = channel;
+	}
 
-    @Override
-    public void onPMessage(String pattern, String channel, String message) {
-             System.out.println("onPMessage");
-    }
-
-    @Override
-    public void onSubscribe(String channel, int subscribedChannels) {
-    	  System.out.println("onSubscribe");
-    }
-
-    @Override
-    public void onUnsubscribe(String channel, int subscribedChannels) {
-    	System.out.println("onUnsubscribe");
-    }
-
-    @Override
-    public void onPUnsubscribe(String pattern, int subscribedChannels) {
-    	System.out.println("onPUnsubscribe");
-    }
-
-    @Override
-    public void onPSubscribe(String pattern, int subscribedChannels) {
-    	System.out.println("onPSubscribe");
-    }
+	public void psub(final RedisListener listener) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				// 订阅得到信息在lister的onMessage(...)方法中进行处理
+				// 订阅多个频道
+				// redisClient.subscribe(listener, "news.share", "news.log");
+				publisherJedis.psubscribe(listener, new String[] {channel });// 使用模式匹配的方式设置频道
+			}
+		}).start();
+	}
 }

@@ -5,29 +5,39 @@ import org.slf4j.LoggerFactory;
 
 import redis.clients.jedis.Jedis;
 
-public class Publisher{
-	private static final Logger logger = LoggerFactory.getLogger(Publisher.class);
+public class Publisher {
 
-    private final Jedis publisherJedis;
+	private static final Logger logger = LoggerFactory
+			.getLogger(Publisher.class);
 
-    private final String channel;
+	private final Jedis publisherJedis;
 
-    public Publisher(Jedis publisherJedis, String channel) {
-        this.publisherJedis = publisherJedis;
-        this.channel = channel;
-    }
-    public void lpublish(String msg) {
-        try {
-            publisherJedis.lpush(channel,msg);
-        } catch (Exception e) {
-            logger.error("IO failure while reading input, e");
-        }
-    }
-    public void publish(String msg){
-    	 try {
-             publisherJedis.publish(channel,msg);
-         } catch (Exception e) {
-             logger.error("IO failure while reading input, e");
-         }
-    }
+	private final String channel;
+
+	public Publisher(Jedis publisherJedis, String channel) {
+		this.publisherJedis = publisherJedis;
+		this.channel = channel;
+	}
+
+	public void lpublish(String msg) {
+		try {
+			publisherJedis.lpush(channel, msg);
+		} catch (Exception e) {
+			logger.error("IO failure while reading input, e");
+		}
+	}
+
+	public void publish(final String msg){
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {  
+				     Thread.sleep(1000);  
+				    } catch (InterruptedException e) {  
+				     e.printStackTrace();  
+				    } 
+				publisherJedis.publish(channel, msg);
+			}
+		}).start();
+	}
 }
