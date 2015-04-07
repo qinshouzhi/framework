@@ -36,8 +36,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.auth.AuthModel;
 import com.newtouch.lion.admin.web.model.system.user.UserVo;
-import com.newtouch.lion.cache.system.ParameterUtil;
-import com.newtouch.lion.common.constant.Constants;
 import com.newtouch.lion.common.date.DateUtil;
 import com.newtouch.lion.common.file.FileUtil;
 import com.newtouch.lion.common.user.UserInfo;
@@ -110,7 +108,7 @@ public class UserController extends AbstractController {
 	/** 已授权组 */
 	private static final String AUTH_USER_GROUPS_TB = "usergroup_tb";
 	/** 默认密码 */
-	private static final String DEFAULT_PASSWORD =ParameterUtil.getValue(Constants.DEFLAUT_PASSWORD_KEY);
+	private static final String DEFAULT_PASSWORD ="111aaa";
 	@Autowired
 	private UserService userService;
 	@Autowired

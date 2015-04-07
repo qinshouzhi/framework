@@ -213,9 +213,7 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 
 		int startIndex = criteria.getStartIndex();
 
-		PageResult<Role> pageResult = this.roleDao.query(hql,
-				HqlUtils.generateCountHql(hql, null), params, startIndex,
-				pageSize);
+		PageResult<Role> pageResult = this.roleDao.query(hql,HqlUtils.generateCountHql(hql, null), params, startIndex,pageSize);
 
 		return pageResult;
 	}
