@@ -6,6 +6,8 @@
 */
 package com.newtouch.lion.cache.system; 
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.newtouch.lion.common.SpringContextUtil;
 
 /**
@@ -26,6 +28,10 @@ import com.newtouch.lion.common.SpringContextUtil;
  * @version 1.0
  */
 public class ParameterUtil {
+	
+	/**消息代码*/
+	@Autowired
+	private ParameterCacheService  parameterCacheService;
 	/***
 	 * 根据KEY获取数据
 	 * @param key
