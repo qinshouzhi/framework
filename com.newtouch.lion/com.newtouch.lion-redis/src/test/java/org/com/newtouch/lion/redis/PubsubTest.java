@@ -2,17 +2,14 @@ package org.com.newtouch.lion.redis;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.newtouch.lion.redis.base.RedisClientTemplate;
-import com.newtouch.lion.redis.pubsub.Publisher;
-import com.newtouch.lion.redis.pubsub.RedisListener;
-import com.newtouch.lion.redis.pubsub.Subscriber;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+
+import com.newtouch.lion.redis.pubsub.Publisher;
+import com.newtouch.lion.redis.pubsub.RedisListener;
+import com.newtouch.lion.redis.pubsub.Subscriber;
 
 public class PubsubTest {
 	public static final String CHANNEL_NAME = "news.share";
