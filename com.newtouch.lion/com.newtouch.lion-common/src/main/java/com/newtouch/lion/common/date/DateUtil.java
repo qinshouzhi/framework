@@ -42,6 +42,10 @@ public class DateUtil {
 	public static final String FORMAT_DATE_DEFAULT = "yyyy-MM-dd";
 	/** FORMAT_DATE_YYYYMMDD:yyyyMMdd eg:20130111 */
 	public static final String FORMAT_DATE_YYYYMMDD = "yyyyMMdd";
+	/** FORMAT_DATE_YYYYMMDDHH:yyyyMMddHH eg:2013011101 */
+	public static final String FORMAT_DATE_YYYYMMDDHH = "yyyyMMddHH";
+	/** FORMAT_DATE_YYYYMMDDHH:yyyyMMddHH eg:2013011101 */
+	public static final String FORMAT_DATE_YYYYMM= "yyyyMM";
 	/** FORMAT_DATE_YYYY_MM_DD:yyyy-MM-dd */
 	public static final String FORMAT_DATE_YYYY_MM_DD = "yyyy-MM-dd";
 	/** FORMAT_DATE_SLASH_YYYY_MM_DD:yyyy/MM/dd */

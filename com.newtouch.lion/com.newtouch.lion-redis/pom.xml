@@ -6,11 +6,11 @@
 	<parent>
 		<groupId>com.newtouch.lion</groupId>
 		<artifactId>com.newtouch.lion-parent</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>0.1.2-SNAPSHOT</version>
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>com.newtouch.lion-redis</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.1.2-SNAPSHOT</version>
 	<name>com.newtouch.lion-redis</name>
 	<url>http://www.newtouchone.com</url>
 	<properties>
@@ -86,6 +86,16 @@
 		</dependency>
 	</dependencies>
 	<build>
+		<resources>
+			<!-- 过滤所有资源资源由程序员配置 -->
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+				<excludes>
+					<exclude>**/*.xml</exclude>
+					<exclude>application.properties</exclude>
+				</excludes>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

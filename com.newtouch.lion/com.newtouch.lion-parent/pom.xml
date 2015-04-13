@@ -5,26 +5,26 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.newtouch.lion</groupId>
 	<artifactId>com.newtouch.lion-parent</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.1.2-SNAPSHOT</version>
 	<name>com.newtouch.lion-parent</name>
 	<packaging>pom</packaging>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.7</jdk.version>
-		<lion-parent.version>0.0.2-SNAPSHOT</lion-parent.version>
-		<lion-adpater.version>0.0.2-SNAPSHOT</lion-adpater.version>
-		<lion-im.version>0.0.2-SNAPSHOT</lion-im.version>
-		<lion-webcore.version>0.0.2-SNAPSHOT</lion-webcore.version>
-		<lion-shiro.version>0.0.2-SNAPSHOT</lion-shiro.version>
-		<lion-web.version>0.0.2-SNAPSHOT</lion-web.version>
-		<lion-webadmin.version>0.0.2-SNAPSHOT</lion-webadmin.version>
-		<lion-api.version>0.0.2-SNAPSHOT</lion-api.version>
-		<lion-service.version>0.0.2-SNAPSHOT</lion-service.version>
-		<lion-data.version>0.0.2-SNAPSHOT</lion-data.version>
-		<lion-common.version>0.0.2-SNAPSHOT</lion-common.version>
-		<lion-redis.version>0.0.2-SNAPSHOT</lion-redis.version>
-		<lion-exception.version>0.0.2-SNAPSHOT</lion-exception.version>
+		<lion-parent.version>0.1.2-SNAPSHOT</lion-parent.version>
+		<lion-adpater.version>0.1.2-SNAPSHOT</lion-adpater.version>
+		<lion-im.version>0.1.2-SNAPSHOT</lion-im.version>
+		<lion-webcore.version>0.1.2-SNAPSHOT</lion-webcore.version>
+		<lion-shiro.version>0.1.2-SNAPSHOT</lion-shiro.version>
+		<lion-web.version>0.1.2-SNAPSHOT</lion-web.version>
+		<lion-webadmin.version>0.1.2-SNAPSHOT</lion-webadmin.version>
+		<lion-api.version>0.1.2-SNAPSHOT</lion-api.version>
+		<lion-service.version>0.1.2-SNAPSHOT</lion-service.version>
+		<lion-data.version>0.1.2-SNAPSHOT</lion-data.version>
+		<lion-common.version>0.1.2-SNAPSHOT</lion-common.version>
+		<lion-redis.version>0.1.2-SNAPSHOT</lion-redis.version>
+		<lion-exception.version>0.1.2-SNAPSHOT</lion-exception.version>
 		<junit.version>4.8.2</junit.version>
 		<slf4j.version>1.7.1</slf4j.version>
 		<poi.version>3.9</poi.version>
@@ -117,6 +117,11 @@
 				<groupId>com.newtouch.lion</groupId>
 				<artifactId>com.newtouch.lion-web</artifactId>
 				<version>${lion-web.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.newtouch.lion</groupId>
+				<artifactId>com.newtouch.lion-redis</artifactId>
+				<version>${lion-redis.version}</version>
 			</dependency>
 			<!-- lion End -->
 			<!-- Test jar start -->

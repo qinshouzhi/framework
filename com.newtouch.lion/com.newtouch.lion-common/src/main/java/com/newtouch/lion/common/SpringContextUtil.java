@@ -7,13 +7,13 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 /**
  * @author wanglijun
  *
  */
-@Repository("springContextUtil")
+@Component("springContextUtil")
 public class SpringContextUtil implements ApplicationContextAware {
 	
 	private static ApplicationContext applicationContext;

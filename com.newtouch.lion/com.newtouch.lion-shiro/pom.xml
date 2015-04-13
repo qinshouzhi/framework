@@ -6,11 +6,11 @@
 	<parent>
 		<groupId>com.newtouch.lion</groupId>
 		<artifactId>com.newtouch.lion-parent</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>0.1.2-SNAPSHOT</version>
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>com.newtouch.lion-shiro</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.1.2-SNAPSHOT</version>
 	<name>com.newtouch.lion-shiro</name>
 	<url>http://www.newtouchone.com</url>
 	<properties>
@@ -34,10 +34,6 @@
 		<dependency>
 			<groupId>com.newtouch.lion</groupId>
 			<artifactId>com.newtouch.lion-data</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.newtouch.lion</groupId>
-			<artifactId>com.newtouch.lion-im</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.newtouch.lion</groupId>
