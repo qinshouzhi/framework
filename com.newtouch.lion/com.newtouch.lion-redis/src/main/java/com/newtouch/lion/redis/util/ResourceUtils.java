@@ -18,7 +18,7 @@ import com.newtouch.lion.redis.exception.RedisClientException;
  * 
  * ResourceUtils
  * 
- * @author pinzhao
+ * @author 
  */
 public class ResourceUtils {
     /**

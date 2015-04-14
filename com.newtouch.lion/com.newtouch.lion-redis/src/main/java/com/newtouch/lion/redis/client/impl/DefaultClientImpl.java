@@ -127,7 +127,7 @@ public class DefaultClientImpl {
     public void clearDisableFlags() {
         // 所有shard中所有连接池
         Collection<ShardHandler> allShards = sharded4Jedis.getAllShards();
-        for (ShardHandler shard : allShards) {
+        for (ShardHandler shard:allShards) {
             shard.clearDisableFlags();
         }
     }

@@ -40,8 +40,8 @@ public class PubsubTest {
 		//pub.lpublish("hello1 word");//发布到server
 		
 		Subscriber sub = new Subscriber(subRedisClient,CHANNEL_NAME);
-		           sub.psub(listener); // 订阅一个频道
-		pubRedisClient.del(CHANNEL_NAME);//删除
+		sub.psub(listener); // 订阅一个频道
+		//pubRedisClient.del(CHANNEL_NAME);//删除
 		
 	}
 	}
