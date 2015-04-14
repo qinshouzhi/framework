@@ -2865,4 +2865,17 @@ public class SpringRedisClientImpl extends DefaultSpringClientImpl implements IR
     public Long bitcount(String key, long start, long end) {
         return null;
     }
+
+    @Override
+	public Long push(final String key,final String... fields) {
+		return this.performFunction(key, new CallBack<Long>() {
+			public Long invoke(Jedis jedis) {
+				long r = 0;
+				for (String field : fields) {
+					r=r+jedis.publish(key,field);
+				}
+				return r;
+			}
+		});
+	}
 }

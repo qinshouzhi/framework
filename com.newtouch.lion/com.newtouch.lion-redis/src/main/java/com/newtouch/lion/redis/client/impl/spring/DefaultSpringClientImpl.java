@@ -25,8 +25,7 @@ public class DefaultSpringClientImpl {
 	/**
 	 * 日志
 	 */
-	private static Logger logger = LoggerFactory
-			.getLogger(DefaultSpringClientImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(DefaultSpringClientImpl.class);
 	/**
 	 * 分片
 	 */

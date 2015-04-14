@@ -22,6 +22,9 @@ public interface IRedisClient extends JedisCommands {
      * @return Long 被成功删除的个数
      */
     Long del(String key);
+    
+    
+    
 
     /**
      * 功能描述： lpush元素
@@ -31,6 +34,14 @@ public interface IRedisClient extends JedisCommands {
      * @return Long 被成功插入的个数
      */
     Long lpush(String key, String... fields);
+    
+    /****
+     * 功能描述：push
+     * @param key 指定的key
+     * @param fields 被插入的元素
+     * @return   Long 被成功插入的个数
+     */
+    Long push(String key,String ...fields);
 
     /**
      * 功能描述： rpush元素

@@ -3,6 +3,7 @@ package com.newtouch.lion.redis.pubsub;
 import redis.clients.jedis.Jedis;
 
 public class Subscriber {
+	
 	private final Jedis publisherJedis;
 
 	private final String channel;

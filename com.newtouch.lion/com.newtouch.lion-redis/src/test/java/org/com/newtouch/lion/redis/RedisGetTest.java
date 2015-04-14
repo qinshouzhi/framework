@@ -47,6 +47,17 @@ public class RedisGetTest  extends RedisAllTest{
 		String str=springRedisClient.get(key);
 		
 		logger.info("1111111111111111:str:{}",str);
+		 
+	}
+	
+	@Test
+	public void lpush(){
+		springRedisClient.lpush("news.share1", "OK");
+	}
+	
+	@Test
+	public void push(){
+		springRedisClient.push("watchmen:notify", "OK");
 	}
 }
 

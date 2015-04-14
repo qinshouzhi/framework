@@ -12,7 +12,7 @@ import com.newtouch.lion.redis.pubsub.RedisListener;
 import com.newtouch.lion.redis.pubsub.Subscriber;
 
 public class PubsubTest {
-	public static final String CHANNEL_NAME = "news.share";
+	public static final String CHANNEL_NAME = "watchmen:notify";
 
 	private static Logger logger = LoggerFactory.getLogger(PubsubTest.class);
 
@@ -33,11 +33,11 @@ public class PubsubTest {
 		
 		RedisListener listener = new RedisListener();
 
-		Publisher pub = new Publisher(pubRedisClient,CHANNEL_NAME);
+		//Publisher pub = new Publisher(pubRedisClient,CHANNEL_NAME);
 
-		pub.publish("hello word"); // 发布一个频道
+		//pub.publish("hello word"); // 发布一个频道
 		
-		pub.lpublish("hello1 word");//发布到server
+		//pub.lpublish("hello1 word");//发布到server
 		
 		Subscriber sub = new Subscriber(subRedisClient,CHANNEL_NAME);
 		           sub.psub(listener); // 订阅一个频道
