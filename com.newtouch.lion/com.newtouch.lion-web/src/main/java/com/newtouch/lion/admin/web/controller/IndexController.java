@@ -40,7 +40,7 @@ public class IndexController extends  AbstractController{
 	/**选择页面*/
 	private static final String COMBO_RETURN="/combo";
 	
-	@RequestMapping("index")
+	//@RequestMapping("index")
 	public String index(){
 		//权限校验。判断是否包含权限。
 		Subject subject = SecurityUtils.getSubject();

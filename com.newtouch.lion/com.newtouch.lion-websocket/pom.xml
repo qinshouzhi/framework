@@ -3,24 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.newtouch.lion</groupId>
-		<artifactId>com.newtouch.lion-parent</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
-		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
-	</parent>
+	<groupId>com.newtouch.lion</groupId>
 	<artifactId>com.newtouch.lion-websocket</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<version>0.1.2-SNAPSHOT</version>
+	 
 	<name>com.newtouch.lion-websocket</name>
 	<url>http://www.newtouchone.com</url>
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
 	<build>
 		<finalName>com.newtouch.lion-websocket</finalName>
 	</build>
