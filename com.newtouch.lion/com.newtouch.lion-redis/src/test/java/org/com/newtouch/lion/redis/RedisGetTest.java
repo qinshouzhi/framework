@@ -7,6 +7,7 @@
 package org.com.newtouch.lion.redis; 
 
 import org.junit.Test;
+import org.springframework.asm.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
