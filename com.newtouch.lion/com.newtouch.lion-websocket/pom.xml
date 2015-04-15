@@ -13,7 +13,7 @@
 	<name>com.newtouch.lion-websocket</name>
 	<url>http://www.newtouchone.com</url>
 	<properties>
-		<netty-all.version>4.0.26.Final</netty-all.version>
+		<netty-all.version>4.0.27.Final</netty-all.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -33,6 +33,14 @@
 			<groupId>io.netty</groupId>
 			<artifactId>netty-all</artifactId>
 			<version>${netty-all.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
 		</dependency>
 	</dependencies>
 	<build>
