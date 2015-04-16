@@ -4,7 +4,7 @@
 *
 * $id: WebSocketServerHandler.java 9552 2015年4月15日 下午10:51:55 WangLijun$
 */
-package com.newtouch.lion.websocket; 
+package com.newtouch.lion.websocket.server; 
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

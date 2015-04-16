@@ -4,7 +4,7 @@
 *
 * $id: WebSocketServer.java 9552 2015年4月15日 下午10:19:54 WangLijun$
 */
-package com.newtouch.lion.websocket; 
+package com.newtouch.lion.websocket.server; 
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
