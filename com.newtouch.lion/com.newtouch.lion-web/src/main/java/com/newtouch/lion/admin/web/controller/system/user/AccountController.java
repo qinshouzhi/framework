@@ -22,8 +22,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.system.user.PasswordVo;
@@ -181,10 +179,10 @@ public class AccountController extends AbstractController{
 	public ModelAndView changeImg(@Valid @ModelAttribute("userImageVo") UserImageVo userImageVo,Errors errors, ModelAndView modelAndView) throws IllegalStateException, IOException{
 		
 		UserInfo userInfo =LoginSecurityUtil.getUser();
-		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest(); 
+		HttpServletRequest request = this.getRequest();
 		String realPath = request.getSession().getServletContext().getRealPath("/");
-		String resourcePath = ("resources/admin/image/");
-		String totalPath = realPath+"/"+resourcePath;
+		String resourcePath = "resources\\admin\\image\\";
+		String totalPath = realPath+"\\"+resourcePath;
         if(userImageVo.getImage() != null){
             if(ImageUploadUtil.isImage(userImageVo.getImage())){
                 String fileName = userImageVo.getImage().getOriginalFilename();

@@ -44,6 +44,7 @@
 <script src="${base}/resources/global/js/combo/combo.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
+<script src="${base}/resources/admin/scripts/admin-common.js"></script>
 <!--fileupload Js-->
 <script src="${base}/resources/global/js/upload/lion.upload.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/ajaxfileupload/ajaxfileupload.js" type="text/javascript"></script>
