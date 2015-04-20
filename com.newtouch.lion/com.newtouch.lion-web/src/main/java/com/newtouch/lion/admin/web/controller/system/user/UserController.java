@@ -197,7 +197,6 @@ public class UserController extends AbstractController {
 		// 将登录用户转换为小写
 		user.setUsername(user.getUsername().toLowerCase());
 		userService.doCreateUser(user);
-		System.out.println("==================="+user.getId());
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(BindResult.SUCCESS, ConstantMessage.ADD_SUCCESS_MESSAGE_CODE);
 		modelAndView.addObject(BindMessage.SUCCESS, params);
