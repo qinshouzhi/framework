@@ -11,8 +11,8 @@ import java.util.List;
 
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Statistics;
 import net.sf.ehcache.Status;
-import net.sf.ehcache.statistics.StatisticsGateway;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -101,10 +101,10 @@ public class ApplicationCacheManagerImpl implements ApplicationCacheManager {
 			cacheModel.setMemoryStoreSize(cache.calculateInMemorySize());
 			// cacheModel.setMemoryStoreEvictionPolicy(cache.getMemoryStoreEvictionPolicy().getName());
 			cacheModel.setDiskStoreSize((long) cache.getDiskStoreSize());
-			StatisticsGateway statistics = cache.getStatistics();
-			cacheModel.setInMemoryHits(statistics.localHeapHitCount());
-			cacheModel.setCacheHits(statistics.cacheHitCount());
-			cacheModel.setOnDiskHits(statistics.localDiskHitCount());
+			Statistics statistics = cache.getStatistics();
+			cacheModel.setInMemoryHits(statistics.getInMemoryHits());
+			cacheModel.setCacheHits(statistics.getCacheHits());
+			cacheModel.setOnDiskHits(statistics.getOnDiskHits());
 		 
 			list.add(cacheModel);
 		}
@@ -131,10 +131,10 @@ public class ApplicationCacheManagerImpl implements ApplicationCacheManager {
 			cacheModel.setMemoryStoreSize(cache.calculateInMemorySize());
 			cacheModel.setMemoryStoreEvictionPolicy(cache.getMemoryStoreEvictionPolicy().getName());
 			cacheModel.setDiskStoreSize((long) cache.getDiskStoreSize());
-			StatisticsGateway statistics = cache.getStatistics();
-			cacheModel.setInMemoryHits(statistics.localHeapHitCount());
-			cacheModel.setCacheHits(statistics.cacheHitCount());
-			cacheModel.setOnDiskHits(statistics.localDiskHitCount());
+			Statistics statistics = cache.getStatistics();
+			cacheModel.setInMemoryHits(statistics.getInMemoryHits());
+			cacheModel.setCacheHits(statistics.getCacheHits());
+			cacheModel.setOnDiskHits(statistics.getOnDiskHits());
 		 
 			list.add(cacheModel);
 		}

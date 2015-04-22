@@ -56,7 +56,7 @@
 		<jstl.version>1.2</jstl.version>
 		<servlet-api.version>2.5</servlet-api.version>
 		<sitemesh.version>2.5-atlassian-9</sitemesh.version>
-		<ehcache.version>2.7.1</ehcache.version>
+		<ehcache.version>2.5.0</ehcache.version>
 		<ehcache-spring-annotations.version>1.2.0</ehcache-spring-annotations.version>
 		<httpclient.version>4.3.5</httpclient.version>
 		<httpcore.version>4.3.2</httpcore.version>
@@ -697,7 +697,7 @@
 			<!-- Ehcache Start -->
 			<dependency>
 				<groupId>net.sf.ehcache</groupId>
-				<artifactId>ehcache</artifactId>
+				<artifactId>ehcache-core</artifactId>
 				<version>${ehcache.version}</version>
 			</dependency>
 			<dependency>
