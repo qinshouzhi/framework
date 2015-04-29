@@ -29,7 +29,6 @@
 		<module>com.newtouch.lion-monitor</module>
    		<module>com.newtouch.lion-websocket</module>
    		<module>com.newtouch.lion-webadmin</module>
-    <module>com.newtouch.lion-mongodb</module>
   </modules>
 	<distributionManagement>
 		<repository>
