@@ -7,7 +7,6 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
-import com.newtouch.lion.redis.pubsub.Publisher;
 import com.newtouch.lion.redis.pubsub.RedisListener;
 import com.newtouch.lion.redis.pubsub.Subscriber;
 

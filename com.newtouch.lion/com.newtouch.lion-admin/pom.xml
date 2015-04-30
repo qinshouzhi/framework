@@ -45,6 +45,6 @@
 		<!-- lion End -->
 	</dependencies>
 	<build>
-		<finalName>com.newtouch.lion-webmain</finalName>
+		<finalName>admin</finalName>
 	</build>
 </project>
