@@ -256,20 +256,7 @@ $(function() {
 	 $('#btnSave').click(function(){
 	 	   addForm.submit();
 	 });
-   //重置密码
-   $('#btnResetPwd').click(function(){
-        var row=getSelectedRow();
-     if(!row){
-       lion.util.info('提示','请选择要重置密码的记录');
-       return;
-     }
-     bootbox.confirm('确认要重置密码？', function(result) {
-          if(result){              
-              var param={'id':row.id};
-              lion.util.post('resetpwd.json',param,successForResetPwd,errorRequest);
-          }
-      });
-   });
+   
     //重置密码
    $('#btnResetPwd').click(function(){
      var row=getSelectedRow();

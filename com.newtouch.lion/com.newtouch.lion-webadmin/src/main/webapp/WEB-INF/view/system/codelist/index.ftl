@@ -114,7 +114,7 @@
 							<th data-field="editable" style="width:30px;" align="center"  data-formatter="formatterEidtable">
 								可编辑
 							</th>								
-							<th data-field="editable" style="width:30px;" align="center"  data-formatter="formatterEidtable">
+							<th data-field="selected" style="width:30px;" align="center"  data-formatter="formatterEidtable">
 								默认项
 							</th>								
 						</tr>

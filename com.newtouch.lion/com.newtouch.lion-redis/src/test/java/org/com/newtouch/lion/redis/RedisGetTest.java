@@ -57,7 +57,7 @@ public class RedisGetTest  extends RedisAllTest{
 	
 	@Test
 	public void push(){
-		springRedisClient.push("watchmen:notify", "OK");
+		springRedisClient.push("watchmen:panel:notify", "OK");
 	}
 }
 
