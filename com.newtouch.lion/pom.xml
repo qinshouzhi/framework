@@ -17,6 +17,7 @@
 		<module>com.newtouch.lion-adpater</module>
 		<module>com.newtouch.lion-api</module>
 		<module>com.newtouch.lion-data</module>
+		<module>com.newtouch.lion-mongodb</module>
 		<module>com.newtouch.lion-service</module>
 		<module>com.newtouch.lion-im</module>
 		<module>com.newtouch.lion-common</module>
