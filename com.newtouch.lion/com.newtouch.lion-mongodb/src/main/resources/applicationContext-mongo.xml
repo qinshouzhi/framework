@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cxf="http://cxf.apache.org/core"
+	xmlns:p="http://cxf.apache.org/policy" xmlns:ss="http://www.springframework.org/schema/security"
+	xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+   	http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+   	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+   	http://cxf.apache.org/policy http://cxf.apache.org/schemas/policy.xsd
+   	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+   	http://cxf.apache.org/bindings/soap http://cxf.apache.org/schemas/configuration/soap.xsd
+   	http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd
+   	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+   	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+   	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+   	
+   	<context:component-scan base-package="com.newtouch.lion" />
+	<!-- 加载接口配置文件 -->
+	<context:property-placeholder  local-override="false"  file-encoding="UTF-8"  location="classpath:application-mongo.properties"/>
+    <!-- MongoDB 连接池信息 -->
+	<bean id="mongoConfig" class="com.newtouch.lion.mongo.config.Config">
+		<property name="host"  value="${mongo.host}"/>
+		<property name="port"  value="${mongo.port}"/>
+		<property name="username" value="${mongo.username}" />
+		<property name="password" value="${mongo.password}" />
+		<property name="dbname" value="${mongo.dbname}" />
+		<!-- Pool Info-->
+		<property name="minPoolSize" value="${mongo.minpoolsize}" />
+		<property name="maxPoolSize" value="${mongo.maxpoolsize}" />
+		<property name="maxWaitTime" value="${mongo.maxwaittime}" />
+		
+		<property name="perHost" value="${mongo.perhost}" />
+		<property name="socketKeepAlive" value="${mongo.socketkeepalive}" />
+		<property name="threadsAllowedToBlockForConnectionMultiplier" value="${mongo.threadsallowedtoblock}" />
+		<property name="socketTimeout" value="${mongo.sockettimeout}" />
+		<property name="timeout" value="${mongo.timeout}"/>
+	</bean>
+	
+	<!--  MongoManager -->
+	<bean id="mongoManager"  class="com.newtouch.lion.mongo.MongoManager">
+		<property name="config"  ref="mongoConfig"/>
+	</bean>
+</beans>
