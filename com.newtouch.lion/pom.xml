@@ -26,6 +26,7 @@
 		<module>com.newtouch.lion-webcore</module>
 		<module>com.newtouch.lion-shiro</module>
 		<module>com.newtouch.lion-redis</module>
+   		<module>com.newtouch.lion-mongodb</module>
 		<module>com.newtouch.lion-dsession</module>
 		<module>com.newtouch.lion-monitor</module>
    		<module>com.newtouch.lion-websocket</module>
