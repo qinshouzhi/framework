@@ -43,7 +43,7 @@ public class RedisGetTest  extends RedisAllTest{
 	
 	@Test
 	public void queryGet(){
-		String key="watchme:20150410";
+		String key="watchmen:20150410";
 		String str=springRedisClient.get(key);
 		
 		logger.info("1111111111111111:str:{}",str);
