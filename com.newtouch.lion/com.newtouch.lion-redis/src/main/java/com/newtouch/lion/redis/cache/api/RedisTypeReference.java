@@ -1,14 +1,12 @@
 /*
- * Copyright (C), 2013-2014, 上海汽车集团股份有限公司
- * FileName: TypeReference.java
- * Author:   wanglijun
- * Date:     2014年8月4日 下午6:13:31
- * Description: //模块目的、功能描述      
- * History: //修改记录
- * <author>      <time>      <version>    <desc>
- * 修改人姓名             修改时间            版本号                  描述
- */
+* Copyright (c)  2015, Newtouch
+* All rights reserved. 
+*
+* $id: RedisCacheableMethodAdvice.java 9552 2015年4月11日 下午2:30:25 WangLijun$
+*/
 package com.newtouch.lion.redis.cache.api;
+
+import com.alibaba.fastjson.TypeReference;
 
 
 
@@ -23,5 +21,5 @@ package com.newtouch.lion.redis.cache.api;
  */
 public interface RedisTypeReference {
     @SuppressWarnings("rawtypes")
-    public com.alibaba.fastjson.TypeReference typeReference();
+    public TypeReference typeReference();
 }
