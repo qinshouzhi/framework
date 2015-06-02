@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
  * 〈SessionStreamUtils〉<br>
  * 〈功能详细描述〉
  * 
- * @author v_leihong
+ * @author wanglijun
 
  * @since [产品/模块版本] （可选）
  */
