@@ -26,6 +26,7 @@
 		<lion-redis.version>0.1.2-SNAPSHOT</lion-redis.version>
 		<lion-mongodb.version>0.1.2-SNAPSHOT</lion-mongodb.version>
 		<lion-exception.version>0.1.2-SNAPSHOT</lion-exception.version>
+		<lion-trans.version>0.1.2-SNAPSHOT</lion-trans.version>
 		<junit.version>4.8.2</junit.version>
 		<slf4j.version>1.7.1</slf4j.version>
 		<poi.version>3.9</poi.version>
@@ -129,6 +130,11 @@
 				<groupId>com.newtouch.lion</groupId>
 				<artifactId>com.newtouch.lion-mongodb</artifactId>
 				<version>${lion-mongodb.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.newtouch.lion</groupId>
+				<artifactId>com.newtouch.lion-trans</artifactId>
+				<version>${lion-trans.version}</version>
 			</dependency>
 			<!-- lion End -->
 			<!-- Test jar start -->
