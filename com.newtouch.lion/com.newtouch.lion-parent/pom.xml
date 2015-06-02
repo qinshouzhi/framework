@@ -65,6 +65,7 @@
 		<xstream.version>1.4.6</xstream.version>
 		<jedis.version>2.2.1</jedis.version>
 		<spring-data-redis.version>1.5.0.RELEASE</spring-data-redis.version>
+		<validation-api.version>1.1.0.Final</validation-api.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -754,6 +755,11 @@
 				<groupId>redis.clients</groupId>
 				<artifactId>jedis</artifactId>
 				<version>${jedis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>${validation-api.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
