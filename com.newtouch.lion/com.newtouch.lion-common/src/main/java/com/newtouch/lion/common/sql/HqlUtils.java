@@ -57,9 +57,9 @@ public class HqlUtils {
 			sb.append(queryFields).append(" ");
 		}
 		sb.append(fromJoinSubClause);
-		sb.append(" ").append(generateHqlWhereClause(whereBodies, params));
-		sb.append(" ").append(
-				generateHqlOrderClause(orderField, orderDirection));
+		boolean  includeWhere=sb.indexOf(" where ")>0?true:false;
+		sb.append(" ").append(generateHqlWhereClause(whereBodies, params,includeWhere));
+		sb.append(" ").append(generateHqlOrderClause(orderField, orderDirection));
 		String finalHql = sb.toString();
 		log.debug("HQL: " + finalHql);
 
@@ -103,7 +103,7 @@ public class HqlUtils {
 	}
 
 	private static String generateHqlWhereClause(String[] whereBodies,
-			Map<String, ?> params) {
+			Map<String, ?> params,boolean includeWhere) {
 		StringBuffer sb = new StringBuffer();
 		String andOp = " and ";
 		if ((whereBodies != null) && (whereBodies.length > 0)) {
@@ -120,7 +120,7 @@ public class HqlUtils {
 					sb.append(andOp).append("(").append(whereBody).append(")");
 				}
 			}
-			if (sb.length() > 0) {
+			if (sb.length() > 0&&!includeWhere) {
 				sb.replace(0, andOp.length(), " where ");
 			}
 		}
