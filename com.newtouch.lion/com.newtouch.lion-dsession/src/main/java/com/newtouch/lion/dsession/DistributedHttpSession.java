@@ -72,6 +72,7 @@ public class DistributedHttpSession implements HttpSession {
     /**是否有效*/
     @SuppressWarnings("unused")
 	private boolean expired;
+
     /**
      * model
      */

@@ -95,11 +95,14 @@ public class DefaultDistributedSessionContext extends AbstractDistributedRequest
      * @return 当前的session或新的session， 如果不存在则返回
      */
     public HttpSession getSession(boolean create) {
+ 
     	if(this.distributedHttpSession!=null&&this.distributedHttpSession.isExpired()){
     		logger.info("session has been expired");
     		//如果session过期，则清空和重置session
     		this.distributedHttpSession.invalidate();
+ 
     	}
+ 
     	//如getSession方法已经执行过，且没有超过过期时间，那么直接返回。
     	if(this.distributedHttpSession!=null){
     		this.distributedHttpSession.reset();
@@ -182,6 +185,10 @@ public class DefaultDistributedSessionContext extends AbstractDistributedRequest
 	public void setSessionIdFormURL(boolean sessionIdFormURL) {
 		this.sessionIdFormURL = sessionIdFormURL;
 	}
+	
+	
+
+	 
 
 	@Override
 	public String getSessionId() {
