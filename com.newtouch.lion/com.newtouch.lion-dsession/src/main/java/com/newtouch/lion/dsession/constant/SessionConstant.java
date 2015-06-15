@@ -31,12 +31,12 @@ public class SessionConstant {
     /**
      * session create time
      */
-    public static final String SESSION_CREATE_TIME = "scookie1"; 
+    public static final String CREATE_TIME = "scookie1"; 
     
     /**
      * session last access time
      */
-    public static final String SESSION_LASTACCESS_TIME = "scookie2";
+    public static final String LASTACCESS_TIME = "scookie2";
 }
 
 	

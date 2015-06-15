@@ -61,7 +61,7 @@ public class SessionModel  implements Serializable{
     /**
      * 创建时间
      */
-    private long createdTime;
+    private long creationTime;
 
     /**
      * last access time
@@ -73,8 +73,36 @@ public class SessionModel  implements Serializable{
      */
     private int maxInactiveInterval;
     
+    /**
+     * @param distributedHttpSession
+     */
+    public SessionModel(DistributedHttpSession distributedHttpSession) {
+    	 this.setDistributedHttpSession(distributedHttpSession);
+    	 this.reset();
+	}
     
-    @Override
+    
+
+	/**
+	 * @param distributedSessionConfig
+	 * @param sessionId
+	 * @param createdTime
+	 * @param lastAccessedTime
+	 * @param maxInactiveInterval
+	 */
+	public SessionModel(DistributedSessionConfig distributedSessionConfig,
+			String sessionId, long creationTime, long lastAccessedTime,
+			int maxInactiveInterval) {
+		this.distributedSessionConfig = distributedSessionConfig;
+		this.sessionId = sessionId;
+		this.creationTime = creationTime;
+		this.lastAccessedTime = lastAccessedTime;
+		this.maxInactiveInterval = maxInactiveInterval;
+	}
+
+
+
+	@Override
     public Object clone() {
         try {
             return super.clone();
@@ -102,8 +130,8 @@ public class SessionModel  implements Serializable{
      */
     public void reset() {
     	getDistributedSessionConfig();
-        this.createdTime = System.currentTimeMillis();
-        this.lastAccessedTime =createdTime;
+        this.creationTime = System.currentTimeMillis();
+        this.lastAccessedTime =creationTime;
     }
 
     /**
@@ -157,19 +185,35 @@ public class SessionModel  implements Serializable{
 		this.sessionId = sessionId;
 	}
 
-	/**
-	 * @return the createdTime
-	 */
-	public long getCreatedTime() {
-		return createdTime;
-	}
+	 
 
 	/**
-	 * @param createdTime the createdTime to set
+	 * @return the creationTime
 	 */
-	public void setCreatedTime(long createdTime) {
-		this.createdTime = createdTime;
+	public long getCreationTime() {
+		return creationTime;
 	}
+
+
+
+	/**
+	 * @param creationTime the creationTime to set
+	 */
+	public void setCreationTime(long creationTime) {
+		this.creationTime = creationTime;
+	}
+
+
+
+	/**
+	 * @param distributedSessionConfig the distributedSessionConfig to set
+	 */
+	public void setDistributedSessionConfig(
+			DistributedSessionConfig distributedSessionConfig) {
+		this.distributedSessionConfig = distributedSessionConfig;
+	}
+
+
 
 	/**
 	 * @return the lastAccessedTime

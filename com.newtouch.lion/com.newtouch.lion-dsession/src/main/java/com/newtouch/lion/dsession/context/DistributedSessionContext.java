@@ -34,14 +34,14 @@ public interface DistributedSessionContext extends DistributedRequestContext {
 	String getSessionId();
 	/***
 	 * 获取SessionConfig信息
-	 * @return SessionConfig
+	 * @return DistributedSessionConfig
 	 */
 	public DistributedSessionConfig  getDistributedSessionConfig();
 	/***
 	 * 获取CookieConfig信息
-	 * @return CookieConfig
+	 * @return DistributedCookieConfig
 	 */
-	public DistributedCookieConfig getCookieConfig();
+	public DistributedCookieConfig getDistributedCookieConfig();
 	
 	 /**
      * 判断session是否已经作废。

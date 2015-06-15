@@ -6,23 +6,27 @@
  */
 package com.newtouch.lion.dsession.util;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
+import com.newtouch.lion.dsession.config.DistributedCookieAttributeConfig;
 import com.newtouch.lion.dsession.context.DefaultDistributedSessionContext;
 import com.newtouch.lion.dsession.context.DistributedRequestContext;
-import com.newtouch.lion.session.common.RequestContextUtils;
+import com.newtouch.lion.dsession.context.DistributedSessionContext;
+import com.newtouch.lion.dsession.store.DistributedCookieStore;
 import com.newtouch.lion.session.common.SessionConstant;
-import com.newtouch.lion.session.config.CookieAttributeConfig;
-import com.newtouch.lion.session.store.DdsCookieStore;
 
 /**
  * <p>
@@ -45,7 +49,7 @@ public class DistributedContextUtil {
 	/**
 	 * logger
 	 */
-	private static final Logger logger = LoggerFactory.getLogger(RequestContextUtils.class);
+	private static final Logger logger = LoggerFactory.getLogger(DistributedContextUtil.class);
 	
 	 /**
      * 
@@ -58,12 +62,12 @@ public class DistributedContextUtil {
      * @see [相关类/方法](可选)
      * @since [产品/模块版本](可选)
      */
-    public static void writeKeyValueToCookie(DefaultDistributedSessionContext context, String key, String value) {
-        CookieAttributeConfig cookieConfigModel = null;
-        if (context.getCookieConfig()!= null) {
-            DdsCookieStore cookieStore = context.getCookieConfig().getCookieStore(key);
+    public static void writeKeyValueToCookie(DistributedSessionContext context, String key, String value) {
+    	DistributedCookieAttributeConfig cookieConfigModel = null;
+        if (context.getDistributedCookieConfig()!= null) {
+            DistributedCookieStore cookieStore = context.getDistributedCookieConfig().getCookieStore(key);
             if (cookieStore != null) {
-                cookieConfigModel = cookieStore.getCookieAttributeConfig();
+                cookieConfigModel = cookieStore.getDistributedCookieAttributeConfig();
             }
         }
         Cookie cookie = getCookie(context.getRequest(), key);        
@@ -97,6 +101,28 @@ public class DistributedContextUtil {
         context.getResponse().addCookie(cookie);
     }
     
+    
+    /**
+     * 
+     * 功能描述: 根据requestContext读cookie<br>
+     * @param requestContext request context
+     * @param keys keys
+     * @return map
+     */
+    public static Map<String, Cookie> getCookiesFromCookie(DistributedSessionContext context, List<String> keys) {
+        Map<String, Cookie> result = new HashMap<String, Cookie>();
+        Cookie[] cookies = context.getRequest().getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                for (String key : keys) {
+                    if (cookie.getName().equals(key)) {
+                        result.put(key, cookie);
+                    }
+                }
+            }
+        }
+        return result;
+    }
     
     /**
      * 
@@ -187,6 +213,8 @@ public class DistributedContextUtil {
 
 		return null;
 	}
+	
+	
 
 	/**
 	 * 功能描述: 从cookie中取得session ID。<br> 
@@ -210,4 +238,124 @@ public class DistributedContextUtil {
 		}
 		return null;
 	}
+	
+	  /**
+     * 
+     * 功能描述:  将session ID编码到URL中去。<br>
+     * 〈功能详细描述〉
+     *
+     * @param requestContext request context
+     * @param url url
+     * @return  包含session ID的URL
+     * @see [相关类/方法](可选)
+     * @since [产品/模块版本](可选)
+     */
+    public static String encodeSessionIDIntoURL(DefaultDistributedSessionContext context, String url) {
+        HttpSession session = context.getRequest().getSession(false);
+
+        if (session != null && (session.isNew() || context.isSessionIdFormURL()&& !context.isSessionIdFromCookie())) {
+            String sessionID = session.getId();
+            String keyName = SessionConstant.SESSION_ID;
+            int keyNameLength = keyName.length();
+            int urlLength = url.length();
+            int urlQueryIndex = url.indexOf('?');
+
+            if (urlQueryIndex >= 0) {
+                urlLength = urlQueryIndex;
+            }
+
+            boolean found = false;
+
+            for (int keyBeginIndex = url.indexOf(';');
+                    keyBeginIndex >= 0 && keyBeginIndex < urlLength; 
+                    keyBeginIndex = url.indexOf(';', keyBeginIndex + 1)) {
+                
+                keyBeginIndex++;
+
+                if (urlLength - keyBeginIndex <= keyNameLength
+                        || !url.regionMatches(keyBeginIndex, keyName, 0, keyNameLength)
+                        || url.charAt(keyBeginIndex + keyNameLength) != '=') {
+                    continue;
+                }
+
+                int valueBeginIndex = keyBeginIndex + keyNameLength + 1;
+                int valueEndIndex = url.indexOf(';', valueBeginIndex);
+
+                if (valueEndIndex < 0) {
+                    valueEndIndex = urlLength;
+                }
+
+                if (!url.regionMatches(valueBeginIndex, sessionID, 0, sessionID.length())) {
+                    url = url.substring(0, valueBeginIndex) + sessionID + url.substring(valueEndIndex);
+                }
+
+                found = true;
+                break;
+            }
+
+            if (!found) {
+                url = url.substring(0, urlLength) + ';' + keyName + '=' + sessionID + url.substring(urlLength);
+            }
+        }
+
+        return url;
+    }
+	
+	 /**
+     * 
+     * 功能描述: 从URL中取得session ID。<br>
+     * @param requestContext request context
+     * @return 如果存在，则返回session ID，否则返回
+     */
+    public static String decodeSessionIDFromURL(DistributedSessionContext context) {
+        String uri = context.getRequest().getRequestURI();
+        String keyName = SessionConstant.SESSION_ID;
+        int uriLength = uri.length();
+        int keyNameLength = keyName.length();
+
+        for (int keyBeginIndex = uri.indexOf(';'); keyBeginIndex >= 0; keyBeginIndex = uri.indexOf(';',
+                keyBeginIndex + 1)) {
+            keyBeginIndex++;
+
+            if (uriLength - keyBeginIndex <= keyNameLength
+                    || !uri.regionMatches(keyBeginIndex, keyName, 0, keyNameLength)
+                    || uri.charAt(keyBeginIndex + keyNameLength) != '=') {
+                continue;
+            }
+
+            int valueBeginIndex = keyBeginIndex + keyNameLength + 1;
+            int valueEndIndex = uri.indexOf(';', valueBeginIndex);
+
+            if (valueEndIndex < 0) {
+                valueEndIndex = uriLength;
+            }
+
+            return uri.substring(valueBeginIndex, valueEndIndex);
+        }
+
+        return null;
+    }
+
+    /**
+     * 
+     * 功能描述: 从cookie中取得session ID。<br>
+     * @param requestContext request context
+     * @return 如果存在，则返回session ID，否则返回
+     */
+    public static String decodeSessionIDFromCookie(DistributedSessionContext context) {
+        Cookie[] cookies = context.getRequest().getCookies();
+
+        if (cookies != null) {
+
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals(SessionConstant.SESSION_ID)) {
+                    String sessionID = StringUtils.trimWhitespace(cookie.getValue());
+                    if (sessionID != null) {
+                        return sessionID;
+                    }
+                }
+            }
+        }
+        return null;
+    }
 }

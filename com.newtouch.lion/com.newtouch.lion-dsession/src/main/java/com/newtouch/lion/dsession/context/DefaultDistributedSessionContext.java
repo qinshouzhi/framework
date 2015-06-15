@@ -21,6 +21,7 @@ import com.newtouch.lion.dsession.DistributedHttpSession;
 import com.newtouch.lion.dsession.config.DistributedCookieConfig;
 import com.newtouch.lion.dsession.config.DistributedSessionConfig;
 import com.newtouch.lion.dsession.util.DistributedContextUtil;
+import com.newtouch.lion.dsession.util.UUIDGenerator;
 import com.newtouch.lion.session.common.SessionConstant;
 
 /**
@@ -94,9 +95,32 @@ public class DefaultDistributedSessionContext extends AbstractDistributedRequest
      * @return 当前的session或新的session， 如果不存在则返回
      */
     public HttpSession getSession(boolean create) {
-    	if(this.distributedHttpSession!=null&&this.distributedHttpSession.get){
-    		
+    	if(this.distributedHttpSession!=null&&this.distributedHttpSession.isExpired()){
+    		logger.info("session has been expired");
+    		//如果session过期，则清空和重置session
+    		this.distributedHttpSession.invalidate();
     	}
+    	//如getSession方法已经执行过，且没有超过过期时间，那么直接返回。
+    	if(this.distributedHttpSession!=null){
+    		this.distributedHttpSession.reset();
+    		logger.info("{}'s last access time updated",this.distributedHttpSession.getSessionId());
+    		return this.distributedHttpSession;
+    	}
+    	//创建session，
+    	if(this.distributedHttpSession==null){
+    		//从request中取得sessionId
+    		  boolean isNew = false;
+    		if(this.getSessionId()==null){
+    			if(!create){
+    				return null;
+    			}
+    			this.sessionId=UUIDGenerator.getUUID();
+    			this.encodeSessionIDIntoCookie(this.sessionId);
+    			isNew=true;
+    		}
+    		this.distributedHttpSession=new DistributedHttpSession(this.sessionId,this,isNew);
+    	}
+    	return null;
     }
 
 	@Override
@@ -104,8 +128,13 @@ public class DefaultDistributedSessionContext extends AbstractDistributedRequest
 		return this.distributedSessionConfig;
 	}
 
+	
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.dsession.context.DistributedSessionContext#getDistributedCookieConfig()
+	 */
 	@Override
-	public DistributedCookieConfig getCookieConfig() {
+	public DistributedCookieConfig getDistributedCookieConfig() {
 		return this.distributedCookieConfig;
 	}
 
@@ -122,34 +151,36 @@ public class DefaultDistributedSessionContext extends AbstractDistributedRequest
 		return null;
 	}
 
-	@Override
-	public ServletContext getServletContext() {
-		// TODO Auto-generated method stub
-		return null;
+ 
+	
+	
+
+	/**
+	 * @return the sessionIdFromCookie
+	 */
+	public boolean isSessionIdFromCookie() {
+		return sessionIdFromCookie;
 	}
 
-	@Override
-	public HttpServletRequest getRequest() {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * @param sessionIdFromCookie the sessionIdFromCookie to set
+	 */
+	public void setSessionIdFromCookie(boolean sessionIdFromCookie) {
+		this.sessionIdFromCookie = sessionIdFromCookie;
 	}
 
-	@Override
-	public HttpServletResponse getResponse() {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * @return the sessionIdFormURL
+	 */
+	public boolean isSessionIdFormURL() {
+		return sessionIdFormURL;
 	}
 
-	@Override
-	public HttpServletRequest getOriginalRequest() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public HttpServletResponse getOriginalResponse() {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * @param sessionIdFormURL the sessionIdFormURL to set
+	 */
+	public void setSessionIdFormURL(boolean sessionIdFormURL) {
+		this.sessionIdFormURL = sessionIdFormURL;
 	}
 
 	@Override
@@ -176,7 +207,9 @@ public class DefaultDistributedSessionContext extends AbstractDistributedRequest
     }
     
     
-    
+    public String encodeSessionIDIntoURL(String url) {
+        return DistributedContextUtil.encodeSessionIDIntoURL(this, url);
+    }
 
     /**
      * 
@@ -211,6 +244,11 @@ public class DefaultDistributedSessionContext extends AbstractDistributedRequest
 	public void clear() {
 		
 	}
+	
+	public boolean isSessionIdValid(){
+		HttpSession session=this.getSession(false);
+		return session!=null&&session.getId().equals(this.getSessionId());
+	}
 	/***
 	 * 内部类－分布式请求处理
 	 * @author wanglijun
@@ -230,6 +268,51 @@ public class DefaultDistributedSessionContext extends AbstractDistributedRequest
 		public String getRequestedSessionId() {			 
 			return  DefaultDistributedSessionContext.this.getSessionId();
 		}
+		
+		  /**
+         * 当前的session ID是从URL中取得的吗？
+         * 
+         * @return 如果是，则返回<code>true</code>
+         */
+        @Override
+        public boolean isRequestedSessionIdFromURL() {
+            return DefaultDistributedSessionContext.this.isSessionIdFormURL();
+        }
+
+        /**
+         * 判断当前的session ID是否仍然合法。
+         * 
+         * @return 如果是，则返回<code>true</code>
+         */
+        @Override
+        public boolean isRequestedSessionIdValid() {
+            return DefaultDistributedSessionContext.this.isSessionIdValid();
+        }
+
+        @Override
+        public HttpSession getSession() {
+            return DefaultDistributedSessionContext.this.getSession(true);
+        }
+
+        /**
+         * 取得当前的session，如果不存在，且<code>create</code>为<code>true</code>，则创建一个新的。
+         * 
+         * @param create 必要时是否创建新的session
+         * @return 当前的session或新的session，如果不存在，且<code>create</code>为 <code>false</code>，则返回<code>null</code>
+         */
+        @Override
+        public HttpSession getSession(boolean create) {
+            return DefaultDistributedSessionContext.this.getSession(create);
+        }
+
+        /**
+         * @return isRequestedSessionIdFromURL
+         */
+        @Override
+        @Deprecated
+        public boolean isRequestedSessionIdFromUrl() {
+            return isRequestedSessionIdFromURL();
+        }
 		
 	}
 	
@@ -261,9 +344,8 @@ public class DefaultDistributedSessionContext extends AbstractDistributedRequest
 		}
 		
 		@Override
-		public String encodeRedirectUrl(String url) {
-			
-			return super.encodeRedirectUrl(url);
+		public String encodeRedirectUrl(String url) {			
+			return  DefaultDistributedSessionContext.this.encodeSessionIDIntoURL(url);
 		}
 		
 		 /**
