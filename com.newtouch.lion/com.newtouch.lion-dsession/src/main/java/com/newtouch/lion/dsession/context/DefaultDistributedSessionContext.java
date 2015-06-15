@@ -94,9 +94,10 @@ public class DefaultDistributedSessionContext extends AbstractDistributedRequest
      * @return 当前的session或新的session， 如果不存在则返回
      */
     public HttpSession getSession(boolean create) {
-    	if(this.distributedHttpSession!=null&&this.distributedHttpSession.get){
+    	if(this.distributedHttpSession!=null){
     		
     	}
+    	return null;
     }
 
 	@Override
@@ -104,8 +105,13 @@ public class DefaultDistributedSessionContext extends AbstractDistributedRequest
 		return this.distributedSessionConfig;
 	}
 
+	
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.dsession.context.DistributedSessionContext#getDistributedCookieConfig()
+	 */
 	@Override
-	public DistributedCookieConfig getCookieConfig() {
+	public DistributedCookieConfig getDistributedCookieConfig() {
 		return this.distributedCookieConfig;
 	}
 
@@ -150,6 +156,36 @@ public class DefaultDistributedSessionContext extends AbstractDistributedRequest
 	public HttpServletResponse getOriginalResponse() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	
+
+	/**
+	 * @return the sessionIdFromCookie
+	 */
+	public boolean isSessionIdFromCookie() {
+		return sessionIdFromCookie;
+	}
+
+	/**
+	 * @param sessionIdFromCookie the sessionIdFromCookie to set
+	 */
+	public void setSessionIdFromCookie(boolean sessionIdFromCookie) {
+		this.sessionIdFromCookie = sessionIdFromCookie;
+	}
+
+	/**
+	 * @return the sessionIdFormURL
+	 */
+	public boolean isSessionIdFormURL() {
+		return sessionIdFormURL;
+	}
+
+	/**
+	 * @param sessionIdFormURL the sessionIdFormURL to set
+	 */
+	public void setSessionIdFormURL(boolean sessionIdFormURL) {
+		this.sessionIdFormURL = sessionIdFormURL;
 	}
 
 	@Override

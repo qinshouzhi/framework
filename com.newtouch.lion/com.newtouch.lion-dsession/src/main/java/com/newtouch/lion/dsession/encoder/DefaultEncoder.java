@@ -45,7 +45,7 @@ public class DefaultEncoder implements Encoder {
 	 * @see com.newtouch.lion.dsession.encoder.Encoder#encodeValue(java.lang.String)
 	 */
 	@Override
-	public String encodeValue(String value) {
+	public Object encodeValue(Object value) {
 	 
 		return value;
 	}
@@ -54,7 +54,7 @@ public class DefaultEncoder implements Encoder {
 	 * @see com.newtouch.lion.dsession.encoder.Encoder#decodeValue(java.lang.String)
 	 */
 	@Override
-	public String decodeValue(String value) {
+	public Object decodeValue(Object value) {
 	 
 		return value;
 	}

@@ -6,6 +6,9 @@
  */
 package com.newtouch.lion.dsession.util;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,12 +20,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
-import com.newtouch.lion.dsession.context.DefaultDistributedSessionContext;
+import com.newtouch.lion.dsession.config.DistributedCookieAttributeConfig;
 import com.newtouch.lion.dsession.context.DistributedRequestContext;
+import com.newtouch.lion.dsession.context.DistributedSessionContext;
+import com.newtouch.lion.dsession.store.DistributedCookieStore;
 import com.newtouch.lion.session.common.RequestContextUtils;
 import com.newtouch.lion.session.common.SessionConstant;
-import com.newtouch.lion.session.config.CookieAttributeConfig;
-import com.newtouch.lion.session.store.DdsCookieStore;
 
 /**
  * <p>
@@ -58,12 +61,12 @@ public class DistributedContextUtil {
      * @see [相关类/方法](可选)
      * @since [产品/模块版本](可选)
      */
-    public static void writeKeyValueToCookie(DefaultDistributedSessionContext context, String key, String value) {
-        CookieAttributeConfig cookieConfigModel = null;
-        if (context.getCookieConfig()!= null) {
-            DdsCookieStore cookieStore = context.getCookieConfig().getCookieStore(key);
+    public static void writeKeyValueToCookie(DistributedSessionContext context, String key, String value) {
+    	DistributedCookieAttributeConfig cookieConfigModel = null;
+        if (context.getDistributedCookieConfig()!= null) {
+            DistributedCookieStore cookieStore = context.getDistributedCookieConfig().getCookieStore(key);
             if (cookieStore != null) {
-                cookieConfigModel = cookieStore.getCookieAttributeConfig();
+                cookieConfigModel = cookieStore.getDistributedCookieAttributeConfig();
             }
         }
         Cookie cookie = getCookie(context.getRequest(), key);        
@@ -97,6 +100,28 @@ public class DistributedContextUtil {
         context.getResponse().addCookie(cookie);
     }
     
+    
+    /**
+     * 
+     * 功能描述: 根据requestContext读cookie<br>
+     * @param requestContext request context
+     * @param keys keys
+     * @return map
+     */
+    public static Map<String, Cookie> getCookiesFromCookie(DistributedSessionContext context, List<String> keys) {
+        Map<String, Cookie> result = new HashMap<String, Cookie>();
+        Cookie[] cookies = context.getRequest().getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                for (String key : keys) {
+                    if (cookie.getName().equals(key)) {
+                        result.put(key, cookie);
+                    }
+                }
+            }
+        }
+        return result;
+    }
     
     /**
      * 

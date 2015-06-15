@@ -39,16 +39,16 @@ public interface Encoder {
 	
 	/***
 	 * 对value进行编码
-	 * @param value String
+	 * @param value Object
 	 * @return
 	 */
-	public String encodeValue(String value);
+	public Object encodeValue(Object value);
 	/***
 	 * 对value进行解码
-	 * @param value
+	 * @param value Object
 	 * @return
 	 */
-	public String decodeValue(String value);
+	public Object decodeValue(Object value);
 }
 
 	
