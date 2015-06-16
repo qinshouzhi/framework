@@ -15,8 +15,6 @@ import com.newtouch.lion.redis.cache.Remove;
  * 缓存存储
  *
  * @author wanglijun
- * @see [相关类/方法]（可选）
- * @since [产品/模块版本] （可选）
  */
 public interface CacheableRedis {
     
@@ -29,8 +27,6 @@ public interface CacheableRedis {
      * @param method 方法
      * @param value 返回类型
      * @return
-     * @see [相关类/方法](可选)
-     * @since [产品/模块版本](可选)
      */
     public <T> T getCache(String key,Method method,Class<T> value);
     
@@ -41,8 +37,6 @@ public interface CacheableRedis {
     * @param key      KEY
     * @param Object   缓存的方法
     * @param method   缓存的方法
-    * @see [相关类/方法](可选)
-    * @since [产品/模块版本](可选)
     */
     public void setCache(String key,Object object,Method method);
     /***
@@ -53,8 +47,6 @@ public interface CacheableRedis {
      * @param target  代理目标对象
      * @param method  缓存的方法
      * @param args    请求参数
-     * @see [相关类/方法](可选)
-     * @since [产品/模块版本](可选)
      */
     public String getKeyGenerator(Object target,Method method,Object[] args);
     /***
@@ -67,8 +59,6 @@ public interface CacheableRedis {
      * @param args   请求参数
      * @param remove  删除的KEY
      * @return
-     * @see [相关类/方法](可选)
-     * @since [产品/模块版本](可选)
      */
     public String getKeyGenerator(Object target,Method method,Object[] args,Remove remove);
     
@@ -79,8 +69,6 @@ public interface CacheableRedis {
      * @param target
      * @param method
      * @param args
-     * @see [相关类/方法](可选)
-     * @since [产品/模块版本](可选)
      */
     public void removeCache(Object target,Method method,Object[] args);
     

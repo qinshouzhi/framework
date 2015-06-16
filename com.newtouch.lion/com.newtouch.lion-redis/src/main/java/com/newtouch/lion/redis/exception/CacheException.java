@@ -10,8 +10,6 @@ package com.newtouch.lion.redis.exception;
  * 接口异常处理<br> 
  *
  * @author wanglijun
- * @see [相关类/方法]（可选）
- * @since [产品/模块版本] （可选）
  */
 public class CacheException extends RuntimeException{
 
