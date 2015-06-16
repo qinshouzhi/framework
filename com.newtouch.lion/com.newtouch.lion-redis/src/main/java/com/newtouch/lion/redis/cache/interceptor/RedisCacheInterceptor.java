@@ -26,8 +26,6 @@ import com.newtouch.lion.redis.cache.api.CacheableRedis;
  * 缓存注解解析
  * 
  * @author wanglijun
- * @see [相关类/方法]（可选）
- * @since [产品/模块版本] （可选）
  */
 //@Component("redisCacheInterceptor")
 public class RedisCacheInterceptor implements MethodInterceptor {
@@ -96,8 +94,6 @@ public class RedisCacheInterceptor implements MethodInterceptor {
      *
      * @param className
      * @return
-     * @see [相关类/方法](可选)
-     * @since [产品/模块版本](可选)
      */
     protected Object getTarget(String className){
         return targets.get(className);
@@ -110,8 +106,6 @@ public class RedisCacheInterceptor implements MethodInterceptor {
      *
      * @param target
      * @return
-     * @see [相关类/方法](可选)
-     * @since [产品/模块版本](可选)
      */
     protected String getTargetClassName(Object target){
         String classProxyName=target.getClass().getName();

@@ -9,10 +9,7 @@ package com.newtouch.lion.redis.exception;
 /**
  * 缓存错误代码定义<br> 
  * 异常错误代码有：EC00001,缓存的KEY不 能为空
- *
  * @author wanglijun
- * @see [相关类/方法]（可选）
- * @since [产品/模块版本] （可选）
  */
 public enum CacheErrorCode  implements ErrorCode{
     KEY_IS_NULL("EC00001","缓存的KEY不 能为空"),

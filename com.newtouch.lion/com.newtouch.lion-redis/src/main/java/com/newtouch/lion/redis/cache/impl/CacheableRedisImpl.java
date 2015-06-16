@@ -35,8 +35,6 @@ import com.newtouch.lion.redis.exception.CacheException;
  * 〈功能详细描述〉
  *
  * @author wanglijun
- * @see [相关类/方法]（可选）
- * @since [产品/模块版本] （可选）
  */
 @Service("cacheableRedis")
 public class CacheableRedisImpl implements CacheableRedis {
@@ -164,8 +162,6 @@ public class CacheableRedisImpl implements CacheableRedis {
      *
      * @param key
      * @return
-     * @see [相关类/方法](可选)
-     * @since [产品/模块版本](可选)
      */
     protected Boolean  containRemoveLikeStr(String key){
         Matcher matcher = patternLike.matcher(key);

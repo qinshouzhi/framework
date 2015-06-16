@@ -10,12 +10,9 @@ import java.io.ObjectOutputStream;
 
 /**
  * 
- * 〈SessionStreamUtils〉<br>
- * 〈功能详细描述〉
+ * SessionStreamUtils<br>
  * 
  * @author wanglijun
- * @see [相关类/方法]（可选）
- * @since [产品/模块版本] （可选）
  */
 public class SessionStreamUtils {
 
@@ -35,13 +32,9 @@ public class SessionStreamUtils {
     /**
      * 
      * 功能描述:对象转换成自己数组 <br>
-     * 〈功能详细描述〉
-     * 
      * @param obj obj
      * @return byte
      * @throws IOException io exception
-     * @see [相关类/方法](可选)
-     * @since [产品/模块版本](可选)
      */
     public static byte[] objectToByteArray(Object obj) throws IOException {
         if (obj == null) {
@@ -60,21 +53,10 @@ public class SessionStreamUtils {
 
     /**
      * 
-     * 
-     * @param bytes
-     * @return
-     * @throws IOException
-     */
-    /**
-     * 
      * 功能描述:自己数组转换成对象 <br>
-     * 〈功能详细描述〉
-     *
      * @param bytes bytes
      * @return object
      * @throws IOException ioexception
-     * @see [相关类/方法](可选)
-     * @since [产品/模块版本](可选)
      */
     public static Object byteArrayToObject(byte[] bytes) throws IOException {
         if (bytes == null || bytes.length <= 0) {

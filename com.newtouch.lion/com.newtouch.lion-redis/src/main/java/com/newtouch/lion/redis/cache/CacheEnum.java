@@ -11,8 +11,6 @@ package com.newtouch.lion.redis.cache;
  * 〈功能详细描述〉
  *
  * @author wanglijun
- * @see [相关类/方法]（可选）
- * @since [产品/模块版本] （可选）
  */
 public interface CacheEnum {
     /**
@@ -20,7 +18,6 @@ public interface CacheEnum {
      * 获取枚举类型编码.
      *
      * @return 类型编码
-     * @since [商品视图与服务/version=1]
      */
     Integer code();
     
@@ -29,7 +26,6 @@ public interface CacheEnum {
      * 获取枚举类型字符描述.
      *
      * @return 类型字符描述
-     * @since [商品视图与服务/version=1]
      */
     String desc();
 }
