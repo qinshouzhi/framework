@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.pool.impl.GenericObjectPool.Config;
+
+import redis.clients.jedis.JedisPoolConfig;
 
 import com.newtouch.lion.redis.config.ConfigManager;
 import com.newtouch.lion.redis.shard.NodeInfo4Jedis;
@@ -143,7 +144,7 @@ public class ConfigManager4Spring extends ConfigManager {
      */
     private void parseShardingConfig(ShardConfig shardConfig) {
         lstInfo4Jedis = new ArrayList<ShardInfo4Jedis>();
-        Config config = new Config();
+        JedisPoolConfig config = new JedisPoolConfig();
         setPoolParameters(poolConfig, config);
         shardConfig.setConfig(config);
         for (ShardInfo4Jedis shardInfo : shardConfig.getShards()) {
@@ -172,43 +173,46 @@ public class ConfigManager4Spring extends ConfigManager {
      * @param poolConfig 参数说明
      * @param config 参数说明
      */
-    private void setPoolParameters(PoolConfig poolConfig, Config config) {
-
+    private void setPoolParameters(PoolConfig poolConfig, JedisPoolConfig config) {
+    	
         if (!StringUtils.isBlank(poolConfig.getTestOnBorrow())) {
             // 获取连接池是否检测可用性
-            config.testOnBorrow = Boolean.valueOf(poolConfig.getTestOnBorrow());
+            config.setTestOnBorrow(Boolean.valueOf(poolConfig.getTestOnBorrow()));
         }
 
         if (!StringUtils.isBlank(poolConfig.getTestOnReturn())) {
             // 归还时是否检测可用性
-            config.testOnReturn = Boolean.valueOf(poolConfig.getTestOnReturn());
+            config.setTestOnReturn(Boolean.valueOf(poolConfig.getTestOnReturn()));
         }
         if (!StringUtils.isBlank(poolConfig.getTestWhileIdle())) {
             // 空闲时是否检测可用性
-            config.testWhileIdle = Boolean.valueOf(poolConfig.getTestWhileIdle());
+            config.setTestWhileIdle( Boolean.valueOf(poolConfig.getTestWhileIdle()));
         } else {
-            config.testWhileIdle = true;
+        	 config.setTestWhileIdle(true);
         }
         if (!StringUtils.isBlank(poolConfig.getWhenExhaustedAction())) {
-            config.whenExhaustedAction = Byte.valueOf(poolConfig.getWhenExhaustedAction());
+            config.setBlockWhenExhausted(Boolean.valueOf(poolConfig.getWhenExhaustedAction()));
         }
         if (!StringUtils.isBlank(poolConfig.getTimeBetweenEvictionRunsMillis())) {
-            config.timeBetweenEvictionRunsMillis = Long.valueOf(poolConfig.getTimeBetweenEvictionRunsMillis());
+ 
+            config.setTimeBetweenEvictionRunsMillis(Long.valueOf(poolConfig.getTimeBetweenEvictionRunsMillis()));
         } else {
-            config.timeBetweenEvictionRunsMillis = 30000L;
+            config.setTimeBetweenEvictionRunsMillis(30000L);
         }
         if (!StringUtils.isBlank(poolConfig.getNumTestsPerEvictionRun())) {
-            config.numTestsPerEvictionRun = Integer.valueOf(poolConfig.getNumTestsPerEvictionRun());
+        
+            config.setNumTestsPerEvictionRun(Integer.valueOf(poolConfig.getNumTestsPerEvictionRun()));
         } else {
-            config.numTestsPerEvictionRun = -1;
+        	 config.setNumTestsPerEvictionRun(-1);
         }
         if (!StringUtils.isBlank(poolConfig.getMinEvictableIdleTimeMillis())) {
-            config.minEvictableIdleTimeMillis = Integer.valueOf(poolConfig.getMinEvictableIdleTimeMillis());
+            
+            config.setMinEvictableIdleTimeMillis(Integer.valueOf(poolConfig.getMinEvictableIdleTimeMillis()));
         } else {
-            config.minEvictableIdleTimeMillis = 60000L;
+        	  config.setMinEvictableIdleTimeMillis(60000);
         }
         if (!StringUtils.isBlank(poolConfig.getSoftMinEvictableIdleTimeMillis())) {
-            config.softMinEvictableIdleTimeMillis = Integer.valueOf(poolConfig.getSoftMinEvictableIdleTimeMillis());
+            config.setSoftMinEvictableIdleTimeMillis( Integer.valueOf(poolConfig.getSoftMinEvictableIdleTimeMillis()));
         }
     }
 

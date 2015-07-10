@@ -1,13 +1,14 @@
 package com.newtouch.lion.redis.shard;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.pool.impl.GenericObjectPool.Config;
+
+import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * 
  * NodeInfo4Jedis
  * 
- * @author pinzhao
+ * @author wanglijun
  */
 public class NodeInfo4Jedis {
 
@@ -39,7 +40,7 @@ public class NodeInfo4Jedis {
     /**
      * 配置信息
      */
-    private Config config;
+    private JedisPoolConfig config;
 
     /**
      * 
@@ -59,7 +60,7 @@ public class NodeInfo4Jedis {
      * @param timeOut 连接超时时间
      * @param config 配置信息
      */
-    public NodeInfo4Jedis(String ip, Integer port, String password, int dbIndex, int timeOut, Config config) {
+    public NodeInfo4Jedis(String ip, Integer port, String password, int dbIndex, int timeOut, JedisPoolConfig config) {
         this.ip = ip;
         this.port = port;
         this.password = password;
@@ -91,7 +92,7 @@ public class NodeInfo4Jedis {
      * 
      * @param config 配置信息
      */
-    public void setConfig(Config config) {
+    public void setConfig(JedisPoolConfig config) {
         this.config = config;
     }
 
@@ -100,7 +101,7 @@ public class NodeInfo4Jedis {
      * 
      * @return Config 配置信息
      */
-    public Config getConfig() {
+    public JedisPoolConfig getConfig() {
         return config;
     }
 

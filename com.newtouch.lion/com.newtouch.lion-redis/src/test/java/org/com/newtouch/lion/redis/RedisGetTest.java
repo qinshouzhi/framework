@@ -50,6 +50,16 @@ public class RedisGetTest  extends RedisAllTest{
 		 
 	}
 	
+
+	@Test
+	public void  set(){
+		String key="watchmen:20150410";
+		 springRedisClient.set(key,"test Cluster");
+		//logger.info("1111111111111111:str:{}",str);
+		 
+	}
+	
+	
 	@Test
 	public void lpush(){
 		springRedisClient.lpush("news.share1", "OK");

@@ -4,15 +4,12 @@ import java.lang.reflect.Field;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.pool.BasePoolableObjectFactory;
 import org.apache.commons.pool.impl.GenericObjectPool;
-import org.apache.commons.pool.impl.GenericObjectPool.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.exceptions.JedisException;
+import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.util.Pool;
 
 /**
@@ -26,7 +23,8 @@ public class DefaultJedisPool extends Pool<Jedis> {
     /**
      * log
      */
-    private static Logger logger = LoggerFactory.getLogger(DefaultJedisPool.class);
+    @SuppressWarnings("unused")
+	private static Logger logger = LoggerFactory.getLogger(DefaultJedisPool.class);
     /**
      * host
      */
@@ -60,9 +58,9 @@ public class DefaultJedisPool extends Pool<Jedis> {
      * @param dbIndex 索引
      * @param isMaster 是否是master
      */
-    public DefaultJedisPool(final Config poolConfig, final String host, int port, int timeout, final String password,
+    public DefaultJedisPool(final JedisPoolConfig poolConfig, final String host, int port, int timeout, final String password,
             int dbIndex, boolean isMaster) {
-        super(poolConfig, new JedisFactory(host, port, timeout, password, dbIndex));
+        super(poolConfig,new JedisFactory(host,port,timeout,null,dbIndex));
         this.host = host;
         this.port = port;
         this.dbIndex = dbIndex;
@@ -149,124 +147,6 @@ public class DefaultJedisPool extends Pool<Jedis> {
                     && ObjectUtils.equals(dbIndex, that.dbIndex);
         } else {
             return false;
-        }
-    }
-
-    /**
-     * 
-     * PoolableObjectFactory custom impl.
-     * 
-     * @author pinzhao
-     */
-    @SuppressWarnings("rawtypes")
-	private static class JedisFactory extends BasePoolableObjectFactory {
-        /**
-         * host
-         */
-        private final String host;
-        /**
-         * port
-         */
-        private final int port;
-        /**
-         * timeout
-         */
-        private final int timeout;
-        /**
-         * password
-         */
-        private final String password;
-        /**
-         * dbIndex
-         */
-        private final int dbIndex;
-
-        /**
-         * JedisFactory constructor
-         * 
-         * @param host redis服务器ip
-         * @param port redis服务器端口
-         * @param timeout  超时时间
-         * @param password 密码
-         * @param dbIndex dbindex
-         */
-        public JedisFactory(final String host, final int port, final int timeout, final String password, int dbIndex) {
-            super();
-            this.host = host;
-            this.port = port;
-            this.timeout = (timeout > 0) ? timeout : -1;
-            this.password = password;
-            this.dbIndex = dbIndex;
-        }
-
-        /**
-         * 
-         * 创建新连接对象
-         * 
-         * @return Object 返回值
-         * @exception Exception 异常
-         */
-        public Object makeObject() throws Exception {
-            final Jedis jedis;
-            if (timeout > 0) {
-                jedis = new Jedis(this.host, this.port, this.timeout);
-            } else {
-                jedis = new Jedis(this.host, this.port);
-            }
-            jedis.connect();
-            if (!StringUtils.isBlank(this.password)) {
-                jedis.auth(this.password);
-            }
-
-            if (dbIndex != 0) {
-                jedis.select(dbIndex);
-            }
-            return jedis;
-        }
-
-        /**
-         * 
-         * 销毁连接对象
-         * 
-         * @param obj 对象
-         */
-        public void destroyObject(final Object obj) {
-            if (obj instanceof Jedis) {
-                final Jedis jedis = (Jedis) obj;
-                if (jedis.isConnected()) {
-                    try {
-                        try {
-                            jedis.quit();
-                        } catch (JedisException e) {
-                            logger.error(e.getMessage());
-                        }
-                        jedis.disconnect();
-                    } catch (JedisException e) {
-                        logger.error(e.getMessage());
-                    }
-                }
-            }
-        }
-
-        /**
-         * 
-         * 验证连接是否可用
-         * 
-         * @param obj 对象
-         * @return boolean 返回值
-         */
-        public boolean validateObject(final Object obj) {
-            if (obj instanceof Jedis) {
-                final Jedis jedis = (Jedis) obj;
-                try {
-                    return jedis.isConnected() && jedis.ping().equals("PONG");
-                } catch (JedisException e) {
-                    logger.error(e.getMessage());
-                    return false;
-                }
-            } else {
-                return false;
-            }
         }
     }
 

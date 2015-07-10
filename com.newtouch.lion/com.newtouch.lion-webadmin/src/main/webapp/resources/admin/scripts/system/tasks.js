@@ -5,8 +5,7 @@ var queryForm=$('#queryform');
 $(function(){
 	//默认加载函数
 	lion.web.AppInit();
-  
-//验证表单
+	//验证表单
   handleVForm(addForm,submitForm);
 
 });

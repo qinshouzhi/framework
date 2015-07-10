@@ -8,13 +8,14 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.pool.impl.GenericObjectPool.Config;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import redis.clients.jedis.JedisPoolConfig;
 
 import com.newtouch.lion.redis.exception.RedisClientException;
 import com.newtouch.lion.redis.shard.NodeInfo4Jedis;
@@ -161,7 +162,7 @@ public class ConfigManager {
      * @param poolConfig 参数说明 返回值: 类型 <说明>
      */
     @SuppressWarnings("unchecked")
-    private void parseShardingConfig(Element serverElement, Config poolConfig) {
+    private void parseShardingConfig(Element serverElement, JedisPoolConfig poolConfig) {
         lstInfo4Jedis = new ArrayList<ShardInfo4Jedis>();
         List<Element> shards = serverElement.element("shardConfig").elements("shard");
         for (Element shardElement : shards) {
@@ -210,7 +211,7 @@ public class ConfigManager {
      */
     private void parserWithDoc(Document doc) {
         Element serverElement = doc.getRootElement();
-        Config poolConfig = this.parsePoolConfig(serverElement);
+        JedisPoolConfig poolConfig = this.parsePoolConfig(serverElement);
         parseShardingConfig(serverElement, poolConfig);
     }
 
@@ -221,9 +222,9 @@ public class ConfigManager {
      * @param serverElement 参数说明 返回值: 类型 <说明>
      * @return Config 返回值
      */
-    private Config parsePoolConfig(Element serverElement) {
-        Config config = new Config();
-        config.maxWait = 2000L;
+    private JedisPoolConfig parsePoolConfig(Element serverElement) {
+    	JedisPoolConfig config = new JedisPoolConfig();
+        config.setMaxWaitMillis(2000L);
         Element poolConfigTag = serverElement.element("poolConfig");
         if (poolConfigTag != null) {
             String maxIdle = poolConfigTag.elementTextTrim("maxIdle");
@@ -240,19 +241,19 @@ public class ConfigManager {
             String softMinEvictableIdleTimeMillis = poolConfigTag.elementTextTrim("softMinEvictableIdleTimeMillis");
             String lifo = poolConfigTag.elementTextTrim("lifo");
             if (!StringUtils.isBlank(maxIdle)) {
-                config.maxIdle = Integer.valueOf(maxIdle);
+                config.setMaxIdle(Integer.parseInt(maxIdle));
             }
             if (!StringUtils.isBlank(minIdle)) {
-                config.minIdle = Integer.valueOf(minIdle);
+                config.setMinIdle(Integer.parseInt(minIdle));
             }
             if (!StringUtils.isBlank(maxActive)) {
-                config.maxActive = Integer.valueOf(maxActive);
+                
             }
             if (!StringUtils.isBlank(maxWait)) {
-                config.maxWait = Long.valueOf(maxWait);
+                config.setMaxWaitMillis( Long.valueOf(maxWait));
             }
             if (!StringUtils.isBlank(lifo)) {
-                config.lifo = Boolean.valueOf(lifo);
+                config.setLifo(Boolean.valueOf(lifo));
             }
             setTestParameters(config, whenExhaustedAction, testOnBorrow, testOnReturn, testWhileIdle,
                     timeBetweenEvictionRunsMillis, numTestsPerEvictionRun, minEvictableIdleTimeMillis,
@@ -274,45 +275,48 @@ public class ConfigManager {
      * @param minEvictableIdleTimeMillis 参数说明 返回值: 类型 <说明>
      * @param softMinEvictableIdleTimeMillis 参数说明 返回值: 类型 <说明>
      */
-    private void setTestParameters(Config config, String whenExhaustedAction, String testOnBorrow, String testOnReturn,
+    private void setTestParameters(JedisPoolConfig  config, String whenExhaustedAction, String testOnBorrow, String testOnReturn,
             String testWhileIdle, String timeBetweenEvictionRunsMillis, String numTestsPerEvictionRun,
             String minEvictableIdleTimeMillis, String softMinEvictableIdleTimeMillis) {
 
         if (!StringUtils.isBlank(testOnBorrow)) {
             // 获取连接池是否检测可用性
-            config.testOnBorrow = Boolean.valueOf(testOnBorrow);
+            config.setTestOnBorrow(Boolean.valueOf(testOnBorrow));
         }
 
         if (!StringUtils.isBlank(testOnReturn)) {
             // 归还时是否检测可用性
-            config.testOnReturn = Boolean.valueOf(testOnReturn);
+            config.setTestOnReturn(Boolean.valueOf(testOnReturn));
         }
         if (!StringUtils.isBlank(testWhileIdle)) {
             // 空闲时是否检测可用性
-            config.testWhileIdle = Boolean.valueOf(testWhileIdle);
+            config.setTestWhileIdle(Boolean.valueOf(testWhileIdle));
         } else {
-            config.testWhileIdle = true;
+        	 config.setTestWhileIdle(true);
         }
         if (!StringUtils.isBlank(whenExhaustedAction)) {
-            config.whenExhaustedAction = Byte.valueOf(whenExhaustedAction);
+            config.setBlockWhenExhausted(Boolean.valueOf(whenExhaustedAction));
         }
         if (!StringUtils.isBlank(timeBetweenEvictionRunsMillis)) {
-            config.timeBetweenEvictionRunsMillis = Long.valueOf(timeBetweenEvictionRunsMillis);
+ 
+            config.setTimeBetweenEvictionRunsMillis(Long.valueOf(timeBetweenEvictionRunsMillis));
         } else {
-            config.timeBetweenEvictionRunsMillis = 30000L;
+            config.setTimeBetweenEvictionRunsMillis(30000L);
         }
         if (!StringUtils.isBlank(numTestsPerEvictionRun)) {
-            config.numTestsPerEvictionRun = Integer.valueOf(numTestsPerEvictionRun);
+        
+            config.setNumTestsPerEvictionRun(Integer.valueOf(numTestsPerEvictionRun));
         } else {
-            config.numTestsPerEvictionRun = -1;
+        	 config.setNumTestsPerEvictionRun(-1);
         }
         if (!StringUtils.isBlank(minEvictableIdleTimeMillis)) {
-            config.minEvictableIdleTimeMillis = Integer.valueOf(minEvictableIdleTimeMillis);
+            
+            config.setMinEvictableIdleTimeMillis(Integer.valueOf(minEvictableIdleTimeMillis));
         } else {
-            config.minEvictableIdleTimeMillis = 60000L;
+        	  config.setMinEvictableIdleTimeMillis(60000);
         }
         if (!StringUtils.isBlank(softMinEvictableIdleTimeMillis)) {
-            config.softMinEvictableIdleTimeMillis = Integer.valueOf(softMinEvictableIdleTimeMillis);
+            config.setSoftMinEvictableIdleTimeMillis( Integer.valueOf(softMinEvictableIdleTimeMillis));
         }
     }
 }

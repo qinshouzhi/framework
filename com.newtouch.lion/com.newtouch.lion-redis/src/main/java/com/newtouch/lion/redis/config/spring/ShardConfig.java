@@ -2,7 +2,7 @@ package com.newtouch.lion.redis.config.spring;
 
 import java.util.List;
 
-import org.apache.commons.pool.impl.GenericObjectPool.Config;
+import redis.clients.jedis.JedisPoolConfig;
 
 import com.newtouch.lion.redis.shard.ShardInfo4Jedis;
 
@@ -24,14 +24,14 @@ public class ShardConfig {
     /**
      * config
      */
-    private Config config;
+    private JedisPoolConfig config;
 
     /**
      * 获取分片配置
      * 
      * @return Config 分片配置
      */
-    public Config getConfig() {
+    public JedisPoolConfig getConfig() {
         return config;
     }
 
@@ -40,7 +40,7 @@ public class ShardConfig {
      * 
      * @param config 分片配置
      */
-    public void setConfig(Config config) {
+    public void setConfig(JedisPoolConfig config) {
         this.config = config;
     }
 

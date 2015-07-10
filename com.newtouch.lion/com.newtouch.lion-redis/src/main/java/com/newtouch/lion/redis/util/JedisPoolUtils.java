@@ -20,10 +20,10 @@ public class JedisPoolUtils{
         JedisPoolConfig config = new JedisPoolConfig();
 
         // 设置最大连接数
-        config.setMaxActive(100);
+        config.setMaxTotal(100);
 
         // 设置最大阻塞时间，记住是毫秒数milliseconds
-        config.setMaxWait(1000);
+        config.setMaxWaitMillis(6000);
 
         // 设置空间连接
         config.setMaxIdle(10);
@@ -59,6 +59,6 @@ public class JedisPoolUtils{
      * @param jedis
      */
     public static void returnRes(Jedis jedis) {
-        pool.returnResource(jedis);
+        pool.returnResourceObject(jedis);
     }
 }

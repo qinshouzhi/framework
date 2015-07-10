@@ -2,10 +2,12 @@ package com.newtouch.lion.redis.client.impl.spring;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import redis.clients.jedis.BinaryClient.LIST_POSITION;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.ScanResult;
 import redis.clients.jedis.SortingParams;
 import redis.clients.jedis.Tuple;
 import redis.clients.jedis.ZParams;
@@ -2593,7 +2595,7 @@ public class SpringRedisClientImpl extends DefaultSpringClientImpl implements IR
      * @param value 参数
      * @return 结果
      */
-    @Override
+   
     public Boolean setbit(String key, long offset, String value) {
         return null;
     }
@@ -2617,10 +2619,8 @@ public class SpringRedisClientImpl extends DefaultSpringClientImpl implements IR
      * @param scoreMembers 成员得分
      * @return 结果
      */
-    @Override
-    public Long zadd(String key, Map<Double, String> scoreMembers) {
-        return null;
-    }
+ 
+   
 
     /**
      * 返回有序集 key 中， score 值在 min 和 max 之间(默认包括 score 值等于 min 或 max )的成员的数量。
@@ -2877,5 +2877,141 @@ public class SpringRedisClientImpl extends DefaultSpringClientImpl implements IR
 				return r;
 			}
 		});
+	}
+
+	@Override
+	public Long pexpire(String key, long milliseconds) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Long pexpireAt(String key, long millisecondsTimestamp) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Double incrByFloat(String key, double value) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<String> spop(String key, long count) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> srandmember(String key, int count) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+ 
+
+	@Override
+	public Long zlexcount(String key, String min, String max) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<String> zrangeByLex(String key, String min, String max) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<String> zrangeByLex(String key, String min, String max,
+			int offset, int count) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<String> zrevrangeByLex(String key, String max, String min) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<String> zrevrangeByLex(String key, String max, String min,
+			int offset, int count) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Long zremrangeByLex(String key, String min, String max) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> blpop(int timeout, String key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> brpop(int timeout, String key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ScanResult<Entry<String, String>> hscan(String key, int cursor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ScanResult<String> sscan(String key, int cursor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ScanResult<Tuple> zscan(String key, int cursor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ScanResult<Entry<String, String>> hscan(String key, String cursor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ScanResult<String> sscan(String key, String cursor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ScanResult<Tuple> zscan(String key, String cursor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Long pfadd(String key, String... elements) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long pfcount(String key) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Long zadd(String key, Map<String, Double> scoreMembers) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

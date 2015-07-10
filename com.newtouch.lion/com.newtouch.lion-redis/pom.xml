@@ -10,7 +10,7 @@
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>com.newtouch.lion-redis</artifactId>
-	<version>0.1.2-SNAPSHOT</version>
+	<version>0.5-SNAPSHOT</version>
 	<name>com.newtouch.lion-redis</name>
 	<url>http://www.newtouchone.com</url>
 	<properties>
@@ -59,10 +59,7 @@
 			<artifactId>logback-ext-spring</artifactId>
 		</dependency>
 		<!-- Logger End -->
-		<dependency>
-			<groupId>redis.clients</groupId>
-			<artifactId>jedis</artifactId>
-		</dependency>
+	 
 		<dependency>
 			<groupId>commons-pool</groupId>
 			<artifactId>commons-pool</artifactId>
@@ -93,6 +90,10 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.7.4</version>
+		</dependency>		
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

@@ -27,7 +27,7 @@ import com.newtouch.lion.common.sql.QueryOrder;
  */
 public class QueryVo{
 	/**当前页索引*/
-	private Integer page=1;
+	private Integer page=0;
 	/**每页显示记录数*/
 	private Integer rows=15;
 	/**排序字段*/

@@ -52,6 +52,7 @@
 		<property name="timeOut" value="${redis.timeout}" />
 		<property name="dbIndex" value="${redis.default.db}"/>
 	</bean>
+ 
 	<!-- 配置shard信息 -->
 	<bean id="shard1" class="com.newtouch.lion.redis.shard.ShardInfo4Jedis">
 		<property name="shardName" value="shard1" />
