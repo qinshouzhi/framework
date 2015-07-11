@@ -35,7 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @TransactionConfiguration(defaultRollback = false)
-@ContextConfiguration(locations = {"classpath*:applicationContext-redis.xml","classpath*:applicationContext-rediscluster.xml","classpath*:applicationContext-common.xml"})
+@ContextConfiguration(locations = {"classpath*:applicationContext-rediscluster.xml","classpath*:applicationContext-common.xml"})
 public class RedisClusterAllTest extends AbstractJUnit4SpringContextTests{
 	/**日志*/
 	protected  final Logger logger=LoggerFactory.getLogger(super.getClass());

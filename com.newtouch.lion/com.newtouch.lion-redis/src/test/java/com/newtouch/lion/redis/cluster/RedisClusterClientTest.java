@@ -33,7 +33,7 @@ import com.newtouch.lion.redis.client.IRedisClient;
 public class RedisClusterClientTest extends RedisClusterAllTest{
 	
 	@Autowired
-	@Qualifier("springRedisClusterClient")
+	@Qualifier("redisClient")
 	private IRedisClient redisClient;
 	
 	@Test

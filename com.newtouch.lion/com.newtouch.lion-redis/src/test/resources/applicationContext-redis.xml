@@ -75,10 +75,10 @@
 		<property name="poolConfig" ref="poolConfig" />
 		<property name="shardConfig" ref="shardConfig" />
 	</bean>
-	<bean id="springRedisClient" class="com.newtouch.lion.redis.client.impl.spring.SpringRedisClientImpl" init-method="init">
+	<bean id="redisClient" class="com.newtouch.lion.redis.client.impl.spring.SpringRedisClientImpl" init-method="init">
 		<property name="configManager4Spring" ref="configManager4Spring" />
 	</bean>
-	<bean id="springBinaryRedisClient" class="com.newtouch.lion.redis.client.impl.spring.SpringBinaryRedisClientImpl" init-method="init">
+	<bean id="binaryRedisClient" class="com.newtouch.lion.redis.client.impl.spring.SpringBinaryRedisClientImpl" init-method="init">
 		<property name="configManager4Spring" ref="configManager4Spring" />
 	</bean>
 </beans>

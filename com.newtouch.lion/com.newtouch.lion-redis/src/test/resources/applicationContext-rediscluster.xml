@@ -54,7 +54,11 @@
  		<constructor-arg  index="3"   ref="jedisPoolConfig"/>	
  	</bean>
  	<!--Redis Client简单对象 -->
- 	<bean  id="springRedisClusterClient" class="com.newtouch.lion.redis.client.impl.spring.SpringRedisClusterClientImpl">
+ 	<bean  id="redisClient" class="com.newtouch.lion.redis.client.impl.spring.SpringRedisClusterClientImpl">
+ 		<constructor-arg index="0"  ref="jedisClusterConfig"/>
+ 	</bean>
+ 		<!--Redis Client 复杂对象-->
+ 	<bean  id="binaryRedisClient" class="com.newtouch.lion.redis.client.impl.spring.SpringBinaryRedisClusterClientImpl">
  		<constructor-arg index="0"  ref="jedisClusterConfig"/>
  	</bean>
 </beans>

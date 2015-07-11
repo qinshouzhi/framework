@@ -52,11 +52,11 @@ public class CacheableRedisImpl implements CacheableRedis {
     
     /**  二进制的redis. */
     @Autowired
-    @Qualifier("springBinaryRedisClient")
+    @Qualifier("binaryRedisClient")
     private IBinaryRedisClient springBinaryRedisClient;
     /** 缓存接口. */
     @Autowired
-    @Qualifier("springRedisClient")
+    @Qualifier("redisClient")
     private IRedisClient springRedisClient;
     /**
      * {@inheritDoc}
