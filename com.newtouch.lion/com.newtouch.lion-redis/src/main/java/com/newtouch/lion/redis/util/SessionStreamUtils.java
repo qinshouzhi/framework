@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,15 +35,71 @@ public class SessionStreamUtils {
     }
     
     /**
-     * 
      * 功能描述:对象转换成自己数组 <br>
-     * 〈功能详细描述〉
-     * 
      * @param obj obj
      * @return byte
      * @throws IOException io exception
+     */
+    public static byte[] objectToBytes(Object obj){
+    	 if (obj == null) {
+             return null;
+         }
+    	 byte[] sendBuf=null;
+         ObjectOutputStream os = null;
+         ByteArrayOutputStream byteStream=null;
+         try {
+        	 byteStream= new ByteArrayOutputStream(FIVE);
+        	 os = new ObjectOutputStream(new BufferedOutputStream(byteStream));
+			 os.flush();
+	         os.writeObject(obj);
+	         os.flush();
+	         sendBuf = byteStream.toByteArray();
+		} catch (IOException e) {
+			logger.error(e.getMessage(),e);
+		}finally{
+			IOUtils.closeQuietly(os);
+			IOUtils.closeQuietly(byteStream);
+		}
+        return sendBuf;
+       
+    }
+    
+    /**
+     * 
+     * 自己数组转换成对象 <br>
+     * @param bytes bytes
+     * @return object
+     * @throws IOException ioexception
 
-     * @since [产品/模块版本](可选)
+     */
+    public static Object bytesToObject(byte[] bytes){
+        if (bytes == null || bytes.length <= 0) {
+            return null;
+        }
+        Object obj = null;
+        ObjectInputStream ois=null;
+        ByteArrayInputStream bis=null;
+        try {
+            bis = new ByteArrayInputStream(bytes);
+            ois= new ObjectInputStream(new BufferedInputStream(bis));
+            obj = ois.readObject();
+          
+        } catch (ClassNotFoundException e) {
+            logger.error(e.getMessage(),e);
+        } catch (IOException e) {
+        	logger.error(e.getMessage(),e);
+		}finally{
+			IOUtils.closeQuietly(ois);
+			IOUtils.closeQuietly(bis);
+        }
+        return obj;
+    }
+    
+    /**
+     * 功能描述:对象转换成自己数组 <br>
+     * @param obj obj
+     * @return byte
+     * @throws IOException io exception
      */
     public static byte[] objectToByteArray(Object obj) throws IOException {
         if (obj == null) {
@@ -68,14 +125,11 @@ public class SessionStreamUtils {
      */
     /**
      * 
-     * 功能描述:自己数组转换成对象 <br>
-     * 〈功能详细描述〉
-     *
+     * 自己数组转换成对象 <br>
      * @param bytes bytes
      * @return object
      * @throws IOException ioexception
 
-     * @since [产品/模块版本](可选)
      */
     public static Object byteArrayToObject(byte[] bytes) throws IOException {
         if (bytes == null || bytes.length <= 0) {

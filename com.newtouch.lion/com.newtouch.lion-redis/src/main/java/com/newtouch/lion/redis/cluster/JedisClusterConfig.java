@@ -150,7 +150,7 @@ public class JedisClusterConfig  implements InitializingBean {
 	/**
 	 * @return the jedisClusterNode
 	 */
-	public static Set<HostAndPort> getJedisClusterNode() {
+	public  Set<HostAndPort> getJedisClusterNode() {
 		return jedisClusterNode;
 	}
 
