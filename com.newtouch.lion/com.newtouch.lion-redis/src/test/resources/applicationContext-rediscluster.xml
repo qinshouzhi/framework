@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cxf="http://cxf.apache.org/core"
+	xmlns:p="http://cxf.apache.org/policy" xmlns:ss="http://www.springframework.org/schema/security"
+	xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+   	http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+   	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+   	http://cxf.apache.org/policy http://cxf.apache.org/schemas/policy.xsd
+   	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+   	http://cxf.apache.org/bindings/soap http://cxf.apache.org/schemas/configuration/soap.xsd
+   	http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd
+   	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+   	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+   	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd" default-autowire="default">
+   	
+   	<context:component-scan base-package="com.newtouch.lion" />
+	<!-- 加载接口配置文件 -->
+	<context:property-placeholder 
+		local-override="false" 
+		file-encoding="UTF-8" 
+		location="classpath:application-rediscluster.properties"/>
+   
+    <!-- 配置redis连接池信息 -->
+	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxIdle" value="${redis.maxIdle}" />
+		<property name="minIdle" value="${redis.mixIdle}" />
+		<property name="testOnBorrow"  value="true" />
+		<property name="testOnReturn"  value="true" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnCreate"  value="true" />
+	 
+		<!--
+	     <property name="maxActive" value=""/>
+	     <property name="maxWait" value=""/>
+	     <property name="whenExhaustedAction" value=""/>
+	     <property name="testOnBorrow" value=""/>
+	     <property name="testOnReturn" value=""/>
+	     <property name="testWhileIdle" value="" />
+	     <property name="timeBetweenEvictionRunsMillis" value=""/>
+	     <property name="numTestsPerEvictionRun" value=""/>
+	     <property name="minEvictableIdleTimeMillis" value=""/>
+	     <property name="softMinEvictableIdleTimeMillis" value=""/>
+	     <property name="lifo" value=""/>
+	     -->
+	</bean>
+ 	<!-- Redis Cluster 配置信息 -->
+ 	<bean  id="jedisClusterConfig" class="com.newtouch.lion.redis.cluster.JedisClusterConfig">
+ 		<constructor-arg  index="0"  value="${redis.address}"/>
+ 		<constructor-arg  index="1"  value="${cluster.timeout}"/>	
+ 		<constructor-arg  index="2"  value="${cluster.maxredirections}"/>	
+ 		<constructor-arg  index="3"   ref="poolConfig"/>	
+ 	</bean>
+ 	<!--Redis Client简单对象 -->
+ 	<bean  id="springRedisClusterClient" class="com.newtouch.lion.redis.client.impl.spring.SpringRedisClusterClientImpl">
+ 		<constructor-arg index="0"  ref="jedisClusterConfig"/>
+ 	</bean>
+</beans>
