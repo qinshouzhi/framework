@@ -24,7 +24,7 @@
 		location="classpath:application-rediscluster.properties"/>
    
     <!-- 配置redis连接池信息 -->
-	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
 		<property name="maxIdle" value="${redis.maxIdle}" />
 		<property name="minIdle" value="${redis.mixIdle}" />
 		<property name="testOnBorrow"  value="true" />
@@ -51,7 +51,7 @@
  		<constructor-arg  index="0"  value="${redis.address}"/>
  		<constructor-arg  index="1"  value="${cluster.timeout}"/>	
  		<constructor-arg  index="2"  value="${cluster.maxredirections}"/>	
- 		<constructor-arg  index="3"   ref="poolConfig"/>	
+ 		<constructor-arg  index="3"   ref="jedisPoolConfig"/>	
  	</bean>
  	<!--Redis Client简单对象 -->
  	<bean  id="springRedisClusterClient" class="com.newtouch.lion.redis.client.impl.spring.SpringRedisClusterClientImpl">
