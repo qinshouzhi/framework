@@ -121,8 +121,7 @@ public class BinaryRedisClientImpl<T> extends RedisClientImpl implements IBinary
                     byte[] bvalue = SessionStreamUtils.objectToByteArray(value);
                     return jedis.set(bkey, bvalue);
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                	e.printStackTrace();
                 }
                 return null;
             }
@@ -139,7 +138,6 @@ public class BinaryRedisClientImpl<T> extends RedisClientImpl implements IBinary
                     byte[] bvalue = SessionStreamUtils.objectToByteArray(value);                    
                     return jedis.setex(bkey, time, bvalue);
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
                 return null;
@@ -205,7 +203,6 @@ public class BinaryRedisClientImpl<T> extends RedisClientImpl implements IBinary
                     byte[] bfield = SessionStreamUtils.objectToByteArray(field);
                     return SessionStreamUtils.byteArrayToObject(jedis.hget(bkey, bfield));
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }  
                 return null;
