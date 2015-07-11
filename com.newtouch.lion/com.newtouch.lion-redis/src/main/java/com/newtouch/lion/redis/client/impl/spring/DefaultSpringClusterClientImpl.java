@@ -40,7 +40,7 @@ public class DefaultSpringClusterClientImpl extends JedisCluster {
 	protected JedisClusterConfig jedisClusterConfig;
 	
 	public DefaultSpringClusterClientImpl(JedisClusterConfig jedisClusterConfig) {	
-		super(JedisClusterConfig.getJedisClusterNode(), jedisClusterConfig.getTimeout(), jedisClusterConfig.getMaxRedirections(),jedisClusterConfig.getPoolConfig());
+		super(jedisClusterConfig.getJedisClusterNode(), jedisClusterConfig.getTimeout(), jedisClusterConfig.getMaxRedirections(),jedisClusterConfig.getPoolConfig());
 		logger.info("init redis cluster client...");
 		this.jedisClusterConfig=jedisClusterConfig;
 	}
