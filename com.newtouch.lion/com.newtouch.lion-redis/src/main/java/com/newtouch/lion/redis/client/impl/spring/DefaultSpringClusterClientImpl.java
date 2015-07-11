@@ -44,11 +44,6 @@ public class DefaultSpringClusterClientImpl extends JedisCluster {
 		logger.info("init redis cluster client...");
 		this.jedisClusterConfig=jedisClusterConfig;
 	}
-	
-	/**初始化*/
-	protected void init(){
-		
-	}
 	/**
 	 * @return the jedisClusterConfig
 	 */
@@ -63,7 +58,7 @@ public class DefaultSpringClusterClientImpl extends JedisCluster {
 	public void setJedisClusterConfig(JedisClusterConfig jedisClusterConfig) {
 		this.jedisClusterConfig = jedisClusterConfig;
 	}
- 
+	
 	
 
 	/* (non-Javadoc)

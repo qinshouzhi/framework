@@ -4,7 +4,7 @@
 *
 * $id: RedisAllTest.java 9552 2015年4月11日 下午2:29:05 WangLijun$
 */
-package org.com.newtouch.lion.redis; 
+package com.newtouch.lion.redis; 
 
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

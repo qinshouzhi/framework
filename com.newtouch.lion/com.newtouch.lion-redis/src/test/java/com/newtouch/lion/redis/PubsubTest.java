@@ -1,4 +1,4 @@
-package org.com.newtouch.lion.redis;
+package com.newtouch.lion.redis;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

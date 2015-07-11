@@ -4,7 +4,7 @@
 *
 * $id: RedisGetTest.java 9552 2015年4月11日 下午2:30:25 WangLijun$
 */
-package org.com.newtouch.lion.redis; 
+package com.newtouch.lion.redis; 
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

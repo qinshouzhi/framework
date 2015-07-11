@@ -9,6 +9,8 @@ package com.newtouch.lion.redis.cluster;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.beans.factory.InitializingBean;
+
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.Protocol;
@@ -30,7 +32,7 @@ import redis.clients.jedis.Protocol;
  * @author WangLijun
  * @version 1.0
  */
-public class JedisClusterConfig {
+public class JedisClusterConfig  implements InitializingBean {
 	/***集群连接*/
 	private  static Set<HostAndPort> jedisClusterNode = new HashSet<HostAndPort>();
 	/**地址信息 格式为：127.0.0.1:6379,127.0.0.2:6379,127.0.0.3:6379 类似于：Zeekeeper连接地址*/
@@ -150,6 +152,12 @@ public class JedisClusterConfig {
 	 */
 	public static Set<HostAndPort> getJedisClusterNode() {
 		return jedisClusterNode;
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		//初始化节点信息
+		this.initClusterNode();
 	}
 
 

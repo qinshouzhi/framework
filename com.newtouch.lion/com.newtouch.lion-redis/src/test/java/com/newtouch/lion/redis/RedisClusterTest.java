@@ -4,7 +4,7 @@
  *
  * $id: RedisClusterTest.java 9552 2015年7月10日 下午2:17:40 WangLijun$
  */
-package org.com.newtouch.lion.redis;
+package com.newtouch.lion.redis;
 
 import java.util.HashSet;
 import java.util.Set;

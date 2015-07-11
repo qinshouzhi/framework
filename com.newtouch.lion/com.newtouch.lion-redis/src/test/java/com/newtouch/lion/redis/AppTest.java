@@ -1,4 +1,4 @@
-package org.com.newtouch.lion.redis;
+package com.newtouch.lion.redis;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
