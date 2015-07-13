@@ -10,7 +10,7 @@
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>com.newtouch.lion-redis</artifactId>
-	<version>0.5-SNAPSHOT</version>
+	<version>0.5</version>
 	<name>com.newtouch.lion-redis</name>
 	<url>http://www.newtouchone.com</url>
 	<properties>
