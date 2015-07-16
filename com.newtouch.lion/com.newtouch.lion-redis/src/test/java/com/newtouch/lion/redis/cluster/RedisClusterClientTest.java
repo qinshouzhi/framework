@@ -56,10 +56,10 @@ public class RedisClusterClientTest extends RedisClusterAllTest{
 	
 	@Test
 	public void setMap(){
-		Map<String,String> test = new HashMap<String,String>();
+		Map test = new HashMap();
 		test .put("test", "ccc");
 		test .put("test1", "ccc");
-		binaryRedisClient.set("key:map",test);
+		binaryRedisClient.set("key:map1",test);
 	}
 	
 	@Test

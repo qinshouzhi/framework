@@ -50,7 +50,7 @@ import com.newtouch.lion.session.AppContext;
  * @version 1.0
  */
 
-public class BaseDaoImpl<T extends BaseEntity<PK>, PK> implements BaseDao<T, PK> {
+public abstract class BaseDaoImpl<T extends BaseEntity<PK>, PK> implements BaseDao<T, PK> {
 
 	private static final long serialVersionUID = 840623395509475191L;
 	/**日志*/

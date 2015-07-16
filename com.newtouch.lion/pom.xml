@@ -31,6 +31,7 @@
    		<module>com.newtouch.lion-websocket</module>
    		<module>com.newtouch.lion-webadmin</module>
     <module>com.newtouch.lion-trans</module>
+    <module>com.newtouch.lion-core</module>
   </modules>
 	<distributionManagement>
 		<repository>
