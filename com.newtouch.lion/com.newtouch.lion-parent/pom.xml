@@ -13,6 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.7</jdk.version>
 		<lion-parent.version>0.1.2-SNAPSHOT</lion-parent.version>
+		<lion-core.version>0.5</lion-core.version>
 		<lion-adpater.version>0.1.2-SNAPSHOT</lion-adpater.version>
 		<lion-im.version>0.1.2-SNAPSHOT</lion-im.version>
 		<lion-webcore.version>0.1.2-SNAPSHOT</lion-webcore.version>
@@ -79,6 +80,16 @@
 			</dependency>
 			<dependency>
 				<groupId>com.newtouch.lion</groupId>
+				<artifactId>com.newtouch.lion-common</artifactId>
+				<version>${lion-common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.newtouch.lion</groupId>
+				<artifactId>com.newtouch.lion-core</artifactId>
+				<version>${lion-common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.newtouch.lion</groupId>
 				<artifactId>com.newtouch.lion-adpater</artifactId>
 				<version>${lion-adpater.version}</version>
 			</dependency>
@@ -87,11 +98,7 @@
 				<artifactId>com.newtouch.lion-api</artifactId>
 				<version>${lion-api.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>com.newtouch.lion</groupId>
-				<artifactId>com.newtouch.lion-common</artifactId>
-				<version>${lion-common.version}</version>
-			</dependency>
+			
 			<dependency>
 				<groupId>com.newtouch.lion</groupId>
 				<artifactId>com.newtouch.lion-data</artifactId>
