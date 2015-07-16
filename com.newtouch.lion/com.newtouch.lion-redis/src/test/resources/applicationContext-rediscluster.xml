@@ -61,4 +61,13 @@
  	<bean  id="binaryRedisClient" class="com.newtouch.lion.redis.client.impl.spring.SpringBinaryRedisClusterClientImpl">
  		<constructor-arg index="0"  ref="jedisClusterConfig"/>
  	</bean>
+ 	
+ 	<!-- CacheableRedisImpl 注解调用方法  -->
+ 	<bean  id="cacheableRedis" class="com.newtouch.lion.redis.cache.impl.CacheableRedisImpl">
+ 		<property name="binaryRedisClient" ref="binaryRedisClient"/>
+ 		<property name="redisClient"  ref="redisClient"/>
+ 		<property name="cacheKeyGenerator" ref="cacheKeyGenerator"/>
+ 	</bean>
+ 	<!-- Redis处理 -->
+ 	<bean id="cacheKeyGenerator"  class="com.newtouch.lion.redis.cache.impl.CacheKeyGeneratorImpl"/>
 </beans>

@@ -29,7 +29,6 @@ import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
-import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.newtouch.lion.redis.cache.Constant;
@@ -44,7 +43,6 @@ import com.newtouch.lion.redis.exception.CacheException;
  *
  * @author wanglijun
  */
-@Service
 public class CacheKeyGeneratorImpl implements CacheKeyGenerator {
     /**日志*/
     protected final Logger logger=LoggerFactory.getLogger(super.getClass());

@@ -6,11 +6,17 @@
 */
 package com.newtouch.lion.redis.cluster; 
 
+ 
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.newtouch.lion.redis.RedisClusterAllTest;
+import com.newtouch.lion.redis.client.IBinaryRedisClient;
 import com.newtouch.lion.redis.client.IRedisClient;
 
 /**
@@ -36,12 +42,24 @@ public class RedisClusterClientTest extends RedisClusterAllTest{
 	@Qualifier("redisClient")
 	private IRedisClient redisClient;
 	
+	@Autowired
+	@Qualifier("binaryRedisClient")
+	private IBinaryRedisClient binaryRedisClient;
+	
 	@Test
 	public void set(){
 		for (int i = 1000; i < 2000; i++) {
 			String key = "key:" + i;
 			redisClient.set("watchmen:"+i,key);
 		}
+	}
+	
+	@Test
+	public void setMap(){
+		Map<String,String> test = new HashMap<String,String>();
+		test .put("test", "ccc");
+		test .put("test1", "ccc");
+		binaryRedisClient.set("key:map",test);
 	}
 	
 	@Test

@@ -14,8 +14,6 @@ import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.newtouch.lion.redis.cache.Cacheable;
@@ -36,7 +34,6 @@ import com.newtouch.lion.redis.exception.CacheException;
  *
  * @author wanglijun
  */
-@Service("cacheableRedis")
 public class CacheableRedisImpl implements CacheableRedis {
     
     /**日志*/
@@ -51,13 +48,11 @@ public class CacheableRedisImpl implements CacheableRedis {
     protected final Pattern patternLike=Pattern.compile(Constant.KEY_LIKE_PATTERN);
     
     /**  二进制的redis. */
-    @Autowired
-    @Qualifier("binaryRedisClient")
-    private IBinaryRedisClient springBinaryRedisClient;
+    
+    private IBinaryRedisClient binaryRedisClient;
     /** 缓存接口. */
-    @Autowired
-    @Qualifier("redisClient")
-    private IRedisClient springRedisClient;
+ 
+    private IRedisClient redisClient;
     /**
      * {@inheritDoc}
      */
@@ -69,10 +64,10 @@ public class CacheableRedisImpl implements CacheableRedis {
             if(annotation.cacheReference().typeReference()==null){
                 throw new CacheException(CacheErrorCode.CACHE_REFERENCE_NULL);
             }
-            Object object=springBinaryRedisClient.get(key,annotation.cacheReference().typeReference());
+            Object object=binaryRedisClient.get(key,annotation.cacheReference().typeReference());
             return (T) object;
         }else  if(annotation.dataType()==DataType.STRING){
-            return springBinaryRedisClient.get(key,value);
+            return binaryRedisClient.get(key,value);
         }
         return null;
     }
@@ -87,9 +82,9 @@ public class CacheableRedisImpl implements CacheableRedis {
         //缓存有效时间
         Integer timeToLive=annotation.timeToLive().code();
         if(annotation.timeToLive()==TimeToLive.PERSISTENCE){
-            this.springBinaryRedisClient.set(key,object); 
+            this.binaryRedisClient.set(key,object); 
         }else{
-            this.springBinaryRedisClient.setex(key,object, timeToLive);
+            this.binaryRedisClient.setex(key,object, timeToLive);
         }
        
     }
@@ -152,7 +147,7 @@ public class CacheableRedisImpl implements CacheableRedis {
             this.clearCacheByPattern(key);
         }else{
             logger.info("单个键值删除RedisCache");
-            this.springRedisClient.del(key);
+            this.redisClient.del(key);
         }
     }
     /***
@@ -177,9 +172,9 @@ public class CacheableRedisImpl implements CacheableRedis {
      * @since [产品/模块版本](可选)
      */
     protected void clearCacheByPattern(String pattern) {
-        Set<String> keys =this.springRedisClient.keys(pattern);
+        Set<String> keys =this.redisClient.keys(pattern);
         for (String key : keys) {
-            springRedisClient.del(key);
+            redisClient.del(key);
         }
     }
     
@@ -197,4 +192,48 @@ public class CacheableRedisImpl implements CacheableRedis {
        Matcher matcher = paramPattern.matcher(key);
        return matcher.find();
     }
+
+	/**
+	 * @return the cacheKeyGenerator
+	 */
+	public CacheKeyGenerator getCacheKeyGenerator() {
+		return cacheKeyGenerator;
+	}
+
+	/**
+	 * @param cacheKeyGenerator the cacheKeyGenerator to set
+	 */
+	public void setCacheKeyGenerator(CacheKeyGenerator cacheKeyGenerator) {
+		this.cacheKeyGenerator = cacheKeyGenerator;
+	}
+
+	/**
+	 * @return the binaryRedisClient
+	 */
+	public IBinaryRedisClient getBinaryRedisClient() {
+		return binaryRedisClient;
+	}
+
+	/**
+	 * @param binaryRedisClient the binaryRedisClient to set
+	 */
+	public void setBinaryRedisClient(IBinaryRedisClient binaryRedisClient) {
+		this.binaryRedisClient = binaryRedisClient;
+	}
+
+	/**
+	 * @return the redisClient
+	 */
+	public IRedisClient getRedisClient() {
+		return redisClient;
+	}
+
+	/**
+	 * @param redisClient the redisClient to set
+	 */
+	public void setRedisClient(IRedisClient redisClient) {
+		this.redisClient = redisClient;
+	}
+	
+	
 }
