@@ -6,6 +6,8 @@
  */
 package com.newtouch.lion.cache.service;
 
+import org.springframework.cache.annotation.Cacheable;
+
 import com.newtouch.lion.cache.model.User;
 
 /**
