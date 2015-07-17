@@ -5,6 +5,9 @@
 * $id: User.java 9552 2015年7月17日 下午10:28:22 WangLijun$
 */
 package com.newtouch.lion.cache.model; 
+
+import java.io.Serializable;
+
 /**
  * <p>
  * Title: User 测试类
@@ -22,7 +25,11 @@ package com.newtouch.lion.cache.model;
  * @author WangLijun
  * @version 1.0
  */
-public class User {
+public class User   implements Serializable {
+	/**
+	 * 序列化
+	 */
+	private static final long serialVersionUID = -7484326967614263403L;
 	/**ID*/
 	private Long id;
 	/**用户名*/

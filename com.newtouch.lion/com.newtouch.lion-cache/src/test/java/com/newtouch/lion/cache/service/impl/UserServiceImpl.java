@@ -6,8 +6,12 @@
 */
 package com.newtouch.lion.cache.service.impl; 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.newtouch.lion.cache.model.User;
@@ -32,16 +36,27 @@ import com.newtouch.lion.cache.service.UserService;
  */
 @Service
 public class UserServiceImpl   implements UserService{
-	
-	
+ 
 	/**日志*/
 	protected  final Logger logger=LoggerFactory.getLogger(super.getClass());
+	static User user=new User(1L, "Even", "scwanglijun", 1, "上海", "200000", "上海");
+	static User user1=new User(2L, "Even", "scwanglijun", 1, "上海", "200000", "上海");
+	static User user2=new User(3L, "Even", "scwanglijun", 1, "上海", "200000", "上海");
+	static Map<Long,User> params=new HashMap<Long,User>();
+	static{
+		params.put(1L,user);
+		params.put(2L,user1);
+		params.put(3L,user2);
+	}
+	
 	/* (non-Javadoc)
-	 * @see com.newtouch.lion.cache.service.UserService#find(java.lang.Integer)
+	 * @see com.newtouch.lion.cache.service.UserService#find(java.lang.Long)
 	 */
 	@Override
-	public User find(Integer id) {
-		return null;
+	@Cacheable(value="codeListEhCache",key="#id")
+	public User find(Long id) {
+		logger.info("从数据库查询");
+		return params.get(id);
 	}
 
 	/* (non-Javadoc)

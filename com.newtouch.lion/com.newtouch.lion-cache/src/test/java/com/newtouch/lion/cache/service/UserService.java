@@ -6,6 +6,8 @@
  */
 package com.newtouch.lion.cache.service;
 
+import org.springframework.cache.annotation.Cacheable;
+
 import com.newtouch.lion.cache.model.User;
 
 /**
@@ -27,8 +29,9 @@ import com.newtouch.lion.cache.model.User;
  */
 public interface UserService {
 
-	public User find(Integer id);
-
+	
+	public User find(Long id);
+	
 	public User find(User user);
 
 }

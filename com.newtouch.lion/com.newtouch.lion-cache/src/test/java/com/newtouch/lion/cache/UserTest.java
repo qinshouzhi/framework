@@ -35,6 +35,10 @@ public class UserTest extends CacheAllTest {
 	
 	@Test
 	public void findById(){
+		logger.info("第一次查询");
+		userService.find(1L);
+		logger.info("第二次查询");
+		userService.find(1L);
 		logger.info("------");
 	}
 }
