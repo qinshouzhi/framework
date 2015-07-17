@@ -22,6 +22,10 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.newtouch.lion</groupId>
+			<artifactId>com.newtouch.lion-core</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
