@@ -72,7 +72,7 @@ public class EhCacheBasedObjectCache<T> implements InitializingBean,ObjectCache<
 	 * com.honbang.framework.cache.ObjectCache#getObjectFromCache(java.lang.
 	 * Object)
 	 */
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings({ "unchecked"})
 	@Override
 	public T getObjectFromCache(Object key) {
 		Element element = null;
@@ -100,7 +100,7 @@ public class EhCacheBasedObjectCache<T> implements InitializingBean,ObjectCache<
 	 * com.honbang.framework.cache.ObjectCache#putObjectInCache(java.lang.Object
 	 * , java.lang.Object)
 	 */
-	@SuppressWarnings("deprecation")
+ 
 	@Override
 	public void putObjectInCache(Object key, T obj) {
 		Element element = new Element(key,obj);
