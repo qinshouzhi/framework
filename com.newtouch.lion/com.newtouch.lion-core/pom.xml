@@ -9,14 +9,13 @@
 		<version>0.1.2-SNAPSHOT</version>
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
-	<groupId>com.newtouch.lion-core</groupId>
 	<artifactId>com.newtouch.lion-core</artifactId>
-	<version>${project.version}</version>
+	<version>${lion-core.version}</version>
 	<name>com.newtouch.lion-core</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.version>0.5</project.version>
+		<lion-core.version>0.5</lion-core.version>
 	</properties>
 	<dependencies>
 		<dependency>

@@ -86,7 +86,7 @@
 			<dependency>
 				<groupId>com.newtouch.lion</groupId>
 				<artifactId>com.newtouch.lion-core</artifactId>
-				<version>${lion-common.version}</version>
+				<version>${lion-core.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.newtouch.lion</groupId>

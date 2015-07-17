@@ -11,13 +11,19 @@
 	</parent>
 	<artifactId>com.newtouch.lion-api</artifactId>
 	<name>com.newtouch.lion-api</name>
-	<version>0.1.2-SNAPSHOT</version>
+	<version>${lion-api.version}</version>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<com.newtouch.lion-parent.version>0.1.2-SNAPSHOT</com.newtouch.lion-parent.version>
+		<lion-api.version>0.1.2-SNAPSHOT</lion-api.version>
 	</properties>
-	<dependencies>		
+	<dependencies>
+		<!-- lion jar start -->
+		<dependency>
+			<groupId>com.newtouch.lion</groupId>
+			<artifactId>com.newtouch.lion-core</artifactId>
+		</dependency>
+		<!-- lion jar end -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -29,18 +35,6 @@
 			<artifactId>persistence-api</artifactId>
 		</dependency>
 		<!-- JPA End -->
-		<!-- Logger Start -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<!-- Logger End -->
-		<!-- Ehcache Start -->
-		<dependency>
-			<groupId>net.sf.ehcache</groupId>
-			<artifactId>ehcache-core</artifactId>
-		</dependency>
-		<!-- Ehcache End -->
 	</dependencies>
 	<build>
 		<plugins>
