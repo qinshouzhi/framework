@@ -8,7 +8,6 @@ package com.newtouch.lion.exception;
 
 import org.apache.commons.lang.StringUtils;
 
-
 /**
  * <p>
  * Title:系统基础异常
@@ -28,7 +27,6 @@ import org.apache.commons.lang.StringUtils;
  */
 public class SystemException extends BaseException {
 
-	
 	private static final long serialVersionUID = -1490742393672145880L;
 
 	/** 错误代码 */
@@ -37,29 +35,27 @@ public class SystemException extends BaseException {
 	private Object[] params;
 
 	public SystemException(String code) {
-		this(code,StringUtils.EMPTY);
-	}
- 
-	
-	public SystemException(String code,String msg){
-		this(code,null,msg);
-	}
-	
-	public SystemException(String code,String[] params) {
-		this(code,params,null);
+		this(code, StringUtils.EMPTY);
 	}
 
-	public SystemException(String code,String[] params,String msg) {
-		this(code,params,msg,null);
+	public SystemException(String code, String msg) {
+		this(code, null, msg);
 	}
 
-	public SystemException(String code, String[] params,String msg, Throwable cause) {
-		super(code,msg,cause);
+	public SystemException(String code, String[] params) {
+		this(code, params, null);
+	}
+
+	public SystemException(String code, String[] params, String msg) {
+		this(code, params, msg, null);
+	}
+
+	public SystemException(String code, String[] params, String msg,
+			Throwable cause) {
+		super(code, msg, cause);
 		this.code = code;
 		this.params = params;
 	}
-
-	 
 
 	/**
 	 * @return the code
@@ -69,7 +65,8 @@ public class SystemException extends BaseException {
 	}
 
 	/**
-	 * @param code the code to set
+	 * @param code
+	 *            the code to set
 	 */
 	public void setCode(String code) {
 		this.code = code;
@@ -83,12 +80,10 @@ public class SystemException extends BaseException {
 	}
 
 	/**
-	 * @param params the params to set
+	 * @param params
+	 *            the params to set
 	 */
 	public void setParams(Object[] params) {
 		this.params = params;
 	}
-	
-	
-	
 }
