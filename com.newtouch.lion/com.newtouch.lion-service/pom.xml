@@ -40,6 +40,10 @@
 			<groupId>com.newtouch.lion</groupId>
 			<artifactId>com.newtouch.lion-data</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.newtouch.lion</groupId>
+			<artifactId>com.newtouch.lion-cache</artifactId>
+		</dependency>
 		<!-- lion End -->
 		<!-- Apache Shiro Start -->
 		<dependency>
