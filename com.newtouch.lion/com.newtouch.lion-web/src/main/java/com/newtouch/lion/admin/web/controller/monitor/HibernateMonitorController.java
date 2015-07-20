@@ -20,7 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.newtouch.lion.hibernate.HibernateUtil;
+import com.newtouch.lion.hibernate.HibernateUtils;
 import com.newtouch.lion.model.monitor.jvm.MemoryUsage;
 import com.newtouch.lion.service.monitor.HibernateMonitorService;
 import com.newtouch.lion.service.monitor.JvmMonitorService;
@@ -63,7 +63,7 @@ public class HibernateMonitorController extends AbstractController{
 	@RequestMapping(value="/index",method=RequestMethod.GET)
 	public String index(Model model){
 		EntityManager em=hibernateMontiorService.getEntityManager();
-		Statistics statistics = HibernateUtil.getSessionFactory(em).getStatistics();
+		Statistics statistics = HibernateUtils.getSessionFactory(em).getStatistics();
 		
 	    model.addAttribute("statistics", statistics);
 	   
@@ -72,7 +72,7 @@ public class HibernateMonitorController extends AbstractController{
         long upSeconds = (nowDate.getTime() - startDate.getTime()) / 1000;
         model.addAttribute("upSeconds", upSeconds);
         //Session的信息
-        model.addAttribute("sessionFactory",HibernateUtil.getSessionFactory(em));
+        model.addAttribute("sessionFactory",HibernateUtils.getSessionFactory(em));
         //配置信息
         Map<String, Object> properties = new TreeMap<String, Object>(em.getEntityManagerFactory().getProperties());
         
