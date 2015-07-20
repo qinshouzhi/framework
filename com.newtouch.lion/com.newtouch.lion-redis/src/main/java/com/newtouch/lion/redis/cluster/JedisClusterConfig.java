@@ -20,7 +20,7 @@ import redis.clients.jedis.Protocol;
  * Title: Redis 集群配置信息
  * </p>
  * <p>
- * Description: 
+ * Description:  主要配置连接池和连接超时间
  * </p>
  * <p>
  * Copyright: Copyright (c) 2015

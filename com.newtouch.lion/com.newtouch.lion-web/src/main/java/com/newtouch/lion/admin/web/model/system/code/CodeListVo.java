@@ -54,12 +54,12 @@ public class CodeListVo implements Serializable {
 	/**
 	 * @Fields nameEn：英文名称
 	 */
-	@Length(max = 100, min = 2, message = "{sys.codeList.form.nameen.length.message}")
+	@Length(max = 100, min = 1, message = "{sys.codeList.form.nameen.length.message}")
 	private String nameEn;
 	/**
 	 * @Fields nameZh：中文名称
 	 */
-	@Length(max = 100, min = 2, message = "{sys.codeList.form.namezh.length.message}")
+	@Length(max = 100, min = 1, message = "{sys.codeList.form.namezh.length.message}")
 	private String nameZh;
 	
 	/**编码排序*/

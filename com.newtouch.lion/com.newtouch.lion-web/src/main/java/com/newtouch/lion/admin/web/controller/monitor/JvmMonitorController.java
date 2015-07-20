@@ -12,10 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.newtouch.lion.model.montior.jvm.MemoryUsage;
-import com.newtouch.lion.model.montior.jvm.OperatingSystemInfo;
-import com.newtouch.lion.model.montior.jvm.RuntimeInfo;
-import com.newtouch.lion.model.montior.jvm.ThreadSummary;
+import com.newtouch.lion.model.monitor.jvm.MemoryUsage;
+import com.newtouch.lion.model.monitor.jvm.OperatingSystemInfo;
+import com.newtouch.lion.model.monitor.jvm.RuntimeInfo;
+import com.newtouch.lion.model.monitor.jvm.ThreadSummary;
 import com.newtouch.lion.service.monitor.JvmMonitorService;
 import com.newtouch.lion.web.controller.AbstractController;
 

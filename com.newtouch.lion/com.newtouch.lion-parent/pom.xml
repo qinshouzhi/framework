@@ -17,6 +17,7 @@
 		<lion-adpater.version>0.1.2-SNAPSHOT</lion-adpater.version>
 		<lion-im.version>0.1.2-SNAPSHOT</lion-im.version>
 		<lion-webcore.version>0.1.2-SNAPSHOT</lion-webcore.version>
+		<lion-cache.version>0.1.2-SNAPSHOT</lion-cache.version>
 		<lion-shiro.version>0.1.2-SNAPSHOT</lion-shiro.version>
 		<lion-web.version>0.1.2-SNAPSHOT</lion-web.version>
 		<lion-webadmin.version>0.1.2-SNAPSHOT</lion-webadmin.version>
@@ -28,6 +29,7 @@
 		<lion-mongodb.version>0.1.2-SNAPSHOT</lion-mongodb.version>
 		<lion-exception.version>0.1.2-SNAPSHOT</lion-exception.version>
 		<lion-trans.version>0.1.2-SNAPSHOT</lion-trans.version>
+		<lion-monitor.version>0.1.2-SNAPSHOT</lion-monitor.version>
 		<junit.version>4.8.2</junit.version>
 		<slf4j.version>1.7.1</slf4j.version>
 		<poi.version>3.9</poi.version>
@@ -90,6 +92,16 @@
 			</dependency>
 			<dependency>
 				<groupId>com.newtouch.lion</groupId>
+				<artifactId>com.newtouch.lion-cache</artifactId>
+				<version>${lion-cache.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.newtouch.lion</groupId>
+				<artifactId>com.newtouch.lion-monitor</artifactId>
+				<version>${lion-monitor.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.newtouch.lion</groupId>
 				<artifactId>com.newtouch.lion-adpater</artifactId>
 				<version>${lion-adpater.version}</version>
 			</dependency>
@@ -98,7 +110,7 @@
 				<artifactId>com.newtouch.lion-api</artifactId>
 				<version>${lion-api.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.newtouch.lion</groupId>
 				<artifactId>com.newtouch.lion-data</artifactId>

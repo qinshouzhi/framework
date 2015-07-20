@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.newtouch.lion.hibernate.HibernateUtils;
-import com.newtouch.lion.model.montior.jvm.MemoryUsage;
+import com.newtouch.lion.model.monitor.jvm.MemoryUsage;
 import com.newtouch.lion.service.monitor.HibernateMonitorService;
 import com.newtouch.lion.service.monitor.JvmMonitorService;
 import com.newtouch.lion.web.controller.AbstractController;

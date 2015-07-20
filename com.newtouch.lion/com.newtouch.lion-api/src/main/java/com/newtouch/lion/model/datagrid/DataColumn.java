@@ -40,55 +40,10 @@ public class DataColumn extends VersionEntity<Long> {
 	private String field;
 	/** 列名显示字段 */
 	private String name;
-	/** 显示列宽度：eg width=30 */
-	private Integer width;
-	/** rowspan Indicate how many rows a cell should take up. */
-	private int rowspan;
-	/** colspan Indicate how many columns a cell should take up. */
-	private int colspan;
-	/** 是否排列,Possible vlaues are:'true','false',default value:false */
-	private Boolean sortable;
-	/** 排列方式：ASC,DESC Default value is:ASC */
-	private String order;
-	/**
-	 * Indicate how to align the column header. Possible values
-	 * are:'left','cetner','right'
-	 */
-	private String headerAlign;
 	/** 对齐方式:'left','center','right' */
 	private String align;
-	/** True to hide the column, Default value is:false */
-	private Boolean hidden;
-	/**
-	 * True to show a checkbox. The checkbox column has fixed width. Default
-	 * value is:false
-	 */
-	private Boolean checkbox;
-	/**
-	 * The cell formatter funcation,take three parameters:value:the field
-	 * value.rowData:the row record data.rowIndex:the row index.
-	 */
-	private String formatter;
-	/**
-	 * The cell styler function,return style string to custom the cell style
-	 * such as 'backgroud:red'.The funcation take three parameter:value:the
-	 * field value.rowData:the row record data.rowIndex:the row index
-	 */
-	private String styler;
-	/**
-	 * sorter The custom field sort function that used to do local sorting, take
-	 * two parameters: a: the first field value. b: the second field value.
-	 */
-	private String sorter;
-
-	/**
-	 * Indicate the edit type. When string indicates the edit type, when object
-	 * contains two properties: type: string, the edit type, possible type is:
-	 * text,textarea,checkbox,numberbox,validatebox,datebox,combobox,combotree.
-	 * options: object, the editor options corresponding to the edit type.
-	 */
-	private String editor;
-
+	/** 显示列宽度：eg width=30 */
+	private Integer width;
 	/** 数据 */
 	private DataGrid dataGrid;
 
@@ -130,96 +85,12 @@ public class DataColumn extends VersionEntity<Long> {
 		return name;
 	}
 
-	/**
-	 * @return the width
-	 */
-	public Integer getWidth() {
-		return width;
-	}
-
-	/**
-	 * @return the rowspan
-	 */
-	public int getRowspan() {
-		return rowspan;
-	}
-
-	/**
-	 * @return the colspan
-	 */
-	public int getColspan() {
-		return colspan;
-	}
-
-	/**
-	 * @return the sortable
-	 */
-	public Boolean getSortable() {
-		return sortable;
-	}
-
-	/**
-	 * @return the order
-	 */
-	public String getOrder() {
-		return order;
-	}
-
-	/**
-	 * @return the headerAlign
-	 */
-	public String getHeaderAlign() {
-		return headerAlign;
-	}
 
 	/**
 	 * @return the align
 	 */
 	public String getAlign() {
 		return align;
-	}
-
-	/**
-	 * @return the hidden
-	 */
-	public Boolean getHidden() {
-		return hidden;
-	}
-
-	/**
-	 * @return the checkbox
-	 */
-	public Boolean getCheckbox() {
-		return checkbox;
-	}
-
-	/**
-	 * @return the formatter
-	 */
-	public String getFormatter() {
-		return formatter;
-	}
-
-	/**
-	 * @return the styler
-	 */
-
-	public String getStyler() {
-		return styler;
-	}
-
-	/**
-	 * @return the sorter
-	 */
-	public String getSorter() {
-		return sorter;
-	}
-
-	/**
-	 * @return the editor
-	 */
-	public String getEditor() {
-		return editor;
 	}
 
 	/**
@@ -262,107 +133,11 @@ public class DataColumn extends VersionEntity<Long> {
 	}
 
 	/**
-	 * @param width
-	 *            the width to set
-	 */
-	public void setWidth(Integer width) {
-		this.width = width;
-	}
-
-	/**
-	 * @param rowspan
-	 *            the rowspan to set
-	 */
-	public void setRowspan(int rowspan) {
-		this.rowspan = rowspan;
-	}
-
-	/**
-	 * @param colspan
-	 *            the colspan to set
-	 */
-	public void setColspan(int colspan) {
-		this.colspan = colspan;
-	}
-
-	/**
-	 * @param sortable
-	 *            the sortable to set
-	 */
-	public void setSortable(Boolean sortable) {
-		this.sortable = sortable;
-	}
-
-	/**
-	 * @param order
-	 *            the order to set
-	 */
-	public void setOrder(String order) {
-		this.order = order;
-	}
-
-	/**
-	 * @param headerAlign
-	 *            the headerAlign to set
-	 */
-	public void setHeaderAlign(String headerAlign) {
-		this.headerAlign = headerAlign;
-	}
-
-	/**
 	 * @param align
 	 *            the align to set
 	 */
 	public void setAlign(String align) {
 		this.align = align;
-	}
-
-	/**
-	 * @param hidden
-	 *            the hidden to set
-	 */
-	public void setHidden(Boolean hidden) {
-		this.hidden = hidden;
-	}
-
-	/**
-	 * @param checkbox
-	 *            the checkbox to set
-	 */
-	public void setCheckbox(Boolean checkbox) {
-		this.checkbox = checkbox;
-	}
-
-	/**
-	 * @param formatter
-	 *            the formatter to set
-	 */
-	public void setFormatter(String formatter) {
-		this.formatter = formatter;
-	}
-
-	/**
-	 * @param styler
-	 *            the styler to set
-	 */
-	public void setStyler(String styler) {
-		this.styler = styler;
-	}
-
-	/**
-	 * @param sorter
-	 *            the sorter to set
-	 */
-	public void setSorter(String sorter) {
-		this.sorter = sorter;
-	}
-
-	/**
-	 * @param editor
-	 *            the editor to set
-	 */
-	public void setEditor(String editor) {
-		this.editor = editor;
 	}
 
 	/**
@@ -380,4 +155,19 @@ public class DataColumn extends VersionEntity<Long> {
 	public void setDataGridId(Long dataGridId) {
 		this.dataGridId = dataGridId;
 	}
+
+	/**
+	 * @return the width
+	 */
+	public Integer getWidth() {
+		return width;
+	}
+
+	/**
+	 * @param width the width to set
+	 */
+	public void setWidth(Integer width) {
+		this.width = width;
+	}
+	
 }

@@ -72,7 +72,6 @@ public class ImageCut {
                g.drawImage(img, 0, 0, null); // 绘制缩小后的图
                g.dispose();
                // 输出为文件
-               System.out.println(srcImageFile+"_cut.jpg===========================");
                ImageIO.write(tag, "JPEG", new File(srcImageFile+"_cut.jpg"));
 	       }
     	} catch (IOException e) {

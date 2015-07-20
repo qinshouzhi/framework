@@ -18,9 +18,7 @@ import org.springframework.util.CollectionUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.newtouch.lion.redis.client.IBinaryRedisClient;
-import com.newtouch.lion.redis.cluster.BinaryJedisCluster;
 import com.newtouch.lion.redis.cluster.JedisClusterConfig;
-import com.newtouch.lion.redis.util.ByteUtils;
 import com.newtouch.lion.redis.util.SessionStreamUtils;
 
 /**
@@ -181,6 +179,19 @@ public class SpringBinaryRedisClusterClientImpl<T> extends BinaryJedisCluster im
              }
 		}
 		return allObjs;
+	}
+
+	@Override
+	public String set(String key, String value, String nxxx, String expx,
+			long time) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Long expire(String id, int seconds) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 

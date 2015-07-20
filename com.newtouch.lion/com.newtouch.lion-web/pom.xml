@@ -46,6 +46,10 @@
 			<groupId>com.newtouch.lion</groupId>
 			<artifactId>com.newtouch.lion-webcore</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.newtouch.lion</groupId>
+			<artifactId>com.newtouch.lion-monitor</artifactId>
+		</dependency>
 		<!-- lion End -->
 		<dependency>
 			<groupId>junit</groupId>

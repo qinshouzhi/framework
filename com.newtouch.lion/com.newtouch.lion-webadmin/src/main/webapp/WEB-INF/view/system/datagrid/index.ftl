@@ -106,21 +106,6 @@
 							<th data-field="title" style="width:90px;">
 							  	标题
 							</th>
-							<th data-field="method" style="width:30px;">
-								请求方法
-							</th>					
-							<th data-field="pageNumber" style="width:50px;" >
-								当前页码
-							</th>
-							<th data-field="pageSize" style="width:30px;" >
-								每页记录数
-							</th>
-							<th data-field="checkOnSelect" style="width:30px;" >
-								显示复选框
-							</th>
-							<th data-field="singleSelect" style="width:30px;" >
-								是否多选
-							</th>
 						</tr>
 					</thead>
 				</table>
@@ -130,8 +115,8 @@
 </div>
 <!-- END PAGE CONTENT INNER -->
 <!--Dialog Start -->
-<div class="modal fade bs-modal-lg " id="basic" tabindex="-1" role="basic" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
+<div class="modal fade " id="basic" tabindex="-1" role="basic" aria-hidden="true">
+	<div class="modal-dialog">
 		<div class="modal-content ">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -145,10 +130,10 @@
 										<input type="hidden" id='id' name='id' value="">
 										<div class="form-body">
 											<div class="form-group">
-												<label class="col-md-1 control-label">
+												<label class="col-md-3 control-label">
 													<@spring.message "sys.datagrid.form.type.text"/>
 												</label>
-												<div class="col-md-2">												 
+												<div class="col-md-5">												 
 													  <select  id="codeList"   name="type" 
 													 	placeholder="<@spring.message "sys.datacolumn.query.datagrid.missing.message"/>..."  
 													 	class="lion-combo form-control select2" 
@@ -157,237 +142,27 @@
 													 	data-URL="${base}/system/code/combox.json?nameEn=datagrid_type">
 													 </select>
 												</div>
-												<label class="col-md-1 control-label">
+											</div>	
+											<div class="form-group">
+												<label class="col-md-3 control-label">
 													<@spring.message "sys.datagrid.form.tableId.text"/>
 												</label>
-												<div class="col-md-2">
+												<div class="col-md-5">
 													<div class="input-group">
 														<input   type="text"  id="tableId" name="tableId" maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.tableId.missing.message"/>" size="30"/>
 													</div>
 												</div>
-												<label class="col-md-1 control-label">
+											</div>
+											<div class="form-group">
+												<label class="col-md-3 control-label">
 													<@spring.message "sys.datagrid.form.title.text"/>
 												</label>
-												<div class="col-md-2">
+												<div class="col-md-5">
 													<div class="input-group radio-list">	
 														<input   type="text"  id="title" name="title" maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.title.missing.message"/>" size="30"/>
 													</div>
 												</div>
-												<div class="col-md-3">
-													<@spring.message "sys.datagrid.form.showTitle.text"/>
-													<input type="checkbox" class="form-control control-label "  name="showTitle" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-md-1 control-label">
-													<@spring.message "sys.datagrid.form.url.text"/>
-												</label>
-												<div class="col-md-2">
-													<div class="input-group radio-list">	
-														<input   type="text"  id="url" name="url" maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.url.missing.message"/>" size="30"/>
-													</div>
-												</div>
-												<label class="col-md-1 control-label"><@spring.message "sys.datagrid.form.data.text"/></label>
-												<div class="col-md-2">
-													<div class="input-group">
-														<input   type="text"  id="data" name="data" maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.data.missing.message"/>" size="30"/>
-													</div>
-												</div>
-												<label class="col-md-1 control-label">
-													<@spring.message "sys.datagrid.form.loadMsg.text"/>
-												</label>
-												<div class="col-md-2">
-													<div class="input-group">
-														<input type="text"  name="loadMsg"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.loadMsg.missing.message"/>" size="30"/>
-													</div>
-												</div>
-												<label class="col-md-1 control-label">
-													<@spring.message "sys.datagrid.form.method.text"/>
-												</label>
-												<div class="col-md-2">
-													<input type="radio" name="method" id="method0" value="get" >
-													get
-													<input type="radio" name="method" id="method1" value="post" checked>
-													post
-												</div>
-											</div>		
-											<div class="form-group">
-												<label class="col-md-1 control-label">
-													<@spring.message "sys.datagrid.form.pagePosition.text"/>
-												</label>
-												<div class="col-md-2">
-													 <select  id="pagePosition"   name="pagePosition" 
-													 	placeholder="<@spring.message "sys.datagrid.form.pagePosition.missing.message"/>..."  
-													 	class="lion-combo form-control select2" 
-													 	data-valueField='codeValue'  
-													 	data-textField='nameZh'  
-													 	data-URL="${base}/system/code/combox.json?nameEn=PagePosition">
-													 </select>
-												</div>
-												
-												
-												<label class="col-md-1 control-label">
-												      <@spring.message "sys.datagrid.form.pageList.text"/>
-												</label>
-												<div class="col-md-2">
-												   <select  id="pageList"   name="pageList" 
-													 	placeholder="<@spring.message "sys.datagrid.form.pageList.missing.message"/>..."  
-													 	class="lion-combo form-control select2" 
-													 	data-valueField='codeValue'  
-													 	data-textField='nameZh'  
-													 	data-URL="${base}/system/code/combox.json?nameEn=PageList">
-													 </select>
-												</div>
-												<label class="col-md-2 control-label"><@spring.message "sys.datagrid.form.pageNumber.text"/></label>
-												<div class="col-md-1">
-													<div class="input-group radio-list">	
-														<input type="text"  name="pageNumber"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.pageNumber.missing.message"/>" size="30" value="1"/>
-													</div>
-												</div>
-												<label class="col-md-1 control-label"><@spring.message "sys.datagrid.form.pageSize.text"/></label>
-												<div class="col-md-1">
-													<div class="input-group radio-list">	
-														<input type="text"  name="pageSize"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.pageSize.missing.message"/>" size="30" value="15"/>
-													</div>
-												</div>
-											</div>	
-											<div class="form-group">
-												<label class="col-md-1 control-label"><@spring.message "sys.datagrid.form.queryParams.text"/></label>
-												<div class="col-md-2">
-													<div class="input-group">
-														<input type="text"  name="queryParams"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.queryParams.missing.message"/>" size="30"/>
-													</div>
-												</div>
-												<label class="col-md-1 control-label"><@spring.message "sys.datagrid.form.sortName.text"/></label>
-												<div class="col-md-2">
-													<div class="input-group radio-list">	
-														<input type="text"  name="sortName"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.sortName.missing.message"/>" size="30"/>
-													</div>
-												</div>
-												<div class="col-md-2 control-label">
-													<@spring.message "sys.datagrid.form.remoteSort.text"/>
-													<input type="checkbox" class="form-control "  name="remoteSort" />
-												</div>
-												<label class="col-md-1 control-label"><@spring.message "sys.datagrid.form.sortOrder.text"/></label>
-												<div class="col-md-3">
-													<div class="input-group radio-list">	
-														<label class="radio-inline">
-															<input type="radio" name="sortOrder" id="sortOrder0" value="asc" checked>
-															asc
-														</label>
-														<label class="radio-inline">
-															<input type="radio" name="sortOrder" id="sortOrder1" value="desc">
-															 desc
-													    </label>
-													</div>
-												</div>
-											</div>																					
-											<div class="form-group">
-												<label class="col-md-2 control-label"><@spring.message "sys.datagrid.form.scrollbarSize.text"/></label>
-												<div class="col-md-2">
-													<div class="input-group radio-list">	
-														<input type="text"  name="scrollbarSize"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.scrollbarSize.missing.message"/>" size="30" value="18"/>
-													</div>
-												</div>
-												<label class="col-md-1 control-label"><@spring.message "sys.datagrid.form.rowStyler.text"/></label>
-												<div class="col-md-2">
-													<div class="input-group radio-list">	
-														<input type="text"  name="rowStyler"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.rowStyler.missing.message"/>" size="30"/>
-													</div>
-												</div>
-												<div class="col-md-2">
-													<@spring.message "sys.datagrid.form.showHeader.text"/>
-													<input type="checkbox" class="form-control "  name="showHeader" />
-												</div>
-												<div class="col-md-3">
-													<@spring.message "sys.datagrid.form.showFooter.text"/>
-													<input type="checkbox" class="form-control "  name="showFooter" />
-												</div>
-											</div>	
-											
-											<div class="form-group">
-												<label class="col-md-1 control-label">
-													<@spring.message "sys.datagrid.form.loader.text"/>
-												</label>
-												<div class="col-md-2">
-													<div class="input-group radio-list">	
-														<input type="text"  name="loader"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.loader.missing.message"/>" size="30"/>
-													</div>
-												</div>
-												<label class="col-md-1 control-label">
-													<@spring.message "sys.datagrid.form.loadFilter.text"/>
-												</label>
-												<div class="col-md-2">
-													<div class="input-group radio-list">	
-														<input type="text"  name="loadFilter"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.loadFilter.missing.message"/>" size="30"/>
-													</div>
-												</div>
-												<label class="col-md-1 control-label">
-													<@spring.message "sys.datagrid.form.editors.text"/>
-												</label>
-												<div class="col-md-2">
-													<div class="input-group radio-list">	
-														<input type="text"  name="editors"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.editors.missing.message"/>" size="30"/>
-													</div>
-												</div>
-												<label class="col-md-1 control-label">
-													<@spring.message "sys.datagrid.form.view.text"/>
-												</label>
-												<div class="col-md-2">
-													<div class="input-group radio-list">	
-														<input type="text"  name="view222"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datagrid.form.view.missing.message"/>" size="30"/>
-													</div>
-												</div>
-											</div>	
-											
-											<div class="form-group">
-												<div class="col-md-2">
-													<@spring.message "sys.datagrid.form.fit.text"/>
-													<input type="checkbox" class="form-control "  name="fit" />
-												</div>												
-												<div class="col-md-2">
-													<@spring.message "sys.datagrid.form.frozen.text"/>
-													<input type="checkbox" class="form-control "  name="frozen" />
-												</div>												
-												<div class="col-md-2">
-													<@spring.message "sys.datagrid.form.showGroup.text"/>
-													<input type="checkbox" class="form-control "  name="showGroup" />
-												</div>												
-												<div class="col-md-2">
-													<@spring.message "sys.datagrid.form.pagination.text"/>
-													<input type="checkbox" class="form-control "  name="pagination" />
-												</div>												
-												<div class="col-md-2">
-													<@spring.message "sys.datagrid.form.fitColumns.text"/>
-													<input type="checkbox" class="form-control "  name="fitColumns" />
-												</div>												
-												<div class="col-md-2">
-													<@spring.message "sys.datagrid.form.striped.text"/>
-													<input type="checkbox" class="form-control "  name="Striped" />
-												</div>	
-											</div>	
-											<div class="form-group">
-												<div class="col-md-2">
-													<@spring.message "sys.datagrid.form.nowrap.text"/>
-													<input type="checkbox" class="form-control "  name="nowrap" />
-												</div>
-												<div class="col-md-2">
-													<@spring.message "sys.datagrid.form.rownumbers.text"/>
-													<input type="checkbox" class="form-control "  name="rownumbers" />
-												</div>
-												<div class="col-md-2">
-													<@spring.message "sys.datagrid.form.singleSelect.text"/>
-													<input type="checkbox" class="form-control "  name="singleSelect" />
-												</div>
-												<div class="col-md-2">
-													<@spring.message "sys.datagrid.form.checkOnSelect.text"/>
-													<input type="checkbox" class="form-control "  name="checkOnSelect" />
-												</div>
-												<div class="col-md-2">
-													<@spring.message "sys.datagrid.form.selectOnCheck.text"/>	
-													<input type="checkbox" class="form-control "  name="selectOnCheck" />
-												</div>
-											</div>															
+											</div>					
 										</div>								 
 									</form>
 									<!-- END FORM-->
