@@ -15,14 +15,21 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.newtouch.lion.admin.web.model.session.SessionVo;
+import com.newtouch.lion.common.date.DateUtil;
+import com.newtouch.lion.common.file.FileUtil;
 import com.newtouch.lion.data.DataTable;
+import com.newtouch.lion.model.datagrid.DataGrid;
 import com.newtouch.lion.model.session.SessionModel;
+import com.newtouch.lion.service.datagrid.DataGridService;
+import com.newtouch.lion.service.excel.ExcelExportService;
 import com.newtouch.lion.service.session.SessionService;
 import com.newtouch.lion.service.system.UserService;
 import com.newtouch.lion.web.constant.ConstantMessage;
@@ -54,13 +61,18 @@ public class SessionController extends AbstractController {
 	/**首页*/
 	private static final String  INDEX_RETURN="/sessions/index";
 	
-	 
 	/**用户会话服务*/
 	@Autowired
 	private SessionService sessionService;
 	/**用户服务*/
 	@Autowired
 	private UserService userService;
+	/**DataGrid表格*/
+	@Autowired
+	private DataGridService dataGridService;
+	/**Excel通用导出*/
+	@Autowired
+	private ExcelExportService excelExportService;
 	
 	/**返回到首页**/
 	@RequestMapping("index")
@@ -81,6 +93,47 @@ public class SessionController extends AbstractController {
 		DataTable<SessionModel> dataTable=new DataTable<SessionModel>((long) list.size(),list,query.getRequestId()); 
 		return dataTable;
 	}
+	
+	/**
+	 * 导出excel
+	 * @param tableId
+	 * @param sort
+	 * @param order
+	 * @param policy
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value = "export")
+	@ResponseBody
+	public ModelAndView exportExcel(@RequestParam(required=false) String tableId,@RequestParam(required = false) String sort,@RequestParam(required = false) String order,@ModelAttribute("session") SessionVo sessionVo,ModelAndView modelAndView){
+		
+		DataGrid dataGrid=dataGridService.doFindByTableIdAndSort(tableId);
+		List<SessionModel> result=sessionService.getActiveSessions();
+		
+		Map<String, Map<Object, Object>> fieldCodeTypes = new HashMap<String, Map<Object, Object>>();
+
+		Map<String, String> dataFormats = new HashMap<String, String>();		
+		dataFormats.put("birthday", DateUtil.FORMAT_DATE_YYYY_MM_DD);
+		//创建.xls的文件名
+		String fileName=this.createFileName(FileUtil.EXCEL_EXTENSION);
+		
+		modelAndView.addObject("title", dataGrid.getTitle());
+		
+		Long startTime=System.currentTimeMillis();
+		
+		fileName=excelExportService.export(dataGrid, result, fileName, fieldCodeTypes, dataFormats);
+		
+		logger.info("fileName:{}",fileName);
+		
+		Long costTime=System.currentTimeMillis()-startTime;
+		
+		modelAndView.addObject(FILENAME,fileName);
+		
+		logger.info("export Excel {} cost:{} time,fileName:{}",dataGrid.getTitle(),costTime,fileName);
+		logger.info("out Excel导出");
+		return this.getExcelView(modelAndView);
+	}
+	
 	/***
 	 * 强制用户退出
 	 * @param sessionId 用户会ID
