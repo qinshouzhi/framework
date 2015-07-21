@@ -161,7 +161,7 @@ public class DepartmentServiceImpl extends AbstractService implements
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		List<Department> departments = departmentDao.query(hql, params);
-
+		
 		return departments;
 	}
 
@@ -221,6 +221,7 @@ public class DepartmentServiceImpl extends AbstractService implements
 		properties.add("description");
 		properties.add("departmentNo");
 		properties.add("departments");
+		properties.add("editable");
 		return JSONParser.toJSONString(departments, properties);
 	}
 

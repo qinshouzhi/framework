@@ -123,19 +123,6 @@
 							<th data-field="width" style="width:50px;" >
 								宽度
 							</th>
-							<th data-field="sortable" style="width:30px;"  data-formatter="formatterSortable">
-								排序
-							</th>								
-							<th data-field="order" style="width:30px;">
-								方向
-							</th>
-							<th data-field="headerAlign" style="width:40px;">
-								标题对齐
-							</th>
-							
-							<th data-field="checkbox" style="width:40px;" data-formatter="formatterSortable">
-								显示BOX
-							</th>
 						</tr>
 					</thead>
 				</table>
@@ -145,8 +132,8 @@
 </div>
 <!-- END PAGE CONTENT INNER -->
 <!--Dialog Start -->
-<div class="modal fade bs-modal-lg " id="basic" tabindex="-1" role="basic" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
+<div class="modal fade " id="basic" tabindex="-1" role="basic" aria-hidden="true">
+	<div class="modal-dialog">
 		<div class="modal-content ">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -160,10 +147,10 @@
 										<input type="hidden" id='id' name='id' value="">
 										<div class="form-body">
 											<div class="form-group">
-												<label class="col-md-2 control-label">
+												<label class="col-md-3 control-label">
 													 表格类型
 												</label>
-												<div class="col-md-4">
+												<div class="col-md-5">
 													 <select  id="dataGridListType"   name="type" 
 													 	placeholder="<@spring.message "sys.datacolumn.query.datagrid.missing.message"/>..."  
 													 	class="lion-combo form-control input-medium select2" 
@@ -172,10 +159,13 @@
 													 	data-URL="${base}/system/code/combox.json?nameEn=datagrid_type">
 													 </select>
 												</div>
-												<label class="col-md-2 control-label">
+												
+											</div>
+											<div class="form-group">
+												<label class="col-md-3 control-label">
 													 表格名称
 												</label>
-												<div class="col-md-4">
+												<div class="col-md-5">
 													 <select  id="dataGridList"   name="dataGridId" 
 														placeholder="<@spring.message "sys.datacolumn.query.datagrid.missing.message"/>..."  
 														class="lion-combo input-medium form-control select2" 
@@ -186,91 +176,52 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-md-2 control-label">
+												<label class="col-md-3 control-label">
 													<@spring.message "sys.datacolumn.form.field.text"/>
 												</label>
-												<div class="col-md-4">
+												<div class="col-md-5">
 													<div class="input-group">
 														<input type="text"  name="field"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.field.missing.message"/>" size="30"/>
 													</div>
 												</div>
-												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.name.text"/></label>
-												<div class="col-md-4">
+											</div>								 
+											<div class="form-group">
+												<label class="col-md-3 control-label">
+													<@spring.message "sys.datacolumn.form.name.text"/>
+												</label>
+												<div class="col-md-5">
 													<div class="input-group">
 														<input type="text"  id="name" name="name" maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.name.missing.message"/>" size="30"/>
 													</div>
-												</div>									
-											</div>								 
-											<div class="form-group">
-												<label class="col-md-2 control-label">								显示顺序</label>
-												<div class="col-md-1">
-													<div class="input-group">
-														<input type="text"  id="showOrder" name="showOrder" maxlength="100" class="form-control input-xsmall" placeholder="顺序" size="30"/>
-													</div>
-												</div>
-												<label class="col-md-1 control-label"><@spring.message "sys.datacolumn.form.width.text"/></label>
-												<div class="col-md-2">
-													<div class="input-group">
-														<input type="text"  name="width"  maxlength="100" class="form-control input-xsmall" placeholder="<@spring.message "sys.datacolumn.form.width.missing.message"/>" size="30"/>
-													</div>
-												</div>
-												<label class="col-md-1 control-label"><@spring.message "sys.datacolumn.form.rowspan.text"/></label>
-												<div class="col-md-2">
-													<div class="input-group">
-														<input type="text"  id="rowspan" name="rowspan" maxlength="100" class="form-control input-xsmall" placeholder="<@spring.message "sys.datacolumn.form.rowspan.missing.message"/>" size="30"/>
-													</div>
-												</div>
-												<label class="col-md-1 control-label"><@spring.message "sys.datacolumn.form.colspan.text"/></label>
-												<div class="col-md-2">
-													<div class="input-group">
-														<input type="text"  name="colspan"  maxlength="100" class="form-control input-xsmall" placeholder="<@spring.message "sys.datacolumn.form.colspan.missing.message"/>" size="30"/>
-													</div>
-												</div>			
+												</div>		
 											</div>
 											<div class="form-group">
-
-												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.formatter.text"/></label>
-												<div class="col-md-4">
+												<label class="col-md-3 control-label">
+													显示顺序
+												</label>
+												<div class="col-md-5">
 													<div class="input-group">
-														<input type="text" name="formatter" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.formatter.missing.message"/>" maxlength="255" size="30"/>
-													</div>
-												</div>	
-											</div>	
-											<div class="form-group">										
-												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.styler.text"/></label>
-												<div class="col-md-4">
-													<div class="input-group">
-														<input type="text"  name="styler"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.styler.missing.message"/>" size="30"/>
+														<input type="text"  id="showOrder" name="showOrder" maxlength="100" class="form-control" placeholder="请输入顺序" size="30"/>
 													</div>
 												</div>
-												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.editor.text"/></label>
-												<div class="col-md-4">
-													<div class="input-group">
-														<input type="text" name="editor" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.editor.missing.message"/>" maxlength="255" size="30"/>
-													</div>
-												</div>
-											</div>		
+												
+											</div>
 											<div class="form-group">
-												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.headerAlign.text"/></label>
-												<div class="col-md-4">
+												<label class="col-md-3 control-label">
+													<@spring.message "sys.datacolumn.form.width.text"/>
+												</label>
+												<div class="col-md-5">
 													<div class="input-group">
-														<label class="radio-inline">
-															<input type="radio" name="headerAlign" id="headerAlign0" value="left" checked>
-															left
-														</label>
-														<label class="radio-inline">
-															<input type="radio" name="headerAlign" id="headerAlign1" value="center">
-															 center
-													    </label>
-														<label class="radio-inline">
-															<input type="radio" name="headerAlign" id="headerAlign2" value="right">
-															 right
-													    </label>
+														<input type="text"  name="width"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.datacolumn.form.width.missing.message"/>" size="30"/>
 													</div>
 												</div>
-												<label class="col-md-2 control-label"><@spring.message "sys.datacolumn.form.align.text"/></label>
-												<div class="col-md-4">
-													<div class="input-group">
+											</div>
+											<div class="form-group">
+												<label class="col-md-3 control-label">
+													<@spring.message "sys.datacolumn.form.align.text"/>
+												</label>
+												<div class="col-md-9">
+													<div class="input-group radio-list">
 														<label class="radio-inline">
 															<input type="radio" name="align" id="align0" value="left" checked>
 															left
@@ -286,35 +237,6 @@
 													</div>
 												</div>
 											</div>										 
-											<div class="form-group">
-												<div class="col-md-3 control-label">
-													<@spring.message "sys.datacolumn.form.hidden.text"/>
-													<input type="checkbox" class="form-control"  name="hidden" checked="true" />						 
-												</div>
-												<div class="col-md-3 control-label">
-													<div class="input-group">
-														<@spring.message "sys.datacolumn.form.checkbox.text"/>
-														<input type="checkbox" class="form-control"  name="checkbox" checked="true" />						 
-													</div>
-												</div>
-												<div class="col-md-2 control-label">
-													<@spring.message "sys.datacolumn.form.sortable.text"/>
-													<input type="checkbox" class="form-control"  name="sortable" checked="true" />
-												</div>
-												<label class="col-md-1 control-label"><@spring.message "sys.datacolumn.form.order.text"/></label>
-												<div class="col-md-3">
-													<div class="input-group">
-														<label class="radio-inline">
-															<input type="radio" name="order" id="order0" value="asc" checked>
-															asc
-														</label>
-														<label class="radio-inline">
-															<input type="radio" name="order" id="order1" value="desc">
-															 desc
-													    </label>
-													</div>
-												</div>
-											</div>
 										</div>
 									</form>
 									<!-- END FORM-->

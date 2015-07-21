@@ -89,9 +89,9 @@
 				 		<th field="parentDepartmentId"  width="10" align="center" halign="center"sortable="true"order="asc"hidden="true">parentDepartmentId</th>
 				 		<th field="nameEn"  width="80" align="left" halign="left"sortable="true"order="asc">部门名称(英文)</th>
 				 		<th field="nameZh"  width="80" align="left" halign="left"sortable="true"order="asc">部门名称(中文)</th>
-				 		<th field="departmentNo"  width="80" align="center" halign="center"sortable="true"order="asc">部门编号</th>
-				 		<th field="description"  width="120" align="left" halign="left"sortable="true"order="asc">部门描述</th>
-				 		<th field="editable"  width="20" align="center" halign="center"sortable="true"order="asc"formatter="formatterEidtable">可编辑</th>
+				 		<th field="departmentNo"  width="80" align="center" halign="center" sortable="true" order="asc">部门编号</th>
+				 		<th field="description"  width="120" align="left" halign="left" sortable="true" order="asc">部门描述</th>
+				 		<th field="editable"  width="20" align="center" halign="center" sortable="true" order="asc" formatter="formatterEidtable">可编辑</th>
 					</tr>
 				</thead>
 			</table>
