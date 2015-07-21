@@ -39,6 +39,7 @@ $(function () {
 	    }
 	    addForm.reset();
 	    addDialog.find('.modal-header h4 span').text('编辑图标');
+	    $('#iconType').combo('val',[row.iconType]); 
 	    addDialog.modal('toggle');
 	    addForm.fill(row);
     });
@@ -134,10 +135,6 @@ handleVForm=function(vForm,submitCallBackfn){
 	            required:'请输入图标类名',
 	            rangelength:jQuery.validator.format('图标类名长度为{0}和{1}字符之间'),
 	            remote:'该图标类名已存在，请输入其它名称'
-        	},
-        	iconImage:{
-	            required:'请输入图标图片路径',
-	            rangelength:jQuery.validator.format('图标图片路径长度为{0}和{1}字符之间')
         	}
         },
         rules: {
@@ -165,9 +162,6 @@ handleVForm=function(vForm,submitCallBackfn){
                        }
                     }
              }
-            },
-            iconImage: {
-                rangelength:[1,128]
             }
         },
         invalidHandler: function (event, validator) {             
@@ -230,7 +224,6 @@ function formatterEidtable(data,type,full) {
 }
 //显示class图标
 function formatterIconI(data,type,row){
-  console.dir(type);
   return '<i class="'+data+'"></i>';
 }
 
