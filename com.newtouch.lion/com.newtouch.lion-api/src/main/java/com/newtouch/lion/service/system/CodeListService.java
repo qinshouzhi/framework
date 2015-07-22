@@ -64,7 +64,7 @@ public interface CodeListService {
 
 	/** 更新 */
 	public CodeList doUpdateObj(CodeList obj);
-
+	
 	/** 通用类型编码查询，并返回分页对象 */
 	public PageResult<CodeList> doFindByCriteria(QueryCriteria criteria);
 

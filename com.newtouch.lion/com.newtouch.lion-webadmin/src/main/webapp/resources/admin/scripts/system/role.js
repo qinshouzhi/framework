@@ -320,7 +320,7 @@ function successEditFrm(result,args){
         addDialog.modal('toggle');
         roledg.datagrids('reload');
     },
-    msg:'添加角色未成功'
+    msg:'编辑角色未成功'
   });
 }
 

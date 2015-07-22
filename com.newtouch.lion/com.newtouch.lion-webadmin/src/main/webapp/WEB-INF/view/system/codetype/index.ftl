@@ -47,14 +47,15 @@
 					<label class="control-label col-md-2" for="nameZh" >
 						<@spring.message "sys.codeType.form.namezh.text"/>
 					</label>
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="<@spring.message "sys.codeType.form.namezh.missing.message"/>"/>					
 					</div>
 					<label class="control-label col-md-2" for="type" >
 						<@spring.message "sys.codeType.query.type.text"/>
 					</label>
 					<div class="col-md-3">					  
-						 <select  id="idCodeTypeList"  name="type" placeholder="<@spring.message "sys.codeType.form.type.missing.message"/>..."  class="lion-combo form-control select2  " data-valueField='codeValue'  data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=codeTypes">
+						 <select  id="idCodeTypeList"  name="type" placeholder="<@spring.message "sys.codeType.form.type.missing.message"/>..."  class="lion-combo form-control select2  " data-valueField='codeValue'  data-textField='nameZh' 
+						 data-URL="${base}/system/code/combox.htm?nameEn=codeTypes">
 						</select>	
 					</div>
 					<div class="col-md-2">

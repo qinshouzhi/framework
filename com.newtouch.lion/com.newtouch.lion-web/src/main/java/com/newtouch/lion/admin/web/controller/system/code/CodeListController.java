@@ -106,7 +106,7 @@ public class CodeListController extends AbstractController{
 	@RequestMapping(value = "edit")
 	@ResponseBody
 	public ModelAndView edit(
-			@Valid @ModelAttribute("codeListVo") CodeListVo codeListVo,
+			@Valid @ModelAttribute("codeList") CodeListVo codeListVo,
 			Errors errors, ModelAndView modelAndView) {
 		modelAndView=this.getJsonView(modelAndView);
 		if (!errors.hasErrors() && codeListVo.getId() == null) {
@@ -129,7 +129,6 @@ public class CodeListController extends AbstractController{
 			modelAndView.addObject(BindMessage.ERRORS_MODEL_KEY, errors);
 			return modelAndView;
 		}
-
 		BeanUtils.copyProperties(codeListVo, codeList);
 		codeListService.doUpdateObj(codeList);
 

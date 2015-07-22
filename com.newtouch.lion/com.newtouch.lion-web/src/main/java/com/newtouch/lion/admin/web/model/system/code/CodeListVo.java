@@ -49,7 +49,7 @@ public class CodeListVo implements Serializable {
 	private Long codeTypeId;
 
 	/** @Fileds editable 是否可编辑 */
-	private Boolean editable;
+	private Boolean editable=Boolean.FALSE;
 
 	/**
 	 * @Fields nameEn：英文名称

@@ -2,10 +2,18 @@ var $sessiontb=$('#sys_session_tb');
 $(function () {
 	//默认加载函数
 	lion.web.AppInit();
+	var queryForm=$('#queryform');
 	 //刷新
 	 $('#btnRefresh').on('click',function(){
 		 $sessiontb.datagrids('reload'); 
 	 });
+	//导出Excel
+	$('#btnExport').on('click',function(){
+		var params=queryForm.serialize(),
+		   dgtableId=$sessiontb.attr('id');
+		   lion.web.exportfn({url:'export.json',data:params,tableId:dgtableId});
+		   return;
+	});
 	//选择DataGrid单行
 	function getSelectedRow(){return $sessiontb.datagrids('getSelected');}
 	//强制用户退出

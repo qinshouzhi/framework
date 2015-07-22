@@ -46,7 +46,7 @@
 		<div class="row">
 			<div class="col-md-12 margin-bottom-10">
 				<form id="queryform" class="form-horizontal">
-					<label class="control-label col-md-1" for="nameZh" >名称</label>
+					<label class="control-label col-md-2" for="nameZh" >名称(中文)</label>
 					<div class="col-md-2">
 						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="请输入参数名称"/>					
 					</div>
@@ -57,7 +57,7 @@
 						 	data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=SystemParamter">
 						 </select>
 					</div>
-					<div class="col-md-3 ">
+					<div class="col-md-1 ">
 						<a href="javascript:void(0)" id="btnQuery" class="btn blue"><i class="fa fa-search"></i> 查 询 </a>
 					</div>
 				</form>
@@ -142,7 +142,7 @@
 													<label class="col-md-3 control-label">参数名称(英文)</label>
 													<div class="col-md-5">
 														<div class="input-group">
-															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入参数名称（中文）" size="30"/>
+															<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入参数名称（英文）" size="30"/>
 														</div>
 													</div>
 												</div>
