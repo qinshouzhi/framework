@@ -58,7 +58,7 @@
 					<div class="col-md-3">
 						<select  id="iconTypeList" name="iconType"  placeholder="<@spring.message "sys.icon.form.class.missing.message"/>..."  
 						 	class="lion-combo form-control select2" data-valueField='codeValue' 
-						 	data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=ICON_TYPE">
+						 	data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=IconType">
 						</select>
 					</div>
 					<div class="col-md-2">
@@ -101,9 +101,6 @@
 							<th data-field="iconClass" style="width:100px;"  data-formatter="formatterIconI">
 							 	图标类名
 							</th>
-							<th data-field="iconImage" style="width:100px;"  data-formatter="formatterImage">
-								图标图片
-							</th>
 							<th data-field="createdDate" style="width:100px;">
 								创建时间
 							</th>
@@ -145,7 +142,7 @@
 									<div class="col-md-5">
 										 <select  id="iconType" name="iconType"  placeholder="<@spring.message "sys.icon.form.class.missing.message"/>..."  
 										 	class="lion-combo form-control select2" data-valueField='codeValue' 
-										 	data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=ICON_TYPE">
+										 	data-textField='nameZh' data-URL="${base}/system/code/combox.htm?nameEn=IconType">
 										</select>
 									</div>
 								</div>
@@ -156,16 +153,6 @@
 									<div class="col-md-5">
 										<div class="input-group">
 											<input type="text"  id="iconClass" name="iconClass" maxlength="100" class="form-control" placeholder="<@spring.message "sys.icon.form.class.missing.message"/>" maxlength="255" size="30"/>
-										</div>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-md-3 control-label">
-										<@spring.message "sys.icon.form.image.text"/>
-									</label>
-									<div class="col-md-5">
-										<div class="input-group">
-											<input type="text" id="iconImage" name="iconImage" class="form-control" placeholder="<@spring.message "sys.icon.form.image.missing.message"/>" maxlength="255" size="30"/>
 										</div>
 									</div>
 								</div>
