@@ -49,7 +49,7 @@
 					<label class="control-label col-md-2" for="nameZh" >
 						<@spring.message "sys.codeList.query.namezh.text"/>
 					</label>
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="<@spring.message "sys.codeList.query.namezh.missing.message"/>"/>					
 					</div>
 					<label class="control-label col-md-2" for="type" >
@@ -182,7 +182,7 @@
 													<label class="col-md-3 control-label"><@spring.message "sys.codeList.form.editable.text"/></label>
 													<div class="col-md-5 control-label">
 														<div class="input-group">
-															<input type="checkbox" class="form-control "  name="editable" checked="true" />
+															<input type="checkbox" class="form-control" name="editable" checked="true" value="1"/>
 														</div>
 													</div>
 												</div>

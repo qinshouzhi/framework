@@ -5,6 +5,7 @@
 * $id: SessionVo.java 9552 2015年2月27日 下午5:37:54 WangLijun$
 */
 package com.newtouch.lion.admin.web.model.session; 
+
 /**
  * <p>
  * Title: Shiro Session VO
@@ -23,7 +24,7 @@ package com.newtouch.lion.admin.web.model.session;
  * @version 1.0
  */
 public class SessionVo {
-	
+	/**会话ID*/
 	private String id;
 	
 	public SessionVo() {
@@ -43,8 +44,7 @@ public class SessionVo {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
-	
+
 }
 
 	

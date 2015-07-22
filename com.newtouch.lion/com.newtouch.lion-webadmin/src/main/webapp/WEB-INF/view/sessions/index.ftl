@@ -42,17 +42,28 @@
 <div class="portlet light">
 	<div class="portlet-body">
 		<div class="row">
-			<div class="col-md-12 margin-bottom-10">				 
+			<div class="col-md-12 margin-bottom-10">	
+				<form id="queryform" class="form-horizontal">
+					<div class="col-md-12 margin-bottom-5" id="toolbar">
+						<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue">
+						<i class="fa fa-refresh"></i><@spring.message "common.toolbar.btn.reload.text"/> 
+						</a>				
+						<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green">
+						<i class="fa  fa-file-excel-o"></i><@spring.message "common.toolbar.btn.export.text"/>
+						</a>
+						<a id="btnUserExit" class="btn btn-sm red" ><i class="fa fa-plus"></i> 强制退出 </a>
+					</div>
+				</form>			 
 			</div>
 		
-			<div class="col-md-12 margin-bottom-5" id="toolbar">
+			<!--<div class="col-md-12 margin-bottom-5" id="toolbar">
 				<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue">
 				<i class="fa fa-refresh"></i><@spring.message "common.toolbar.btn.reload.text"/> 
 				</a>				
 				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green">
 				<i class="fa  fa-file-excel-o"></i> Excel </a>
 				<a id="btnUserExit" class="btn btn-sm red" ><i class="fa fa-plus"></i> 强制退出 </a>
-			</div>
+			</div>-->
 			<div class="col-md-12">
 				  <!---<@lion.datagrids name="sys_parameter_lists_tb" tableClass="easyui-datagrid" toolbar=""  load="true" url="${base}/system/parameter/list.json" dataOptions="" style="height:400px;"/>-->
 				  <table class="lion-datagrids table table-striped table-bordered table-hover" id="sys_session_tb" data-singleselect="true" data-sort="false" data-loadUrl="${base}/sessions/actives.json" data-checkbox="true"  data-paginate="false" width="100%">
