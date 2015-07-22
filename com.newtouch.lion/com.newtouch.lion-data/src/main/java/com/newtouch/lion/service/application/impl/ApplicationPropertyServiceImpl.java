@@ -69,7 +69,6 @@ public class ApplicationPropertyServiceImpl implements
 	@Override
 	public PageResult<ApplicationProperty> doFindByCriteria(
 			QueryCriteria criteria) {
-		// TODO Auto-generated method stub
 		String queryEntry = " from ApplicationProperty ";
 
 		String[] whereBodies = {" tableId  like :tableId","appId like :appId","value like :value"};
