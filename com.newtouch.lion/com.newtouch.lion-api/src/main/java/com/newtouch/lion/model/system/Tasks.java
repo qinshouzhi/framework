@@ -19,6 +19,8 @@ public class Tasks extends VersionEntity<Long> {
 	private String methodName;
 	/** 是否启动  */
 	private Integer isStart;
+	/**执行时间*/
+	private Integer executeTime;
 	/** discription */
 	private String description;
 	@Override
@@ -61,6 +63,13 @@ public class Tasks extends VersionEntity<Long> {
 	}
 	public void setIsStart(Integer isStart) {
 		this.isStart = isStart;
+	}
+	
+	public Integer getExecuteTime() {
+		return executeTime;
+	}
+	public void setExecuteTime(Integer executeTime) {
+		this.executeTime = executeTime;
 	}
 	public void setIsStart(int isStart) {
 		this.isStart = isStart;
