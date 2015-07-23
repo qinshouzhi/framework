@@ -6,9 +6,6 @@
 */
 package com.newtouch.lion.zookeeper.model; 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.NodeCache;
@@ -134,38 +131,6 @@ public class Subscriber {
 			logger.error(e.getMessage(),e);
 		}
 	}
-	
-	
-	public static void main(String[] args) throws InterruptedException {
-		List<String> serverList = new ArrayList< String >();
-		serverList.add( "127.0.0.1:2181" );
-		serverList.add( "10.232.37.128:2181");
-		serverList.add( "10.232.37.126:2181");
-	 
-			for( String server : serverList ){
-				
-				Subscriber sub = null;
-				try {
-					sub = new Subscriber( server, "/wanglijun/test", 1 );
-					 
-					if( !sub.checkAlive() ){			 
-						logger.info( server + " error" );
-					 
-					}else{
-						logger.info( server + " alive" );
-					}
-					Thread.sleep( 1000 * 5 );
-				} catch ( Exception e ) {
-					logger.error( server + "" + e.getMessage() );
-				}finally{
-					if( null != sub )
-						sub.close();
-				}
-			}
-			Thread.sleep( 5000 );
-		}
-	 
-	
 }
 
 	
