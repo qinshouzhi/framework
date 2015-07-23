@@ -90,7 +90,7 @@
 			</div>
 			<div class="col-md-12">
 			 	 <table class="lion-datagrids table table-striped table-bordered table-hover" 
-				  		 id="datacolumn_tb" data-singleselect="true"
+				  		 id="datagrid_dt" data-singleselect="true"
 				  		 data-loadUrl="${base}/system/datagrid/list.json" data-checkbox="true" data-pageSize="10">
 					<thead>
 						<tr>
