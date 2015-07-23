@@ -141,7 +141,7 @@
 														<label class="col-md-3 control-label">部门名称(英文)</label>
 														<div class="col-md-5">
 															<div class="input-group">
-																<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入部门名称(中文)" size="30" maxlength="128"/>
+																<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入部门名称(英文)" size="30" maxlength="128"/>
 															</div>
 														</div>
 													</div>

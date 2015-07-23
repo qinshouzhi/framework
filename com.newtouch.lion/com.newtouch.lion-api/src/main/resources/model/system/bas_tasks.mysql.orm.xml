@@ -32,6 +32,9 @@
 			<basic name="isStart">
 				<column name="IS_START" length="200" nullable="true"/>
 			</basic>
+			<basic name="executeTime">
+				<column name="EXECUTE_TIME" length="20" nullable="true"/>
+			</basic>
 			<basic name="description">
 				<column name="DESCRIPTION" length="200" nullable="true"/>
 			</basic>

@@ -3,10 +3,6 @@ package com.newtouch.lion.admin.web.model.system.tasks;
 
 public class TasksVo {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7855531416534081758L;
 	
 	public static final  String BEAN_CLASS="beanCLass";
 	/**任务id*/
@@ -23,6 +19,8 @@ public class TasksVo {
 	private String methodName;
 	/** 是否启动  */
 	private Integer isStart;
+	/**执行时间*/
+	private Integer executeTime;
 	/** discription */
 	private String description;
 	
@@ -75,6 +73,12 @@ public class TasksVo {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public Integer getExecuteTime() {
+		return executeTime;
+	}
+	public void setExecuteTime(Integer executeTime) {
+		this.executeTime = executeTime;
 	}
 
 	

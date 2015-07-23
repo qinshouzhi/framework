@@ -109,6 +109,9 @@
 							<th data-field="methodName" style="width:100px;">
 								方法名称
 							</th>
+							<th data-field="executeTime" style="width:100px;">
+								启动时间
+							</th>
 							<th data-field="isStart" style="width:100px;">
 								是否启动
 							</th>
