@@ -54,14 +54,44 @@ public class ExecutorServiceManager {
 	/** Dump zk cluster config info to memeory*/
 	private static ExecutorService zkClusterConfigDumperExecutor;
 	/**实始化线程池*/
-	public static  void init(){
+	private static  void init(){
 		if(null==zooKeeperNodeAliveCheckExecutor){
+			logger.info( "Start init ThreadPoolManager..." );
 			zooKeeperNodeAliveCheckExecutor=Executors.newFixedThreadPool(ZKNODEALIVECHECK_EXECUTOR_SIZE);
 			messageSendExecutor=Executors.newFixedThreadPool(MESSAGESEND_EXECUTOR_SIZE);
 			zkServerStatusCollectorExecutor=Executors.newFixedThreadPool(ZKSERVERSTATUS_COLLECTOR_EXECUTOR_SIZE);
 			zkServerPerformanceCollectorExecutor=Executors.newFixedThreadPool(ZKSERVERPERFORMAN_CECOLLECTOR_EXECUTOR_SIZE);
 			zkClusterConfigDumperExecutor=Executors.newFixedThreadPool(ZKCLUSTERCONFIG_DUMPER_EXECUTOR_SIZE);
 		}
+	}
+	/***
+	 * 添加Zookeeper是否存活的检测
+	 * @param command
+	 */
+	public static  void addJobZooKeeperNodeAliveCheckExecutor(Runnable  command){
+		ExecutorServiceManager.init();
+		ExecutorServiceManager.zooKeeperNodeAliveCheckExecutor.execute(command);
+	}
+	
+	
+	public static  void addJobMessageSendExecutor(Runnable  command){
+		ExecutorServiceManager.init();
+		ExecutorServiceManager.messageSendExecutor.execute(command);
+	}
+	
+	public static void addJobZookeeperServerStatusCollectorExecutor(Runnable command){
+		ExecutorServiceManager.init();
+		ExecutorServiceManager.zkServerStatusCollectorExecutor.execute(command);
+	}
+	
+	public static void addJobServerPerformanceCollectorExecutor(Runnable command){
+		ExecutorServiceManager.init();
+		ExecutorServiceManager.zkServerPerformanceCollectorExecutor.execute(command);
+	}
+	
+	public static void addJobZookeeperClusterConfigDumperExecutor(Runnable command){
+		ExecutorServiceManager.init();
+		ExecutorServiceManager.zkClusterConfigDumperExecutor.execute(command);
 	}
 	
 	
