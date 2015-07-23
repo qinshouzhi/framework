@@ -4,7 +4,7 @@
 *
 * $id: ZeekeeperServerAliveChecking.java 9552 2015年5月29日 下午10:16:15 WangLijun$
 */
-package com.newtouch.lion.zookeeper.task.runable; 
+package com.newtouch.lion.monitor.task.runable; 
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
