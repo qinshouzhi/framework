@@ -1,11 +1,15 @@
+var datagridId='#datagrid_dt';
+var addForm=$('#sysDataGridForm');
+var addDialog=$('#basic');
+var queryForm=$('#queryform');
 $(function() {
 	//默认加载函数
 	lion.web.AppInit();
 	
-	var datagridId='#datagrid_dt';
-	var addForm=$('#sysDataGridForm');
-	var addDialog=$('#basic');
-	var queryForm=$('#queryform');
+	datagridId='#datagrid_dt';
+	addForm=$('#sysDataGridForm');
+	addDialog=$('#basic');
+	queryForm=$('#queryform');
 	
 	handleVForm(addForm,submitForm);
 	//选择DataGrid单行
@@ -15,10 +19,10 @@ $(function() {
 	 * [查询]
 	 */
 	 $('#btnQuery').click(function(){
-		 var params=queryForm.serializeObject();	      
-	      $(datagridId).datagrid({queryParams:params});
+		 $(datagridId).datagrids({querydata:queryForm.serializeObject()});
+	      var queryparam=$(datagridId).datagrids('queryparams'); 
 	      //重新加载数据
-	      dataGridReload(datagridId);
+	      $(datagridId).datagrids('reload');
 	 });
 	 
 	//重新加载DataGrid
@@ -27,11 +31,11 @@ $(function() {
 	  }
 	 //刷新
 	 $('#btnRefresh').on('click',function(){
-		   dataGridReload(datagridId);
+		 $(datagridId).datagrids('reload');
 	 });
 	 //新增
 	 $('#btnAdd').on('click',function(){
-		 addForm.reset();
+		  addForm.reset();
 		  addDialog.find('.modal-header h4 span').text('添加DataGrid');
 		  $('.lion-combo').combo('reloadLi');
 	 });
@@ -46,7 +50,7 @@ $(function() {
 
 	 //编辑
 	 $('#btnEdit').on('click',function(){
-		 var row=getSelectedRow();
+		 var row=$(datagridId).datagrids('getSelected');
 		 if(!row){
 			 lion.util.info('提示','请选择要编辑记录');
 			 return;
@@ -56,11 +60,12 @@ $(function() {
 		 addForm.find('.help-block').remove();
 		 addDialog.find('.modal-header h4').text('编辑DataGrid');
 		 $('#basic').modal('toggle');
+		 $('#codeList').combo('val',[row.type]);
 		 addForm.fill(row);
 	 });
 	 //删除
 	 $('#btnDelete').on('click',function(){
-		 var row=getSelectedRow();
+		 var row=$(datagridId).datagrids('getSelected');
 		 if(!row){
 			 lion.util.info('提示','请选择要删除记录');
 			 return;
@@ -69,7 +74,6 @@ $(function() {
               if(result){            	 
             	  var param={'id':row.id};
                 lion.util.post('delete.json',param,successForDelete,errorRequest);
-            	  //lion.util.success('提示!', '已删除成功');
               }
           }); 
 	 });
@@ -85,8 +89,8 @@ $(function() {
 
 function successForDelete(data,arg){
    if(data!==null&&!(data.hasError)){
+	  $(datagridId).datagrids('reload');
       lion.util.success('提示',data.message);
-      $('#datagrid_dt').datagrid('reload');
    }else if(data!==null&&data.hasError){
       var gmsg='';
       for(var msg in data.errorMessage){
@@ -111,11 +115,10 @@ function submitForm(frm){
 
 //添加后&编辑后提交
 function successAddFrm(data,arg,id){
-  //TODO
   if(data!==null&&!(data.hasError)){
+	$(datagridId).datagrids('reload');
   	lion.util.success('提示',data.message);
   	$('#basic').modal('toggle');
-  	$('#datagrid_dt').datagrid('reload');
   }else if(data!==null&&data.hasError){
   	var gmsg='';
   	for(var msg in data.errorMessage){
@@ -128,6 +131,7 @@ function successAddFrm(data,arg,id){
   }else{
   	lion.util.error('提示','添加DataGrid失败');
   }
+
 }
 //请求失败后信息
 function errorRequest(data,arg){
@@ -156,63 +160,10 @@ handleVForm=function(vForm,submitCallBackfn){
             title:{
               required: '请输入title',
               rangelength: jQuery.validator.format('title长度为{0}和{1}字符之间')
-            },
-            url:{
-              required: '请输入url',
-              rangelength: jQuery.validator.format('url长度为{0}和{1}字符之间')
-            },
-            data:{
-              rangelength: jQuery.validator.format('data长度为{0}和{1}字符之间')
-            },
-            loadMsg:{
-              rangelength: jQuery.validator.format('loadMsg长度为{0}和{1}字符之间')
-            },
-            pagePosition:{
-              required: '请选择pagePosition'
-            },
-            pageNumber:{
-              required: '请输入pageNumber',
-              number: '请输入正确的数字'
-            },
-            pageSize:{
-              required: '请输入pageSize',
-              number: '请输入正确的数字'
-            },
-            pageList:{
-              required: '请选择pageList'
-            },
-            queryParams:{
-              rangelength: jQuery.validator.format('queryParams长度为{0}和{1}字符之间')
-            },
-            sortName:{
-              rangelength: jQuery.validator.format('sortName长度为{0}和{1}字符之间')
-            },
-            sortOrder:{
-              required: '请输入sortOrder',
-              rangelength: jQuery.validator.format('sortOrder长度为{0}和{1}字符之间')
-            },
-            scrollbarSize:{
-              required: '请输入scrollbarSize',
-              number: '请输入正确的数字'
-            },
-            rowStyler:{
-              rangelength: jQuery.validator.format('rowStyler长度为{0}和{1}字符之间')
-            },
-            loader:{
-              rangelength: jQuery.validator.format('loader长度为{0}和{1}字符之间')
-            },
-            loadFilter:{
-              rangelength: jQuery.validator.format('loadFilter长度为{0}和{1}字符之间')
-            },
-            editors:{
-              rangelength: jQuery.validator.format('editors长度为{0}和{1}字符之间')
-            },
-            view:{
-              rangelength: jQuery.validator.format('view长度为{0}和{1}字符之间')
             }
         },
         rules: {
-        	  type: {
+        	type: {
                 required:true
             },
             tableId:{
@@ -226,8 +177,8 @@ handleVForm=function(vForm,submitCallBackfn){
                      nameEn: function() {
                       return $('#name').val();
                      },
-                         id:function(){
-                           var id=($('#id').val());
+                     	tableId:function(){
+                           var id=($('#tableId').val());
                            if(lion.util.isNotEmpty(id)){
                              return id;
                            }
@@ -239,61 +190,6 @@ handleVForm=function(vForm,submitCallBackfn){
             title:{
             	required: true,
             	rangelength: [4,128]
-            },
-            url:{
-            	required: true,
-            	rangelength: [0,256]
-            },
-            data:{
-            	rangelength: [0,512]
-            },
-            loadMsg:{
-            	rangelength: [0,100]
-            },
-            pagePosition:{
-            	required: true,
-            	rangelength: [1,10]
-            },
-            pageNumber:{
-            	required: true,
-            	number: true
-            },
-            pageSize:{
-            	required: true,
-            	number: true
-            },
-            pageList:{
-              required: true,
-              rangelength: [1,50]
-            },
-            queryParams:{
-              rangelength: [1,50]
-            },
-            sortName:{
-              rangelength: [1,50]
-            },
-            sortOrder:{
-              required: true,
-              rangelength: [0,5]
-            },
-            scrollbarSize:{
-              required: true,
-              number: true
-            },
-            rowStyler:{
-              rangelength: [0,100]
-            },
-            loader:{
-              rangelength: [0,100]
-            },
-            loadFilter:{
-              rangelength: [0,100]
-            },
-            editors:{
-              rangelength: [0,100]
-            },
-            view:{
-              rangelength: [0,100]
             }
         },
         invalidHandler: function (event, validator) {             

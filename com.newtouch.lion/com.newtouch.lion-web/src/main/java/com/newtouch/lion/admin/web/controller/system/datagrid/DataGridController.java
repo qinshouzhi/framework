@@ -267,7 +267,7 @@ public class DataGridController extends AbstractController {
 			@RequestParam(required = false) String tableId,@RequestParam(required=false) Long id) {
 		Boolean flag=Boolean.FALSE;
 		
-		if(id==null){
+		if(tableId==null){
 			flag = this.isExistByTableId(tableId)? false : true;
 		}else{
 			DataGrid dataGrid = dataGridService.doGetById(id);
