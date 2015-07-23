@@ -16,11 +16,11 @@
    	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
    	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
    	
-   	<context:component-scan base-package="com.newtouch.watchman" />
+   	<context:component-scan base-package="com.newtouch.lion" />
 	<!-- 加载接口配置文件 -->
 	<context:property-placeholder 	local-override="false" 	file-encoding="UTF-8"  	location="classpath:application-zookeeper.properties"/>
     <!-- Zookeeper Config -->
-    <bean id="zookeeperConfig" class="com.newtouch.watchman.zookeeper.config.ZookeeperConfig">
+    <bean id="zookeeperConfig" class="com.newtouch.lion.zookeeper.config.ZookeeperConfig">
     	  <property name="connectString" value="${zookeeper.address}"/>
     	  <property name="connectionTimeout"  value="${zookeeper.connectiontimeout}"/>
     	  <property name="sessionTimeout" value="${zookeeper.sessiontimeout}"/>
@@ -30,9 +30,9 @@
     	  <property name="maxRetries"  value="${zookeeper.maxretries}"/>
     </bean>
      <!-- Zookeeper 连接监听器 -->
-     <bean  id="zookeeperConnectionStateListener" class="com.newtouch.watchman.zookeeper.listener.ZookeeperConnectionStateListener"/>
+     <bean  id="zookeeperConnectionStateListener" class="com.newtouch.lion.zookeeper.listener.ZookeeperConnectionStateListener"/>
     <!-- Zookeeper Client -->
-    <bean id="zookeeperClient" class="com.newtouch.watchman.zookeeper.client.ZookeeperClient">
+    <bean id="zookeeperClient" class="com.newtouch.lion.zookeeper.client.ZookeeperClient">
     	<property name="config" ref="zookeeperConfig"/>
     	<property name="connectionStateListener"  ref="zookeeperConnectionStateListener"/>
     </bean>
