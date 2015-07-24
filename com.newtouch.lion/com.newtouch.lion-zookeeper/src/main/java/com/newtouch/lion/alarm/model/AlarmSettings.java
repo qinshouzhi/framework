@@ -45,7 +45,7 @@ public class AlarmSettings {
 	/**设置的目录的最大使用率，如果超过这个阈值，会报警。*/
 	private String maxDiskUsage;  
 	/**检查次数*/
-	private   int checkTime;
+	private   int checkTime=2;
 	public AlarmSettings() {
 	}
 

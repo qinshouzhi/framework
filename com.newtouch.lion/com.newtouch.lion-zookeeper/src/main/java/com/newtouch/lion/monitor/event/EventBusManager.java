@@ -12,10 +12,10 @@ import com.newtouch.lion.monitor.task.MonitorInfo;
 
 /**
  * <p>
- * Title: EventBusManger
+ * Title: EventBusManger 管理
  * </p>
  * <p>
- * Description: 
+ * Description: 管理
  * </p>
  * <p>
  * Copyright: Copyright (c) 2015

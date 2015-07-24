@@ -29,7 +29,8 @@ public class MonitorInfo {
 	public static final String ZOOKEEPER_MONITOR_PATH="/alive.check";
 	/**Zookeeper EventBus I*/
 	public static final String ZOOKEEPER_EVENT_BUS_ID="zookeeper.monitor.eventbus";
-	
+	/**两次存活性检查间隔*/
+	public final static int   ALIVE_CHECK_ZOOKEEPER_PER_TIME = 1; 
 	
 	
 }

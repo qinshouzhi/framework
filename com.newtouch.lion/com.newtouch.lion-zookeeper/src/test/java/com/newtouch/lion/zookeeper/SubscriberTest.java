@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Stopwatch;
-import com.newtouch.lion.zookeeper.model.Subscriber;
+import com.newtouch.lion.zookeeper.sub.Subscriber;
 
 /**
  * <p>
