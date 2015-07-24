@@ -19,8 +19,8 @@ import com.newtouch.lion.monitor.task.GlobalInstance;
 import com.newtouch.lion.monitor.task.MonitorInfo;
 import com.newtouch.lion.util.ObjectUtil;
 import com.newtouch.lion.util.ServletUtil;
-import com.newtouch.lion.zookeeper.model.Subscriber;
 import com.newtouch.lion.zookeeper.model.ZooKeeperCluster;
+import com.newtouch.lion.zookeeper.sub.Subscriber;
 
 /**
  * <p>

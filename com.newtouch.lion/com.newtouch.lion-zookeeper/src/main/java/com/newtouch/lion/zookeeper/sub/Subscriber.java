@@ -4,7 +4,7 @@
 *
 * $id: Subscriber.java 9552 2015年7月23日 下午8:54:22 WangLijun$
 */
-package com.newtouch.lion.zookeeper.model; 
+package com.newtouch.lion.zookeeper.sub; 
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.curator.framework.CuratorFramework;
