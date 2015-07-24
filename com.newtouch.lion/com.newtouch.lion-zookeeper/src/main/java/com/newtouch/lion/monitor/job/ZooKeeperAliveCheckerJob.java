@@ -20,10 +20,10 @@ import org.springframework.util.CollectionUtils;
 import com.newtouch.lion.alarm.model.AlarmSettings;
 import com.newtouch.lion.dao.AlarmSettingsDao;
 import com.newtouch.lion.dao.ZookeeperClusterDao;
-import com.newtouch.lion.monitor.task.ExecutorServiceManager;
-import com.newtouch.lion.monitor.task.GlobalInstance;
-import com.newtouch.lion.monitor.task.MonitorInfo;
-import com.newtouch.lion.monitor.task.runable.ZeekeeperServerAliveChecking;
+import com.newtouch.lion.monitor.ExecutorServiceManager;
+import com.newtouch.lion.monitor.GlobalInstance;
+import com.newtouch.lion.monitor.MonitorInfo;
+import com.newtouch.lion.monitor.task.ZeekeeperServerAliveChecking;
 import com.newtouch.lion.zookeeper.model.ZooKeeperCluster;
 
 /**

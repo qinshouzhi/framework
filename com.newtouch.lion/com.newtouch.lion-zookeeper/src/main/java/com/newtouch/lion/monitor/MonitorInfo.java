@@ -4,7 +4,7 @@
 *
 * $id: MonitorParameter.java 9552 2015年7月24日 下午2:44:11 WangLijun$
 */
-package com.newtouch.lion.monitor.task; 
+package com.newtouch.lion.monitor; 
 /**
  * <p>
  * Title: 监控常用属性定义

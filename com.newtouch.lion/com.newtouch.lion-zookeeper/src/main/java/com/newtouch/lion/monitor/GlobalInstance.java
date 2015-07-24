@@ -4,7 +4,7 @@
 *
 * $id: GlobalInstance.java 9552 2015年7月23日 下午8:07:15 WangLijun$
 */
-package com.newtouch.lion.monitor.task; 
+package com.newtouch.lion.monitor; 
 
 import java.sql.Connection;
 import java.util.Map;

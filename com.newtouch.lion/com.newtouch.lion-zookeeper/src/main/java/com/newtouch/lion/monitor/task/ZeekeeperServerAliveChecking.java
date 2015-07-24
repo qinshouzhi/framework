@@ -4,7 +4,7 @@
  *
  * $id: ZeekeeperServerAliveChecking.java 9552 2015年5月29日 下午10:16:15 WangLijun$
  */
-package com.newtouch.lion.monitor.task.runable;
+package com.newtouch.lion.monitor.task;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -14,9 +14,9 @@ import org.springframework.util.CollectionUtils;
 import com.newtouch.lion.alarm.model.AlarmSettings;
 import com.newtouch.lion.message.model.Message;
 import com.newtouch.lion.message.sender.MessageTempletManager;
+import com.newtouch.lion.monitor.GlobalInstance;
+import com.newtouch.lion.monitor.MonitorInfo;
 import com.newtouch.lion.monitor.event.EventBusManager;
-import com.newtouch.lion.monitor.task.GlobalInstance;
-import com.newtouch.lion.monitor.task.MonitorInfo;
 import com.newtouch.lion.util.ObjectUtil;
 import com.newtouch.lion.util.ServletUtil;
 import com.newtouch.lion.zookeeper.model.ZooKeeperCluster;

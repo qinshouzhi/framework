@@ -8,7 +8,7 @@ package com.newtouch.lion.monitor.event;
 
 import com.google.common.eventbus.EventBus;
 import com.newtouch.lion.message.sender.MessageListener;
-import com.newtouch.lion.monitor.task.MonitorInfo;
+import com.newtouch.lion.monitor.MonitorInfo;
 
 /**
  * <p>

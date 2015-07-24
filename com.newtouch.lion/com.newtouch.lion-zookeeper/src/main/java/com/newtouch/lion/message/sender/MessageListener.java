@@ -9,7 +9,7 @@ package com.newtouch.lion.message.sender;
 import com.google.common.eventbus.Subscribe;
 import com.newtouch.lion.message.model.Message;
 import com.newtouch.lion.message.sender.impl.MessageSenderImpl;
-import com.newtouch.lion.monitor.task.ExecutorServiceManager;
+import com.newtouch.lion.monitor.ExecutorServiceManager;
 
 /**
  * <p>

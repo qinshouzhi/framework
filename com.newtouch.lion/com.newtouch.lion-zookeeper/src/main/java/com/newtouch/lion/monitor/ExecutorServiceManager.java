@@ -4,7 +4,7 @@
 *
 * $id: ExecutorServiceManager.java 9552 2015年6月3日 上午11:24:10 WangLijun$
 */
-package com.newtouch.lion.monitor.task; 
+package com.newtouch.lion.monitor; 
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
