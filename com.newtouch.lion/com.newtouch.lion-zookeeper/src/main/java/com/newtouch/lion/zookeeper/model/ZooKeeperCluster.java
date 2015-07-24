@@ -34,7 +34,7 @@ public class ZooKeeperCluster {
 	/**集群描述*/
 	private String description;
 	/**集群地址信息 ip:prot */
-	private List< String > serverList;
+	private List<String> serverList;
 	/***
 	 * 默认地址信息
 	 */

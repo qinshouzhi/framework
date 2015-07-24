@@ -24,17 +24,16 @@ $(function() {
 	 * [查询]
 	 */
 	 $('#btnQuery').click(function(){
-		 var params=queryForm.serializeObject();	
-		 console.dir(params);
-	      $(datagridId).datagrids({queryParams:params});
+		 $(datagridId).datagrids({querydata:queryForm.serializeObject()});
+	      var queryparam=$(datagridId).datagrids('queryparams'); 
 	      //重新加载数据
-	      dataGridReload(datagridId);
+	      $(datagridId).datagrids('reload');
 	 });
 	 
 	
 	 //刷新
 	 $('#btnRefresh').on('click',function(){
-		   dataGridReload(datagridId);
+		 $(datagridId).datagrids('reload');
 	 });
 	 //新增
 	 $('#btnAdd').on('click',function(){
@@ -61,7 +60,7 @@ $(function() {
 		 addForm.find('.form-group').removeClass('has-error');
 		 addForm.find('.help-block').remove();
 		 addDialog.find('.modal-header h4').text('编辑DataColumn');
-		 $('#basic').modal('toggle');
+		 $('#basic').modal('toggle');  
 		 addForm.fill(row);
 	 });
 	 //删除
@@ -108,10 +107,21 @@ function submitForm(frm){
 	var param=frm.serialize(),id=($('#id').val());
   //ID为空时，为添加动作
   if(lion.util.isEmpty(id)){
- 	    lion.util.post('add.json',param,successAddFrm,errorRequest);
+ 	  lion.util.post('add.json',param,successAddFrm,errorRequest);
   }else{
-      lion.util.post('edit.json',param,successAddFrm,errorRequest,param.id);
+      lion.util.post('edit.json',param,successEditFrm,errorRequest,param.id);
   }
+}
+//编辑成功的函数
+function successEditFrm(result,args){
+  lion.web.parsedata({
+    data:result,
+    success:function(){
+        addDialog.modal('toggle');
+        $(datagridId).datagrids('reload');
+    },
+    msg:'编辑DataColumn未成功'
+  });
 }
 
 //添加后&编辑后提交
@@ -119,7 +129,7 @@ function successAddFrm(data,arg,id){
   if(data!==null&&!(data.hasError)){
   	lion.util.success('提示',data.message);
   	$('#basic').modal('toggle');
-  	 $(datagridId).datagrids('reload');
+	  $(datagridId).datagrids('reload');
   }else if(data!==null&&data.hasError){
   	var gmsg='';
   	for(var msg in data.errorMessage){

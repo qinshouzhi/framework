@@ -48,6 +48,18 @@ public class ZookeeperClient {
 		super();
 		//this.initBuilder();
 	}
+	
+	
+	
+	/**
+	 * @param config
+	 */
+	public ZookeeperClient(ZookeeperConfig config) {
+		this.config = config;
+	}
+
+
+
 	/***
 	 * Zookeeper 客户端
 	 * @return
@@ -81,7 +93,7 @@ public class ZookeeperClient {
 		//连接超时时间
 		builder.connectionTimeoutMs(config.getConnectionTimeout());
 		//连接服务器地址
-		builder.connectString(config.getConnectString());		 
+		builder.connectString(config.getConnectString());
 		//连接
 		this.client=builder.build();
 		//添加连接监听器

@@ -673,8 +673,6 @@ public class UserController extends AbstractController {
 
 		PageResult<User> result=this.userService.doFindByCriteria(queryCriteria);
 		Map<String, Map<Object, Object>> fieldDepartment= new HashMap<String, Map<Object, Object>>();
-		
-	 
 		fieldDepartment.put("department",null);
 
 		Map<String, String> dataFormats = new HashMap<String, String>();		

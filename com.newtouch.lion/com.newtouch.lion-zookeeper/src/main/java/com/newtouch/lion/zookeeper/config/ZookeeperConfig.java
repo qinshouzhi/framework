@@ -50,6 +50,23 @@ public class ZookeeperConfig {
 	
 	
 	
+	
+	 
+	
+	
+
+
+	/**
+	 * @param connectString
+	 */
+	public ZookeeperConfig(String connectString) {
+		this.connectString = connectString;
+	}
+
+ 
+
+
+
 	/**
 	 * @param connectString
 	 * @param sessionTimeout

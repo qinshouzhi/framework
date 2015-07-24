@@ -24,6 +24,7 @@ public class AlarmSettings {
 	private String phoneList;
 	/**收件人列表*/
 	private String emailList;
+	
 	private String maxDelayOfCheck;
 	/**最大CPU使用率*/
 	private String maxCpuUsage;
