@@ -43,7 +43,7 @@ public class ZookeeperClusterDaoImpl implements ZookeeperClusterDao{
 		String[] serverListArray = serverListStr.split(",");
 		List<String>  serverList =Arrays.asList(serverListArray);		 
 		List<ZooKeeperCluster> keeperClusters=new ArrayList<ZooKeeperCluster>();
-		keeperClusters.add(new ZooKeeperCluster("1", "lion", "Zookeeper",serverList));
+		keeperClusters.add(new ZooKeeperCluster(1,"lion", "Zookeeper",serverList));
 		return keeperClusters;
 	}
 	

@@ -28,7 +28,7 @@ import java.util.List;
 public class ZooKeeperCluster {
 	
 	/**集群ID*/
-	private String clusterId;
+	private int clusterId;
 	/**集群名称*/
 	private String clusterName;
 	/**集群描述*/
@@ -50,7 +50,7 @@ public class ZooKeeperCluster {
 	 * @param description
 	 * @param serverList
 	 */
-	public ZooKeeperCluster(String clusterId, String clusterName,
+	public ZooKeeperCluster(int clusterId, String clusterName,
 			String description, List<String> serverList) {
 		super();
 		this.clusterId = clusterId;
@@ -64,13 +64,13 @@ public class ZooKeeperCluster {
 	/**
 	 * @return the clusterId
 	 */
-	public String getClusterId() {
+	public int getClusterId() {
 		return clusterId;
 	}
 	/**
 	 * @param clusterId the clusterId to set
 	 */
-	public void setClusterId(String clusterId) {
+	public void setClusterId(int clusterId) {
 		this.clusterId = clusterId;
 	}
 	/**
