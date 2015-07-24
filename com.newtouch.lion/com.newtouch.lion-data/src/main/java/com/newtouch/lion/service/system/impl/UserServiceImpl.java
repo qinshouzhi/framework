@@ -639,14 +639,14 @@ public class UserServiceImpl extends AbstractService implements UserService {
 		int pageSize = criteria.getPageSize();
 
 		int startIndex = criteria.getStartIndex();
-
-		PageResult<User> pageResult = this.userDao.query(hql,
-				HqlUtils.generateCountHql(hql, null), params, startIndex,
+		System.out.println("11111111111111"+pageSize+"//"+startIndex);
+		PageResult<User> pageResult = this.userDao.query(hql, 
+				HqlUtils.generateCountHql(hql, null), params, startIndex, 
 				pageSize);
-
+		System.out.println("222222222222222222222"+pageResult);
 		return pageResult;
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
