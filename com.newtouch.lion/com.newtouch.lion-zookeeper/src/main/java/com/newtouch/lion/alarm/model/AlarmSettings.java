@@ -24,7 +24,7 @@ public class AlarmSettings {
 	private String phoneList;
 	/**收件人列表*/
 	private String emailList;
-	
+	/**检查等待时间*/
 	private String maxDelayOfCheck;
 	/**最大CPU使用率*/
 	private String maxCpuUsage;
@@ -44,7 +44,8 @@ public class AlarmSettings {
 	private String dataLogDir;
 	/**设置的目录的最大使用率，如果超过这个阈值，会报警。*/
 	private String maxDiskUsage;  
-
+	/**检查次数*/
+	private   int checkTime;
 	public AlarmSettings() {
 	}
 
@@ -190,5 +191,22 @@ public class AlarmSettings {
 				+ maxDelayOfCheck + ", maxCpuUsage=" + maxCpuUsage
 				+ ", maxMemoryUsage=" + maxMemoryUsage + ", maxLoad=" + maxLoad;
 	}
+
+	/**
+	 * @return the checkTime
+	 */
+	public   int getCheckTime() {
+		return checkTime;
+	}
+
+	/**
+	 * @param checkTime the checkTime to set
+	 */
+	public   void setCheckTime(int checkTime) {
+		 	this.checkTime=checkTime;
+	}
+	
+	
+	
 
 }

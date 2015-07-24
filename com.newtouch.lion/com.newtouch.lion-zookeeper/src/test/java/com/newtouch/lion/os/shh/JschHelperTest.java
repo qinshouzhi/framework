@@ -4,7 +4,7 @@
 *
 * $id: JschHelper.java 9552 2015年5月27日 下午3:52:30 WangLijun$
 */
-package com.newtouch.watchman.os.shh; 
+package com.newtouch.lion.os.shh; 
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

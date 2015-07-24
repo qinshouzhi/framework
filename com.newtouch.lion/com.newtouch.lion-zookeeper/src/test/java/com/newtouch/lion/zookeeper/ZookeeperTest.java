@@ -4,7 +4,7 @@
 *
 * $id: ZookeeperTest.java 9552 2015年5月25日 下午4:57:49 WangLijun$
 */
-package com.newtouch.watchman.zookeeper; 
+package com.newtouch.lion.zookeeper; 
 
 import java.io.IOException;
 

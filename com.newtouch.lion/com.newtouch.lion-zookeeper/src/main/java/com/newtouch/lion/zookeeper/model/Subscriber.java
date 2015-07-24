@@ -40,23 +40,22 @@ public class Subscriber {
 	
 	/**日志*/
 	private static final Logger logger=LoggerFactory.getLogger(Subscriber.class);
-	
+	/**检查OK的次数*/
 	private int okTimes = 0;
 	/**Zookeeper服务器地址*/
 	private String serverList;
 	/**路径*/
 	private String path;
 	/**命名空间*/
-	private String nameSpace;
-	
+	private String nameSpace;	
 	private CuratorFramework client= null;
-	
+	/**重试的时间,默认为:1秒*/
 	private int maxDelaySecsForNotify=1;
-	
+	/**最后更新字符串*/
 	private  String lastedUpdateToServer =StringUtils.EMPTY;
-	
+	/**监控是否节点变化*/
 	private NodeCache cache;
-	
+	/**检查次数，默认为：3*/
 	private int checkAliveTime=3;
 
 	/***
@@ -73,10 +72,12 @@ public class Subscriber {
 		this.nameSpace=nameSpace;
 		this.checkAliveTime=checkAliveTime;
 		//创建Zookeeper Client连接
-		ZookeeperConfig config=new ZookeeperConfig(this.serverList,500,500,false,500,1,this.nameSpace);
+		ZookeeperConfig config=new ZookeeperConfig(this.serverList,500,500,false,1,0,this.nameSpace);
 		this.client=new ZookeeperClient(config).builder();
 		this.monitorData(path);
 	}
+	
+	 
 	
 	//监控数据变化
 	private void monitorData(String path){		
@@ -112,7 +113,7 @@ public class Subscriber {
 			}
 		}
 		
-		return this.okTimes==3;
+		return this.okTimes==this.checkAliveTime;
 	}
 	
 	//关闭

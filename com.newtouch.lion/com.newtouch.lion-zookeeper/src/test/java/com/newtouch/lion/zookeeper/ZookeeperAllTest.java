@@ -4,7 +4,7 @@
 *
 * $id: ZookeeperAllTest.java 9552 2015年5月25日 下午3:39:32 WangLijun$
 */
-package com.newtouch.watchman.zookeeper; 
+package com.newtouch.lion.zookeeper; 
 
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

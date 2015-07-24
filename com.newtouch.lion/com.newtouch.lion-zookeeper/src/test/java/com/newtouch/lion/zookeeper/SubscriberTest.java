@@ -4,7 +4,7 @@
 *
 * $id: Subscriber.java 9552 2015年7月24日 上午12:40:23 WangLijun$
 */
-package com.newtouch.watchman.zookeeper; 
+package com.newtouch.lion.zookeeper; 
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,22 +40,26 @@ public class SubscriberTest {
 	
 	public static void main(String[] args) throws InterruptedException {
 		List<String> serverList = new ArrayList< String >();
+		//serverList.add( "192.168.205.36:2181" );
 		serverList.add( "127.0.0.1:2181" );
 		//serverList.add( "10.232.37.128:2181");
-		//serverList.add( "10.232.37.126:2181");
+		serverList.add( "10.232.37.126:2181");
 		Stopwatch stopwatch=new Stopwatch();
 		stopwatch.start();
 		for( String server : serverList ){
 			
 			Subscriber sub = null;
 			try {
-				sub = new Subscriber( server, "/wanglijun/test","zookeeper",1,1);
+				sub = new Subscriber( server, "/wanglijun/test","zookeeper",1,2);
 				 
-				if( !sub.checkAlive() ){			 
-					logger.info( server + " error" );
-				 
+				if(!sub.checkAlive() ){
+					if(!sub.checkAlive()){
+						logger.info( server + "----no -alive" );
+					}else{
+						logger.info( server + "-----  alive" );
+					}
 				}else{
-					logger.info( server + " alive" );
+					logger.info( server + "-----  alive" );
 				}
 				Thread.sleep( 1000 * 5 );
 			} catch ( Exception e ) {

@@ -4,7 +4,7 @@
 *
 * $id: PerformanceUtil.java 9552 2015年5月28日 上午11:12:52 WangLijun$
 */
-package com.newtouch.watchman.os.shh; 
+package com.newtouch.lion.os.shh; 
 
 import java.util.Map;
 import java.util.Map.Entry;
