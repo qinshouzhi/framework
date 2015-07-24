@@ -40,7 +40,8 @@ $(function () {
       addForm.reset();
       addDialog.find('.modal-header h4 span').text('编辑编码类型');
       addDialog.modal('toggle');
-      $('#codeTypeList').combo('val',[row.type]);
+      $('#dataGridListType').combo('val',[row.type]);
+      $('#dataGridList').combo('val',[row.dataGridId]);
       addForm.fill(row);
     });
 

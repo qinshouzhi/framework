@@ -52,28 +52,28 @@
 			<div class="col-md-12 margin-bottom-10">
 				<form id="queryform" class="form-horizontal">
 					<label class="control-label col-md-1" for="name" >
-						名称
+						列名
 					</label>
 					<div class="col-md-2">
 						<input class="form-control input-small" type="text" size="30" name="name" id="name"  placeholder="<@spring.message "sys.datacolumn.query.name.missing.message"/>"/>					
 					</div>
-					<label class="control-label col-md-2" for="name" >
+					<label class="control-label col-md-2" for="type" >
 						表格类型
 					</label>
 					<div class="col-md-2">
 						<select  id="dataGridListType1"   name="type" 
-							placeholder="<@spring.message "sys.datacolumn.query.datagrid.missing.message"/>..."  
+							placeholder="<@spring.message "sys.datacolumn.query.datagrid.type.missing.message"/>..."  
 							class="lion-combo form-control select2" 
 							data-valueField='codeValue'  
 							data-textField='nameZh' 
 							data-URL="${base}/system/code/combox.json?nameEn=datagrid_type">
 						</select>	
 					</div>
-					<label class="control-label col-md-2" for="name" >
+					<label class="control-label col-md-2" for="dataGridId" >
 						 表格名称
 					</label>
 					<div class="col-md-2">
-						<select  id="dataGridListType2"   name="type" 
+						<select  id="dataGridListType2"   name="dataGridId" 
 							placeholder="<@spring.message "sys.datacolumn.query.datagrid.missing.message"/>..."  
 							class="lion-combo form-control select2" 
 							data-valueField='id'  
@@ -117,11 +117,11 @@
 							<th data-field="align" style="width:30px;">
 								对齐
 							</th>
-							<th data-field="showOrder" style="width:30px;" data-formatter="formatterSortable">
-								顺序
-							</th>						
 							<th data-field="width" style="width:50px;" >
 								宽度
+							</th>
+							<th data-field="showOrder" style="width:30px;" >
+								顺序
 							</th>
 						</tr>
 					</thead>
@@ -152,7 +152,7 @@
 												</label>
 												<div class="col-md-5">
 													 <select  id="dataGridListType"   name="type" 
-													 	placeholder="<@spring.message "sys.datacolumn.query.datagrid.missing.message"/>..."  
+													 	placeholder="<@spring.message "sys.datacolumn.query.datagrid.type.missing.message"/>..."  
 													 	class="lion-combo form-control input-medium select2" 
 													 	data-valueField='codeValue'  
 													 	data-textField='nameZh' 

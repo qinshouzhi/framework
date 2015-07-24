@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,6 +67,7 @@ public class DataColumnController extends AbstractController{
 	private static final String DEFAULT_ORDER_FILED_NAME = "id";
 	/** 首页返回路径 */
 	private static final String INDEX_RETURN = "system/datacolumn/index";
+
 	/** 首页显示列表名称 */
 	@SuppressWarnings("unused")
 	private static final String INDEX_TB = "datacolumn_tb";
@@ -171,7 +173,7 @@ public class DataColumnController extends AbstractController{
 	/** 列表显示 */
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public DataTable<DataColumn> lists(QueryDt query,@ModelAttribute("dataColumn") DataColumnVo dataColumnVo) {
+	public DataTable<DataColumn> lists(QueryDt query,@ModelAttribute("dataColumnVo") DataColumnVo dataColumnVo) {
 		QueryCriteria queryCriteria = new QueryCriteria();
 		// 设置分页 启始页
 		queryCriteria.setStartIndex(query.getPage());
@@ -193,7 +195,7 @@ public class DataColumnController extends AbstractController{
 		if (StringUtils.isNotEmpty(dataColumnVo.getName())) {
 			queryCriteria.addQueryCondition("name", "%"+dataColumnVo.getName()+"%");
 		}
-
+		
 		PageResult<DataColumn> pageResult = dataColumnService.doFindByCriteria(queryCriteria);
 		
 		return pageResult.getDataTable(query.getRequestId());
