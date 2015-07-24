@@ -117,11 +117,11 @@
 							<th data-field="align" style="width:30px;">
 								对齐
 							</th>
-							<th data-field="showOrder" style="width:30px;" data-formatter="formatterSortable">
-								顺序
-							</th>						
 							<th data-field="width" style="width:50px;" >
 								宽度
+							</th>
+							<th data-field="showOrder" style="width:30px;" >
+								顺序
 							</th>
 						</tr>
 					</thead>

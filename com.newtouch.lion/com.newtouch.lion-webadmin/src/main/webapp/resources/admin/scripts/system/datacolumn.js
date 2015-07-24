@@ -1,31 +1,37 @@
+var datagridId='#datacolumn_tb';
+var addForm=$('#sysDataGridForm');
+var addDialog=$('#basic');
+var queryForm=$('#queryform');
 $(function() {
 	//默认加载函数
 	lion.web.AppInit();;
 	
-	var datagridId='#datacolumn_tb';
-	var addForm=$('#sysDataColumnForm');
-	var addDialog=$('#basic');
-	var queryForm=$('#queryform');
+	datagridId='#datacolumn_tb';
+	addForm=$('#sysDataColumnForm');
+	addDialog=$('#basic');
+	queryForm=$('#queryform');
 	
 	handleVForm(addForm,submitForm);
 	//选择DataGrid单行
 	function getSelectedRow(){return $(datagridId).datagrids('getSelected');}
-	 
+	
+	//重新加载DataGrid
+	  function dataGridReload(dataGridId){
+	     $(datagridId).datagrids('reload');
+	  }
 	
 	/**
 	 * [查询]
 	 */
 	 $('#btnQuery').click(function(){
-		 var params=queryForm.serializeObject();	      
-	      $(datagridId).datagrid({queryParams:params});
+		 var params=queryForm.serializeObject();	
+		 console.dir(params);
+	      $(datagridId).datagrids({queryParams:params});
 	      //重新加载数据
 	      dataGridReload(datagridId);
 	 });
 	 
-	//重新加载DataGrid
-	  function dataGridReload(dataGridId){
-	     $(datagridId).datagrid('reload');
-	  }
+	
 	 //刷新
 	 $('#btnRefresh').on('click',function(){
 		   dataGridReload(datagridId);
@@ -69,7 +75,6 @@ $(function() {
               if(result){            	 
             	  var param={'id':row.id};
                 lion.util.post('delete.json',param,successForDelete,errorRequest);
-            	  //lion.util.success('提示!', '已删除成功');
               }
           }); 
 	 });
@@ -86,7 +91,7 @@ $(function() {
 function successForDelete(data,arg){
    if(data!==null&&!(data.hasError)){
       lion.util.success('提示',data.message);
-      $('#datacolumn_tb').datagrid('reload');
+      $(datagridId).datagrids('reload');
    }else if(data!==null&&data.hasError){
       var gmsg='';
       for(var msg in data.errorMessage){
@@ -111,18 +116,17 @@ function submitForm(frm){
 
 //添加后&编辑后提交
 function successAddFrm(data,arg,id){
-  //TODO
   if(data!==null&&!(data.hasError)){
   	lion.util.success('提示',data.message);
   	$('#basic').modal('toggle');
-  	$('#datacolumn_tb').datagrid('reload');
+  	 $(datagridId).datagrids('reload');
   }else if(data!==null&&data.hasError){
   	var gmsg='';
   	for(var msg in data.errorMessage){
   		gmsg+=data.errorMessage[msg];
   	}
   	if(lion.util.isEmpty(gmsg)){
-  		gmsg='添加角色出错';
+  		gmsg='添加DataColumn出错';
   	}
   	lion.util.error('提示',gmsg);
   }else{
@@ -165,22 +169,6 @@ handleVForm=function(vForm,submitCallBackfn){
               required: '请输入width',
               number:'请输入正确的数字'
             },
-            rowspan:{
-              required: '请输入rowspan',
-              number:'请输入正确的数字'
-            },
-            colspan:{
-              required:'请输入colspan',
-              number:'请输入正确的数字'
-            },
-            order:{
-              required: '请输入order',
-              rangelength:jQuery.validator.format('order长度为{0}和{1}字符之间')
-            },
-            headerAlign:{
-              required: '请输入headerAlign',
-              rangelength:jQuery.validator.format('headerAlign长度为{0}和{1}字符之间')
-            },
             align:{
               required: '请输入align',
               rangelength:jQuery.validator.format('align长度为{0}和{1}字符之间')
@@ -218,7 +206,6 @@ handleVForm=function(vForm,submitCallBackfn){
                     },
                     dataGridId:function(){
                       var dataGridId=$('#dataGridList').combo('val');
-                      console.dir(dataGridId);
                       if(lion.util.isNotEmpty(dataGridId)){
                         return dataGridId;
                       }
@@ -230,22 +217,6 @@ handleVForm=function(vForm,submitCallBackfn){
             width:{
             	required: true,
             	number:true
-            },
-            rowspan:{
-            	required: true,
-            	number:true
-            },
-            colspan:{
-            	required: true,
-            	number:true
-            },
-            order:{
-            	required: true,
-            	rangelength:[1,5]
-            },
-            headerAlign:{
-            	required: true,
-            	rangelength:[1,10]
             },
             align:{
             	required: true,

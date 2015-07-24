@@ -171,7 +171,7 @@ public class DataColumnController extends AbstractController{
 	/** 列表显示 */
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public DataTable<DataColumn> lists(QueryDt query,@ModelAttribute("dataColumn") DataColumnVo dataColumnVo) {
+	public DataTable<DataColumn> lists(QueryDt query,@ModelAttribute("dataColumnVo") DataColumnVo dataColumnVo) {
 		QueryCriteria queryCriteria = new QueryCriteria();
 		// 设置分页 启始页
 		queryCriteria.setStartIndex(query.getPage());
