@@ -40,11 +40,14 @@ public class Subscriber {
 	
 	/**日志*/
 	private static final Logger logger=LoggerFactory.getLogger(Subscriber.class);
+	
 	private int okTimes = 0;
-	
+	/**Zookeeper服务器地址*/
 	private String serverList;
-	
+	/**路径*/
 	private String path;
+	/**命名空间*/
+	private String nameSpace;
 	
 	private CuratorFramework client= null;
 	
@@ -53,18 +56,24 @@ public class Subscriber {
 	private  String lastedUpdateToServer =StringUtils.EMPTY;
 	
 	private NodeCache cache;
+	
+	private int checkAliveTime=3;
 
-	/**
+	/***
+	 * 
 	 * @param serverList
-	 * @param path
+	 * @param path 路径
+	 * @param nameSpace　命名空间
 	 * @param maxDelaySecsForNotify
 	 */
-	public Subscriber(String serverList, String path, int maxDelaySecsForNotify) {
+	public Subscriber(String serverList, String path,String nameSpace,int maxDelaySecsForNotify,int checkAliveTime) {
 		this.serverList = serverList;
 		this.path = path;
 		this.maxDelaySecsForNotify=maxDelaySecsForNotify;
+		this.nameSpace=nameSpace;
+		this.checkAliveTime=checkAliveTime;
 		//创建Zookeeper Client连接
-		ZookeeperConfig config=new ZookeeperConfig(this.serverList,500,500,false,10,1,"zookeeper");
+		ZookeeperConfig config=new ZookeeperConfig(this.serverList,500,500,false,500,1,this.nameSpace);
 		this.client=new ZookeeperClient(config).builder();
 		this.monitorData(path);
 	}
@@ -92,7 +101,7 @@ public class Subscriber {
 	//检查是否存活着
 	public boolean checkAlive(){
 		this.createNodeNotExist(this.path);
-		for(int i=0;i<3;i++){
+		for(int i=0;i<this.checkAliveTime;i++){
 			this.lastedUpdateToServer=this.serverList+System.currentTimeMillis();
 			this.updateNodeData(this.lastedUpdateToServer);
 			try {

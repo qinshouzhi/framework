@@ -8,10 +8,12 @@ package com.newtouch.watchman.zookeeper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Stopwatch;
 import com.newtouch.lion.zookeeper.model.Subscriber;
 
 /**
@@ -33,20 +35,21 @@ import com.newtouch.lion.zookeeper.model.Subscriber;
  */
 public class SubscriberTest {
 
-	private static final Logger logger=LoggerFactory.getLogger(Subscriber.class);
+	private static final Logger logger=LoggerFactory.getLogger(SubscriberTest.class);
 	
 	
 	public static void main(String[] args) throws InterruptedException {
 		List<String> serverList = new ArrayList< String >();
 		serverList.add( "127.0.0.1:2181" );
-		serverList.add( "10.232.37.128:2181");
-		serverList.add( "10.232.37.126:2181");
-	 
+		//serverList.add( "10.232.37.128:2181");
+		//serverList.add( "10.232.37.126:2181");
+		Stopwatch stopwatch=new Stopwatch();
+		stopwatch.start();
 		for( String server : serverList ){
 			
 			Subscriber sub = null;
 			try {
-				sub = new Subscriber( server, "/wanglijun/test", 1 );
+				sub = new Subscriber( server, "/wanglijun/test","zookeeper",1,1);
 				 
 				if( !sub.checkAlive() ){			 
 					logger.info( server + " error" );
@@ -62,6 +65,8 @@ public class SubscriberTest {
 					sub.close();
 			}
 		}
+		stopwatch.stop();
+		System.out.println(stopwatch.elapsed(TimeUnit.NANOSECONDS));
 		Thread.sleep( 5000 );
 	}
 	 
