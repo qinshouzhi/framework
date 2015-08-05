@@ -31,6 +31,18 @@ public class MonitorInfo {
 	public static final String ZOOKEEPER_EVENT_BUS_ID="zookeeper.monitor.eventbus";
 	/**两次存活性检查间隔*/
 	public final static int   ALIVE_CHECK_ZOOKEEPER_PER_TIME = 1; 
+	/**用户名*/
+	public final static String OS_USERNAME="root";
+	/**默认密码*/
+	public final static String OS_PASSWORD="newtouch.cn";
+	/**ZK MODE follower*/
+	public final static String ZK_MODE_FOLLOWER="F";
+	/**ZK MODE follower*/
+	public final static String ZK_MODE_STANDALONE="S";
+	/**ZK MODE leader*/
+	public final static String ZK_MODE_LEADER="L";
+	
+	
 	
 	
 }

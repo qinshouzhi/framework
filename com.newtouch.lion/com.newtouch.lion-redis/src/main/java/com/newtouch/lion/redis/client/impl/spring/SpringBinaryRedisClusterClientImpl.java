@@ -73,7 +73,7 @@ public class SpringBinaryRedisClusterClientImpl<T> extends BinaryJedisCluster im
 	@Override
 	public String setObject(String key, Object value) {
  
-		return null;
+		return super.set(key, JSON.toJSONString(value));
 	}
 
 	/* (non-Javadoc)
