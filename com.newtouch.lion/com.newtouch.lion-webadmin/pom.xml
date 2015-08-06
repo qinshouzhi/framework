@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>com.newtouch.lion</groupId>
 		<artifactId>com.newtouch.lion-parent</artifactId>
-		<version>0.1.2-SNAPSHOT</version>
+		<version>1.0</version>
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>com.newtouch.lion-webadmin</artifactId>
 	<name>com.newtouch.lion-webadmin</name>
-	<version>0.1.2-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>war</packaging>
 	<url>http://maven.apache.org</url>
 	<dependencies>
