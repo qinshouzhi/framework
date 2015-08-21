@@ -40,6 +40,7 @@ public interface BaseDao<T extends BaseEntity<PK>,PK> extends Serializable {
 	 * 获得当前事物的session
 	 * @return org.hibernate.Session
 	 */
+	
 	public EntityManager getEntityManager();
 	
 	/***

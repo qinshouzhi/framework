@@ -56,8 +56,14 @@ public abstract class BaseDaoImpl<T extends BaseEntity<PK>, PK> implements BaseD
 	/**日志*/
 	protected final Logger log = LoggerFactory.getLogger(super.getClass());
 	/**entityManager*/
-	@PersistenceContext
+	
 	private EntityManager  entityManager;
+	
+	@PersistenceContext(unitName="entityUnit")
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+
 	/**实体类*/
 	private Class<T> entityClass;
 
@@ -320,6 +326,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity<PK>, PK> implements BaseD
 	@SuppressWarnings({ "unchecked" })
 	public PageResult<T> query(String hql, String countHql,
 			Map<String, ?> params, int offsetIndex, int pageSize) {
+		System.out.println();
 		PageResult<T> pageResult = new PageResult<T>();
 
 		pageResult.setCurrentIndex(offsetIndex);
@@ -335,7 +342,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity<PK>, PK> implements BaseD
 					/ pageSize);
 			pageResult.setCurrentPage((offsetIndex + pageSize) / pageSize);
 		}
-		Query query =this.entityManager.createQuery(hql);
+		Query query =entityManager.createQuery(hql);
 		this.setParams(query, params);
 		query.setFirstResult(offsetIndex);
 		query.setMaxResults(pageSize);
@@ -358,8 +365,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity<PK>, PK> implements BaseD
 	 */
 
 	public Long queryCount(final String countHql, final Map<String, ?> params) {
-
-		Query query = this.entityManager.createQuery(countHql);
+		Query query = entityManager.createQuery(countHql);
 		this.setParams(query, params);
 		return (Long) query.getSingleResult();
 
