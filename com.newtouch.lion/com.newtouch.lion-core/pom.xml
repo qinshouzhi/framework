@@ -10,7 +10,7 @@
 		<version>1.0</version>
 	</parent>
 	<artifactId>com.newtouch.lion-core</artifactId>
-	<version>1.0</version>
+	<version>1.01</version>
 	<name>com.newtouch.lion-core</name>
 	<url>http://maven.apache.org</url>
 	<properties>
