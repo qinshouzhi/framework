@@ -59,4 +59,6 @@ public final class Constants {
 	public static final String DEFLAUT_PASSWORD_KEY="PwdInitialization";
 	/**密码错误最大重试次数，默认为：5*/
 	public static final Integer PASSWORD_RETYR_MAXCOUNT=5;
+	/**冒号:*/
+	public static final String  COLON=":";
 }

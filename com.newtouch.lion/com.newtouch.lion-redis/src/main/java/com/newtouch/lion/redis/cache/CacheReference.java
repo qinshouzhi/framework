@@ -17,9 +17,7 @@ import com.newtouch.lion.redis.cache.api.RedisTypeReference;
 public enum CacheReference implements RedisTypeReference{
     /**默认为空*/
     NONE(null),
-    /**用户分页列表*/
-    
-    ;
+    /**用户分页列表*/;
     
     @SuppressWarnings("rawtypes")
     private TypeReference typeReference;
