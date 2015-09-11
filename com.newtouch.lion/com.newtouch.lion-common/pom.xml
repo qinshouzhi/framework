@@ -35,11 +35,7 @@
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 		<!-- Logger End -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
+ 	
 		<!-- Spring framework Start -->
 		<dependency>
 			<groupId>aopalliance</groupId>

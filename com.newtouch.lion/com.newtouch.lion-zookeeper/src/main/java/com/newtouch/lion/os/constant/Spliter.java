@@ -28,8 +28,6 @@ public  class Spliter {
 	/**逗号:,*/
 	public static final String COMMA=",";
 	/**句号：.*/
-	public static final String PREIOD=".";
-	
+	public static final String PREIOD=".";	
 }
-
 	
