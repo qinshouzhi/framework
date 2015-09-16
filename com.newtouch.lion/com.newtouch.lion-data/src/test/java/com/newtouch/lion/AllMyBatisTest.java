@@ -35,7 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @TransactionConfiguration(defaultRollback = false)
-@ContextConfiguration(locations = { "classpath*:applicationContext.xml" })
+@ContextConfiguration(locations = { "classpath*:applicationContext-mybatistest.xml" })
 public abstract class AllMyBatisTest extends AbstractJUnit4SpringContextTests {
 	/**日志*/
 	protected final Logger logger = LoggerFactory.getLogger(super.getClass());

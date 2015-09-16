@@ -6,6 +6,9 @@
  */
 package com.newtouch.lion.dao.datagrid.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import com.newtouch.lion.dao.datagrid.DataColumnDao;
@@ -38,4 +41,14 @@ public class DataColumnDaoImpl extends BaseDaoImpl<DataColumn,Long> implements
 		 */
 	private static final long serialVersionUID = 6344152760634570667L;
 
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.dao.datagrid.DataColumnDao#doDeleteById(java.lang.Long)
+	 */
+	@Override
+	public int doDeleteById(Long id) {
+		String hql = "delete from DataColumn p where p.id=:id";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
+		return this.updateHQL(hql, params);
+	}
 }

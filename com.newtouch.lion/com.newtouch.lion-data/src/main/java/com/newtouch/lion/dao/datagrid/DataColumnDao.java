@@ -27,5 +27,10 @@ import com.newtouch.lion.model.datagrid.DataColumn;
  * @version 1.0
  */
 public interface DataColumnDao extends BaseDao<DataColumn,Long> {
-
+	/***
+	 * 根据ID删除记录
+	 * @param id
+	 * @return
+	 */
+	public int doDeleteById(Long id);
 }

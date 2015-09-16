@@ -108,10 +108,7 @@ public class DataColumnServiceImpl extends AbstractService implements
 	 */
 	@Override
 	public int doDeleteById(Long id) {
-		String hql = "delete from DataColumn p where p.id=:id";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("id", id);
-		return this.dataColumnDao.updateHQL(hql, params);
+		 return this.doDeleteById(id);
 	}
 
 	/*
@@ -191,9 +188,7 @@ public class DataColumnServiceImpl extends AbstractService implements
 
 		int startIndex = criteria.getStartIndex();
 
-		PageResult<DataColumn> pageResult = this.dataColumnDao.query(hql,
-				HqlUtils.generateCountHql(hql, null), params, startIndex,
-				pageSize);
+		PageResult<DataColumn> pageResult = this.dataColumnDao.query(hql,HqlUtils.generateCountHql(hql, null), params, startIndex,pageSize);
 		for(DataColumn  dataColumn:pageResult.getContent()){
 		    dataColumn.getDataGrid().getTitle();
 		}
@@ -220,7 +215,6 @@ public class DataColumnServiceImpl extends AbstractService implements
 	 */
 	@Override
 	public boolean doIsExistByName(String name) {
-		// TODO Auto-generated method stub
 		Assert.notNull(name);
 		DataColumn dataColumn = this.doFindTypeByName(name);
 		if (dataColumn != null)
@@ -250,7 +244,6 @@ public class DataColumnServiceImpl extends AbstractService implements
 	 */
 	@Override
 	public void doCreate(DataColumn dataColumn) {
-		// TODO Auto-generated method stub
 		Assert.notNull(dataColumn);
 		dataColumnDao.save(dataColumn);
 	}
@@ -260,7 +253,6 @@ public class DataColumnServiceImpl extends AbstractService implements
 	 */
 	@Override
 	public DataColumn doFindTypeByNameandDatagridId(String name,Long datagridId) {
-		// TODO Auto-generated method stub
 		Assert.notNull(name);
 		String hql = "from DataColumn  where name=:name and dataGridId=:datagridId";
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -278,9 +270,7 @@ public class DataColumnServiceImpl extends AbstractService implements
 	 */
 	@Override
 	public boolean doIsExistByNameandDataGridId(String name, Long dataGridId) {
-		// TODO Auto-generated method stub
 		DataColumn dataColumn = this.doFindTypeByNameandDatagridId(name,dataGridId);
-		System.out.println(name+"==============="+dataGridId+"=========="+dataColumn);
 		if (dataColumn != null)
 			return true;
 		return false;
