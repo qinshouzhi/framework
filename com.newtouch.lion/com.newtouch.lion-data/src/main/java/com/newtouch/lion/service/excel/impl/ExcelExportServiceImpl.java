@@ -162,7 +162,7 @@ public class ExcelExportServiceImpl extends ExcelExport<Object>  implements Exce
 			index++;
 			// 遍历集合数据，产生数据行
 			Iterator<?> it = data.iterator();
-			
+			HSSFCellStyle temp=this.workbook.createCellStyle();
 			while (it.hasNext()) {
 				index++;
 				row = sheet.createRow(index);
@@ -178,7 +178,7 @@ public class ExcelExportServiceImpl extends ExcelExport<Object>  implements Exce
 					CellDataType dataType=CellDataType.STRING;
 					
 					if(!CollectionUtils.isEmpty(codeTypes)&&codeTypes.containsKey(fieldName)){
-						textValue=this.getCellValueForCodeList(fieldName, value, codeTypes);
+						textValue=this.getCellValueForCodeList(temp,fieldName, value, codeTypes);
 					}else if (value instanceof Boolean) {
 						textValue = this.getCellValueForBoolean(value, fieldName,codeTypes);
 						dataType=CellDataType.BOOLEAN;
@@ -194,13 +194,13 @@ public class ExcelExportServiceImpl extends ExcelExport<Object>  implements Exce
 					}
 					
 					if(value instanceof String && StringUtils.isNotEmpty(textValue)){
-						this.setCellForString(cell, textValue, rowStyle,dataType,dataColumn.getAlign());
+						this.setCellForString(temp,cell, textValue, rowStyle,dataType,dataColumn.getAlign());
 					}else if (StringUtils.isNotEmpty(textValue)&&NumberUtils.isNumeric(textValue)) {						 
 							dataType=CellDataType.NUMBER;
-							this.setCellForNumber(cell, textValue, rowStyle,dataType,dataColumn.getAlign());
+							this.setCellForNumber(temp,cell, textValue, rowStyle,dataType,dataColumn.getAlign());
 					} else {
 						textValue=(StringUtils.isEmpty(textValue)?StringUtils.EMPTY:textValue);
-						this.setCellForString(cell,textValue, rowStyle,dataType,dataColumn.getAlign());
+						this.setCellForString(temp,cell,textValue, rowStyle,dataType,dataColumn.getAlign());
 					}
 				}
 			}
@@ -221,12 +221,12 @@ public class ExcelExportServiceImpl extends ExcelExport<Object>  implements Exce
 	 * @param dataType 数据类型
 	 * @param align 对齐方式
 	 */
-	protected void setCellForString(HSSFCell cell, String str,
+	protected void setCellForString(HSSFCellStyle temp,HSSFCell cell, String str,
 			HSSFCellStyle cellStyle, CellDataType dataType, String align) {
 		HSSFRichTextString richString = new HSSFRichTextString(str);
 		cell.setCellValue(richString);
 		cell.setCellStyle(cellStyle);
-		HSSFCellStyle temp=this.workbook.createCellStyle();
+		
 		temp.cloneStyleFrom(cell.getCellStyle());
 		temp.setAlignment(this.getCellForAlign(dataType, align));
 		cell.setCellStyle(temp);
@@ -241,7 +241,7 @@ public class ExcelExportServiceImpl extends ExcelExport<Object>  implements Exce
 	 * @param dataType 数据类型
 	 * @param align 对齐方式
 	 */
-	protected void setCellForNumber(HSSFCell cell, String str,
+	protected void setCellForNumber(HSSFCellStyle temp,HSSFCell cell, String str,
 			HSSFCellStyle cellStyle, CellDataType dataType, String align) {
 		//是数字当作double处理	
 		cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
@@ -250,7 +250,6 @@ public class ExcelExportServiceImpl extends ExcelExport<Object>  implements Exce
 			cellStyle=this.getCallDataStyle(this.decimalFmt);
 		}
 		cell.setCellStyle(cellStyle);
-		HSSFCellStyle temp=this.workbook.createCellStyle();
 		temp.cloneStyleFrom(cell.getCellStyle());
 		temp.setAlignment(this.getCellForAlign(dataType, align));
 		cell.setCellStyle(temp);
@@ -305,7 +304,7 @@ public class ExcelExportServiceImpl extends ExcelExport<Object>  implements Exce
 	 * @param codeTypes 参数数据
 	 * @return  String
 	 */
-	protected String getCellValueForCodeList(String fieldName,Object value,Map<String,Map<Object,Object>> codeTypes){
+	protected String getCellValueForCodeList(HSSFCellStyle temp,String fieldName,Object value,Map<String,Map<Object,Object>> codeTypes){
 		String filedValue=String.valueOf(value);
 		if(value instanceof Department){
 			 Department department=(Department) value;
