@@ -23,7 +23,7 @@ import com.newtouch.lion.page.PageResult;
  * Title:数据操作类
  * </p>
  * <p>
- * Description:该类支持SQL、HSQL等方式进行查询，用保存、查询、更新、分页等功能
+ * Description:基于Hibernate该类支持SQL、HSQL等方式进行查询，用保存、查询、更新、分页等功能
  * </p>
  * <p>
  * Copyright: Copyright (c) 2012

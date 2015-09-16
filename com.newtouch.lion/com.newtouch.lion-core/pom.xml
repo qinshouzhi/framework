@@ -7,10 +7,10 @@
 		<groupId>com.newtouch.lion</groupId>
 		<artifactId>com.newtouch.lion-parent</artifactId>
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
-		<version>1.0</version>
+		<version>1.02</version>
 	</parent>
 	<artifactId>com.newtouch.lion-core</artifactId>
-	<version>1.01</version>
+	<version>1.02</version>
 	<name>com.newtouch.lion-core</name>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -181,5 +181,11 @@
 			<artifactId>fastjson</artifactId>
 		</dependency>
 		<!-- JSON End -->
+		<!-- mybatis Jar Start -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+		</dependency>
+		<!-- mybatis Jar End -->
 	</dependencies>
 </project>
