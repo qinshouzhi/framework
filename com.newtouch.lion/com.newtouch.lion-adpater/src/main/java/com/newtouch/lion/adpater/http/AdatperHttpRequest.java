@@ -1,5 +1,7 @@
 package com.newtouch.lion.adpater.http;
 
+import java.util.List;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpPost;
 
@@ -34,7 +36,7 @@ public class AdatperHttpRequest {
     /**
      * Post方式请求时组装好的参数值对
      */
-    private NameValuePair[] parameters;
+    private List<NameValuePair> parameters;
 
     /**
      * Get方式请求时对应的参数
@@ -103,18 +105,18 @@ public class AdatperHttpRequest {
         this.connectionTimeout = connectionTimeout;
     }
     /**
-     * @return the parameters
-     */
-    public NameValuePair[] getParameters() {
-        return parameters;
-    }
-    /**
-     * @param parameters the parameters to set
-     */
-    public void setParameters(NameValuePair[] parameters) {
-        this.parameters = parameters;
-    }
-    /**
+	 * @return the parameters
+	 */
+	public List<NameValuePair> getParameters() {
+		return parameters;
+	}
+	/**
+	 * @param parameters the parameters to set
+	 */
+	public void setParameters(List<NameValuePair> parameters) {
+		this.parameters = parameters;
+	}
+	/**
      * @return the queryString
      */
     public String getQueryString() {

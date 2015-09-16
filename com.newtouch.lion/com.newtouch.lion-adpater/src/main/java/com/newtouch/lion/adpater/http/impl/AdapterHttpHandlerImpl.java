@@ -69,6 +69,7 @@ public class AdapterHttpHandlerImpl implements AdapterHttpHandler {
         HttpPost httpPost = new HttpPost(adatperHttpRequest.getAddress());
         httpPost.setConfig(this.requestConfig());
         httpPost.setHeader(HTTP.CONTENT_TYPE, adatperHttpRequest.getContentType().code());
+//        HttpEntity httpEntity = new StringEntity(adatperHttpRequest.getParameters().toString(), Charset.UFT8.code());  
         HttpEntity httpEntity = new StringEntity(adatperHttpRequest.getQueryString(), Charset.UFT8.code());
         httpPost.setEntity(httpEntity);
         AdapterHttpResponse adapterHttpResponse=null;
@@ -94,6 +95,7 @@ public class AdapterHttpHandlerImpl implements AdapterHttpHandler {
         } finally {
             httpPost.releaseConnection();
         }
+
         return adapterHttpResponse;
     }
     

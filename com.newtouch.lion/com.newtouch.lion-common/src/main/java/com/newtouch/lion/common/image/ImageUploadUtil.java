@@ -40,6 +40,7 @@ public class ImageUploadUtil {
 		IMAGE_MAP=new HashMap<String, String>();
 		IMAGE_MAP.put("FFD8FF", "JPEG");
 		IMAGE_MAP.put("FFD8FF", "JPG");
+		IMAGE_MAP.put("89504E", "PNG");
 		IMAGE_MAP.put("89504E47", "PNG");
 		IMAGE_MAP.put("47494638", "GIF");
 	}
@@ -62,7 +63,6 @@ public class ImageUploadUtil {
         }
         // 获取上传文件的文件头判断是否是图片
         String imgHead = bytesToHexString(b);
-      
         
         if(IMAGE_MAP.containsKey(imgHead.toUpperCase())){
         	flag=true;

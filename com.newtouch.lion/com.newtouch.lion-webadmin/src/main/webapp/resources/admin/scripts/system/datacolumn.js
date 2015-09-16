@@ -5,6 +5,11 @@ var queryForm=$('#queryform');
 $(function() {
 	//默认加载函数
 	lion.web.AppInit();;
+	//加载combo
+	var title	= ['请选择类型' , '请选择datagrid'];
+	$.each(title , function(k , v) {
+		title[k]	= '<option value="">'+v+'</option>';
+	});
 	
 	datagridId='#datacolumn_tb';
 	addForm=$('#sysDataColumnForm');
@@ -39,7 +44,7 @@ $(function() {
 	 $('#btnAdd').on('click',function(){
 		 addForm.reset();
 		  addDialog.find('.modal-header h4 span').text('添加DataColumn');
-		  $('.lion-combo').combo('reloadLi');
+		  $('.lion-combo').combo('reload');
 	 });
 
 	 addForm.on('show.bs.modal',function(){
@@ -61,6 +66,8 @@ $(function() {
 		 addForm.find('.help-block').remove();
 		 addDialog.find('.modal-header h4').text('编辑DataColumn');
 		 $('#basic').modal('toggle');  
+		 $('#dataGridListType').combo('val',row.dataGrid.type);
+		 $('#dataGridList').combo('val',row.dataGridId);
 		 addForm.fill(row);
 	 });
 	 //删除

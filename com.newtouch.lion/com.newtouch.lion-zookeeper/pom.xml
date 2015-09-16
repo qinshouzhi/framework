@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.newtouch.lion</groupId>
 		<artifactId>com.newtouch.lion-parent</artifactId>
-		<version>1.0</version>
+		<version>1.02</version>
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>com.newtouch.lion-zookeeper</artifactId>
@@ -82,5 +82,5 @@
 			<version>${jsch.version}</version>
 		</dependency>
 	</dependencies>
-	<version>1.0</version>
+	<version>1.02</version>
 </project>

@@ -33,4 +33,5 @@ public interface DemoService {
 	public List<DemoModel> doFindByParentId();
 
 	public void doCreateDemoModel(DemoModel demoModel);
+	
 }

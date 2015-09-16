@@ -43,6 +43,7 @@
 <!--lion UI JS End-->
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/scripts/system/datacolumn.js" type="text/javascript"></script>
+<script src="${base}/resources/admin/scripts/system/casc.js" type="text/javascript"></script>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed-hide-logo">
 <!-- BEGIN PAGE CONTENT INNER -->
@@ -152,11 +153,8 @@
 												</label>
 												<div class="col-md-5">
 													 <select  id="dataGridListType"   name="type" 
-													 	placeholder="<@spring.message "sys.datacolumn.query.datagrid.type.missing.message"/>..."  
-													 	class="lion-combo form-control input-medium select2" 
-													 	data-valueField='codeValue'  
-													 	data-textField='nameZh' 
-													 	data-URL="${base}/system/code/combox.json?nameEn=datagrid_type">
+													 	class="lion-casc1 form-control input-medium select2" 
+													 	>
 													 </select>
 												</div>
 												
@@ -167,11 +165,8 @@
 												</label>
 												<div class="col-md-5">
 													 <select  id="dataGridList"   name="dataGridId" 
-														placeholder="<@spring.message "sys.datacolumn.query.datagrid.missing.message"/>..."  
-														class="lion-combo input-medium form-control select2" 
-														data-valueField='id'  
-														data-textField='title' 
-														data-URL="${base}/system/datagrid/combox.json">
+														class="lion-casc2 input-medium form-control select2" 
+														>
 													</select>
 												</div>
 											</div>
