@@ -266,10 +266,13 @@
 				return a.id - b.id;
 			});
 			for (var i = 0, l = nodes.length; i < l; i++) {
+				console.dir(nodes[i].name);
 				v += nodes[i].name + ',';
 				valueId = nodes[i].id;
 			}
+			
 			if (v.length > 0) v = v.substring(0, v.length - 1);
+			console.dir(v);
 			$btn.find('span').text(v);
 			$inputText.val(valueId);
 
