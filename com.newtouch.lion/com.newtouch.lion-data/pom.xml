@@ -193,6 +193,7 @@
 			<artifactId>fastjson</artifactId>
 		</dependency>
 		<!-- JSON End -->
+		
 	</dependencies>
 	<build>
 		<resources>

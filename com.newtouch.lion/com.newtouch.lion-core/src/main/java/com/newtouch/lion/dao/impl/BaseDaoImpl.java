@@ -56,7 +56,6 @@ public abstract class BaseDaoImpl<T extends BaseEntity<PK>, PK> implements BaseD
 	/**日志*/
 	protected final Logger log = LoggerFactory.getLogger(super.getClass());
 	/**entityManager*/
-	
 	private EntityManager  entityManager;
 	
 	@PersistenceContext(unitName="entityUnit")

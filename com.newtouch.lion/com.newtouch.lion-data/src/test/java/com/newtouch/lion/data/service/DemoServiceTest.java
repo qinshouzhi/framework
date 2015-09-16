@@ -13,7 +13,7 @@ import java.util.Set;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.newtouch.lion.data.AllTest;
+import com.newtouch.lion.AllTest;
 import com.newtouch.lion.model.system.DemoModel;
 import com.newtouch.lion.service.system.DemoService;
 

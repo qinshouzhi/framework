@@ -8,7 +8,7 @@ package com.newtouch.lion.data.demo;
 
 import org.junit.Test;
 
-import com.newtouch.lion.data.AllTest;
+import com.newtouch.lion.AllTest;
 
 /**
  * <p>

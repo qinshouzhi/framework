@@ -73,6 +73,7 @@
 		<validation-api.version>1.1.0.Final</validation-api.version>
 		<maven-source.version>2.4</maven-source.version>
 		<mybatis.version>3.2.8</mybatis.version>
+		<mybatis-spring.version>1.2.2</mybatis-spring.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -794,6 +795,11 @@
 				<groupId>org.mybatis</groupId>
 				<artifactId>mybatis</artifactId>
 				<version>${mybatis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis-spring</artifactId>
+				<version>${mybatis-spring.version}</version>
 			</dependency>
 			<!-- mybatis Jar End -->
 		</dependencies>

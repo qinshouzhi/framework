@@ -9,7 +9,7 @@ package com.newtouch.lion.data.service;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.newtouch.lion.data.AllTest;
+import com.newtouch.lion.AllTest;
 import com.newtouch.lion.model.system.User;
 import com.newtouch.lion.model.system.UserGroup;
 import com.newtouch.lion.page.PageResult;

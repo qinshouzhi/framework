@@ -9,8 +9,8 @@ package com.newtouch.lion.data.message;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.newtouch.lion.AllTest;
 import com.newtouch.lion.common.resource.MessageResource;
-import com.newtouch.lion.data.AllTest;
 
 /**
  * <p>
