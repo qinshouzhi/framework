@@ -32,5 +32,5 @@ public interface DataColumnDao extends BaseDao<DataColumn,Long> {
 	 * @param id
 	 * @return
 	 */
-	public int doDeleteById(Long id);
+	public int deleteById(Long id);
 }

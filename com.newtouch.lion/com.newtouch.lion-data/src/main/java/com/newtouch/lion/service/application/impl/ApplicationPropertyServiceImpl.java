@@ -6,7 +6,6 @@
 */
 package com.newtouch.lion.service.application.impl; 
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,10 +96,8 @@ public class ApplicationPropertyServiceImpl implements
 	 */
 	@Override
 	public int doDeleteById(Long id) {
-		String hql = "delete from ApplicationProperty p where p.id=:id";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("id", id);
-		return this.applicationPropertyDao.updateHQL(hql, params);
+	 
+		return this.applicationPropertyDao.deleteById(id);
 	}
 
 	/* (non-Javadoc)

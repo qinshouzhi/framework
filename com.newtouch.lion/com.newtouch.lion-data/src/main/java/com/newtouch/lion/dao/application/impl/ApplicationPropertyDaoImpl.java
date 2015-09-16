@@ -7,6 +7,9 @@
 */
 package com.newtouch.lion.dao.application.impl; 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import com.newtouch.lion.dao.application.ApplicationPropertyDao;
@@ -37,6 +40,19 @@ public class ApplicationPropertyDaoImpl  extends BaseDaoImpl<ApplicationProperty
 	 * 
 	 */
 	private static final long serialVersionUID = -718928038791870080L;
+
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.dao.application.ApplicationPropertyDao#doDeleteById(java.lang.Long)
+	 */
+	@Override
+	public int deleteById(Long id) {
+		String hql = "delete from ApplicationProperty p where p.id=:id";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
+		return this.updateHQL(hql, params);
+	}
+	
+	
 
 }
 

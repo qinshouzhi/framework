@@ -28,7 +28,12 @@ import com.newtouch.lion.model.application.ApplicationProperty;
  * @version 1.0
  */
 public interface ApplicationPropertyDao extends BaseDao<ApplicationProperty,Long> {
-
+	/***
+	 * 根据主键删除ID
+	 * @param id
+	 * @return
+	 */
+	public int deleteById(Long id);
 }
 
 	

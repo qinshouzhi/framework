@@ -45,7 +45,7 @@ public class DataColumnDaoImpl extends BaseDaoImpl<DataColumn,Long> implements
 	 * @see com.newtouch.lion.dao.datagrid.DataColumnDao#doDeleteById(java.lang.Long)
 	 */
 	@Override
-	public int doDeleteById(Long id) {
+	public int deleteById(Long id) {
 		String hql = "delete from DataColumn p where p.id=:id";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", id);
