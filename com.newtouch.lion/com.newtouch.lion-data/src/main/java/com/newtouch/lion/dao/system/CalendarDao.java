@@ -7,8 +7,12 @@
 */
 package com.newtouch.lion.dao.system; 
 
+import java.util.Date;
+import java.util.List;
+
 import com.newtouch.lion.dao.BaseDao;
 import com.newtouch.lion.model.system.Calendar;
+import com.newtouch.lion.model.system.User;
 
 /**
  * <p>
@@ -28,6 +32,12 @@ import com.newtouch.lion.model.system.Calendar;
  * @version 1.0
  */
 public interface CalendarDao extends BaseDao<Calendar, Long> {
+	
+	public int doDeleteById(Long id);
+	
+	public List<Calendar> doFindCalendarByuser(User user);
+	
+	public List<Calendar> doFindCalendarByuser(Long userId, Date start, Date end);
 
 }
 

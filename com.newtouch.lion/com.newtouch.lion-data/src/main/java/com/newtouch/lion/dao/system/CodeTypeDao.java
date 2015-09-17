@@ -27,5 +27,7 @@ import com.newtouch.lion.model.system.CodeType;
  * @version 1.0
  */
 public interface CodeTypeDao extends BaseDao<CodeType,Long> {
+	
+	public CodeType doFindTypeByNameEn(String nameEn);
 
 }

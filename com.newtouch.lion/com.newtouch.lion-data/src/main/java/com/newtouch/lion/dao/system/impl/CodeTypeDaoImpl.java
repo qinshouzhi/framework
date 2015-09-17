@@ -6,6 +6,9 @@
  */
 package com.newtouch.lion.dao.system.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import com.newtouch.lion.dao.impl.BaseDaoImpl;
@@ -36,5 +39,17 @@ public class CodeTypeDaoImpl extends BaseDaoImpl<CodeType,Long> implements CodeT
 	 * 
 	 */
 	private static final long serialVersionUID = -7307456949562991641L;
+	
+	@Override
+	public CodeType doFindTypeByNameEn(String nameEn) {
+		String hql = "from CodeType  where nameEn=:nameEn";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("nameEn", nameEn);
+		java.util.List<CodeType> codeTypes = this.query(hql, params);
+		if (codeTypes != null && codeTypes.size() > 0) {
+			return codeTypes.get(0);
+		}
+		return null;
+	}
 
 }

@@ -7,7 +7,6 @@
 package com.newtouch.lion.service.system.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -82,10 +81,7 @@ public class CodeListServiceImpl extends AbstractService implements
 	 */
 	@Override
 	public int doDeleteById(Long id) {
-		String hql="delete from CodeList c where c.id=:id";
-		Map<String,Object> params=new  HashMap<String, Object>();
-		params.put("id",id);
-		return this.codeListDao.updateHQL(hql, params);
+		return this.codeListDao.doDeleteById(id);
 	}
 
 	/*
@@ -171,10 +167,8 @@ public class CodeListServiceImpl extends AbstractService implements
 	 */
 	@Override
 	public List<CodeList> doFindCodeListByCodeTypeNameEn(String codeTypeNameEn) {
-		String hql="select cl from CodeList cl left join cl.codeType ct where ct.nameEn=:nameEn order by cl.sortNo ASC";
-		Map<String,Object>  params=new HashMap<String, Object>();
-		params.put("nameEn",codeTypeNameEn);
-		return codeListDao.query(hql, params);
+		Assert.notNull(codeTypeNameEn);
+		return codeListDao.doFindCodeListByCodeTypeNameEn(codeTypeNameEn);
 	}
 
 	/* (non-Javadoc)
@@ -203,22 +197,14 @@ public class CodeListServiceImpl extends AbstractService implements
 	
 	public CodeList doFindCodeListByNameEn(String nameEn) {
 		Assert.notNull(nameEn);
-		String hql = "from CodeList  where nameEn=:nameEn";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("nameEn",nameEn);
-		java.util.List<CodeList> codeList = codeListDao
-				.query(hql, params);
-		if (codeList != null&&codeList.size()>0) {
-			return codeList.get(0);
-		}
-		return null;
+		return codeListDao.doFindCodeListByNameEn(nameEn);
 	}
 
 
 	@Override
 	public boolean doIsExistByNameEn(String nameEn) {
 		Assert.notNull(nameEn);
-			CodeList  codelist=this.doFindCodeListByNameEn(nameEn);
+		CodeList  codelist=this.doFindCodeListByNameEn(nameEn);
 		if(codelist!=null)
 			return true;
 		return false;
@@ -231,7 +217,6 @@ public class CodeListServiceImpl extends AbstractService implements
 	 */
 	@Override
 	public void doCreate(CodeList codeList) {
-		// TODO Auto-generated method stub
 		Assert.notNull(codeList);
 		codeListDao.save(codeList);
 	}

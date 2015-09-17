@@ -6,6 +6,10 @@
  */
 package com.newtouch.lion.dao.system.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import com.newtouch.lion.dao.impl.BaseDaoImpl;
@@ -37,5 +41,35 @@ public class CodeListDaoImpl extends BaseDaoImpl<CodeList, Long> implements
 	 * 
 	 */
 	private static final long serialVersionUID = 5326942517929124113L;
+	
+	@Override
+	public int doDeleteById(Long id){
+		String hql="delete from CodeList c where c.id=:id";
+		Map<String,Object> params=new  HashMap<String, Object>();
+		params.put("id",id);
+		return this.updateHQL(hql, params);
+	}
+	
+	@Override
+	public List<CodeList> doFindCodeListByCodeTypeNameEn(String codeTypeNameEn){
+		String hql="select cl from CodeList cl left join cl.codeType ct where ct.nameEn=:nameEn order by cl.sortNo ASC";
+		Map<String,Object>  params=new HashMap<String, Object>();
+		params.put("nameEn",codeTypeNameEn);
+		return this.query(hql, params);
+	}
 
+	@Override
+	public CodeList doFindCodeListByNameEn(String nameEn) {
+		String hql = "from CodeList  where nameEn=:nameEn";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("nameEn",nameEn);
+		java.util.List<CodeList> codeList = this
+				.query(hql, params);
+		if (codeList != null&&codeList.size()>0) {
+			return codeList.get(0);
+		}
+		return null;
+	}
+	
+	
 }

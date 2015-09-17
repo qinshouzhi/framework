@@ -8,9 +8,7 @@
 package com.newtouch.lion.service.system.impl; 
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,10 +53,7 @@ public class CalendarServiceImpl implements CalendarService {
 	 */
 	@Override
 	public int doDeleteById(Long id) {
-		String hql="delete from Calendar c where c.id=:id";
-		Map<String,Object> params=new  HashMap<String, Object>();
-		params.put("id",id);
-		return this.calendarDao.updateHQL(hql, params);
+		return calendarDao.doDeleteById(id);
 	}
 
 	/* (non-Javadoc)
@@ -91,10 +86,7 @@ public class CalendarServiceImpl implements CalendarService {
 	 */
 	@Override
 	public List<Calendar> doFindCalendarByuser(User user) {
-		String hql = "from Calendar where user.id=:id";
-		Map<String,Object>  params=new HashMap<String, Object>();
-		params.put("id",user.getId());
-		return calendarDao.query(hql, params);
+		return calendarDao.doFindCalendarByuser(user);
 	}
 
 	/* (non-Javadoc)
@@ -102,12 +94,7 @@ public class CalendarServiceImpl implements CalendarService {
 	 */
 	@Override
 	public List<Calendar> doFindCalendarByuser(Long userId, Date start, Date end) {
-		String hql = "from Calendar where userId=:userId and startdate between :start and :end";
-		Map<String,Object>  params=new HashMap<String, Object>();
-		params.put("userId",userId);
-		params.put("start", start);
-		params.put("end", end);
-		return calendarDao.query(hql, params);
+		return calendarDao.doFindCalendarByuser(userId, start, end);
 	}
 	
 }

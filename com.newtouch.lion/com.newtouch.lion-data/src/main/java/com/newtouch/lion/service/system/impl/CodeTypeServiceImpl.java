@@ -8,7 +8,6 @@ package com.newtouch.lion.service.system.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -270,13 +269,7 @@ public class CodeTypeServiceImpl extends AbstractService implements  CodeTypeSer
 	@Override
 	public CodeType doFindTypeByNameEn(String nameEn) {
 		Assert.notNull(nameEn);
-		String hql = "from CodeType  where nameEn=:nameEn";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("nameEn", nameEn);
-		java.util.List<CodeType> codeTypes = codeTypeDao.query(hql, params);
-		if (codeTypes != null && codeTypes.size() > 0) {
-			return codeTypes.get(0);
-		}
+		codeTypeDao.doFindTypeByNameEn(nameEn);
 		return null;
 	}
 

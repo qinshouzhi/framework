@@ -6,6 +6,8 @@
  */
 package com.newtouch.lion.dao.system;
 
+import java.util.List;
+
 import com.newtouch.lion.dao.BaseDao;
 import com.newtouch.lion.model.system.CodeList;
 
@@ -27,5 +29,10 @@ import com.newtouch.lion.model.system.CodeList;
  * @version 1.0
  */
 public interface CodeListDao extends BaseDao<CodeList, Long> {
-
+	
+	public int doDeleteById(Long id);
+	
+	public List<CodeList> doFindCodeListByCodeTypeNameEn(String codeTypeNameEn);
+	
+	public CodeList doFindCodeListByNameEn(String nameEn);
 }
