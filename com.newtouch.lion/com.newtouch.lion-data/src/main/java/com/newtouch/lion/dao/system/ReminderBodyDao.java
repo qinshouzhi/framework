@@ -9,6 +9,8 @@ package com.newtouch.lion.dao.system;
 
 import com.newtouch.lion.dao.BaseDao;
 import com.newtouch.lion.model.system.ReminderBody;
+import com.newtouch.lion.page.PageResult;
+import com.newtouch.lion.query.QueryCriteria;
 
 /**
  * <p>
@@ -28,6 +30,12 @@ import com.newtouch.lion.model.system.ReminderBody;
  * @version 1.0
  */
 public interface ReminderBodyDao extends BaseDao<ReminderBody, Long> {
+	
+	public int doDeleteById(Long id);
+	
+	public ReminderBody doFindTypeByReminderBodyClass(String reminderBodyClass);
+	
+	public PageResult<ReminderBody> doFindByCriteria(QueryCriteria queryCriteria);
 
 }
 
