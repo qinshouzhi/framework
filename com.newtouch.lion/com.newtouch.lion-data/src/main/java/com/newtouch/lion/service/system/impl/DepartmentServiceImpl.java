@@ -111,10 +111,7 @@ public class DepartmentServiceImpl extends AbstractService implements
 	 */
 	@Override
 	public int doDeleteById(Long id) {
-		String hql = "delete from Department p where p.id=:id";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("id", id);
-		return this.departmentDao.updateHQL(hql, params);
+		return departmentDao.doDeleteById(id);
 	}
 
 	/*
@@ -156,13 +153,7 @@ public class DepartmentServiceImpl extends AbstractService implements
 
 	@Override
 	public List<Department> doFindFirstLevel() {
-		String hql = "from Department where  parentDepartmentId is null order by departmentNO DESC";
-
-		Map<String, Object> params = new HashMap<String, Object>();
-
-		List<Department> departments = departmentDao.query(hql, params);
-		
-		return departments;
+		return departmentDao.doFindFirstLevel();
 	}
 
 	/*

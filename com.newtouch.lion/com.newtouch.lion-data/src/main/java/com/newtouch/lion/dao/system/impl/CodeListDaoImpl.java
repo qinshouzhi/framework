@@ -12,9 +12,12 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.impl.BaseDaoImpl;
 import com.newtouch.lion.dao.system.CodeListDao;
 import com.newtouch.lion.model.system.CodeList;
+import com.newtouch.lion.page.PageResult;
+import com.newtouch.lion.query.QueryCriteria;
 
 /**
  * <p>
@@ -71,5 +74,28 @@ public class CodeListDaoImpl extends BaseDaoImpl<CodeList, Long> implements
 		return null;
 	}
 	
-	
+	@Override
+	public PageResult<CodeList> doFindByCriteria(QueryCriteria criteria) {
+		String queryEntry = " select cl from CodeList cl ";
+
+		String[] whereBodies = {"cl.codeType.id=:codeTypeId"," cl.nameZh like :nameZh " };
+
+		String fromJoinSubClause = "";
+
+		Map<String, Object> params = criteria.getQueryCondition();
+
+		String orderField =criteria.getOrderField();
+
+		String orderDirection = criteria.getOrderDirection();
+
+		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,whereBodies, orderField, orderDirection, params);
+
+		int pageSize = criteria.getPageSize();
+
+		int startIndex = criteria.getStartIndex();
+
+		PageResult<CodeList> pageResult = this.query(hql,HqlUtils.generateCountHql(hql, null), params, startIndex,pageSize);
+		
+		return pageResult;
+	}
 }

@@ -7,7 +7,6 @@
 */
 package com.newtouch.lion.service.system.impl; 
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,10 +58,7 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	 */
 	@Override
 	public int doDeleteById(Long id) {	 
-		String hql="delete from Icon i where i.id=:id";
-		Map<String,Object> params=new  HashMap<String, Object>();
-		params.put("id",id);
-		return this.iconDao.updateHQL(hql, params);
+		return iconDao.doDeleteById(id);
 	}
 
 	/* (non-Javadoc)
@@ -126,14 +122,7 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	@Override
 	public Icon doFindTypeByIconClass(String iconClass) {
 		Assert.notNull(iconClass);
-		String hql = "from Icon where iconClass=:iconClass";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("iconClass", iconClass);
-		java.util.List<Icon> icons = iconDao.query(hql, params);
-		if (icons != null && icons.size() > 0) {
-			return icons.get(0);
-		}
-		return null;
+		return iconDao.doFindTypeByIconClass(iconClass);
 	}
 
 	/* (non-Javadoc)
@@ -152,10 +141,7 @@ public class IconServiceImpl extends AbstractService implements IconService {
 	@Override
 	public List<Icon> doFindByType(String iconType) {
 		Assert.notNull(iconType);		 
-		String queryHQL = "from Icon where iconType=:iconType";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("iconType", iconType);
-		return iconDao.query(queryHQL, params);
+		return iconDao.doFindByType(iconType);
 	}
 }
 

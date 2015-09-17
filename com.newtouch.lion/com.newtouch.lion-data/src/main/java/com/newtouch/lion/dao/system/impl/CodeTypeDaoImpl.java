@@ -11,9 +11,12 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.impl.BaseDaoImpl;
 import com.newtouch.lion.dao.system.CodeTypeDao;
 import com.newtouch.lion.model.system.CodeType;
+import com.newtouch.lion.page.PageResult;
+import com.newtouch.lion.query.QueryCriteria;
 
 /**
  * <p>
@@ -51,5 +54,31 @@ public class CodeTypeDaoImpl extends BaseDaoImpl<CodeType,Long> implements CodeT
 		}
 		return null;
 	}
-
+	
+	@Override
+	public PageResult<CodeType> doFindByCriteria(QueryCriteria criteria) {
+		String queryEntry = "from CodeType";
+		
+		String[] whereBodies = {"type =:type","isDeleted=false"," nameZh  like :nameZh " };
+		
+		String fromJoinSubClause = "";
+		
+		Map<String, Object> params = criteria.getQueryCondition();
+		
+		String orderField = criteria.getOrderField();
+		
+		String orderDirection = criteria.getOrderDirection();
+		
+		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause, whereBodies, orderField, orderDirection, params);
+		
+		int pageSize = criteria.getPageSize();
+		
+		int startIndex = criteria.getStartIndex();
+		
+		PageResult<CodeType> pageResult = this.query(hql, HqlUtils.generateCountHql(hql, null), params, startIndex, pageSize);
+		
+	 
+		
+		return pageResult;
+	}
 }

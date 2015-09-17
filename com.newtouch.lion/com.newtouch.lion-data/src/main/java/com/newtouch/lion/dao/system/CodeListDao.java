@@ -10,6 +10,8 @@ import java.util.List;
 
 import com.newtouch.lion.dao.BaseDao;
 import com.newtouch.lion.model.system.CodeList;
+import com.newtouch.lion.page.PageResult;
+import com.newtouch.lion.query.QueryCriteria;
 
 /**
  * <p>
@@ -35,4 +37,6 @@ public interface CodeListDao extends BaseDao<CodeList, Long> {
 	public List<CodeList> doFindCodeListByCodeTypeNameEn(String codeTypeNameEn);
 	
 	public CodeList doFindCodeListByNameEn(String nameEn);
+	
+	public PageResult<CodeList> doFindByCriteria(QueryCriteria criteria);
 }

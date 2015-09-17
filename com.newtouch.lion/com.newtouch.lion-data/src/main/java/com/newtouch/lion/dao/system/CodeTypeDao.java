@@ -8,6 +8,8 @@ package com.newtouch.lion.dao.system;
 
 import com.newtouch.lion.dao.BaseDao;
 import com.newtouch.lion.model.system.CodeType;
+import com.newtouch.lion.page.PageResult;
+import com.newtouch.lion.query.QueryCriteria;
 
 /**
  * <p>
@@ -29,5 +31,7 @@ import com.newtouch.lion.model.system.CodeType;
 public interface CodeTypeDao extends BaseDao<CodeType,Long> {
 	
 	public CodeType doFindTypeByNameEn(String nameEn);
+	
+	public PageResult<CodeType> doFindByCriteria(QueryCriteria criteria);
 
 }

@@ -7,6 +7,8 @@
 */
 package com.newtouch.lion.dao.system; 
 
+import java.util.List;
+
 import com.newtouch.lion.dao.BaseDao;
 import com.newtouch.lion.model.system.Icon;
 
@@ -28,7 +30,12 @@ import com.newtouch.lion.model.system.Icon;
  * @version 1.0
  */
 public interface IconDao extends BaseDao<Icon,Long>{
-
+	
+	public int doDeleteById(Long id);
+	
+	public Icon doFindTypeByIconClass(String iconClass);
+	
+	public List<Icon> doFindByType(String iconType);
 }
 
 	

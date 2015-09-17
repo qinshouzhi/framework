@@ -6,6 +6,8 @@
 */
 package com.newtouch.lion.dao.system; 
 
+import java.util.List;
+
 import com.newtouch.lion.dao.BaseDao;
 import com.newtouch.lion.model.system.Department;
 	/**
@@ -26,6 +28,10 @@ import com.newtouch.lion.model.system.Department;
  * @version 1.0
  */
 public interface DepartmentDao extends BaseDao<Department,Long>{
+	
+	public int doDeleteById(Long id);
+	
+	public List<Department> doFindFirstLevel();
 
 }
 

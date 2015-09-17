@@ -7,16 +7,13 @@
 package com.newtouch.lion.service.system.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.newtouch.lion.common.Assert;
-import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.system.ParameterDao;
 import com.newtouch.lion.model.system.CodeList;
 import com.newtouch.lion.model.system.Parameter;
@@ -107,14 +104,7 @@ public class ParameterServiceImpl extends AbstractService implements
 	@Override
 	public Parameter doFindTypeByNameEn(String nameEn) {
 		Assert.notNull(nameEn);
-		String hql = "from Parameter  where nameEn=:nameEn";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("nameEn", nameEn);
-		java.util.List<Parameter> parameters = parameterDao.query(hql, params);
-		if (parameters != null && parameters.size() > 0) {
-			return parameters.get(0);
-		}
-		return null;
+		return parameterDao.doFindTypeByNameEn(nameEn);
 	}
 
 	/*
@@ -151,10 +141,7 @@ public class ParameterServiceImpl extends AbstractService implements
 	 */
 	@Override
 	public int doDeleteById(Long id) {
-		String hql = "delete from Parameter p where p.id=:id";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("id", id);
-		return this.parameterDao.updateHQL(hql, params);
+		return parameterDao.doDeleteById(id);
 	}
 
 	/*
@@ -175,31 +162,8 @@ public class ParameterServiceImpl extends AbstractService implements
 	 */
 	@Override
 	public PageResult<Parameter> doFindByCriteria(QueryCriteria queryCriteria) {
-
-		String queryEntry = "select parameter ";
-
-		String[] whereBodies = { " parameter.type=:type "," parameter.nameZh  like :nameZh "};
-
-		String fromJoinSubClause = "from Parameter parameter";
-
-		Map<String, Object> params = queryCriteria.getQueryCondition();
-
-		String orderField = queryCriteria.getOrderField();
-
-		String orderDirection = queryCriteria.getOrderDirection();
-
-		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
-				whereBodies, orderField, orderDirection, params);
-
-		int pageSize = queryCriteria.getPageSize();
-
-		int startIndex = queryCriteria.getStartIndex();
-
-		PageResult<Parameter> result = this.parameterDao.query(hql,
-				HqlUtils.generateCountHql(hql, null), params, startIndex,
-				pageSize);
-
-		return result;
+		
+		return parameterDao.doFindByCriteria(queryCriteria);
 	}
 
 	/*

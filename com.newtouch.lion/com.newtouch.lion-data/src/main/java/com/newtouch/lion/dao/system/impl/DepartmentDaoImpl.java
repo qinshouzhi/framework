@@ -6,6 +6,10 @@
  */
 package com.newtouch.lion.dao.system.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import com.newtouch.lion.dao.impl.BaseDaoImpl;
@@ -37,5 +41,26 @@ public class DepartmentDaoImpl extends BaseDaoImpl<Department,Long> implements
 	 * 
 	 */
 	private static final long serialVersionUID = -8194460110365083678L;
+
+	@Override
+	public int doDeleteById(Long id) {
+		String hql = "delete from Department p where p.id=:id";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
+		return this.updateHQL(hql, params);
+	}
+	
+	@Override
+	public List<Department> doFindFirstLevel() {
+		String hql = "from Department where  parentDepartmentId is null order by departmentNO DESC";
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		List<Department> departments = this.query(hql, params);
+		
+		return departments;
+	}
+	
+	
 
 }

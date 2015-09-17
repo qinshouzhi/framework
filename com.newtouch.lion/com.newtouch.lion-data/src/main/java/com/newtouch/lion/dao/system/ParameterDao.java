@@ -8,6 +8,8 @@ package com.newtouch.lion.dao.system;
 
 import com.newtouch.lion.dao.BaseDao;
 import com.newtouch.lion.model.system.Parameter;
+import com.newtouch.lion.page.PageResult;
+import com.newtouch.lion.query.QueryCriteria;
 
 /**
  * <p>
@@ -27,5 +29,11 @@ import com.newtouch.lion.model.system.Parameter;
  * @version 1.0
  */
 public interface ParameterDao extends BaseDao<Parameter, Long> {
+	
+	public Parameter doFindTypeByNameEn(String nameEn);
+	
+	public int doDeleteById(Long id);
+	
+	public PageResult<Parameter> doFindByCriteria(QueryCriteria queryCriteria);
 
 }
