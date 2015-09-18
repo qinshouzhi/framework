@@ -20,7 +20,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.system.GroupDao;
 import com.newtouch.lion.dao.system.RoleDao;
 import com.newtouch.lion.dao.system.UserDao;
@@ -118,14 +117,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	 */
 	@Override
 	public User doFindByUserName(String username) {
-		String hql = "from  User u where u.username=:username";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("username", username);
-		List<User> list = this.userDao.query(hql, params);
-		if (!CollectionUtils.isEmpty(list)) {
-			return list.get(0);
-		}
-		return null;
+		return userDao.doFindByUserName(username);
 	}
 	
 	
@@ -135,14 +127,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	 */
 	@Override
 	public User doFindByEmpolyeeCode(String employeeCode) {
-		String hql="from User u where u.employeeCode=:employeeCode";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("employeeCode", employeeCode);
-		List<User> list = this.userDao.query(hql, params);
-		if (!CollectionUtils.isEmpty(list)) {
-			return list.get(0);
-		}
-		return null;
+		return userDao.doFindByEmpolyeeCode(employeeCode);
 	}
 
 	/* (non-Javadoc)
@@ -150,14 +135,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	 */
 	@Override
 	public User doFindByEmail(String email) {
-		String hql="from User u where u.email=:email";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("email", email);
-		List<User> list = this.userDao.query(hql, params);
-		if (!CollectionUtils.isEmpty(list)) {
-			return list.get(0);
-		}
-		return null;
+		return userDao.doFindByEmail(email);
 	}
 	
 	
@@ -340,10 +318,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	 */
 	@Override
 	public int doDeleteById(Long id) {
-		String hql = "delete from User u where u.id=:id";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("id", id);
-		return this.userDao.updateHQL(hql, params);
+		return userDao.doDeleteById(id);
 	}
 
 	/*
@@ -455,29 +430,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	public PageResult<UserGroup> doFindUserGroupByCriteria(
 			QueryCriteria criteria) {
 		
-		String queryEntry = "select new com.newtouch.lion.model.system.UserGroup(id,username,employeeCode,realnameZh,realnameEn) from User ";
-
-		String[] whereBodies = { "username like :username", "employeeCode like :employeeCode","email like :email" };
-
-		String fromJoinSubClause = "";
-
-		Map<String, Object> params = criteria.getQueryCondition();
-
-		String orderField = criteria.getOrderField();
-
-		String orderDirection = criteria.getOrderDirection();
-
-		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
-				whereBodies, orderField, orderDirection, params);
-
-		int pageSize = criteria.getPageSize();
-
-		int startIndex = criteria.getStartIndex();
-
-		PageResult<UserGroup> pageResult = this.userGroupDao.query(hql,
-				HqlUtils.generateCountHql(hql, null), params, startIndex,
-				pageSize);
-		return pageResult;
+		return userGroupDao.doFindUserGroupByCriteria(criteria);
 	}
 	
 	/* (non-Javadoc)
@@ -487,26 +440,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	public PageResult<UserRole> doFindUserRoleByCriteria(
 			QueryCriteria criteria,Long roleId) {
 		
-		String queryEntry = "select new com.newtouch.lion.model.system.UserRole(id,username,employeeCode,realnameZh,realnameEn) from User ";
-		
-		String[] whereBodies = { "username like :username", "employeeCode like :employeeCode","email like :email" };
-		
-		String fromJoinSubClause = "";
-
-		Map<String, Object> params = criteria.getQueryCondition();
-
-		String orderField = criteria.getOrderField();
-
-		String orderDirection = criteria.getOrderDirection();
-
-		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
-				whereBodies, orderField, orderDirection, params);
-
-		int pageSize = criteria.getPageSize();
-
-		int startIndex = criteria.getStartIndex();
-		
-		PageResult<UserRole> pageResult = this.userRoleDao.query(hql,HqlUtils.generateCountHql(hql, null),params,startIndex,pageSize);
+		PageResult<UserRole> pageResult = this.userRoleDao.doFindUserRoleByCriteria(criteria);
 		
 		//如果查询为空，则直接返回数据
 		if(CollectionUtils.isEmpty(pageResult.getContent())){
@@ -556,30 +490,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	 */
 	@Override
 	public PageResult<User> doFindByCriteriaAndGroup(QueryCriteria criteria) {
-		String queryEntry = " select user from User as  user inner join fetch user.groups g ";
-
-		String[] whereBodies = { "user.nameZh like :nameZh","g.id =:groupId","user.id in(:userIds)"};
-
-		String fromJoinSubClause = "";
-
-		Map<String, Object> params = criteria.getQueryCondition();
-
-		String orderField = criteria.getOrderField();
-
-		String orderDirection = criteria.getOrderDirection();
-
-		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
-				whereBodies, orderField, orderDirection, params);
-		
-		String countHql=HqlUtils.generateCountHql(hql,"user.id ");
-
-		int pageSize = criteria.getPageSize();
-
-		int startIndex = criteria.getStartIndex();
-
-		PageResult<User> pageResult = this.userDao.query(hql,countHql, params, startIndex,pageSize);
-		
-		return pageResult;
+		return userDao.doFindByCriteriaAndGroup(criteria);
 	}
 
 	/* (non-Javadoc)
@@ -587,30 +498,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	 */
 	@Override
 	public PageResult<User> doFindByCriteriaAndRole(QueryCriteria criteria) {
-		String queryEntry = " select user from User as  user inner join fetch user.roles r ";
-
-		String[] whereBodies = { "user.nameZh like :nameZh","r.id =:roleId","user.id in(:userIds)"};
-
-		String fromJoinSubClause = "";
-
-		Map<String, Object> params = criteria.getQueryCondition();
-
-		String orderField = criteria.getOrderField();
-
-		String orderDirection = criteria.getOrderDirection();
-
-		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
-				whereBodies, orderField, orderDirection, params);
-		
-		String countHql=HqlUtils.generateCountHql(hql,"user.id ");
-
-		int pageSize = criteria.getPageSize();
-
-		int startIndex = criteria.getStartIndex();
-
-		PageResult<User> pageResult = this.userDao.query(hql,countHql, params, startIndex,pageSize);
-		
-		return pageResult;
+		return userDao.doFindByCriteriaAndRole(criteria);
 	}
 	
 	/*
@@ -621,30 +509,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	 */
 	@Override
 	public PageResult<User> doFindByCriteria(QueryCriteria criteria) {
-		String queryEntry = " from User ";
-
-		String[] whereBodies = { "username like :username", "employeeCode like :employeeCode","email like :email" };
-
-		String fromJoinSubClause = "";
-
-		Map<String, Object> params = criteria.getQueryCondition();
-
-		String orderField = criteria.getOrderField();
-
-		String orderDirection = criteria.getOrderDirection();
-
-		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
-				whereBodies, orderField, orderDirection, params);
-
-		int pageSize = criteria.getPageSize();
-
-		int startIndex = criteria.getStartIndex();
-		System.out.println("11111111111111"+pageSize+"//"+startIndex);
-		PageResult<User> pageResult = this.userDao.query(hql, 
-				HqlUtils.generateCountHql(hql, null), params, startIndex, 
-				pageSize);
-		System.out.println("222222222222222222222"+pageResult);
-		return pageResult;
+		return userDao.doFindByCriteria(criteria);
 	}
 	
 	/*

@@ -9,6 +9,8 @@ package com.newtouch.lion.dao.system;
 
 import com.newtouch.lion.dao.BaseDao;
 import com.newtouch.lion.model.system.GroupRole;
+import com.newtouch.lion.page.PageResult;
+import com.newtouch.lion.query.QueryCriteria;
 
 /**
  * <p>
@@ -28,7 +30,9 @@ import com.newtouch.lion.model.system.GroupRole;
  * @version 1.0
  */
 public interface GroupRoleDao extends BaseDao<GroupRole,Long>{
-
+	
+	PageResult<GroupRole> doFindGroupRoleByCriteria(
+			QueryCriteria criteria);
 }
 
 	

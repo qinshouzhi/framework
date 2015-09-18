@@ -27,11 +27,7 @@ public class TasksServiceImpl extends AbstractService implements TasksService {
 
 	@Override
 	public int doDeleteById(Long id) {
-		String hql = "delete from Tasks t where t.id=:id";
-		Map<String,Object> params = new HashMap<String, Object>();
-		params.put("id", id);
-		
-		return this.tasksDao.updateHQL(hql, params);
+		return tasksDao.doDeleteById(id);
 	}
 
 	@Override

@@ -6,11 +6,16 @@
 */
 package com.newtouch.lion.dao.system.impl; 
 
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
+import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.impl.BaseDaoImpl;
 import com.newtouch.lion.dao.system.RoleGroupDao;
 import com.newtouch.lion.model.system.RoleGroup;
+import com.newtouch.lion.page.PageResult;
+import com.newtouch.lion.query.QueryCriteria;
 
 /**
  * <p>
@@ -36,6 +41,31 @@ public class RoleGroupDaoImpl  extends BaseDaoImpl<RoleGroup,Long> implements Ro
 	 * 
 	 */
 	private static final long serialVersionUID = 572376030513791675L;
+	
+	@Override
+	public PageResult<RoleGroup> doFindRoleUserByCriteria(
+			QueryCriteria queryCriteria) {
+		String queryEntry = "select new com.newtouch.lion.model.system.RoleGroup(id,nameZh,nameEn,description) from Role ";
+
+		String[] whereBodies = { "nameZh like :nameZh"};
+
+		String fromJoinSubClause = "";
+
+		Map<String, Object> params = queryCriteria.getQueryCondition();
+
+		String orderField = queryCriteria.getOrderField();
+
+		String orderDirection = queryCriteria.getOrderDirection();
+
+		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
+				whereBodies, orderField, orderDirection, params);
+
+		int pageSize = queryCriteria.getPageSize();
+
+		int startIndex = queryCriteria.getStartIndex();
+
+		return this.query(hql,HqlUtils.generateCountHql(hql, null), params, startIndex,pageSize);
+	}
 	
 }
 

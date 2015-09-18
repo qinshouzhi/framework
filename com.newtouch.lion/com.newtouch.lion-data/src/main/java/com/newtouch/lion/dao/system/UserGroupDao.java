@@ -8,6 +8,8 @@ package com.newtouch.lion.dao.system;
 
 import com.newtouch.lion.dao.BaseDao;
 import com.newtouch.lion.model.system.UserGroup;
+import com.newtouch.lion.page.PageResult;
+import com.newtouch.lion.query.QueryCriteria;
 
 /**
  * <p>
@@ -27,6 +29,9 @@ import com.newtouch.lion.model.system.UserGroup;
  * @version 1.0
  */
 public interface UserGroupDao extends BaseDao<UserGroup,Long>{
+	
+	public PageResult<UserGroup> doFindUserGroupByCriteria(
+			QueryCriteria criteria);
 	
 }	
 

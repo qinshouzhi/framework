@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.newtouch.lion.common.Assert;
-import com.newtouch.lion.common.sql.HqlUtils;
 import com.newtouch.lion.dao.system.GroupDao;
 import com.newtouch.lion.dao.system.GroupRoleDao;
 import com.newtouch.lion.dao.system.RoleDao;
@@ -264,10 +263,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 	 */
 	@Override
 	public List<Group> doFindByUserId(Long userId) {
-		String hql = "from Group where users.id=:userId";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("userId", userId);
-		return this.groupDao.query(hql, params);
+		return groupDao.doFindByUserId(userId);
 	}
 
 	/*
@@ -279,10 +275,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 	 */
 	@Override
 	public List<Group> doFindByRoleId(Long roleId) {
-		String hql = "from Group where roles.id=:roleId";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("roleId", roleId);
-		return this.groupDao.query(hql, params);
+		return groupDao.doFindByRoleId(roleId);
 	}
 
 	/*
@@ -317,10 +310,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 	 */
 	@Override
 	public int doDeleteById(Long id) {
-		String hql = "delete from Group p where p.id=:id";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("id", id);
-		return this.groupDao.updateHQL(hql, params);
+		return groupDao.doDeleteById(id);
 	}
 
 	/*
@@ -354,29 +344,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 	 */
 	@Override
 	public PageResult<Group> doFindByCriteriaAndUser(QueryCriteria queryCriteria) {
-		String queryEntry = " select groups from Group as  groups inner join fetch groups.users u ";
-
-		String[] whereBodies = { "groups.nameZh like :nameZh","u.id =:userId","groups.id in(:groupIds)"};
-
-		String fromJoinSubClause = "";
-
-		Map<String, Object> params = queryCriteria.getQueryCondition();
-
-		String orderField = queryCriteria.getOrderField();
-
-		String orderDirection = queryCriteria.getOrderDirection();
-
-		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
-				whereBodies, orderField, orderDirection, params);
-		
-		String countHql=HqlUtils.generateCountHql(hql," groups.id ");
-
-		int pageSize = queryCriteria.getPageSize();
-
-		int startIndex = queryCriteria.getStartIndex();
-
-		PageResult<Group> pageResult = this.groupDao.query(hql,countHql, params, startIndex,pageSize);
-		return pageResult;
+		return groupDao.doFindByCriteriaAndUser(queryCriteria);
 	}
 
 	/*
@@ -388,30 +356,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 	 */
 	@Override
 	public PageResult<Group> doFindByCriteria(QueryCriteria criteria) {
-		String queryEntry = " from Group ";
-
-		String[] whereBodies = {"nameZh like :nameZh"};
-
-		String fromJoinSubClause = "";
-
-		Map<String, Object> params = criteria.getQueryCondition();
-
-		String orderField = criteria.getOrderField();
-
-		String orderDirection = criteria.getOrderDirection();
-
-		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
-				whereBodies, orderField, orderDirection, params);
-
-		int pageSize = criteria.getPageSize();
-
-		int startIndex = criteria.getStartIndex();
-
-		PageResult<Group> pageResult = this.groupDao.query(hql,
-				HqlUtils.generateCountHql(hql, null), params, startIndex,
-				pageSize);
-
-		return pageResult;
+		return groupDao.doFindByCriteria(criteria);
 	}
 
 	/*
@@ -489,14 +434,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 	@Override
 	public Group doFindTypeByNameEn(String nameEn) {
 		Assert.notNull(nameEn);
-		String hql = "from Group  where nameEn=:nameEn";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("nameEn", nameEn);
-		java.util.List<Group> groups = groupDao.query(hql, params);
-		if (groups != null && groups.size() > 0) {
-			return groups.get(0);
-		}
-		return null;
+		return groupDao.doFindTypeByNameEn(nameEn);
 	}
 
 	/* (non-Javadoc)
@@ -515,26 +453,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 	public PageResult<GroupRole> doFindGroupRoleByCriteria(
 			QueryCriteria criteria,Long roleId) {
  
-		String queryEntry = "select new com.newtouch.lion.model.system.GroupRole(id,nameZh,nameEn,description) from Group ";
-
-		String[] whereBodies = { "nameZh like :nameZh", "nameEn like :nameEn","description like :description" };
-
-		String fromJoinSubClause = "";
-
-		Map<String, Object> params = criteria.getQueryCondition();
-
-		String orderField = criteria.getOrderField();
-
-		String orderDirection = criteria.getOrderDirection();
-
-		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
-				whereBodies, orderField, orderDirection, params);
-
-		int pageSize = criteria.getPageSize();
-
-		int startIndex = criteria.getStartIndex();
-		
-		PageResult<GroupRole> pageResult = this.groupRoleDao.query(hql,HqlUtils.generateCountHql(hql, null),params,startIndex,pageSize);
+		PageResult<GroupRole> pageResult = this.groupRoleDao.doFindGroupRoleByCriteria(criteria);
 		
 		//如果查询为空，则直接返回数据
 		if(CollectionUtils.isEmpty(pageResult.getContent())){
@@ -584,25 +503,8 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 	 */
 	@Override
 	public PageResult<GroupRole> doFindGroupUserByCriteria(QueryCriteria queryCriteria,Long userId) {
-		String queryEntry = "select new com.newtouch.lion.model.system.GroupRole(id,nameZh,nameEn,description) from Group ";
-
-		String[] whereBodies = { "nameZh like :nameZh", "nameEn like :nameEn","description like :description" };
-
-		String fromJoinSubClause = "";
-
-		Map<String, Object> params = queryCriteria.getQueryCondition();
-
-		String orderField = queryCriteria.getOrderField();
-
-		String orderDirection = queryCriteria.getOrderDirection();
-
-		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,whereBodies, orderField, orderDirection, params);
-
-		int pageSize = queryCriteria.getPageSize();
-
-		int startIndex = queryCriteria.getStartIndex();
-
-		PageResult<GroupRole> pageResult = this.groupRoleDao.query(hql,HqlUtils.generateCountHql(hql, null), params, startIndex,pageSize);
+		
+		PageResult<GroupRole> pageResult = this.groupRoleDao.doFindGroupRoleByCriteria(queryCriteria);
 		
 		//如果查询为空，则直接返回数据
 		if(CollectionUtils.isEmpty(pageResult.getContent())){
@@ -652,30 +554,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService {
 	 */
 	@Override
 	public PageResult<Group> doFindByCriteriaAndRole(QueryCriteria criteria) {
-		String queryEntry = " select groups from Group groups inner join groups.roles r ";
-
-		String[] whereBodies = { "groups.nameZh like :nameZh","r.id =:roleId","groups.id in(:groupIds)"};
-
-		String fromJoinSubClause = "";
-
-		Map<String, Object> params = criteria.getQueryCondition();
-
-		String orderField = criteria.getOrderField();
-
-		String orderDirection = criteria.getOrderDirection();
-
-		String hql = HqlUtils.generateHql(queryEntry, fromJoinSubClause,
-				whereBodies, orderField, orderDirection, params);
-		
-		String countHql=HqlUtils.generateCountHql(hql,"groups.id");
-
-		int pageSize = criteria.getPageSize();
-
-		int startIndex = criteria.getStartIndex();
-
-		PageResult<Group> pageResult = this.groupDao.query(hql,countHql, params, startIndex,pageSize);
-		
-		return pageResult;
+		return groupDao.doFindByCriteriaAndRole(criteria);
 		
 	}
 	

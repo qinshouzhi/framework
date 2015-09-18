@@ -6,8 +6,12 @@
  */
 package com.newtouch.lion.dao.system;
 
+import java.util.List;
+
 import com.newtouch.lion.dao.BaseDao;
 import com.newtouch.lion.model.system.Role;
+import com.newtouch.lion.page.PageResult;
+import com.newtouch.lion.query.QueryCriteria;
 
 /**
  * <p>
@@ -27,5 +31,19 @@ import com.newtouch.lion.model.system.Role;
  * @version 1.0
  */
 public interface RoleDao extends BaseDao<Role,Long> {
+	
+	public int doDeleteById(Long id);
+	
+	public PageResult<Role> doFindByCriteria(QueryCriteria criteria);
+	
+	public PageResult<Role> doFindByCriteriaAndGroup(QueryCriteria criteria);
+	
+	public PageResult<Role> doFindByCriteriaAndUser(QueryCriteria queryCriteria);
+	
+	public List<Role> doFindByUserId(Long userId);
+	
+	public Role doFindTypeByNameEn(String nameEn);
+	
+	
 
 }
