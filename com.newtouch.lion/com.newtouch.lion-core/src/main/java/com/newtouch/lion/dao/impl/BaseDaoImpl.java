@@ -325,7 +325,6 @@ public abstract class BaseDaoImpl<T extends BaseEntity<PK>, PK> implements BaseD
 	@SuppressWarnings({ "unchecked" })
 	public PageResult<T> query(String hql, String countHql,
 			Map<String, ?> params, int offsetIndex, int pageSize) {
-		System.out.println();
 		PageResult<T> pageResult = new PageResult<T>();
 
 		pageResult.setCurrentIndex(offsetIndex);
