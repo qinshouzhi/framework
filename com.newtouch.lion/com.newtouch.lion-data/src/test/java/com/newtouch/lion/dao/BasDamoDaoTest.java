@@ -38,8 +38,8 @@ public class BasDamoDaoTest extends AllMyBatisTest {
 	
 	@Test
 	public void find(){
-		BasDemo basDemo=basDemoDao.find(1L);
-		logger.info(basDemo.toString());
+	 
+		 
 	}
 
 }

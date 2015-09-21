@@ -8,8 +8,6 @@ package com.newtouch.lion.model.demo;
 
 import java.util.Date;
 
-import com.newtouch.lion.model.AuditEntity;
-
 /**
  * <p>
  * Title: 

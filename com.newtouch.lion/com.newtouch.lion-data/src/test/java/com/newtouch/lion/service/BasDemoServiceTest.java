@@ -10,9 +10,11 @@ package com.newtouch.lion.service;
 import java.util.Date;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.newtouch.lion.AllMyBatisTest;
 import com.newtouch.lion.model.demo.BasDemo;
 
 /**
@@ -32,7 +34,11 @@ import com.newtouch.lion.model.demo.BasDemo;
  * @author WangLijun
  * @version 1.0
  */
-public class BasDemoServiceTest extends AllMyBatisTest {
+//整合
+@RunWith(SpringJUnit4ClassRunner.class)
+//加载配置
+@ContextConfiguration(locations = "classpath:applicationContext.xml")
+public class BasDemoServiceTest {
 	
 	@Autowired
 	private BasDemoService basDemoService;
@@ -40,14 +46,14 @@ public class BasDemoServiceTest extends AllMyBatisTest {
 	@Test
 	public void save(){
 		BasDemo basDemo=new BasDemo();
-		basDemo.setId(1L);
+		//basDemo.setId(1L);
 		basDemo.setNameZh("MyBatis");
 		basDemo.setParentId(0L);
 		basDemo.setUpdatedById(1L);
 		basDemo.setUpdatedDate(new Date());
 		basDemo.setCreatedById(1L);
 		basDemo.setCreatedDate(new Date());
-		basDemoService.save(basDemo);
+		basDemoService.insert(basDemo);
 	}
 }
 

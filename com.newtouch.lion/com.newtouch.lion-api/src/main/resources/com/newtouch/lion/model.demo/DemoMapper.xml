@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 这里的namespace名字必须为执行该sql的dao地址&nbsp; -->
 <mapper namespace="com.newtouch.lion.dao.demo.BasDemoDao">
-	<resultMap type="com.newtouch.lion.model.demo.Demo" id="demoResultMap">  
+	<resultMap type="com.newtouch.lion.model.demo.BasDemo" id="demoResultMap">  
         <id property="id" column="bas_demo_id"/>  
         <result property="parentId"  column="parent_id"/>  
         <result property="nameZh"    column="name_zh"/>  

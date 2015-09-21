@@ -5,31 +5,24 @@
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref=dataSource />
-		<property name="configLocation" value="classpath:mybatis-config.xml"/>
-		<property name="mapperLocations">
-				<list>
-					<value>classpath*:persistence/BasDemoDao.xml</value>
-				</list>
-		</property>
+		<property name="configLocation"  value="classpath*:mybatis-config.xml"/>
+		<property name="mapperLocations" value="classpath*:persistence/*.xml"/>
 	</bean>
 	<!-- 创建BaseDDao -->
 	<bean  id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage"  value="com.newtouch.lion.dao.demo"/>
+		<property name="basePackage" value="com.newtouch.lion.dao.demo" />
 	</bean>
 	
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-		p:dataSource-ref="dataSource" />
+	<bean id="transactionManager1" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource" />
 
 	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
 
 	<aop:config>
-		<aop:pointcut id="myPointCut"
-			expression="execution(* com.newtouch.lion.service..*.*(..))" />
-		<aop:advisor pointcut-ref="myPointCut" advice-ref="txAdvice" />
+		<aop:pointcut id="myPointCut" expression="execution(* com.newtouch.lion.service..*.*(..))" />
+		<aop:advisor pointcut-ref="myPointCut" advice-ref="txAdvice1" />
 	</aop:config>
 
-	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+	<tx:advice id="txAdvice1" transaction-manager="transactionManager1">
 		<tx:attributes>
 			<tx:method name="get*" read-only="true" />
 			<tx:method name="delete*" />
