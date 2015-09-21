@@ -1,14 +1,6 @@
-/*
-* Copyright (c)  2015, Newtouch
-* All rights reserved. 
-*
-* $id: BasDemo.java 9552 2015年9月16日 上午11:12:58 WangLijun$
-*/
-package com.newtouch.lion.model.demo; 
+package com.newtouch.lion.model;
 
 import java.util.Date;
-
-import com.newtouch.lion.model.AuditEntity;
 
 /**
  * <p>
@@ -136,3 +128,5 @@ public class BasDemo {
 		this.updatedDate = updatedDate;
 	}
 }
+
+	

@@ -6,8 +6,6 @@
 */
 package com.newtouch.lion.dao.demo; 
 
-import java.util.List;
-
 import com.newtouch.lion.model.demo.BasDemo;
 
 /**
@@ -29,17 +27,7 @@ import com.newtouch.lion.model.demo.BasDemo;
  */
 public interface BasDemoDao {
 	
-	public BasDemo save(BasDemo  basDemo);
-	
-	public BasDemo update(BasDemo  basDemo);
-	
-	public BasDemo delete(Long id);
-	
-	public BasDemo find(Long id);
-	
-	public List<BasDemo> findAll();
-	
-	
+	public BasDemo insert(BasDemo  basDemo);	
 }
 
 	

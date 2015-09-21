@@ -12,9 +12,12 @@
 	<!-- common End -->
 	
 	<!-- repository Start -->
-	<!--  
+	<!--
 	<import resource="dao/applicationContext-jpa.xml" />
-	<import resource="tx/applicationContext-tx.xml" />-->
+		<import resource="tx/applicationContext-tx.xml" />  -->
+	<import resource="dao/applicationContext-mybatis.xml"/>
+
+	
 	<!-- repository End -->
 
 </beans>
