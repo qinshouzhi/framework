@@ -96,13 +96,14 @@ public class ResourceServiceImpl extends AbstractService implements
 		Resource parentResource = resource.getResource();
 
 		if (parentResource != null) {
-			boolean empty = parentResource.getResources().size() <= 1;
+			boolean empty = parentResource.getResources().size() <= 1?true:false;
 			parentResource.setIsLeaf(Boolean.valueOf(empty));
-			
-			if(parentResource.getType().equals(CodeListConstant.RESTYPE_MODULE_MENU_CATEGORY)){
-				parentResource.setType(CodeListConstant.RESTYPE_MODULE_CATEGORY_ITEM);
+			if(empty){
+				if(parentResource.getType().equals(CodeListConstant.RESTYPE_MODULE_MENU_CATEGORY)){
+					parentResource.setType(CodeListConstant.RESTYPE_MODULE_CATEGORY_ITEM);
+				}
+				this.resourceDao.save(parentResource);
 			}
-			this.resourceDao.save(parentResource);
 		}
 
 		this.resourceDao.remove(resource);
