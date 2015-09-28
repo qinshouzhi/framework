@@ -31,9 +31,10 @@ $(function() {
 
 
 	 $('#btnSave').click(function(){
+		 	$('#btnSave').unbind('click');
 	 		addForm.submit();
+	 		
 	 });
-
 	 //编辑
 	 $('#btnEdit').on('click',function(){
 		 var row=getSelectedRow();
@@ -42,7 +43,7 @@ $(function() {
 			 return;
 		 }
 		 addDialog.find('.modal-header h4 span').text('编辑资源');
-     addDialog.modal('toggle');
+         addDialog.modal('toggle');
 		 addForm.fill(row);
    
      $('#sysresourcetype').combo('val',[row.type]);
@@ -114,6 +115,10 @@ function successAddFrm(data,arg,id){
   	lion.util.success('提示',data.message);
   	$('#basic').modal('toggle');
   	$('#sys_resource_lists_tb').treegrid('reload');
+  	$('#btnSave').click(function(){
+	 	$('#btnSave').unbind('click');
+	 	$('#addform').submit();
+	});
   }else if(data!==null&&data.hasError){
   	var gmsg='';
   	for(var msg in data.errorMessage){
@@ -123,13 +128,25 @@ function successAddFrm(data,arg,id){
   		gmsg='添加资源出错';
   	}
   	lion.util.error('提示',gmsg);
+  	$('#btnSave').click(function(){
+	 	$('#btnSave').unbind('click');
+	 	$('#addform').submit();
+	});
   }else{
   	lion.util.error('提示','添加资源失败');
+  	$('#btnSave').click(function(){
+	 	$('#btnSave').unbind('click');
+	 	$('#addform').submit();
+	});
   }
 }
 //请求失败后信息
 function errorRequest(data,arg){
 	 lion.util.error('提示','网络连接异常');
+	 $('#btnSave').click(function(){
+	 	$('#btnSave').unbind('click');
+	 	$('#addform').submit();
+	});
 }
 //判断是否编辑
 function formatterEidtable(val,row) {
