@@ -15,7 +15,7 @@
 	<!--
 	<import resource="dao/applicationContext-jpa.xml" />
 	<import resource="tx/applicationContext-tx.xml" />  -->
-	<import resource="root-context.xml"/>
+	<import resource="mybatis-context.xml"/>
 
 	
 	<!-- repository End -->
