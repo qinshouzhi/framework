@@ -30,8 +30,7 @@
 		<property name="basePackage" value="com.newtouch.lion.mapper" />
 	</bean>
 
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
 		p:dataSource-ref="dynamicsDataSource" />
 
 	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
