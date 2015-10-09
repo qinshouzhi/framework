@@ -90,23 +90,22 @@ public class DynamicsDataSourceProcessor implements BeanPostProcessor {
 
 		try {
 			NameMatchTransactionAttributeSource transactionAttributeSource = (NameMatchTransactionAttributeSource) bean;
-			Field nameMapField = ReflectionUtils.findField(
-					NameMatchTransactionAttributeSource.class, "nameMap");
+			Field nameMapField = ReflectionUtils.findField(NameMatchTransactionAttributeSource.class, "nameMap");
 			nameMapField.setAccessible(true);
 			@SuppressWarnings("unchecked")
 			Map<String, TransactionAttribute> nameMap = (Map<String, TransactionAttribute>) nameMapField
 					.get(transactionAttributeSource);
 
 			for (Entry<String, TransactionAttribute> entry : nameMap.entrySet()) {
-				RuleBasedTransactionAttribute attr = (RuleBasedTransactionAttribute) entry
-						.getValue();
+				RuleBasedTransactionAttribute attr = (RuleBasedTransactionAttribute) entry.getValue();
 
 				// 仅对read-only的处理
+				String methodName = entry.getKey();
 				if (!attr.isReadOnly()) {
+					slaveMethodMap.put(methodName,Boolean.FALSE);
 					continue;
 				}
-
-				String methodName = entry.getKey();
+		 
 				Boolean isForceChoiceRead = Boolean.FALSE;
 				if (this.force) {
 					// 不管之前操作是写，默认强制从读库读 （设置为NOT_SUPPORTED即可）
@@ -131,7 +130,7 @@ public class DynamicsDataSourceProcessor implements BeanPostProcessor {
 	public Object determineMasterOrSlave(ProceedingJoinPoint proceedingJoinPoint)
 			throws Throwable {
 
-		if (isChoiceReadDB(proceedingJoinPoint.getSignature().getName())) {
+		if (isChoiceSlave(proceedingJoinPoint.getSignature().getName())) {
 			DataSourceContextHolder.setSlave();
 		} else {
 			DataSourceContextHolder.setMaster();
@@ -145,7 +144,7 @@ public class DynamicsDataSourceProcessor implements BeanPostProcessor {
 
 	}
 
-	private boolean isChoiceReadDB(String methodName) {
+	private boolean isChoiceSlave(String methodName) {
 
 		String bestNameMatch = null;
 		for (String mappedName : this.slaveMethodMap.keySet()) {

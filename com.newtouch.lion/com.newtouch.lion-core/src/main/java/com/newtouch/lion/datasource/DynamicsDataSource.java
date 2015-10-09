@@ -38,8 +38,7 @@ import org.springframework.util.CollectionUtils;
  * @author WangLijun
  * @version 1.0
  */
-public class DynamicsDataSource extends AbstractDataSource implements
-		InitializingBean {
+public class DynamicsDataSource extends AbstractDataSource implements InitializingBean {
 	/***
 	 * 日志
 	 */
@@ -111,10 +110,10 @@ public class DynamicsDataSource extends AbstractDataSource implements
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		if (masterDataSource == null) {
-			throw new IllegalArgumentException("property 'writeDataSource' is required");
+			throw new IllegalArgumentException("property 'masterDataSource' is required");
 		}
 		if (CollectionUtils.isEmpty(slaveDataSourceMap)) {
-			throw new IllegalArgumentException("property 'readDataSourceMap' is required");
+			throw new IllegalArgumentException("property 'slaveDataSourceMap' is required");
 		}
 		this.slaveDataSourceCount = this.slaveDataSourceMap.size();
 

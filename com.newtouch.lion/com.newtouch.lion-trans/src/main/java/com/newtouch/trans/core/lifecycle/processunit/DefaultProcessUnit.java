@@ -53,16 +53,14 @@ public abstract class DefaultProcessUnit<T> implements ProcessUnit {
 		T reqBody = null;
 		boolean hasError = false;
 		try {
-			reqBody = (T) JSON.parseObject(ctx.getRequest().getRequestJson(),
-					Class.forName(this.getClassName()));
+			reqBody = (T) JSON.parseObject(ctx.getRequest().getRequestJson(),Class.forName(this.getClassName()));
 		} catch (ClassNotFoundException e) {
 			logger.error("json解析异常", e);
 			hasError = true;
 		}
 
 		if (hasError) {
-			throw new TransException(ApplicationErrorCode.REQUEST_ERROR,
-					"JSON格式转换异常");
+			throw new TransException(ApplicationErrorCode.REQUEST_ERROR,"JSON格式转换异常");
 		}
 
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();

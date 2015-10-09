@@ -50,13 +50,13 @@
 
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="get*" read-only="true" />
-			<tx:method name="find*" read-only="true" />
-			<tx:method name="delete*" propagation="REQUIRED"/>
-			<tx:method name="save*" read-only="true" />
+			<tx:method name="get*"     read-only="true" />
+			<tx:method name="find*"    read-only="true" />
+			<tx:method name="delete*"  propagation="REQUIRED"/>
+			<tx:method name="save*"    read-only="true" />
 			<tx:method name="update*"  propagation="REQUIRED"/>
-			<tx:method name="insert*" propagation="REQUIRED"/>
-			<tx:method name="*"   propagation="SUPPORTS"/>
+			<tx:method name="insert*"  propagation="REQUIRED"/>
+			<tx:method name="*"        propagation="SUPPORTS"/>
 		</tx:attributes>
 	</tx:advice>
 
