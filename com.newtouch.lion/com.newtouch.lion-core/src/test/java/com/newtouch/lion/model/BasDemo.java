@@ -127,6 +127,18 @@ public class BasDemo {
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "BasDemo [id=" + id + ", parentId=" + parentId + ", nameZh="
+				+ nameZh + ", createdById=" + createdById + ", createdDate="
+				+ createdDate + ", updatedById=" + updatedById
+				+ ", updatedDate=" + updatedDate + "]";
+	}
+	
+	
 }
 
 	

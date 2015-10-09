@@ -31,6 +31,18 @@ public interface BasDemoService {
 	 * @param basDemo
 	 */
 	public void insert(BasDemo basDemo);
+	
+	/***
+	 * 
+	 * @param id
+	 */
+	public BasDemo findById(Long id);
+	
+	/**
+	 * 删除
+	 * @param id
+	 */
+	public int deleteById(Long id);
 }
 
 	

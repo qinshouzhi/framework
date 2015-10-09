@@ -19,8 +19,11 @@
 		<!--configLocation属性指定mybatis的核心配置文件 -->
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
 		<!-- 所有配置的mapper文件 -->
-		<property name="mapperLocations"
-			value="classpath*:persistence/*.xml" />
+		<property name="mapperLocations" value="classpath*:persistence/*.xml" />
+	</bean>
+	<!-- 构建SqlSessionTemplate -->
+	<bean id="sqlSessionTemplate"  class="org.mybatis.spring.SqlSessionTemplate">
+			<constructor-arg  name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

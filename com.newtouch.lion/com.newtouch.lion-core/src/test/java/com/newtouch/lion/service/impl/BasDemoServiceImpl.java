@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.newtouch.lion.dao.BasDemoDao;
 import com.newtouch.lion.model.BasDemo;
 import com.newtouch.lion.service.BasDemoService;
+import com.newtouch.lion.service.DemoDao;
 
 /**
  * <p>
@@ -35,6 +36,9 @@ public class BasDemoServiceImpl implements BasDemoService {
 	
 	@Autowired
 	private BasDemoDao basDemoDao;
+	
+	@Autowired
+	private DemoDao demoDao;
 
 	/* (non-Javadoc)
 	 * @see com.aoseala.test.service.BasDemoSevice#save()
@@ -44,6 +48,18 @@ public class BasDemoServiceImpl implements BasDemoService {
 		basDemoDao.insert(basDemo);
 	}
 
-}
+	/* (non-Javadoc)
+	 * @see com.newtouch.lion.service.BasDemoService#findById(java.lang.Long)
+	 */
+	@Override
+	public BasDemo findById(Long id) {
+		 return this.demoDao.getById(id);
+	}
+
+	@Override
+	public int deleteById(Long id) {
+		 return this.demoDao.delete(id);
+	}
+}	
 
 	

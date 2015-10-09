@@ -22,7 +22,11 @@ import com.newtouch.lion.model.BasDemo;
  */
 public interface BasDemoDao {
 	 
-    int insert(BasDemo basDemo);	
+    int insert(BasDemo basDemo);
+    
+    BasDemo getById(Long id);
+   
+	int  delete(Long id);
 }
 
 	

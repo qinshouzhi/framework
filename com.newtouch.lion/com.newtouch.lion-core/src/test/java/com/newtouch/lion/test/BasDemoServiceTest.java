@@ -5,6 +5,8 @@ import java.util.Date;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -33,6 +35,8 @@ import com.newtouch.lion.service.BasDemoService;
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class BasDemoServiceTest {
 	
+	protected static  final Logger logger=LoggerFactory.getLogger(BasDemoServiceTest.class);
+	
 	@Autowired
 	private BasDemoService  basDemoService;
 	
@@ -48,6 +52,21 @@ public class BasDemoServiceTest {
 		basDemoService.insert(basDemo);
 		
 		
+	}
+	
+	@Test
+	public void findById(){
+		Long id=1L;
+		BasDemo basDemo=this.basDemoService.findById(id);
+		logger.info("{}",basDemo.toString());
+	}
+	
+	
+	@Test
+	public void deleteById(){
+		Long id=1L;
+		int result=this.basDemoService.deleteById(id);
+		logger.info("result:{}",result);
 	}
 }
 
