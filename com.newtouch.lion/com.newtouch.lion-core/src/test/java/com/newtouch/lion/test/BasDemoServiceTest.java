@@ -56,7 +56,7 @@ public class BasDemoServiceTest {
 	
 	@Test
 	public void findById(){
-		Long id=1L;
+		Long id=2L;
 		BasDemo basDemo=this.basDemoService.findById(id);
 		logger.info("{}",basDemo.toString());
 	}

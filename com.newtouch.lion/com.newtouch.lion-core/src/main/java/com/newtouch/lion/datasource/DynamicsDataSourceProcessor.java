@@ -111,8 +111,7 @@ public class DynamicsDataSourceProcessor implements BeanPostProcessor {
 				if (this.force) {
 					// 不管之前操作是写，默认强制从读库读 （设置为NOT_SUPPORTED即可）
 					// NOT_SUPPORTED会挂起之前的事务
-					attr.setPropagationBehavior(Propagation.NOT_SUPPORTED
-							.value());
+					attr.setPropagationBehavior(Propagation.NOT_SUPPORTED.value());
 					isForceChoiceRead = Boolean.TRUE;
 				} else {
 					// 否则 设置为SUPPORTS（这样可以参与到写事务）
@@ -123,14 +122,13 @@ public class DynamicsDataSourceProcessor implements BeanPostProcessor {
 			}
 
 		} catch (Exception e) {
-			throw new DynamicsDataSourceTransactionException(
-					"process read/write transaction error", e);
+			throw new DynamicsDataSourceTransactionException("process read/write transaction error", e);
 		}
 
 		return bean;
 	}
 
-	public Object determineReadOrWriteDB(ProceedingJoinPoint proceedingJoinPoint)
+	public Object determineMasterOrSlave(ProceedingJoinPoint proceedingJoinPoint)
 			throws Throwable {
 
 		if (isChoiceReadDB(proceedingJoinPoint.getSignature().getName())) {

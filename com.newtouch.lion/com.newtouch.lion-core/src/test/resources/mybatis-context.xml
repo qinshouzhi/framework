@@ -15,7 +15,7 @@
  
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<!--dataSource属性指定要用到的连接池 -->
-		<property name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="dynamicsDataSource" />
 		<!--configLocation属性指定mybatis的核心配置文件 -->
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
 		<!-- 所有配置的mapper文件 -->
@@ -32,24 +32,31 @@
 
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-		p:dataSource-ref="dataSource" />
+		p:dataSource-ref="dynamicsDataSource" />
 
 	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
 
+ 	<bean id="dynamicsDataSourceProcessor" class="com.newtouch.lion.datasource.DynamicsDataSourceProcessor">
+       <property name="force" value="false"/>
+    </bean>
+
 	<aop:config>
-		<aop:pointcut id="myPointCut"
-			expression="execution(* com.newtouch.lion.service..*.*(..))" />
+		<aop:pointcut id="myPointCut" expression="execution(* com.newtouch.lion.service..*.*(..))" />
 		<aop:advisor pointcut-ref="myPointCut" advice-ref="txAdvice" />
+	 	<aop:aspect  order="-2147483648" ref="dynamicsDataSourceProcessor">
+	 			<aop:around   pointcut-ref="myPointCut" method="determineMasterOrSlave"/>
+	 	</aop:aspect>
 	</aop:config>
 
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="get*" read-only="true" />
-			<tx:method name="delete*" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="delete*" propagation="REQUIRED"/>
 			<tx:method name="save*" read-only="true" />
-			<tx:method name="update*" />
-			<tx:method name="insert*" />
-			<tx:method name="*" propagation="SUPPORTS" />
+			<tx:method name="update*"  propagation="REQUIRED"/>
+			<tx:method name="insert*" propagation="REQUIRED"/>
+			<tx:method name="*"   propagation="SUPPORTS"/>
 		</tx:attributes>
 	</tx:advice>
 
