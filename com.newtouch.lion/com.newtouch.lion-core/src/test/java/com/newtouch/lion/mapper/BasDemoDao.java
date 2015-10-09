@@ -1,4 +1,4 @@
-package com.newtouch.lion.dao;
+package com.newtouch.lion.mapper;
 
 
 import com.newtouch.lion.model.BasDemo;

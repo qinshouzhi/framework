@@ -28,7 +28,7 @@ import org.springframework.util.ReflectionUtils;
  * Title: 数据源读写分离
  * </p>
  * <p>
- * Description: 数据源读写分离
+ * Description: 数据源读写分离（所以读方法必须是read-only（必须，以此来判断是否是读方法）。）
  * </p>
  * <p>
  * Copyright: Copyright (c) 2015

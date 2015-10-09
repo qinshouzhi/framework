@@ -33,7 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author WangLijun
  * @version 1.0
  */
-public abstract class MyBatisBaseDaoImpl<T> extends SqlSessionDaoSupport {
+public abstract class MyBatisAbstractBaseDao<T> extends SqlSessionDaoSupport {
 	/**日志*/
 	protected final  Logger logger=LoggerFactory.getLogger(super.getClass());
 	

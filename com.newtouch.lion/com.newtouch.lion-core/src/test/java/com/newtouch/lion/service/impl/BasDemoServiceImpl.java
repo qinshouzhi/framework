@@ -9,10 +9,10 @@ package com.newtouch.lion.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.newtouch.lion.dao.BasDemoDao;
+import com.newtouch.lion.dao.DemoDao;
+import com.newtouch.lion.mapper.BasDemoDao;
 import com.newtouch.lion.model.BasDemo;
 import com.newtouch.lion.service.BasDemoService;
-import com.newtouch.lion.service.DemoDao;
 
 /**
  * <p>

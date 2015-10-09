@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.newtouch.lion.dao.BasDemoDao">
+<mapper namespace="com.newtouch.lion.mapper.BasDemoDao">
 	<resultMap id="BaseResultMap" type="com.newtouch.lion.model.BasDemo">
 		<id property="id" column="bas_demo_id" jdbcType="INTEGER" />
 		<result property="parentId" column="parent_id" jdbcType="INTEGER" />

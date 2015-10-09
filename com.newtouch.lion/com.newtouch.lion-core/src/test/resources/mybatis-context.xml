@@ -27,7 +27,7 @@
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.newtouch.lion.dao" />
+		<property name="basePackage" value="com.newtouch.lion.mapper" />
 	</bean>
 
 	<bean id="transactionManager"
