@@ -104,9 +104,6 @@
 		<level value="info" />
 		<appender-ref ref="STDOUT" />
 	</logger>
-	<logger name="org.apache.ibatis" level="info">
-		<appender-ref ref="STDOUT"/>
-	</logger>
 	<logger name="com.newtouch.lion">
 		<level value="info" />
 		<appender-ref ref="APP" />
