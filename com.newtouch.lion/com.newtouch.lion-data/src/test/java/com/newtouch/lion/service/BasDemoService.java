@@ -2,15 +2,15 @@
 * Copyright (c)  2015, Newtouch
 * All rights reserved. 
 *
-* $id: BasDemoService.java 9552 2015年9月16日 下午2:29:16 WangLijun$
+* $id: BasDemoSevice.java 9552 2015��9��16�� ����4:25:07 WangLijun$
 */
-package com.newtouch.lion.service; 
+package  com.newtouch.lion.service;
 
-import com.newtouch.lion.model.demo.BasDemo;
+import com.newtouch.lion.model.BasDemo;
 
 /**
  * <p>
- * Title: MyBatis测试方法
+ * Title: 
  * </p>
  * <p>
  * Description: 
@@ -30,7 +30,19 @@ public interface BasDemoService {
 	 * 
 	 * @param basDemo
 	 */
-	public BasDemo insert(BasDemo basDemo);
+	public void insert(BasDemo basDemo);
+	
+	/***
+	 * 
+	 * @param id
+	 */
+	public BasDemo findById(Long id);
+	
+	/**
+	 * 删除
+	 * @param id
+	 */
+	public int deleteById(Long id);
 }
 
 	

@@ -43,8 +43,7 @@ import org.springframework.util.ReflectionUtils;
 public class DynamicsDataSourceProcessor implements BeanPostProcessor {
 
 	/** 日志 */
-	private static final Logger logger = LoggerFactory
-			.getLogger(DynamicsDataSourceProcessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(DynamicsDataSourceProcessor.class);
 
 	/**
 	 * 当之前操作是写的时候，是否强制从从库读 默认（false） 当之前操作是写，默认强制从写库读

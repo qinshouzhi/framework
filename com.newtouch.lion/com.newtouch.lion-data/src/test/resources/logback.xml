@@ -92,6 +92,14 @@
 		<level value="info" />
 		<appender-ref ref="STDOUT" />
 	</logger>
+	<logger name="org.apache.ibatis">
+		<level value="debug" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+	<logger name="org.mybatis.spring">
+		<level value="debug" />
+		<appender-ref ref="STDOUT" />
+	</logger>
 	<logger name="org.hibernate">
 		<level value="info" />
 		<appender-ref ref="STDOUT" />

@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 
 import com.newtouch.lion.AllTest;
 import com.newtouch.lion.model.system.DemoModel;
@@ -39,9 +40,12 @@ public class DemoServiceTest extends AllTest {
 	@Autowired
 	private DemoService demoService;
 
-	//@Test
+	@Test
 	public void doFindByParentIdTest() {
 		List<DemoModel> demoModels = demoService.doFindByParentId();
+		if(CollectionUtils.isEmpty(demoModels)){
+			return;
+		}
 		DemoModel demoModel=demoModels.get(0);
 	 
 		logger.info("id:{},nameZh:{},demoModel.getDemoModels().size():{}",demoModel.getId(),demoModel.getNameZh(),demoModel.getDemoModels().size());
