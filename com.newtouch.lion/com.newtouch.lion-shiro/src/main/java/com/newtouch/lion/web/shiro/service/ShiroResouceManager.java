@@ -27,7 +27,7 @@ import com.newtouch.lion.web.shiro.model.AuthorityModel;
  * @author WangLijun
  * @version 1.0
  */
-public interface ShiroResouceService {
+public interface ShiroResouceManager {
 	/****
 	 * 根据资源查询所有权限信息
 	 * @return
