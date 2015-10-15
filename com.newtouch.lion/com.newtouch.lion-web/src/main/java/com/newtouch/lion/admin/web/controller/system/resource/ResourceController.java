@@ -48,7 +48,7 @@ import com.newtouch.lion.web.controller.AbstractController;
 import com.newtouch.lion.web.model.QueryVo;
 import com.newtouch.lion.web.servlet.view.support.BindMessage;
 import com.newtouch.lion.web.servlet.view.support.BindResult;
-import com.newtouch.lion.web.shiro.chain.FilterChainDefinitionsService;
+import com.newtouch.lion.web.shiro.chain.FilterChainDefinitions;
 import com.newtouch.lion.web.shiro.session.LoginSecurityUtil;
 
 /**
@@ -89,7 +89,7 @@ public class ResourceController extends AbstractController{
 	private DataGridService dataGridService;
 	/***权限拦截更新*/
 	@Autowired
-	private FilterChainDefinitionsService filterChainDefinitionsService; 
+	private FilterChainDefinitions filterChainDefinitions; 
 	
 
 	@RequestMapping(value = "add")
@@ -115,7 +115,7 @@ public class ResourceController extends AbstractController{
 	 */
 	private void updatePermission(){
 		//TODO 集群更新 (单台更新)
-		filterChainDefinitionsService.updatePermission();
+		filterChainDefinitions.updatePermission();
 	}
 	
 	@RequestMapping(value = "edit")

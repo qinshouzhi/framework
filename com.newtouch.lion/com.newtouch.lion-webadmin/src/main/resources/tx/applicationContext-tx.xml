@@ -20,9 +20,13 @@
 	<bean id="methodTraceAdvice" class="com.newtouch.lion.advice.MethodTraceAdvice">
 		 <property name="enabledMethodTrace" value="true" />
 	</bean>
+	
+ 
 	<!-- Transaction Advisor -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
+			<tx:method name="find*"   read-only="true" />
+			<tx:method name="delete*" propagation="REQUIRED"/>
 			<tx:method name="doFind*" read-only="true"   propagation="SUPPORTS" />
 			<tx:method name="find*"   read-only="true"   propagation="SUPPORTS" />
 			<tx:method name="get*"    read-only="true"   propagation="SUPPORTS" />
@@ -37,15 +41,18 @@
 
 	<!-- AOP Configuration -->
 	<aop:config proxy-target-class="true">
+		<aop:pointcut id="txPointCut" expression="execution(* *..*Service.*(..))" />
 		<aop:advisor id="doMethodTimer" advice-ref="methodTimerAdvice"
 			pointcut="execution(* *..*Service.do*(..))" order="1" />
 
-		<aop:advisor id="idoMethodTimer" advice-ref="methodTimerAdvice"
-			pointcut="execution(* *..*Service.ido*(..))" order="2" />
+		<aop:advisor id="idoMethodTimer" advice-ref="methodTimerAdvice" 	pointcut="execution(* *..*Service.ido*(..))" order="2" />
 
-		<aop:advisor id="methodTrace" advice-ref="methodTraceAdvice"
-			pointcut="execution(* *..*Service.*(..))" order="3" />
+		<aop:advisor id="methodTrace" advice-ref="methodTraceAdvice" pointcut="execution(* *..*Service.*(..))" order="3" />
 			
-		<aop:advisor id="serviceTx" advice-ref="txAdvice" pointcut="execution(* *..*Service.*(..))" order="4" />
+		<aop:advisor id="serviceTx"  pointcut-ref="txPointCut" advice-ref="txAdvice" order="4" />
+		
+		<aop:aspect  order="-2147483648" ref="dynamicsPersistenceExceptionTranslationPostProcessor">
+	 			<aop:around   pointcut-ref="txPointCut" method="determineMasterOrSlave"/>
+	 	</aop:aspect>
 	</aop:config>
 </beans>

@@ -116,7 +116,7 @@ public class DynamicsDataSourceProcessor implements BeanPostProcessor {
 					attr.setPropagationBehavior(Propagation.SUPPORTS.value());
 				}
 				logger.debug("read/write transaction process  method:{} force read:{}",methodName, isForceChoiceRead);
-				slaveMethodMap.put(methodName, isForceChoiceRead);
+				this.slaveMethodMap.put(methodName, isForceChoiceRead);
 			}
 
 		} catch (Exception e) {
@@ -146,14 +146,20 @@ public class DynamicsDataSourceProcessor implements BeanPostProcessor {
 	private boolean isChoiceSlave(String methodName) {
 
 		String bestNameMatch = null;
+		logger.info("methodName:{}",methodName);
 		for (String mappedName : this.slaveMethodMap.keySet()) {
 			if (isMatch(methodName, mappedName)) {
 				bestNameMatch = mappedName;
 				break;
 			}
 		}
-
-		Boolean isForceChoiceRead = slaveMethodMap.get(bestNameMatch);
+		logger.info("bestNameMatch:{}",bestNameMatch);
+		//判断是否空
+	   if(this.slaveMethodMap.containsKey(bestNameMatch)){
+		   	return false;
+	   }
+		
+		Boolean isForceChoiceRead = this.slaveMethodMap.get(bestNameMatch);
 		// 表示强制选择 读 库
 		if (isForceChoiceRead == Boolean.TRUE) {
 			return true;
@@ -175,5 +181,6 @@ public class DynamicsDataSourceProcessor implements BeanPostProcessor {
 	protected boolean isMatch(String methodName, String mappedName) {
 		return PatternMatchUtils.simpleMatch(mappedName, methodName);
 	}
+ 
 
 }

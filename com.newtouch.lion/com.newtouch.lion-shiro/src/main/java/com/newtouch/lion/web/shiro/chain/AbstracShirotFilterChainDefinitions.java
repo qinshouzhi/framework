@@ -11,11 +11,10 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.config.Ini;
 import org.apache.shiro.config.Ini.Section;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.util.CollectionUtils;
 import org.apache.shiro.web.config.IniFilterChainResolverFactory;
 import org.apache.shiro.web.filter.mgt.DefaultFilterChainManager;
 import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
@@ -24,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 
 import com.newtouch.lion.common.lang.StringFormatter;
 import com.newtouch.lion.web.shiro.constant.Constants;
@@ -46,11 +46,11 @@ import com.newtouch.lion.web.shiro.model.AuthorityModel;
  * @author WangLijun
  * @version 1.0
  */
-public abstract class AbstractFilterChainDefinitionsService implements FilterChainDefinitionsService, FactoryBean<Section> {
+public abstract class AbstracShirotFilterChainDefinitions implements FilterChainDefinitions, FactoryBean<Section> {
 	/***
 	 * 日志
 	 */
-	private static final Logger logger = LoggerFactory.getLogger(AbstractFilterChainDefinitionsService.class);
+	private static final Logger logger = LoggerFactory.getLogger(AbstracShirotFilterChainDefinitions.class);
 
 	/** shiro默认的链接定义 ***/
 	private String filterChainDefinitions;
@@ -74,7 +74,7 @@ public abstract class AbstractFilterChainDefinitionsService implements FilterCha
 	private Section obtainPermission() {
 		try {
 			return this.getObject();
-		} catch (Exception e) {
+		} catch (java.lang.Exception e) {
 			logger.error("", e);
 			return null;
 		}
@@ -95,7 +95,7 @@ public abstract class AbstractFilterChainDefinitionsService implements FilterCha
 			try {
 				//加载资源
 				shiroFilter = (AbstractShiroFilter) shiroFilterFactoryBean.getObject();
-			} catch (Exception e) {
+			} catch (java.lang.Exception e) {
 				logger.error(e.getMessage());
 			}
 
@@ -143,7 +143,7 @@ public abstract class AbstractFilterChainDefinitionsService implements FilterCha
 	}
 
 	@Override
-	public Section getObject() throws Exception {
+	public Section getObject() throws java.lang.Exception{
 		Ini ini = new Ini();
 		// 加载默认的url
 		ini.load(filterChainDefinitions);
@@ -173,7 +173,7 @@ public abstract class AbstractFilterChainDefinitionsService implements FilterCha
 	public abstract List<AuthorityModel> initOtherPermission();
 
 	@Override
-	public Class<?> getObjectType() {
+	public java.lang.Class<?> getObjectType() {
 		return Section.class;
 	}
 

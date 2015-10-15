@@ -18,7 +18,7 @@ import com.newtouch.lion.model.system.Role;
 import com.newtouch.lion.service.AbstractService;
 import com.newtouch.lion.service.system.ResourceService;
 import com.newtouch.lion.web.shiro.model.AuthorityModel;
-import com.newtouch.lion.web.shiro.service.ShiroResouceService;
+import com.newtouch.lion.web.shiro.service.ShiroResouceManager;
 
 /**
  * <p>
@@ -38,8 +38,8 @@ import com.newtouch.lion.web.shiro.service.ShiroResouceService;
  * @version 1.0
  */
 @Service
-public class ShiroResouceServiceImpl extends AbstractService implements
-		ShiroResouceService {
+public class ShiroResouceManagerImpl  implements
+		ShiroResouceManager {
 	/** 资源读取类 */
 	@Autowired
 	private ResourceService resourceService; 
