@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.newtouch.lion</groupId>
 		<artifactId>com.newtouch.lion-parent</artifactId>
-		<version>1.02</version>
+		<version>1.03</version>
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>com.newtouch.lion-websocket</artifactId>
@@ -57,5 +57,5 @@
 	<build>
 		<finalName>com.newtouch.lion-websocket</finalName>
 	</build>
-	<version>1.02</version>
+	<version>1.03</version>
 </project>
