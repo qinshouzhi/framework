@@ -5,13 +5,18 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.newtouch.lion</groupId>
 	<artifactId>com.newtouch.lion-parent</artifactId>
+<<<<<<< HEAD
 	<version>1.0.4</version>
+=======
+	<version>1.03</version>
+>>>>>>> branch '1.0' of git@github.com:scwanglijun/framework.git
 	<name>com.newtouch.lion-parent</name>
 	<packaging>pom</packaging>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.7</jdk.version>
+<<<<<<< HEAD
 		<lion-parent.version>1.0.4</lion-parent.version>
 		<lion-core.version>1.0.4</lion-core.version>
 		<lion-adpater.version>1.0.4</lion-adpater.version>
@@ -31,6 +36,27 @@
 		<lion-trans.version>1.0.4</lion-trans.version>
 		<lion-monitor.version>1.0.4</lion-monitor.version>
 		<lion-zookeeper.version>1.0.4</lion-zookeeper.version>
+=======
+		<lion-parent.version>1.03</lion-parent.version>
+		<lion-core.version>1.03</lion-core.version>
+		<lion-adpater.version>1.03</lion-adpater.version>
+		<lion-im.version>1.03</lion-im.version>
+		<lion-webcore.version>1.03</lion-webcore.version>
+		<lion-cache.version>1.03</lion-cache.version>
+		<lion-shiro.version>1.03</lion-shiro.version>
+		<lion-web.version>1.03</lion-web.version>
+		<lion-webadmin.version>1.03</lion-webadmin.version>
+		<lion-api.version>1.03</lion-api.version>
+		<lion-service.version>1.03</lion-service.version>
+		<lion-data.version>1.03</lion-data.version>
+		<lion-common.version>1.03</lion-common.version>
+		<lion-redis.version>1.03</lion-redis.version>
+		<lion-mongodb.version>1.03</lion-mongodb.version>
+		<lion-exception.version>1.03</lion-exception.version>
+		<lion-trans.version>1.03</lion-trans.version>
+		<lion-monitor.version>1.03</lion-monitor.version>
+		<lion-zookeeper.version>1.03</lion-zookeeper.version>
+>>>>>>> branch '1.0' of git@github.com:scwanglijun/framework.git
 		<junit.version>4.8.2</junit.version>
 		<slf4j.version>1.7.1</slf4j.version>
 		<poi.version>3.9</poi.version>

@@ -21,7 +21,9 @@
 		 <property name="enabledMethodTrace" value="true" />
 	</bean>
 	
- 	
+ 	<bean id="dynamicsDataSourceProcessor" class="com.newtouch.lion.datasource.DynamicsDataSourceProcessor">
+       <property name="force" value="false"/>
+    </bean>
 	<!-- Transaction Advisor -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
@@ -51,7 +53,7 @@
 			
 		<aop:advisor id="serviceTx"  pointcut-ref="txPointCut" advice-ref="txAdvice" order="4" />
 		
-		<aop:aspect  order="-2147483648" ref="dynamicsBeanPostProcessor">
+		<aop:aspect  order="-2147483648" ref="dynamicsDataSourceProcessor">
 	 			<aop:around   pointcut-ref="txPointCut" method="determineMasterOrSlave"/>
 	 	</aop:aspect>
 	</aop:config>

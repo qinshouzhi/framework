@@ -28,14 +28,14 @@
 <script src="${base}/resources/admin/pages/scripts/ui-toastr.js"></script>
 <script src="${base}/resources/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
 <!--lion UI JS Start-->
-<script src="${base}/resources/global/js/lion.js" type="text/javascript"></script>
-<script src="${base}/resources/global/js/combo/combonew.js" type="text/javascript"></script>
-<script src="${base}/resources/global/js/form/form.fill.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/lion.min.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/combo/combonew.min.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/form/form.fill.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
-<script src="${base}/resources/global/js/combotree/combotree.js" type="text/javascript"></script>
-<script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/combotree/combotree.min.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/datagrid/datagrids.min.js" type="text/javascript"></script>
 <!--lang-->
-<script src="${base}/resources/admin/scripts/admin-common.js" type="text/javascript"></script>
+<script src="${base}/resources/admin/scripts/admin-common.min.js" type="text/javascript"></script>
 <!-- icon -->
 <script src="${base}/resources/admin/scripts/system/icon.js" type="text/javascript"></script>
 </head>

@@ -20,11 +20,7 @@
 	<import resource="classpath:dao/applicationContext-jpa.xml" />
 	<import resource="classpath:tx/applicationContext-tx.xml" />
 	<!-- Dao End -->
-	
-	<!-- MyBatis Start -->
-	<import resource="mybatis/mybatis-context.xml" />
-	<!-- MyBatis end -->
-	
+
 	<!-- shiro Start-->
 	<import resource="classpath:shiro/applicationContext-shiroweb.xml" />
 	<import resource="classpath:freemarker/applicationContext-freemarker.xml" />

@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.newtouch.lion</groupId>
 		<artifactId>com.newtouch.lion-parent</artifactId>
-		<version>1.0.4</version>
+		<version>1.03</version>
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>com.newtouch.lion-shiro</artifactId>
@@ -67,5 +67,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	<version>1.0.4.1</version>
+	<version>1.03</version>
 </project>

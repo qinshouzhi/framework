@@ -21,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.newtouch.lion.common.lang.StringFormatter;
 import com.newtouch.lion.web.shiro.constant.Constants;
 import com.newtouch.lion.web.shiro.model.AuthorityModel;
-import com.newtouch.lion.web.shiro.service.ShiroResouceManager;
+import com.newtouch.lion.web.shiro.service.ShiroResouceService;
 
 /**
  * <p>
@@ -48,7 +48,7 @@ public class ShiroFilterChainDefinitionManager  implements FactoryBean<Section> 
 	 * 资源权限读取
 	 */
 	@Autowired
-	private ShiroResouceManager shiroResouceManager;
+	private ShiroResouceService shiroResouceService;
 
 	/** shiro默认的链接定义***/
 	private String filterChainDefinitions;
@@ -72,7 +72,7 @@ public class ShiroFilterChainDefinitionManager  implements FactoryBean<Section> 
 		if (CollectionUtils.isEmpty(section)) {
 			section = ini.getSection(Ini.DEFAULT_SECTION_NAME);
 		}
-		 List<AuthorityModel> resources =shiroResouceManager.doFindAll();
+		 List<AuthorityModel> resources =shiroResouceService.doFindAll();
 		// 循环数据库资源的url
 		for (AuthorityModel authorityModel:resources) {
 			 StringBuffer sb=new StringBuffer();

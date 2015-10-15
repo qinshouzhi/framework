@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.newtouch.lion.web.shiro.model.AuthorityModel;
-import com.newtouch.lion.web.shiro.service.ShiroResouceManager;
+import com.newtouch.lion.web.shiro.service.ShiroResouceService;
 
 /**
  * <p>
@@ -32,7 +32,7 @@ import com.newtouch.lion.web.shiro.service.ShiroResouceManager;
  * @author WangLijun
  * @version 1.0
  */
-public class ShiroFilterChainDefinitionManager  extends AbstracShirotFilterChainDefinitions {
+public class ShiroFilterChainDefinitionManager  extends AbstractFilterChainDefinitionsService {
 	
 	/**日志*/
 	private static final Logger logger=LoggerFactory.getLogger(ShiroFilterChainDefinitionManager.class);
@@ -40,12 +40,12 @@ public class ShiroFilterChainDefinitionManager  extends AbstracShirotFilterChain
 	 * 资源权限读取
 	 */
 	@Autowired
-	private ShiroResouceManager shiroResouceManager;
+	private ShiroResouceService shiroResouceService;
 
  
 	@Override
 	public List<AuthorityModel> initOtherPermission() {
 	    logger.info("加载菜单资源进行拦截");
-		return shiroResouceManager.doFindAll();
+		return shiroResouceService.doFindAll();
 	}
 }
