@@ -48,7 +48,7 @@ public abstract class AbstractAdvisingBeanPostProcessor extends ProxyConfig
 
 	protected boolean beforeExistingAdvisors = false;
 
-	private ClassLoader beanClassLoader = ClassUtils.getDefaultClassLoader();
+	protected ClassLoader beanClassLoader = ClassUtils.getDefaultClassLoader();
 
 	/**
 	 * This should run after all other post-processors, so that it can just add

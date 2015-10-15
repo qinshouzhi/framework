@@ -6,11 +6,11 @@
 	<parent>
 		<groupId>com.newtouch.lion</groupId>
 		<artifactId>com.newtouch.lion-parent</artifactId>
-		<version>1.03</version>
+		<version>1.0.4-SNAPSHOT</version>
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>com.newtouch.lion-adpater</artifactId>
-	<version>1.03</version>
+	<version>1.0.4-SNAPSHOT</version>
 	<name>com.newtouch.lion-adpater</name>
 	<url>http://maven.apache.org</url>
 	<properties>

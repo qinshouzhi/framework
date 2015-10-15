@@ -6,13 +6,13 @@
 	<parent>
 		<groupId>com.newtouch.lion</groupId>
 		<artifactId>com.newtouch.lion-parent</artifactId>
-		<version>1.03</version>
+		<version>1.0.4-SNAPSHOT</version>
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>com.newtouch.lion-cache</artifactId>
 	<name>com.newtouch.lion-cache</name>
 	<url>http://www.newtouchone.com</url>
-	<version>1.03</version>
+	<version>1.0.4-SNAPSHOT</version>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
