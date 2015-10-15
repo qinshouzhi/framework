@@ -6,19 +6,11 @@
 	<parent>
 		<groupId>com.newtouch.lion</groupId>
 		<artifactId>com.newtouch.lion-parent</artifactId>
-<<<<<<< HEAD
-		<version>1.0.4</version>
-=======
-		<version>1.03</version>
->>>>>>> branch '1.0' of git@github.com:scwanglijun/framework.git
+		<version>1.0.4-SNAPSHOT</version>
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>com.newtouch.lion-redis</artifactId>
-<<<<<<< HEAD
-	<version>1.0.4</version>
-=======
-	<version>1.03</version>
->>>>>>> branch '1.0' of git@github.com:scwanglijun/framework.git
+	<version>1.0.4-SNAPSHOT</version>
 	<name>com.newtouch.lion-redis</name>
 	<url>http://www.newtouchone.com</url>
 	<properties>

@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.newtouch.lion</groupId>
 	<artifactId>com.newtouch.lion-parent</artifactId>
-	<version>1.0.4</version>
+	<version>1.0.4-SNAPSHOT</version>
 	<name>com.newtouch.lion-parent</name>
 	<packaging>pom</packaging>
 	<url>http://maven.apache.org</url>
