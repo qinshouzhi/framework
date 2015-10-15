@@ -13,27 +13,30 @@
 	</properties>
 	<modules>
 		<module>com.newtouch.lion-parent</module>
+		<module>com.newtouch.lion-common</module>
 		<module>com.newtouch.lion-exception</module>
 		<module>com.newtouch.lion-adpater</module>
 		<module>com.newtouch.lion-api</module>
+		<module>com.newtouch.lion-core</module>
 		<module>com.newtouch.lion-data</module>
 		<module>com.newtouch.lion-service</module>
-		<module>com.newtouch.lion-im</module>
-		<module>com.newtouch.lion-common</module>
-		<module>com.newtouch.lion-web</module>		
-		<module>com.newtouch.lion-mgt</module>
-		<module>com.newtouch.lion-webcore</module>
 		<module>com.newtouch.lion-shiro</module>
+		<module>com.newtouch.lion-im</module>
+	
+		<module>com.newtouch.lion-mgt</module>
+
+		<module>com.newtouch.lion-web</module>	
+		<module>com.newtouch.lion-webcore</module>		
 		<module>com.newtouch.lion-redis</module>
    		<module>com.newtouch.lion-mongodb</module>
 		<module>com.newtouch.lion-dsession</module>
 		<module>com.newtouch.lion-monitor</module>
    		<module>com.newtouch.lion-websocket</module>
    		<module>com.newtouch.lion-webadmin</module>
-    <module>com.newtouch.lion-trans</module>
-    <module>com.newtouch.lion-core</module>
-    <module>com.newtouch.lion-cache</module>
-    <module>com.newtouch.lion-zookeeper</module>
+	    <module>com.newtouch.lion-trans</module>
+	   
+	    <module>com.newtouch.lion-cache</module>
+	    <module>com.newtouch.lion-zookeeper</module>
   </modules>
 	<distributionManagement>
 		<repository>
