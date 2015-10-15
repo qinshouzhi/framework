@@ -45,7 +45,7 @@ public class ShiroResouceManagerImpl  implements ShiroResouceManager {
 	 * (non-Javadoc)
 	 * 
 	 * @see com.newtouch.lion.web.shiro.service.ShiroResouceService#findAll()
-	 */
+	 */ 
 	@Override
 	public List<AuthorityModel> doFindAll() {
 		List<Resource> resources = resourceService.doFindAuthAll();
