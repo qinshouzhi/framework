@@ -52,10 +52,9 @@ public class IndexController extends  AbstractController{
 		return INDEX_RETURN;
 	}
 	
+	
 	@RequestMapping("test")
 	public String test(){
-		
-		 
         logger.info(" request.getRequestURL():{}",this.getRequest().getRequestURL());
         logger.info(" request.getRequestURI():{}",this.getRequest().getRequestURI());
         logger.info(":{}",this.getRequest().getContextPath());
@@ -65,8 +64,6 @@ public class IndexController extends  AbstractController{
 	
 	@RequestMapping("test2")
 	public String test2(){
-		
-		 
         logger.info(" request.getRequestURL():{}",this.getRequest().getRequestURL());
         logger.info(" request.getRequestURI():{}",this.getRequest().getRequestURI());
         logger.info(":{}",this.getRequest().getContextPath());

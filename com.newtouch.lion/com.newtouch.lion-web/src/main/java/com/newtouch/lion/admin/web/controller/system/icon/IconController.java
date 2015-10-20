@@ -84,6 +84,10 @@ public class IconController extends AbstractController{
 	public String index() {
 		return INDEX_RETURN;
 	}
+	@RequestMapping(value = "icon")
+	public String icon() {
+		return "system/icon/icon";
+	}
 	/** 图标数据添加对话框 */
 	@RequestMapping(value = "adddialog")
 	public String addDialog() {

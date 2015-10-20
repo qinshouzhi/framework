@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @TransactionConfiguration(defaultRollback = false)
-@ContextConfiguration(locations = { "classpath*:applicationContext.xml" })
+@ContextConfiguration(locations = { "classpath*:applicationContext-admin.xml" })
 public abstract class AllTest extends AbstractTransactionalJUnit4SpringContextTests{
 	
 	/**日志*/

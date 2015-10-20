@@ -5592,10 +5592,8 @@
 		this.fnGetData = function( src, col )
 		{
 			var api = this.api( true );
-		
 			if ( src !== undefined ) {
 				var type = src.nodeName ? src.nodeName.toLowerCase() : '';
-		
 				return col !== undefined || type == 'td' || type == 'th' ?
 					api.cell( src, col ).data() :
 					api.row( src ).data() || null;

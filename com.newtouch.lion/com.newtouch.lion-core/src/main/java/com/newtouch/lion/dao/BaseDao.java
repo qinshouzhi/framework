@@ -106,7 +106,7 @@ public interface BaseDao<T extends BaseEntity<PK>,PK> extends Serializable {
 	 * @param params
 	 * @return
 	 */
-	public int updateHQL( String hql, Map<String, ?> params);
+	public int updateHQL(String hql, Map<String, ?> params);
 	
 	/***
 	 * 
