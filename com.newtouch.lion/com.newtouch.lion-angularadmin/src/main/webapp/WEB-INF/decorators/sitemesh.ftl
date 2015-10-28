@@ -9,7 +9,7 @@ Author: wanglijun
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="en" class="no-js">
+<html lang="en" class="no-js" ng-app="LionApp">
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
@@ -53,13 +53,14 @@ ${head}
 <#include "header.ftl"/> 
 <!-- BEGIN PAGE -->
 <!-- BEGIN CONTAINER -->
-<div class="page-container">
+<div class="page-container" ng-controller="AppController">
 	<!-- BEGIN SIDEBAR -->
 	<#include "menu.ftl"/> 
 	<!-- END SIDEBAR -->
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
 		<div class="page-content">
+		    <input type="text" ng-model="first" />
 			<#include "navigationbar.ftl">
 			<!-- BEGIN PAGE CONTENT INNER -->
 		 	${body}
@@ -91,6 +92,21 @@ ${head}
 <script src="${base}/resources/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
+
+<!-- BEGIN CORE ANGULARJS PLUGINS -->
+<script src="${base}/resources/global/plugins/angularjs/angular.min.js" type="text/javascript"></script>	
+<script src="${base}/resources/global/plugins/angularjs/angular-sanitize.min.js" type="text/javascript"></script>
+<script src="${base}/resources/global/plugins/angularjs/angular-touch.min.js" type="text/javascript"></script>	
+<script src="${base}/resources/global/plugins/angularjs/plugins/angular-ui-router.min.js" type="text/javascript"></script>
+<script src="${base}/resources/global/plugins/angularjs/plugins/ocLazyLoad.min.js" type="text/javascript"></script>
+<script src="${base}/resources/global/plugins/angularjs/plugins/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
+<!-- END CORE ANGULARJS PLUGINS -->
+
+<!-- BEGIN APP LEVEL ANGULARJS SCRIPTS -->
+<script src="${base}/resources/global/js/app.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/directives.js" type="text/javascript"></script>
+<!-- END APP LEVEL ANGULARJS SCRIPTS -->
+
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="${base}/resources/global/scripts/metronic.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/layout4/scripts/layout.js" type="text/javascript"></script>
