@@ -74,7 +74,7 @@
 		<maven-source.version>2.4</maven-source.version>
 		<mybatis.version>3.2.1</mybatis.version>
 		<mybatis-spring.version>1.2.0</mybatis-spring.version>
-		
+		<hessian.version>4.0.38</hessian.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -803,6 +803,13 @@
 				<version>${mybatis-spring.version}</version>
 			</dependency>
 			<!-- mybatis Jar End -->
+			<!-- Hessian Jar Start -->
+			<dependency>
+				<groupId>com.caucho</groupId>
+				<artifactId>hessian</artifactId>
+				<version>${hessian.version}</version>
+			</dependency>
+			<!-- Hessian Jar End -->
 		</dependencies>
 	</dependencyManagement>
 	<build>
@@ -873,12 +880,12 @@
 		<repository>
 			<id>releases</id>
 			<name>Nexus Release Repository</name>
-			<url>http://maven.newtouchone.com/content/repositories/newtouch/</url>
+			<url>http://maven.newtouch.com/content/repositories/newtouch/</url>
 		</repository>
 		<snapshotRepository>
 			<id>snapshots</id>
 			<name>Nexus Snapshot Repository</name>
-			<url>http://maven.newtouchone.com/content/repositories/newtouch-snapshots/</url>
+			<url>http://maven.newtouch.com/content/repositories/newtouch-snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>

@@ -140,4 +140,13 @@
 			<value>jsonView</value>
 		</property>
 	</bean>
+	<!-- hessian -->
+	<bean id="addService.htm" class="com.newtouch.lion.service.system.impl.IconServiceImpl" />
+
+	<bean name="/addService.htm"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="addService.htm" />
+		<property name="serviceInterface"
+			value="com.newtouch.lion.service.system.IconService" />
+	</bean>
 </beans>
