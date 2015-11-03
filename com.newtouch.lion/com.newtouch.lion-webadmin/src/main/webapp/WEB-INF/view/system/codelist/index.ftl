@@ -68,10 +68,12 @@
 			</div>
 		
 			<div class="col-md-12 margin-bottom-10" id="toolbar">
+				<@shiro.hasPermission name="system.codetype.add">
 				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" href="#basic">
 					<i class="fa fa-plus"></i> 
 					<@spring.message "common.toolbar.btn.add.text"/>  
 				</a>
+				</@shiro.hasPermission>
 				<a id="btnEdit" class="btn btn-sm red">
 					<i class="fa fa-edit"></i> 
 					<@spring.message "common.toolbar.btn.edit.text"/>

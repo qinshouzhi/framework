@@ -252,8 +252,7 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 	 * @see com.newtouch.lion.service.system.RoleService#doFindRoleGroupByCriteria(com.newtouch.lion.query.QueryCriteria, java.lang.Long)
 	 */
 	@Override
-	public PageResult<RoleGroup> doFindRoleGroupByCriteria(
-			QueryCriteria criteria, Long groupId) {
+	public PageResult<RoleGroup> doFindRoleGroupByCriteria(QueryCriteria criteria, Long groupId) {
 		
 		PageResult<RoleGroup> pageResult = roleGroupDao.doFindRoleUserByCriteria(criteria);
 		
@@ -306,7 +305,7 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 	@Override
 	public PageResult<Role> doFindByCriteriaAndGroup(QueryCriteria criteria) {
 		
-		return roleDao.doFindByCriteria(criteria);
+		return roleDao.doFindByCriteriaAndGroup(criteria);
 	}
 
 	
@@ -316,7 +315,7 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 	 */
 	@Override
 	public PageResult<Role> doFindByCriteriaAndUser(QueryCriteria queryCriteria) {
-		return roleDao.doFindByCriteria(queryCriteria);
+		return roleDao.doFindByCriteriaAndUser(queryCriteria);
 	}
 
 	/*
@@ -370,7 +369,7 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 	 */
 	@Override
 	public void doAddRolesToGroup(List<Long> roldeIds, Group group) {
-
+		
 	}
 
 	/*
