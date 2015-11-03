@@ -60,6 +60,7 @@ public class RedisClusterClientTest extends RedisClusterAllTest{
 		test .put("test", "ccc");
 		test .put("test1", "ccc");
 		binaryRedisClient.set("key:map1",test);
+		Map  map=binaryRedisClient.get("key:map1", Map.class);
 	}
 	
 	@Test

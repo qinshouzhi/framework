@@ -11,6 +11,7 @@
 	</parent>
 	<artifactId>com.newtouch.lion-shiro</artifactId>
 	<name>com.newtouch.lion-shiro</name>
+	<version>1.0.4-SNAPSHOT</version>
 	<url>http://www.newtouchone.com</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -67,5 +68,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	<version>1.0.4-SNAPSHOT</version>
+	
 </project>

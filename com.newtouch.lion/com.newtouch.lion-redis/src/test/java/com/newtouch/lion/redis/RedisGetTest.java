@@ -32,8 +32,8 @@ import com.newtouch.lion.redis.client.IRedisClient;
  */
 public class RedisGetTest  extends RedisAllTest{
 	
-	
-	 /**  二进制的redis. */
+	 /*
+	*  二进制的redis. */
     @Autowired
     @Qualifier("springBinaryRedisClient")
     private IBinaryRedisClient springBinaryRedisClient;

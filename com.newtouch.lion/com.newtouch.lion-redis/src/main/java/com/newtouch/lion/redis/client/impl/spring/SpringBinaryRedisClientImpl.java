@@ -131,7 +131,6 @@ public class SpringBinaryRedisClientImpl<T> extends SpringRedisClientImpl implem
                     logger.debug(key + " put in the redis and expired after " + time + " seconds");
                     return jedis.setex(bkey, time, bvalue);
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
                 return null;

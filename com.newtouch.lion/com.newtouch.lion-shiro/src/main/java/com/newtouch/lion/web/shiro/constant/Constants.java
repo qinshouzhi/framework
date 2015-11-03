@@ -62,6 +62,14 @@ public class Constants {
 	public static final String AJAX_UNAUTH="user-unauth";
 	/**Ajax AJAX_UNLOGIN_STATUS  未登录状态*/
 	public static final int AJAX_UNAUTH_STATUS=999;
+	/***
+	 * Redis Session 默认的前缀
+	 */
+	public static final String REDIS_SHIRO_SESSION = "shiro-session:";
+	/**有效时间：18000 ms*/
+	public static final int  SESSION_VAL_TIME_SPAN = 18000;
+	
+	
 }
 
 	
