@@ -150,7 +150,10 @@
 		<servlet-name>sitemeshServlet</servlet-name>
 		<url-pattern>*.ftl</url-pattern>
 	</servlet-mapping>
+	
+	
 	<servlet-mapping>
+	
 		<servlet-name>DruidStatView</servlet-name>
 		<url-pattern>/druid/*</url-pattern>
 	</servlet-mapping>

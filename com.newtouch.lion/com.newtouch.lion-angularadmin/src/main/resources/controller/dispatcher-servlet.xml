@@ -125,6 +125,9 @@
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	
+	
 	<!-- 统一异常处理 -->
 	<bean id="exceptionResolver"
 		class="com.newtouch.lion.web.exception.ErrorCodeMappingExceptionResolver">

@@ -5,32 +5,32 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.newtouch.lion</groupId>
 	<artifactId>com.newtouch.lion-parent</artifactId>
-	<version>1.0.4-SNAPSHOT</version>
+	<version>1.0.4</version>
 	<name>com.newtouch.lion-parent</name>
 	<packaging>pom</packaging>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.7</jdk.version>
-		<lion-parent.version>1.0.4-SNAPSHOT</lion-parent.version>
-		<lion-core.version>1.0.4-SNAPSHOT</lion-core.version>
-		<lion-adpater.version>1.0.4-SNAPSHOT</lion-adpater.version>
-		<lion-im.version>1.0.4-SNAPSHOT</lion-im.version>
-		<lion-webcore.version>1.0.4-SNAPSHOT</lion-webcore.version>
-		<lion-cache.version>1.0.4-SNAPSHOT</lion-cache.version>
-		<lion-shiro.version>1.0.4-SNAPSHOT</lion-shiro.version>
-		<lion-web.version>1.0.4-SNAPSHOT</lion-web.version>
-		<lion-webadmin.version>1.0.4-SNAPSHOT</lion-webadmin.version>
-		<lion-api.version>1.0.4-SNAPSHOT</lion-api.version>
-		<lion-service.version>1.0.4-SNAPSHOT</lion-service.version>
-		<lion-data.version>1.0.4-SNAPSHOT</lion-data.version>
-		<lion-common.version>1.0.4-SNAPSHOT</lion-common.version>
-		<lion-redis.version>1.0.4-SNAPSHOT</lion-redis.version>
-		<lion-mongodb.version>1.0.4-SNAPSHOT</lion-mongodb.version>
-		<lion-exception.version>1.0.4-SNAPSHOT</lion-exception.version>
-		<lion-trans.version>1.0.4-SNAPSHOT</lion-trans.version>
-		<lion-monitor.version>1.0.4-SNAPSHOT</lion-monitor.version>
-		<lion-zookeeper.version>1.0.4-SNAPSHOT</lion-zookeeper.version>
+		<lion-parent.version>1.0.4</lion-parent.version>
+		<lion-core.version>1.0.4</lion-core.version>
+		<lion-adpater.version>1.0.4</lion-adpater.version>
+		<lion-im.version>1.0.4</lion-im.version>
+		<lion-webcore.version>1.0.4</lion-webcore.version>
+		<lion-cache.version>1.0.4</lion-cache.version>
+		<lion-shiro.version>1.0.4</lion-shiro.version>
+		<lion-web.version>1.0.4</lion-web.version>
+		<lion-webadmin.version>1.0.4</lion-webadmin.version>
+		<lion-api.version>1.0.4</lion-api.version>
+		<lion-service.version>1.0.4</lion-service.version>
+		<lion-data.version>1.0.4</lion-data.version>
+		<lion-common.version>1.0.4</lion-common.version>
+		<lion-redis.version>1.0.4</lion-redis.version>
+		<lion-mongodb.version>1.0.4</lion-mongodb.version>
+		<lion-exception.version>1.0.4</lion-exception.version>
+		<lion-trans.version>1.0.4</lion-trans.version>
+		<lion-monitor.version>1.0.4</lion-monitor.version>
+		<lion-zookeeper.version>1.0.4</lion-zookeeper.version>
 		<junit.version>4.8.2</junit.version>
 		<slf4j.version>1.7.1</slf4j.version>
 		<poi.version>3.9</poi.version>
