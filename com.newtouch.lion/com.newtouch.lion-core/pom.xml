@@ -7,10 +7,10 @@
 		<groupId>com.newtouch.lion</groupId>
 		<artifactId>com.newtouch.lion-parent</artifactId>
 		<relativePath>../com.newtouch.lion-parent/pom.xml</relativePath>
-		<version>1.0.4</version>
+		<version>1.1</version>
 	</parent>
 	<artifactId>com.newtouch.lion-core</artifactId>
-	<version>1.0.4</version>
+	<version>1.1</version>
 	<name>com.newtouch.lion-core</name>
 	<url>http://maven.apache.org</url>
 	<properties>
