@@ -477,8 +477,12 @@
            }
           
            util.post(url,param,handleAjaxSuccess,handleAjaxError);
+           
            //加载成功的函数
            function handleAjaxSuccess(data,arg){
+        	   if(data.data.length==0&&param.page!=0){
+	   	   	   		$('.pagination').find('li')[1].firstChild.click();
+	   	   	   	}
            		fnCallback.call(this,data);
            }
            //加载失败的错误
