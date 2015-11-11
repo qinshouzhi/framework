@@ -20,7 +20,7 @@ $(function () {
     icondg.datagrids('reload');
   });
   //刷新
-  $('#btnRefresh').click(function(){     
+  $('#btnRefresh').click(function(){ 
 	  icondg.datagrids('reload');
     });
   //添加

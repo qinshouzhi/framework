@@ -34,14 +34,14 @@ import com.newtouch.lion.web.controller.AbstractController;
 @RequestMapping("/")
 public class IndexController extends  AbstractController{
 	/**首页模板路径*/
-//	private static final String INDEX_RETURN="/index";
+	private static final String INDEX_RETURN="/index";
 	/**测试页面*/
 	private static final String TEST_RETURN="/test";
 	/**选择页面*/
 	private static final String COMBO_RETURN="/combo";
 	
 	/**首页测试版进入index.html**/
-	private static final String INDEX_RETURN_HTML="/html/index";
+//	private static final String INDEX_RETURN_HTML="/html/index";
 	//
 	@RequestMapping("index")
 	public String index(){
@@ -52,7 +52,7 @@ public class IndexController extends  AbstractController{
 		logger.info("isPermitted:{}",isPermitted);
 		logger.info("进入首页.....");
 		System.out.println("===================");
-		return INDEX_RETURN_HTML;
+		return INDEX_RETURN;
 	}
 	
 	

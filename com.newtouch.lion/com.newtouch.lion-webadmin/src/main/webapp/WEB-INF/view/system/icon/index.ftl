@@ -28,7 +28,7 @@
 <script src="${base}/resources/admin/pages/scripts/ui-toastr.js"></script>
 <script src="${base}/resources/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
 <!--lion UI JS Start-->
-<script src="${base}/resources/global/js/lion.min.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/lion.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combo/combonew.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/form/form.fill.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>

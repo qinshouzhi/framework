@@ -37,7 +37,22 @@ lion.assemblyCache={};
 /**
  * 
  * util
+ * 
+ * ;(function($){
+ *    $.fn.pluginName = function(){
+ *      var default = {
+ *        btn:true,
+ *        success:null
+ *      }
+ *    }
+ * })(jQuery);
  *
+ *$('').pluginName({
+ *   btn:true,
+ *   success:function(){
+ *      
+ *   }
+ *});
  */
 (function($){
 
@@ -46,6 +61,7 @@ lion.assemblyCache={};
    */
   var exports={},
 	_this=this;
+  
 
   /**
    * 方法提供到util命名空间下
@@ -140,7 +156,7 @@ lion.assemblyCache={};
 					  "onclick": null,
 					  "showDuration": "1000",
 					  "hideDuration": "0",
-					  "timeOut": "0",
+					  "timeOut": "1000",
 					  "extendedTimeOut": "0",
 					  "showEasing": "swing",
 					  "hideEasing": "linear",
