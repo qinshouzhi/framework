@@ -128,6 +128,55 @@
        	  	}
        	  	return this.data;
        	},
+       	//根据url重新加载数据
+        reload:function(url){
+       	 //调后台
+       	 util.post(url,{},buildOptions);
+       	 //请求成功处理
+       	 var that=this,
+       	 	 selectedKeys=null,
+       	 	 idKey=this.options.valuefield||'id',
+       	 	 textKey=this.options.textfield||'text',
+       	 	 selectedKey=this.options.selectedField||'selected';
+
+       	 function buildOptions(data){
+       		 console.dir(data);
+       	 	 that.data=data;
+       	     //判断数据是否空
+       	     if($.isEmptyObject(data)){
+       	     	 return;
+       	     }
+       	     //清空select的内容
+       	     that.$element.empty();
+       	     //判断是否带错误
+       	     if(that.options.allowClear===true){
+       	     	that.$element.append('<option value=""></option>');
+       	     }        	   
+       	     //加载数据,并创建创建select的option项
+       	     $.each(data,function(key,item){
+       	     	   var  selected=item[selectedKey],
+       	     	   		itemId=item[idKey],
+       	     	   		itemText=item[textKey];
+       	           if(selected===true){
+       	           	 	selectedKeys=itemId;
+       	     	  		that.$element.append('<option value="'+itemId+'" selected>'+itemText+'</option>');
+       	     	   }else{
+       	     	   		that.$element.append('<option value="'+itemId+'" >'+itemText+'</option>');
+       	     	   }
+       	     	  
+       	     });
+       	     //重新加载并选择；
+       	     delayfunc(selectedKeys);      
+        	 }
+        	 
+       	 function delayfunc(){
+       	 	if($.isEmptyObject(selectedKeys)){
+       	 		that.init().val(null).trigger('change');
+       	 		return;
+       	 	}
+       	 	that.init().val([selectedKeys]).trigger('change');
+       	 }
+       },
         //加载数据
         loading:function(){
         	 
