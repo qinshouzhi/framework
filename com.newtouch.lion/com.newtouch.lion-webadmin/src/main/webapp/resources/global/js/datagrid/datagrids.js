@@ -465,6 +465,52 @@
             //如已经事件阻止，则返回
            if (e.isDefaultPrevented()) return;
         },
+      //逻辑删除 add by Jovi
+        deleteRow:function(){
+        	this.$element.find('.selected').remove();
+        },
+        //逻辑添加 add by Jovi
+        addRow:function(row){
+        	var that=this,
+            $thatelement=that.$element,
+            $wrapper=$('#'+this.id+'_wrapper'),
+            tbodytr=$thatelement.find('tbody tr'),
+            tbodytrsize=tbodytr.length;
+        	
+        	//判断原来是否有数据
+        	if(this.settings().aoData.size==undefined||this.settings().aoData.size==null){
+        		$thatelement.find('tbody').empty();
+        	}
+        	
+        	//选择table外的表格DIV对象_wrapper
+        	this.settings().aoData.push(row);
+        	
+        	var html = '';
+        	
+        	
+        	if(this.settings().aoData.size%2!=0){
+        		html += '<tr role="row" class="odd">';
+        	}else{
+        		html += '<tr role="row" class="even">';
+        	}
+        	html += '<td><input type="checkbox" class="checkboxes" value="'+row.id+'" ></td>';
+        	$.each(this.buildHeader(), function(key, val) {   
+        	    if(val.field != 'id'){
+        	    	for(var i in row){
+        	    		if(i === val.field){
+        	    			html += '<td>'+row[i]+'</td>';
+        	    			break;
+        	    		}
+        	    	}
+        	    	
+        	    }
+        	});   
+        	html += '</tr>';
+        	this.$element.append(html);
+        	//表单美化
+        	this.$element.find('tbody tr input,textarea,select,button').uniform();
+        	that.drawCallback();
+        },
         //加载列表
        	loaddata:function(url, data, fnCallback){
            //是否初始化立即加载数据 
