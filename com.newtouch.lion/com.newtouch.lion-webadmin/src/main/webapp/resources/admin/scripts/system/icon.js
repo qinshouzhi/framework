@@ -21,6 +21,7 @@ $(function () {
   });
   //刷新
   $('#btnRefresh').click(function(){ 
+	  lion.util.error('提示',"heheh");
 	  icondg.datagrids('reload');
     });
   //添加

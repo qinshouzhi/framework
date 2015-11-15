@@ -127,6 +127,8 @@ lion.assemblyCache={};
    	*@param {[string]} [content] [description]
    	**/
    exports.success=function(title,content){
+	   var toast = $("#toast-container");
+		 if(toast.length==0){
 			 toastr.options = {
 				  "closeButton": true,
 				  "debug": false,
@@ -142,6 +144,7 @@ lion.assemblyCache={};
 				  "hideMethod": "fadeOut"
 			 };
 			 toastr.success(content, title);
+		 }
 	};
 	/***
    	*错误提示对话
@@ -149,6 +152,9 @@ lion.assemblyCache={};
    	*@param {[string]} [content] [description]
    	**/
 	exports.error=function(title,content){
+		
+		 var toast = $("#toast-container");
+		 if(toast.length==0){
 			 toastr.options = {
 					  "closeButton": true,
 					  "debug": false,
@@ -164,6 +170,7 @@ lion.assemblyCache={};
 					  "hideMethod": "fadeOut"
 				};
 			 toastr.error(content, title);
+		 }
 	 };
 	 /***
    	 *警告提示对话
@@ -171,21 +178,24 @@ lion.assemblyCache={};
    	 *@param {[string]} [content] [description]
    	 **/
 	  exports.warning=function(title,content){
-	 	 toastr.options = {
-	 			  "closeButton": true,
-	 			  "debug": false,
-	 			  "positionClass": "toast-top-center",
-	 			  "onclick": null,
-	 			  "showDuration": "1000",
-	 			  "hideDuration": "0",
-	 			  "timeOut": "0",
-	 			  "extendedTimeOut": "0",
-	 			  "showEasing": "swing",
-	 			  "hideEasing": "linear",
-	 			  "showMethod": "fadeIn",
-	 			  "hideMethod": "fadeOut"
-	 		};
-	 	 toastr.warning(content, title); 
+		  var toast = $("#toast-container");
+			 if(toast.length==0){
+			 	 toastr.options = {
+			 			  "closeButton": true,
+			 			  "debug": false,
+			 			  "positionClass": "toast-top-center",
+			 			  "onclick": null,
+			 			  "showDuration": "1000",
+			 			  "hideDuration": "0",
+			 			  "timeOut": "0",
+			 			  "extendedTimeOut": "0",
+			 			  "showEasing": "swing",
+			 			  "hideEasing": "linear",
+			 			  "showMethod": "fadeIn",
+			 			  "hideMethod": "fadeOut"
+			 		};
+			 	 toastr.warning(content, title); 
+			 }
 	  };
 	  /***
    	 *info提示对话
@@ -193,21 +203,26 @@ lion.assemblyCache={};
    	 *@param {[string]} [content] [description]
    	 **/
 	  exports.info=function(title,content){
-	 	 toastr.options = {
-	 			  "closeButton": true,
-	 			  "debug": false,
-	 			  "positionClass": "toast-top-center",
-	 			  "onclick": null,
-	 			  "showDuration": "1000",
-	 			  "hideDuration": "1000",
-	 			  "timeOut": "5000",
-	 			  "extendedTimeOut": "1000",
-	 			  "showEasing": "swing",
-	 			  "hideEasing": "linear",
-	 			  "showMethod": "fadeIn",
-	 			  "hideMethod": "fadeOut"
-	 		};
-	 	 toastr.info(content, title);
+		  
+		 var toast = $("#toast-container");
+		 if(toast.length==0){
+			 toastr.options = {
+		 			  "closeButton": true,
+		 			  "debug": false,
+		 			  "positionClass": "toast-top-center",
+		 			  "onclick": null,
+		 			  "showDuration": "1000",
+		 			  "hideDuration": "1000",
+		 			  "timeOut": "5000",
+		 			  "extendedTimeOut": "1000",
+		 			  "showEasing": "swing",
+		 			  "hideEasing": "linear",
+		 			  "showMethod": "fadeIn",
+		 			  "hideMethod": "fadeOut"
+		 		};
+		 	 toastr.info(content, title);
+		 }
+	 	 
 	  };
    /**连接超时时间*/
    exports.timeout=5000;

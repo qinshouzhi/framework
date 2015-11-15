@@ -95,7 +95,8 @@
 		<property name="useCodeAsDefaultMessage" value="false" />
 	</bean>
 	<!-- 针对free marker的视图配置 -->
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+	
+		<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 		<property name="cache" value="true" />
 		<property name="order" value="1" />
 		<property name="viewClass" 	value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
@@ -111,6 +112,7 @@
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<property name="order" value="2" />
 	</bean>
+		
 	<!-- JSON View -->
 	<bean id="jsonView" class="com.newtouch.lion.web.servlet.view.JsonView"/>
 	<!-- String JSON View -->
