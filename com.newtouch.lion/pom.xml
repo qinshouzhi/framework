@@ -38,6 +38,7 @@
 	    <module>com.newtouch.lion-cache</module>
 	    <module>com.newtouch.lion-zookeeper</module>
     <module>com.newtouch.lion-angularadmin</module>
+    <module>com.newtouch.lion-angularweb</module>
   </modules>
 	<distributionManagement>
 		<repository>
