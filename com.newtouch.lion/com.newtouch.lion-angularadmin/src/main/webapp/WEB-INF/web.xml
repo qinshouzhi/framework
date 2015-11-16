@@ -145,10 +145,12 @@
 	<!--Servlet Definitions End -->
 
 	<!--Servlet Mappings Start -->
-	<servlet-mapping>
+	<!-- 
+		<servlet-mapping>
 		<servlet-name>dispatcherServlet</servlet-name>
 		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
+	 -->
 	<servlet-mapping>
 		<servlet-name>dispatcherServlet</servlet-name>
 		<url-pattern>*.json</url-pattern>
