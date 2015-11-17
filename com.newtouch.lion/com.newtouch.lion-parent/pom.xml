@@ -20,6 +20,7 @@
 		<lion-cache.version>1.1</lion-cache.version>
 		<lion-shiro.version>1.1</lion-shiro.version>
 		<lion-web.version>1.1</lion-web.version>
+		<lion-angularweb.version>1.1</lion-angularweb.version>
 		<lion-webadmin.version>1.1</lion-webadmin.version>
 		<lion-api.version>1.1</lion-api.version>
 		<lion-service.version>1.1</lion-service.version>
@@ -145,6 +146,13 @@
 				<artifactId>com.newtouch.lion-web</artifactId>
 				<version>${lion-web.version}</version>
 			</dependency>
+			<!-- anguler begin -->
+			<dependency>
+				<groupId>com.newtouch.lion</groupId>
+				<artifactId>com.newtouch.lion-angularweb</artifactId>
+				<version>${lion-angularweb.version}</version>
+			</dependency>
+			<!-- angular end -->
 			<dependency>
 				<groupId>com.newtouch.lion</groupId>
 				<artifactId>com.newtouch.lion-redis</artifactId>

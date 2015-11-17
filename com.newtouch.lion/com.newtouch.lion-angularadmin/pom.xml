@@ -40,6 +40,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.newtouch.lion</groupId>
+			<artifactId>com.newtouch.lion-angularweb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.newtouch.lion</groupId>
 			<artifactId>com.newtouch.lion-web</artifactId>
 		</dependency>
 		<!-- lion End -->
