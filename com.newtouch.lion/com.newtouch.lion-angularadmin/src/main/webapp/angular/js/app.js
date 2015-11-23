@@ -75,9 +75,82 @@ MetronicApp.controller('FooterController', ['$scope', function($scope) {
 
 /* Setup Layout Part - Role */
 MetronicApp.controller('RoleController', ['$scope', function($scope) {
-    $scope.$on('$includeContentLoaded', function() {
-        Layout.initFooter(); // init footer
-    });
+    $scope.names = [
+       {
+    	   "id":"0",
+    	   "eName":"test12",
+    	   "cName":"测试12",
+    	   "description":"测试用的专属单号",
+    	   "isEdit":"是",
+    	   "createTime":"2015-11-18 14:09:19",
+    	   "endTime":"2015-12-18 18:26:20"
+       },
+       {
+    	   "id":"1",
+    	   "eName":"wqdw1",
+    	   "cName":"嗯嗯1",
+    	   "description":"说好的是测试",
+    	   "isEdit":"否",
+    	   "createTime":"2015-6-18 7:14:36",
+    	   "endTime":"2015-8-12 18:32:10"
+       },
+       {
+    	   "id":"2",
+    	   "eName":"ythty",
+    	   "cName":"呵呵了",
+    	   "description":"呢斯蒂法诺地",
+    	   "isEdit":"否",
+    	   "createTime":"2015-6-18 7:14:36",
+    	   "endTime":"2015-8-12 18:32:10"
+       }
+    ];   
+    
+    
+    //测试代码
+//    $scope.tesarry=['1','2','3','4','5'];//初始化数据
+//    $scope.choseArr=[];//定义数组用于存放前端显示
+//    var str="";//
+//    var flag='';//是否点击了全选，是为a
+//    $scope.x=false;//默认未选中
+//
+//    $scope.all= function (c,v) {//全选
+//        if(c==true){
+//            $scope.x=true;
+//            $scope.choseArr=v;
+//        }else{
+//            $scope.x=false;
+//            $scope.choseArr=[""];
+//        }
+//
+//        flag='a';
+//
+//    };
+//    $scope.chk= function (z,x) {//单选或者多选
+//        if(flag=='a') {//在全选的基础上操作
+//            str = $scope.choseArr.join(',') + ',';
+//        }
+//        if (x == true) {//选中
+//            str = str + z + ',';
+//        } else {
+//            str = str.replace(z + ',','');//取消选中
+//        }
+//
+//        $scope.choseArr=(str.substr(0,str.length-1)).split(',');
+//
+//    };
+//    $scope.delete= function () {// 操作CURD
+//
+//        if($scope.choseArr[0]==""||$scope.choseArr.length==0){//没有选择一个的时候提示
+//            alert("请至少选中一条数据在操作！")
+//            return;
+//        };
+//
+//        for(var i=0;i<$scope.choseArr.length;i++){
+//            //alert($scope.choseArr[i]);
+//            console.log($scope.choseArr[i]);//遍历选中的id
+//        }
+//    };
+    
 }]);
 
 /* Setup Layout Part - Group */
@@ -152,9 +225,34 @@ MetronicApp.controller('DatacolumnController', ['$scope', function($scope) {
 
 /* Setup Layout Part - Applicationproperty */
 MetronicApp.controller('ApplicationpropertyController', ['$scope', function($scope) {
-    $scope.$on('$includeContentLoaded', function() {
-        Layout.initFooter(); // init footer
-    });
+    $scope.names = [
+      {
+    	  "id":"0",
+    	  "appid":"lion",
+    	  "key":"hibernate.cache.provider_class",
+    	  "value":"net.sf.ehcache.hibernate.SingletonEhCacheProvider",
+    	  "decription":"配置使用二级缓存的类－提供商",
+    	  "createtime":"2015-03-30 11:12:12",
+    	  "endtime":"2015-03-30 11:25:43"
+      },
+      {
+    	  "id":"1",
+    	  "appid":"lion",
+    	  "key":"wefwewefew",
+    	  "value":"ryjtyehtyehtyhjerft45gf",
+    	  "decription":"缓存二级的配置使用类－提供商",
+    	  "createtime":"2015-06-30 6:12:12",
+    	  "endtime":"2015-10-30 10:25:43"
+      },
+      {
+    	  "appid":"koala",
+    	  "key":"rtegerfr",
+    	  "value":"iwecbeibudini",
+    	  "decription":"的嫩速度非常难闻哦存档－提供商",
+    	  "createtime":"2015-3-16 6:12:12",
+    	  "endtime":"2015-8-30 7:25:43"
+      }
+    ];
 }]);
 
 /* Setup Layout Part - Icon */

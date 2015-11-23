@@ -5,6 +5,9 @@
 	<li>
 		<a href="#">首页</a><i class="fa fa-circle"></i>
 	</li>
+	<li>
+		<a href="#">系统设置</a><i class="fa fa-circle"></i>
+	</li>
 	<li class="active"><span data-ng-bind="$state.current.data.pageTitle"></span></li>
 </ul>
 <!-- END PAGE BREADCRUMB -->
@@ -60,14 +63,25 @@
 				</a>
 			</div>
 			<div class="col-md-12">
+			    
+			    <!-- 测试代码
+			    <div>
+			        <pre>{{choseArr}}</pre>
+			       全选: <input type="checkbox" ng-model="master" ng-click="all(master,tesarry)" />
+			        <div ng-repeat="z in tesarry">
+			            <input id={{z}} type="checkbox"  ng-model="x" ng-checked="master" ng-click="chk(z,x)" />{{z}}
+			        </div>
+			        <a href="#" class="btn btn-danger" ng-click="delete()" > 删除</a>
+			    </div>-->
+			    
 				<table class="lion-datagrids table table-striped table-bordered dataTable table-hover" id="sys_rolelist_tb" data-singleselect="true",   data-loadUrl="" data-checkbox="true" data-pageSize="10">
 					<thead>
 						<tr>
 							<th class="table-checkbox sorting_disabled" data-field='id' data-checkbox="true" rowspan="1" colspan="1">
-						 	  <div class="checker">
-						 		  <span>
-						 		    <input type="checkbox" class="group-checkable" data-set="#sys_group_list_tb.checkboxes" data-sortable="false" disabled="disabled">
-						 		  </span>
+							  <div class="checker"> 	
+							    <span>  
+						 	      <input type="checkbox" class="group-checkable" data-set="#sys_group_list_tb.checkboxes" data-sortable="false" disabled="disabled">
+						 	    </span>
 						 	  </div>
 						 	</th>
 							<th data-field='nameEn' data-sortDir="asc" style="width:100px;">
@@ -91,173 +105,33 @@
 						</tr>
 					</thead>
 					<tbody>
-					    <tr>
+					    <tr ng-repeat="v in names">
 					       <td>
-					         <div class="checker">
-						 		  <span>
-						 		    <input type="checkbox" class="group-checkable">
-						 		  </span>
-						 	  </div>
+					         <div class="checker"> 	
+						         <span ng-class="{'checked':check.active}" ng-click="check.active = !check.active">
+							 	   <input type="checkbox" id="{{v.id}}">
+							 	 </span>
+						 	 </div>
 					       </td>
 					       <td>
-					         test12
+					         {{v.eName}}
 					       </td>
 					       <td>
-					         测试12
+					         {{v.cName}}
 					       </td>
 					       <td>
-					         测试用的专属单号
+					         {{v.description}}
 					       </td>
 					       <td>
-					         是
+					         {{v.isEdit}}
 					       </td>
 					       <td>
-					         2015-11-18 14:09:19
+					         {{v.createTime}}
 					       </td>
 					       <td>
-					         2015-11-18 14:16:39
+					         {{v.endTime}}
 					       </td>
-					    </tr>
-					    
-					    <tr>
-					       <td>
-					         <div class="checker">
-						 		  <span>
-						 		    <input type="checkbox" class="group-checkable" data-set="#sys_group_list_tb.checkboxes" data-sortable="true">
-						 		  </span>
-						 	  </div>
-					       </td>
-					       <td>
-					         test12
-					       </td>
-					       <td>
-					         测试12
-					       </td>
-					       <td>
-					         测试用的专属单号
-					       </td>
-					       <td>
-					         是
-					       </td>
-					       <td>
-					         2015-11-18 14:09:19
-					       </td>
-					       <td>
-					         2015-11-18 14:16:39
-					       </td>
-					    </tr>
-					    
-					    <tr>
-					       <td>
-					         <div class="checker">
-						 		  <span>
-						 		    <input type="checkbox" class="group-checkable" data-set="#sys_group_list_tb.checkboxes" data-sortable="true">
-						 		  </span>
-						 	  </div>
-					       </td>
-					       <td>
-					         test12
-					       </td>
-					       <td>
-					         测试12
-					       </td>
-					       <td>
-					         测试用的专属单号
-					       </td>
-					       <td>
-					         是
-					       </td>
-					       <td>
-					         2015-11-18 14:09:19
-					       </td>
-					       <td>
-					         2015-11-18 14:16:39
-					       </td>
-					    </tr>
-					    
-					    <tr>
-					       <td>
-					         <div class="checker">
-						 		  <span>
-						 		    <input type="checkbox" class="group-checkable" data-set="#sys_group_list_tb.checkboxes" data-sortable="true">
-						 		  </span>
-						 	  </div>
-					       </td>
-					       <td>
-					         test12
-					       </td>
-					       <td>
-					         测试12
-					       </td>
-					       <td>
-					         测试用的专属单号
-					       </td>
-					       <td>
-					         是
-					       </td>
-					       <td>
-					         2015-11-18 14:09:19
-					       </td>
-					       <td>
-					         2015-11-18 14:16:39
-					       </td>
-					    </tr>
-					    
-					    <tr>
-					       <td>
-					         <div class="checker">
-						 		  <span>
-						 		    <input type="checkbox" class="group-checkable" data-set="#sys_group_list_tb.checkboxes" data-sortable="true">
-						 		  </span>
-						 	  </div>
-					       </td>
-					       <td>
-					         test12
-					       </td>
-					       <td>
-					         测试12
-					       </td>
-					       <td>
-					         测试用的专属单号
-					       </td>
-					       <td>
-					         是
-					       </td>
-					       <td>
-					         2015-11-18 14:09:19
-					       </td>
-					       <td>
-					         2015-11-18 14:16:39
-					       </td>
-					    </tr>
-					    
-					    <tr>
-					       <td>
-					         <div class="checker">
-						 		  <span>
-						 		    <input type="checkbox" class="group-checkable" data-set="#sys_group_list_tb.checkboxes" data-sortable="true">
-						 		  </span>
-						 	  </div>
-					       </td>
-					       <td>
-					         test12
-					       </td>
-					       <td>
-					         测试12
-					       </td>
-					       <td>
-					         测试用的专属单号
-					       </td>
-					       <td>
-					         是
-					       </td>
-					       <td>
-					         2015-11-18 14:09:19
-					       </td>
-					       <td>
-					         2015-11-18 14:16:39
-					       </td>
-					    </tr>
+					    </tr>				    
 					</tbody>
 				</table>
 			</div>
@@ -464,11 +338,7 @@
 										</label>
 										<div class="col-md-9 control-label">
 											<div class="input-group">
-												<div class="checker">
-												   <span class="checked">
-												      <input type="checkbox" class="form-control" name="editable" checked="true" value="1">
-												   </span>
-												</div>
+												<input type="checkbox" class="form-control" name="editable" checked="true" value="1">
 											</div>
 										</div>
 									</div>
@@ -499,6 +369,6 @@
 <!--Edit Dialog End -->
 <script>
 $(function(){
-
+   //$("input[type='checkbox']").uniform();
 });
 </script>
