@@ -1,18 +1,144 @@
 <!DOCTYPE html>
-<html>
+<!--
+Template Name:  Newtouch Admin Dashboard Template build with Twitter Bootstrap 3.3.1
+Version: 3.6.1
+Author: wanglijun
+-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta charset="utf-8"/>
+<title>新致通用后台管理平台</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta content="" name="description"/>
+<meta content="" name="author"/>
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<link href="../resources/global/css/fonts.css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
+<link href="../resources/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="../resources/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+<link href="../resources/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="../resources/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+<!-- END GLOBAL MANDATORY STYLES -->
+<!-- BEGIN PAGE LEVEL STYLES -->
+<link href="../resources/admin/pages/css/login.css" rel="stylesheet" type="text/css"/>
+<!-- END PAGE LEVEL SCRIPTS -->
+<!-- BEGIN THEME STYLES -->
+<link href="../resources/global/css/components-rounded.css" id="style_components" rel="stylesheet" type="text/css"/>
+<link href="../resources/global/css/plugins.css" rel="stylesheet" type="text/css"/>
+<link href="../resources/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
+<link href="../resources/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+<link href="../resources/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
+<!-- END THEME STYLES -->
+<!--<link rel="shortcut icon" href="favicon.ico"/>-->
 </head>
-
-
-
-
-<body>
-<input type="button" id="button" value="点一下" >
-进来了！
-<input type="button" id="go" value="去吧" />
-<script type="text/javascript" charset="utf-8" src="jquery-1.7.2.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="login.js"></script>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="login">
+<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+<div class="menu-toggler sidebar-toggler">
+</div>
+<!-- END SIDEBAR TOGGLER BUTTON -->
+<!-- BEGIN LOGO -->
+<div class="logo">
+	<a href="index.htm">
+		<img src="../resources/logo/logo-login.png" alt=""/>
+	</a>
+</div>
+<!-- END LOGO -->
+<!-- BEGIN LOGIN -->
+<div class="content">
+	<!-- BEGIN LOGIN FORM -->
+	<form class="login-form"  method="post"  action="../login.htm">
+		<h3 class="form-title">
+			欢迎登录使用
+		</h3>
+		<div class="alert alert-danger display-hide">
+			<button class="close" data-close="alert"></button>
+			<span>
+				请输入用户名或者密码
+			</span>
+		</div>
+		<div class="form-group">
+			<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+			<label class="control-label visible-ie8 visible-ie9">				
+				<@spring.message "login.form.username.label.text"/>
+			</label>
+			<input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder='<@spring.message "login.form.username.label.text"/>' name="username"/>
+		</div>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">
+				<@spring.message "login.form.password.label.text"/>
+			</label>	 
+			<input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder='<@spring.message "login.form.password.label.text"/>' name="password"/>
+		</div>
+		<div class="form-actions">
+			<a class="btn btn-success uppercase" href="index.html">
+				登录
+			</a>
+			<label class="rememberme check">
+			    <input type="checkbox" name="rememberMe" value="true"/>
+				记住密码 
+			</label>
+			</a>
+		</div>
+	</form>
+	<!-- END LOGIN FORM -->
+	<!-- BEGIN FORGOT PASSWORD FORM -->
+	<form class="forget-form" action="index.html" method="post">
+		<h3>忘记密码 ?</h3>
+		<p>
+		 	输入您的电子邮件地址重新设置您的密码。
+		</p>
+		<div class="form-group">
+			<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder='<@spring.message "login.form.forget.email"/>' name="email"/>
+		</div>
+		<div class="form-actions">
+			<button type="button" id="back-btn" class="btn btn-default">
+				返回
+			</button>
+			<button type="submit" class="btn btn-success uppercase pull-right">
+				提交
+			</button>
+		</div>
+	</form>
+	<!-- END FORGOT PASSWORD FORM -->
+</div>
+<div class="copyright">
+    2014 © Newtouch Web Admin.
+</div>
+<!-- END LOGIN -->
+<!-- BEGIN CORE PLUGINS -->
+<!--[if lt IE 9]>
+<script src="../resources/global/plugins/respond.min.js"></script>
+<script src="../resources/global/plugins/excanvas.min.js"></script> 
+<![endif]-->
+<script src="../resources/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="../resources/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<script src="../resources/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../resources/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="../resources/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="../resources/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="../resources/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="../resources/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="../resources/admin/pages/scripts/login.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+<script>
+$(function() {     
+Metronic.init(); // init metronic core components
+Login.init();//登录验证框架
+});
+</script>
+<!-- END JAVASCRIPTS -->
 </body>
+<!-- END BODY -->
 </html>

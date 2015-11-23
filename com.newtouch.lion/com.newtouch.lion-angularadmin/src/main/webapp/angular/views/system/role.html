@@ -1,0 +1,504 @@
+<meta charset="utf-8"/>
+
+<!-- BEGIN PAGE BREADCRUMB -->
+<ul class="page-breadcrumb breadcrumb">
+	<li>
+		<a href="#">首页</a><i class="fa fa-circle"></i>
+	</li>
+	<li class="active"><span data-ng-bind="$state.current.data.pageTitle"></span></li>
+</ul>
+<!-- END PAGE BREADCRUMB -->
+
+<!-- BEGIN PAGE CONTENT INNER -->
+<div class="portlet light">
+	<div class="portlet-body">
+		<div class="row">
+			<div class="col-md-12 margin-bottom-10">
+				<form id="queryform" class="form-horizontal">
+					<label class="control-label col-md-2" for="nameZh" >
+					   角色名称(中文)
+					</label>
+					<div class="col-md-3">
+						<input class="form-control input-small" type="text" size="30" name="nameZh" id="nameZh"  placeholder="请输入角色名称"/>					
+					</div>
+					<div class="col-md-7">
+						<a href="javascript:void(0)" id="btnQuery" class="btn blue"><i class="fa fa-search"></i>查询</a>
+					</div>
+				</form>
+			</div>
+			<!--DataGrid start-->
+			<div class="col-md-12 margin-bottom-10" id="toolbar">
+				<a id="btnAdd" class="btn btn-sm yellow" data-toggle="modal" data-target="#basic">
+					<i class="fa fa-plus"></i> 
+					<!--<@spring.message "common.toolbar.btn.add.text"/>-->
+					添加
+				</a>
+				<a id="btnEdit" class="btn btn-sm red">
+					<i class="fa fa-edit"></i>
+					<!--<@spring.message "common.toolbar.btn.edit.text"/>-->
+					编辑
+				</a>
+				<a href="javascript:void(0)" id="btnDelete" class="btn btn-sm purple">
+					<i class="fa fa-times"></i>
+					<!--<@spring.message "common.toolbar.btn.delete.text"/>-->
+					删除
+				</a>
+				<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue">
+					<i class="fa fa-refresh"></i>
+					<!--<@spring.message "common.toolbar.btn.reload.text"/>-->
+					刷新
+				</a>
+				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green">
+					<i class="fa  fa-file-excel-o"></i>
+					<!--<@spring.message "common.toolbar.btn.export.text"/>-->
+					Excel
+				</a>
+				<a href="javascript:void(0)" id="btnAuth"  class="btn btn-sm  btn-primary">
+					<i class="fa  fa-gear"></i> 
+					<!--<@spring.message "common.toolbar.btn.auth.text"/>  -->
+					授权
+				</a>
+			</div>
+			<div class="col-md-12">
+				<table class="lion-datagrids table table-striped table-bordered dataTable table-hover" id="sys_rolelist_tb" data-singleselect="true",   data-loadUrl="" data-checkbox="true" data-pageSize="10">
+					<thead>
+						<tr>
+							<th class="table-checkbox sorting_disabled" data-field='id' data-checkbox="true" rowspan="1" colspan="1">
+						 	  <div class="checker">
+						 		  <span>
+						 		    <input type="checkbox" class="group-checkable" data-set="#sys_group_list_tb.checkboxes" data-sortable="false" disabled="disabled">
+						 		  </span>
+						 	  </div>
+						 	</th>
+							<th data-field='nameEn' data-sortDir="asc" style="width:100px;">
+								角色名称(英文)
+							</th>
+							<th data-field="nameZh" style="width:100px;">
+							 	角色名称(中文)
+							</th>
+							<th data-field="description" style="width:100px;">
+								描述
+							</th>
+							<th data-field="editable" style="width:40px;" align="center"  data-formatter="">
+								可编辑
+							</th>							
+							<th data-field="createdDate" style="width:100px;">
+								创建时间
+							</th>
+							<th data-field="updatedDate" style="width:100px;">
+								更新时间
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+					    <tr>
+					       <td>
+					         <div class="checker">
+						 		  <span>
+						 		    <input type="checkbox" class="group-checkable">
+						 		  </span>
+						 	  </div>
+					       </td>
+					       <td>
+					         test12
+					       </td>
+					       <td>
+					         测试12
+					       </td>
+					       <td>
+					         测试用的专属单号
+					       </td>
+					       <td>
+					         是
+					       </td>
+					       <td>
+					         2015-11-18 14:09:19
+					       </td>
+					       <td>
+					         2015-11-18 14:16:39
+					       </td>
+					    </tr>
+					    
+					    <tr>
+					       <td>
+					         <div class="checker">
+						 		  <span>
+						 		    <input type="checkbox" class="group-checkable" data-set="#sys_group_list_tb.checkboxes" data-sortable="true">
+						 		  </span>
+						 	  </div>
+					       </td>
+					       <td>
+					         test12
+					       </td>
+					       <td>
+					         测试12
+					       </td>
+					       <td>
+					         测试用的专属单号
+					       </td>
+					       <td>
+					         是
+					       </td>
+					       <td>
+					         2015-11-18 14:09:19
+					       </td>
+					       <td>
+					         2015-11-18 14:16:39
+					       </td>
+					    </tr>
+					    
+					    <tr>
+					       <td>
+					         <div class="checker">
+						 		  <span>
+						 		    <input type="checkbox" class="group-checkable" data-set="#sys_group_list_tb.checkboxes" data-sortable="true">
+						 		  </span>
+						 	  </div>
+					       </td>
+					       <td>
+					         test12
+					       </td>
+					       <td>
+					         测试12
+					       </td>
+					       <td>
+					         测试用的专属单号
+					       </td>
+					       <td>
+					         是
+					       </td>
+					       <td>
+					         2015-11-18 14:09:19
+					       </td>
+					       <td>
+					         2015-11-18 14:16:39
+					       </td>
+					    </tr>
+					    
+					    <tr>
+					       <td>
+					         <div class="checker">
+						 		  <span>
+						 		    <input type="checkbox" class="group-checkable" data-set="#sys_group_list_tb.checkboxes" data-sortable="true">
+						 		  </span>
+						 	  </div>
+					       </td>
+					       <td>
+					         test12
+					       </td>
+					       <td>
+					         测试12
+					       </td>
+					       <td>
+					         测试用的专属单号
+					       </td>
+					       <td>
+					         是
+					       </td>
+					       <td>
+					         2015-11-18 14:09:19
+					       </td>
+					       <td>
+					         2015-11-18 14:16:39
+					       </td>
+					    </tr>
+					    
+					    <tr>
+					       <td>
+					         <div class="checker">
+						 		  <span>
+						 		    <input type="checkbox" class="group-checkable" data-set="#sys_group_list_tb.checkboxes" data-sortable="true">
+						 		  </span>
+						 	  </div>
+					       </td>
+					       <td>
+					         test12
+					       </td>
+					       <td>
+					         测试12
+					       </td>
+					       <td>
+					         测试用的专属单号
+					       </td>
+					       <td>
+					         是
+					       </td>
+					       <td>
+					         2015-11-18 14:09:19
+					       </td>
+					       <td>
+					         2015-11-18 14:16:39
+					       </td>
+					    </tr>
+					    
+					    <tr>
+					       <td>
+					         <div class="checker">
+						 		  <span>
+						 		    <input type="checkbox" class="group-checkable" data-set="#sys_group_list_tb.checkboxes" data-sortable="true">
+						 		  </span>
+						 	  </div>
+					       </td>
+					       <td>
+					         test12
+					       </td>
+					       <td>
+					         测试12
+					       </td>
+					       <td>
+					         测试用的专属单号
+					       </td>
+					       <td>
+					         是
+					       </td>
+					       <td>
+					         2015-11-18 14:09:19
+					       </td>
+					       <td>
+					         2015-11-18 14:16:39
+					       </td>
+					    </tr>
+					</tbody>
+				</table>
+			</div>
+			<!--DataGrid End-->
+	</div>
+</div>
+<!-- END PAGE CONTENT INNER -->
+
+<!--Auth Modal Dialog Start-->
+<div class="modal fade bs-modal-lg" id="modalRoleAuth" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<h4 class="modal-title"><i class="fa fa-gear"></i> <span>角色授权</span></h4>
+				<input type="hidden" id='roleId' name='id' value="">
+			</div>
+			<div class="modal-body">
+				<div class="row">
+						<div  class="col-md-12">
+							<ul class="nav nav-tabs">
+								<li class="active">
+									<a href="#tab_3_1"  data-toggle="tab">已授权信息 </a>
+								</li>								
+								<li>
+									<a href="#tab_3_2"  data-toggle="tab">关联用户组</a>
+								</li>
+								<li>
+									<a href="#tab_3_3"  data-toggle="tab">关联用户</a>
+								</li>
+								<li>
+									<a href="#tab_3_4"  data-toggle="tab">关联资源</a>
+								</li>
+							</ul>
+							<div class="tab-content">
+								<div role="tabpanel" class="tab-pane active" id="tab_3_1" style="height:450px;width:868px;">
+								 
+										<div class="col-md-12">	
+												<i class="fa"></i><strong>已关联用户组</strong>
+												<table  id="rolegroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",    data-loadUrl=""   data-checkbox="true" data-pageSize="3" cellspacing="0"   data-loading="false">
+													<thead>
+														<tr>
+															<th class="table-checkbox" data-field='id' data-checkbox="true" width="19px">
+														 		<input type="checkbox" class="group-checkable" data-set="#rolegroup_list.checkboxes"  data-sortable="false"  />
+														 	</th>
+															<th data-field='nameEn' width="200px;" data-sortDir="asc" data-formatter="">
+																用户组名称(英文)
+															</th>
+															<th data-field="nameZh"  width="200px;" >
+															 	用户组名称(中文)
+															</th>
+															<th data-field="description"  width="200px;"  >
+																描述
+															</th>
+														</tr>
+													</thead>
+												</table>						 						
+												<i class="fa"></i><strong>已关联用户</strong>
+												<table  id="roleuser_list" class="lion-datagrids table table-striped table-bordered table-hover" data-loading="false" >
+													<thead>
+														<tr>
+															<th class="table-checkbox" data-field='id' data-checkbox="true" width="19px">
+														 		<input type="checkbox" class="group-checkable" data-set="#roleuser_list.checkboxes" />
+														 	</th>
+															<th data-field='username' width="200px;" data-sortDir="asc" >
+																用户名
+															</th>
+															<th data-field="realnameZh"  width="200px;" >
+															 	用户姓名(中文)
+															</th>
+															<th data-field="employeeCode"  width="200px;">
+																员工
+															</th>
+														</tr>
+													</thead>
+												</table>
+										</div>				 
+								</div>
+								
+								<div  role="tabpanel" class="tab-pane fade" id="tab_3_2">
+									 <div class="row">
+										<div class="col-md-12">
+											<table  id="authgroup_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   data-loadUrl=""  data-loading="false"  data-checkbox="true" data-pageSize="5">
+												<thead>
+													<tr>
+														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
+													 		<input type="checkbox" class="group-checkable" data-set="#authgroup_list.checkboxes"  data-sortable="false"  />
+													 	</th>
+														<th data-field='nameEn' width="200px;" data-sortDir="asc" data-formatter="">
+															用户组名称(英文)
+														</th>
+														<th data-field="nameZh"  width="200px;" >
+														 	用户组名称(中文)
+														</th>
+														<th data-field="description"  width="200px;"  >
+															描述
+														</th>
+													</tr>
+												</thead>
+											</table>
+										</div>
+									</div>
+								</div>
+								<div role="tabpanel" class="tab-pane fade" id="tab_3_3">
+									<div class="row">
+										<div class="col-md-12">
+											<table  id="authuser_list" class="lion-datagrids table table-striped table-bordered table-hover" data-singleselect="false",   data-loadUrl=""  data-loading="false"  data-checkbox="true" data-pageSize="5">
+												<thead>
+													<tr>
+														<th class="table-checkbox" data-field='id' data-checkbox="true"   >
+													 		<input type="checkbox" class="group-checkable" data-set="#authuser_list.checkboxes"  data-sortable="false"  />
+													 	</th>
+														<th data-field='username' width="200px;" data-sortDir="asc" >
+															用户名
+														</th>
+														<th data-field="realnameZh"  width="200px;" >
+														 	用户姓名(中文)
+														</th>
+														<th data-field="employeeCode"  width="200px;">
+															员工
+														</th>
+													</tr>
+												</thead>
+											</table>
+										</div>
+									</div>
+								</div>
+								<div  role="tabpanel" class="tab-pane fade" id="tab_3_4">
+									 <div class="row">
+										<div class="col-md-12" style="width:868px;height:350px;overflow-y:auto;margin-top:0;">
+											<ul id="resourcetree" class="ztree" style="width:848px; overflow-y:auto;height:340px;margin-top:0;border:solid 1px #cccccc;"></ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal">
+					<i class="fa  fa-arrow-left"></i> 取 消 </button>
+				<button type="button" id="btnAuthSave" class="btn blue">
+					<i class="fa fa-save"></i> 保 存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Auth Modal Dialog End-->
+
+<!--Edit Dialog Start -->
+<div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<h4 class="modal-title">
+					<i class="fa fa-plus"></i>
+					<span>
+						<!--<@spring.message "sys.role.form.adddialog.text"/>-->
+						添加角色
+					</span>
+				</h4>
+			</div>
+			<div class="modal-body">
+				 	<div class="row">
+				 	<div class="col-md-12 portlet-body form">
+				 		<!-- BEGIN FORM-->
+							<form action="#" class="form-horizontal" name="sysRoleForm" id="sysRoleForm" method="post">
+								<input type="hidden" id='id' name='id' value="">
+								<div class="form-body">
+									<div class="form-group">
+										<label class="col-md-3 control-label">
+											角色名称(中文)
+										</label>
+										<div class="col-md-9">
+											<div class="input-group">
+												<input type="text"  name="nameZh"  maxlength="100" class="form-control" placeholder="请输入角色名称(中文)" size="30"/>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">
+											角色名称(英文)
+										</label>
+										<div class="col-md-9">
+											<div class="input-group">
+												<input type="text"  id="nameEn" name="nameEn" maxlength="100" class="form-control" placeholder="请输入角色名称(英文)" size="30"/>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">
+											角色描述
+										</label>
+										<div class="col-md-9">
+											<div class="input-group">
+												<input type="text" name="description" id="description" class="form-control" placeholder="请输入角色描述信息" maxlength="255" size="30"/>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">
+											是否可编辑
+										</label>
+										<div class="col-md-9 control-label">
+											<div class="input-group">
+												<div class="checker">
+												   <span class="checked">
+												      <input type="checkbox" class="form-control" name="editable" checked="true" value="1">
+												   </span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						<!-- END FORM-->
+				 	</div>
+				 	</div>
+			</div>
+			<!--modal body end-->
+			<!--footer start-->
+			<div class="modal-footer">
+				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal">
+					<i class="fa  fa-arrow-left"></i> 
+					<!--<@spring.message "common.diaglog.btn.cancel"/>-->
+					取消 
+				</button>
+				<button type="button" id="btnSave" class="btn blue">
+					<i class="fa fa-save"></i>
+					<!--<@spring.message "common.diaglog.btn.save"/>-->
+					保存
+				</button>
+			</div>
+			<!--footer end-->
+		</div>
+	</div>
+</div>
+<!--Edit Dialog End -->
+<script>
+$(function(){
+
+});
+</script>
