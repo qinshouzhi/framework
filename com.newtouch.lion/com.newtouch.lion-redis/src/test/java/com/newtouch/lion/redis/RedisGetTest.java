@@ -1,3 +1,4 @@
+ 
 /*
 * Copyright (c)  2015, Newtouch
 * All rights reserved. 
@@ -35,16 +36,15 @@ public class RedisGetTest  extends RedisAllTest{
 	 /*
 	*  二进制的redis. */
     @Autowired
-    @Qualifier("springBinaryRedisClient")
-    private IBinaryRedisClient springBinaryRedisClient;
+    private IBinaryRedisClient binaryRedisClient;
     /** 缓存接口. */
     @Autowired
-    private IRedisClient springRedisClient;
+    private IRedisClient redisClient;
 	
 	@Test
 	public void queryGet(){
 		String key="watchmen:20150410";
-		String str=springRedisClient.get(key);
+		String str=redisClient.get(key);
 		
 		logger.info("1111111111111111:str:{}",str);
 		 
@@ -54,7 +54,7 @@ public class RedisGetTest  extends RedisAllTest{
 	@Test
 	public void  set(){
 		String key="watchmen:20150410";
-		 springRedisClient.set(key,"test Cluster");
+		redisClient.set(key,"test Cluster");
 		//logger.info("1111111111111111:str:{}",str);
 		 
 	}
@@ -62,18 +62,17 @@ public class RedisGetTest  extends RedisAllTest{
 	
 	@Test
 	public void lpush(){
-		springRedisClient.lpush("news.share1", "OK");
+		redisClient.lpush("news.share1", "OK");
 	}
 	
 	@Test
 	public void push(){
-		springRedisClient.push("watchmen:panel:notify:ok", "OK");
+		redisClient.push("watchmen:panel:notify:ok", "OK");
 	}
 	
 	@Test
 	public void pushNofityFail(){
-		springRedisClient.push("watchmen:panel:notify:fail", "OK");
+		redisClient.push("watchmen:panel:notify:fail", "OK");
 	}
 }
-
 	
