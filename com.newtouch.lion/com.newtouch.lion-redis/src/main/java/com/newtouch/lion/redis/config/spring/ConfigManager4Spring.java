@@ -153,7 +153,6 @@ public class ConfigManager4Spring extends ConfigManager {
                 node.setConfig(shardConfig.getConfig());
             }
         }
-
         isSharding = lstInfo4Jedis.size() > 1 ? true : false;
     }
 
@@ -175,7 +174,17 @@ public class ConfigManager4Spring extends ConfigManager {
      */
     private void setPoolParameters(PoolConfig poolConfig, JedisPoolConfig config) {
     	
-        if (!StringUtils.isBlank(poolConfig.getTestOnBorrow())) {
+    	if (!StringUtils.isBlank(poolConfig.getMaxWait())) {
+            // 获取连接池是否检测可用性
+            config.setMaxWaitMillis(Long.parseLong(poolConfig.getMaxWait()));
+        }
+    	
+    	if (!StringUtils.isBlank(poolConfig.getMaxActive())) {
+            // 获取连接池是否检测可用性
+            config.setMaxTotal(Integer.parseInt(poolConfig.getMaxActive()));
+        }
+    	
+    	if (!StringUtils.isBlank(poolConfig.getTestOnBorrow())) {
             // 获取连接池是否检测可用性
             config.setTestOnBorrow(Boolean.valueOf(poolConfig.getTestOnBorrow()));
         }

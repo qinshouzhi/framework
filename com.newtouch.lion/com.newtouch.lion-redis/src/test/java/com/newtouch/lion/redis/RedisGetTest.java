@@ -9,7 +9,6 @@ package com.newtouch.lion.redis;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.newtouch.lion.redis.client.IBinaryRedisClient;
 import com.newtouch.lion.redis.client.IRedisClient;
@@ -73,6 +72,15 @@ public class RedisGetTest  extends RedisAllTest{
 	@Test
 	public void pushNofityFail(){
 		redisClient.push("watchmen:panel:notify:fail", "OK");
+	}
+	
+	@Test
+	public void incr(){
+		String key="scm:group";
+		//redisClient.set(key,"1");
+		for(int i=0;i<10000;i++){
+			redisClient.incr(key);
+		}
 	}
 }
 	
