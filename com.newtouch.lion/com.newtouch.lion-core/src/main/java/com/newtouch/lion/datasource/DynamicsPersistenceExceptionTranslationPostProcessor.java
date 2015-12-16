@@ -7,6 +7,9 @@
 package com.newtouch.lion.datasource; 
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
@@ -25,6 +28,7 @@ import org.springframework.transaction.interceptor.RuleBasedTransactionAttribute
 import org.springframework.transaction.interceptor.TransactionAttribute;
 import org.springframework.util.PatternMatchUtils;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.util.StringUtils;
 
 /**
  * <p>
@@ -56,6 +60,8 @@ public class DynamicsPersistenceExceptionTranslationPostProcessor extends Persis
 	private boolean force = false;
 	/** 读操作匹配方法列表 */
 	private Map<String, Boolean> slaveMethodMap = new ConcurrentHashMap<String, Boolean>();
+	/**读操作匹配的方法列表－排序列表－降序排序*/
+	private List<String>  sortMethods=null;
 
 	/**
 	 * 序列化
@@ -105,7 +111,8 @@ public class DynamicsPersistenceExceptionTranslationPostProcessor extends Persis
 					// 仅对read-only的处理
 					String methodName = entry.getKey();
 					if (!attr.isReadOnly()) {
-						slaveMethodMap.put(methodName,Boolean.FALSE);
+						 //仅处理只读数据库
+						//this.slaveMethodMap.put(methodName,Boolean.TRUE);
 						continue;
 					}
 			 
@@ -126,6 +133,8 @@ public class DynamicsPersistenceExceptionTranslationPostProcessor extends Persis
 				 
 			}
 		}
+		this.sortMethods=new ArrayList<String>(this.slaveMethodMap.keySet());
+		Collections.sort(this.sortMethods,Collections.reverseOrder());
 		// No async proxy needed.
 		return bean;
 	}
@@ -135,6 +144,7 @@ public class DynamicsPersistenceExceptionTranslationPostProcessor extends Persis
 
 		if (isChoiceSlave(proceedingJoinPoint.getSignature().getName())) {
 			DataSourceContextHolder.setSlave();
+			logger.info("走读库:{}",proceedingJoinPoint.getSignature().getName());
 		} else {
 			DataSourceContextHolder.setMaster();
 		}
@@ -148,32 +158,35 @@ public class DynamicsPersistenceExceptionTranslationPostProcessor extends Persis
 	}
 
 	private boolean isChoiceSlave(String methodName) {
-
+		
 		String bestNameMatch = null;
-		logger.info("methodName:{}",methodName);
-		for (String mappedName : this.slaveMethodMap.keySet()) {
+		
+		for (String mappedName:this.sortMethods) {
 			if (isMatch(methodName, mappedName)) {
 				bestNameMatch = mappedName;
 				break;
 			}
 		}
 		logger.info("bestNameMatch:{}",bestNameMatch);
-		//判断是否空
-	   if(this.slaveMethodMap.containsKey(bestNameMatch)){
+		//判断是否空，为表示从写数库
+	   if(StringUtils.isEmpty(bestNameMatch)){
 		   	return false;
 	   }
-		
+	   //不存在也走写数库,即read-only!=true的情况
+	   if(!this.slaveMethodMap.containsKey(bestNameMatch)){
+		   return false;
+	   }
+	   
 		Boolean isForceChoiceRead = this.slaveMethodMap.get(bestNameMatch);
-		// 表示强制选择 读 库
-		if (isForceChoiceRead == Boolean.TRUE) {
+		// 表示强制选择 读库
+		if (isForceChoiceRead) {
 			return true;
 		}
-
+		
 		// 如果之前选择了写库 现在还选择 写库
 		if (DataSourceContextHolder.isMaster()) {
 			return false;
-		}
-		
+		}		
 		// 表示应该选择读库
 		if (isForceChoiceRead != null) {
 			return true;
