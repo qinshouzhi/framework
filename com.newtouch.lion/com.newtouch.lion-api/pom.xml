@@ -11,6 +11,7 @@
 	</parent>
 	<artifactId>com.newtouch.lion-api</artifactId>
 	<name>com.newtouch.lion-api</name>
+	<version>1.1</version>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -54,5 +55,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	<version>1.1</version>
+	
 </project>

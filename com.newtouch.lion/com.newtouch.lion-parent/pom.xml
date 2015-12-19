@@ -13,7 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.7</jdk.version>
 		<lion-parent.version>1.1</lion-parent.version>
-		<lion-core.version>1.1</lion-core.version>
+		<lion-core.version>1.1.2</lion-core.version>
 		<lion-adpater.version>1.1</lion-adpater.version>
 		<lion-im.version>1.1</lion-im.version>
 		<lion-webcore.version>1.1</lion-webcore.version>
@@ -26,7 +26,7 @@
 		<lion-service.version>1.1</lion-service.version>
 		<lion-data.version>1.1</lion-data.version>
 		<lion-common.version>1.1</lion-common.version>
-		<lion-redis.version>1.1</lion-redis.version>
+		<lion-redis.version>1.1.2</lion-redis.version>
 		<lion-mongodb.version>1.1</lion-mongodb.version>
 		<lion-exception.version>1.1</lion-exception.version>
 		<lion-trans.version>1.1</lion-trans.version>
