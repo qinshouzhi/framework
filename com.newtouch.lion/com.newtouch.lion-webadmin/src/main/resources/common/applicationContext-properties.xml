@@ -14,7 +14,7 @@
 	<!--　加载配置文件 -->
 	<bean name="databaseConfiguration" class="org.apache.commons.configuration.DatabaseConfiguration">
 		<constructor-arg index="0" ref="dataSource" />
-		<constructor-arg index="1" value="BAS_APP_PROPERTIES" />
+		<constructor-arg index="1" value="bas_app_properties" />
 		<constructor-arg index="2" value="APP_ID" />
 		<constructor-arg index="3" value="KEY_" />
 		<constructor-arg index="4" value="VALUE_" />

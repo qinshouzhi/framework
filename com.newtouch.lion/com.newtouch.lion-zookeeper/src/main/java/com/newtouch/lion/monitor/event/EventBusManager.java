@@ -6,6 +6,8 @@
 */
 package com.newtouch.lion.monitor.event; 
 
+import java.util.concurrent.CountDownLatch;
+
 import com.google.common.eventbus.EventBus;
 import com.newtouch.lion.message.sender.MessageListener;
 import com.newtouch.lion.monitor.MonitorInfo;
@@ -51,6 +53,8 @@ public class EventBusManager {
 	public static void post(Object obj){
 		EventBusManager.initEventBus();
 		eventBus.post(obj);
+		
+		
 	}
 }
 

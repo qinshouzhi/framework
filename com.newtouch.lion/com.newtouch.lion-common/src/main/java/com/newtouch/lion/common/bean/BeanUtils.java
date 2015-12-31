@@ -1,5 +1,5 @@
 /*
- * Copyright (c)  2013, Newtouch
+ * Copyright (c)  2016, Newtouch
  * All rights reserved. 
  *
  * $id: BeanUtils.java 9552 2013-6-5 下午4:17:43 WangLijun$
@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
  * Description: 获取Bean的属性，将Bean转换为Map<String,Object>,调用Bean的方法。
  * </p>
  * <p>
- * Copyright: Copyright (c) 2013
+ * Copyright: Copyright (c) 2016
  * </p>
  * <p>
  * Company: Newtouch
