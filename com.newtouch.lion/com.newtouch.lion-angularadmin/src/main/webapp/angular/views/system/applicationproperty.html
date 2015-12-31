@@ -1,5 +1,22 @@
 <meta charset="utf-8"/>
-<link href="../resources/global/css/plugins.css" rel="stylesheet" type="text/css"/>
+
+<!--DataTable css Start-->
+<link rel="stylesheet" type="text/css" href="../resources/global/plugins/select2/select2.css"/>
+<link rel="stylesheet" type="text/css" href="../resources/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="../resources/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css"/>
+<link rel="stylesheet" type="text/css" href="../resources/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css"/>
+<!--DataTable css End-->
+
+<style>
+    .page-list .pagination {float:left;}
+    .page-list .pagination span {cursor: pointer;}
+    .page-list .pagination .separate span{cursor: default; border-top:none;border-bottom:none;}
+    .page-list .pagination .separate span:hover {background: none;}
+    .page-list .page-total {float:left; margin: 25px 20px;}
+    .page-list .page-total input, .page-list .page-total select{height: 26px; border: 1px solid #ddd;}
+    .page-list .page-total input {width: 40px; padding-left:3px;}
+    .page-list .page-total select {width: 50px;}
+</style>
 <!-- BEGIN PAGE BREADCRUMB -->
 <ul class="page-breadcrumb breadcrumb">
 	<li>
@@ -70,7 +87,7 @@
 				</a>
 			</div>
 			<div class="col-md-12">
-				<table class="lion-datagrids table table-striped table-bordered table-hover dataTable" id="sys_app_property_list_tb" data-checkbox="true">
+				<table class="lion-datagrids table table-striped table-bordered table-hover dataTable" id="sample_1" data-checkbox="true">
 					<thead>
 						<tr>
 							<th class="table-checkbox" data-field='id' data-checkbox="true">
@@ -118,6 +135,11 @@
 					    </tr>
 					</tbody>
 				</table>
+				
+				<!-- 分页 -->
+				<!--<pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>-->
+				<!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+				
 			</div>
 		</div>
 	</div>
@@ -155,31 +177,34 @@
 									</div>
 									<div class="form-group">
 										<label class="col-md-3 control-label">
-											<@spring.message "sys.applicationProperty.form.key.text"/>
+											<!--<@spring.message "sys.applicationProperty.form.key.text"/>-->
+											键
 										</label>
 										<div class="col-md-5">
 											<div class="input-group">
-												<input type="text"  name="key"  maxlength="100" class="form-control" placeholder="<@spring.message "sys.applicationProperty.form.key.missing.message"/>" size="30"/>
+												<input type="text"  name="key"  maxlength="100" class="form-control" placeholder="请输入键" size="30"/>
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-3 control-label">
-											<@spring.message "sys.applicationProperty.form.value.text"/>
+											<!--<@spring.message "sys.applicationProperty.form.value.text"/>-->
+											值
 										</label>
 										<div class="col-md-5">
 											<div class="input-group">
-												<input type="text"  id="value" name="value" maxlength="100" class="form-control" placeholder="<@spring.message "sys.applicationProperty.form.value.missing.message"/>" size="30"/>
+												<input type="text"  id="value" name="value" maxlength="100" class="form-control" placeholder="请输入值" size="30"/>
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-3 control-label">
-											<@spring.message "sys.applicationProperty.form.description.text"/>
+											<!--<@spring.message "sys.applicationProperty.form.description.text"/>-->
+										    描述
 										</label>
 										<div class="col-md-5">
 											<div class="input-group ">															 
-												<input type="text" class="form-control" name="description" placeholder="<@spring.message "sys.applicationProperty.form.description.missing.message"/>" maxlength="255" size="40"/>
+												<input type="text" class="form-control" name="description" placeholder="请输入描述" maxlength="255" size="40"/>
 											</div>
 										</div>
 									</div>
@@ -192,11 +217,13 @@
 			<div class="modal-footer">
 				<button type="button" id="btnCancel" class="btn default" data-dismiss="modal">
 					<i class="fa  fa-arrow-left"></i> 
-					<@spring.message "common.diaglog.btn.cancel"/>
+					<!--<@spring.message "common.diaglog.btn.cancel"/>-->
+					取消
 				</button>
 				<button type="button" id="btnSave" class="btn blue">
 					<i class="fa fa-save"></i>
-					<@spring.message "common.diaglog.btn.save"/>
+					<!--<@spring.message "common.diaglog.btn.save"/>-->
+					保存
 				</button>
 			</div>
 		</div>
@@ -205,9 +232,20 @@
 </div>
 <!-- /.modal-dialog -->
 <!--Edit Dialog End -->
+
 <!-- DataTables js Start -->
+<script type="text/javascript" src="../resources/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="../resources/global/plugins/datatables/all.min.js"></script>
+<script type="text/javascript" src="js/scripts/table-advanced.js"></script>
+<!--lion UI JS Start-->
+<!--lang-->
+
 <script>
 $(function(){
    //$("input[type='checkbox']").uniform();
+   $('#btnEdit').click(function(){
+       $('#basic h4 span').html('编辑项目属性配置');
+       $('#basic').modal('show');
+   });
 });
 </script>

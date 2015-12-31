@@ -7,7 +7,8 @@ var MetronicApp = angular.module("LionApp", [
     "ui.router", 
     "ui.bootstrap", 
     "oc.lazyLoad",  
-    "ngSanitize"
+    "ngSanitize",
+    "tm.pagination"
 ]); 
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
@@ -224,8 +225,12 @@ MetronicApp.controller('DatacolumnController', ['$scope', function($scope) {
 }]);
 
 /* Setup Layout Part - Applicationproperty */
-MetronicApp.controller('ApplicationpropertyController', ['$scope', function($scope) {
-    $scope.names = [
+MetronicApp.controller('ApplicationpropertyController', ['$rootScope', '$scope', 'settings', function($rootScope, $scope, settings) {
+	$scope.$on('$viewContentLoaded', function() {  
+		Metronic.initAjax();
+	});
+	
+	$scope.names = [                    
       {
     	  "id":"0",
     	  "appid":"lion",
@@ -253,6 +258,19 @@ MetronicApp.controller('ApplicationpropertyController', ['$scope', function($sco
     	  "endtime":"2015-8-30 7:25:43"
       }
     ];
+    
+    $scope.paginationConf = {
+        currentPage: 1,
+        totalItems: 100,
+        itemsPerPage: 10,
+        pagesLength: 10,
+        perPageOptions: [10, 20],
+        rememberPerPage: 'perPageItems',
+        onChange: function(){
+           
+        }
+    };
+    
 }]);
 
 /* Setup Layout Part - Icon */
@@ -277,7 +295,28 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             url: "/dashboard.html",
             templateUrl: "views/dashboard.html",            
             data: {pageTitle: '应用管理系统', pageSubTitle: 'statistics & reports'},
-            controller: "DashboardController"
+            controller: "DashboardController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+//                        name: 'MetronicApp',
+//                        insertBefore: '#ng_load_plugins_before',
+//                        files: [
+//                            '../resources/global/plugins/morris/morris.css',
+//                            '../resources/admin/pages/css/tasks.css',
+//                            
+//                            '../resources/global/plugins/morris/morris.min.js',
+//                            '../resources/global/plugins/morris/raphael-min.js',
+//                            '../resources/global/plugins/jquery.sparkline.min.js',
+//
+//                            '../resources/admin/pages/scripts/index3.js',
+//                            '../resources/admin/pages/scripts/tasks.js',
+//
+//                             'js/controllers/DashboardController.js'
+//                        ] 
+                   });
+                }]
+            }
         })
 
         // Role

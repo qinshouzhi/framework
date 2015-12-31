@@ -20,22 +20,22 @@
  	 'use strict';// js hint ;_;
 	 this.ui = this.ui || {}; //定义ui对象。为避免覆盖如果存在ui对象则使用，不存在则新建
 	 var util = this.util, //用变量存储util.js中的方法，方便调用
-	       exports = this.ui, //用变量存储ui下的方法，可直接使用此变量追加组件。如不这样需要this.ui.add追加
-	       _version = this.version,//组件版本号
-	       _id = 0,//id
-	       _catchPrefix = 'ui-datagrids-',//组件缓存对象前缀
-	       _idPrefix = this.namespace + '-datagrids-',//自定义id前缀
-	       events = {};//按钮事件缓存区
+         exports = this.ui, //用变量存储ui下的方法，可直接使用此变量追加组件。如不这样需要this.ui.add追加
+         _version = this.version,//组件版本号
+         _id = 0,//id
+         _catchPrefix = 'ui-datagrids-',//组件缓存对象前缀
+         _idPrefix = this.namespace + '-datagrids-',//自定义id前缀
+         events = {};//按钮事件缓存区
    //默认HTML模板
    var templates={
       checkboxs:'<input type="checkbox" class="checkboxes"/>'//checkbox的模板
    };
  
 	var defaults={
-    		id:'',
-    		singleselect:false,//默认单项选择=true
-    		lengthchange:false,//不显示下拉页面选择器
-    		searching:false,//不显示搜索框
+		id:'',
+		singleselect:false,//默认单项选择=true
+		lengthchange:false,//不显示下拉页面选择器
+		searching:false,//不显示搜索框
         querydata:{},//查询参数
     	processing:true,//服务器
         serverside:true, //服务器处理
@@ -60,7 +60,7 @@
                     'sortDescending': ':'
                 },
                 'emptyTable': '无记录',
-                'info': '从 _START_ 到 _END_ / 共 _TOTAL_ 条数据',
+                'info': '从 _START_ 到 _END_ / 共 _TOTAL_ 条数据<input type="text" placeholder="跳转至" style="width:50px;margin-left:10px;" id="goinput"/><input type="button" value="Go" id="go"/>',
                 'infoEmpty': '无记录',
                 'infoFiltered': '(从 _MAX_ 条记录过滤)',
                 'lengthMenu': '每页显示 _MENU_ 条数据',
@@ -82,44 +82,44 @@
 		//参数选项
 		this.options=options;
 		//datagrid节点
-    this.$element = $(element);
-    //ID
-    this.id=this.$element.attr('id');
-    this.options.id=this.id;
-    //DataTable对象
-    this.$odatatale=null;
-    //表头
-    this.headerCols=null;
-    //配置信息
-    this.osettings=null;
-    //单行;
-    this.rows=null;
-    //是否是单行选择
-    this.singleselect=this.options.singleselect;
-    //单行选择的行对象
-    this.selectedrow=null;
-    //不排序
-    this.sorttargets=[];
-    //初始化函数
-    this.init();
+	    this.$element = $(element);
+	    //ID
+	    this.id=this.$element.attr('id');
+	    this.options.id=this.id;
+	    //DataTable对象
+	    this.$odatatale=null;
+	    //表头
+	    this.headerCols=null;
+	    //配置信息
+	    this.osettings=null;
+	    //单行;
+	    this.rows=null;
+	    //是否是单行选择
+	    this.singleselect=this.options.singleselect;
+	    //单行选择的行对象
+	    this.selectedrow=null;
+	    //不排序
+	    this.sorttargets=[];
+	    //初始化函数
+	    this.init();
 	};
 	//版本数据
 	Datagrids.version=_version;
 	//创建Combox对象
  	Datagrids.prototype = {
         //设置构造函数
-         constructor: Datagrids,
+        constructor: Datagrids,
         //设置初始化方法
-          init:function(){
+        init:function(){
         	//加载样式
-          this.loadTableClass();
+            this.loadTableClass();
             //创建表
         	this.$odatatale=this.buildTable();
         	//创建列
         	//this.columns();
         	this.osettings=this.settings();
-          //加载事件
-          this.initComplete();
+            //加载事件
+            this.initComplete();
         },
         //查询参数
         queryparams:function(data){
@@ -213,7 +213,7 @@
 
        	orders:function(){
           if(this.options.order.length===0){
-       		   return [[1, 'asc']];
+       		 return [[1, 'asc']];
           }else{
              var corders=[];
              corders.push(this.options.order);
@@ -223,7 +223,9 @@
        	},
        	//构造表格
        	buildTable:function(){
-              var that=this, tableOptions={language:that.options.language,//语言
+              var that=this, 
+              tableOptions={
+              language:that.options.language,//语言
               columns:that.columns(),//列创建  
               ajaxSource:that.options.loadurl,//数据加载URL
               columnDefs:that.columnDefs(),//自定义列
@@ -247,10 +249,46 @@
               },//表格重绘回调函数
               fnServerData:function(source, sdata, fnCallback){
                  that.loaddata(source,sdata,fnCallback);
-              },//加载服务器数据
+              },//加载服务器数据       
               createdRow:function(row, data, index){
                 that.createdRow(row, data, index);
               },//创建行调用回调
+              
+              //add by wuxiang
+              footerCallback:function(row, data, start, end, display){
+            	  if(that.$element.find('tfoot').length != 0){
+            		  var api = this.api(), data;
+                	  
+                      // Remove the formatting to get integer data for summation
+                      var intVal = function ( i ) {
+                          return typeof i === 'string' ?
+                              i.replace(/[\$,]/g, '')*1 :
+                              typeof i === 'number' ?
+                                  i : 0;
+                      };
+           
+                      // Total over all pages
+                      var total = api
+                          .column( 5 )
+                          .data()
+                          .reduce( function (a, b) {
+                              return intVal(a) + intVal(b);
+                          }, 0 );
+           
+                      // Total over this page
+                      var pageTotal = api
+                          .column( 5, { page: 'current'} )
+                          .data()
+                          .reduce( function (a, b) {
+                              return intVal(a) + intVal(b);
+                          }, 0 );
+           
+                      // Update footer
+                      $( api.column( 5 ).footer() ).html(
+                          '$'+pageTotal
+                      );  
+            	  }       	  
+               }
               };
               if(!that.options.sort){
                  tableOptions['bSort']=that.options.sort;
@@ -370,7 +408,7 @@
        	},
        	//初始化事件,提供给外部使用
        	initComplete:function(){            
-       		  var e = $.Event('datagrids.initcomplete');
+       		var e = $.Event('datagrids.initcomplete');
             this.$element.trigger(e);
             //如已经事件阻止，则返回
             if (e.isDefaultPrevented()) return;
@@ -388,7 +426,7 @@
           });
           //调用初始化事件
          
-       		//单行选择的和checkbox,表头的checkbox设置为:disabled
+       		//单行选择的和checkbox,表头的checkbox   设置为:disabled
        		if(this.options.singleselect===true&&this.options.checkbox){
                  $thatelement.find('thead th input[type=checkbox]').each(function(){         				
                         $(this).attr('disabled',true);
@@ -447,6 +485,7 @@
        	reload:function(){
        		var odatatable=this.$element.dataTable();
        		odatatable.fnDraw(this.settings());
+       		
        		if(!this.options.singleselect){
 	       		this.$element.find('thead th input[type=checkbox]:checked').each(function(){
 	       			$(this).removeAttr('checked');
@@ -465,6 +504,10 @@
             //如已经事件阻止，则返回
            if (e.isDefaultPrevented()) return;
         },
+//        addNewRow:function(data){
+//           var odatatable=this.$element.DataTable(); 
+//           odatatable.row.add(data).draw( false );
+//        },
       //逻辑删除 add by Jovi
         deleteRow:function(){
         	this.$element.find('.selected').remove();
@@ -656,7 +699,7 @@
                   options = typeof option == 'object' && option;
                   if (!data) {
                     var config = $.extend({},defaults,$.fn.datagrids.defaults||{},$this.data(),options);
-                    $this.data('datagrids', (data = new Datagrids(this, config, event)));
+                    $this.data('datagrids', (data = new Datagrids(this, config, event)));  //此处调用
                   } else if (options) {
                     for (var i in options) {
                       if (options.hasOwnProperty(i)) {
@@ -693,7 +736,7 @@
     $(function () {
       $('.lion-datagrids').each(function () {
            var $datagrids = $(this);
-           Plugin.call($datagrids,$datagrids.data());
+           Plugin.call($datagrids,$datagrids.data()); //把html5  data-数据传进去
       });
     });
  }).call(lion,jQuery);

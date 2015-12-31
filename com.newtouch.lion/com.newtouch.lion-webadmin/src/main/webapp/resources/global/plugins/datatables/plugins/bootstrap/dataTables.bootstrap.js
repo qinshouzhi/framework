@@ -189,6 +189,22 @@ $.extend($.fn.dataTableExt.oPagination, {
                 '<li class="next disabled"><a href="#" title="' + oLang.sLast + '"><i class="fa fa-angle-double-right"></i></a></li>' +
                 '</ul>'
             );
+            
+            //datatables分页跳转
+            $(nPaging).find(".redirect").keyup(function(e){
+                var ipage = parseInt($(this).val());
+                var oPaging = oSettings.oInstance.fnPagingInfo();
+                if(isNaN(ipage) || ipage<1){
+                    ipage = 1;
+                }else if(ipage>oPaging.iTotalPages){
+                    ipage=oPaging.iTotalPages;
+                }
+                $(this).val(ipage);
+                ipage--;
+                oSettings._iDisplayStart = ipage * oPaging.iLength;
+                fnDraw( oSettings );
+            });
+            
             var els = $('a', nPaging);
             $(els[0]).bind('click.DT', {
                 action: "first"

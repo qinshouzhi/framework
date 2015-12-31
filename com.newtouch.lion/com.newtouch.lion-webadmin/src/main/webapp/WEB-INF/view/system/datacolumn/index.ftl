@@ -15,6 +15,11 @@
 <link href="${base}/resources/global/css/lion.css" rel="stylesheet" type="text/css">
 <link href="${base}/resources/global/css/dialog/lion.dialog.css" rel="stylesheet" type="text/css">
 <link href="${base}/resources/global/css/combo/lion.combo.css" rel="stylesheet" type="text/css">
+<style>
+tfoot tr td{
+  border-left:none !important;
+}
+</style>
 <!-- DataTables js Start -->
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/media/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="${base}/resources/global/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
@@ -97,7 +102,7 @@
 				<a href="javascript:void(0)" id="btnRefresh" class="btn btn-sm blue"><i class="fa fa-refresh"></i> <@spring.message "common.toolbar.btn.reload.text"/>   </a>
 				<a href="javascript:void(0)" id="btnExport"  class="btn btn-sm green"><i class="fa  fa-file-excel-o"></i> <@spring.message "common.toolbar.btn.export.text"/> </a>
 			</div>
-			<div class="col-md-12">
+			<div class="col-md-12"> 
 				  <table class="lion-datagrids table table-striped table-bordered table-hover" 
 				  		 id="datacolumn_tb" data-singleselect="true"
 				  		 data-loadUrl="${base}/system/datacolumn/list.json" data-checkbox="true" data-pageSize="10">
@@ -126,6 +131,31 @@
 							</th>
 						</tr>
 					</thead>
+					<tfoot>
+					    <tr>
+					        <td class="table-checkbox" data-field="id" data-checkbox="true">
+						 		
+						 	</td>
+							<td data-field="dataGridId" style="width:90px;" data-formatter="formatterDataGridTitle">
+								
+							</td>
+							<td data-field="name" style="width:90px;">
+								
+							</td>
+							<td data-field="field" style="width:90px;">
+							  	
+							</td>
+							<td data-field="align" style="width:30px;">
+								Total
+							</td>
+							<td data-field="width" style="width:50px;" >
+								
+							</td>
+							<td data-field="showOrder" style="width:30px;" >
+								
+							</td>
+					    </tr>
+				    </tfoot>
 				</table>
 			</div>
 		</div>

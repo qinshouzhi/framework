@@ -33,7 +33,7 @@
 <script src="${base}/resources/global/js/form/form.fill.min.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/local/lion-lang-zh_CN.js" type="text/javascript"></script>
 <script src="${base}/resources/global/js/combotree/combotree.min.js" type="text/javascript"></script>
-<script src="${base}/resources/global/js/datagrid/datagrids.min.js" type="text/javascript"></script>
+<script src="${base}/resources/global/js/datagrid/datagrids.js" type="text/javascript"></script>
 <!--lang-->
 <script src="${base}/resources/admin/scripts/admin-common.min.js" type="text/javascript"></script>
 <!-- icon -->
