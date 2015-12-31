@@ -60,7 +60,7 @@ public class DefaultJedisPool extends Pool<Jedis> {
      */
     public DefaultJedisPool(final JedisPoolConfig poolConfig, final String host, int port, int timeout, final String password,
             int dbIndex, boolean isMaster) {
-        super(poolConfig,new JedisFactory(host,port,timeout,null,dbIndex));
+        super(poolConfig,new JedisFactory(host,port,timeout,password,dbIndex));
         this.host = host;
         this.port = port;
         this.dbIndex = dbIndex;
