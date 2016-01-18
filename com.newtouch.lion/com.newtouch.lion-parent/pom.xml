@@ -5,43 +5,44 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.newtouch.lion</groupId>
 	<artifactId>com.newtouch.lion-parent</artifactId>
-	<version>1.1.3</version>
+	<version>1.2</version>
 	<name>com.newtouch.lion-parent</name>
 	<packaging>pom</packaging>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.7</jdk.version>
-		<lion-parent.version>1.1.3</lion-parent.version>
-		<lion-core.version>1.1.3</lion-core.version>
-		<lion-adpater.version>1.1.3</lion-adpater.version>
-		<lion-im.version>1.1.3</lion-im.version>
-		<lion-webcore.version>1.1.3</lion-webcore.version>
-		<lion-cache.version>1.1.3</lion-cache.version>
-		<lion-shiro.version>1.1.3</lion-shiro.version>
-		<lion-web.version>1.1.3</lion-web.version>
-		<lion-angularweb.version>1.1.3</lion-angularweb.version>
-		<lion-webadmin.version>1.1.3</lion-webadmin.version>
-		<lion-api.version>1.1.3</lion-api.version>
-		<lion-service.version>1.1.3</lion-service.version>
-		<lion-data.version>1.1.3</lion-data.version>
-		<lion-common.version>1.1.3</lion-common.version>
-		<lion-redis.version>1.1.3</lion-redis.version>
-		<lion-mongodb.version>1.1.3</lion-mongodb.version>
-		<lion-exception.version>1.1.3</lion-exception.version>
-		<lion-trans.version>1.1.3</lion-trans.version>
-		<lion-monitor.version>1.1.3</lion-monitor.version>
-		<lion-zookeeper.version>1.1.3</lion-zookeeper.version>
+		<lion-parent.version>1.2</lion-parent.version>
+		<lion-core.version>1.2</lion-core.version>
+		<lion-adpater.version>1.2</lion-adpater.version>
+		<lion-im.version>1.2</lion-im.version>
+		<lion-webcore.version>1.2</lion-webcore.version>
+		<lion-cache.version>1.2</lion-cache.version>
+		<lion-shiro.version>1.2</lion-shiro.version>
+		<lion-web.version>1.2</lion-web.version>
+		<lion-angularweb.version>1.2</lion-angularweb.version>
+		<lion-webadmin.version>1.2</lion-webadmin.version>
+		<lion-api.version>1.2</lion-api.version>
+		<lion-service.version>1.2</lion-service.version>
+		<lion-data.version>1.2</lion-data.version>
+		<lion-common.version>1.2</lion-common.version>
+		<lion-redis.version>1.2</lion-redis.version>
+		<lion-mongodb.version>1.2</lion-mongodb.version>
+		<lion-exception.version>1.2</lion-exception.version>
+		<lion-trans.version>1.2</lion-trans.version>
+		<lion-monitor.version>1.2</lion-monitor.version>
+		<lion-zookeeper.version>1.2</lion-zookeeper.version>
 		<junit.version>4.8.2</junit.version>
 		<slf4j.version>1.7.1</slf4j.version>
 		<poi.version>3.9</poi.version>
 		<logback.version>1.1.2</logback.version>
 		<logback-ext-spring.version>0.1.1</logback-ext-spring.version>
-		<javax.persistence.version>2.0</javax.persistence.version>
-		<hibernate.version>4.2.2.Final</hibernate.version>
+		<javax.persistence.version>2.1</javax.persistence.version>
+		<javax.jta.version>1.1</javax.jta.version>
+		<hibernate.version>5.0.6.Final</hibernate.version>
 		<aopalliance.version>1.0</aopalliance.version>
-		<springframework.version>3.2.12.RELEASE</springframework.version>
-		<hibernate-validator.version>4.3.0.Final</hibernate-validator.version>
+		<springframework.version>4.2.4.RELEASE</springframework.version>
+		<hibernate-validator.version>5.2.2.Final</hibernate-validator.version>
 		<c3p0.version>0.9.1.2</c3p0.version>
 		<mysql.version>5.1.32</mysql.version>
 		<ojdbc14.version>10.2.0.4.0</ojdbc14.version>
@@ -283,10 +284,11 @@
 			<!-- Apache Shiro End -->
 
 			<!-- JPA&ORM Start -->
+			
 			<dependency>
-				<groupId>javax.persistence</groupId>
-				<artifactId>persistence-api</artifactId>
-				<version>${javax.persistence.version}</version>
+				<groupId>javax.transaction</groupId>
+				<artifactId>jta</artifactId>
+				<version>${javax.jta.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
@@ -703,6 +705,16 @@
 				<groupId>org.apache.poi</groupId>
 				<artifactId>poi</artifactId>
 				<version>${poi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml</artifactId>
+				<version>3.11</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml-schemas</artifactId>
+				<version>3.11</version>
 			</dependency>
 			<!-- POI End -->
 			<!-- JSON Start -->
